@@ -1,0 +1,11 @@
+{
+  "projectId": "yyc3-design-system",
+  "buildScriptName": "build-storybook",
+  "autoAcceptChanges": "storybook-addon-a11y",
+  "onlyStoryFiles": true,
+  "untraced": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.git/**"
+  ]
+}

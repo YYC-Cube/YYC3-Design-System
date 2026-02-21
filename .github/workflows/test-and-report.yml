@@ -1,0 +1,114 @@
+name: Test Tokens and Post OKLCH Report
+
+on:
+  pull_request:
+    paths:
+      - 'design/tokens.json'
+      - 'scripts/**'
+      - 'style-dictionary.config.js'
+  push:
+    paths:
+      - 'design/tokens.json'
+      - 'scripts/**'
+      - 'style-dictionary.config.js'
+
+permissions:
+  contents: read
+  pull-requests: write
+  actions: read
+
+jobs:
+  test-build-report:
+    name: Test, Build and Generate OKLCH Report
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run OKLCH conversion smoke test
+        id: ok_test
+        run: |
+          echo "Running OKLCH smoke test..."
+          npm run test:oklch
+        continue-on-error: true
+
+      - name: Run unit tests (Jest)
+        id: unit_test
+        run: |
+          if npm run -s test; then
+            echo "Unit tests passed"
+          else
+            echo "Unit tests failed"
+            exit 1
+          fi
+
+      - name: Build tokens with Style Dictionary
+        id: build_tokens
+        run: |
+          npm run build:tokens
+
+      - name: Generate OKLCH report
+        id: gen_report
+        run: |
+          npm run report:oklch
+        continue-on-error: true
+
+      - name: Ensure reports directory exists
+        run: |
+          if [ ! -f reports/oklch-report.md ]; then
+            echo "reports/oklch-report.md not found, creating placeholder"
+            mkdir -p reports
+            echo "# OKLCH report not generated" > reports/oklch-report.md
+          fi
+
+      - name: Upload OKLCH report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: oklch-report
+          path: reports/
+
+      - name: Read report into variable
+        id: read_report
+        run: |
+          REPORT_FILE="reports/oklch-report.md"
+          echo "Reading $REPORT_FILE"
+          REPORT_CONTENT=$(sed -e 's/`/\\`/g' "$REPORT_FILE")
+          # Limit size to avoid extremely large comments (truncate if > 60000 chars)
+          MAX=60000
+          LEN=${#REPORT_CONTENT}
+          if [ "$LEN" -gt "$MAX" ]; then
+            echo "Report too large ($LEN chars), truncating to $MAX"
+            REPORT_CONTENT="${REPORT_CONTENT:0:$MAX}"
+            REPORT_CONTENT="${REPORT_CONTENT}\n\n*Report truncated due to size. Please download artifact for full report.*"
+          fi
+          # Write to GITHUB_OUTPUT environment file (new syntax)
+          echo "report=$REPORT_CONTENT" >> "$GITHUB_OUTPUT"
+        shell: bash
+
+      - name: Post or update PR comment with OKLCH report
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          issue-number: ${{ github.event.pull_request.number || github.event.number }}
+          body: |
+            ## OKLCH → HEX 转换报告
+            _自动生成于 CI_
+
+            ${{ steps.read_report.outputs.report }}
+          # unique identifier ensures the comment is updated instead of creating duplicates
+          identifier: oklch-report-comment
+
+      - name: Fail job if smoke test or report generation failed
+        if: ${{ steps.ok_test.outcome != 'success' || steps.gen_report.outcome != 'success' }}
+        run: |
+          echo "One or more checks failed (OKLCH smoke test or report generation). Failing job to block merge."
+          exit 1

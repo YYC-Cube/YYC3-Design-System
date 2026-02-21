@@ -1,0 +1,28 @@
+# .github/workflows/build-tokens.yml
+name: Build Tokens
+
+on:
+  push:
+    paths:
+      - 'design/tokens.json'
+      - 'scripts/**'
+      - 'style-dictionary.config.js'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install
+        run: npm ci
+      - name: Build tokens
+        run: npm run build:tokens
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: tokens-dist
+          path: dist

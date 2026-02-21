@@ -1,0 +1,34 @@
+{
+  "projectId": "yyc3-design-system",
+  "buildScriptName": "build-storybook",
+  "autoAcceptChanges": false,
+  "checkBranchName": false,
+  "ignoreLastCommitOnBranches": ["main", "master"],
+  "storybookBaseDir": "storybook",
+  "storybookConfigDir": "storybook",
+  "onlyStoryFiles": false,
+  "untrackedFiles": false,
+  "exitZeroOnChanges": false,
+  "exitOnceUploaded": false,
+  "script": {
+    "start": "yarn run storybook",
+    "build": "yarn run build-storybook"
+  },
+  "viewportPresets": [
+    "iPhone 6/7/8",
+    "iPhone 6/7/8 Plus",
+    "iPhone X",
+    "iPhone 12 Pro",
+    "iPad Pro",
+    "iPad Mini",
+    "Desktop (1920x1080)",
+    "Desktop (1366x768)",
+    "Desktop (1440x900)"
+  ],
+  "chromeFlags": [
+    "--disable-gpu",
+    "--disable-dev-shm-usage"
+  ],
+  "asyncTimeout": 120000,
+  "concurrency": 4
+}

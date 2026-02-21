@@ -1,0 +1,143 @@
+{
+  "color": {
+    "primary": {
+      "value": {
+        "oklch": "oklch(0.6509 0.1801 348.1385)",
+        "hex": "#e06a70",
+        "foreground": "#ffffff"
+      },
+      "type": "color"
+    },
+    "background": {
+      "value": {
+        "oklch": "oklch(0.1599 0.0203 345.6985)",
+        "hex": "#1a1a1a",
+        "foreground": "#a0a0a0"
+      },
+      "type": "color"
+    },
+    "card": {
+      "value": {
+        "oklch": "oklch(0.2198 0.0500 86.8891)",
+        "hex": "#2d2d2d",
+        "foreground": "#d0d0d0"
+      },
+      "type": "color"
+    },
+    "destructive": {
+      "value": {
+        "oklch": "oklch(0.6391 0.1697 21.9551)",
+        "hex": "#ff6b5b",
+        "foreground": "#ffffff"
+      },
+      "type": "color"
+    },
+    "ring": {
+      "value": {
+        "oklch": "oklch(0.6302 0.1597 350.7532)",
+        "hex": "#ff9f9a"
+      },
+      "type": "color"
+    },
+    "foreground": {
+      "value": "#f0f0f0",
+      "type": "color"
+    },
+    "muted-foreground": {
+      "value": "#a0a0a0",
+      "type": "color"
+    }
+  },
+  "radius": {
+    "default": {
+      "value": "0.5rem",
+      "type": "dimension"
+    },
+    "sm": {
+      "value": "0.125rem",
+      "type": "dimension"
+    },
+    "md": {
+      "value": "0.25rem",
+      "type": "dimension"
+    },
+    "lg": {
+      "value": "0.5rem",
+      "type": "dimension"
+    }
+  },
+  "shadow": {
+    "card": {
+      "value": {
+        "x": "0px",
+        "y": "6px",
+        "blur": "20px",
+        "spread": "-4px",
+        "color_hex": "#0a0a0a"
+      },
+      "type": "shadow"
+    },
+    "popover": {
+      "value": {
+        "x": "0px",
+        "y": "10px",
+        "blur": "30px",
+        "spread": "0px",
+        "color_hex": "#0a0a0a"
+      },
+      "type": "shadow"
+    },
+    "focus": {
+      "value": {
+        "x": "0px",
+        "y": "0px",
+        "blur": "0px",
+        "spread": "2px",
+        "color_hex": "#e06a70"
+      },
+      "type": "shadow"
+    }
+  },
+  "typography": {
+    "font-sans": {
+      "value": "Geist, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial",
+      "type": "fontFamily"
+    },
+    "font-serif": {
+      "value": "Source Serif 4, Georgia, 'Times New Roman', serif",
+      "type": "fontFamily"
+    },
+    "font-mono": {
+      "value": "Geist Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace",
+      "type": "fontFamily"
+    }
+  },
+  "font-size": {
+    "heading-1": {
+      "value": "2rem",
+      "type": "dimension"
+    },
+    "heading-2": {
+      "value": "1.5rem",
+      "type": "dimension"
+    },
+    "body": {
+      "value": "1rem",
+      "type": "dimension"
+    },
+    "caption": {
+      "value": "0.875rem",
+      "type": "dimension"
+    }
+  },
+  "line-height": {
+    "heading": {
+      "value": "1.2",
+      "type": "number"
+    },
+    "body": {
+      "value": "1.5",
+      "type": "number"
+    }
+  }
+}

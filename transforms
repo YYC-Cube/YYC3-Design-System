@@ -1,0 +1,105 @@
+// scripts/style-dictionary.transforms.js
+const StyleDictionary = require('style-dictionary');
+const tinycolor = require('tinycolor2');
+
+// Helper: convert oklch string to CSS fallback hex if present
+function parseOklchToCss(value) {
+  // value example: "oklch(0.6209 0.1801 348.1385)"
+  if (!value || typeof value !== 'string') return value;
+  if (!value.startsWith('oklch')) return value;
+  // Keep the OKLCH string for modern browsers, but also provide hex fallback.
+  // We cannot reliably convert OKLCH to hex without a color lib that supports it.
+  // For practical purposes, expect tokens.json to include hex fallback fields.
+  return value;
+}
+
+// Transform: convert token names to kebab-case (already available in SD but ensure)
+StyleDictionary.registerTransform({
+  name: 'name/cti/kebab',
+  type: 'name',
+  transformer: function(prop) {
+    return prop.path.join('-').toLowerCase();
+  }
+});
+
+// Transform: convert token names to camelCase for JS output
+StyleDictionary.registerTransform({
+  name: 'name/cti/camel',
+  type: 'name',
+  transformer: function(prop) {
+    const parts = prop.path;
+    return parts
+      .map((p, i) => i === 0 ? p : p.charAt(0).toUpperCase() + p.slice(1))
+      .join('');
+  }
+});
+
+// Transform: rem values remain as-is; provide px fallback if needed
+StyleDictionary.registerTransform({
+  name: 'size/remToPx',
+  type: 'value',
+  matcher: function(prop) {
+    return typeof prop.value === 'string' && prop.value.endsWith('rem');
+  },
+  transformer: function(prop) {
+    // keep rem, also attach px fallback in comment or separate token if needed
+    return prop.value;
+  }
+});
+
+// Transform: color OKLCH handling - keep oklch() string and prefer hex fallback if present
+StyleDictionary.registerTransform({
+  name: 'color/oklchToCss',
+  type: 'value',
+  matcher: function(prop) {
+    return prop.path.includes('color') || prop.path.includes('colour');
+  },
+  transformer: function(prop) {
+    const v = prop.value;
+    if (typeof v === 'object') {
+      // if token is object with okLch and hex, prefer hex for CSS but keep oklch in metadata
+      if (v.hex) return v.hex;
+      if (v.oklch) return v.oklch;
+      return JSON.stringify(v);
+    }
+    if (typeof v === 'string') {
+      if (v.startsWith('oklch')) {
+        // return oklch string; consumer should use hex fallback if browser support missing
+        return v;
+      }
+      return v;
+    }
+    return v;
+  }
+});
+
+// Transform: compose shadow string from shadow token parts
+StyleDictionary.registerTransform({
+  name: 'shadow/compose',
+  type: 'value',
+  matcher: function(prop) {
+    return prop.path.includes('shadow') && typeof prop.value === 'object';
+  },
+  transformer: function(prop) {
+    const s = prop.value;
+    // expected fields: x, y, blur, spread, color_hex
+    const color = s.color_hex || s.color || 'rgba(0,0,0,0.12)';
+    return `${s.x} ${s.y} ${s.blur} ${s.spread} ${color}`;
+  }
+});
+
+// Optional format: CSS variables (already provided by SD), JS format is built-in
+// Register a small helper format to output a theme object if desired
+StyleDictionary.registerFormat({
+  name: 'javascript/theme',
+  formatter: function({ dictionary }) {
+    const obj = {};
+    dictionary.allProperties.forEach(prop => {
+      const path = prop.path.join('.');
+      obj[path] = prop.value;
+    });
+    return `export default ${JSON.stringify(obj, null, 2)};`;
+  }
+});
+
+module.exports = StyleDictionary;
