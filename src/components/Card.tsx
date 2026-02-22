@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { CardProps } from '../../types/tokens';
 import { useTheme } from '../theme/useTheme';
 
-export const Card: React.FC<CardProps> = ({ children, className = '', 'data-testid': dataTestId }) => {
+export const Card = memo<CardProps>(({ children, className = '', 'data-testid': dataTestId }) => {
   const { tokens } = useTheme();
   const radius = tokens['radius.lg'] as string || '0.5rem';
   const cardShadowValue = tokens['shadow.card'] as string;
@@ -23,9 +23,11 @@ export const Card: React.FC<CardProps> = ({ children, className = '', 'data-test
       {children}
     </div>
   );
-};
+});
 
-export const CardHeader: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => {
+Card.displayName = 'Card';
+
+export const CardHeader = memo<{ children: React.ReactNode; className?: string }>(({ children, className = '' }) => {
   const { tokens } = useTheme();
   
   const headerStyle: React.CSSProperties = {
@@ -39,9 +41,11 @@ export const CardHeader: React.FC<{ children: React.ReactNode; className?: strin
       {children}
     </div>
   );
-};
+});
 
-export const CardTitle: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => {
+CardHeader.displayName = 'CardHeader';
+
+export const CardTitle = memo<{ children: React.ReactNode; className?: string }>(({ children, className = '' }) => {
   const { tokens } = useTheme();
   
   const titleStyle: React.CSSProperties = {
@@ -56,9 +60,11 @@ export const CardTitle: React.FC<{ children: React.ReactNode; className?: string
       {children}
     </h3>
   );
-};
+});
 
-export const CardContent: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => {
+CardTitle.displayName = 'CardTitle';
+
+export const CardContent = memo<{ children: React.ReactNode; className?: string }>(({ children, className = '' }) => {
   const { tokens } = useTheme();
   
   const contentStyle: React.CSSProperties = {
@@ -71,6 +77,8 @@ export const CardContent: React.FC<{ children: React.ReactNode; className?: stri
       {children}
     </div>
   );
-};
+});
+
+CardContent.displayName = 'CardContent';
 
 export default Card;

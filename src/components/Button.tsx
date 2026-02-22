@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { ButtonProps } from '../../types/tokens';
 import { useTheme } from '../theme/useTheme';
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button = memo<ButtonProps>(({
   children,
   variant = 'default',
   size = 'default',
@@ -93,6 +93,8 @@ export const Button: React.FC<ButtonProps> = ({
       {children}
     </button>
   );
-};
+});
+
+Button.displayName = 'Button';
 
 export default Button;

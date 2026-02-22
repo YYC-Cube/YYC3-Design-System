@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import { InputProps } from '../../types/tokens';
 import { useTheme } from '../theme/useTheme';
 
-export const Input: React.FC<InputProps> = ({
+export const Input = memo<InputProps>(({
   type = 'text',
   label,
   placeholder = '',
@@ -37,21 +37,21 @@ export const Input: React.FC<InputProps> = ({
     boxSizing: 'border-box',
   };
 
-  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+  const handleFocus = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
     e.target.style.borderColor = tokens['color.primary'] as string || '#d45a5f';
     e.target.style.boxShadow = shadowString;
-  };
+  }, [tokens, shadowString]);
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+  const handleBlur = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
     e.target.style.borderColor = tokens['color.muted-foreground'] as string || '#ccc';
     e.target.style.boxShadow = 'none';
-  };
+  }, [tokens]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
       onChange(e.target.value);
     }
-  };
+  }, [onChange]);
 
   return (
     <div>
@@ -72,6 +72,8 @@ export const Input: React.FC<InputProps> = ({
       />
     </div>
   );
-};
+});
+
+Input.displayName = 'Input';
 
 export default Input;
