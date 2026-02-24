@@ -5,12 +5,13 @@
  * @author YYC³
  * @version 1.0.0
  * @created 2026-02-23
- * @updated 2026-02-23
+ * @updated 2026-02-25
  * @copyright Copyright (c) 2026 YYC³
  * @license MIT
  */
 
 import { memo, ReactNode, LabelHTMLAttributes } from 'react';
+import React from 'react';
 import { Controller, FieldValues, FieldPath, FieldPathValue, Control } from 'react-hook-form';
 import { useTheme } from '../theme/ThemeProvider';
 import { useFormField } from './Form';
@@ -79,7 +80,7 @@ const FormFieldComponent = <TFieldValues extends FieldValues = FieldValues, TNam
     marginTop: '2px',
   };
 
-  const currentControl = control || formContext.control as any;
+  const currentControl = control || (formContext.control as Control<TFieldValues>);
 
   return (
     <div className={className} style={containerStyles} data-testid={dataTestId} {...props}>

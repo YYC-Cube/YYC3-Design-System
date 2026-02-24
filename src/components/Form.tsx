@@ -5,19 +5,19 @@
  * @author YYC³
  * @version 1.0.0
  * @created 2026-02-23
- * @updated 2026-02-23
+ * @updated 2026-02-25
  * @copyright Copyright (c) 2026 YYC³
  * @license MIT
  */
 
 import { memo, ReactNode, FormHTMLAttributes, useCallback } from 'react';
-import { useForm, FormProvider, useFormContext } from 'react-hook-form';
+import { useForm, FormProvider, useFormContext, UseFormReturn } from 'react-hook-form';
 import type { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTheme } from '../theme/ThemeProvider';
 
-export interface FormProps extends Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> {
-  schema: z.ZodType;
+export interface FormProps<T extends z.ZodType> extends Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> {
+  schema: T;
   defaultValues?: Record<string, unknown>;
   onSubmit: (data: Record<string, unknown>) => void | Promise<void>;
   children: ReactNode;
@@ -25,7 +25,7 @@ export interface FormProps extends Omit<FormHTMLAttributes<HTMLFormElement>, 'on
   'data-testid'?: string;
 }
 
-const FormComponent = ({
+const FormComponent = <T extends z.ZodType>({
   schema,
   defaultValues,
   onSubmit,
@@ -33,15 +33,15 @@ const FormComponent = ({
   className = '',
   'data-testid': dataTestId,
   ...props
-}: FormProps) => {
+}: FormProps<T>) => {
   const { tokens } = useTheme();
   
-  const methods = useForm<any>({
-    resolver: zodResolver(schema as any) as any,
+  const methods = useForm({
+    resolver: zodResolver(schema),
     defaultValues: defaultValues,
-  });
+  }) as UseFormReturn<Record<string, unknown>>;
 
-  const handleSubmit = useCallback(async (data: any) => {
+  const handleSubmit = useCallback(async (data: Record<string, unknown>) => {
     try {
       await onSubmit(data);
     } catch (error) {
@@ -71,7 +71,7 @@ const FormComponent = ({
   );
 };
 
-export const Form = memo(FormComponent) as typeof FormComponent;
+export const Form = memo(FormComponent) as <T extends z.ZodType>(props: FormProps<T>) => ReturnType<typeof FormComponent>;
 
 export const useFormField = () => {
   const context = useFormContext();

@@ -18,7 +18,7 @@ export class PluginManager {
   private componentRegistry: Map<string, ComponentRegistration> = new Map();
   private themeRegistry: Map<string, ThemeRegistration> = new Map();
   private tokenRegistry: Map<string, TokenRegistration> = new Map();
-  private eventListeners: Map<string, Set<Function>> = new Map();
+  private eventListeners: Map<string, Set<(data: unknown) => void>> = new Map();
 
   constructor() {
     this.loadPlugins();
@@ -35,7 +35,7 @@ export class PluginManager {
       throw new Error(`Plugin ${id} requires YYC³ Design System version ${yyc3.minVersion} or higher`);
     }
 
-    if (yyc3?.maxVersion && this.isVersionIncompatible(yyc3.maxVersion)) {
+    if (yyc3?.maxVersion && this.isVersionIncompatible('0.0.0', yyc3.maxVersion)) {
       throw new Error(`Plugin ${id} is not compatible with YYC³ Design System version ${yyc3.maxVersion}`);
     }
 
@@ -235,14 +235,14 @@ export class PluginManager {
     }
   }
 
-  onEvent(event: string, callback: (data: any) => void): void {
+  onEvent(event: string, callback: (data: unknown) => void): void {
     if (!this.eventListeners.has(event)) {
       this.eventListeners.set(event, new Set());
     }
     this.eventListeners.get(event)!.add(callback);
   }
 
-  offEvent(event: string, callback: (data: any) => void): void {
+  offEvent(event: string, callback: (data: unknown) => void): void {
     const listeners = this.eventListeners.get(event);
     if (listeners) {
       listeners.delete(callback);
@@ -294,14 +294,16 @@ export class PluginManager {
   }
 
   private getPluginHooks(manifest: PluginManifest): PluginHooks {
+    const createEmptyHook = () => async () => {};
+
     return {
-      onInstall: manifest.yyc3?.hooks?.onInstall || (() => {}),
-      onActivate: manifest.yyc3?.hooks?.onActivate || (() => {}),
-      onDeactivate: manifest.yyc3?.hooks?.onDeactivate || (() => {}),
-      onUninstall: manifest.yyc3?.hooks?.onUninstall || (() => {}),
-      onConfigChange: manifest.yyc3?.hooks?.onConfigChange || ((config: PluginConfig) => {}),
-      onThemeChange: manifest.yyc3?.hooks?.onThemeChange || ((theme: string) => {}),
-      onLanguageChange: manifest.yyc3?.hooks?.onLanguageChange || ((language: string) => {}),
+      onInstall: manifest.yyc3?.hooks?.onInstall || createEmptyHook(),
+      onActivate: manifest.yyc3?.hooks?.onActivate || createEmptyHook(),
+      onDeactivate: manifest.yyc3?.hooks?.onDeactivate || createEmptyHook(),
+      onUninstall: manifest.yyc3?.hooks?.onUninstall || createEmptyHook(),
+      onConfigChange: manifest.yyc3?.hooks?.onConfigChange || (async (_config: PluginConfig) => {}),
+      onThemeChange: manifest.yyc3?.hooks?.onThemeChange || (async (_theme: string) => {}),
+      onLanguageChange: manifest.yyc3?.hooks?.onLanguageChange || (async (_language: string) => {}),
     };
   }
 

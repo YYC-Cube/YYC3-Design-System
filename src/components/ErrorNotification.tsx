@@ -5,7 +5,7 @@
  * @author YYC³
  * @version 1.0.0
  * @created 2026-02-23
- * @updated 2026-02-23
+ * @updated 2026-02-25
  * @copyright Copyright (c) 2026 YYC³
  * @license MIT
  */
