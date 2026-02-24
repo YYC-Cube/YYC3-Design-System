@@ -51,6 +51,22 @@ export default defineConfig({
         drop_console: false,
         drop_debugger: true,
         pure_funcs: ['console.log'],
+        arrows: true,
+        collapse_vars: true,
+        comparisons: true,
+        computed_props: true,
+        hoist_funs: true,
+        hoist_props: true,
+        hoist_vars: true,
+        inline: true,
+        loops: true,
+        negate_iife: true,
+        properties: true,
+        reduce_funcs: true,
+        reduce_vars: true,
+        switches: true,
+        toplevel: true,
+        typeofs: true,
       },
       mangle: {
         safari10: true,
@@ -61,6 +77,9 @@ export default defineConfig({
     },
     chunkSizeWarningLimit: 500,
     reportCompressedSize: true,
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
   },
   optimizeDeps: {
     include: ['react', 'react-dom'],
@@ -70,5 +89,12 @@ export default defineConfig({
     port: 3200,
     host: true,
     open: true,
+    hmr: {
+      overlay: false,
+    },
+  },
+  css: {
+    devSourcemap: false,
+    postcss: './postcss.config.js',
   },
 });
