@@ -44,7 +44,7 @@ describe('Avatar 组件', () => {
 
     const img = screen.getByAltText('John Doe');
     expect(img).toBeInTheDocument();
-    expect(img).toHaveAttribute('src', 'https://example.com/avatar.jpg');
+    expect(img).toHaveAttribute('data-src', 'https://example.com/avatar.jpg');
   });
 
   it('应该在图片加载失败时显示 fallback', () => {
