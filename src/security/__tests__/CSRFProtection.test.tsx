@@ -7,9 +7,11 @@
  * @created 2026-02-19
  */
 
-
 import React from 'react';
-import { render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
+;
+
+import { render, fireEvent, waitFor } from '@testing-library/react'
+
 import { CSRFProvider, CSRFProtectedForm, useCSRF, CSRFProtectedFetch, withCSRFProtection, createCSRFMiddleware, validateCSRFToken, createStrictConfig, createModerateConfig, createPermissiveConfig } from '../CSRFProtection';
 
 global.fetch = jest.fn() as any;

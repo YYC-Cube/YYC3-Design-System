@@ -8,7 +8,10 @@
  */
 
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+;
+
+import { render, fireEvent, waitFor } from '@testing-library/react'
+
 import '@testing-library/jest-dom';
 import {
   XSSProvider,

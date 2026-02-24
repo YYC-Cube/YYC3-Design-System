@@ -7,9 +7,11 @@
  * @created 2026-02-19
  */
 
-
 import React from 'react';
-import { render, screen, cleanup, waitFor, act } from '@testing-library/react';
+;
+
+import { render, fireEvent, waitFor } from '@testing-library/react'
+
 import { CSPProvider, useCSP, CSPScript, CSPStyle, CSPImg, createStrictCSPConfig, createModerateCSPConfig, createPermissiveCSPConfig, generateNonce, withCSP } from '../CSPProvider';
 
 describe('CSP Provider Module', () => {

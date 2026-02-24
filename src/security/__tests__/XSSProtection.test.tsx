@@ -7,10 +7,11 @@
  * @created 2026-02-19
  */
 
-
 import React from 'react';
-import { render, screen, cleanup, waitFor } from '@testing-library/react';
-import { XSSProvider, useXSS } from '../XSSProtection';
+;
+;
+import { XSSProvider, useXSS } from '../XSSProtection'
+import { render, screen, cleanup, fireEvent, waitFor, act } from '@testing-library/react';;
 
 describe('XSS Protection Module', () => {
   beforeEach(() => {
