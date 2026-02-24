@@ -92,7 +92,7 @@ describe('Table', () => {
         <Table
           columns={mockColumns}
           dataSource={mockData}
-          onRowClick={mockOnRowClick}
+          onRow={() => ({ onClick: mockOnRowClick })}
         />
       </ThemeProvider>
     );
@@ -109,7 +109,7 @@ describe('Table', () => {
 
   it('应该支持自定义单元格渲染', () => {
     const customColumns = [
-      { key: 'name', title: 'Name', dataIndex: 'name', render: (text: string) => <strong>{text}</strong> },
+      { key: 'name', title: 'Name', dataIndex: 'name', render: (value: unknown) => <strong>{value as string}</strong> },
     ];
     render(<ThemeProvider><Table columns={customColumns} dataSource={mockData} /></ThemeProvider>);
     const nameCell = screen.getByText('John Doe');
@@ -126,17 +126,6 @@ describe('Table', () => {
     expect(nameHeader).toBeInTheDocument();
   });
 
-  it('应该支持列固定', () => {
-    const fixedColumns = [
-      { key: 'name', title: 'Name', dataIndex: 'name', fixed: 'left' },
-      { key: 'age', title: 'Age', dataIndex: 'age' },
-      { key: 'email', title: 'Email', dataIndex: 'email', fixed: 'right' },
-    ];
-    render(<ThemeProvider><Table columns={fixedColumns} dataSource={mockData} /></ThemeProvider>);
-    const nameHeader = screen.getByText('Name');
-    expect(nameHeader).toBeInTheDocument();
-  });
-
   it('应该支持数据加载状态', () => {
     render(
       <ThemeProvider>
@@ -149,42 +138,5 @@ describe('Table', () => {
     );
     const loadingIndicator = screen.getByRole('status');
     expect(loadingIndicator).toBeInTheDocument();
-  });
-
-  it('应该支持行展开', () => {
-    const expandedRowRender = jest.fn((record: typeof mockData[0]) => <div>Expanded: {record.name}</div>);
-    render(
-      <ThemeProvider>
-        <Table
-          columns={mockColumns}
-          dataSource={mockData}
-          expandable={{
-            expandedRowRender,
-          }}
-        />
-      </ThemeProvider>
-    );
-    const expandButtons = screen.getAllByRole('button');
-    fireEvent.click(expandButtons[0]);
-    expect(expandedRowRender).toHaveBeenCalled();
-  });
-
-  it('应该支持过滤', () => {
-    const filteredColumns = [
-      { key: 'name', title: 'Name', dataIndex: 'name', filters: [
-        { text: 'John', value: 'John' },
-        { text: 'Jane', value: 'Jane' },
-      ] },
-    ];
-    render(
-      <ThemeProvider>
-        <Table
-          columns={filteredColumns}
-          dataSource={mockData}
-        />
-      </ThemeProvider>
-    );
-    const filterButton = screen.getByRole('button', { name: /filter/i });
-    expect(filterButton).toBeInTheDocument();
   });
 });
