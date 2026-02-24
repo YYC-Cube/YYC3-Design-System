@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, FC, memo } from 'react';
 import { useTheme } from '../theme/useTheme';
 
 interface ModalProps {
@@ -8,7 +8,7 @@ interface ModalProps {
   className?: string;
 }
 
-export const Modal: React.FC<ModalProps> = ({
+export const Modal: FC<ModalProps> = ({
   isOpen = false,
   onClose,
   children,
@@ -97,4 +97,93 @@ export const Modal: React.FC<ModalProps> = ({
   );
 };
 
-export default Modal;
+Modal.displayName = 'Modal';
+
+export const ModalHeader = memo<{ children: React.ReactNode; className?: string }>(({ children, className }) => {
+  const { tokens } = useTheme();
+  
+  const headerStyle: React.CSSProperties = {
+    marginBottom: '1rem',
+    paddingBottom: '0.75rem',
+    borderBottom: `1px solid ${tokens['color.muted-foreground'] as string || '#ccc'}`,
+  };
+
+  return (
+    <div style={headerStyle} className={className}>
+      {children}
+    </div>
+  );
+});
+
+ModalHeader.displayName = 'ModalHeader';
+
+export const ModalTitle = memo<{ children: React.ReactNode; className?: string }>(({ children, className }) => {
+  const { tokens } = useTheme();
+  
+  const titleStyle: React.CSSProperties = {
+    fontSize: tokens['font-size.heading-2'] as string || '1.5rem',
+    fontWeight: '600',
+    margin: '0',
+    color: tokens['color.foreground'] as string || '#000',
+  };
+
+  return (
+    <h3 style={titleStyle} className={className}>
+      {children}
+    </h3>
+  );
+});
+
+ModalTitle.displayName = 'ModalTitle';
+
+export const ModalContent = memo<{ children: React.ReactNode; className?: string }>(({ children, className }) => {
+  const { tokens } = useTheme();
+  
+  const contentStyle: React.CSSProperties = {
+    fontSize: tokens['font-size.body'] as string || '1rem',
+    lineHeight: tokens['line-height.body'] as string || '1.5',
+  };
+
+  return (
+    <div style={contentStyle} className={className}>
+      {children}
+    </div>
+  );
+});
+
+ModalContent.displayName = 'ModalContent';
+
+export const ModalFooter = memo<{ children: React.ReactNode; className?: string }>(({ children, className }) => {
+  const { tokens } = useTheme();
+  
+  const footerStyle: React.CSSProperties = {
+    marginTop: '1rem',
+    paddingTop: '0.75rem',
+    borderTop: `1px solid ${tokens['color.muted-foreground'] as string || '#ccc'}`,
+    display: 'flex',
+    justifyContent: 'flex-end',
+    gap: '0.5rem',
+  };
+
+  return (
+    <div style={footerStyle} className={className}>
+      {children}
+    </div>
+  );
+});
+
+ModalFooter.displayName = 'ModalFooter';
+
+const ModalWithSubcomponents = Modal as typeof Modal & {
+  Header: typeof ModalHeader;
+  Title: typeof ModalTitle;
+  Content: typeof ModalContent;
+  Footer: typeof ModalFooter;
+};
+
+ModalWithSubcomponents.Header = ModalHeader;
+ModalWithSubcomponents.Title = ModalTitle;
+ModalWithSubcomponents.Content = ModalContent;
+ModalWithSubcomponents.Footer = ModalFooter;
+
+export default ModalWithSubcomponents;

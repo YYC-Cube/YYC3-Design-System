@@ -1,6 +1,11 @@
 import React, { memo } from 'react';
-import { CardProps } from '../../types/tokens';
 import { useTheme } from '../theme/useTheme';
+
+interface CardProps {
+  children: React.ReactNode;
+  className?: string;
+  'data-testid'?: string;
+}
 
 export const Card = memo<CardProps>(({ children, className = '', 'data-testid': dataTestId }) => {
   const { tokens } = useTheme();
@@ -27,7 +32,7 @@ export const Card = memo<CardProps>(({ children, className = '', 'data-testid': 
 
 Card.displayName = 'Card';
 
-export const CardHeader = memo<{ children: React.ReactNode; className?: string }>(({ children, className = '' }) => {
+export const CardHeader = memo<{ children: React.ReactNode; className?: string }>(({ children, className }) => {
   const { tokens } = useTheme();
   
   const headerStyle: React.CSSProperties = {
@@ -45,7 +50,7 @@ export const CardHeader = memo<{ children: React.ReactNode; className?: string }
 
 CardHeader.displayName = 'CardHeader';
 
-export const CardTitle = memo<{ children: React.ReactNode; className?: string }>(({ children, className = '' }) => {
+export const CardTitle = memo<{ children: React.ReactNode; className?: string }>(({ children, className }) => {
   const { tokens } = useTheme();
   
   const titleStyle: React.CSSProperties = {
@@ -64,7 +69,7 @@ export const CardTitle = memo<{ children: React.ReactNode; className?: string }>
 
 CardTitle.displayName = 'CardTitle';
 
-export const CardContent = memo<{ children: React.ReactNode; className?: string }>(({ children, className = '' }) => {
+export const CardContent = memo<{ children: React.ReactNode; className?: string }>(({ children, className }) => {
   const { tokens } = useTheme();
   
   const contentStyle: React.CSSProperties = {
@@ -81,4 +86,37 @@ export const CardContent = memo<{ children: React.ReactNode; className?: string 
 
 CardContent.displayName = 'CardContent';
 
-export default Card;
+export const CardFooter = memo<{ children: React.ReactNode; className?: string }>(({ children, className }) => {
+  const { tokens } = useTheme();
+  
+  const footerStyle: React.CSSProperties = {
+    marginTop: '1rem',
+    paddingTop: '0.75rem',
+    borderTop: `1px solid ${tokens['color.muted-foreground'] as string || '#ccc'}`,
+    display: 'flex',
+    justifyContent: 'flex-end',
+    gap: '0.5rem',
+  };
+
+  return (
+    <div style={footerStyle} className={className}>
+      {children}
+    </div>
+  );
+});
+
+CardFooter.displayName = 'CardFooter';
+
+const CardWithSubcomponents = Card as typeof Card & {
+  Header: typeof CardHeader;
+  Title: typeof CardTitle;
+  Content: typeof CardContent;
+  Footer: typeof CardFooter;
+};
+
+CardWithSubcomponents.Header = CardHeader;
+CardWithSubcomponents.Title = CardTitle;
+CardWithSubcomponents.Content = CardContent;
+CardWithSubcomponents.Footer = CardFooter;
+
+export default CardWithSubcomponents;
