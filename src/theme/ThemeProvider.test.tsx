@@ -1,5 +1,5 @@
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
-import { screen } from '@testing-library/dom';;
+import { render, fireEvent, waitFor, act } from '@testing-library/react'
+import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { ThemeProvider, useTheme } from './ThemeProvider';
 

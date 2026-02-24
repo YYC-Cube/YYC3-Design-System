@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { screen } from '@testing-library/dom';;
+import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { ThemeProvider, useTheme } from '../theme/ThemeProvider';
 import { Button } from '../components/Button';
@@ -262,7 +262,7 @@ describe('性能测试', () => {
         return (
           <Input
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e: any) => setValue(e.target.value)}
             placeholder="输入框"
           />
         );

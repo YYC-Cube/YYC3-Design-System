@@ -7,8 +7,8 @@
  * @created 2026-02-23
  */
 
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import { screen } from '@testing-library/dom';;
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { z } from 'zod';
 import { Form } from '../Form';

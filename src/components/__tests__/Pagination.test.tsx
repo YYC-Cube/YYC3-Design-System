@@ -7,8 +7,8 @@
  * @created 2026-02-23
  */
 
-import { render, fireEvent, waitFor, screen } from '@testing-library/react'
-import { screen } from '@testing-library/dom';;
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { Pagination } from '../Pagination'
 import { ThemeProvider } from '../../theme/ThemeProvider';;

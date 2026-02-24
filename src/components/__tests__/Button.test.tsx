@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import { screen } from '@testing-library/dom';;
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { Button } from '../Button';
 import { ThemeProvider } from '../../theme/ThemeProvider';

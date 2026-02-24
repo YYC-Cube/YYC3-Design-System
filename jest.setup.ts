@@ -9,11 +9,6 @@
 
 import '@testing-library/jest-dom';
 
-// 扩展screen对象类型以支持所有查询方法
-declare global {
-  const screen: typeof import('@testing-library/dom').screen;
-}
-
 global.matchMedia = (query: string) => ({
   matches: false,
   media: query,
@@ -39,7 +34,7 @@ global.URL = class URL extends OriginalURL {
   constructor(url: string, base?: string | URL) {
     super(url, base);
   }
-  
+
   static createObjectURL = jest.fn(() => 'blob:test-url');
   static revokeObjectURL = jest.fn();
 } as any;
@@ -84,23 +79,23 @@ global.Response = class Response {
   statusText: string;
   headers: Headers;
   ok: boolean;
-  
-  constructor(body?: any, init?: ResponseInit) {
+
+  constructor(body?: any, init?: any) {
     this.body = body;
     this.status = init?.status || 200;
     this.statusText = init?.statusText || '';
     this.headers = new Headers(init?.headers);
     this.ok = this.status >= 200 && this.status < 300;
   }
-  
+
   json() {
     return Promise.resolve(this.body);
   }
-  
+
   text() {
     return Promise.resolve(this.body);
   }
-  
+
   clone() {
     return new Response(this.body, {
       status: this.status,
@@ -114,17 +109,17 @@ global.Request = class Request {
   url: string;
   method: string;
   headers: Headers;
-  
-  constructor(input: string | Request, init?: RequestInit) {
+
+  constructor(input: string | Request, init?: any) {
     this.url = typeof input === 'string' ? input : input.url;
     this.method = init?.method || 'GET';
     this.headers = new Headers(init?.headers);
   }
-  
+
   json() {
     return Promise.resolve({});
   }
-  
+
   clone() {
     return new Request(this.url, {
       method: this.method,
@@ -135,31 +130,37 @@ global.Request = class Request {
 
 global.Headers = class Headers {
   private headers: Map<string, string> = new Map();
-  
-  constructor(init?: HeadersInit) {
+
+  constructor(init?: any) {
     if (init) {
-      Object.entries(init).forEach(([key, value]) => {
-        this.headers.set(key.toLowerCase(), value);
-      });
+      if (Array.isArray(init)) {
+        init.forEach(([key, value]: [string, string]) => {
+          this.headers.set(key.toLowerCase(), value);
+        });
+      } else {
+        Object.entries(init).forEach(([key, value]: [string, any]) => {
+          this.headers.set(key.toLowerCase(), String(value));
+        });
+      }
     }
   }
-  
+
   get(name: string) {
     return this.headers.get(name.toLowerCase()) || null;
   }
-  
+
   set(name: string, value: string) {
     this.headers.set(name.toLowerCase(), value);
   }
-  
+
   has(name: string) {
     return this.headers.has(name.toLowerCase());
   }
-  
+
   delete(name: string) {
     this.headers.delete(name.toLowerCase());
   }
-  
+
   forEach(callback: (value: string, key: string) => void) {
     this.headers.forEach((value, key) => callback(value, key));
   }
