@@ -7,7 +7,9 @@
  * @created 2026-02-19
  */
 
-import { render, waitFor } from '@testing-library/react';
+;
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import { waitFor, fireEvent } from '@testing-library/dom';;;
 import '@testing-library/jest-dom';
 import { imageCache, resourceCache, compressImage, generateResponsiveImageUrls, createBlurHash, preloadImage, preloadResource, useImageOptimization, useResourcePreload, createImageOptimizationConfig, createResourcePreloadConfig } from '../resource-optimization';
 import React from 'react';
