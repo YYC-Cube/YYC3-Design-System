@@ -25,6 +25,7 @@ P1-2 任务是阶段五"性能优化和监控"中的构建优化部分，旨在�
 ### P1-2-1: 分析需要懒加载的组件和路由 ✅
 
 **分析结果**:
+
 - 项目包含 50+ 个组件文件
 - 大型组件：Modal、TokenPlayground、AI 组件系列
 - Storybook 路由：多个组件展示页面
@@ -71,6 +72,7 @@ P1-2 任务是阶段五"性能优化和监控"中的构建优化部分，旨在�
    - 支持预加载脚本、样式、图片、字体
 
 **代码示例**:
+
 ```typescript
 const LazyModal = createLazyWrapper(
   () => import('./Modal'),
@@ -115,6 +117,7 @@ const LazyModal = createLazyWrapper(
    - 提供重试机制
 
 **路由配置示例**:
+
 ```typescript
 export const lazyRoutes: RouteConfig[] = [
   {
@@ -154,6 +157,7 @@ export const lazyRoutes: RouteConfig[] = [
 **文件**: [src/components/LazyLoadExample.tsx](../../src/components/LazyLoadExample.tsx)
 
 **演示内容**:
+
 1. 组件懒加载示例（Modal、TokenPlayground）
 2. 资源懒加载示例（图片、脚本）
 3. 资源预加载示例（字体、脚本）
@@ -172,14 +176,14 @@ export const lazyRoutes: RouteConfig[] = [
 
 ### 配置文件
 
-2. **[config/lazy-routes.config.ts](../../config/lazy-routes.config.ts)** (230 行)
+1. **[config/lazy-routes.config.ts](../../config/lazy-routes.config.ts)** (230 行)
    - 路由懒加载配置
    - 路由预加载功能
    - 错误边界处理
 
 ### 演示组件
 
-3. **[src/components/LazyLoadExample.tsx](../../src/components/LazyLoadExample.tsx)** (215 行)
+1. **[src/components/LazyLoadExample.tsx](../../src/components/LazyLoadExample.tsx)** (215 行)
    - 懒加载使用示例
    - 性能优化建议
 

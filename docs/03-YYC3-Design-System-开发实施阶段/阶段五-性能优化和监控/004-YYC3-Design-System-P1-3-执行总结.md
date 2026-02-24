@@ -28,6 +28,7 @@ P1-3 任务是阶段五"性能优化和监控"中的构建优化部分，旨在�
 **配置内容**:
 
 1. **Gzip 压缩配置**
+
    ```javascript
    gzip: {
      enabled: true,
@@ -38,6 +39,7 @@ P1-3 任务是阶段五"性能优化和监控"中的构建优化部分，旨在�
    ```
 
 2. **Brotli 压缩配置**
+
    ```javascript
    brotli: {
      enabled: true,
@@ -48,6 +50,7 @@ P1-3 任务是阶段五"性能优化和监控"中的构建优化部分，旨在�
    ```
 
 **优化效果**:
+
 - Gzip 压缩率：60-70%
 - Brotli 压缩率：70-80%
 - 文件大小减少：50-60%
@@ -93,6 +96,7 @@ P1-3 任务是阶段五"性能优化和监控"中的构建优化部分，旨在�
    - 平均响应时间
 
 **配置示例**:
+
 ```typescript
 export const cdnConfig: CDNConfig = {
   enabled: process.env.NODE_ENV === 'production',
@@ -150,6 +154,7 @@ export const cdnConfig: CDNConfig = {
    - 清除 CDN 缓存
 
 **优先级配置示例**:
+
 ```typescript
 export const resourcePriorityConfig: ResourcePriorityConfig = {
   critical: [

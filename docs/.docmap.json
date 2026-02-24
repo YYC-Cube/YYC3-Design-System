@@ -1,0 +1,181 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-02-23T00:00:00Z",
+  "documents": [
+    {
+      "id": "doc-001",
+      "path": "README.md",
+      "type": "readme",
+      "status": "published",
+      "version": "1.4.0",
+      "lastModified": "2026-02-23T00:00:00Z",
+      "dependencies": [],
+      "tags": ["overview", "getting-started"],
+      "category": "documentation"
+    },
+    {
+      "id": "doc-002",
+      "path": "CHANGELOG.md",
+      "type": "changelog",
+      "status": "published",
+      "version": "1.4.0",
+      "lastModified": "2026-02-23T00:00:00Z",
+      "dependencies": [],
+      "tags": ["version-history", "updates"],
+      "category": "documentation"
+    },
+    {
+      "id": "doc-003",
+      "path": "docs/01-YYC3-Design-System-项目概述/001-项目概述.md",
+      "type": "overview",
+      "status": "published",
+      "version": "1.0.0",
+      "lastModified": "2026-02-23T00:00:00Z",
+      "dependencies": [],
+      "tags": ["overview", "architecture"],
+      "category": "project"
+    },
+    {
+      "id": "doc-004",
+      "path": "docs/02-YYC3-Design-System-技术架构/001-技术架构.md",
+      "type": "architecture",
+      "status": "published",
+      "version": "1.0.0",
+      "lastModified": "2026-02-23T00:00:00Z",
+      "dependencies": ["doc-003"],
+      "tags": ["architecture", "tech-stack"],
+      "category": "technical"
+    },
+    {
+      "id": "doc-005",
+      "path": "docs/03-YYC3-Design-System-开发实施阶段/审核分析/003-Design-System-多维度审核报告-20260223.md",
+      "type": "audit",
+      "status": "published",
+      "version": "1.0.0",
+      "lastModified": "2026-02-23T00:00:00Z",
+      "dependencies": ["doc-003", "doc-004"],
+      "tags": ["audit", "quality"],
+      "category": "development"
+    },
+    {
+      "id": "doc-006",
+      "path": "docs/03-YYC3-Design-System-开发实施阶段/审核分析/004-Design-System-改进建议任务清单.md",
+      "type": "task-list",
+      "status": "published",
+      "version": "1.0.0",
+      "lastModified": "2026-02-23T00:00:00Z",
+      "dependencies": ["doc-005"],
+      "tags": ["tasks", "improvements"],
+      "category": "development"
+    },
+    {
+      "id": "doc-007",
+      "path": "docs/03-YYC3-Design-System-开发实施阶段/审核分析/006-Design-System-第一阶段实施总结-20260223.md",
+      "type": "summary",
+      "status": "published",
+      "version": "1.0.0",
+      "lastModified": "2026-02-23T00:00:00Z",
+      "dependencies": ["doc-006"],
+      "tags": ["summary", "phase-1"],
+      "category": "development"
+    },
+    {
+      "id": "doc-008",
+      "path": "docs/03-YYC3-Design-System-开发实施阶段/审核分析/007-Design-System-第二阶段任务准备-20260223.md",
+      "type": "preparation",
+      "status": "published",
+      "version": "1.0.0",
+      "lastModified": "2026-02-23T00:00:00Z",
+      "dependencies": ["doc-007"],
+      "tags": ["preparation", "phase-2"],
+      "category": "development"
+    },
+    {
+      "id": "doc-009",
+      "path": "docs/03-YYC3-Design-System-开发实施阶段/审核分析/008-Design-System-改进建议分析-20260223.md",
+      "type": "analysis",
+      "status": "published",
+      "version": "1.0.0",
+      "lastModified": "2026-02-23T00:00:00Z",
+      "dependencies": ["doc-005"],
+      "tags": ["analysis", "improvements"],
+      "category": "development"
+    },
+    {
+      "id": "doc-010",
+      "path": "docs/03-YYC3-Design-System-开发实施阶段/状态管理/001-Zustand集成评估.md",
+      "type": "evaluation",
+      "status": "published",
+      "version": "1.0.0",
+      "lastModified": "2026-02-23T00:00:00Z",
+      "dependencies": ["doc-004"],
+      "tags": ["state-management", "zustand", "evaluation"],
+      "category": "technical"
+    },
+    {
+      "id": "doc-011",
+      "path": "docs/03-YYC3-Design-System-开发实施阶段/依赖管理/001-依赖更新策略.md",
+      "type": "strategy",
+      "status": "published",
+      "version": "1.0.0",
+      "lastModified": "2026-02-23T00:00:00Z",
+      "dependencies": [],
+      "tags": ["dependencies", "strategy", "security"],
+      "category": "development"
+    },
+    {
+      "id": "doc-012",
+      "path": "docs/03-YYC3-Design-System-开发实施阶段/插件生态/001-插件开发指南.md",
+      "type": "guide",
+      "status": "published",
+      "version": "1.0.0",
+      "lastModified": "2026-02-23T00:00:00Z",
+      "dependencies": ["doc-004"],
+      "tags": ["plugin", "guide", "development"],
+      "category": "plugin"
+    },
+    {
+      "id": "doc-013",
+      "path": "docs/03-YYC3-Design-System-开发实施阶段/部署/001-Docker部署指南.md",
+      "type": "guide",
+      "status": "published",
+      "version": "1.0.0",
+      "lastModified": "2026-02-23T00:00:00Z",
+      "dependencies": [],
+      "tags": ["docker", "deployment", "guide"],
+      "category": "deployment"
+    }
+  ],
+  "syncRules": {
+    "autoSync": true,
+    "syncInterval": 3600000,
+    "syncOnCommit": true,
+    "syncOnPush": true,
+    "syncOnPull": true,
+    "excludePatterns": [
+      "node_modules/**",
+      "dist/**",
+      "build/**",
+      ".git/**",
+      "*.log"
+    ]
+  },
+  "notificationRules": {
+    "enabled": true,
+    "channels": ["email", "slack"],
+    "events": [
+      "document.created",
+      "document.updated",
+      "document.deleted",
+      "sync.started",
+      "sync.completed",
+      "sync.failed"
+    ]
+  },
+  "versionControl": {
+    "enabled": true,
+    "strategy": "semantic",
+    "autoIncrement": true,
+    "preRelease": false
+  }
+}
