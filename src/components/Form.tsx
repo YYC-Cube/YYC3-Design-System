@@ -11,21 +11,20 @@
  */
 
 import { memo, ReactNode, FormHTMLAttributes, useCallback } from 'react';
-import { useForm, FormProvider, useFormContext, UseFormReturn } from 'react-hook-form';
+import { useForm, FormProvider, useFormContext } from 'react-hook-form';
 import type { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useTheme } from '../theme/ThemeProvider';
 
-export interface FormProps<T extends z.ZodType> extends Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> {
-  schema: T;
-  defaultValues?: Record<string, unknown>;
-  onSubmit: (data: Record<string, unknown>) => void | Promise<void>;
+export interface FormProps<T = Record<string, unknown>> extends Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> {
+  schema?: z.ZodType<any>;
+  defaultValues?: any;
+  onSubmit: (data: T) => void | Promise<void>;
   children: ReactNode;
   className?: string;
   'data-testid'?: string;
 }
 
-const FormComponent = <T extends z.ZodType>({
+const FormComponent = <T = Record<string, unknown>>({
   schema,
   defaultValues,
   onSubmit,
@@ -34,14 +33,12 @@ const FormComponent = <T extends z.ZodType>({
   'data-testid': dataTestId,
   ...props
 }: FormProps<T>) => {
-  const { tokens } = useTheme();
-  
   const methods = useForm({
-    resolver: zodResolver(schema),
+    resolver: schema ? zodResolver(schema as any) : undefined,
     defaultValues: defaultValues,
-  }) as UseFormReturn<Record<string, unknown>>;
+  });
 
-  const handleSubmit = useCallback(async (data: Record<string, unknown>) => {
+  const handleSubmit = useCallback(async (data: T) => {
     try {
       await onSubmit(data);
     } catch (error) {
@@ -59,7 +56,7 @@ const FormComponent = <T extends z.ZodType>({
   return (
     <FormProvider {...methods}>
       <form
-        onSubmit={methods.handleSubmit(handleSubmit)}
+        onSubmit={methods.handleSubmit(handleSubmit as any)}
         className={className}
         style={containerStyles}
         data-testid={dataTestId}
@@ -71,7 +68,7 @@ const FormComponent = <T extends z.ZodType>({
   );
 };
 
-export const Form = memo(FormComponent) as <T extends z.ZodType>(props: FormProps<T>) => ReturnType<typeof FormComponent>;
+export const Form = memo(FormComponent);
 
 export const useFormField = () => {
   const context = useFormContext();
