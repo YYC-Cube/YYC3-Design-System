@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YYC³ Design System - 间距设计令牌">
+    <title>间距 - YYC³ Design System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="../index.html">YYC³ Design System</a></h1>
+                </div>
+                <nav class="nav">
+                    <a href="../index.html#components" class="nav-link">组件</a>
+                    <a href="../index.html#tokens" class="nav-link">设计令牌</a>
+                    <a href="../index.html#guidelines" class="nav-link">指南</a>
+                    <a href="../index.html#demo" class="nav-link">演示</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">首页</a> / <a href="../index.html#tokens">设计令牌</a> / 间距
+            </div>
+
+            <section class="token-doc">
+                <h1 class="token-title">间距</h1>
+                <p class="token-intro">
+                    间距系统定义了统一的间距规范，确保界面的一致性和视觉平衡。
+                </p>
+
+                <section class="token-section">
+                    <h2>间距标尺</h2>
+                    <div class="spacing-scale">
+                        <div class="spacing-item">
+                            <div class="spacing-label">xs - 0.25rem (4px)</div>
+                            <div class="spacing-visual" style="height: 4px;"></div>
+                        </div>
+                        <div class="spacing-item">
+                            <div class="spacing-label">sm - 0.5rem (8px)</div>
+                            <div class="spacing-visual" style="height: 8px;"></div>
+                        </div>
+                        <div class="spacing-item">
+                            <div class="spacing-label">md - 1rem (16px)</div>
+                            <div class="spacing-visual" style="height: 16px;"></div>
+                        </div>
+                        <div class="spacing-item">
+                            <div class="spacing-label">lg - 1.5rem (24px)</div>
+                            <div class="spacing-visual" style="height: 24px;"></div>
+                        </div>
+                        <div class="spacing-item">
+                            <div class="spacing-label">xl - 2rem (32px)</div>
+                            <div class="spacing-visual" style="height: 32px;"></div>
+                        </div>
+                        <div class="spacing-item">
+                            <div class="spacing-label">2xl - 3rem (48px)</div>
+                            <div class="spacing-visual" style="height: 48px;"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="token-section">
+                    <h2>应用示例</h2>
+                    <div class="spacing-examples">
+                        <div class="spacing-example">
+                            <h3>内边距 (Padding)</h3>
+                            <div class="example-box" style="padding: 0.5rem;">
+                                padding: 0.5rem (8px)
+                            </div>
+                            <div class="example-box" style="padding: 1rem;">
+                                padding: 1rem (16px)
+                            </div>
+                            <div class="example-box" style="padding: 1.5rem;">
+                                padding: 1.5rem (24px)
+                            </div>
+                        </div>
+                        <div class="spacing-example">
+                            <h3>外边距 (Margin)</h3>
+                            <div class="example-box" style="margin-bottom: 0.5rem;">
+                                margin-bottom: 0.5rem (8px)
+                            </div>
+                            <div class="example-box" style="margin-bottom: 1rem;">
+                                margin-bottom: 1rem (16px)
+                            </div>
+                            <div class="example-box" style="margin-bottom: 1.5rem;">
+                                margin-bottom: 1.5rem (24px)
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="token-section">
+                    <h2>间距原则</h2>
+                    <div class="principles-grid">
+                        <div class="principle-card">
+                            <div class="principle-icon">📏</div>
+                            <h3>一致性</h3>
+                            <p>使用统一的间距标尺，避免随意设置间距值</p>
+                        </div>
+                        <div class="principle-card">
+                            <div class="principle-icon">⚖️</div>
+                            <h3>平衡</h3>
+                            <p>保持元素之间的间距平衡，避免过于拥挤或稀疏</p>
+                        </div>
+                        <div class="principle-card">
+                            <div class="principle-icon">🎯</div>
+                            <h3>层级</h3>
+                            <p>使用不同的间距来建立视觉层级</p>
+                        </div>
+                        <div class="principle-card">
+                            <div class="principle-icon">📱</div>
+                            <h3>响应式</h3>
+                            <p>根据屏幕尺寸调整间距，保持良好的可读性</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="usage-section">
+                    <h2>使用指南</h2>
+                    <ul class="usage-list">
+                        <li>使用间距标尺中的值，避免自定义间距</li>
+                        <li>相关元素使用较小的间距，不相关元素使用较大的间距</li>
+                        <li>使用间距来建立视觉层级和分组</li>
+                        <li>在移动设备上适当减小间距</li>
+                        <li>保持间距的一致性，提高界面的可预测性</li>
+                    </ul>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 YYC³ Team. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <style>
+        .breadcrumb {
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: var(--color-secondary-foreground);
+        }
+        
+        .breadcrumb a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .token-doc {
+            padding: 2rem 0;
+        }
+        
+        .token-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin: 0 0 2rem 0;
+            text-align: center;
+        }
+        
+        .token-intro {
+            font-size: 1.125rem;
+            color: var(--color-secondary-foreground);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+        
+        .token-section {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .token-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1.5rem 0;
+            color: var(--color-foreground);
+        }
+        
+        .spacing-scale {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: var(--color-background);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-border);
+        }
+        
+        .spacing-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-secondary-foreground);
+            min-width: 200px;
+        }
+        
+        .spacing-visual {
+            flex: 1;
+            background: var(--color-primary);
+            border-radius: var(--radius-sm);
+            transition: all 0.3s ease;
+        }
+        
+        .spacing-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .spacing-example h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 0 0 1rem 0;
+            color: var(--color-foreground);
+        }
+        
+        .example-box {
+            background: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--color-secondary-foreground);
+            margin-bottom: 0.75rem;
+        }
+        
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .principle-card {
+            background: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .principle-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .principle-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 0 0 0.75rem 0;
+            color: var(--color-primary);
+        }
+        
+        .principle-card p {
+            font-size: 0.875rem;
+            color: var(--color-secondary-foreground);
+            line-height: 1.6;
+        }
+        
+        .usage-section {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .usage-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1.5rem 0;
+            color: var(--color-foreground);
+        }
+        
+        .usage-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .usage-list li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--color-secondary-foreground);
+            line-height: 1.8;
+        }
+        
+        .usage-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+    </style>
+</body>
+</html>

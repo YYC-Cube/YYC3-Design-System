@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YYC³ Design System - Button 组件文档">
+    <title>Button 组件 - YYC³ Design System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="../index.html">YYC³ Design System</a></h1>
+                </div>
+                <nav class="nav">
+                    <a href="../index.html#components" class="nav-link">组件</a>
+                    <a href="../index.html#tokens" class="nav-link">设计令牌</a>
+                    <a href="../index.html#guidelines" class="nav-link">指南</a>
+                    <a href="../index.html#demo" class="nav-link">演示</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">首页</a> / <a href="../index.html#components">组件</a> / Button
+            </div>
+
+            <section class="component-doc">
+                <h1 class="component-title">Button 组件</h1>
+                <p class="component-intro">
+                    Button 组件是一个可点击的按钮，支持多种变体、尺寸和状态。用于触发操作或导航。
+                </p>
+
+                <div class="demo-section">
+                    <h2>基础示例</h2>
+                    <div class="demo-preview">
+                        <button class="button button-primary">默认按钮</button>
+                        <button class="button button-secondary">次要按钮</button>
+                        <button class="button button-outline">轮廓按钮</button>
+                    </div>
+                </div>
+
+                <section class="api-section">
+                    <h2>API 属性</h2>
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>属性</th>
+                                <th>类型</th>
+                                <th>默认值</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>variant</code></td>
+                                <td><code>'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'</code></td>
+                                <td><code>'default'</code></td>
+                                <td>按钮的视觉变体</td>
+                            </tr>
+                            <tr>
+                                <td><code>size</code></td>
+                                <td><code>'default' | 'sm' | 'lg' | 'icon'</code></td>
+                                <td><code>'default'</code></td>
+                                <td>按钮的尺寸</td>
+                            </tr>
+                            <tr>
+                                <td><code>disabled</code></td>
+                                <td><code>boolean</code></td>
+                                <td><code>false</code></td>
+                                <td>是否禁用按钮</td>
+                            </tr>
+                            <tr>
+                                <td><code>onClick</code></td>
+                                <td><code>() => void</code></td>
+                                <td>-</td>
+                                <td>点击事件处理函数</td>
+                            </tr>
+                            <tr>
+                                <td><code>children</code></td>
+                                <td><code>ReactNode</code></td>
+                                <td>-</td>
+                                <td>按钮内容</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="variants-section">
+                    <h2>变体</h2>
+                    <div class="variant-grid">
+                        <div class="variant-item">
+                            <h3>Default</h3>
+                            <button class="button button-primary">默认按钮</button>
+                            <p>主要操作按钮，使用品牌色</p>
+                        </div>
+                        <div class="variant-item">
+                            <h3>Destructive</h3>
+                            <button class="button button-destructive">危险操作</button>
+                            <p>用于删除、取消等危险操作</p>
+                        </div>
+                        <div class="variant-item">
+                            <h3>Outline</h3>
+                            <button class="button button-outline">轮廓按钮</button>
+                            <p>带边框的透明按钮</p>
+                        </div>
+                        <div class="variant-item">
+                            <h3>Secondary</h3>
+                            <button class="button button-secondary">次要按钮</button>
+                            <p>次要操作，使用中性色</p>
+                        </div>
+                        <div class="variant-item">
+                            <h3>Ghost</h3>
+                            <button class="button button-ghost">幽灵按钮</button>
+                            <p>无背景的按钮，悬停时显示效果</p>
+                        </div>
+                        <div class="variant-item">
+                            <h3>Link</h3>
+                            <button class="button button-link">链接按钮</button>
+                            <p>类似链接的按钮样式</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="sizes-section">
+                    <h2>尺寸</h2>
+                    <div class="size-demo">
+                        <button class="button button-primary button-sm">小按钮</button>
+                        <button class="button button-primary">默认按钮</button>
+                        <button class="button button-primary button-lg">大按钮</button>
+                        <button class="button button-primary button-icon">🔍</button>
+                    </div>
+                </section>
+
+                <section class="usage-section">
+                    <h2>使用示例</h2>
+                    <div class="code-block">
+                        <pre><code>import { Button } from 'yyc3-design-system';
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Button variant="default"&gt;默认按钮&lt;/Button&gt;
+      &lt;Button variant="destructive"&gt;危险操作&lt;/Button&gt;
+      &lt;Button variant="outline"&gt;轮廓按钮&lt;/Button&gt;
+      &lt;Button size="sm"&gt;小按钮&lt;/Button&gt;
+      &lt;Button size="lg"&gt;大按钮&lt;/Button&gt;
+      &lt;Button disabled&gt;禁用按钮&lt;/Button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                    </div>
+                </section>
+
+                <section class="best-practices-section">
+                    <h2>最佳实践</h2>
+                    <ul class="best-practices-list">
+                        <li>使用 <code>variant</code> 属性来区分按钮的重要性</li>
+                        <li>为重要操作使用 <code>default</code> 变体</li>
+                        <li>为危险操作使用 <code>destructive</code> 变体</li>
+                        <li>使用 <code>disabled</code> 属性来禁用按钮</li>
+                        <li>按钮文本应该简洁明了，通常不超过4个字</li>
+                        <li>在表单中，主要操作按钮应该放在右侧</li>
+                    </ul>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 YYC³ Team. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <style>
+        .breadcrumb {
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: var(--color-secondary-foreground);
+        }
+        
+        .breadcrumb a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .component-doc {
+            padding: 2rem 0;
+        }
+        
+        .component-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin: 0 0 2rem 0;
+            text-align: center;
+        }
+        
+        .component-intro {
+            font-size: 1.125rem;
+            color: var(--color-secondary-foreground);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+        
+        .demo-section {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .demo-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1.5rem 0;
+            color: var(--color-foreground);
+        }
+        
+        .demo-preview {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 1rem;
+            background: var(--color-background);
+            border-radius: var(--radius-md);
+        }
+        
+        .api-section {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .api-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1.5rem 0;
+            color: var(--color-foreground);
+        }
+        
+        .api-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        .api-table th,
+        .api-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .api-table th {
+            background: var(--color-background);
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+        
+        .api-table code {
+            background: #f5f5f5;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+        }
+        
+        .variants-section,
+        .sizes-section,
+        .usage-section,
+        .best-practices-section {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .variants-section h2,
+        .sizes-section h2,
+        .usage-section h2,
+        .best-practices-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1.5rem 0;
+            color: var(--color-foreground);
+        }
+        
+        .variant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .variant-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--color-background);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-border);
+        }
+        
+        .variant-item h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0 0 1rem 0;
+            color: var(--color-primary);
+        }
+        
+        .variant-item p {
+            font-size: 0.875rem;
+            color: var(--color-secondary-foreground);
+            line-height: 1.6;
+        }
+        
+        .size-demo {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--color-background);
+            border-radius: var(--radius-md);
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            margin: 0;
+        }
+        
+        .code-block code {
+            color: #d4d4d4;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        
+        .best-practices-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .best-practices-list li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--color-secondary-foreground);
+            line-height: 1.8;
+        }
+        
+        .best-practices-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+        
+        .button-primary {
+            background: var(--color-primary);
+            color: var(--color-primary-foreground);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .button-primary:hover {
+            background: #c04a4f;
+            transform: translateY(-2px);
+        }
+        
+        .button-secondary {
+            background: var(--color-secondary);
+            color: var(--color-secondary-foreground);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .button-outline {
+            background: transparent;
+            color: var(--color-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--color-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .button-destructive {
+            background: var(--color-destructive);
+            color: var(--color-primary-foreground);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .button-ghost {
+            background: transparent;
+            color: var(--color-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .button-link {
+            background: transparent;
+            color: var(--color-primary);
+            padding: 0;
+            border-radius: var(--radius-md);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: underline;
+        }
+        
+        .button-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+        
+        .button-lg {
+            padding: 1rem 2rem;
+            font-size: 1.25rem;
+        }
+        
+        .button-icon {
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+    </style>
+</body>
+</html>

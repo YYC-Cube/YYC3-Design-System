@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YYC³ Design System - Card 组件文档">
+    <title>Card 组件 - YYC³ Design System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="../index.html">YYC³ Design System</a></h1>
+                </div>
+                <nav class="nav">
+                    <a href="../index.html#components" class="nav-link">组件</a>
+                    <a href="../index.html#tokens" class="nav-link">设计令牌</a>
+                    <a href="../index.html#guidelines" class="nav-link">指南</a>
+                    <a href="../index.html#demo" class="nav-link">演示</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">首页</a> / <a href="../index.html#components">组件</a> / Card
+            </div>
+
+            <section class="component-doc">
+                <h1 class="component-title">Card 组件</h1>
+                <p class="component-intro">
+                    Card 组件是一个容器组件，用于内容分组和展示。支持Header、Title、Content等子组件。
+                </p>
+
+                <div class="demo-section">
+                    <h2>基础示例</h2>
+                    <div class="demo-preview">
+                        <div class="card-demo">
+                            <h3>卡片标题</h3>
+                            <p>这是卡片的内容区域。可以放置文本、图片、按钮等各种内容。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="api-section">
+                    <h2>子组件</h2>
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>组件</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>Card</code></td>
+                                <td>卡片容器组件</td>
+                            </tr>
+                            <tr>
+                                <td><code>CardHeader</code></td>
+                                <td>卡片头部区域</td>
+                            </tr>
+                            <tr>
+                                <td><code>CardTitle</code></td>
+                                <td>卡片标题</td>
+                            </tr>
+                            <tr>
+                                <td><code>CardContent</code></td>
+                                <td>卡片内容区域</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="variants-section">
+                    <h2>使用示例</h2>
+                    <div class="variant-grid">
+                        <div class="variant-item">
+                            <h3>基础卡片</h3>
+                            <div class="card-demo">
+                                <h3>卡片标题</h3>
+                                <p>这是卡片的内容区域。</p>
+                            </div>
+                        </div>
+                        <div class="variant-item">
+                            <h3>带标题的卡片</h3>
+                            <div class="card-demo">
+                                <div class="card-header">
+                                    <h3>卡片标题</h3>
+                                </div>
+                                <p>这是卡片的内容区域。</p>
+                            </div>
+                        </div>
+                        <div class="variant-item">
+                            <h3>统计卡片</h3>
+                            <div class="card-demo">
+                                <div style="font-size: 0.875rem; color: #666; margin-bottom: 0.5rem;">总访问量</div>
+                                <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">12,345</div>
+                                <div style="font-size: 0.875rem; color: #10b981;">↑ 12.5% 较上周</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="usage-section">
+                    <h2>使用示例</h2>
+                    <div class="code-block">
+                        <pre><code>import { Card, CardHeader, CardTitle, CardContent } from 'yyc3-design-system';
+
+function App() {
+  return (
+    &lt;Card&gt;
+      &lt;CardHeader&gt;
+        &lt;CardTitle&gt;卡片标题&lt;/CardTitle&gt;
+      &lt;/CardHeader&gt;
+      &lt;CardContent&gt;
+        这是卡片的内容区域。
+      &lt;/CardContent&gt;
+    &lt;/Card&gt;
+  );
+}</code></pre>
+                    </div>
+                </section>
+
+                <section class="best-practices-section">
+                    <h2>最佳实践</h2>
+                    <ul class="best-practices-list">
+                        <li>使用 <code>CardHeader</code> 和 <code>CardTitle</code> 来组织卡片标题</li>
+                        <li>使用 <code>CardContent</code> 来包裹卡片内容</li>
+                        <li>卡片内容应该简洁明了，避免过度复杂</li>
+                        <li>使用卡片来分组相关内容</li>
+                        <li>在响应式布局中，卡片可以自动适应屏幕大小</li>
+                    </ul>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 YYC³ Team. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <style>
+        .breadcrumb {
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: var(--color-secondary-foreground);
+        }
+        
+        .breadcrumb a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .component-doc {
+            padding: 2rem 0;
+        }
+        
+        .component-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin: 0 0 2rem 0;
+            text-align: center;
+        }
+        
+        .component-intro {
+            font-size: 1.125rem;
+            color: var(--color-secondary-foreground);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+        
+        .demo-section {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .demo-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1.5rem 0;
+            color: var(--color-foreground);
+        }
+        
+        .demo-preview {
+            padding: 1.5rem;
+            background: var(--color-background);
+            border-radius: var(--radius-md);
+        }
+        
+        .card-demo {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-card);
+        }
+        
+        .card-demo h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1rem 0;
+            color: var(--color-foreground);
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .card-demo p {
+            font-size: 1rem;
+            color: var(--color-secondary-foreground);
+            line-height: 1.6;
+        }
+        
+        .card-header {
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .card-header h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+            color: var(--color-primary);
+        }
+        
+        .api-section {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .api-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1.5rem 0;
+            color: var(--color-foreground);
+        }
+        
+        .api-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        .api-table th,
+        .api-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .api-table th {
+            background: var(--color-background);
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+        
+        .api-table code {
+            background: #f5f5f5;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+        }
+        
+        .variants-section,
+        .usage-section,
+        .best-practices-section {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .variants-section h2,
+        .usage-section h2,
+        .best-practices-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1.5rem 0;
+            color: var(--color-foreground);
+        }
+        
+        .variant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .variant-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--color-background);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-border);
+        }
+        
+        .variant-item h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0 0 1rem 0;
+            color: var(--color-primary);
+        }
+        
+        .variant-item p {
+            font-size: 0.875rem;
+            color: var(--color-secondary-foreground);
+            line-height: 1.6;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            margin: 0;
+        }
+        
+        .code-block code {
+            color: #d4d4d4;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        
+        .best-practices-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .best-practices-list li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--color-secondary-foreground);
+            line-height: 1.8;
+        }
+        
+        .best-practices-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+    </style>
+</body>
+</html>

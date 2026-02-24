@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YYC³ Design System - 阴影设计令牌">
+    <title>阴影 - YYC³ Design System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="../index.html">YYC³ Design System</a></h1>
+                </div>
+                <nav class="nav">
+                    <a href="../index.html#components" class="nav-link">组件</a>
+                    <a href="../index.html#tokens" class="nav-link">设计令牌</a>
+                    <a href="../index.html#guidelines" class="nav-link">指南</a>
+                    <a href="../index.html#demo" class="nav-link">演示</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">首页</a> / <a href="../index.html#tokens">设计令牌</a> / 阴影
+            </div>
+
+            <section class="token-doc">
+                <h1 class="token-title">阴影</h1>
+                <p class="token-intro">
+                    阴影系统定义了不同层级的阴影效果，增强视觉层次和深度感。
+                </p>
+
+                <section class="token-section">
+                    <h2>阴影层级</h2>
+                    <div class="shadow-grid">
+                        <div class="shadow-item">
+                            <div class="shadow-preview" style="box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);"></div>
+                            <div class="shadow-info">
+                                <div class="shadow-name">Small</div>
+                                <div class="shadow-value">0 1px 2px rgba(0, 0, 0, 0.05)</div>
+                            </div>
+                        </div>
+                        <div class="shadow-item">
+                            <div class="shadow-preview" style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"></div>
+                            <div class="shadow-info">
+                                <div class="shadow-name">Medium</div>
+                                <div class="shadow-value">0 4px 6px -1px rgba(0, 0, 0, 0.1)</div>
+                            </div>
+                        </div>
+                        <div class="shadow-item">
+                            <div class="shadow-preview" style="box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);"></div>
+                            <div class="shadow-info">
+                                <div class="shadow-name">Large</div>
+                                <div class="shadow-value">0 10px 15px -3px rgba(0, 0, 0, 0.1)</div>
+                            </div>
+                        </div>
+                        <div class="shadow-item">
+                            <div class="shadow-preview" style="box-shadow: 0 6px 20px -4px #d6cbd0;"></div>
+                            <div class="shadow-info">
+                                <div class="shadow-name">Card</div>
+                                <div class="shadow-value">0 6px 20px -4px #d6cbd0</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="token-section">
+                    <h2>应用场景</h2>
+                    <div class="use-cases">
+                        <div class="use-case-item">
+                            <h3>Small Shadow</h3>
+                            <p>用于轻微的浮起效果，如按钮悬停状态</p>
+                            <div class="use-case-demo" style="box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);">
+                                按钮悬停效果
+                            </div>
+                        </div>
+                        <div class="use-case-item">
+                            <h3>Medium Shadow</h3>
+                            <p>用于中等浮起效果，如下拉菜单、工具提示</p>
+                            <div class="use-case-demo" style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                                下拉菜单
+                            </div>
+                        </div>
+                        <div class="use-case-item">
+                            <h3>Large Shadow</h3>
+                            <p>用于明显的浮起效果，如模态框、抽屉</p>
+                            <div class="use-case-demo" style="box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+                                模态框
+                            </div>
+                        </div>
+                        <div class="use-case-item">
+                            <h3>Card Shadow</h3>
+                            <p>用于卡片组件，提供柔和的阴影效果</p>
+                            <div class="use-case-demo" style="box-shadow: 0 6px 20px -4px #d6cbd0;">
+                                卡片组件
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="token-section">
+                    <h2>阴影原则</h2>
+                    <div class="principles-grid">
+                        <div class="principle-card">
+                            <div class="principle-icon">📊</div>
+                            <h3>层级</h3>
+                            <p>使用不同强度的阴影来建立视觉层级</p>
+                        </div>
+                        <div class="principle-card">
+                            <div class="principle-icon">🎨</div>
+                            <h3>一致性</h3>
+                            <p>使用预定义的阴影值，保持一致性</p>
+                        </div>
+                        <div class="principle-card">
+                            <div class="principle-icon">💡</div>
+                            <h3>适度</h3>
+                            <p>避免过度使用阴影，保持界面简洁</p>
+                        </div>
+                        <div class="principle-card">
+                            <div class="principle-icon">🌈</div>
+                            <h3>色彩</h3>
+                            <p>使用品牌色的阴影增强品牌识别度</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="usage-section">
+                    <h2>使用指南</h2>
+                    <ul class="usage-list">
+                        <li>使用预定义的阴影值，避免自定义阴影</li>
+                        <li>根据元素的层级选择合适的阴影强度</li>
+                        <li>在悬停状态使用较小的阴影增强交互反馈</li>
+                        <li>使用品牌色阴影增强品牌识别度</li>
+                        <li>在深色模式下调整阴影的透明度和颜色</li>
+                    </ul>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 YYC³ Team. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <style>
+        .breadcrumb {
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: var(--color-secondary-foreground);
+        }
+        
+        .breadcrumb a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .token-doc {
+            padding: 2rem 0;
+        }
+        
+        .token-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin: 0 0 2rem 0;
+            text-align: center;
+        }
+        
+        .token-intro {
+            font-size: 1.125rem;
+            color: var(--color-secondary-foreground);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+        
+        .token-section {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .token-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1.5rem 0;
+            color: var(--color-foreground);
+        }
+        
+        .shadow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .shadow-item {
+            background: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .shadow-preview {
+            height: 80px;
+            background: var(--color-card);
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .shadow-preview:hover {
+            transform: translateY(-4px);
+        }
+        
+        .shadow-info {
+            text-align: left;
+        }
+        
+        .shadow-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-foreground);
+            margin-bottom: 0.5rem;
+        }
+        
+        .shadow-value {
+            font-size: 0.75rem;
+            color: var(--color-secondary-foreground);
+            font-family: var(--font-mono);
+            line-height: 1.4;
+        }
+        
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .use-case-item {
+            background: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+        
+        .use-case-item h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 0 0 0.75rem 0;
+            color: var(--color-primary);
+        }
+        
+        .use-case-item p {
+            font-size: 0.875rem;
+            color: var(--color-secondary-foreground);
+            line-height: 1.6;
+            margin: 0 0 1rem 0;
+        }
+        
+        .use-case-demo {
+            background: var(--color-card);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--color-foreground);
+        }
+        
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .principle-card {
+            background: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .principle-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .principle-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 0 0 0.75rem 0;
+            color: var(--color-primary);
+        }
+        
+        .principle-card p {
+            font-size: 0.875rem;
+            color: var(--color-secondary-foreground);
+            line-height: 1.6;
+        }
+        
+        .usage-section {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .usage-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1.5rem 0;
+            color: var(--color-foreground);
+        }
+        
+        .usage-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .usage-list li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--color-secondary-foreground);
+            line-height: 1.8;
+        }
+        
+        .usage-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YYC³ Design System - Modal 组件文档">
+    <title>Modal 组件 - YYC³ Design System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="../index.html">YYC³ Design System</a></h1>
+                </div>
+                <nav class="nav">
+                    <a href="../index.html#components" class="nav-link">组件</a>
+                    <a href="../index.html#tokens" class="nav-link">设计令牌</a>
+                    <a href="../index.html#guidelines" class="nav-link">指南</a>
+                    <a href="../index.html#demo" class="nav-link">演示</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">首页</a> / <a href="../index.html#components">组件</a> / Modal
+            </div>
+
+            <section class="component-doc">
+                <h1 class="component-title">Modal 组件</h1>
+                <p class="component-intro">
+                    Modal 组件是一个弹出式对话框，支持遮罩层、键盘导航和点击外部关闭。用于显示重要信息或表单。
+                </p>
+
+                <div class="demo-section">
+                    <h2>基础示例</h2>
+                    <div class="demo-preview">
+                        <button id="openModal" class="button button-primary">打开模态框</button>
+                    </div>
+                </div>
+
+                <section class="api-section">
+                    <h2>API 属性</h2>
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>属性</th>
+                                <th>类型</th>
+                                <th>默认值</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>isOpen</code></td>
+                                <td><code>boolean</code></td>
+                                <td><code>false</code></td>
+                                <td>是否显示模态框</td>
+                            </tr>
+                            <tr>
+                                <td><code>onClose</code></td>
+                                <td><code>() => void</code></td>
+                                <td>-</td>
+                                <td>关闭回调函数</td>
+                            </tr>
+                            <tr>
+                                <td><code>children</code></td>
+                                <td><code>ReactNode</code></td>
+                                <td>-</td>
+                                <td>模态框内容</td>
+                            </tr>
+                            <tr>
+                                <td><code>className</code></td>
+                                <td><code>string</code></td>
+                                <td>-</td>
+                                <td>自定义类名</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="features-section">
+                    <h2>特性</h2>
+                    <ul class="features-list">
+                        <li>✓ 点击遮罩层关闭</li>
+                        <li>✓ ESC 键关闭</li>
+                        <li>✓ 阻止背景滚动</li>
+                        <li>✓ 响应式设计</li>
+                        <li>✓ 无障碍支持（ARIA）</li>
+                    </ul>
+                </section>
+
+                <section class="usage-section">
+                    <h2>使用示例</h2>
+                    <div class="code-block">
+                        <pre><code>import { useState } from 'react';
+import { Modal } from 'yyc3-design-system';
+
+function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={() => setIsOpen(true)}&gt;
+        打开模态框
+      &lt;/button&gt;
+      
+      &lt;Modal isOpen={isOpen} onClose={() => setIsOpen(false)}&gt;
+        &lt;h2&gt;模态框标题&lt;/h2&gt;
+        &lt;p&gt;这是模态框的内容。&lt;/p&gt;
+        &lt;button onClick={() => setIsOpen(false)}&gt;
+          关闭
+        &lt;/button&gt;
+      &lt;/Modal&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                    </div>
+                </section>
+
+                <section class="best-practices-section">
+                    <h2>最佳实践</h2>
+                    <ul class="best-practices-list">
+                        <li>模态框应该有明确的关闭方式</li>
+                        <li>使用 <code>onClose</code> 回调来管理模态框状态</li>
+                        <li>模态框内容应该简洁明了</li>
+                        <li>避免嵌套模态框</li>
+                        <li>使用 ESC 键关闭以提高可访问性</li>
+                        <li>模态框打开时应该阻止背景滚动</li>
+                    </ul>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 YYC³ Team. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const openModalBtn = document.getElementById('openModal');
+        let modalOverlay = null;
+        let modalContent = null;
+
+        function createModal() {
+            if (modalOverlay) return;
+
+            modalOverlay = document.createElement('div');
+            modalOverlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+            `;
+
+            modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: #f8f9ef;
+                border-radius: 0.5rem;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+                max-width: 90%;
+                max-height: 90vh;
+                overflow: auto;
+                padding: 2rem;
+                position: relative;
+            `;
+
+            const closeButton = document.createElement('button');
+            closeButton.innerHTML = '×';
+            closeButton.style.cssText = `
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+                color: #1a1a1a;
+                padding: 0;
+                line-height: 1;
+            `;
+
+            const title = document.createElement('h2');
+            title.textContent = '模态框标题';
+            title.style.cssText = `
+                font-size: 1.75rem;
+                font-weight: 600;
+                margin: 0 0 1rem 0;
+                color: #1a1a1a;
+            `;
+
+            const content = document.createElement('p');
+            content.textContent = '这是模态框的内容。可以放置表单、信息或其他交互元素。';
+            content.style.cssText = `
+                font-size: 1rem;
+                line-height: 1.5;
+                color: #1a1a1a;
+            `;
+
+            const closeBtn = document.createElement('button');
+            closeBtn.textContent = '关闭';
+            closeBtn.style.cssText = `
+                background: #d45a5f;
+                color: #ffffff;
+                border: none;
+                border-radius: 0.5rem;
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                margin-top: 1.5rem;
+            `;
+
+            modalContent.appendChild(closeButton);
+            modalContent.appendChild(title);
+            modalContent.appendChild(content);
+            modalContent.appendChild(closeBtn);
+            modalOverlay.appendChild(modalContent);
+            document.body.appendChild(modalOverlay);
+            document.body.style.overflow = 'hidden';
+
+            const closeModal = () => {
+                document.body.removeChild(modalOverlay);
+                modalOverlay = null;
+                modalContent = null;
+                document.body.style.overflow = 'unset';
+            };
+
+            closeButton.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) closeModal();
+            });
+            closeBtn.addEventListener('click', closeModal);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeModal();
+            });
+        }
+
+        openModalBtn.addEventListener('click', createModal);
+    </script>
+
+    <style>
+        .breadcrumb {
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: var(--color-secondary-foreground);
+        }
+        
+        .breadcrumb a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .component-doc {
+            padding: 2rem 0;
+        }
+        
+        .component-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin: 0 0 2rem 0;
+            text-align: center;
+        }
+        
+        .component-intro {
+            font-size: 1.125rem;
+            color: var(--color-secondary-foreground);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+        
+        .demo-section {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .demo-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1.5rem 0;
+            color: var(--color-foreground);
+        }
+        
+        .demo-preview {
+            display: flex;
+            justify-content: center;
+            padding: 1.5rem;
+            background: var(--color-background);
+            border-radius: var(--radius-md);
+        }
+        
+        .api-section,
+        .features-section,
+        .usage-section,
+        .best-practices-section {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .api-section h2,
+        .features-section h2,
+        .usage-section h2,
+        .best-practices-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1.5rem 0;
+            color: var(--color-foreground);
+        }
+        
+        .api-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        .api-table th,
+        .api-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .api-table th {
+            background: var(--color-background);
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+        
+        .api-table code {
+            background: #f5f5f5;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+        }
+        
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .features-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--color-secondary-foreground);
+            line-height: 1.8;
+        }
+        
+        .features-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            margin: 0;
+        }
+        
+        .code-block code {
+            color: #d4d4d4;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        
+        .best-practices-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .best-practices-list li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--color-secondary-foreground);
+            line-height: 1.8;
+        }
+        
+        .best-practices-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+        
+        .button-primary {
+            background: var(--color-primary);
+            color: var(--color-primary-foreground);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .button-primary:hover {
+            background: #c04a4f;
+            transform: translateY(-2px);
+        }
+    </style>
+</body>
+</html>

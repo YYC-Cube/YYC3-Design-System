@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YYC³ Design System - 组件库文档">
+    <title>YYC³ Design System - 文档</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>YYC³ Design System</h1>
+                </div>
+                <nav class="nav">
+                    <a href="#components" class="nav-link">组件</a>
+                    <a href="#tokens" class="nav-link">设计令牌</a>
+                    <a href="#guidelines" class="nav-link">指南</a>
+                    <a href="#demo" class="nav-link">演示</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="hero">
+                <h1>YYC³ Design System</h1>
+                <p class="hero-description">
+                    YYC³ 设计系统提供了一套完整的UI组件库和设计规范，帮助团队快速构建一致、美观的用户界面。
+                </p>
+                <div class="hero-actions">
+                    <a href="#components" class="button button-primary">查看组件</a>
+                    <a href="#demo" class="button button-secondary">在线演示</a>
+                </div>
+            </section>
+
+            <section id="components" class="section">
+                <h2 class="section-title">组件库</h2>
+                <p class="section-description">
+                    YYC³ Design System 提供了一系列基础UI组件，支持主题切换和响应式设计。
+                </p>
+                
+                <div class="component-grid">
+                    <a href="components/button.html" class="component-card">
+                        <div class="component-icon">🔘</div>
+                        <h3 class="component-name">Button</h3>
+                        <p class="component-description">按钮组件，支持多种变体和尺寸</p>
+                    </a>
+                    
+                    <a href="components/input.html" class="component-card">
+                        <div class="component-icon">📝</div>
+                        <h3 class="component-name">Input</h3>
+                        <p class="component-description">输入框组件，支持多种类型和验证</p>
+                    </a>
+                    
+                    <a href="components/card.html" class="component-card">
+                        <div class="component-icon">📦</div>
+                        <h3 class="component-name">Card</h3>
+                        <p class="component-description">卡片组件，用于内容分组和展示</p>
+                    </a>
+                    
+                    <a href="components/modal.html" class="component-card">
+                        <div class="component-icon">🪟</div>
+                        <h3 class="component-name">Modal</h3>
+                        <p class="component-description">模态框组件，用于弹出式内容</p>
+                    </a>
+                    
+                    <a href="components/grid.html" class="component-card">
+                        <div class="component-icon">📊</div>
+                        <h3 class="component-name">Grid</h3>
+                        <p class="component-description">网格布局组件，支持响应式设计</p>
+                    </a>
+                    
+                    <a href="components/container.html" class="component-card">
+                        <div class="component-icon">📐</div>
+                        <h3 class="component-name">Container</h3>
+                        <p class="component-description">容器组件，用于居中内容</p>
+                    </a>
+                </div>
+            </section>
+
+            <section id="tokens" class="section">
+                <h2 class="section-title">设计令牌</h2>
+                <p class="section-description">
+                    设计令牌是设计系统的基础，定义了颜色、字体、间距等设计变量。
+                </p>
+                
+                <div class="token-grid">
+                    <div class="token-card">
+                        <h3>颜色</h3>
+                        <p>定义了品牌色、功能色、中性色等颜色系统</p>
+                        <a href="tokens/colors.html" class="token-link">查看详情 →</a>
+                    </div>
+                    
+                    <div class="token-card">
+                        <h3>字体</h3>
+                        <p>定义了字体家族、字号、行高等排版规范</p>
+                        <a href="tokens/typography.html" class="token-link">查看详情 →</a>
+                    </div>
+                    
+                    <div class="token-card">
+                        <h3>间距</h3>
+                        <p>定义了统一的间距系统，确保界面一致性</p>
+                        <a href="tokens/spacing.html" class="token-link">查看详情 →</a>
+                    </div>
+                    
+                    <div class="token-card">
+                        <h3>阴影</h3>
+                        <p>定义了不同层级的阴影效果，增强视觉层次</p>
+                        <a href="tokens/shadows.html" class="token-link">查看详情 →</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="guidelines" class="section">
+                <h2 class="section-title">使用指南</h2>
+                <p class="section-description">
+                    遵循这些指南可以确保项目的一致性和可维护性。
+                </p>
+                
+                <div class="guideline-list">
+                    <div class="guideline-item">
+                        <div class="guideline-number">1</div>
+                        <div class="guideline-content">
+                            <h3>安装</h3>
+                            <p>通过npm安装YYC³ Design System</p>
+                            <code class="code">npm install yyc3-design-system</code>
+                        </div>
+                    </div>
+                    
+                    <div class="guideline-item">
+                        <div class="guideline-number">2</div>
+                        <div class="guideline-content">
+                            <h3>导入</h3>
+                            <p>在项目中导入需要的组件</p>
+                            <code class="code">import { Button } from 'yyc3-design-system';</code>
+                        </div>
+                    </div>
+                    
+                    <div class="guideline-item">
+                        <div class="guideline-number">3</div>
+                        <div class="guideline-content">
+                            <h3>使用</h3>
+                            <p>在React组件中使用导入的组件</p>
+                            <code class="code">&lt;Button&gt;点击我&lt;/Button&gt;</code>
+                        </div>
+                    </div>
+                    
+                    <div class="guideline-item">
+                        <div class="guideline-number">4</div>
+                        <div class="guideline-content">
+                            <h3>主题</h3>
+                            <p>使用ThemeProvider包裹应用以启用主题切换</p>
+                            <code class="code">&lt;ThemeProvider&gt;...&lt;/ThemeProvider&gt;</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="demo" class="section">
+                <h2 class="section-title">在线演示</h2>
+                <p class="section-description">
+                    查看组件的实际效果和交互体验。
+                </p>
+                
+                <div class="demo-card">
+                    <h3>组件演示页面</h3>
+                    <p>在浏览器中查看所有组件的实时演示</p>
+                    <a href="../demo/index.html" class="button button-primary" target="_blank">打开演示页面</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 YYC³ Team. All rights reserved.</p>
+            <p>Words Initiate Quadrants, Language Serves as Core for the Future</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

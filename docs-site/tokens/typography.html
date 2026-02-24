@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YYC³ Design System - 字体设计令牌">
+    <title>字体 - YYC³ Design System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><a href="../index.html">YYC³ Design System</a></h1>
+                </div>
+                <nav class="nav">
+                    <a href="../index.html#components" class="nav-link">组件</a>
+                    <a href="../index.html#tokens" class="nav-link">设计令牌</a>
+                    <a href="../index.html#guidelines" class="nav-link">指南</a>
+                    <a href="../index.html#demo" class="nav-link">演示</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">首页</a> / <a href="../index.html#tokens">设计令牌</a> / 字体
+            </div>
+
+            <section class="token-doc">
+                <h1 class="token-title">字体</h1>
+                <p class="token-intro">
+                    字体系统定义了字体家族、字号、行高等排版规范，确保界面的一致性和可读性。
+                </p>
+
+                <section class="token-section">
+                    <h2>字体家族</h2>
+                    <div class="font-family-demo">
+                        <div class="font-item">
+                            <div class="font-label">Sans Serif</div>
+                            <div class="font-preview" style="font-family: 'Inter', sans-serif;">
+                                Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif
+                            </div>
+                        </div>
+                        <div class="font-item">
+                            <div class="font-label">Monospace</div>
+                            <div class="font-preview" style="font-family: 'SF Mono', Monaco, monospace;">
+                                SF Mono, Monaco, 'Cascadia Code', 'Roboto Mono', monospace
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="token-section">
+                    <h2>字号</h2>
+                    <div class="font-size-demo">
+                        <div class="size-item">
+                            <div class="size-label">H1 - 2.5rem (40px)</div>
+                            <div class="size-preview" style="font-size: 2.5rem; font-weight: 700;">标题一</div>
+                        </div>
+                        <div class="size-item">
+                            <div class="size-label">H2 - 2rem (32px)</div>
+                            <div class="size-preview" style="font-size: 2rem; font-weight: 600;">标题二</div>
+                        </div>
+                        <div class="size-item">
+                            <div class="size-label">H3 - 1.5rem (24px)</div>
+                            <div class="size-preview" style="font-size: 1.5rem; font-weight: 600;">标题三</div>
+                        </div>
+                        <div class="size-item">
+                            <div class="size-label">Body - 1rem (16px)</div>
+                            <div class="size-preview" style="font-size: 1rem; font-weight: 400;">正文内容</div>
+                        </div>
+                        <div class="size-item">
+                            <div class="size-label">Small - 0.875rem (14px)</div>
+                            <div class="size-preview" style="font-size: 0.875rem; font-weight: 400;">小号文本</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="token-section">
+                    <h2>字重</h2>
+                    <div class="font-weight-demo">
+                        <div class="weight-item">
+                            <div class="weight-label">Regular (400)</div>
+                            <div class="weight-preview" style="font-weight: 400;">普通文本</div>
+                        </div>
+                        <div class="weight-item">
+                            <div class="weight-label">Medium (500)</div>
+                            <div class="weight-preview" style="font-weight: 500;">中等字重</div>
+                        </div>
+                        <div class="weight-item">
+                            <div class="weight-label">Semibold (600)</div>
+                            <div class="weight-preview" style="font-weight: 600;">半粗体</div>
+                        </div>
+                        <div class="weight-item">
+                            <div class="weight-label">Bold (700)</div>
+                            <div class="weight-preview" style="font-weight: 700;">粗体</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="token-section">
+                    <h2>行高</h2>
+                    <div class="line-height-demo">
+                        <div class="line-height-item">
+                            <div class="line-height-label">Tight (1.2)</div>
+                            <div class="line-height-preview" style="line-height: 1.2;">紧凑行高，适用于标题</div>
+                        </div>
+                        <div class="line-height-item">
+                            <div class="line-height-label">Normal (1.6)</div>
+                            <div class="line-height-preview" style="line-height: 1.6;">正常行高，适用于正文</div>
+                        </div>
+                        <div class="line-height-item">
+                            <div class="line-height-label">Relaxed (1.8)</div>
+                            <div class="line-height-preview" style="line-height: 1.8;">宽松行高，适用于长文本</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="usage-section">
+                    <h2>使用指南</h2>
+                    <ul class="usage-list">
+                        <li>使用 Sans Serif 字体作为主要字体</li>
+                        <li>使用 Monospace 字体显示代码和数据</li>
+                        <li>标题使用较大的字号和较重的字重</li>
+                        <li>正文使用适中的行高，提高可读性</li>
+                        <li>保持字体层级的一致性</li>
+                    </ul>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 YYC³ Team. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <style>
+        .breadcrumb {
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: var(--color-secondary-foreground);
+        }
+        
+        .breadcrumb a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .token-doc {
+            padding: 2rem 0;
+        }
+        
+        .token-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin: 0 0 2rem 0;
+            text-align: center;
+        }
+        
+        .token-intro {
+            font-size: 1.125rem;
+            color: var(--color-secondary-foreground);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+        
+        .token-section {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .token-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1.5rem 0;
+            color: var(--color-foreground);
+        }
+        
+        .font-family-demo,
+        .font-size-demo,
+        .font-weight-demo,
+        .line-height-demo {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .font-item,
+        .size-item,
+        .weight-item,
+        .line-height-item {
+            background: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+        
+        .font-label,
+        .size-label,
+        .weight-label,
+        .line-height-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-secondary-foreground);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .font-preview,
+        .size-preview,
+        .weight-preview,
+        .line-height-preview {
+            font-size: 1.125rem;
+            color: var(--color-foreground);
+            line-height: 1.6;
+        }
+        
+        .usage-section {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .usage-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0 0 1.5rem 0;
+            color: var(--color-foreground);
+        }
+        
+        .usage-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .usage-list li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--color-secondary-foreground);
+            line-height: 1.8;
+        }
+        
+        .usage-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+    </style>
+</body>
+</html>
