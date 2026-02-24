@@ -2,14 +2,14 @@ import React from 'react';
 ;
 
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
+
 import '@testing-library/jest-dom';
 import { Modal } from '../Modal'
 import { ThemeProvider } from '../../theme/ThemeProvider';;
 
 describe('Modal 组件', () => {
   describe('基础渲染', () => {
-    it('it('it('it('当open为false时不应该渲染Modal', () => {
+    it('当open为false时不应该渲染Modal', () => {
       render(<ThemeProvider>
         <Modal open={false} onClose={() => {}}>
           <div>Modal内容</div>
@@ -18,7 +18,7 @@ describe('Modal 组件', () => {
       expect(screen.queryByText('Modal内容')).not.toBeInTheDocument();
     });
 
-    it('it('it('it('当open为true时应该渲染Modal', () => {
+    it('当open为true时应该渲染Modal', () => {
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}}>
           <div>Modal内容</div>
@@ -27,7 +27,7 @@ describe('Modal 组件', () => {
       expect(screen.getByText('Modal内容')).toBeInTheDocument();
     });
 
-    it('it('it('it('应该支持自定义类名', () => {
+    it('应该支持自定义类名', () => {
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}} className="custom-modal">
           <div>内容</div>
@@ -39,7 +39,7 @@ describe('Modal 组件', () => {
   });
 
   describe('关闭功能', () => {
-    it('it('it('it('应该支持通过onClose关闭', () => {
+    it('应该支持通过onClose关闭', () => {
       const handleClose = jest.fn();
       const { rerender } = render(<ThemeProvider>
         <Modal open={true} onClose={handleClose}>
@@ -56,7 +56,7 @@ describe('Modal 组件', () => {
       expect(screen.queryByText('内容')).not.toBeInTheDocument();
     });
 
-    it('it('it('it('点击遮罩层应该触发onClose', () => {
+    it('点击遮罩层应该触发onClose', () => {
       const handleClose = jest.fn();
       render(<ThemeProvider>
         <Modal open={true} onClose={handleClose}>
@@ -71,7 +71,7 @@ describe('Modal 组件', () => {
       expect(handleClose).toHaveBeenCalled();
     });
 
-    it('it('it('it('点击Modal内容不应该触发onClose', () => {
+    it('点击Modal内容不应该触发onClose', () => {
       const handleClose = jest.fn();
       render(<ThemeProvider>
         <Modal open={true} onClose={handleClose}>
@@ -86,7 +86,7 @@ describe('Modal 组件', () => {
   });
 
   describe('键盘事件', () => {
-    it('it('it('it('按ESC键应该触发onClose', () => {
+    it('按ESC键应该触发onClose', () => {
       const handleClose = jest.fn();
       render(<ThemeProvider>
         <Modal open={true} onClose={handleClose}>
@@ -98,7 +98,7 @@ describe('Modal 组件', () => {
       expect(handleClose).toHaveBeenCalled();
     });
 
-    it('it('it('it('按其他键不应该触发onClose', () => {
+    it('按其他键不应该触发onClose', () => {
       const handleClose = jest.fn();
       render(<ThemeProvider>
         <Modal open={true} onClose={handleClose}>
@@ -112,7 +112,7 @@ describe('Modal 组件', () => {
   });
 
   describe('ModalHeader 组件', () => {
-    it('it('it('it('应该正确渲染ModalHeader', () => {
+    it('应该正确渲染ModalHeader', () => {
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}}>
           <Modal.Header>标题</Modal.Header>
@@ -121,7 +121,7 @@ describe('Modal 组件', () => {
       expect(screen.getByText('标题')).toBeInTheDocument();
     });
 
-    it('it('it('it('应该支持自定义类名', () => {
+    it('应该支持自定义类名', () => {
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}}>
           <Modal.Header className="custom-header">标题</Modal.Header>
@@ -133,7 +133,7 @@ describe('Modal 组件', () => {
   });
 
   describe('ModalTitle 组件', () => {
-    it('it('it('it('应该正确渲染ModalTitle', () => {
+    it('应该正确渲染ModalTitle', () => {
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}}>
           <Modal.Title>Modal标题</Modal.Title>
@@ -144,7 +144,7 @@ describe('Modal 组件', () => {
       expect(title.tagName).toBe('H2');
     });
 
-    it('it('it('it('应该支持自定义类名', () => {
+    it('应该支持自定义类名', () => {
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}}>
           <Modal.Title className="custom-title">标题</Modal.Title>
@@ -156,7 +156,7 @@ describe('Modal 组件', () => {
   });
 
   describe('ModalDescription 组件', () => {
-    it('it('it('it('应该正确渲染ModalDescription', () => {
+    it('应该正确渲染ModalDescription', () => {
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}}>
           <Modal.Description>Modal描述</Modal.Description>
@@ -167,7 +167,7 @@ describe('Modal 组件', () => {
       expect(description.tagName).toBe('P');
     });
 
-    it('it('it('it('应该支持自定义类名', () => {
+    it('应该支持自定义类名', () => {
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}}>
           <Modal.Description className="custom-desc">描述</Modal.Description>
@@ -179,7 +179,7 @@ describe('Modal 组件', () => {
   });
 
   describe('ModalContent 组件', () => {
-    it('it('it('it('应该正确渲染ModalContent', () => {
+    it('应该正确渲染ModalContent', () => {
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}}>
           <Modal.Content>内容</Modal.Content>
@@ -188,7 +188,7 @@ describe('Modal 组件', () => {
       expect(screen.getByText('内容')).toBeInTheDocument();
     });
 
-    it('it('it('it('应该支持自定义类名', () => {
+    it('应该支持自定义类名', () => {
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}}>
           <Modal.Content className="custom-content">内容</Modal.Content>
@@ -200,7 +200,7 @@ describe('Modal 组件', () => {
   });
 
   describe('ModalFooter 组件', () => {
-    it('it('it('it('应该正确渲染ModalFooter', () => {
+    it('应该正确渲染ModalFooter', () => {
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}}>
           <Modal.Footer>底部</Modal.Footer>
@@ -209,7 +209,7 @@ describe('Modal 组件', () => {
       expect(screen.getByText('底部')).toBeInTheDocument();
     });
 
-    it('it('it('it('应该支持自定义类名', () => {
+    it('应该支持自定义类名', () => {
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}}>
           <Modal.Footer className="custom-footer">底部</Modal.Footer>
@@ -221,7 +221,7 @@ describe('Modal 组件', () => {
   });
 
   describe('组合使用', () => {
-    it('it('it('it('应该正确渲染完整的Modal结构', () => {
+    it('应该正确渲染完整的Modal结构', () => {
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}}>
           <Modal.Header>
@@ -239,7 +239,7 @@ describe('Modal 组件', () => {
       expect(screen.getByText('底部')).toBeInTheDocument();
     });
 
-    it('it('it('it('应该支持嵌套组件', () => {
+    it('应该支持嵌套组件', () => {
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}}>
           <Modal.Content>
@@ -255,7 +255,7 @@ describe('Modal 组件', () => {
   });
 
   describe('可访问性', () => {
-    it('it('it('it('应该设置正确的ARIA属性', () => {
+    it('应该设置正确的ARIA属性', () => {
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}}>
           <div>内容</div>
@@ -266,7 +266,7 @@ describe('Modal 组件', () => {
       expect(modal).toBeInTheDocument();
     });
 
-    it('it('it('it('应该支持自定义aria-label', () => {
+    it('应该支持自定义aria-label', () => {
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}} aria-label="自定义Modal">
           <div>内容</div>
@@ -279,7 +279,7 @@ describe('Modal 组件', () => {
   });
 
   describe('ref', () => {
-    it('it('it('it('Modal应该支持ref转发', () => {
+    it('Modal应该支持ref转发', () => {
       const ref = React.createRef<HTMLDivElement>();
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}} ref={ref}>
@@ -289,7 +289,7 @@ describe('Modal 组件', () => {
       expect(ref.current).toBeInstanceOf(HTMLDivElement);
     });
 
-    it('it('it('it('ModalContent应该支持ref转发', () => {
+    it('ModalContent应该支持ref转发', () => {
       const ref = React.createRef<HTMLDivElement>();
       render(<ThemeProvider>
         <Modal open={true} onClose={() => {}}>

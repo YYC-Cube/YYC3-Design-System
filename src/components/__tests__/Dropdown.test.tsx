@@ -10,7 +10,7 @@
 ;
 
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
+
 import { Dropdown } from '../Dropdown';
 import { Button } from '../Button'
 import { ThemeProvider } from '../../theme/ThemeProvider';;
@@ -22,7 +22,7 @@ describe('Dropdown', () => {
     { key: '3', label: '选项3' },
   ];
 
-  it('it('it('it('应该渲染下拉菜单', () => {
+  it('应该渲染下拉菜单', () => {
     render(<ThemeProvider>
       <Dropdown options={mockOptions}>
         <Button>点击</Button>
@@ -31,7 +31,7 @@ describe('Dropdown', () => {
     expect(screen.getByText('点击')).toBeInTheDocument();
   });
 
-  it('it('it('it('点击时应该显示下拉菜单', () => {
+  it('点击时应该显示下拉菜单', () => {
     render(<ThemeProvider>
       <Dropdown options={mockOptions}>
         <Button>点击</Button>
@@ -42,7 +42,7 @@ describe('Dropdown', () => {
     expect(screen.getByText('选项1')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该调用选项的onClick回调', () => {
+  it('应该调用选项的onClick回调', () => {
     const mockOnClick = jest.fn();
     const optionsWithClick = [
       { key: '1', label: '选项1', onClick: mockOnClick },
@@ -59,7 +59,7 @@ describe('Dropdown', () => {
     expect(mockOnClick).toHaveBeenCalled();
   });
 
-  it('it('it('it('应该支持禁用选项', () => {
+  it('应该支持禁用选项', () => {
     const disabledOptions = [
       { key: '1', label: '选项1' },
       { key: '2', label: '选项2', disabled: true },
@@ -75,7 +75,7 @@ describe('Dropdown', () => {
     expect(disabledOption).toHaveAttribute('aria-disabled', 'true');
   });
 
-  it('it('it('it('应该支持分隔线', () => {
+  it('应该支持分隔线', () => {
     const optionsWithDivider = [
       { key: '1', label: '选项1' },
       { key: 'divider', label: '', divider: true },
@@ -92,7 +92,7 @@ describe('Dropdown', () => {
     expect(divider).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持图标', () => {
+  it('应该支持图标', () => {
     const optionsWithIcon = [
       { key: '1', label: '选项1', icon: '📄' },
     ];
@@ -106,7 +106,7 @@ describe('Dropdown', () => {
     expect(screen.getByText('📄')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持多级菜单', () => {
+  it('应该支持多级菜单', () => {
     const nestedOptions = [
       {
         key: '1',
@@ -128,7 +128,7 @@ describe('Dropdown', () => {
     expect(screen.getByText('子选项2')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持hover触发', () => {
+  it('应该支持hover触发', () => {
     render(<ThemeProvider>
       <Dropdown options={mockOptions} trigger="hover">
         <Button>悬停</Button>
@@ -139,7 +139,7 @@ describe('Dropdown', () => {
     expect(screen.getByText('选项1')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持受控visible', () => {
+  it('应该支持受控visible', () => {
     const { rerender } = render(<ThemeProvider>
       <Dropdown options={mockOptions} visible={false}>
         <Button>点击</Button>
@@ -155,7 +155,7 @@ describe('Dropdown', () => {
     expect(screen.getByText('选项1')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持禁用状态', () => {
+  it('应该支持禁用状态', () => {
     render(<ThemeProvider>
       <Dropdown options={mockOptions} disabled>
         <Button>点击</Button>
@@ -166,7 +166,7 @@ describe('Dropdown', () => {
     expect(screen.queryByText('选项1')).not.toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持不同placement', () => {
+  it('应该支持不同placement', () => {
     render(<ThemeProvider>
       <Dropdown options={mockOptions} placement="topLeft">
         <Button>点击</Button>
@@ -177,7 +177,7 @@ describe('Dropdown', () => {
     expect(screen.getByText('选项1')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持键盘导航', () => {
+  it('应该支持键盘导航', () => {
     render(<ThemeProvider>
       <Dropdown options={mockOptions}>
         <Button>点击</Button>
@@ -189,7 +189,7 @@ describe('Dropdown', () => {
     expect(screen.getByText('选项1')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持ESC键关闭', () => {
+  it('应该支持ESC键关闭', () => {
     render(<ThemeProvider>
       <Dropdown options={mockOptions}>
         <Button>点击</Button>
@@ -202,7 +202,7 @@ describe('Dropdown', () => {
     expect(screen.queryByText('选项1')).not.toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持自定义类名', () => {
+  it('应该支持自定义类名', () => {
     const { container } = render(<ThemeProvider>
       <Dropdown options={mockOptions} className="custom-dropdown">
         <Button>点击</Button>

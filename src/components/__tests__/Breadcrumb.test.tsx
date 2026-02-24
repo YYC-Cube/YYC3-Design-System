@@ -10,7 +10,7 @@
 ;
 
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
+
 import { Breadcrumb } from '../Breadcrumb'
 import { ThemeProvider } from '../../theme/ThemeProvider';;
 
@@ -21,32 +21,32 @@ describe('Breadcrumb', () => {
     { key: 'detail', title: '详情' },
   ];
 
-  it('it('it('it('应该渲染面包屑导航', () => {
+  it('应该渲染面包屑导航', () => {
     render(<ThemeProvider><Breadcrumb items={mockItems} />);
     expect(screen.getByText('首页')).toBeInTheDocument();
     expect(screen.getByText('产品')).toBeInTheDocument();
     expect(screen.getByText('详情')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该使用默认分隔符', () => {
+  it('应该使用默认分隔符', () => {
     render(<ThemeProvider><Breadcrumb items={mockItems} />);
     const separators = screen.getAllByText('/');
     expect(separators).toHaveLength(2);
   });
 
-  it('it('it('it('应该使用自定义分隔符', () => {
+  it('应该使用自定义分隔符', () => {
     render(<ThemeProvider><Breadcrumb items={mockItems} separator=">" />);
     const separators = screen.getAllByText('>');
     expect(separators).toHaveLength(2);
   });
 
-  it('it('it('it('应该渲染链接', () => {
+  it('应该渲染链接', () => {
     render(<ThemeProvider><Breadcrumb items={mockItems} />);
     const homeLink = screen.getByText('首页').closest('a');
     expect(homeLink).toHaveAttribute('href', '/');
   });
 
-  it('it('it('it('应该支持点击事件', () => {
+  it('应该支持点击事件', () => {
     const mockOnClick = jest.fn();
     const itemsWithClick = [
       { key: 'home', title: '首页', onClick: mockOnClick },
@@ -58,13 +58,13 @@ describe('Breadcrumb', () => {
     expect(mockOnClick).toHaveBeenCalled();
   });
 
-  it('it('it('it('应该正确标记最后一项', () => {
+  it('应该正确标记最后一项', () => {
     render(<ThemeProvider><Breadcrumb items={mockItems} />);
     const lastItem = screen.getByText('详情');
     expect(lastItem).toHaveAttribute('aria-current', 'page');
   });
 
-  it('it('it('it('应该支持禁用状态', () => {
+  it('应该支持禁用状态', () => {
     const itemsWithDisabled = [
       { key: 'home', title: '首页', href: '/', disabled: true },
       { key: 'detail', title: '详情' },
@@ -74,25 +74,25 @@ describe('Breadcrumb', () => {
     expect(homeLink).toHaveAttribute('aria-disabled', 'true');
   });
 
-  it('it('it('it('应该支持自定义类名', () => {
+  it('应该支持自定义类名', () => {
     const { container } = render(<ThemeProvider>
       <Breadcrumb items={mockItems} className="custom-breadcrumb" />
     );
     expect(container.querySelector('.custom-breadcrumb')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持自定义分隔符组件', () => {
+  it('应该支持自定义分隔符组件', () => {
     const customSeparator = <span className="custom-separator">→</span>;
     render(<ThemeProvider><Breadcrumb items={mockItems} separator={customSeparator} />);
     expect(screen.getByText('→')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该正确处理空项', () => {
+  it('应该正确处理空项', () => {
     render(<ThemeProvider><Breadcrumb items={[]} />);
     expect(screen.queryByRole('navigation')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持单个项', () => {
+  it('应该支持单个项', () => {
     const singleItem = [{ key: 'home', title: '首页' }];
     render(<ThemeProvider><Breadcrumb items={singleItem} />);
     expect(screen.getByText('首页')).toBeInTheDocument();

@@ -10,7 +10,7 @@
 ;
 
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
+
 import { Menu } from '../Menu'
 import { ThemeProvider } from '../../theme/ThemeProvider';;
 
@@ -21,36 +21,36 @@ describe('Menu', () => {
     { key: 'about', label: '关于', icon: 'ℹ️' },
   ];
 
-  it('it('it('it('应该渲染菜单', () => {
+  it('应该渲染菜单', () => {
     render(<ThemeProvider><Menu items={mockItems} />);
     expect(screen.getByText('首页')).toBeInTheDocument();
     expect(screen.getByText('产品')).toBeInTheDocument();
     expect(screen.getByText('关于')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持垂直模式', () => {
+  it('应该支持垂直模式', () => {
     render(<ThemeProvider><Menu items={mockItems} mode="vertical" />);
     expect(screen.getByText('首页')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持水平模式', () => {
+  it('应该支持水平模式', () => {
     render(<ThemeProvider><Menu items={mockItems} mode="horizontal" />);
     expect(screen.getByText('首页')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持图标', () => {
+  it('应该支持图标', () => {
     render(<ThemeProvider><Menu items={mockItems} />);
     expect(screen.getByText('🏠')).toBeInTheDocument();
     expect(screen.getByText('📦')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持选中状态', () => {
+  it('应该支持选中状态', () => {
     render(<ThemeProvider><Menu items={mockItems} selectedKey="home" />);
     const homeItem = screen.getByText('首页').closest('div');
     expect(homeItem).toHaveStyle({ backgroundColor: expect.any(String) });
   });
 
-  it('it('it('it('应该调用onSelect回调', () => {
+  it('应该调用onSelect回调', () => {
     const mockOnSelect = jest.fn();
     render(<ThemeProvider><Menu items={mockItems} onSelect={mockOnSelect} />);
     const homeItem = screen.getByText('首页').closest('div');
@@ -58,7 +58,7 @@ describe('Menu', () => {
     expect(mockOnSelect).toHaveBeenCalledWith('home');
   });
 
-  it('it('it('it('应该支持禁用项', () => {
+  it('应该支持禁用项', () => {
     const disabledItems = [
       { key: 'home', label: '首页' },
       { key: 'products', label: '产品', disabled: true },
@@ -68,7 +68,7 @@ describe('Menu', () => {
     expect(productsItem).toHaveAttribute('aria-disabled', 'true');
   });
 
-  it('it('it('it('应该支持分隔线', () => {
+  it('应该支持分隔线', () => {
     const itemsWithDivider = [
       { key: 'home', label: '首页' },
       { key: 'divider', label: '', divider: true },
@@ -79,7 +79,7 @@ describe('Menu', () => {
     expect(divider).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持嵌套菜单', () => {
+  it('应该支持嵌套菜单', () => {
     const nestedItems = [
       {
         key: 'file',
@@ -97,7 +97,7 @@ describe('Menu', () => {
     expect(screen.getByText('打开')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持快捷键', () => {
+  it('应该支持快捷键', () => {
     const itemsWithShortcut = [
       { key: 'save', label: '保存', shortcut: 'Ctrl+S' },
       { key: 'open', label: '打开', shortcut: 'Ctrl+O' },
@@ -107,25 +107,25 @@ describe('Menu', () => {
     expect(screen.getByText('Ctrl+O')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持折叠状态', () => {
+  it('应该支持折叠状态', () => {
     render(<ThemeProvider><Menu items={mockItems} inlineCollapsed />);
     expect(screen.getByText('🏠')).toBeInTheDocument();
     expect(screen.queryByText('首页')).not.toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持暗色主题', () => {
+  it('应该支持暗色主题', () => {
     render(<ThemeProvider><Menu items={mockItems} theme="dark" />);
     const menu = screen.getByRole('menu');
     expect(menu).toHaveStyle({ backgroundColor: expect.any(String) });
   });
 
-  it('it('it('it('应该支持默认选中项', () => {
+  it('应该支持默认选中项', () => {
     render(<ThemeProvider><Menu items={mockItems} defaultSelectedKey="products" />);
     const productsItem = screen.getByText('产品').closest('div');
     expect(productsItem).toHaveStyle({ backgroundColor: expect.any(String) });
   });
 
-  it('it('it('it('应该支持受控选中状态', () => {
+  it('应该支持受控选中状态', () => {
     const { rerender } = render(<ThemeProvider><Menu items={mockItems} selectedKey="home" />);
     expect(screen.getByText('首页').closest('div')).toHaveStyle({ backgroundColor: expect.any(String) });
 
@@ -133,12 +133,12 @@ describe('Menu', () => {
     expect(screen.getByText('产品').closest('div')).toHaveStyle({ backgroundColor: expect.any(String) });
   });
 
-  it('it('it('it('应该支持自定义类名', () => {
+  it('应该支持自定义类名', () => {
     const { container } = render(<ThemeProvider><Menu items={mockItems} className="custom-menu" />);
     expect(container.querySelector('.custom-menu')).toBeInTheDocument();
   });
 
-  it('it('it('it('应该支持点击事件', () => {
+  it('应该支持点击事件', () => {
     const mockOnClick = jest.fn();
     const itemsWithClick = [
       { key: 'home', label: '首页', onClick: mockOnClick },
@@ -149,7 +149,7 @@ describe('Menu', () => {
     expect(mockOnClick).toHaveBeenCalled();
   });
 
-  it('it('it('it('应该支持展开/折叠子菜单', () => {
+  it('应该支持展开/折叠子菜单', () => {
     const nestedItems = [
       {
         key: 'file',
