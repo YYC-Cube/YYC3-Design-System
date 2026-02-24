@@ -117,7 +117,7 @@ export const useAnimationFrame = (
   callback: () => void,
   deps: React.DependencyList = []
 ) => {
-  const requestRef = React.useRef<number>();
+  const requestRef = React.useRef<number>(0);
   const previousDeps = React.useRef(deps);
 
   React.useEffect(() => {
@@ -146,7 +146,7 @@ export const useThrottledAnimationFrame = (
   delay: number = 16
 ) => {
   const lastRunRef = React.useRef<number>(0);
-  const requestRef = React.useRef<number>();
+  const requestRef = React.useRef<number>(0);
 
   return React.useCallback(() => {
     const now = performance.now();

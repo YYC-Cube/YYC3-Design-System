@@ -7,12 +7,19 @@
  * @created 2026-02-22
  */
 
-import { Metric } from 'web-vitals';
+export interface Metric {
+  name: string;
+  value: number;
+  rating?: 'good' | 'needs-improvement' | 'poor';
+  id?: string;
+  delta?: number;
+  entries?: unknown[];
+}
 
 export interface PerformanceReport {
   fcp?: Metric;
   lcp?: Metric;
-  fid?: Metric;
+  inp?: Metric;
   cls?: Metric;
   ttfb?: Metric;
   timestamp: number;
@@ -41,17 +48,11 @@ const formatMetric = (metric: Metric | undefined): string | undefined => {
   return `${metric.name}: ${metric.value.toFixed(2)} ${metric.rating === 'good' ? '✓' : '⚠'}`;
 };
 
-const getMetricRating = (metric: Metric): 'good' | 'needs-improvement' | 'poor' => {
-  if (metric.rating === 'good') return 'good';
-  if (metric.rating === 'needs-improvement') return 'needs-improvement';
-  return 'poor';
-};
-
 const createPerformanceReport = (
   metrics: {
     fcp?: Metric;
     lcp?: Metric;
-    fid?: Metric;
+    inp?: Metric;
     cls?: Metric;
     ttfb?: Metric;
   }
@@ -59,7 +60,7 @@ const createPerformanceReport = (
   return {
     fcp: metrics.fcp,
     lcp: metrics.lcp,
-    fid: metrics.fid,
+    inp: metrics.inp,
     cls: metrics.cls,
     ttfb: metrics.ttfb,
     timestamp: Date.now(),
@@ -111,9 +112,9 @@ const stopReporting = (): void => {
   }
 };
 
-export const reportWebVitals = (
+export const reportWebVitals = async (
   reporter: PerformanceReporter = DEFAULT_REPORTER
-): void => {
+): Promise<void> => {
   if (typeof window === 'undefined') {
     console.warn('[Performance] Web Vitals can only be collected in browser');
     return;
@@ -122,24 +123,33 @@ export const reportWebVitals = (
   const collectedMetrics: {
     fcp?: Metric;
     lcp?: Metric;
-    fid?: Metric;
+    inp?: Metric;
     cls?: Metric;
     ttfb?: Metric;
   } = {};
 
-  const onPerfEntry = (metric: Metric): void => {
-    console.log('[Performance]', formatMetric(metric));
+  const onPerfEntry = (metric: unknown): void => {
+    const perfMetric = metric as { name: string; value: number; rating?: 'good' | 'needs-improvement' | 'poor'; id?: string; delta?: number };
+    const formattedMetric: Metric = {
+      name: perfMetric.name,
+      value: perfMetric.value,
+      rating: perfMetric.rating,
+      id: perfMetric.id,
+      delta: perfMetric.delta,
+    };
 
-    if (metric.name === 'FCP') {
-      collectedMetrics.fcp = metric;
-    } else if (metric.name === 'LCP') {
-      collectedMetrics.lcp = metric;
-    } else if (metric.name === 'FID') {
-      collectedMetrics.fid = metric;
-    } else if (metric.name === 'CLS') {
-      collectedMetrics.cls = metric;
-    } else if (metric.name === 'TTFB') {
-      collectedMetrics.ttfb = metric;
+    console.warn('[Performance]', formatMetric(formattedMetric));
+
+    if (formattedMetric.name === 'FCP') {
+      collectedMetrics.fcp = formattedMetric;
+    } else if (formattedMetric.name === 'LCP') {
+      collectedMetrics.lcp = formattedMetric;
+    } else if (formattedMetric.name === 'INP') {
+      collectedMetrics.inp = formattedMetric;
+    } else if (formattedMetric.name === 'CLS') {
+      collectedMetrics.cls = formattedMetric;
+    } else if (formattedMetric.name === 'TTFB') {
+      collectedMetrics.ttfb = formattedMetric;
     }
 
     const report = createPerformanceReport(collectedMetrics);
@@ -151,13 +161,13 @@ export const reportWebVitals = (
   };
 
   try {
-    const { getCLS, getFID, getFCP, getLCP, getTTFB } = await import('web-vitals');
+    const { onCLS, onFCP, onINP, onLCP, onTTFB } = await import('web-vitals');
 
-    getCLS(onPerfEntry);
-    getFID(onPerfEntry);
-    getFCP(onPerfEntry);
-    getLCP(onPerfEntry);
-    getTTFB(onPerfEntry);
+    onCLS(onPerfEntry);
+    onINP(onPerfEntry);
+    onFCP(onPerfEntry);
+    onLCP(onPerfEntry);
+    onTTFB(onPerfEntry);
 
     startReporting(reporter);
   } catch (error) {
@@ -185,7 +195,7 @@ export const getMetricsSummary = (): {
   totalReports: number;
   averageFCP: number;
   averageLCP: number;
-  averageFID: number;
+  averageINP: number;
   averageCLS: number;
   goodMetrics: number;
   warningMetrics: number;
@@ -196,7 +206,7 @@ export const getMetricsSummary = (): {
       totalReports: 0,
       averageFCP: 0,
       averageLCP: 0,
-      averageFID: 0,
+      averageINP: 0,
       averageCLS: 0,
       goodMetrics: 0,
       warningMetrics: 0,
@@ -206,15 +216,15 @@ export const getMetricsSummary = (): {
 
   const fcpValues = metricsBuffer.filter(m => m.fcp).map(m => m.fcp!.value);
   const lcpValues = metricsBuffer.filter(m => m.lcp).map(m => m.lcp!.value);
-  const fidValues = metricsBuffer.filter(m => m.fid).map(m => m.fid!.value);
+  const inpValues = metricsBuffer.filter(m => m.inp).map(m => m.inp!.value);
   const clsValues = metricsBuffer.filter(m => m.cls).map(m => m.cls!.value);
 
   const averageFCP = fcpValues.reduce((a, b) => a + b, 0) / fcpValues.length;
   const averageLCP = lcpValues.reduce((a, b) => a + b, 0) / lcpValues.length;
-  const averageFID = fidValues.reduce((a, b) => a + b, 0) / fidValues.length;
+  const averageINP = inpValues.reduce((a, b) => a + b, 0) / inpValues.length;
   const averageCLS = clsValues.reduce((a, b) => a + b, 0) / clsValues.length;
 
-  const allMetrics = [...fcpValues, ...lcpValues, ...fidValues, ...clsValues];
+  const allMetrics = [...fcpValues, ...lcpValues, ...inpValues, ...clsValues];
   const goodMetrics = allMetrics.filter(m => m <= 1500).length;
   const warningMetrics = allMetrics.filter(m => m > 1500 && m <= 2500).length;
   const poorMetrics = allMetrics.filter(m => m > 2500).length;
@@ -223,7 +233,7 @@ export const getMetricsSummary = (): {
     totalReports: metricsBuffer.length,
     averageFCP,
     averageLCP,
-    averageFID,
+    averageINP,
     averageCLS,
     goodMetrics,
     warningMetrics,
@@ -245,13 +255,13 @@ export const exportMetricsAsCSV = (): string => {
     return '';
   }
 
-  const headers = ['timestamp', 'url', 'fcp', 'lcp', 'fid', 'cls', 'ttfb'];
+  const headers = ['timestamp', 'url', 'fcp', 'lcp', 'inp', 'cls', 'ttfb'];
   const rows = metricsBuffer.map(report => [
     report.timestamp,
     report.url,
     report.fcp?.value || '',
     report.lcp?.value || '',
-    report.fid?.value || '',
+    report.inp?.value || '',
     report.cls?.value || '',
     report.ttfb?.value || '',
   ]);

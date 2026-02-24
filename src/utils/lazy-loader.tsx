@@ -61,7 +61,7 @@ const createLazyComponent = <T extends ComponentType<any>>(
   } = options;
 
   const LazyComponent = lazy(() => {
-    return new Promise((resolve, reject) => {
+    return new Promise<{ default: T }>((resolve, reject) => {
       const timer = setTimeout(() => {
         reject(new Error(`组件加载超时 (${timeout}ms)`));
       }, timeout);
@@ -78,7 +78,7 @@ const createLazyComponent = <T extends ComponentType<any>>(
     });
   });
 
-  return LazyComponent as T;
+  return LazyComponent as unknown as T;
 };
 
 export const withLazyLoading = <P extends object>(

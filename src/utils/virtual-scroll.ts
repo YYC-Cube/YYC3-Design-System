@@ -67,7 +67,7 @@ export const getItemStyle = (
   itemHeight: number
 ): React.CSSProperties => {
   return {
-    position: 'absolute',
+    position: 'absolute' as const,
     top: `${index * itemHeight}px`,
     left: 0,
     right: 0,
@@ -79,9 +79,9 @@ export const getContainerStyle = (
   totalHeight: number
 ): React.CSSProperties => {
   return {
-    position: 'relative',
+    position: 'relative' as const,
     height: `${totalHeight}px`,
-    overflow: 'auto',
+    overflow: 'auto' as const,
   };
 };
 

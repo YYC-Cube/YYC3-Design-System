@@ -92,13 +92,13 @@ export const AIColorRecommender: React.FC<AIColorRecommenderProps> = ({
               <Input
                 type="color"
                 value={baseColor}
-                onChange={(value) => setBaseColor(typeof value === 'string' ? value : value.target.value)}
+                onChange={setBaseColor}
                 className="w-16 h-10"
               />
               <Input
                 type="text"
                 value={baseColor}
-                onChange={(value) => setBaseColor(typeof value === 'string' ? value : value.target.value)}
+                onChange={setBaseColor}
                 placeholder="#d45a5f"
               />
             </div>

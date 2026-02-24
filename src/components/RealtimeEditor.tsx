@@ -164,7 +164,7 @@ export const RealtimeEditor: React.FC<RealtimeEditorProps> = ({
           <Input
             type="text"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(typeof e === 'string' ? e : e.target.value)}
+            onChange={setSearchQuery}
             placeholder="搜索令牌..."
           />
         </div>
@@ -200,14 +200,14 @@ export const RealtimeEditor: React.FC<RealtimeEditorProps> = ({
             <Input
               type="text"
               value={newTokenName}
-              onChange={(value) => setNewTokenName(typeof value === 'string' ? value : value.target.value)}
+              onChange={setNewTokenName}
               placeholder="令牌名称 (如: color.primary)"
               className="flex-1"
             />
             <Input
               type="text"
               value={newTokenValue}
-              onChange={(value) => setNewTokenValue(typeof value === 'string' ? value : value.target.value)}
+              onChange={setNewTokenValue}
               placeholder="令牌值 (如: #d45a5f)"
               className="flex-1"
             />
@@ -261,7 +261,7 @@ export const RealtimeEditor: React.FC<RealtimeEditorProps> = ({
                     <Input
                       type="text"
                       value={editingValue}
-                      onChange={(value) => setEditingValue(typeof value === 'string' ? value : value.target.value)}
+                      onChange={setEditingValue}
                       onBlur={() => {
                         handleUpdateToken(name, editingValue);
                         setEditingToken(null);

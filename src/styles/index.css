@@ -1,0 +1,29 @@
+/**
+ * @file 全局样式
+ * @description 全局样式文件，包含 Tailwind CSS 指令
+ * @module styles
+ * @author YYC³
+ * @version 1.0.0
+ * @created 2026-02-22
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
