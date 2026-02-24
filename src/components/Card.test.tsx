@@ -9,10 +9,10 @@
 
 ;
 
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import { screen } from '@testing-library/dom';
 
-import React from 'react';
+import * as React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './Card';
 import { ThemeProvider } from '../theme/ThemeProvider';
 

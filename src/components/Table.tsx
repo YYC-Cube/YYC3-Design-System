@@ -10,6 +10,7 @@
  * @license MIT
  */
 
+import * as React from 'react';
 import { memo, useState, useCallback, useMemo } from 'react';
 import { useTheme } from '../theme/ThemeProvider';
 
@@ -102,12 +103,16 @@ export const Table = memo(<T extends Record<string, unknown>>({
   const handleRowSelect = useCallback((record: T, checked: boolean) => {
     const key = getRowKey(record, dataSource.indexOf(record));
     setSelectedRowKeys(prev => {
+      let newKeys: (string | number)[];
       if (checked) {
-        return [...prev, key];
+        newKeys = [...prev, key];
+      } else {
+        newKeys = prev.filter(k => k !== key);
       }
-      return prev.filter(k => k !== key);
+      rowSelection?.onChange?.(newKeys, newKeys.map(k => dataSource.find((r, i) => getRowKey(r, i) === k)!));
+      return newKeys;
     });
-  }, [getRowKey, dataSource]);
+  }, [getRowKey, dataSource, rowSelection]);
 
   const handleSelectAll = useCallback((checked: boolean) => {
     if (checked) {

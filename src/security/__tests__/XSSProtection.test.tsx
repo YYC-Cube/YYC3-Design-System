@@ -7,7 +7,7 @@
  * @created 2026-02-19
  */
 
-import React from 'react';
+import * as React from 'react';
 ;
 ;
 import { XSSProvider, useXSS } from '../XSSProtection'

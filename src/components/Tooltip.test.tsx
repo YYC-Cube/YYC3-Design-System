@@ -7,7 +7,7 @@
  * @created 2026-02-18
  */
 
-import React from 'react';
+import * as React from 'react';
 
 ;
 

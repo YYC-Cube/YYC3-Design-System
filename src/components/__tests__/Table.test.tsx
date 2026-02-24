@@ -7,7 +7,7 @@
  * @created 2026-02-23
  */
 
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { Table } from '../Table';
@@ -82,7 +82,7 @@ describe('Table', () => {
         />
       </ThemeProvider>
     );
-    const paginationInfo = screen.getByText(/1.*100/);
+    const paginationInfo = screen.getByText(/共.*100.*条/);
     expect(paginationInfo).toBeInTheDocument();
   });
 
