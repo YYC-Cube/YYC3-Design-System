@@ -8,7 +8,10 @@
  */
 
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+;
+
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
 
 import { Select } from './Select';
 import { ThemeProvider } from '../theme/ThemeProvider';
@@ -24,19 +27,19 @@ describe('Select 组件', () => {
     { value: 'option3', label: 'Option 3' },
   ];
 
-  it('应该正确渲染默认 Select', () => {
+  it('it('应该正确渲染默认 Select', () => {
     renderWithTheme(<Select options={mockOptions} />);
     
     expect(screen.getByText('Select...')).toBeInTheDocument();
   });
 
-  it('应该显示自定义 placeholder', () => {
+  it('it('应该显示自定义 placeholder', () => {
     renderWithTheme(<Select options={mockOptions} placeholder="Choose an option" />);
     
     expect(screen.getByText('Choose an option')).toBeInTheDocument();
   });
 
-  it('应该在点击时打开下拉菜单', () => {
+  it('it('应该在点击时打开下拉菜单', () => {
     renderWithTheme(<Select options={mockOptions} />);
     
     const trigger = screen.getByText('Select...');
@@ -47,7 +50,7 @@ describe('Select 组件', () => {
     expect(screen.getByText('Option 3')).toBeInTheDocument();
   });
 
-  it('应该在选择选项后关闭下拉菜单', () => {
+  it('it('应该在选择选项后关闭下拉菜单', () => {
     renderWithTheme(<Select options={mockOptions} />);
     
     const trigger = screen.getByText('Select...');
@@ -59,7 +62,7 @@ describe('Select 组件', () => {
     expect(trigger.textContent).toBe('Option 1');
   });
 
-  it('应该调用 onChange 回调', () => {
+  it('it('应该调用 onChange 回调', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Select options={mockOptions} onChange={handleChange} />);
     
@@ -72,7 +75,7 @@ describe('Select 组件', () => {
     expect(handleChange).toHaveBeenCalledWith('option1');
   });
 
-  it('应该在禁用状态下不响应点击', () => {
+  it('it('应该在禁用状态下不响应点击', () => {
     const handleChange = jest.fn();
     const { container } = renderWithTheme(<Select options={mockOptions} disabled onChange={handleChange} />);
     
@@ -84,7 +87,7 @@ describe('Select 组件', () => {
     expect(handleChange).not.toHaveBeenCalled();
   });
 
-  it('应该支持受控模式', () => {
+  it('it('应该支持受控模式', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Select options={mockOptions} value="option1" onChange={handleChange} />);
     
@@ -92,7 +95,7 @@ describe('Select 组件', () => {
     expect(trigger.textContent).toContain('Option 1');
   });
 
-  it('应该在受控模式下正确更新值', () => {
+  it('it('应该在受控模式下正确更新值', () => {
     const handleChange = jest.fn();
     renderWithTheme(
       <Select options={mockOptions} value="option1" onChange={handleChange} />
@@ -102,7 +105,7 @@ describe('Select 组件', () => {
     expect(trigger.textContent).toContain('Option 1');
   });
 
-  it('应该在点击外部时关闭下拉菜单', () => {
+  it('it('应该在点击外部时关闭下拉菜单', () => {
     const { container } = renderWithTheme(
       <div>
         <Select options={mockOptions} />
@@ -122,7 +125,7 @@ describe('Select 组件', () => {
     expect(dropdown).toHaveStyle({ display: 'none' });
   });
 
-  it('应该应用自定义 className', () => {
+  it('it('应该应用自定义 className', () => {
     const { container } = renderWithTheme(
       <Select options={mockOptions} className="custom-class" />
     );
@@ -131,7 +134,7 @@ describe('Select 组件', () => {
     expect(select).toBeInTheDocument();
   });
 
-  it('应该在悬停选项时改变样式', () => {
+  it('it('应该在悬停选项时改变样式', () => {
     renderWithTheme(<Select options={mockOptions} />);
     
     const trigger = screen.getByRole('combobox');
@@ -149,7 +152,7 @@ describe('Select 组件', () => {
     });
   });
 
-  it('应该在离开选项时恢复样式', () => {
+  it('it('应该在离开选项时恢复样式', () => {
     renderWithTheme(<Select options={mockOptions} />);
     
     const trigger = screen.getByRole('combobox');
@@ -173,7 +176,7 @@ describe('Select 组件', () => {
     });
   });
 
-  it('应该正确显示箭头图标', () => {
+  it('it('应该正确显示箭头图标', () => {
     renderWithTheme(<Select options={mockOptions} />);
     
     const trigger = screen.getByRole('combobox');
@@ -183,7 +186,7 @@ describe('Select 组件', () => {
     expect(trigger.textContent).toContain('▲');
   });
 
-  it('应该在非受控模式下维护内部状态', () => {
+  it('it('应该在非受控模式下维护内部状态', () => {
     renderWithTheme(<Select options={mockOptions} />);
     
     const trigger = screen.getByText('Select...');
@@ -201,7 +204,7 @@ describe('Select 组件', () => {
     expect(trigger.textContent).toBe('Option 2');
   });
 
-  it('应该正确设置 aria 属性', () => {
+  it('it('应该正确设置 aria 属性', () => {
     renderWithTheme(<Select options={mockOptions} />);
     
     const trigger = screen.getByRole('combobox');
@@ -210,7 +213,7 @@ describe('Select 组件', () => {
     expect(trigger).toHaveAttribute('aria-haspopup', 'listbox');
   });
 
-  it('应该在打开时更新 aria-expanded', () => {
+  it('it('应该在打开时更新 aria-expanded', () => {
     renderWithTheme(<Select options={mockOptions} />);
     
     const trigger = screen.getByRole('combobox');
@@ -220,21 +223,21 @@ describe('Select 组件', () => {
     expect(trigger).toHaveAttribute('aria-expanded', 'true');
   });
 
-  it('应该在禁用时设置正确的 tabIndex', () => {
+  it('it('应该在禁用时设置正确的 tabIndex', () => {
     renderWithTheme(<Select options={mockOptions} disabled />);
     
     const trigger = screen.getByRole('combobox');
     expect(trigger).toHaveAttribute('tabIndex', '-1');
   });
 
-  it('应该在未禁用时设置正确的 tabIndex', () => {
+  it('it('应该在未禁用时设置正确的 tabIndex', () => {
     renderWithTheme(<Select options={mockOptions} />);
     
     const trigger = screen.getByRole('combobox');
     expect(trigger).toHaveAttribute('tabIndex', '0');
   });
 
-  it('应该为选项设置正确的 aria-selected', () => {
+  it('it('应该为选项设置正确的 aria-selected', () => {
     renderWithTheme(<Select options={mockOptions} value="option1" />);
     
     const trigger = screen.getByRole('combobox');

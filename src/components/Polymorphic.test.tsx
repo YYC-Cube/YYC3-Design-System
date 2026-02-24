@@ -8,38 +8,41 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+;
+
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
 import '@testing-library/jest-dom';
 import { Slot, createPolymorphicComponent, createSlot, mergeProps, overrideProps, createAsChildComponent, polymorphic, withAsChild } from './Polymorphic';
 
 describe('Polymorphic', () => {
   describe('createPolymorphicComponent', () => {
-    it('应该创建多态组件', () => {
+    it('it('应该创建多态组件', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       render(<TestComponent>Test Content</TestComponent>);
       expect(screen.getByText('Test Content')).toBeInTheDocument();
     });
 
-    it('应该支持自定义元素类型', () => {
+    it('it('应该支持自定义元素类型', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       render(<TestComponent as="button">Button Content</TestComponent>);
       const element = screen.getByText('Button Content');
       expect(element.tagName).toBe('BUTTON');
     });
 
-    it('应该支持 ref 转发', () => {
+    it('it('应该支持 ref 转发', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       const { container } = render(<TestComponent>Test Content</TestComponent>);
       expect(container.querySelector('div')).toBeInTheDocument();
     });
 
-    it('应该支持自定义属性', () => {
+    it('it('应该支持自定义属性', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       const { container } = render(<TestComponent data-testid="test">Test Content</TestComponent>);
       expect(container.querySelector('[data-testid="test"]')).toBeInTheDocument();
     });
 
-    it('应该支持多种元素类型', () => {
+    it('it('应该支持多种元素类型', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       const { container } = render(
         <>
@@ -51,7 +54,7 @@ describe('Polymorphic', () => {
       expect(container.querySelector('section')).toBeInTheDocument();
     });
 
-    it('应该支持更多元素类型', () => {
+    it('it('应该支持更多元素类型', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       const { container } = render(
         <>
@@ -73,7 +76,7 @@ describe('Polymorphic', () => {
       expect(container.querySelector('main')).toBeInTheDocument();
     });
 
-    it('应该支持更多 HTML 元素', () => {
+    it('it('应该支持更多 HTML 元素', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       const { container } = render(
         <>
@@ -93,7 +96,7 @@ describe('Polymorphic', () => {
       expect(container.querySelector('li')).toBeInTheDocument();
     });
 
-    it('应该支持更多 HTML5 元素', () => {
+    it('it('应该支持更多 HTML5 元素', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       const { container } = render(
         <>
@@ -121,7 +124,7 @@ describe('Polymorphic', () => {
       expect(container.querySelector('address')).toBeInTheDocument();
     });
 
-    it('应该支持表单元素', () => {
+    it('it('应该支持表单元素', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       const { container } = render(
         <>
@@ -145,7 +148,7 @@ describe('Polymorphic', () => {
       expect(container.querySelector('option')).toBeInTheDocument();
     });
 
-    it('应该支持交互元素', () => {
+    it('it('应该支持交互元素', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       const handleClick = jest.fn();
       const { container } = render(
@@ -161,7 +164,7 @@ describe('Polymorphic', () => {
       expect(link).toHaveAttribute('href', '#');
     });
 
-    it('应该支持 ARIA 属性', () => {
+    it('it('应该支持 ARIA 属性', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       const { container } = render(
         <TestComponent
@@ -179,7 +182,7 @@ describe('Polymorphic', () => {
       expect(element).toHaveAttribute('role', 'button');
     });
 
-    it('应该支持自定义 data 属性', () => {
+    it('it('应该支持自定义 data 属性', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       const { container } = render(
         <TestComponent
@@ -196,7 +199,7 @@ describe('Polymorphic', () => {
       expect(element).toHaveAttribute('data-id', '123');
     });
 
-    it('应该支持空子元素', () => {
+    it('it('应该支持空子元素', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       const { container } = render(<TestComponent />);
       const element = container.querySelector('div');
@@ -204,7 +207,7 @@ describe('Polymorphic', () => {
       expect(element).toBeEmptyDOMElement();
     });
 
-    it('应该支持 null 子元素', () => {
+    it('it('应该支持 null 子元素', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       const { container } = render(<TestComponent>{null}</TestComponent>);
       const element = container.querySelector('div');
@@ -212,7 +215,7 @@ describe('Polymorphic', () => {
       expect(element).toBeEmptyDOMElement();
     });
 
-    it('应该支持多个子元素', () => {
+    it('it('应该支持多个子元素', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       const { container } = render(
         <TestComponent>
@@ -226,14 +229,14 @@ describe('Polymorphic', () => {
       expect(element?.children.length).toBe(3);
     });
 
-    it('应该有正确的 displayName', () => {
+    it('it('应该有正确的 displayName', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       expect(TestComponent.displayName).toBe('TestComponent');
     });
   });
 
   describe('Slot', () => {
-    it('应该渲染子元素', () => {
+    it('it('应该渲染子元素', () => {
       render(
         <Slot>
           <div>Slot Content</div>
@@ -242,7 +245,7 @@ describe('Polymorphic', () => {
       expect(screen.getByText('Slot Content')).toBeInTheDocument();
     });
 
-    it('应该支持 asChild 模式', () => {
+    it('it('应该支持 asChild 模式', () => {
       render(
         <Slot asChild>
           <button>Button Content</button>
@@ -252,7 +255,7 @@ describe('Polymorphic', () => {
       expect(element.tagName).toBe('BUTTON');
     });
 
-    it('应该支持自定义元素类型', () => {
+    it('it('应该支持自定义元素类型', () => {
       render(
         <Slot as="button">
           Button Content
@@ -262,7 +265,7 @@ describe('Polymorphic', () => {
       expect(element.tagName).toBe('BUTTON');
     });
 
-    it('应该在 asChild 模式下合并属性', () => {
+    it('it('应该在 asChild 模式下合并属性', () => {
       const { container } = render(
         <Slot asChild>
           <button className="slot-class" data-testid="slot">Button Content</button>
@@ -273,7 +276,7 @@ describe('Polymorphic', () => {
       expect(element).toHaveClass('slot-class');
     });
 
-    it('应该支持 ref 转发', () => {
+    it('it('应该支持 ref 转发', () => {
       const ref = React.createRef<HTMLButtonElement>();
       render(
         <Slot asChild>
@@ -283,7 +286,7 @@ describe('Polymorphic', () => {
       expect(ref.current).toBeInTheDocument();
     });
 
-    it('应该处理非 React 元素子节点', () => {
+    it('it('应该处理非 React 元素子节点', () => {
       render(
         <Slot>
           Text Content
@@ -292,7 +295,7 @@ describe('Polymorphic', () => {
       expect(screen.getByText('Text Content')).toBeInTheDocument();
     });
 
-    it('应该支持多个子元素', () => {
+    it('it('应该支持多个子元素', () => {
       render(
         <Slot>
           <div>First</div>
@@ -303,7 +306,7 @@ describe('Polymorphic', () => {
       expect(screen.getByText('Second')).toBeInTheDocument();
     });
 
-    it('应该支持更多元素类型', () => {
+    it('it('应该支持更多元素类型', () => {
       const { container } = render(
         <>
           <Slot as="a">Link</Slot>
@@ -318,7 +321,7 @@ describe('Polymorphic', () => {
       expect(container.querySelector('article')).toBeInTheDocument();
     });
 
-    it('应该支持更多 HTML 元素', () => {
+    it('it('应该支持更多 HTML 元素', () => {
       const { container } = render(
         <>
           <Slot as="h1">Heading 1</Slot>
@@ -335,7 +338,7 @@ describe('Polymorphic', () => {
       expect(container.querySelector('ol')).toBeInTheDocument();
     });
 
-    it('应该支持更多 HTML5 元素', () => {
+    it('it('应该支持更多 HTML5 元素', () => {
       const { container } = render(
         <>
           <Slot as="figure">Figure</Slot>
@@ -362,7 +365,7 @@ describe('Polymorphic', () => {
       expect(container.querySelector('address')).toBeInTheDocument();
     });
 
-    it('应该支持表单元素', () => {
+    it('it('应该支持表单元素', () => {
       const { container } = render(
         <>
           <Slot as="form">Form</Slot>
@@ -385,7 +388,7 @@ describe('Polymorphic', () => {
       expect(container.querySelector('option')).toBeInTheDocument();
     });
 
-    it('应该支持 ARIA 属性', () => {
+    it('it('应该支持 ARIA 属性', () => {
       const { container } = render(
         <Slot as="button" aria-label="Test Button" aria-disabled="true" role="button">
           Button
@@ -397,7 +400,7 @@ describe('Polymorphic', () => {
       expect(element).toHaveAttribute('role', 'button');
     });
 
-    it('应该支持自定义 data 属性', () => {
+    it('it('应该支持自定义 data 属性', () => {
       const { container } = render(
         <Slot
           data-test="test-value"
@@ -413,27 +416,27 @@ describe('Polymorphic', () => {
       expect(element).toHaveAttribute('data-id', '123');
     });
 
-    it('应该支持空子元素', () => {
+    it('it('应该支持空子元素', () => {
       const { container } = render(<Slot />);
       const element = container.querySelector('div');
       expect(element).toBeInTheDocument();
       expect(element).toBeEmptyDOMElement();
     });
 
-    it('应该支持 null 子元素', () => {
+    it('it('应该支持 null 子元素', () => {
       const { container } = render(<Slot>{null}</Slot>);
       const element = container.querySelector('div');
       expect(element).toBeInTheDocument();
       expect(element).toBeEmptyDOMElement();
     });
 
-    it('应该有正确的 displayName', () => {
+    it('it('应该有正确的 displayName', () => {
       expect(Slot.displayName).toBe('Slot');
     });
   });
 
   describe('createSlot', () => {
-    it('应该创建 Slot 组件', () => {
+    it('it('应该创建 Slot 组件', () => {
       const TestSlot = createSlot('TestSlot');
       render(
         <TestSlot>
@@ -443,12 +446,12 @@ describe('Polymorphic', () => {
       expect(screen.getByText('Test Content')).toBeInTheDocument();
     });
 
-    it('应该设置正确的 displayName', () => {
+    it('it('应该设置正确的 displayName', () => {
       const TestSlot = createSlot('TestSlot');
       expect(TestSlot.displayName).toBe('TestSlot');
     });
 
-    it('应该支持自定义元素类型', () => {
+    it('it('应该支持自定义元素类型', () => {
       const TestSlot = createSlot('TestSlot');
       const { container } = render(
         <TestSlot as={'button' as any}>
@@ -459,7 +462,7 @@ describe('Polymorphic', () => {
       expect(element).toBeInTheDocument();
     });
 
-    it('应该支持 ARIA 属性', () => {
+    it('it('应该支持 ARIA 属性', () => {
       const TestSlot = createSlot('TestSlot');
       const { container } = render(
         <TestSlot as={'button' as any} aria-label="Test Button" aria-disabled="true" role="button">
@@ -472,7 +475,7 @@ describe('Polymorphic', () => {
       expect(element).toHaveAttribute('role', 'button');
     });
 
-    it('应该支持自定义 data 属性', () => {
+    it('it('应该支持自定义 data 属性', () => {
       const TestSlot = createSlot('TestSlot');
       const { container } = render(
         <TestSlot
@@ -489,7 +492,7 @@ describe('Polymorphic', () => {
       expect(element).toHaveAttribute('data-id', '123');
     });
 
-    it('应该支持空子元素', () => {
+    it('it('应该支持空子元素', () => {
       const TestSlot = createSlot('TestSlot');
       const { container } = render(<TestSlot />);
       const element = container.querySelector('div');
@@ -497,7 +500,7 @@ describe('Polymorphic', () => {
       expect(element).toBeEmptyDOMElement();
     });
 
-    it('应该支持 null 子元素', () => {
+    it('it('应该支持 null 子元素', () => {
       const TestSlot = createSlot('TestSlot');
       const { container } = render(<TestSlot>{null}</TestSlot>);
       const element = container.querySelector('div');
@@ -505,7 +508,7 @@ describe('Polymorphic', () => {
       expect(element).toBeEmptyDOMElement();
     });
 
-    it('应该支持多个子元素', () => {
+    it('it('应该支持多个子元素', () => {
       const TestSlot = createSlot('TestSlot');
       const { container } = render(
         <TestSlot>
@@ -521,56 +524,56 @@ describe('Polymorphic', () => {
   });
 
   describe('mergeProps', () => {
-    it('应该合并属性', () => {
+    it('it('应该合并属性', () => {
       const result = mergeProps({ a: 1 }, { b: 2 });
       expect(result).toEqual({ a: 1, b: 2 });
     });
 
-    it('应该覆盖同名属性', () => {
+    it('it('应该覆盖同名属性', () => {
       const result = mergeProps({ a: 1 }, { a: 2 });
       expect(result).toEqual({ a: 2 });
     });
 
-    it('应该处理空对象', () => {
+    it('it('应该处理空对象', () => {
       const result = mergeProps({}, {});
       expect(result).toEqual({});
     });
 
-    it('应该处理多个属性', () => {
+    it('it('应该处理多个属性', () => {
       const result = mergeProps({ a: 1, b: 2 }, { c: 3, d: 4 });
       expect(result).toEqual({ a: 1, b: 2, c: 3, d: 4 });
     });
 
-    it('应该处理复杂对象', () => {
+    it('it('应该处理复杂对象', () => {
       const result = mergeProps({ nested: { a: 1 } }, { nested: { b: 2 } });
       expect(result).toEqual({ nested: { b: 2 } });
     });
   });
 
   describe('overrideProps', () => {
-    it('应该覆盖属性', () => {
+    it('it('应该覆盖属性', () => {
       const result = overrideProps({ a: 1, b: 2 }, { a: 3 });
       expect(result).toEqual({ a: 3, b: 2 });
     });
 
-    it('应该支持部分覆盖', () => {
+    it('it('应该支持部分覆盖', () => {
       const result = overrideProps({ a: 1, b: 2, c: 3 }, { b: 4, d: 5 });
       expect(result).toEqual({ a: 1, b: 4, c: 3, d: 5 });
     });
 
-    it('应该处理空覆盖对象', () => {
+    it('it('应该处理空覆盖对象', () => {
       const result = overrideProps({ a: 1, b: 2 }, {});
       expect(result).toEqual({ a: 1, b: 2 });
     });
 
-    it('应该处理空基础对象', () => {
+    it('it('应该处理空基础对象', () => {
       const result = overrideProps({}, { a: 1, b: 2 });
       expect(result).toEqual({ a: 1, b: 2 });
     });
   });
 
   describe('createAsChildComponent', () => {
-    it('应该创建支持 asChild 的组件', () => {
+    it('it('应该创建支持 asChild 的组件', () => {
       const TestComponent = createAsChildComponent<{ asChild?: boolean; children?: React.ReactNode }>(
         'TestComponent',
         (props) => <div data-testid="test">{props.children}</div>
@@ -579,7 +582,7 @@ describe('Polymorphic', () => {
       expect(screen.getByTestId('test')).toBeInTheDocument();
     });
 
-    it('应该有正确的 displayName', () => {
+    it('it('应该有正确的 displayName', () => {
       const TestComponent = createAsChildComponent<{ asChild?: boolean; children?: React.ReactNode }>(
         'TestComponent',
         (props) => <div data-testid="test">{props.children}</div>
@@ -589,27 +592,27 @@ describe('Polymorphic', () => {
   });
 
   describe('polymorphic', () => {
-    it('应该创建多态组件', () => {
+    it('it('应该创建多态组件', () => {
       const TestComponent = polymorphic('TestComponent');
       render(<TestComponent>Test Content</TestComponent>);
       expect(screen.getByText('Test Content')).toBeInTheDocument();
     });
 
-    it('应该支持默认元素类型', () => {
+    it('it('应该支持默认元素类型', () => {
       const TestComponent = polymorphic('TestComponent');
       const { container } = render(<TestComponent>Button Content</TestComponent>);
       const element = container.querySelector('div');
       expect(element).toBeInTheDocument();
     });
 
-    it('应该有正确的 displayName', () => {
+    it('it('应该有正确的 displayName', () => {
       const TestComponent = polymorphic('TestComponent');
       expect(TestComponent.displayName).toBe('TestComponent');
     });
   });
 
   describe('withAsChild', () => {
-    it('应该包装组件并支持 asChild', () => {
+    it('it('应该包装组件并支持 asChild', () => {
       const BaseComponent = ({ children }: { children?: React.ReactNode }) => (
         <div data-testid="base">{children}</div>
       );
@@ -624,7 +627,7 @@ describe('Polymorphic', () => {
       expect(element).toBeInTheDocument();
     });
 
-    it('应该在非 asChild 模式下渲染默认元素', () => {
+    it('it('应该在非 asChild 模式下渲染默认元素', () => {
       const BaseComponent = ({ children }: { children?: React.ReactNode }) => (
         <div data-testid="base">{children}</div>
       );
@@ -634,7 +637,7 @@ describe('Polymorphic', () => {
       expect(screen.getByText('Default Content')).toBeInTheDocument();
     });
 
-    it('应该在 asChild 模式下合并属性', () => {
+    it('it('应该在 asChild 模式下合并属性', () => {
       const BaseComponent = ({ children }: { children?: React.ReactNode }) => (
         <div data-testid="base">{children}</div>
       );
@@ -650,7 +653,7 @@ describe('Polymorphic', () => {
       expect(element).toHaveClass('wrapped-class');
     });
 
-    it('应该有正确的 displayName', () => {
+    it('it('应该有正确的 displayName', () => {
       const BaseComponent = ({ children }: { children?: React.ReactNode }) => (
         <div data-testid="base">{children}</div>
       );
@@ -658,7 +661,7 @@ describe('Polymorphic', () => {
       expect(WrappedComponent.displayName).toBe('WrappedComponent');
     });
 
-    it('应该支持自定义元素类型', () => {
+    it('it('应该支持自定义元素类型', () => {
       const BaseComponent = ({ children }: { children?: React.ReactNode }) => (
         <div data-testid="base">{children}</div>
       );
@@ -673,7 +676,7 @@ describe('Polymorphic', () => {
       expect(element).toBeInTheDocument();
     });
 
-    it('应该支持 ref 转发', () => {
+    it('it('应该支持 ref 转发', () => {
       const BaseComponent = ({ children }: { children?: React.ReactNode }) => (
         <div data-testid="base">{children}</div>
       );

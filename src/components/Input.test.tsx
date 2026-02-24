@@ -9,7 +9,10 @@
 
 import React from 'react';
 
-import { render, screen, fireEvent } from '@testing-library/react';
+;
+
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
 import { Input } from './Input';
 import { ThemeProvider } from '../theme/ThemeProvider';
 
@@ -18,7 +21,7 @@ const renderWithTheme = (component: React.ReactElement) => {
 };
 
 describe('Input 组件', () => {
-  it('应该正确渲染 input 元素', () => {
+  it('it('应该正确渲染 input 元素', () => {
     renderWithTheme(<Input placeholder="Enter text" />);
 
     const input = screen.getByPlaceholderText('Enter text');
@@ -26,7 +29,7 @@ describe('Input 组件', () => {
     expect(input.tagName).toBe('INPUT');
   });
 
-  it('应该支持不同的 type 属性', () => {
+  it('it('应该支持不同的 type 属性', () => {
     const types = ['text', 'password', 'email', 'number'] as const;
 
     types.forEach(type => {
@@ -38,28 +41,28 @@ describe('Input 组件', () => {
     });
   });
 
-  it('应该支持 placeholder 属性', () => {
+  it('it('应该支持 placeholder 属性', () => {
     renderWithTheme(<Input placeholder="Placeholder text" />);
 
     const input = screen.getByPlaceholderText('Placeholder text');
     expect(input).toBeInTheDocument();
   });
 
-  it('应该支持 disabled 属性', () => {
+  it('it('应该支持 disabled 属性', () => {
     renderWithTheme(<Input disabled />);
 
     const input = screen.getByRole('textbox');
     expect(input).toBeDisabled();
   });
 
-  it('应该支持 value 属性', () => {
+  it('it('应该支持 value 属性', () => {
     renderWithTheme(<Input value="Test value" />);
 
     const input = screen.getByDisplayValue('Test value');
     expect(input).toBeInTheDocument();
   });
 
-  it('应该支持 onChange 回调', () => {
+  it('it('应该支持 onChange 回调', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Input onChange={handleChange} />);
 
@@ -69,14 +72,14 @@ describe('Input 组件', () => {
     expect(handleChange).toHaveBeenCalledWith('new value');
   });
 
-  it('应该支持自定义 className', () => {
+  it('it('应该支持自定义 className', () => {
     renderWithTheme(<Input className="custom-class" />);
 
     const input = screen.getByRole('textbox');
     expect(input).toHaveClass('custom-class');
   });
 
-  it('应该在 focus 时改变边框颜色', () => {
+  it('it('应该在 focus 时改变边框颜色', () => {
     renderWithTheme(<Input />);
 
     const input = screen.getByRole('textbox');
@@ -85,7 +88,7 @@ describe('Input 组件', () => {
     expect(input).toHaveStyle({ outline: 'none' });
   });
 
-  it('应该在 blur 时恢复边框颜色', () => {
+  it('it('应该在 blur 时恢复边框颜色', () => {
     renderWithTheme(<Input />);
 
     const input = screen.getByRole('textbox');
@@ -95,7 +98,7 @@ describe('Input 组件', () => {
     expect(input).toHaveStyle({ outline: 'none' });
   });
 
-  it('应该应用正确的样式', () => {
+  it('it('应该应用正确的样式', () => {
     renderWithTheme(<Input />);
 
     const input = screen.getByRole('textbox');
@@ -106,7 +109,7 @@ describe('Input 组件', () => {
     });
   });
 
-  it('应该在 disabled 时设置正确的样式', () => {
+  it('it('应该在 disabled 时设置正确的样式', () => {
     renderWithTheme(<Input disabled />);
 
     const input = screen.getByRole('textbox');
@@ -115,7 +118,7 @@ describe('Input 组件', () => {
     });
   });
 
-  it('应该在非 disabled 时设置正确的样式', () => {
+  it('it('应该在非 disabled 时设置正确的样式', () => {
     renderWithTheme(<Input disabled={false} />);
 
     const input = screen.getByRole('textbox');
@@ -124,7 +127,7 @@ describe('Input 组件', () => {
     });
   });
 
-  it('应该正确处理长文本输入', () => {
+  it('it('应该正确处理长文本输入', () => {
     const longText = 'A'.repeat(1000);
     const handleChange = jest.fn();
     renderWithTheme(<Input onChange={handleChange} />);
@@ -135,7 +138,7 @@ describe('Input 组件', () => {
     expect(handleChange).toHaveBeenCalledWith(longText);
   });
 
-  it('应该正确处理特殊字符输入', () => {
+  it('it('应该正确处理特殊字符输入', () => {
     const specialChars = '!@#$%^&*()_+-=[]{}|;:\'",.<>?/~`';
     const handleChange = jest.fn();
     renderWithTheme(<Input onChange={handleChange} />);
@@ -146,7 +149,7 @@ describe('Input 组件', () => {
     expect(handleChange).toHaveBeenCalledWith(specialChars);
   });
 
-  it('应该正确处理 Unicode 字符输入', () => {
+  it('it('应该正确处理 Unicode 字符输入', () => {
     const unicodeText = '你好世界🌍';
     const handleChange = jest.fn();
     renderWithTheme(<Input onChange={handleChange} />);
@@ -157,7 +160,7 @@ describe('Input 组件', () => {
     expect(handleChange).toHaveBeenCalledWith(unicodeText);
   });
 
-  it('应该正确处理空字符串输入', () => {
+  it('it('应该正确处理空字符串输入', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Input value="test" onChange={handleChange} />);
 
@@ -167,7 +170,7 @@ describe('Input 组件', () => {
     expect(handleChange).toHaveBeenCalledWith('');
   });
 
-  it('应该正确处理粘贴事件', () => {
+  it('it('应该正确处理粘贴事件', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Input onChange={handleChange} />);
 
@@ -181,7 +184,7 @@ describe('Input 组件', () => {
     expect(input).toBeInTheDocument();
   });
 
-  it('应该正确处理剪切事件', () => {
+  it('it('应该正确处理剪切事件', () => {
     renderWithTheme(<Input value="test text" />);
 
     const input = screen.getByRole('textbox');
@@ -190,7 +193,7 @@ describe('Input 组件', () => {
     expect(input).toBeInTheDocument();
   });
 
-  it('应该正确处理复制事件', () => {
+  it('it('应该正确处理复制事件', () => {
     renderWithTheme(<Input value="test text" />);
 
     const input = screen.getByRole('textbox');
@@ -199,7 +202,7 @@ describe('Input 组件', () => {
     expect(input).toBeInTheDocument();
   });
 
-  it('应该正确处理键盘事件', () => {
+  it('it('应该正确处理键盘事件', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Input onChange={handleChange} />);
 
@@ -209,7 +212,7 @@ describe('Input 组件', () => {
     expect(input).toBeInTheDocument();
   });
 
-  it('应该正确处理多次连续输入', () => {
+  it('it('应该正确处理多次连续输入', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Input onChange={handleChange} />);
 
@@ -224,7 +227,7 @@ describe('Input 组件', () => {
     expect(handleChange).toHaveBeenNthCalledWith(3, 'abc');
   });
 
-  it('应该正确处理 placeholder 显示和隐藏', () => {
+  it('it('应该正确处理 placeholder 显示和隐藏', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Input placeholder="Enter text" onChange={handleChange} />);
 
@@ -235,35 +238,35 @@ describe('Input 组件', () => {
     expect(input).toHaveValue('typed text');
   });
 
-  it('应该正确处理空 placeholder', () => {
+  it('it('应该正确处理空 placeholder', () => {
     renderWithTheme(<Input placeholder="" />);
 
     const input = screen.getByRole('textbox');
     expect(input).toHaveAttribute('placeholder', '');
   });
 
-  it('应该正确处理未定义的 placeholder', () => {
+  it('it('应该正确处理未定义的 placeholder', () => {
     renderWithTheme(<Input />);
 
     const input = screen.getByRole('textbox');
     expect(input).toHaveAttribute('placeholder', '');
   });
 
-  it('应该正确处理 undefined value', () => {
+  it('it('应该正确处理 undefined value', () => {
     renderWithTheme(<Input value={undefined} />);
 
     const input = screen.getByRole('textbox');
     expect(input).toBeInTheDocument();
   });
 
-  it('应该正确处理空字符串 value', () => {
+  it('it('应该正确处理空字符串 value', () => {
     renderWithTheme(<Input value="" />);
 
     const input = screen.getByRole('textbox');
     expect(input).toBeInTheDocument();
   });
 
-  it('应该正确处理快速连续的 focus 和 blur', () => {
+  it('it('应该正确处理快速连续的 focus 和 blur', () => {
     renderWithTheme(<Input />);
 
     const input = screen.getByRole('textbox');
@@ -275,7 +278,7 @@ describe('Input 组件', () => {
     expect(input).toBeInTheDocument();
   });
 
-  it('应该正确处理禁用状态下的所有事件', () => {
+  it('it('应该正确处理禁用状态下的所有事件', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Input disabled onChange={handleChange} />);
 
@@ -287,7 +290,7 @@ describe('Input 组件', () => {
     expect(input).toBeDisabled();
   });
 
-  it('应该正确处理受控组件模式', () => {
+  it('it('应该正确处理受控组件模式', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Input value="" onChange={handleChange} />);
 
@@ -298,7 +301,7 @@ describe('Input 组件', () => {
     expect(screen.getByDisplayValue('controlled')).toBeInTheDocument();
   });
 
-  it('应该正确处理非受控组件模式', () => {
+  it('it('应该正确处理非受控组件模式', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Input onChange={handleChange} />);
 

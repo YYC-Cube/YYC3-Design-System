@@ -8,7 +8,10 @@
  */
 
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+;
+
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
 import '@testing-library/jest-dom';
 import { AIUsageAnalyzer } from './AIUsageAnalyzer';
 import { ThemeProvider } from '../theme/ThemeProvider';
@@ -18,22 +21,22 @@ const renderWithTheme = (component: React.ReactElement) => {
 };
 
 describe('AIUsageAnalyzer', () => {
-  it('应该渲染组件', () => {
+  it('it('应该渲染组件', () => {
     renderWithTheme(<AIUsageAnalyzer />);
     expect(screen.getByText('AI 使用模式分析')).toBeInTheDocument();
   });
 
-  it('应该显示开始分析按钮', () => {
+  it('it('应该显示开始分析按钮', () => {
     renderWithTheme(<AIUsageAnalyzer />);
     expect(screen.getByText('开始分析')).toBeInTheDocument();
   });
 
-  it('应该支持自定义类名', () => {
+  it('it('应该支持自定义类名', () => {
     const { container } = renderWithTheme(<AIUsageAnalyzer className="custom-class" />);
     expect(container.querySelector('.custom-class')).toBeInTheDocument();
   });
 
-  it('应该支持点击开始分析按钮', () => {
+  it('it('应该支持点击开始分析按钮', () => {
     renderWithTheme(<AIUsageAnalyzer />);
     
     const analyzeButton = screen.getByText('开始分析');

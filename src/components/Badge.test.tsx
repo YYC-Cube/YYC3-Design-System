@@ -7,8 +7,10 @@
  * @created 2026-02-18
  */
 
+;
 
-import { render, screen } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
 import React from 'react';
 import { Badge } from './Badge';
 import { ThemeProvider } from '../theme/ThemeProvider';
@@ -18,13 +20,13 @@ const renderWithTheme = (component: React.ReactElement) => {
 };
 
 describe('Badge 组件', () => {
-  it('应该正确渲染默认 Badge', () => {
+  it('it('应该正确渲染默认 Badge', () => {
     renderWithTheme(<Badge>Default</Badge>);
 
     expect(screen.getByText('Default')).toBeInTheDocument();
   });
 
-  it('应该支持不同的变体', () => {
+  it('it('应该支持不同的变体', () => {
     const variants = ['default', 'secondary', 'destructive', 'outline'] as const;
 
     variants.forEach(variant => {
@@ -34,7 +36,7 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该为 default variant 应用正确的样式', () => {
+  it('it('应该为 default variant 应用正确的样式', () => {
     renderWithTheme(<Badge variant="default">Default</Badge>);
 
     const badge = screen.getByText('Default');
@@ -44,14 +46,14 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该为 secondary variant 应用正确的样式', () => {
+  it('it('应该为 secondary variant 应用正确的样式', () => {
     renderWithTheme(<Badge variant="secondary">Secondary</Badge>);
 
     const badge = screen.getByText('Secondary');
     expect(badge).toBeInTheDocument();
   });
 
-  it('应该为 destructive variant 应用正确的样式', () => {
+  it('it('应该为 destructive variant 应用正确的样式', () => {
     renderWithTheme(<Badge variant="destructive">Destructive</Badge>);
 
     const badge = screen.getByText('Destructive');
@@ -61,21 +63,21 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该为 outline variant 应用正确的样式', () => {
+  it('it('应该为 outline variant 应用正确的样式', () => {
     renderWithTheme(<Badge variant="outline">Outline</Badge>);
 
     const badge = screen.getByText('Outline');
     expect(badge).toBeInTheDocument();
   });
 
-  it('应该应用自定义 className', () => {
+  it('it('应该应用自定义 className', () => {
     renderWithTheme(<Badge className="custom-class">Test</Badge>);
 
     const badge = screen.getByText('Test');
     expect(badge).toHaveClass('custom-class');
   });
 
-  it('应该应用正确的样式', () => {
+  it('it('应该应用正确的样式', () => {
     renderWithTheme(<Badge>Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -91,54 +93,54 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该正确处理空 children', () => {
+  it('it('应该正确处理空 children', () => {
     const { container } = renderWithTheme(<Badge>{null}</Badge>);
 
     const badge = container.querySelector('span');
     expect(badge).toBeInTheDocument();
   });
 
-  it('应该正确处理 null children', () => {
+  it('it('应该正确处理 null children', () => {
     const { container } = renderWithTheme(<Badge>{null}</Badge>);
 
     const badge = container.querySelector('span');
     expect(badge).toBeInTheDocument();
   });
 
-  it('应该正确处理 undefined children', () => {
+  it('it('应该正确处理 undefined children', () => {
     const { container } = renderWithTheme(<Badge>{undefined}</Badge>);
 
     const badge = container.querySelector('span');
     expect(badge).toBeInTheDocument();
   });
 
-  it('应该正确处理数字 children', () => {
+  it('it('应该正确处理数字 children', () => {
     renderWithTheme(<Badge>123</Badge>);
 
     expect(screen.getByText('123')).toBeInTheDocument();
   });
 
-  it('应该正确处理 React 元素 children', () => {
+  it('it('应该正确处理 React 元素 children', () => {
     renderWithTheme(<Badge><span>Custom</span></Badge>);
 
     expect(screen.getByText('Custom')).toBeInTheDocument();
   });
 
-  it('应该正确处理多个 children', () => {
+  it('it('应该正确处理多个 children', () => {
     renderWithTheme(<Badge>Test <span>Badge</span></Badge>);
 
     expect(screen.getByText('Test')).toBeInTheDocument();
     expect(screen.getByText('Badge')).toBeInTheDocument();
   });
 
-  it('应该正确处理无效的 variant 属性', () => {
+  it('it('应该正确处理无效的 variant 属性', () => {
     renderWithTheme(<Badge variant={'invalid' as any}>Test</Badge>);
 
     const badge = screen.getByText('Test');
     expect(badge).toBeInTheDocument();
   });
 
-  it('应该为无效 variant 使用默认样式', () => {
+  it('it('应该为无效 variant 使用默认样式', () => {
     renderWithTheme(<Badge variant={'invalid' as any}>Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -149,7 +151,7 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该正确应用 borderRadius', () => {
+  it('it('应该正确应用 borderRadius', () => {
     renderWithTheme(<Badge>Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -158,7 +160,7 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该正确应用 fontSize', () => {
+  it('it('应该正确应用 fontSize', () => {
     renderWithTheme(<Badge>Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -167,7 +169,7 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该正确应用 fontWeight', () => {
+  it('it('应该正确应用 fontWeight', () => {
     renderWithTheme(<Badge>Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -176,7 +178,7 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该正确应用 lineHeight', () => {
+  it('it('应该正确应用 lineHeight', () => {
     renderWithTheme(<Badge>Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -185,7 +187,7 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该正确应用 transition', () => {
+  it('it('应该正确应用 transition', () => {
     renderWithTheme(<Badge>Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -194,7 +196,7 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该正确应用 display', () => {
+  it('it('应该正确应用 display', () => {
     renderWithTheme(<Badge>Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -203,7 +205,7 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该正确应用 alignItems', () => {
+  it('it('应该正确应用 alignItems', () => {
     renderWithTheme(<Badge>Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -212,7 +214,7 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该正确应用 padding', () => {
+  it('it('应该正确应用 padding', () => {
     renderWithTheme(<Badge>Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -221,7 +223,7 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该为所有 variant 应用正确的 border 样式', () => {
+  it('it('应该为所有 variant 应用正确的 border 样式', () => {
     const variants = ['default', 'secondary', 'destructive', 'outline'] as const;
 
     variants.forEach(name => {
@@ -232,7 +234,7 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该为所有 variant 应用正确的 backgroundColor', () => {
+  it('it('应该为所有 variant 应用正确的 backgroundColor', () => {
     const variants = ['default', 'secondary', 'destructive', 'outline'] as const;
 
     variants.forEach(name => {
@@ -243,7 +245,7 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该为所有 variant 应用正确的 color', () => {
+  it('it('应该为所有 variant 应用正确的 color', () => {
     const variants = ['default', 'secondary', 'destructive', 'outline'] as const;
 
     variants.forEach(name => {
@@ -254,21 +256,21 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该正确处理未定义的 className', () => {
+  it('it('应该正确处理未定义的 className', () => {
     renderWithTheme(<Badge>Test</Badge>);
 
     const badge = screen.getByText('Test');
     expect(badge).not.toHaveClass();
   });
 
-  it('应该正确处理空字符串 className', () => {
+  it('it('应该正确处理空字符串 className', () => {
     renderWithTheme(<Badge className="">Test</Badge>);
 
     const badge = screen.getByText('Test');
     expect(badge).not.toHaveClass();
   });
 
-  it('default variant 应该有正确的样式组合', () => {
+  it('it('default variant 应该有正确的样式组合', () => {
     renderWithTheme(<Badge variant="default">Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -284,7 +286,7 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('secondary variant 应该有边框', () => {
+  it('it('secondary variant 应该有边框', () => {
     renderWithTheme(<Badge variant="secondary">Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -293,14 +295,14 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('outline variant 应该有透明背景', () => {
+  it('it('outline variant 应该有透明背景', () => {
     renderWithTheme(<Badge variant="outline">Test</Badge>);
 
     const badge = screen.getByText('Test');
     expect(badge).toBeInTheDocument();
   });
 
-  it('default variant 应该有正确的背景色和前景色', () => {
+  it('it('default variant 应该有正确的背景色和前景色', () => {
     renderWithTheme(<Badge variant="default">Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -310,7 +312,7 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('destructive variant 应该有正确的背景色和前景色', () => {
+  it('it('destructive variant 应该有正确的背景色和前景色', () => {
     renderWithTheme(<Badge variant="destructive">Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -320,14 +322,14 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('secondary variant 应该有正确的背景色', () => {
+  it('it('secondary variant 应该有正确的背景色', () => {
     renderWithTheme(<Badge variant="secondary">Test</Badge>);
 
     const badge = screen.getByText('Test');
     expect(badge).toBeInTheDocument();
   });
 
-  it('secondary variant 应该有正确的前景色', () => {
+  it('it('secondary variant 应该有正确的前景色', () => {
     renderWithTheme(<Badge variant="secondary">Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -336,7 +338,7 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('outline variant 应该有正确的前景色', () => {
+  it('it('outline variant 应该有正确的前景色', () => {
     renderWithTheme(<Badge variant="outline">Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -345,7 +347,7 @@ describe('Badge 组件', () => {
     });
   });
 
-  it('应该正确应用 baseStyle 展开', () => {
+  it('it('应该正确应用 baseStyle 展开', () => {
     renderWithTheme(<Badge>Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -360,7 +362,7 @@ describe('Badge 组件', () => {
     expect(style.transition).toBe('all 0.2s ease');
   });
 
-  it('default variant 应该包含 baseStyle', () => {
+  it('it('default variant 应该包含 baseStyle', () => {
     renderWithTheme(<Badge variant="default">Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -375,7 +377,7 @@ describe('Badge 组件', () => {
     expect(style.transition).toBe('all 0.2s ease');
   });
 
-  it('secondary variant 应该包含 baseStyle', () => {
+  it('it('secondary variant 应该包含 baseStyle', () => {
     renderWithTheme(<Badge variant="secondary">Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -390,7 +392,7 @@ describe('Badge 组件', () => {
     expect(style.transition).toBe('all 0.2s ease');
   });
 
-  it('destructive variant 应该包含 baseStyle', () => {
+  it('it('destructive variant 应该包含 baseStyle', () => {
     renderWithTheme(<Badge variant="destructive">Test</Badge>);
 
     const badge = screen.getByText('Test');
@@ -405,7 +407,7 @@ describe('Badge 组件', () => {
     expect(style.transition).toBe('all 0.2s ease');
   });
 
-  it('outline variant 应该包含 baseStyle', () => {
+  it('it('outline variant 应该包含 baseStyle', () => {
     renderWithTheme(<Badge variant="outline">Test</Badge>);
 
     const badge = screen.getByText('Test');

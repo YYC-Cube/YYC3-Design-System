@@ -7,12 +7,14 @@
  * @created 2026-02-18
  */
 
+;
 
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
 import { Animated } from './Animated';
 
 describe('Animated 组件', () => {
-  it('应该正确渲染子元素', () => {
+  it('it('应该正确渲染子元素', () => {
     render(
       <Animated animation="fadeIn">
         <div>Animated content</div>
@@ -22,7 +24,7 @@ describe('Animated 组件', () => {
     expect(screen.getByText('Animated content')).toBeInTheDocument();
   });
 
-  it('应该支持不同的动画类型', () => {
+  it('it('应该支持不同的动画类型', () => {
     const animations: Array<'fadeIn' | 'fadeOut' | 'slideInUp' | 'slideInDown' | 'slideInLeft' | 'slideInRight' | 'scaleIn' | 'scaleOut' | 'rotateIn' | 'bounceIn'> = [
       'fadeIn',
       'fadeOut',
@@ -48,7 +50,7 @@ describe('Animated 组件', () => {
     });
   });
 
-  it('应该支持 mount 触发器', () => {
+  it('it('应该支持 mount 触发器', () => {
     render(
       <Animated animation="fadeIn" trigger="mount">
         <div>Animated content</div>
@@ -58,7 +60,7 @@ describe('Animated 组件', () => {
     expect(screen.getByText('Animated content')).toBeInTheDocument();
   });
 
-  it('应该支持 hover 触发器', () => {
+  it('it('应该支持 hover 触发器', () => {
     render(
       <Animated animation="fadeIn" trigger="hover">
         <div>Animated content</div>
@@ -72,7 +74,7 @@ describe('Animated 组件', () => {
     expect(element).toBeInTheDocument();
   });
 
-  it('应该支持 click 触发器', () => {
+  it('it('应该支持 click 触发器', () => {
     render(
       <Animated animation="fadeIn" trigger="click">
         <div>Animated content</div>
@@ -85,7 +87,7 @@ describe('Animated 组件', () => {
     expect(element).toBeInTheDocument();
   });
 
-  it('应该应用自定义 className', () => {
+  it('it('应该应用自定义 className', () => {
     render(
       <Animated animation="fadeIn" className="custom-class">
         <div>Animated content</div>
@@ -96,7 +98,7 @@ describe('Animated 组件', () => {
     expect(wrapper).toHaveClass('custom-class');
   });
 
-  it('应该支持自定义配置', () => {
+  it('it('应该支持自定义配置', () => {
     render(
       <Animated animation="fadeIn" config={{ duration: 'slow', delay: '200ms' }}>
         <div>Animated content</div>
@@ -106,7 +108,7 @@ describe('Animated 组件', () => {
     expect(screen.getByText('Animated content')).toBeInTheDocument();
   });
 
-  it('click 触发器应该切换动画状态', () => {
+  it('it('click 触发器应该切换动画状态', () => {
     render(
       <Animated animation="fadeIn" trigger="click">
         <div>Animated content</div>
@@ -121,7 +123,7 @@ describe('Animated 组件', () => {
     expect(element).toBeInTheDocument();
   });
 
-  it('hover 触发器应该正确处理鼠标事件', () => {
+  it('it('hover 触发器应该正确处理鼠标事件', () => {
     render(
       <Animated animation="fadeIn" trigger="hover">
         <div>Animated content</div>

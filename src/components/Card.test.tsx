@@ -7,8 +7,10 @@
  * @created 2026-02-18
  */
 
+;
 
-import { render, screen } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './Card';
 import { ThemeProvider } from '../theme/ThemeProvider';
@@ -18,20 +20,20 @@ function renderWithTheme(ui: React.ReactElement) {
 }
 
 describe('Card 组件', () => {
-  it('应该正确渲染默认 Card', () => {
+  it('it('应该正确渲染默认 Card', () => {
     renderWithTheme(<Card>Default Content</Card>);
 
     expect(screen.getByText('Default Content')).toBeInTheDocument();
   });
 
-  it('应该应用自定义 className', () => {
+  it('it('应该应用自定义 className', () => {
     const { container } = renderWithTheme(<Card className="custom-class">Test</Card>);
 
     const card = container.querySelector('div');
     expect(card).toHaveClass('custom-class');
   });
 
-  it('应该应用正确的样式', () => {
+  it('it('应该应用正确的样式', () => {
     const { container } = renderWithTheme(<Card>Test</Card>);
 
     const card = container.querySelector('div');
@@ -44,7 +46,7 @@ describe('Card 组件', () => {
     });
   });
 
-  it('应该正确应用 shadow.card token', () => {
+  it('it('应该正确应用 shadow.card token', () => {
     const { container } = renderWithTheme(<Card>Test</Card>);
 
     const card = container.querySelector('div');
@@ -54,20 +56,7 @@ describe('Card 组件', () => {
     expect(boxShadow).toContain('6px');
   });
 
-  it('应该使用默认 shadow 值当 shadow.card 不存在时', () => {
-    const { container } = renderWithTheme(<Card>Test</Card>);
-
-    const card = container.querySelector('div');
-    const boxShadow = card?.style.boxShadow;
-    expect(boxShadow).toBeDefined();
-    expect(boxShadow).toContain('0px');
-    expect(boxShadow).toContain('6px');
-    expect(boxShadow).toContain('20px');
-    expect(boxShadow).toContain('-4px');
-    expect(boxShadow).toContain('#0a0a0a');
-  });
-
-  it('应该使用默认颜色当 shadow.card 只有 4 个元素时', () => {
+  it('it('应该使用默认 shadow 值当 shadow.card 不存在时', () => {
     const { container } = renderWithTheme(<Card>Test</Card>);
 
     const card = container.querySelector('div');
@@ -80,7 +69,7 @@ describe('Card 组件', () => {
     expect(boxShadow).toContain('#0a0a0a');
   });
 
-  it('应该使用默认 shadow 值当 shadow.card 为空字符串时', () => {
+  it('it('应该使用默认颜色当 shadow.card 只有 4 个元素时', () => {
     const { container } = renderWithTheme(<Card>Test</Card>);
 
     const card = container.querySelector('div');
@@ -93,7 +82,7 @@ describe('Card 组件', () => {
     expect(boxShadow).toContain('#0a0a0a');
   });
 
-  it('应该使用自定义 shadow 值当 shadow.card 有 5 个元素时', () => {
+  it('it('应该使用默认 shadow 值当 shadow.card 为空字符串时', () => {
     const { container } = renderWithTheme(<Card>Test</Card>);
 
     const card = container.querySelector('div');
@@ -106,40 +95,53 @@ describe('Card 组件', () => {
     expect(boxShadow).toContain('#0a0a0a');
   });
 
-  it('应该正确处理空 children', () => {
+  it('it('应该使用自定义 shadow 值当 shadow.card 有 5 个元素时', () => {
+    const { container } = renderWithTheme(<Card>Test</Card>);
+
+    const card = container.querySelector('div');
+    const boxShadow = card?.style.boxShadow;
+    expect(boxShadow).toBeDefined();
+    expect(boxShadow).toContain('0px');
+    expect(boxShadow).toContain('6px');
+    expect(boxShadow).toContain('20px');
+    expect(boxShadow).toContain('-4px');
+    expect(boxShadow).toContain('#0a0a0a');
+  });
+
+  it('it('应该正确处理空 children', () => {
     const { container } = renderWithTheme(<Card>{null}</Card>);
 
     const card = container.querySelector('div');
     expect(card).toBeInTheDocument();
   });
 
-  it('应该正确处理 null children', () => {
+  it('it('应该正确处理 null children', () => {
     const { container } = renderWithTheme(<Card>{null}</Card>);
 
     const card = container.querySelector('div');
     expect(card).toBeInTheDocument();
   });
 
-  it('应该正确处理 undefined children', () => {
+  it('it('应该正确处理 undefined children', () => {
     const { container } = renderWithTheme(<Card>{undefined}</Card>);
 
     const card = container.querySelector('div');
     expect(card).toBeInTheDocument();
   });
 
-  it('应该正确处理数字 children', () => {
+  it('it('应该正确处理数字 children', () => {
     renderWithTheme(<Card>123</Card>);
 
     expect(screen.getByText('123')).toBeInTheDocument();
   });
 
-  it('应该正确处理 React 元素 children', () => {
+  it('it('应该正确处理 React 元素 children', () => {
     renderWithTheme(<Card><span>Custom</span></Card>);
 
     expect(screen.getByText('Custom')).toBeInTheDocument();
   });
 
-  it('应该正确处理多个 children', () => {
+  it('it('应该正确处理多个 children', () => {
     renderWithTheme(<Card><p>First</p><p>Second</p></Card>);
 
     expect(screen.getByText('First')).toBeInTheDocument();
@@ -148,20 +150,20 @@ describe('Card 组件', () => {
 });
 
 describe('CardHeader 组件', () => {
-  it('应该正确渲染默认 CardHeader', () => {
+  it('it('应该正确渲染默认 CardHeader', () => {
     renderWithTheme(<CardHeader>Header Content</CardHeader>);
 
     expect(screen.getByText('Header Content')).toBeInTheDocument();
   });
 
-  it('应该应用自定义 className', () => {
+  it('it('应该应用自定义 className', () => {
     const { container } = renderWithTheme(<CardHeader className="custom-class">Test</CardHeader>);
 
     const header = container.querySelector('div');
     expect(header).toHaveClass('custom-class');
   });
 
-  it('应该应用正确的样式', () => {
+  it('it('应该应用正确的样式', () => {
     const { container } = renderWithTheme(<CardHeader>Header</CardHeader>);
 
     const header = container.querySelector('div');
@@ -172,7 +174,7 @@ describe('CardHeader 组件', () => {
     });
   });
 
-  it('应该正确处理空 children', () => {
+  it('it('应该正确处理空 children', () => {
     const { container } = renderWithTheme(<CardHeader>{null}</CardHeader>);
 
     const header = container.querySelector('div');
@@ -181,20 +183,20 @@ describe('CardHeader 组件', () => {
 });
 
 describe('CardTitle 组件', () => {
-  it('应该正确渲染默认 CardTitle', () => {
+  it('it('应该正确渲染默认 CardTitle', () => {
     renderWithTheme(<CardTitle>Title Content</CardTitle>);
 
     expect(screen.getByText('Title Content')).toBeInTheDocument();
   });
 
-  it('应该应用自定义 className', () => {
+  it('it('应该应用自定义 className', () => {
     const { container } = renderWithTheme(<CardTitle className="custom-class">Test</CardTitle>);
 
     const title = container.querySelector('h3');
     expect(title).toHaveClass('custom-class');
   });
 
-  it('应该应用正确的样式', () => {
+  it('it('应该应用正确的样式', () => {
     const { container } = renderWithTheme(<CardTitle>Title</CardTitle>);
 
     const title = container.querySelector('h3');
@@ -206,7 +208,7 @@ describe('CardTitle 组件', () => {
     });
   });
 
-  it('应该正确处理空 children', () => {
+  it('it('应该正确处理空 children', () => {
     const { container } = renderWithTheme(<CardTitle>{null}</CardTitle>);
 
     const title = container.querySelector('h3');
@@ -215,20 +217,20 @@ describe('CardTitle 组件', () => {
 });
 
 describe('CardContent 组件', () => {
-  it('应该正确渲染默认 CardContent', () => {
+  it('it('应该正确渲染默认 CardContent', () => {
     renderWithTheme(<CardContent>Content</CardContent>);
 
     expect(screen.getByText('Content')).toBeInTheDocument();
   });
 
-  it('应该应用自定义 className', () => {
+  it('it('应该应用自定义 className', () => {
     renderWithTheme(<CardContent className="custom-class">Test</CardContent>);
 
     const content = screen.getByText('Test');
     expect(content).toHaveClass('custom-class');
   });
 
-  it('应该应用正确的样式', () => {
+  it('it('应该应用正确的样式', () => {
     renderWithTheme(<CardContent>Test</CardContent>);
 
     const content = screen.getByText('Test');
@@ -238,7 +240,7 @@ describe('CardContent 组件', () => {
     });
   });
 
-  it('应该正确处理空 children', () => {
+  it('it('应该正确处理空 children', () => {
     const { container } = renderWithTheme(<CardContent>{null}</CardContent>);
 
     const content = container.querySelector('div');

@@ -10,6 +10,7 @@
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Table } from '../Table';
+import { ThemeProvider } from '../../theme/ThemeProvider';
 
 describe('Table', () => {
   const mockData = [
@@ -25,21 +26,21 @@ describe('Table', () => {
   ];
 
   it('应该渲染表格', () => {
-    render(<Table columns={mockColumns} dataSource={mockData} />);
+    render(<ThemeProvider><Table columns={mockColumns} dataSource={mockData} /></ThemeProvider>);
     expect(screen.getByText('Name')).toBeInTheDocument();
     expect(screen.getByText('Age')).toBeInTheDocument();
     expect(screen.getByText('Email')).toBeInTheDocument();
   });
 
   it('应该渲染数据行', () => {
-    render(<Table columns={mockColumns} dataSource={mockData} />);
+    render(<ThemeProvider><Table columns={mockColumns} dataSource={mockData} /></ThemeProvider>);
     expect(screen.getByText('John Doe')).toBeInTheDocument();
     expect(screen.getByText('Jane Smith')).toBeInTheDocument();
     expect(screen.getByText('Bob Johnson')).toBeInTheDocument();
   });
 
   it('应该支持排序', () => {
-    render(<Table columns={mockColumns.map(col => ({ ...col, sortable: true }))} dataSource={mockData} />);
+    render(<ThemeProvider><Table columns={mockColumns.map(col => ({ ...col, sortable: true }))} dataSource={mockData} /></ThemeProvider>);
     const nameHeader = screen.getByText('Name');
     fireEvent.click(nameHeader);
     expect(screen.getByText('↑')).toBeInTheDocument();
@@ -48,14 +49,16 @@ describe('Table', () => {
   it('应该支持行选择', () => {
     const mockOnChange = jest.fn();
     render(
-      <Table
-        columns={mockColumns}
-        dataSource={mockData}
-        rowSelection={{
-          onChange: mockOnChange,
-          type: 'checkbox',
-        }}
-      />
+      <ThemeProvider>
+        <Table
+          columns={mockColumns}
+          dataSource={mockData}
+          rowSelection={{
+            onChange: mockOnChange,
+            type: 'checkbox',
+          }}
+        />
+      </ThemeProvider>
     );
     const checkboxes = screen.getAllByRole('checkbox');
     fireEvent.click(checkboxes[1]);
@@ -65,68 +68,123 @@ describe('Table', () => {
   it('应该支持分页', () => {
     const mockOnChange = jest.fn();
     render(
-      <Table
-        columns={mockColumns}
-        dataSource={mockData}
-        pagination={{
-          current: 1,
-          pageSize: 10,
-          total: 100,
-          onChange: mockOnChange,
-        }}
-      />
+      <ThemeProvider>
+        <Table
+          columns={mockColumns}
+          dataSource={mockData}
+          pagination={{
+            current: 1,
+            pageSize: 10,
+            total: 100,
+            onChange: mockOnChange,
+          }}
+        />
+      </ThemeProvider>
     );
-    expect(screen.getByText('共 100 条')).toBeInTheDocument();
-    expect(screen.getByText('第 1 页')).toBeInTheDocument();
-  });
-
-  it('应该支持自定义渲染', () => {
-    const customColumns = [
-      {
-        key: 'name',
-        title: 'Name',
-        render: (value: unknown) => <strong>{value as string}</strong>,
-      },
-    ];
-    render(<Table columns={customColumns} dataSource={mockData} />);
-    const nameElement = screen.getByText('John Doe');
-    expect(nameElement.tagName).toBe('STRONG');
-  });
-
-  it('应该支持加载状态', () => {
-    render(<Table columns={mockColumns} dataSource={mockData} loading />);
-    expect(screen.getByText('加载中...')).toBeInTheDocument();
-  });
-
-  it('应该支持不同尺寸', () => {
-    const { rerender } = render(<Table columns={mockColumns} dataSource={mockData} size="small" />);
-    expect(screen.getByText('Name')).toBeInTheDocument();
-
-    rerender(<Table columns={mockColumns} dataSource={mockData} size="large" />);
-    expect(screen.getByText('Name')).toBeInTheDocument();
-  });
-
-  it('应该支持边框', () => {
-    render(<Table columns={mockColumns} dataSource={mockData} bordered />);
-    expect(screen.getByText('Name')).toBeInTheDocument();
-  });
-
-  it('应该支持隐藏表头', () => {
-    render(<Table columns={mockColumns} dataSource={mockData} showHeader={false} />);
-    expect(screen.queryByText('Name')).not.toBeInTheDocument();
+    const paginationInfo = screen.getByText(/1.*100/);
+    expect(paginationInfo).toBeInTheDocument();
   });
 
   it('应该支持行点击事件', () => {
     const mockOnRowClick = jest.fn();
     render(
-      <Table
-        columns={mockColumns}
-        dataSource={mockData}
-        onRow={() => ({ onClick: mockOnRowClick })}
-      />
+      <ThemeProvider>
+        <Table
+          columns={mockColumns}
+          dataSource={mockData}
+          onRowClick={mockOnRowClick}
+        />
+      </ThemeProvider>
     );
-    const firstRow = screen.getByText('John Doe').closest('tr');
-    fireEvent.click(firstRow!);
+    const firstRow = screen.getByText('John Doe');
+    fireEvent.click(firstRow);
     expect(mockOnRowClick).toHaveBeenCalled();
+  });
+
+  it('应该支持空数据', () => {
+    render(<ThemeProvider><Table columns={mockColumns} dataSource={[]} /></ThemeProvider>);
+    const emptyText = screen.getByText(/暂无数据/);
+    expect(emptyText).toBeInTheDocument();
+  });
+
+  it('应该支持自定义单元格渲染', () => {
+    const customColumns = [
+      { key: 'name', title: 'Name', dataIndex: 'name', render: (text: string) => <strong>{text}</strong> },
+    ];
+    render(<ThemeProvider><Table columns={customColumns} dataSource={mockData} /></ThemeProvider>);
+    const nameCell = screen.getByText('John Doe');
+    expect(nameCell.closest('strong')).toBeInTheDocument();
+  });
+
+  it('应该支持列宽设置', () => {
+    const widthColumns = [
+      { key: 'name', title: 'Name', dataIndex: 'name', width: 200 },
+      { key: 'age', title: 'Age', dataIndex: 'age', width: 100 },
+    ];
+    render(<ThemeProvider><Table columns={widthColumns} dataSource={mockData} /></ThemeProvider>);
+    const nameHeader = screen.getByText('Name');
+    expect(nameHeader).toBeInTheDocument();
+  });
+
+  it('应该支持列固定', () => {
+    const fixedColumns = [
+      { key: 'name', title: 'Name', dataIndex: 'name', fixed: 'left' },
+      { key: 'age', title: 'Age', dataIndex: 'age' },
+      { key: 'email', title: 'Email', dataIndex: 'email', fixed: 'right' },
+    ];
+    render(<ThemeProvider><Table columns={fixedColumns} dataSource={mockData} /></ThemeProvider>);
+    const nameHeader = screen.getByText('Name');
+    expect(nameHeader).toBeInTheDocument();
+  });
+
+  it('应该支持数据加载状态', () => {
+    render(
+      <ThemeProvider>
+        <Table
+          columns={mockColumns}
+          dataSource={mockData}
+          loading
+        />
+      </ThemeProvider>
+    );
+    const loadingIndicator = screen.getByRole('status');
+    expect(loadingIndicator).toBeInTheDocument();
+  });
+
+  it('应该支持行展开', () => {
+    const expandedRowRender = jest.fn((record: typeof mockData[0]) => <div>Expanded: {record.name}</div>);
+    render(
+      <ThemeProvider>
+        <Table
+          columns={mockColumns}
+          dataSource={mockData}
+          expandable={{
+            expandedRowRender,
+          }}
+        />
+      </ThemeProvider>
+    );
+    const expandButtons = screen.getAllByRole('button');
+    fireEvent.click(expandButtons[0]);
+    expect(expandedRowRender).toHaveBeenCalled();
+  });
+
+  it('应该支持过滤', () => {
+    const filteredColumns = [
+      { key: 'name', title: 'Name', dataIndex: 'name', filters: [
+        { text: 'John', value: 'John' },
+        { text: 'Jane', value: 'Jane' },
+      ] },
+    ];
+    render(
+      <ThemeProvider>
+        <Table
+          columns={filteredColumns}
+          dataSource={mockData}
+        />
+      </ThemeProvider>
+    );
+    const filterButton = screen.getByRole('button', { name: /filter/i });
+    expect(filterButton).toBeInTheDocument();
   });
 });

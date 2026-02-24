@@ -8,7 +8,10 @@
  */
 
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+;
+
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
 import '@testing-library/jest-dom';
 import { RealtimeEditor } from './RealtimeEditor';
 import { ThemeProvider } from '../theme/ThemeProvider';
@@ -18,17 +21,17 @@ const renderWithTheme = (component: React.ReactElement) => {
 };
 
 describe('RealtimeEditor', () => {
-  it('应该渲染组件', () => {
+  it('it('应该渲染组件', () => {
     renderWithTheme(<RealtimeEditor />);
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该支持自定义类名', () => {
+  it('it('应该支持自定义类名', () => {
     const { container } = renderWithTheme(<RealtimeEditor className="custom-class" />);
     expect(container.querySelector('.custom-class')).toBeInTheDocument();
   });
 
-  it('应该支持初始令牌', () => {
+  it('it('应该支持初始令牌', () => {
     const initialTokens = {
       'color.primary': '#ff0000',
       'color.secondary': '#00ff00'
@@ -37,18 +40,18 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该支持 onSave 回调', () => {
+  it('it('应该支持 onSave 回调', () => {
     const onSave = jest.fn();
     renderWithTheme(<RealtimeEditor onSave={onSave} />);
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该支持 userId', () => {
+  it('it('应该支持 userId', () => {
     renderWithTheme(<RealtimeEditor userId="test-user" />);
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该显示初始令牌', () => {
+  it('it('应该显示初始令牌', () => {
     const initialTokens = {
       'color.primary': '#ff0000',
       'color.secondary': '#00ff00'
@@ -58,7 +61,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText('color.secondary')).toBeInTheDocument();
   });
 
-  it('应该支持搜索令牌', async () => {
+  it('it('应该支持搜索令牌', async () => {
     const initialTokens = {
       'color.primary': '#ff0000',
       'spacing.large': '20px',
@@ -74,7 +77,7 @@ describe('RealtimeEditor', () => {
     });
   });
 
-  it('应该支持类别筛选', async () => {
+  it('it('应该支持类别筛选', async () => {
     const initialTokens = {
       'color.primary': '#ff0000',
       'spacing.large': '20px',
@@ -90,7 +93,7 @@ describe('RealtimeEditor', () => {
     });
   });
 
-  it('应该支持添加新令牌', () => {
+  it('it('应该支持添加新令牌', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -99,7 +102,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText('实时编辑器')).toBeInTheDocument();
   });
 
-  it('应该支持编辑令牌值', () => {
+  it('it('应该支持编辑令牌值', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -108,7 +111,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText('实时编辑器')).toBeInTheDocument();
   });
 
-  it('应该支持删除令牌', () => {
+  it('it('应该支持删除令牌', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -118,7 +121,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText('实时编辑器')).toBeInTheDocument();
   });
 
-  it('应该显示未保存状态', () => {
+  it('it('应该显示未保存状态', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -127,7 +130,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText('实时编辑器')).toBeInTheDocument();
   });
 
-  it('应该支持保存更改', () => {
+  it('it('应该支持保存更改', () => {
     const onSave = jest.fn();
     const initialTokens = {
       'color.primary': '#ff0000'
@@ -137,7 +140,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText('实时编辑器')).toBeInTheDocument();
   });
 
-  it('应该支持撤销更改', () => {
+  it('it('应该支持撤销更改', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -146,7 +149,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText('实时编辑器')).toBeInTheDocument();
   });
 
-  it('应该支持放弃更改', () => {
+  it('it('应该支持放弃更改', () => {
     window.confirm = jest.fn(() => true);
     const initialTokens = {
       'color.primary': '#ff0000'
@@ -156,7 +159,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText('实时编辑器')).toBeInTheDocument();
   });
 
-  it('应该显示颜色预览', () => {
+  it('it('应该显示颜色预览', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -166,7 +169,7 @@ describe('RealtimeEditor', () => {
     expect(colorPreview).toHaveStyle({ background: '#ff0000' });
   });
 
-  it('应该显示更改历史', () => {
+  it('it('应该显示更改历史', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -185,7 +188,7 @@ describe('RealtimeEditor', () => {
     }
   });
 
-  it('应该支持按 Enter 键保存编辑', async () => {
+  it('it('应该支持按 Enter 键保存编辑', async () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -205,7 +208,7 @@ describe('RealtimeEditor', () => {
     }
   });
 
-  it('应该支持按 Escape 键取消编辑', async () => {
+  it('it('应该支持按 Escape 键取消编辑', async () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -224,7 +227,7 @@ describe('RealtimeEditor', () => {
     }
   });
 
-  it('应该显示更改历史', () => {
+  it('it('应该显示更改历史', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -233,7 +236,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该显示更改历史数量', () => {
+  it('it('应该显示更改历史数量', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -242,7 +245,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该支持多个类别筛选', async () => {
+  it('it('应该支持多个类别筛选', async () => {
     const initialTokens = {
       'color.primary': '#ff0000',
       'color.secondary': '#00ff00',
@@ -274,7 +277,7 @@ describe('RealtimeEditor', () => {
     });
   });
 
-  it('应该支持搜索和筛选组合', async () => {
+  it('it('应该支持搜索和筛选组合', async () => {
     const initialTokens = {
       'color.primary': '#ff0000',
       'color.secondary': '#00ff00',
@@ -298,7 +301,7 @@ describe('RealtimeEditor', () => {
     });
   });
 
-  it('应该处理空搜索结果', async () => {
+  it('it('应该处理空搜索结果', async () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -312,7 +315,7 @@ describe('RealtimeEditor', () => {
     });
   });
 
-  it('应该显示令牌数量', () => {
+  it('it('应该显示令牌数量', () => {
     const initialTokens = {
       'color.primary': '#ff0000',
       'color.secondary': '#00ff00',
@@ -323,13 +326,13 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/令牌 \(3\)/i)).toBeInTheDocument();
   });
 
-  it('应该支持空令牌列表', () => {
+  it('it('应该支持空令牌列表', () => {
     renderWithTheme(<RealtimeEditor initialTokens={{}} />);
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
     expect(screen.getByText(/令牌 \(0\)/i)).toBeInTheDocument();
   });
 
-  it('应该显示已保存时间', () => {
+  it('it('应该显示已保存时间', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -338,7 +341,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该禁用撤销按钮当无法撤销时', () => {
+  it('it('应该禁用撤销按钮当无法撤销时', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -348,7 +351,7 @@ describe('RealtimeEditor', () => {
     expect(undoButton).toBeDisabled();
   });
 
-  it('应该禁用保存按钮当没有更改时', () => {
+  it('it('应该禁用保存按钮当没有更改时', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -358,7 +361,7 @@ describe('RealtimeEditor', () => {
     expect(saveButton).toBeDisabled();
   });
 
-  it('应该禁用放弃更改按钮当没有更改时', () => {
+  it('it('应该禁用放弃更改按钮当没有更改时', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -368,20 +371,20 @@ describe('RealtimeEditor', () => {
     expect(discardButton).toBeDisabled();
   });
 
-  it('应该禁用添加按钮当令牌名称或值为空时', () => {
+  it('it('应该禁用添加按钮当令牌名称或值为空时', () => {
     renderWithTheme(<RealtimeEditor initialTokens={{}} />);
     
     const addButton = screen.getByText('添加');
     expect(addButton).toBeDisabled();
   });
 
-  it('应该处理空令牌列表', () => {
+  it('it('应该处理空令牌列表', () => {
     renderWithTheme(<RealtimeEditor initialTokens={{}} />);
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
     expect(screen.getByText(/令牌 \(0\)/i)).toBeInTheDocument();
   });
 
-  it('应该处理无效令牌值', () => {
+  it('it('应该处理无效令牌值', () => {
     const initialTokens = {
       'color.invalid': 'invalid-value'
     };
@@ -389,7 +392,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该处理长令牌名称', () => {
+  it('it('应该处理长令牌名称', () => {
     const initialTokens = {
       'color.very.long.token.name.that.exceeds.normal.length': '#ff0000'
     };
@@ -397,7 +400,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该处理特殊字符在令牌名称中', () => {
+  it('it('应该处理特殊字符在令牌名称中', () => {
     const initialTokens = {
       'color.special@token#name': '#ff0000'
     };
@@ -405,7 +408,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该支持多个类别筛选', async () => {
+  it('it('应该支持多个类别筛选', async () => {
     const initialTokens = {
       'color.primary': '#ff0000',
       'color.secondary': '#00ff00',
@@ -437,7 +440,7 @@ describe('RealtimeEditor', () => {
     });
   });
 
-  it('应该支持搜索不存在的令牌', async () => {
+  it('it('应该支持搜索不存在的令牌', async () => {
     const initialTokens = {
       'color.primary': '#ff0000',
       'spacing.large': '20px'
@@ -453,7 +456,7 @@ describe('RealtimeEditor', () => {
     });
   });
 
-  it('应该支持清空搜索', async () => {
+  it('it('应该支持清空搜索', async () => {
     const initialTokens = {
       'color.primary': '#ff0000',
       'spacing.large': '20px'
@@ -475,7 +478,7 @@ describe('RealtimeEditor', () => {
     });
   });
 
-  it('应该支持选择所有类别', async () => {
+  it('it('应该支持选择所有类别', async () => {
     const initialTokens = {
       'color.primary': '#ff0000',
       'spacing.large': '20px',
@@ -493,7 +496,7 @@ describe('RealtimeEditor', () => {
     });
   });
 
-  it('应该处理保存失败', () => {
+  it('it('应该处理保存失败', () => {
     const onSave = jest.fn(() => {
       throw new Error('Save failed');
     });
@@ -504,7 +507,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该处理空 userId', () => {
+  it('it('应该处理空 userId', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -512,7 +515,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该处理 undefined userId', () => {
+  it('it('应该处理 undefined userId', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -520,7 +523,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该支持复制令牌值', () => {
+  it('it('应该支持复制令牌值', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -531,7 +534,7 @@ describe('RealtimeEditor', () => {
     expect(tokenValue).toBeInTheDocument();
   });
 
-  it('应该支持粘贴令牌值', () => {
+  it('it('应该支持粘贴令牌值', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -542,7 +545,7 @@ describe('RealtimeEditor', () => {
     expect(tokenValue).toBeInTheDocument();
   });
 
-  it('应该处理重复令牌名称', () => {
+  it('it('应该处理重复令牌名称', () => {
     const initialTokens = {
       'color.primary': '#ff0000',
       'color.secondary': '#00ff00'
@@ -551,7 +554,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该支持重置为默认值', () => {
+  it('it('应该支持重置为默认值', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -559,7 +562,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该显示加载状态', () => {
+  it('it('应该显示加载状态', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -567,7 +570,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该处理网络错误', () => {
+  it('it('应该处理网络错误', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -575,7 +578,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该支持键盘导航', () => {
+  it('it('应该支持键盘导航', () => {
     const initialTokens = {
       'color.primary': '#ff0000',
       'color.secondary': '#00ff00'
@@ -588,7 +591,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该支持 Tab 键切换焦点', () => {
+  it('it('应该支持 Tab 键切换焦点', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -600,7 +603,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该调用 onSave 回调', async () => {
+  it('it('应该调用 onSave 回调', async () => {
     const onSave = jest.fn();
     const initialTokens = {
       'color.primary': '#ff0000'
@@ -625,7 +628,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该显示确认对话框删除令牌', () => {
+  it('it('应该显示确认对话框删除令牌', () => {
     window.confirm = jest.fn(() => true);
     const initialTokens = {
       'color.primary': '#ff0000'
@@ -638,7 +641,7 @@ describe('RealtimeEditor', () => {
     expect(window.confirm).toHaveBeenCalledWith('确定要删除令牌 color.primary 吗？');
   });
 
-  it('应该显示确认对话框放弃更改', async () => {
+  it('it('应该显示确认对话框放弃更改', async () => {
     window.confirm = jest.fn(() => true);
     const initialTokens = {
       'color.primary': '#ff0000'
@@ -663,7 +666,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该显示验证错误提示', () => {
+  it('it('应该显示验证错误提示', () => {
     window.alert = jest.fn();
     const initialTokens = {};
     const { container } = renderWithTheme(<RealtimeEditor initialTokens={initialTokens} />);
@@ -681,7 +684,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该支持撤销操作', () => {
+  it('it('应该支持撤销操作', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -707,7 +710,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该支持添加新令牌', () => {
+  it('it('应该支持添加新令牌', () => {
     const initialTokens = {};
     const { container } = renderWithTheme(<RealtimeEditor initialTokens={initialTokens} />);
     
@@ -724,7 +727,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该显示颜色预览', () => {
+  it('it('应该显示颜色预览', () => {
     const initialTokens = {
       'color.primary': '#ff0000',
       'color.secondary': '#00ff00'
@@ -734,7 +737,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该显示更改历史', () => {
+  it('it('应该显示更改历史', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -755,7 +758,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该支持更改历史显示旧值和新值', () => {
+  it('it('应该支持更改历史显示旧值和新值', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -776,7 +779,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该支持更改历史的倒序显示', () => {
+  it('it('应该支持更改历史的倒序显示', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -797,7 +800,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该支持更改历史的滚动', () => {
+  it('it('应该支持更改历史的滚动', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };
@@ -818,7 +821,7 @@ describe('RealtimeEditor', () => {
     expect(screen.getByText(/实时编辑器/i)).toBeInTheDocument();
   });
 
-  it('应该显示更改历史数量', () => {
+  it('it('应该显示更改历史数量', () => {
     const initialTokens = {
       'color.primary': '#ff0000'
     };

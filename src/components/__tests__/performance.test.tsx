@@ -21,7 +21,7 @@ describe('组件性能测试', () => {
       name: `Item ${i}`,
     }));
 
-    it('应该正确渲染虚拟列表', () => {
+    it('it('it('it('应该正确渲染虚拟列表', () => {
       const { container } = render(
         <VirtualList
           items={mockItems}
@@ -34,7 +34,7 @@ describe('组件性能测试', () => {
       expect(container).toBeInTheDocument();
     });
 
-    it('应该只渲染可见的项', () => {
+    it('it('it('it('应该只渲染可见的项', () => {
       const { container } = render(
         <VirtualList
           items={mockItems}
@@ -48,7 +48,7 @@ describe('组件性能测试', () => {
       expect(visibleItems.length).toBeLessThanOrEqual(10);
     });
 
-    it('应该支持动态高度', () => {
+    it('it('it('it('应该支持动态高度', () => {
       const { container } = render(
         <VirtualList
           items={mockItems}
@@ -61,7 +61,7 @@ describe('组件性能测试', () => {
       expect(container).toBeInTheDocument();
     });
 
-    it('应该支持滚动到指定位置', async () => {
+    it('it('it('it('应该支持滚动到指定位置', async () => {
       const { container } = render(
         <VirtualList
           items={mockItems}
@@ -79,7 +79,7 @@ describe('组件性能测试', () => {
       });
     });
 
-    it('应该处理空列表', () => {
+    it('it('it('it('应该处理空列表', () => {
       const { container } = render(
         <VirtualList
           items={[]}
@@ -94,7 +94,7 @@ describe('组件性能测试', () => {
       expect(items.length).toBe(0);
     });
 
-    it('应该支持自定义渲染', () => {
+    it('it('it('it('应该支持自定义渲染', () => {
       const customRender = jest.fn((item) => <div key={item.id}>{item.name}</div>);
 
       render(
@@ -116,7 +116,7 @@ describe('组件性能测试', () => {
       name: `Item ${i}`,
     }));
 
-    it('应该正确渲染虚拟网格', () => {
+    it('it('it('it('应该正确渲染虚拟网格', () => {
       const { container } = render(
         <VirtualGrid
           items={mockItems}
@@ -131,7 +131,7 @@ describe('组件性能测试', () => {
       expect(container).toBeInTheDocument();
     });
 
-    it('应该只渲染可见的项', () => {
+    it('it('it('it('应该只渲染可见的项', () => {
       const { container } = render(
         <VirtualGrid
           items={mockItems}
@@ -147,7 +147,7 @@ describe('组件性能测试', () => {
       expect(visibleItems.length).toBeLessThanOrEqual(25);
     });
 
-    it('应该支持动态列数', () => {
+    it('it('it('it('应该支持动态列数', () => {
       const { container } = render(
         <VirtualGrid
           items={mockItems}
@@ -163,7 +163,7 @@ describe('组件性能测试', () => {
       expect(container).toBeInTheDocument();
     });
 
-    it('应该处理空网格', () => {
+    it('it('it('it('应该处理空网格', () => {
       const { container } = render(
         <VirtualGrid
           items={[]}
@@ -182,13 +182,13 @@ describe('组件性能测试', () => {
   });
 
   describe('AnimationOptimizationExample 组件', () => {
-    it('应该正确渲染动画优化示例', () => {
+    it('it('it('it('应该正确渲染动画优化示例', () => {
       const { container } = render(<AnimationOptimizationExample />);
 
       expect(container).toBeInTheDocument();
     });
 
-    it('应该显示动画性能指标', () => {
+    it('it('it('it('应该显示动画性能指标', () => {
       render(<AnimationOptimizationExample />);
 
       const fpsElement = typedScreen.queryByText(/FPS/i);
@@ -198,7 +198,7 @@ describe('组件性能测试', () => {
       expect(frameTimeElement).toBeInTheDocument();
     });
 
-    it('应该支持动画控制', () => {
+    it('it('it('it('应该支持动画控制', () => {
       render(<AnimationOptimizationExample />);
 
       const startButton = typedScreen.queryByText(/Start/i);
@@ -208,7 +208,7 @@ describe('组件性能测试', () => {
       expect(stopButton).toBeInTheDocument();
     });
 
-    it('应该显示动画优化建议', () => {
+    it('it('it('it('应该显示动画优化建议', () => {
       render(<AnimationOptimizationExample />);
 
       const recommendations = typedScreen.queryByText(/优化建议/i);
@@ -221,7 +221,7 @@ describe('组件性能测试', () => {
       <div data-testid="mock-component">{value}</div>
     ));
 
-    it('应该避免不必要的重新渲染', () => {
+    it('it('it('it('应该避免不必要的重新渲染', () => {
       const { rerender } = render(<MockComponent value={1} />);
 
       expect(MockComponent).toHaveBeenCalledTimes(1);
@@ -231,7 +231,7 @@ describe('组件性能测试', () => {
       expect(MockComponent).toHaveBeenCalledTimes(1);
     });
 
-    it('应该在属性变化时重新渲染', () => {
+    it('it('it('it('应该在属性变化时重新渲染', () => {
       const { rerender } = render(<MockComponent value={1} />);
 
       expect(MockComponent).toHaveBeenCalledTimes(1);
@@ -243,7 +243,7 @@ describe('组件性能测试', () => {
   });
 
   describe('useMemo 优化测试', () => {
-    it('应该缓存计算结果', () => {
+    it('it('it('it('应该缓存计算结果', () => {
       const expensiveCalculation = jest.fn((value: number) => value * 2);
 
       const { rerender } = render(
@@ -259,7 +259,7 @@ describe('组件性能测试', () => {
   });
 
   describe('useCallback 优化测试', () => {
-    it('应该缓存函数引用', () => {
+    it('it('it('it('应该缓存函数引用', () => {
       const mockCallback = jest.fn();
 
       const { rerender } = render(
@@ -273,7 +273,7 @@ describe('组件性能测试', () => {
   });
 
   describe('性能基准测试', () => {
-    it('应该测量组件渲染时间', () => {
+    it('it('it('it('应该测量组件渲染时间', () => {
       const start = performance.now();
 
       render(
@@ -291,7 +291,7 @@ describe('组件性能测试', () => {
       expect(renderTime).toBeLessThan(100);
     });
 
-    it('应该测量列表滚动性能', async () => {
+    it('it('it('it('应该测量列表滚动性能', async () => {
       const { container } = render(
         <VirtualList
           items={mockItems}

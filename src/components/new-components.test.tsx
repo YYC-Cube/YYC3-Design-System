@@ -1,5 +1,8 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+;
+
+import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
 import { ThemeProvider } from '../theme/ThemeProvider';
 import { Checkbox } from './Checkbox';
 import { Radio } from './Radio';
@@ -19,12 +22,12 @@ const renderWithTheme = (component: React.ReactElement) => {
 };
 
 describe('Checkbox', () => {
-  it('should render correctly', () => {
+  it('it('should render correctly', () => {
     renderWithTheme(<Checkbox>Label</Checkbox>);
     expect(screen.getByText('Label')).toBeInTheDocument();
   });
 
-  it('should toggle on click', () => {
+  it('it('should toggle on click', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Checkbox onChange={handleChange}>Label</Checkbox>);
     
@@ -33,7 +36,7 @@ describe('Checkbox', () => {
     expect(handleChange).toHaveBeenCalledWith(true);
   });
 
-  it('should be disabled when disabled prop is true', () => {
+  it('it('should be disabled when disabled prop is true', () => {
     renderWithTheme(<Checkbox disabled>Label</Checkbox>);
     const checkbox = screen.getByRole('checkbox');
     expect(checkbox).toBeDisabled();
@@ -41,12 +44,12 @@ describe('Checkbox', () => {
 });
 
 describe('Radio', () => {
-  it('should render correctly', () => {
+  it('it('should render correctly', () => {
     renderWithTheme(<Radio value="1">Option 1</Radio>);
     expect(screen.getByText('Option 1')).toBeInTheDocument();
   });
 
-  it('should call onChange when clicked', () => {
+  it('it('should call onChange when clicked', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Radio value="1" onChange={handleChange}>Option 1</Radio>);
     
@@ -57,12 +60,12 @@ describe('Radio', () => {
 });
 
 describe('Switch', () => {
-  it('should render correctly', () => {
+  it('it('should render correctly', () => {
     renderWithTheme(<Switch />);
     expect(screen.getByRole('switch')).toBeInTheDocument();
   });
 
-  it('should toggle on click', () => {
+  it('it('should toggle on click', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Switch onChange={handleChange} />);
     
@@ -71,7 +74,7 @@ describe('Switch', () => {
     expect(handleChange).toHaveBeenCalledWith(true);
   });
 
-  it('should be disabled when disabled prop is true', () => {
+  it('it('should be disabled when disabled prop is true', () => {
     renderWithTheme(<Switch disabled />);
     const switchEl = screen.getByRole('switch');
     expect(switchEl).toHaveAttribute('tabIndex', '-1');
@@ -79,12 +82,12 @@ describe('Switch', () => {
 });
 
 describe('Progress', () => {
-  it('should render correctly', () => {
+  it('it('should render correctly', () => {
     renderWithTheme(<Progress value={50} />);
     expect(screen.getByRole('progressbar')).toBeInTheDocument();
   });
 
-  it('should have correct aria attributes', () => {
+  it('it('should have correct aria attributes', () => {
     renderWithTheme(<Progress value={75} max={100} />);
     const progress = screen.getByRole('progressbar');
     expect(progress).toHaveAttribute('aria-valuenow', '75');
@@ -94,12 +97,12 @@ describe('Progress', () => {
 });
 
 describe('Spinner', () => {
-  it('should render correctly', () => {
+  it('it('should render correctly', () => {
     renderWithTheme(<Spinner />);
     expect(screen.getByRole('status')).toBeInTheDocument();
   });
 
-  it('should have correct size classes', () => {
+  it('it('should have correct size classes', () => {
     const { container } = renderWithTheme(<Spinner size="lg" />);
     const spinner = container.querySelector('[style*="width: 2rem"]');
     expect(spinner).toBeInTheDocument();
@@ -107,13 +110,13 @@ describe('Spinner', () => {
 });
 
 describe('Alert', () => {
-  it('should render correctly', () => {
+  it('it('should render correctly', () => {
     renderWithTheme(<Alert>Alert message</Alert>);
     expect(screen.getByText('Alert message')).toBeInTheDocument();
     expect(screen.getByRole('alert')).toBeInTheDocument();
   });
 
-  it('should render different variants', () => {
+  it('it('should render different variants', () => {
     const { unmount } = renderWithTheme(<Alert variant="destructive">Error</Alert>);
     expect(screen.getByText('Error')).toBeInTheDocument();
     unmount();
@@ -124,7 +127,7 @@ describe('Alert', () => {
 });
 
 describe('Tabs', () => {
-  it('should render correctly', () => {
+  it('it('should render correctly', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -139,7 +142,7 @@ describe('Tabs', () => {
     expect(screen.getByText('Content 1')).toBeInTheDocument();
   });
 
-  it('should switch tabs on click', () => {
+  it('it('should switch tabs on click', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -157,18 +160,18 @@ describe('Tabs', () => {
 });
 
 describe('Modal', () => {
-  it('should not render when isOpen is false', () => {
+  it('it('should not render when isOpen is false', () => {
     renderWithTheme(<Modal isOpen={false}>Modal content</Modal>);
     expect(screen.queryByText('Modal content')).not.toBeInTheDocument();
   });
 
-  it('should render when isOpen is true', () => {
+  it('it('should render when isOpen is true', () => {
     renderWithTheme(<Modal isOpen={true}>Modal content</Modal>);
     expect(screen.getByText('Modal content')).toBeInTheDocument();
     expect(screen.getByRole('dialog')).toBeInTheDocument();
   });
 
-  it('should call onClose when backdrop is clicked', () => {
+  it('it('should call onClose when backdrop is clicked', () => {
     const handleClose = jest.fn();
     renderWithTheme(<Modal isOpen={true} onClose={handleClose}>Modal content</Modal>);
     
@@ -181,7 +184,7 @@ describe('Modal', () => {
 });
 
 describe('Tooltip', () => {
-  it('should render correctly', () => {
+  it('it('should render correctly', () => {
     renderWithTheme(
       <Tooltip content="Tooltip text">
         <button>Hover me</button>
@@ -190,7 +193,7 @@ describe('Tooltip', () => {
     expect(screen.getByText('Hover me')).toBeInTheDocument();
   });
 
-  it('should show tooltip on hover', () => {
+  it('it('should show tooltip on hover', () => {
     renderWithTheme(
       <Tooltip content="Tooltip text">
         <button>Hover me</button>
@@ -207,12 +210,12 @@ describe('Tooltip', () => {
 });
 
 describe('Divider', () => {
-  it('should render correctly', () => {
+  it('it('should render correctly', () => {
     renderWithTheme(<Divider />);
     expect(screen.getByRole('separator')).toBeInTheDocument();
   });
 
-  it('should render vertical divider', () => {
+  it('it('should render vertical divider', () => {
     const { container } = renderWithTheme(<Divider orientation="vertical" />);
     const divider = container.querySelector('[style*="height: 100%"]');
     expect(divider).toBeInTheDocument();
@@ -220,7 +223,7 @@ describe('Divider', () => {
 });
 
 describe('Select', () => {
-  it('should render correctly', () => {
+  it('it('should render correctly', () => {
     const options = [
       { value: '1', label: 'Option 1' },
       { value: '2', label: 'Option 2' },
@@ -229,7 +232,7 @@ describe('Select', () => {
     expect(screen.getByText('Select...')).toBeInTheDocument();
   });
 
-  it('should open dropdown on click', () => {
+  it('it('should open dropdown on click', () => {
     const options = [
       { value: '1', label: 'Option 1' },
       { value: '2', label: 'Option 2' },
@@ -241,7 +244,7 @@ describe('Select', () => {
     expect(screen.getByText('Option 1')).toBeInTheDocument();
   });
 
-  it('should call onChange when option is selected', () => {
+  it('it('should call onChange when option is selected', () => {
     const handleChange = jest.fn();
     const options = [
       { value: '1', label: 'Option 1' },
@@ -258,24 +261,24 @@ describe('Select', () => {
 });
 
 describe('Animated', () => {
-  it('should render correctly', () => {
+  it('it('should render correctly', () => {
     renderWithTheme(<Animated animation="fadeIn">Content</Animated>);
     expect(screen.getByText('Content')).toBeInTheDocument();
   });
 
-  it('should animate on mount', () => {
+  it('it('should animate on mount', () => {
     const { container } = renderWithTheme(<Animated animation="fadeIn">Content</Animated>);
     const animated = container.querySelector('[style*="animation"]');
     expect(animated).toBeInTheDocument();
   });
 
-  it('should animate on hover', () => {
+  it('it('should animate on hover', () => {
     const { container } = renderWithTheme(<Animated animation="scaleIn" trigger="hover">Content</Animated>);
     const animated = container.querySelector('[style*="transition"]');
     expect(animated).toBeInTheDocument();
   });
 
-  it('should animate on click', () => {
+  it('it('should animate on click', () => {
     const { container } = renderWithTheme(<Animated animation="bounceIn" trigger="click">Content</Animated>);
     const animated = container.querySelector('[style*="cursor: pointer"]');
     expect(animated).toBeInTheDocument();
