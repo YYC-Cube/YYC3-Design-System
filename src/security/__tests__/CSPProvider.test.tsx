@@ -11,6 +11,7 @@ import React from 'react';
 ;
 
 import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen } from '@testing-library/dom';
 
 import { CSPProvider, useCSP, CSPScript, CSPStyle, CSPImg, createStrictCSPConfig, createModerateCSPConfig, createPermissiveCSPConfig, generateNonce, withCSP } from '../CSPProvider';
 

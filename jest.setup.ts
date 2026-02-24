@@ -9,6 +9,11 @@
 
 import '@testing-library/jest-dom';
 
+// 扩展screen对象类型以支持所有查询方法
+declare global {
+  const screen: typeof import('@testing-library/dom').screen;
+}
+
 global.matchMedia = (query: string) => ({
   matches: false,
   media: query,

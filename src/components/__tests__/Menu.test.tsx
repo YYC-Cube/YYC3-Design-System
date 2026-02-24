@@ -10,6 +10,7 @@
 ;
 
 import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen } from '@testing-library/dom';
 
 import { Menu } from '../Menu'
 import { ThemeProvider } from '../../theme/ThemeProvider';;

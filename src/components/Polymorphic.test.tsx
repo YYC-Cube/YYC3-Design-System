@@ -11,6 +11,7 @@ import React from 'react';
 ;
 
 import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen } from '@testing-library/dom';
 
 import '@testing-library/jest-dom';
 import { Slot, createPolymorphicComponent, createSlot, mergeProps, overrideProps, createAsChildComponent, polymorphic, withAsChild } from './Polymorphic';

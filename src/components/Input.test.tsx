@@ -12,6 +12,7 @@ import React from 'react';
 ;
 
 import { render, fireEvent, waitFor } from '@testing-library/react'
+import { screen } from '@testing-library/dom';
 
 import { Input } from './Input';
 import { ThemeProvider } from '../theme/ThemeProvider';

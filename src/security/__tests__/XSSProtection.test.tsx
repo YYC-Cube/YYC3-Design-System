@@ -11,7 +11,8 @@ import React from 'react';
 ;
 ;
 import { XSSProvider, useXSS } from '../XSSProtection'
-import { render, screen, cleanup, fireEvent, waitFor, act } from '@testing-library/react';;
+import { render, screen, cleanup, fireEvent, waitFor, act } from '@testing-library/react'
+import { screen } from '@testing-library/dom';;;
 
 describe('XSS Protection Module', () => {
   beforeEach(() => {
