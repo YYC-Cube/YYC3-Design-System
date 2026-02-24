@@ -797,6 +797,351 @@ import { useDebounce, useThrottle, useMemoizedCallback } from '@yyc3/design-syst
 - [Jest](https://jestjs.io/) - 测试框架
 - [Culori](https://culorijs.org/) - 颜色转换库
 
+## 性能优化
+
+YYC³ Design System 提供全面的性能优化方案，包括性能监控、构建优化、运行时优化、资源优化和性能测试。
+
+### 性能监控
+
+#### Web Vitals 监控
+
+系统自动收集和监控核心 Web Vitals 指标：
+
+- **FCP (First Contentful Paint)**: 首次内容绘制，目标 < 1.5 秒
+- **LCP (Largest Contentful Paint)**: 最大内容绘制，目标 < 2.5 秒
+- **FID (First Input Delay)**: 首次输入延迟，目标 < 100 毫秒
+- **CLS (Cumulative Layout Shift)**: 累积布局偏移，目标 < 0.1
+- **TTFB (Time to First Byte)**: 首次字节时间，目标 < 800 毫秒
+
+```typescript
+import { usePerformanceMonitor } from '@yyc3/design-system/performance';
+
+function MyComponent() {
+  const { fcp, lcp, fid, cls, ttfb, score } = usePerformanceMonitor();
+
+  return (
+    <div>
+      <p>FCP: {fcp}ms</p>
+      <p>LCP: {lcp}ms</p>
+      <p>性能评分: {score}</p>
+    </div>
+  );
+}
+```
+
+#### 性能仪表板
+
+提供实时性能监控仪表板，显示：
+- 实时性能指标
+- 历史趋势图表
+- 性能评分
+- 优化建议
+
+### 构建优化
+
+#### 代码分割
+
+自动代码分割，按路由和功能模块拆分代码：
+
+```typescript
+// vite.config.ts
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'ui-components': ['@yyc3/design-system'],
+        },
+      },
+    },
+  },
+});
+```
+
+#### 资源压缩
+
+启用 Gzip 和 Brotli 压缩：
+
+```typescript
+// vite.config.ts
+import viteCompression from 'vite-plugin-compression';
+
+export default defineConfig({
+  plugins: [
+    viteCompression({
+      algorithm: 'gzip',
+      ext: '.gz',
+    }),
+    viteCompression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+    }),
+  ],
+});
+```
+
+#### Tree Shaking
+
+自动移除未使用的代码，减小打包体积。
+
+### 运行时优化
+
+#### 组件渲染优化
+
+使用 React.memo、useMemo、useCallback 优化组件性能：
+
+```typescript
+import { memo, useMemo, useCallback } from 'react';
+
+const OptimizedComponent = memo(function OptimizedComponent({ data, onUpdate }) {
+  const processedData = useMemo(() => {
+    return data.map(item => ({ ...item, value: item.value * 2 }));
+  }, [data]);
+
+  const handleClick = useCallback(() => {
+    onUpdate(processedData);
+  }, [onUpdate, processedData]);
+
+  return <button onClick={handleClick}>Update</button>;
+});
+```
+
+#### 虚拟滚动
+
+实现高效的虚拟滚动，支持大量数据列表：
+
+```typescript
+import { VirtualList } from '@yyc3/design-system';
+
+function MyList() {
+  const items = Array.from({ length: 10000 }, (_, i) => ({ id: i, name: `Item ${i}` }));
+
+  return (
+    <VirtualList
+      items={items}
+      itemHeight={50}
+      containerHeight={500}
+      renderItem={(item) => <div key={item.id}>{item.name}</div>}
+    />
+  );
+}
+```
+
+#### 动画优化
+
+使用 CSS 硬件加速和 requestAnimationFrame 优化动画：
+
+```typescript
+import { useOptimizedAnimation } from '@yyc3/design-system';
+
+function AnimatedComponent() {
+  const { isAnimating, startAnimation, stopAnimation, fps } = useOptimizedAnimation();
+
+  return (
+    <div>
+      <div style={{ transform: isAnimating ? 'translateX(100px)' : 'none' }}>
+        Animated Content
+      </div>
+      <button onClick={startAnimation}>Start</button>
+      <button onClick={stopAnimation}>Stop</button>
+      <p>FPS: {fps}</p>
+    </div>
+  );
+}
+```
+
+### 资源优化
+
+#### 图片优化
+
+**懒加载**
+
+```typescript
+import { LazyImage } from '@yyc3/design-system';
+
+<LazyImage
+  src="/large-image.jpg"
+  alt="Description"
+  placeholder="/placeholder.jpg"
+  threshold={0.1}
+/>
+```
+
+**预加载**
+
+```typescript
+import { preloadImage } from '@yyc3/design-system';
+
+useEffect(() => {
+  preloadImage('/important-image.jpg', { priority: 'high' });
+}, []);
+```
+
+**响应式图片**
+
+```typescript
+import { ResponsiveImage } from '@yyc3/design-system';
+
+<ResponsiveImage
+  src="/image.jpg"
+  alt="Description"
+  sizes="(max-width: 768px) 100vw, 50vw"
+  srcSet={[
+    '/image-400.jpg 400w',
+    '/image-800.jpg 800w',
+    '/image-1200.jpg 1200w',
+  ]}
+/>
+```
+
+#### 字体优化
+
+**字体预加载**
+
+```typescript
+import { preloadFont } from '@yyc3/design-system';
+
+useEffect(() => {
+  preloadFont('Inter', '/fonts/inter.woff2', {
+    fontWeight: '400',
+    fontStyle: 'normal',
+    priority: 'high',
+  });
+}, []);
+```
+
+**字体子集化**
+
+```typescript
+import { createCriticalFontSubset } from '@yyc3/design-system';
+
+const criticalSubset = createCriticalFontSubset('Hello World 你好世界');
+```
+
+**字体显示优化**
+
+```typescript
+import { FontDisplayOptimizer } from '@yyc3/design-system';
+
+<FontDisplayOptimizer
+  fontFamily="Inter"
+  fontDisplay="swap"
+  fallbackFont="sans-serif"
+>
+  <p>Optimized text rendering</p>
+</FontDisplayOptimizer>
+```
+
+#### 资源预加载
+
+**关键资源预加载**
+
+```typescript
+import { preloadCriticalResources } from '@yyc3/design-system';
+
+useEffect(() => {
+  preloadCriticalResources([
+    {
+      url: '/critical.js',
+      type: 'script',
+      priority: 'high',
+      critical: true,
+    },
+    {
+      url: '/critical.css',
+      type: 'style',
+      priority: 'high',
+      critical: true,
+    },
+  ]);
+}, []);
+```
+
+**预连接**
+
+```typescript
+import { preconnect } from '@yyc3/design-system';
+
+useEffect(() => {
+  preconnect('https://cdn.example.com', { crossOrigin: 'anonymous' });
+}, []);
+```
+
+**预取**
+
+```typescript
+import { prefetch } from '@yyc3/design-system';
+
+useEffect(() => {
+  prefetch('/next-page.html', { priority: 'low' });
+}, []);
+```
+
+### 性能测试
+
+#### 性能监控测试
+
+```typescript
+// 测试 Web Vitals 收集
+describe('性能监控测试', () => {
+  it('应该收集 FCP 指标', async () => {
+    const vitals = await collectWebVitals();
+    expect(vitals.fcp).toBeDefined();
+  });
+});
+```
+
+#### 组件性能测试
+
+```typescript
+// 测试虚拟滚动性能
+describe('VirtualList 性能测试', () => {
+  it('应该测量组件渲染时间', () => {
+    const start = performance.now();
+    render(<VirtualList items={largeData} />);
+    const end = performance.now();
+    expect(end - start).toBeLessThan(100);
+  });
+});
+```
+
+#### 资源优化测试
+
+```typescript
+// 测试图片预加载
+describe('图片优化测试', () => {
+  it('应该预加载图片', async () => {
+    await preloadImage('/image.jpg');
+    const cached = getCachedImage('/image.jpg');
+    expect(cached).toBeDefined();
+  });
+});
+```
+
+### 性能最佳实践
+
+1. **监控优先**: 始终监控性能指标，基于数据优化
+2. **渐进增强**: 先实现核心功能，再逐步优化
+3. **用户体验**: 优先优化影响用户体验的关键路径
+4. **持续改进**: 定期审查和优化性能
+5. **性能预算**: 设定性能预算，防止性能退化
+
+### 性能工具
+
+- **性能仪表板**: [PerformanceDashboard](src/components/PerformanceDashboard.tsx)
+- **虚拟滚动**: [VirtualList](src/components/VirtualList.tsx), [VirtualGrid](src/components/VirtualGrid.tsx)
+- **动画优化**: [AnimationOptimizationExample](src/components/AnimationOptimizationExample.tsx)
+- **图片优化**: [LazyImage](src/components/LazyImage.tsx), [ResponsiveImage](src/components/ResponsiveImage.tsx)
+- **字体优化**: [FontOptimizationExample](src/components/FontOptimizationExample.tsx)
+- **资源预加载**: [ResourcePreloadingExample](src/components/ResourcePreloadingExample.tsx)
+
+详细的性能优化文档请参考：
+- [阶段五任务清单](docs/03-YYC3-Design-System-开发实施阶段/阶段五-性能优化和监控/001-YYC3-Design-System-阶段五-性能优化和监控-任务清单.md)
+- [阶段六任务清单](docs/04-YYC3-Design-System-规划文档/阶段六-持续改进/001-YYC3-Design-System-阶段六任务清单.md)
+- [性能监控和告警规范](docs/02-YYC3-Design-System-技术规范/02-性能监控和告警/001-YYC3-Design-System-性能监控和告警规范.md)
+- [前端性能优化指南](docs/03-YYC3-Design-System-开发实施阶段/开发规范/前端开发规范/006-Design-System-开发实施阶段-前端性能优化指南.md)
+
 ## 贡献指南
 
 我们欢迎所有形式的贡献！
@@ -863,14 +1208,37 @@ YYC³ Design System 正在持续演进中，以下是我们的递进规划设计
 - ✅ 设计一致性检查（AIBestPractices）
 - ✅ CLI 工具（令牌管理、配色推荐、一致性检查、使用分析、最佳实践建议）
 
-### 阶段五：持续优化（进行中）
+### 阶段五：持续优化（✅ 已完成）
 
-- 🔄 提升测试覆盖率至 80%+
-- ✅ 性能优化和监控（P0 核心监控已完成，P1 构建优化全部完成，P2 运行时优化全部完成）
-- 🔄 文档完善和国际化
-- 🔄 社区反馈和功能迭代
-- 🔄 可访问性持续改进
-- 🔄 设计令牌自动化流程优化
+- ✅ 性能优化和监控（P0-P4 全部完成）
+  - ✅ P0 - 核心性能监控
+  - ✅ P1 - 构建优化
+  - ✅ P2 - 运行时优化
+  - ✅ P3 - 资源优化
+  - ✅ P4 - 测试和文档
+- ✅ 文档完善和国际化
+- ✅ 社区反馈和功能迭代
+- ✅ 可访问性持续改进
+- ✅ 设计令牌自动化流程优化
+
+### 阶段六：持续改进（✅ 已完成）
+
+- ✅ 动能性分析
+  - ✅ 行业高可用技术方案调研
+  - ✅ 同类应用性能优化实践分析
+  - ✅ 动能性分析建议
+- ✅ MVP 功能构建
+  - ✅ MVP 功能定义
+  - ✅ MVP 技术方案设计
+  - ✅ MVP 开发计划制定
+- ✅ 持续优化方案
+  - ✅ 性能基准测试方案
+  - ✅ 性能预算配置方案
+  - ✅ 性能告警配置方案
+- ✅ 性能文化建设
+  - ✅ 性能分析工具集成方案
+  - ✅ 性能优化迭代方案
+  - ✅ 性能文档完善方案
 
 详细的递进规划设计方案请参考 [递进规划设计方案](docs/05-YYC3-Design-System-规划文档/01-递进规划设计/001-YYC3-Design-System-递进规划设计方案.md)
 
@@ -889,6 +1257,6 @@ YYC³ Design System 正在持续演进中，以下是我们的递进规划设计
 > 「***Words Initiate Quadrants, Language Serves as Core for the Future***」
 > 「***All things converge in the cloud pivot; Deep stacks ignite a new era of intelligence***」
 
-*协议最后更新：2026-02-17*
+*协议最后更新：2026-02-22*
 
 </div>
