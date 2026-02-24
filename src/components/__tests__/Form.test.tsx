@@ -27,10 +27,10 @@ describe('Form', () => {
       <ThemeProvider>
         <Form schema={loginSchema} onSubmit={jest.fn()}>
           <FormField name="username" label="用户名">
-            <Input />
+            {(field) => <Input {...field} />}
           </FormField>
           <FormField name="password" label="密码">
-            <Input type="password" />
+            {(field) => <Input {...field} type="password" />}
           </FormField>
         </Form>
       </ThemeProvider>
@@ -46,10 +46,10 @@ describe('Form', () => {
       <ThemeProvider>
         <Form schema={loginSchema} onSubmit={handleSubmit}>
           <FormField name="username" label="用户名">
-            <Input />
+            {(field) => <Input {...field} />}
           </FormField>
           <FormField name="password" label="密码">
-            <Input type="password" />
+            {(field) => <Input {...field} type="password" />}
           </FormField>
         </Form>
       </ThemeProvider>
@@ -83,7 +83,7 @@ describe('Form', () => {
           onSubmit={jest.fn()}
         >
           <FormField name="username" label="用户名">
-            <Input />
+            {(field) => <Input {...field} />}
           </FormField>
         </Form>
       </ThemeProvider>
@@ -99,10 +99,10 @@ describe('Form', () => {
       <ThemeProvider>
         <Form schema={loginSchema} onSubmit={handleSubmit}>
           <FormField name="username" label="用户名">
-            <Input defaultValue="validuser" />
+            {(field) => <Input {...field} defaultValue="validuser" />}
           </FormField>
           <FormField name="password" label="密码">
-            <Input type="password" defaultValue="validpassword" />
+            {(field) => <Input {...field} type="password" defaultValue="validpassword" />}
           </FormField>
         </Form>
       </ThemeProvider>
