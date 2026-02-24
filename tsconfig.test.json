@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "types": ["node", "jest", "@testing-library/jest-dom", "@testing-library/dom"],
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "skipLibCheck": true

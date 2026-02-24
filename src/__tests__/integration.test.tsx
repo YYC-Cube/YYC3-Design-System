@@ -1,6 +1,6 @@
 import React from 'react';
-import { act, render } from '@testing-library/react'
-import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
+
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { ThemeProvider, useTheme } from '../theme/ThemeProvider';
 import { Button } from '../components/Button';
@@ -353,7 +353,11 @@ describe('组件集成测试', () => {
         );
       };
 
-      render(<TestComponent />);
+      render(
+        <ThemeProvider>
+          <TestComponent />
+        </ThemeProvider>
+      );
 
       expect(screen.getByText('卡片1')).toBeInTheDocument();
       expect(screen.getByText('卡片2')).toBeInTheDocument();
