@@ -30,7 +30,7 @@ export interface VirtualListProps<T> {
   getItemHeight?: (index: number) => number;
 }
 
-export const VirtualList = memo(<T,>({
+export const VirtualList = memo(function VirtualList<T>({
   items,
   itemHeight = 50,
   estimatedItemHeight = 50,
@@ -41,7 +41,7 @@ export const VirtualList = memo(<T,>({
   className = '',
   dynamicHeight = false,
   getItemHeight: customGetItemHeight,
-}: VirtualListProps<T>) => {
+}: VirtualListProps<T>) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollTop, setScrollTop] = React.useState(0);
 
@@ -131,7 +131,7 @@ export interface VirtualGridProps<T> {
   className?: string;
 }
 
-export const VirtualGrid = memo(<T,>({
+export const VirtualGrid = memo(function VirtualGrid<T>({
   items,
   itemHeight,
   itemWidth,
@@ -142,7 +142,7 @@ export const VirtualGrid = memo(<T,>({
   overscan = 5,
   gap = 10,
   className = '',
-}: VirtualGridProps<T>) => {
+}: VirtualGridProps<T>) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollTop, setScrollTop] = React.useState(0);
   const [scrollLeft, setScrollLeft] = React.useState(0);
@@ -204,7 +204,7 @@ export const VirtualGrid = memo(<T,>({
     >
       <div
         style={{
-          position: 'relative',
+          position: 'relative' as const,
           height: `${totalHeight}px`,
           width: `${columns * (itemWidth + gap) - gap}px`,
         }}
@@ -213,8 +213,8 @@ export const VirtualGrid = memo(<T,>({
           const actualIndex = startIndex * columns + index;
           const row = Math.floor(actualIndex / columns);
           const col = actualIndex % columns;
-          const itemStyle = {
-            position: 'absolute',
+          const itemStyle: React.CSSProperties = {
+            position: 'absolute' as const,
             top: `${row * (itemHeight + gap)}px`,
             left: `${col * (itemWidth + gap)}px`,
             width: `${itemWidth}px`,

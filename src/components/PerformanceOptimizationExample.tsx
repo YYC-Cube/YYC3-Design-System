@@ -17,10 +17,10 @@ interface ExpensiveCalculationProps {
 }
 
 const ExpensiveCalculation = memo<ExpensiveCalculationProps>(({ number }) => {
-  console.log('[ExpensiveCalculation] 渲染');
-  
+  console.warn('[ExpensiveCalculation] 渲染');
+
   const result = useMemo(() => {
-    console.log('[ExpensiveCalculation] 执行计算');
+    console.warn('[ExpensiveCalculation] 执行计算');
     let sum = 0;
     for (let i = 0; i < number; i++) {
       sum += i;
@@ -49,8 +49,8 @@ interface ItemListProps {
 }
 
 const ItemList = memo<ItemListProps>(({ items, onItemClick }) => {
-  console.log('[ItemList] 渲染');
-  
+  console.warn('[ItemList] 渲染');
+
   return (
     <ul style={{ listStyle: 'none', padding: 0 }}>
       {items.map(item => (
@@ -101,21 +101,21 @@ export const PerformanceOptimizationExample: React.FC = () => {
   }, [items.length]);
 
   const handleItemClick = useCallback((id: number) => {
-    console.log(`点击项目: ${id}`);
+    console.warn(`点击项目: ${id}`);
   }, []);
 
   const filteredItems = useMemo(() => {
-    console.log('[PerformanceOptimizationExample] 过滤项目');
+    console.warn('[PerformanceOptimizationExample] 过滤项目');
     return items.filter(item => item.value > 150);
   }, [items]);
 
   const sortedItems = useMemo(() => {
-    console.log('[PerformanceOptimizationExample] 排序项目');
+    console.warn('[PerformanceOptimizationExample] 排序项目');
     return [...filteredItems].sort((a, b) => b.value - a.value);
   }, [filteredItems]);
 
   const totalValue = useMemo(() => {
-    console.log('[PerformanceOptimizationExample] 计算总值');
+    console.warn('[PerformanceOptimizationExample] 计算总值');
     return items.reduce((sum, item) => sum + item.value, 0);
   }, [items]);
 
@@ -123,62 +123,68 @@ export const PerformanceOptimizationExample: React.FC = () => {
     <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
       <h1 style={{ marginBottom: '2rem' }}>性能优化示例</h1>
 
-      <Card style={{ marginBottom: '2rem' }}>
-        <h2 style={{ marginBottom: '1rem' }}>计数器示例（useCallback）</h2>
-        <div style={{ marginBottom: '1rem' }}>
-          <strong>当前计数：</strong> {count}
-        </div>
-        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
-          <Button onClick={handleIncrement}>增加</Button>
-          <Button onClick={handleDecrement} variant="outline">减少</Button>
-        </div>
-        <p style={{ fontSize: '0.875rem', color: '#666' }}>
-          使用 useCallback 避免每次渲染都创建新的函数引用
-        </p>
-      </Card>
-
-      <Card style={{ marginBottom: '2rem' }}>
-        <h2 style={{ marginBottom: '1rem' }}>计算示例（useMemo）</h2>
-        <div style={{ marginBottom: '1rem' }}>
-          <Input
-            label="计算范围"
-            type="number"
-            value={number.toString()}
-            onChange={handleNumberChange}
-          />
-        </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <ExpensiveCalculation number={number} />
-        </div>
-        <p style={{ fontSize: '0.875rem', color: '#666' }}>
-          使用 useMemo 缓存计算结果，避免不必要的重复计算
-        </p>
-      </Card>
-
-      <Card style={{ marginBottom: '2rem' }}>
-        <h2 style={{ marginBottom: '1rem' }}>列表示例（React.memo + useMemo）</h2>
-        <div style={{ marginBottom: '1rem' }}>
-          <Button onClick={handleAddItem}>添加项目</Button>
-        </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <strong>项目总数：</strong> {items.length} | 
-          <strong> 过滤后：</strong> {filteredItems.length} | 
-          <strong> 总值：</strong> {totalValue}
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-          <div>
-            <h3 style={{ marginBottom: '0.5rem' }}>原始列表</h3>
-            <ItemList items={items} onItemClick={handleItemClick} />
+      <div style={{ marginBottom: '2rem' }}>
+        <Card>
+          <h2 style={{ marginBottom: '1rem' }}>计数器示例（useCallback）</h2>
+          <div style={{ marginBottom: '1rem' }}>
+            <strong>当前计数：</strong> {count}
           </div>
-          <div>
-            <h3 style={{ marginBottom: '0.5rem' }}>排序后列表</h3>
-            <ItemList items={sortedItems} onItemClick={handleItemClick} />
+          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+            <Button onClick={handleIncrement}>增加</Button>
+            <Button onClick={handleDecrement} variant="outline">减少</Button>
           </div>
-        </div>
-        <p style={{ fontSize: '0.875rem', color: '#666', marginTop: '1rem' }}>
-          使用 React.memo 避免子组件不必要的重新渲染，使用 useMemo 缓存过滤和排序结果
-        </p>
-      </Card>
+          <p style={{ fontSize: '0.875rem', color: '#666' }}>
+            使用 useCallback 避免每次渲染都创建新的函数引用
+          </p>
+        </Card>
+      </div>
+
+      <div style={{ marginBottom: '2rem' }}>
+        <Card>
+          <h2 style={{ marginBottom: '1rem' }}>计算示例（useMemo）</h2>
+          <div style={{ marginBottom: '1rem' }}>
+            <Input
+              label="计算范围"
+              type="number"
+              value={number.toString()}
+              onChange={handleNumberChange}
+            />
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <ExpensiveCalculation number={number} />
+          </div>
+          <p style={{ fontSize: '0.875rem', color: '#666' }}>
+            使用 useMemo 缓存计算结果，避免不必要的重复计算
+          </p>
+        </Card>
+      </div>
+
+      <div style={{ marginBottom: '2rem' }}>
+        <Card>
+          <h2 style={{ marginBottom: '1rem' }}>列表示例（React.memo + useMemo）</h2>
+          <div style={{ marginBottom: '1rem' }}>
+            <Button onClick={handleAddItem}>添加项目</Button>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <strong>项目总数：</strong> {items.length} |
+            <strong> 过滤后：</strong> {filteredItems.length} |
+            <strong> 总值：</strong> {totalValue}
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <div>
+              <h3 style={{ marginBottom: '0.5rem' }}>原始列表</h3>
+              <ItemList items={items} onItemClick={handleItemClick} />
+            </div>
+            <div>
+              <h3 style={{ marginBottom: '0.5rem' }}>排序后列表</h3>
+              <ItemList items={sortedItems} onItemClick={handleItemClick} />
+            </div>
+          </div>
+          <p style={{ fontSize: '0.875rem', color: '#666', marginTop: '1rem' }}>
+            使用 React.memo 避免子组件不必要的重新渲染，使用 useMemo 缓存过滤和排序结果
+          </p>
+        </Card>
+      </div>
 
       <Card>
         <h2 style={{ marginBottom: '1rem' }}>性能优化技巧总结</h2>

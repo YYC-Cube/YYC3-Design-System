@@ -2,7 +2,7 @@ import React from 'react';
 ;
 
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
+
 import '@testing-library/jest-dom';
 
 import { Button } from './Button';
@@ -13,12 +13,12 @@ describe('Button', () => {
     return render(<ThemeProvider initial={theme}>{component}</ThemeProvider>);
   };
 
-  it('it('renders button with text', () => {
+  it('renders button with text', () => {
     renderWithTheme(<Button>Click me</Button>);
     expect(screen.getByText('Click me')).toBeInTheDocument();
   });
 
-  it('it('calls onClick handler when clicked', () => {
+  it('calls onClick handler when clicked', () => {
     const handleClick = jest.fn();
     renderWithTheme(<Button onClick={handleClick}>Click me</Button>);
     
@@ -28,14 +28,14 @@ describe('Button', () => {
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  it('it('is disabled when disabled prop is true', () => {
+  it('is disabled when disabled prop is true', () => {
     renderWithTheme(<Button disabled>Click me</Button>);
     
     const button = screen.getByText('Click me');
     expect(button).toBeDisabled();
   });
 
-  it('it('applies variant styles', () => {
+  it('applies variant styles', () => {
     const { container } = renderWithTheme(<Button variant="destructive">Delete</Button>);
     
     const button = container.querySelector('button');
@@ -45,7 +45,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('applies size styles', () => {
+  it('applies size styles', () => {
     const { container } = renderWithTheme(<Button size="lg">Large Button</Button>);
     
     const button = container.querySelector('button');
@@ -55,7 +55,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('should support all variants', () => {
+  it('should support all variants', () => {
     const variants = ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'] as const;
 
     variants.forEach(variant => {
@@ -66,7 +66,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('should support all sizes', () => {
+  it('should support all sizes', () => {
     const sizes = ['default', 'sm', 'lg', 'icon'] as const;
 
     sizes.forEach(size => {
@@ -77,14 +77,14 @@ describe('Button', () => {
     });
   });
 
-  it('it('should apply custom className', () => {
+  it('should apply custom className', () => {
     renderWithTheme(<Button className="custom-class">Click me</Button>);
     
     const button = screen.getByText('Click me');
     expect(button).toHaveClass('custom-class');
   });
 
-  it('it('should not call onClick when disabled', () => {
+  it('should not call onClick when disabled', () => {
     const handleClick = jest.fn();
     renderWithTheme(<Button disabled onClick={handleClick}>Click me</Button>);
     
@@ -94,7 +94,7 @@ describe('Button', () => {
     expect(handleClick).not.toHaveBeenCalled();
   });
 
-  it('it('should render children correctly', () => {
+  it('should render children correctly', () => {
     renderWithTheme(
       <Button>
         <span>Custom content</span>
@@ -104,7 +104,7 @@ describe('Button', () => {
     expect(screen.getByText('Custom content')).toBeInTheDocument();
   });
 
-  it('it('应该正确设置 disabled 状态的样式', () => {
+  it('应该正确设置 disabled 状态的样式', () => {
     renderWithTheme(<Button disabled>Click me</Button>);
     
     const button = screen.getByText('Click me');
@@ -114,7 +114,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确设置非禁用状态的样式', () => {
+  it('应该正确设置非禁用状态的样式', () => {
     renderWithTheme(<Button>Click me</Button>);
     
     const button = screen.getByText('Click me');
@@ -124,84 +124,84 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为 default variant 应用正确的样式', () => {
+  it('应该为 default variant 应用正确的样式', () => {
     renderWithTheme(<Button variant="default">Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该为 destructive variant 应用正确的样式', () => {
+  it('应该为 destructive variant 应用正确的样式', () => {
     renderWithTheme(<Button variant="destructive">Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该为 outline variant 应用正确的样式', () => {
+  it('应该为 outline variant 应用正确的样式', () => {
     renderWithTheme(<Button variant="outline">Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该为 secondary variant 应用正确的样式', () => {
+  it('应该为 secondary variant 应用正确的样式', () => {
     renderWithTheme(<Button variant="secondary">Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该为 ghost variant 应用正确的样式', () => {
+  it('应该为 ghost variant 应用正确的样式', () => {
     renderWithTheme(<Button variant="ghost">Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该为 link variant 应用正确的样式', () => {
+  it('应该为 link variant 应用正确的样式', () => {
     renderWithTheme(<Button variant="link">Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该为 default size 应用正确的样式', () => {
+  it('应该为 default size 应用正确的样式', () => {
     renderWithTheme(<Button size="default">Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该为 sm size 应用正确的样式', () => {
+  it('应该为 sm size 应用正确的样式', () => {
     renderWithTheme(<Button size="sm">Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该为 lg size 应用正确的样式', () => {
+  it('应该为 lg size 应用正确的样式', () => {
     renderWithTheme(<Button size="lg">Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该为 icon size 应用正确的样式', () => {
+  it('应该为 icon size 应用正确的样式', () => {
     renderWithTheme(<Button size="icon">Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该正确处理无效 variant（使用默认值）', () => {
+  it('应该正确处理无效 variant（使用默认值）', () => {
     renderWithTheme(<Button variant={'invalid' as any}>Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该正确设置 transition 样式', () => {
+  it('应该正确设置 transition 样式', () => {
     renderWithTheme(<Button>Test</Button>);
     
     const button = screen.getByText('Test');
@@ -210,7 +210,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确设置 fontWeight', () => {
+  it('应该正确设置 fontWeight', () => {
     renderWithTheme(<Button>Test</Button>);
     
     const button = screen.getByText('Test');
@@ -219,35 +219,35 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确设置 borderRadius', () => {
+  it('应该正确设置 borderRadius', () => {
     renderWithTheme(<Button>Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该为 outline variant 设置正确的边框', () => {
+  it('应该为 outline variant 设置正确的边框', () => {
     renderWithTheme(<Button variant="outline">Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该为非 outline variant 设置无边框', () => {
+  it('应该为非 outline variant 设置无边框', () => {
     renderWithTheme(<Button variant="default">Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该为 secondary variant 应用正确的背景色', () => {
+  it('应该为 secondary variant 应用正确的背景色', () => {
     renderWithTheme(<Button variant="secondary">Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该为 ghost variant 应用正确的背景色', () => {
+  it('应该为 ghost variant 应用正确的背景色', () => {
     renderWithTheme(<Button variant="ghost">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -256,7 +256,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为 link variant 应用正确的文本装饰', () => {
+  it('应该为 link variant 应用正确的文本装饰', () => {
     renderWithTheme(<Button variant="link">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -266,7 +266,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为 sm size 应用正确的样式', () => {
+  it('应该为 sm size 应用正确的样式', () => {
     renderWithTheme(<Button size="sm">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -275,7 +275,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为 icon size 应用正确的样式', () => {
+  it('应该为 icon size 应用正确的样式', () => {
     renderWithTheme(<Button size="icon">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -284,7 +284,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该在禁用状态下不触发点击事件', () => {
+  it('应该在禁用状态下不触发点击事件', () => {
     const handleClick = jest.fn();
     renderWithTheme(<Button disabled onClick={handleClick}>Test</Button>);
     
@@ -294,7 +294,7 @@ describe('Button', () => {
     expect(handleClick).not.toHaveBeenCalled();
   });
 
-  it('it('应该正确处理 onClick 为 undefined 的情况', () => {
+  it('应该正确处理 onClick 为 undefined 的情况', () => {
     renderWithTheme(<Button>Test</Button>);
     
     const button = screen.getByText('Test');
@@ -302,7 +302,7 @@ describe('Button', () => {
     expect(() => fireEvent.click(button)).not.toThrow();
   });
 
-  it('it('应该支持多次点击', () => {
+  it('应该支持多次点击', () => {
     const handleClick = jest.fn();
     renderWithTheme(<Button onClick={handleClick}>Test</Button>);
     
@@ -314,7 +314,7 @@ describe('Button', () => {
     expect(handleClick).toHaveBeenCalledTimes(3);
   });
 
-  it('it('应该为 outline variant 设置正确的边框样式', () => {
+  it('应该为 outline variant 设置正确的边框样式', () => {
     renderWithTheme(<Button variant="outline">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -323,14 +323,14 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理默认 className', () => {
+  it('应该正确处理默认 className', () => {
     renderWithTheme(<Button>Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该为 default variant 应用正确的背景色', () => {
+  it('应该为 default variant 应用正确的背景色', () => {
     renderWithTheme(<Button variant="default">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -339,7 +339,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为 default variant 应用正确的文字颜色', () => {
+  it('应该为 default variant 应用正确的文字颜色', () => {
     renderWithTheme(<Button variant="default">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -348,7 +348,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为 destructive variant 应用正确的背景色', () => {
+  it('应该为 destructive variant 应用正确的背景色', () => {
     renderWithTheme(<Button variant="destructive">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -357,7 +357,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为 destructive variant 应用正确的文字颜色', () => {
+  it('应该为 destructive variant 应用正确的文字颜色', () => {
     renderWithTheme(<Button variant="destructive">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -366,7 +366,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为 outline variant 应用正确的背景色', () => {
+  it('应该为 outline variant 应用正确的背景色', () => {
     renderWithTheme(<Button variant="outline">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -375,7 +375,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为 outline variant 应用正确的文字颜色', () => {
+  it('应该为 outline variant 应用正确的文字颜色', () => {
     renderWithTheme(<Button variant="outline">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -384,7 +384,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为 ghost variant 应用正确的文字颜色', () => {
+  it('应该为 ghost variant 应用正确的文字颜色', () => {
     renderWithTheme(<Button variant="ghost">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -393,7 +393,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为 link variant 应用正确的背景色', () => {
+  it('应该为 link variant 应用正确的背景色', () => {
     renderWithTheme(<Button variant="link">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -402,7 +402,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为 link variant 应用正确的文字颜色', () => {
+  it('应该为 link variant 应用正确的文字颜色', () => {
     renderWithTheme(<Button variant="link">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -411,7 +411,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为 default size 应用正确的样式', () => {
+  it('应该为 default size 应用正确的样式', () => {
     renderWithTheme(<Button size="default">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -420,7 +420,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为 lg size 应用正确的样式', () => {
+  it('应该为 lg size 应用正确的样式', () => {
     renderWithTheme(<Button size="lg">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -429,7 +429,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为无效 variant 使用默认样式', () => {
+  it('应该为无效 variant 使用默认样式', () => {
     renderWithTheme(<Button variant={'invalid' as any}>Test</Button>);
     
     const button = screen.getByText('Test');
@@ -439,7 +439,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确设置 borderRadius', () => {
+  it('应该正确设置 borderRadius', () => {
     renderWithTheme(<Button>Test</Button>);
     
     const button = screen.getByText('Test');
@@ -448,7 +448,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确设置 fontFamily', () => {
+  it('应该正确设置 fontFamily', () => {
     renderWithTheme(<Button>Test</Button>);
     
     const button = screen.getByText('Test');
@@ -457,7 +457,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为 secondary variant 应用正确的背景色', () => {
+  it('应该为 secondary variant 应用正确的背景色', () => {
     renderWithTheme(<Button variant="secondary">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -466,7 +466,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该为 secondary variant 应用正确的文字颜色', () => {
+  it('应该为 secondary variant 应用正确的文字颜色', () => {
     renderWithTheme(<Button variant="secondary">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -476,28 +476,28 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理空字符串 children', () => {
+  it('应该正确处理空字符串 children', () => {
     renderWithTheme(<Button>{''}</Button>);
     
     const button = screen.getByRole('button');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该正确处理 null children', () => {
+  it('应该正确处理 null children', () => {
     renderWithTheme(<Button>{null}</Button>);
     
     const button = screen.getByRole('button');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该正确处理 number children', () => {
+  it('应该正确处理 number children', () => {
     renderWithTheme(<Button>123</Button>);
     
     const button = screen.getByText('123');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该正确处理多个子元素', () => {
+  it('应该正确处理多个子元素', () => {
     renderWithTheme(
       <Button>
         <span>Icon</span>
@@ -509,7 +509,7 @@ describe('Button', () => {
     expect(screen.getByText('Text')).toBeInTheDocument();
   });
 
-  it('it('应该正确处理组合 props', () => {
+  it('应该正确处理组合 props', () => {
     renderWithTheme(<Button variant="outline" size="lg" disabled>Test</Button>);
     
     const button = screen.getByText('Test');
@@ -520,7 +520,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理所有 props 组合', () => {
+  it('应该正确处理所有 props 组合', () => {
     const handleClick = jest.fn();
     renderWithTheme(
       <Button 
@@ -542,28 +542,28 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理无效 size', () => {
+  it('应该正确处理无效 size', () => {
     renderWithTheme(<Button size={'invalid' as any}>Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该正确处理特殊字符 children', () => {
+  it('应该正确处理特殊字符 children', () => {
     renderWithTheme(<Button>特殊字符 & symbols @#$%</Button>);
     
     const button = screen.getByText('特殊字符 & symbols @#$%');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该在没有主题时使用默认值', () => {
+  it('应该在没有主题时使用默认值', () => {
     renderWithTheme(<Button>Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该正确处理默认主题令牌', () => {
+  it('应该正确处理默认主题令牌', () => {
     renderWithTheme(<Button variant="default">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -573,7 +573,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 sizeStyles 对象', () => {
+  it('应该正确处理 sizeStyles 对象', () => {
     renderWithTheme(<Button size="lg">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -582,7 +582,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 fontSize 样式', () => {
+  it('应该正确处理 fontSize 样式', () => {
     renderWithTheme(<Button size="sm">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -591,7 +591,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 fontWeight 样式', () => {
+  it('应该正确处理 fontWeight 样式', () => {
     renderWithTheme(<Button>Test</Button>);
     
     const button = screen.getByText('Test');
@@ -600,7 +600,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 transition 样式', () => {
+  it('应该正确处理 transition 样式', () => {
     renderWithTheme(<Button>Test</Button>);
     
     const button = screen.getByText('Test');
@@ -609,7 +609,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 opacity 样式', () => {
+  it('应该正确处理 opacity 样式', () => {
     renderWithTheme(<Button disabled>Test</Button>);
     
     const button = screen.getByText('Test');
@@ -618,7 +618,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理非禁用状态的 opacity', () => {
+  it('应该正确处理非禁用状态的 opacity', () => {
     renderWithTheme(<Button disabled={false}>Test</Button>);
     
     const button = screen.getByText('Test');
@@ -627,7 +627,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理无效 variant 并使用默认样式', () => {
+  it('应该正确处理无效 variant 并使用默认样式', () => {
     renderWithTheme(<Button variant={'unknown' as any}>Test</Button>);
     
     const button = screen.getByText('Test');
@@ -637,14 +637,14 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理默认 variant', () => {
+  it('应该正确处理默认 variant', () => {
     renderWithTheme(<Button>Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该正确处理所有 variant 类型的样式返回', () => {
+  it('应该正确处理所有 variant 类型的样式返回', () => {
     const variants = ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'] as const;
     
     variants.forEach(variant => {
@@ -655,7 +655,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理所有 size 类型的样式返回', () => {
+  it('应该正确处理所有 size 类型的样式返回', () => {
     const sizes = ['default', 'sm', 'lg', 'icon'] as const;
     
     sizes.forEach(size => {
@@ -666,7 +666,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 disabled 所有状态的组合', () => {
+  it('应该正确处理 disabled 所有状态的组合', () => {
     const variants = ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'] as const;
     
     variants.forEach(variant => {
@@ -677,7 +677,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 onClick 所有变体', () => {
+  it('应该正确处理 onClick 所有变体', () => {
     const handleClick = jest.fn();
     const variants = ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'] as const;
     
@@ -691,14 +691,14 @@ describe('Button', () => {
     expect(handleClick).toHaveBeenCalledTimes(6);
   });
 
-  it('it('应该正确处理 variantStyles 变量的赋值', () => {
+  it('应该正确处理 variantStyles 变量的赋值', () => {
     renderWithTheme(<Button variant="default">Test</Button>);
     
     const button = screen.getByText('Test');
     expect(button).toBeInTheDocument();
   });
 
-  it('it('应该正确处理 sizeStyles 的展开', () => {
+  it('应该正确处理 sizeStyles 的展开', () => {
     renderWithTheme(<Button size="default">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -707,7 +707,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 radius 变量的使用', () => {
+  it('应该正确处理 radius 变量的使用', () => {
     renderWithTheme(<Button>Test</Button>);
     
     const button = screen.getByText('Test');
@@ -716,7 +716,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理所有 variant 的默认值回退', () => {
+  it('应该正确处理所有 variant 的默认值回退', () => {
     const variants = ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'] as const;
     
     variants.forEach(variant => {
@@ -727,7 +727,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理所有 size 的默认值回退', () => {
+  it('应该正确处理所有 size 的默认值回退', () => {
     const sizes = ['default', 'sm', 'lg', 'icon'] as const;
     
     sizes.forEach(size => {
@@ -738,7 +738,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 link variant 的 padding 为 0', () => {
+  it('应该正确处理 link variant 的 padding 为 0', () => {
     renderWithTheme(<Button variant="link">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -747,7 +747,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 outline variant 的边框条件', () => {
+  it('应该正确处理 outline variant 的边框条件', () => {
     renderWithTheme(<Button variant="outline">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -756,7 +756,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理非 outline variant 的无边框', () => {
+  it('应该正确处理非 outline variant 的无边框', () => {
     renderWithTheme(<Button variant="default">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -766,7 +766,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 disabled 的 cursor 样式', () => {
+  it('应该正确处理 disabled 的 cursor 样式', () => {
     renderWithTheme(<Button disabled>Test</Button>);
     
     const button = screen.getByText('Test');
@@ -775,7 +775,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理非 disabled 的 cursor 样式', () => {
+  it('应该正确处理非 disabled 的 cursor 样式', () => {
     renderWithTheme(<Button disabled={false}>Test</Button>);
     
     const button = screen.getByText('Test');
@@ -784,7 +784,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 link variant 不应用 sizeStyles', () => {
+  it('应该正确处理 link variant 不应用 sizeStyles', () => {
     renderWithTheme(<Button variant="link" size="lg">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -793,7 +793,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理非 link variant 应用 sizeStyles', () => {
+  it('应该正确处理非 link variant 应用 sizeStyles', () => {
     renderWithTheme(<Button variant="default" size="lg">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -802,7 +802,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 default size 的 padding', () => {
+  it('应该正确处理 default size 的 padding', () => {
     renderWithTheme(<Button size="default">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -811,7 +811,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 sm size 的 padding', () => {
+  it('应该正确处理 sm size 的 padding', () => {
     renderWithTheme(<Button size="sm">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -820,7 +820,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 icon size 的 padding', () => {
+  it('应该正确处理 icon size 的 padding', () => {
     renderWithTheme(<Button size="icon">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -829,7 +829,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 default size 的 fontSize', () => {
+  it('应该正确处理 default size 的 fontSize', () => {
     renderWithTheme(<Button size="default">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -838,7 +838,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 sm size 的 fontSize', () => {
+  it('应该正确处理 sm size 的 fontSize', () => {
     renderWithTheme(<Button size="sm">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -847,7 +847,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 lg size 的 fontSize', () => {
+  it('应该正确处理 lg size 的 fontSize', () => {
     renderWithTheme(<Button size="lg">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -856,7 +856,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理 icon size 的 fontSize', () => {
+  it('应该正确处理 icon size 的 fontSize', () => {
     renderWithTheme(<Button size="icon">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -865,7 +865,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理所有 variant 的颜色值', () => {
+  it('应该正确处理所有 variant 的颜色值', () => {
     const { unmount } = renderWithTheme(<Button variant="default">Test</Button>);
     const button = screen.getByText('Test');
     expect(button).toHaveStyle({
@@ -915,7 +915,7 @@ describe('Button', () => {
     unmount6();
   });
 
-  it('it('应该正确处理 link variant 的 textDecoration', () => {
+  it('应该正确处理 link variant 的 textDecoration', () => {
     renderWithTheme(<Button variant="link">Test</Button>);
     
     const button = screen.getByText('Test');
@@ -924,7 +924,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理所有 variant 和 size 的组合', () => {
+  it('应该正确处理所有 variant 和 size 的组合', () => {
     const variants = ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'] as const;
     const sizes = ['default', 'sm', 'lg', 'icon'] as const;
     
@@ -938,7 +938,7 @@ describe('Button', () => {
     });
   });
 
-  it('it('应该正确处理默认 variant 和默认 size', () => {
+  it('应该正确处理默认 variant 和默认 size', () => {
     renderWithTheme(<Button>Test</Button>);
     
     const button = screen.getByText('Test');

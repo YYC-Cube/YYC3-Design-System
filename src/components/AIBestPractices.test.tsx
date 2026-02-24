@@ -18,22 +18,22 @@ const renderWithTheme = (component: React.ReactElement) => {
 };
 
 describe('AIBestPractices', () => {
-  it('it('应该渲染组件', () => {
+  it('应该渲染组件', () => {
     renderWithTheme(<AIBestPractices />);
     expect(screen.getByText('AI 最佳实践建议')).toBeInTheDocument();
   });
 
-  it('it('应该显示生成建议按钮', () => {
+  it('应该显示生成建议按钮', () => {
     renderWithTheme(<AIBestPractices />);
     expect(screen.getByText('生成建议')).toBeInTheDocument();
   });
 
-  it('it('应该支持自定义类名', () => {
+  it('应该支持自定义类名', () => {
     const { container } = renderWithTheme(<AIBestPractices className="custom-class" />);
     expect(container.querySelector('.custom-class')).toBeInTheDocument();
   });
 
-  it('it('应该支持点击生成建议按钮', () => {
+  it('应该支持点击生成建议按钮', () => {
     renderWithTheme(<AIBestPractices />);
     
     const generateButton = screen.getByText('生成建议');

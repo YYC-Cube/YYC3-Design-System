@@ -185,7 +185,7 @@ export const AIBestPractices: React.FC<AIBestPracticesProps> = ({
                 <Input
                   type="text"
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(typeof e === 'string' ? e : e.target.value)}
+                  onChange={setSearchQuery}
                   placeholder="搜索最佳实践..."
                 />
               </div>

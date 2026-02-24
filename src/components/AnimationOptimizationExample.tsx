@@ -7,7 +7,8 @@
  * @created 2026-02-22
  */
 
-import React, { useState, useCallback, useRef } from 'react';
+import * as React from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { Card } from './Card';
 import { Button } from './Button';
 import {
@@ -103,7 +104,7 @@ export const AnimationOptimizationExample: React.FC = () => {
     transition: 'width 0.1s ease-out',
   };
 
-  const scrollContainerStyle = {
+  const scrollContainerStyle: React.CSSProperties = {
     height: '200px',
     overflowY: 'auto',
     border: '1px solid #e0e0e0',
@@ -133,125 +134,133 @@ export const AnimationOptimizationExample: React.FC = () => {
       <h1 style={{ marginBottom: '2rem' }}>动画优化示例</h1>
 
       {reducedMotion && (
-        <Card style={{ marginBottom: '2rem', backgroundColor: '#fff3e0' }}>
-          <h2 style={{ marginBottom: '1rem' }}>检测到减少动画偏好</h2>
-          <p style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
-            系统检测到用户启用了减少动画偏好设置。为了提供更好的用户体验，
-            我们将自动禁用或简化动画效果。
-          </p>
-        </Card>
+        <div style={{ marginBottom: '2rem' }}>
+          <Card>
+            <h2 style={{ marginBottom: '1rem' }}>检测到减少动画偏好</h2>
+            <p style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
+              系统检测到用户启用了减少动画偏好设置。为了提供更好的用户体验，
+              我们将自动禁用或简化动画效果。
+            </p>
+          </Card>
+        </div>
       )}
 
-      <Card style={{ marginBottom: '2rem' }}>
-        <h2 style={{ marginBottom: '1rem' }}>CSS 动画优化</h2>
-        <div style={{ marginBottom: '1rem' }}>
-          <Button onClick={handleToggleFade}>
-            {showFade ? '隐藏淡入动画' : '显示淡入动画'}
-          </Button>
-        </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <div style={{ ...fadeStyle, padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
-            <h3 style={{ marginBottom: '0.5rem' }}>淡入动画</h3>
+      <div style={{ marginBottom: '2rem' }}>
+        <Card>
+          <h2 style={{ marginBottom: '1rem' }}>CSS 动画优化</h2>
+          <div style={{ marginBottom: '1rem' }}>
+            <Button onClick={handleToggleFade}>
+              {showFade ? '隐藏淡入动画' : '显示淡入动画'}
+            </Button>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <div style={{ ...fadeStyle, padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
+              <h3 style={{ marginBottom: '0.5rem' }}>淡入动画</h3>
+              <p style={{ fontSize: '0.875rem', color: '#666' }}>
+                使用 CSS 动画和硬件加速，性能优于 JavaScript 动画
+              </p>
+            </div>
+          </div>
+
+          <div style={{ marginBottom: '1rem' }}>
+            <Button onClick={handleToggleSlide}>
+              {showSlide ? '隐藏滑入动画' : '显示滑入动画'}
+            </Button>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <div style={{ ...slideStyle, padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
+              <h3 style={{ marginBottom: '0.5rem' }}>滑入动画</h3>
+              <p style={{ fontSize: '0.875rem', color: '#666' }}>
+                使用 transform 和 opacity 过渡，GPU 加速渲染
+              </p>
+            </div>
+          </div>
+
+          <div style={{ marginBottom: '1rem' }}>
+            <Button onClick={handleToggleScale}>
+              {showScale ? '隐藏缩放动画' : '显示缩放动画'}
+            </Button>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <div style={{ ...scaleStyle, padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
+              <h3 style={{ marginBottom: '0.5rem' }}>缩放动画</h3>
+              <p style={{ fontSize: '0.875rem', color: '#666' }}>
+                使用 scale 变换，硬件加速渲染
+              </p>
+            </div>
+          </div>
+
+          <div style={{ marginBottom: '1rem' }}>
+            <Button onClick={handleToggleBounce}>
+              {showBounce ? '隐藏弹跳动画' : '显示弹跳动画'}
+            </Button>
+          </div>
+          <div style={{ marginBottom: '1rem' }}>
+            <div style={{ ...bounceStyle, padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
+              <h3 style={{ marginBottom: '0.5rem' }}>弹跳动画</h3>
+              <p style={{ fontSize: '0.875rem', color: '#666' }}>
+                使用 requestAnimationFrame 进行帧动画，性能最优
+              </p>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      <div style={{ marginBottom: '2rem' }}>
+        <Card>
+          <h2 style={{ marginBottom: '1rem' }}>requestAnimationFrame 优化</h2>
+          <div style={{ marginBottom: '1rem' }}>
+            <Button onClick={handleSpringStart}>
+              启动弹簧动画
+            </Button>
+          </div>
+          <div style={{ marginBottom: '1rem', padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
+            <h3 style={{ marginBottom: '0.5rem' }}>弹簧动画进度</h3>
+            <div style={{ marginBottom: '0.5rem', height: '20px', backgroundColor: '#f0f0f0', borderRadius: '4px' }}>
+              <div style={springBarStyle} />
+            </div>
             <p style={{ fontSize: '0.875rem', color: '#666' }}>
-              使用 CSS 动画和硬件加速，性能优于 JavaScript 动画
+              当前值: {springValue.toFixed(1)}%
+            </p>
+            <p style={{ fontSize: '0.875rem', color: '#666' }}>
+              使用 requestAnimationFrame 实现平滑动画，避免卡顿
             </p>
           </div>
-        </div>
+        </Card>
+      </div>
 
-        <div style={{ marginBottom: '1rem' }}>
-          <Button onClick={handleToggleSlide}>
-            {showSlide ? '隐藏滑入动画' : '显示滑入动画'}
-          </Button>
-        </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <div style={{ ...slideStyle, padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
-            <h3 style={{ marginBottom: '0.5rem' }}>滑入动画</h3>
+      <div style={{ marginBottom: '2rem' }}>
+        <Card>
+          <h2 style={{ marginBottom: '1rem' }}>滚动动画优化</h2>
+          <div style={{ marginBottom: '1rem', padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
+            <h3 style={{ marginBottom: '0.5rem' }}>滚动进度</h3>
+            <div style={{ marginBottom: '0.5rem', height: '10px', backgroundColor: '#f0f0f0', borderRadius: '4px' }}>
+              <div
+                style={{
+                  width: `${scrollProgress}%`,
+                  height: '100%',
+                  backgroundColor: '#d45a5f',
+                  borderRadius: '4px',
+                  transition: 'width 0.1s ease-out',
+                }}
+              />
+            </div>
             <p style={{ fontSize: '0.875rem', color: '#666' }}>
-              使用 transform 和 opacity 过渡，GPU 加速渲染
+              滚动进度: {scrollProgress.toFixed(1)}%
             </p>
           </div>
-        </div>
-
-        <div style={{ marginBottom: '1rem' }}>
-          <Button onClick={handleToggleScale}>
-            {showScale ? '隐藏缩放动画' : '显示缩放动画'}
-          </Button>
-        </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <div style={{ ...scaleStyle, padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
-            <h3 style={{ marginBottom: '0.5rem' }}>缩放动画</h3>
-            <p style={{ fontSize: '0.875rem', color: '#666' }}>
-              使用 scale 变换，硬件加速渲染
-            </p>
+          <div
+            ref={containerRef}
+            style={scrollContainerStyle}
+            onScroll={throttledScrollHandler}
+          >
+            {scrollContent}
           </div>
-        </div>
-
-        <div style={{ marginBottom: '1rem' }}>
-          <Button onClick={handleToggleBounce}>
-            {showBounce ? '隐藏弹跳动画' : '显示弹跳动画'}
-          </Button>
-        </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <div style={{ ...bounceStyle, padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
-            <h3 style={{ marginBottom: '0.5rem' }}>弹跳动画</h3>
-            <p style={{ fontSize: '0.875rem', color: '#666' }}>
-              使用 requestAnimationFrame 进行帧动画，性能最优
-            </p>
-          </div>
-        </div>
-      </Card>
-
-      <Card style={{ marginBottom: '2rem' }}>
-        <h2 style={{ marginBottom: '1rem' }}>requestAnimationFrame 优化</h2>
-        <div style={{ marginBottom: '1rem' }}>
-          <Button onClick={handleSpringStart}>
-            启动弹簧动画
-          </Button>
-        </div>
-        <div style={{ marginBottom: '1rem', padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
-          <h3 style={{ marginBottom: '0.5rem' }}>弹簧动画进度</h3>
-          <div style={{ marginBottom: '0.5rem', height: '20px', backgroundColor: '#f0f0f0', borderRadius: '4px' }}>
-            <div style={springBarStyle} />
-          </div>
-          <p style={{ fontSize: '0.875rem', color: '#666' }}>
-            当前值: {springValue.toFixed(1)}%
+          <p style={{ fontSize: '0.875rem', color: '#666', marginTop: '1rem' }}>
+            使用节流的 requestAnimationFrame 处理滚动事件，提升性能
           </p>
-          <p style={{ fontSize: '0.875rem', color: '#666' }}>
-            使用 requestAnimationFrame 实现平滑动画，避免卡顿
-          </p>
-        </div>
-      </Card>
-
-      <Card style={{ marginBottom: '2rem' }}>
-        <h2 style={{ marginBottom: '1rem' }}>滚动动画优化</h2>
-        <div style={{ marginBottom: '1rem', padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
-          <h3 style={{ marginBottom: '0.5rem' }}>滚动进度</h3>
-          <div style={{ marginBottom: '0.5rem', height: '10px', backgroundColor: '#f0f0f0', borderRadius: '4px' }}>
-            <div
-              style={{
-                width: `${scrollProgress}%`,
-                height: '100%',
-                backgroundColor: '#d45a5f',
-                borderRadius: '4px',
-                transition: 'width 0.1s ease-out',
-              }}
-            />
-          </div>
-          <p style={{ fontSize: '0.875rem', color: '#666' }}>
-            滚动进度: {scrollProgress.toFixed(1)}%
-          </p>
-        </div>
-        <div
-          ref={containerRef}
-          style={scrollContainerStyle}
-          onScroll={throttledScrollHandler}
-        >
-          {scrollContent}
-        </div>
-        <p style={{ fontSize: '0.875rem', color: '#666', marginTop: '1rem' }}>
-          使用节流的 requestAnimationFrame 处理滚动事件，提升性能
-        </p>
-      </Card>
+        </Card>
+      </div>
 
       <Card>
         <h2 style={{ marginBottom: '1rem' }}>动画性能优化技巧</h2>

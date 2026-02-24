@@ -11,7 +11,7 @@ import React from 'react';
 ;
 
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
+
 
 import { Progress } from './Progress';
 import { ThemeProvider } from '../theme/ThemeProvider';
@@ -21,7 +21,7 @@ describe('Progress 组件', () => {
     return render(<ThemeProvider>{component}</ThemeProvider>);
   };
 
-  it('it('应该正确渲染默认进度条', () => {
+  it('应该正确渲染默认进度条', () => {
     renderWithTheme(<Progress />);
     
     const progress = screen.getByRole('progressbar');
@@ -31,7 +31,7 @@ describe('Progress 组件', () => {
     expect(progress).toHaveAttribute('aria-valuemax', '100');
   });
 
-  it('it('应该正确渲染指定值的进度条', () => {
+  it('应该正确渲染指定值的进度条', () => {
     renderWithTheme(<Progress value={50} />);
     
     const progress = screen.getByRole('progressbar');
@@ -39,7 +39,7 @@ describe('Progress 组件', () => {
     expect(progress).toHaveAttribute('aria-valuenow', '50');
   });
 
-  it('it('应该正确渲染指定最大值的进度条', () => {
+  it('应该正确渲染指定最大值的进度条', () => {
     renderWithTheme(<Progress value={5} max={10} />);
     
     const progress = screen.getByRole('progressbar');
@@ -47,7 +47,7 @@ describe('Progress 组件', () => {
     expect(progress).toHaveAttribute('aria-valuemax', '10');
   });
 
-  it('it('应该正确计算进度百分比', () => {
+  it('应该正确计算进度百分比', () => {
     renderWithTheme(<Progress value={50} max={100} />);
     
     const progress = screen.getByRole('progressbar');
@@ -57,7 +57,7 @@ describe('Progress 组件', () => {
     });
   });
 
-  it('it('应该正确处理 0 值', () => {
+  it('应该正确处理 0 值', () => {
     renderWithTheme(<Progress value={0} />);
     
     const progress = screen.getByRole('progressbar');
@@ -67,7 +67,7 @@ describe('Progress 组件', () => {
     });
   });
 
-  it('it('应该正确处理 100% 值', () => {
+  it('应该正确处理 100% 值', () => {
     renderWithTheme(<Progress value={100} />);
     
     const progress = screen.getByRole('progressbar');
@@ -77,7 +77,7 @@ describe('Progress 组件', () => {
     });
   });
 
-  it('it('应该正确处理超过最大值的值（限制为 100%）', () => {
+  it('应该正确处理超过最大值的值（限制为 100%）', () => {
     renderWithTheme(<Progress value={150} />);
     
     const progress = screen.getByRole('progressbar');
@@ -87,7 +87,7 @@ describe('Progress 组件', () => {
     });
   });
 
-  it('it('应该正确处理负值（限制为 0%）', () => {
+  it('应该正确处理负值（限制为 0%）', () => {
     renderWithTheme(<Progress value={-10} />);
     
     const progress = screen.getByRole('progressbar');
@@ -97,14 +97,14 @@ describe('Progress 组件', () => {
     });
   });
 
-  it('it('应该应用自定义 className', () => {
+  it('应该应用自定义 className', () => {
     renderWithTheme(<Progress className="custom-progress" />);
     
     const progress = screen.getByRole('progressbar');
     expect(progress).toHaveClass('custom-progress');
   });
 
-  it('it('应该正确设置容器样式', () => {
+  it('应该正确设置容器样式', () => {
     renderWithTheme(<Progress />);
     
     const progress = screen.getByRole('progressbar');
@@ -115,7 +115,7 @@ describe('Progress 组件', () => {
     });
   });
 
-  it('it('应该正确设置进度条样式', () => {
+  it('应该正确设置进度条样式', () => {
     renderWithTheme(<Progress value={50} />);
     
     const progress = screen.getByRole('progressbar');
@@ -126,14 +126,14 @@ describe('Progress 组件', () => {
     });
   });
 
-  it('it('应该正确设置 role 属性', () => {
+  it('应该正确设置 role 属性', () => {
     renderWithTheme(<Progress />);
     
     const progress = screen.getByRole('progressbar');
     expect(progress).toBeInTheDocument();
   });
 
-  it('it('应该正确设置 aria 属性', () => {
+  it('应该正确设置 aria 属性', () => {
     renderWithTheme(<Progress value={75} max={200} />);
     
     const progress = screen.getByRole('progressbar');
@@ -142,7 +142,7 @@ describe('Progress 组件', () => {
     expect(progress).toHaveAttribute('aria-valuemax', '200');
   });
 
-  it('it('应该正确处理自定义最大值的进度计算', () => {
+  it('应该正确处理自定义最大值的进度计算', () => {
     renderWithTheme(<Progress value={25} max={50} />);
     
     const progress = screen.getByRole('progressbar');
@@ -152,21 +152,21 @@ describe('Progress 组件', () => {
     });
   });
 
-  it('it('应该正确处理小数值', () => {
+  it('应该正确处理小数值', () => {
     renderWithTheme(<Progress value={33.33} />);
     
     const progress = screen.getByRole('progressbar');
     expect(progress).toHaveAttribute('aria-valuenow', '33.33');
   });
 
-  it('it('应该正确设置 borderRadius', () => {
+  it('应该正确设置 borderRadius', () => {
     renderWithTheme(<Progress />);
     
     const progress = screen.getByRole('progressbar');
     expect(progress).toBeInTheDocument();
   });
 
-  it('it('应该正确设置进度条的 borderRadius', () => {
+  it('应该正确设置进度条的 borderRadius', () => {
     renderWithTheme(<Progress value={50} />);
     
     const progress = screen.getByRole('progressbar');
@@ -174,42 +174,42 @@ describe('Progress 组件', () => {
     expect(bar).toBeInTheDocument();
   });
 
-  it('it('应该正确处理默认 max 值', () => {
+  it('应该正确处理默认 max 值', () => {
     renderWithTheme(<Progress value={50} />);
     
     const progress = screen.getByRole('progressbar');
     expect(progress).toHaveAttribute('aria-valuemax', '100');
   });
 
-  it('it('应该正确处理默认 value 值', () => {
+  it('应该正确处理默认 value 值', () => {
     renderWithTheme(<Progress />);
     
     const progress = screen.getByRole('progressbar');
     expect(progress).toHaveAttribute('aria-valuenow', '0');
   });
 
-  it('it('应该正确处理 0 最大值', () => {
+  it('应该正确处理 0 最大值', () => {
     renderWithTheme(<Progress value={0} max={0} />);
     
     const progress = screen.getByRole('progressbar');
     expect(progress).toBeInTheDocument();
   });
 
-  it('it('应该正确处理负最大值', () => {
+  it('应该正确处理负最大值', () => {
     renderWithTheme(<Progress value={50} max={-100} />);
     
     const progress = screen.getByRole('progressbar');
     expect(progress).toBeInTheDocument();
   });
 
-  it('it('应该正确设置容器背景色', () => {
+  it('应该正确设置容器背景色', () => {
     renderWithTheme(<Progress />);
     
     const progress = screen.getByRole('progressbar');
     expect(progress).toBeInTheDocument();
   });
 
-  it('it('应该正确设置进度条背景色', () => {
+  it('应该正确设置进度条背景色', () => {
     renderWithTheme(<Progress value={50} />);
     
     const progress = screen.getByRole('progressbar');

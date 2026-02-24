@@ -11,7 +11,7 @@ import React from 'react';
 ;
 
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
+
 import '@testing-library/jest-dom';
 import { AIConsistencyChecker } from './AIConsistencyChecker';
 import { ThemeProvider } from '../theme/ThemeProvider';
@@ -21,22 +21,22 @@ const renderWithTheme = (component: React.ReactElement) => {
 };
 
 describe('AIConsistencyChecker', () => {
-  it('it('应该渲染组件', () => {
+  it('应该渲染组件', () => {
     renderWithTheme(<AIConsistencyChecker />);
     expect(screen.getByText('AI 设计一致性检查')).toBeInTheDocument();
   });
 
-  it('it('应该显示开始检查按钮', () => {
+  it('应该显示开始检查按钮', () => {
     renderWithTheme(<AIConsistencyChecker />);
     expect(screen.getByText('开始检查')).toBeInTheDocument();
   });
 
-  it('it('应该支持自定义类名', () => {
+  it('应该支持自定义类名', () => {
     const { container } = renderWithTheme(<AIConsistencyChecker className="custom-class" />);
     expect(container.querySelector('.custom-class')).toBeInTheDocument();
   });
 
-  it('it('应该支持自定义 tokens', () => {
+  it('应该支持自定义 tokens', () => {
     const customTokens = {
       color: {
         primary: '#ff0000',
@@ -51,7 +51,7 @@ describe('AIConsistencyChecker', () => {
     expect(checkButton).toBeInTheDocument();
   });
 
-  it('it('应该支持点击开始检查按钮', () => {
+  it('应该支持点击开始检查按钮', () => {
     renderWithTheme(<AIConsistencyChecker />);
     
     const checkButton = screen.getByText('开始检查');

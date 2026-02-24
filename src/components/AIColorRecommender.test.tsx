@@ -11,7 +11,7 @@ import React from 'react';
 ;
 
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
+
 import '@testing-library/jest-dom';
 import { AIColorRecommender } from './AIColorRecommender';
 import { ThemeProvider } from '../theme/ThemeProvider';
@@ -21,17 +21,17 @@ const renderWithTheme = (component: React.ReactElement) => {
 };
 
 describe('AIColorRecommender', () => {
-  it('it('应该渲染组件', () => {
+  it('应该渲染组件', () => {
     renderWithTheme(<AIColorRecommender />);
     expect(screen.getByText('AI 配色方案推荐')).toBeInTheDocument();
   });
 
-  it('it('应该显示基础颜色输入', () => {
+  it('应该显示基础颜色输入', () => {
     renderWithTheme(<AIColorRecommender />);
     expect(screen.getByText('基础颜色')).toBeInTheDocument();
   });
 
-  it('it('应该显示用途选项', () => {
+  it('应该显示用途选项', () => {
     renderWithTheme(<AIColorRecommender />);
     expect(screen.getByText('品牌')).toBeInTheDocument();
     expect(screen.getByText('UI 界面')).toBeInTheDocument();
@@ -39,7 +39,7 @@ describe('AIColorRecommender', () => {
     expect(screen.getByText('营销活动')).toBeInTheDocument();
   });
 
-  it('it('应该显示情绪选项', () => {
+  it('应该显示情绪选项', () => {
     renderWithTheme(<AIColorRecommender />);
     expect(screen.getByText('专业')).toBeInTheDocument();
     expect(screen.getByText('活泼')).toBeInTheDocument();
@@ -48,23 +48,23 @@ describe('AIColorRecommender', () => {
     expect(screen.getByText('高端')).toBeInTheDocument();
   });
 
-  it('it('应该显示可访问性标准选项', () => {
+  it('应该显示可访问性标准选项', () => {
     renderWithTheme(<AIColorRecommender />);
     expect(screen.getByText('AA (4.5:1)')).toBeInTheDocument();
     expect(screen.getByText('AAA (7:1)')).toBeInTheDocument();
   });
 
-  it('it('应该显示生成配色方案按钮', () => {
+  it('应该显示生成配色方案按钮', () => {
     renderWithTheme(<AIColorRecommender />);
     expect(screen.getByText('生成配色方案')).toBeInTheDocument();
   });
 
-  it('it('应该支持自定义类名', () => {
+  it('应该支持自定义类名', () => {
     const { container } = renderWithTheme(<AIColorRecommender className="custom-class" />);
     expect(container.querySelector('.custom-class')).toBeInTheDocument();
   });
 
-  it('it('应该调用 onSelectScheme 回调', () => {
+  it('应该调用 onSelectScheme 回调', () => {
     const onSelectScheme = jest.fn();
     renderWithTheme(<AIColorRecommender onSelectScheme={onSelectScheme} />);
     
@@ -83,21 +83,21 @@ describe('AIColorRecommender', () => {
     }, 100);
   });
 
-  it('it('应该支持选择用途', () => {
+  it('应该支持选择用途', () => {
     renderWithTheme(<AIColorRecommender />);
     
     const purposeButton = screen.getByText('品牌');
     fireEvent.click(purposeButton);
   });
 
-  it('it('应该支持选择情绪', () => {
+  it('应该支持选择情绪', () => {
     renderWithTheme(<AIColorRecommender />);
     
     const moodButton = screen.getByText('活泼');
     fireEvent.click(moodButton);
   });
 
-  it('it('应该支持选择可访问性标准', () => {
+  it('应该支持选择可访问性标准', () => {
     renderWithTheme(<AIColorRecommender />);
     
     const accessibilityButton = screen.getByText('AAA (7:1)');

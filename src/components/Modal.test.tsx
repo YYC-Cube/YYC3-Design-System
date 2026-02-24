@@ -11,7 +11,7 @@ import React from 'react';
 ;
 
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
+
 
 import { Modal } from './Modal';
 import { ThemeProvider } from '../theme/ThemeProvider';
@@ -29,7 +29,7 @@ describe('Modal 组件', () => {
     document.body.style.overflow = 'unset';
   });
 
-  it('it('应该在 isOpen 为 false 时不渲染', () => {
+  it('应该在 isOpen 为 false 时不渲染', () => {
     renderWithTheme(
       <Modal isOpen={false}>
         <div>Modal content</div>
@@ -39,7 +39,7 @@ describe('Modal 组件', () => {
     expect(screen.queryByText('Modal content')).not.toBeInTheDocument();
   });
 
-  it('it('应该在 isOpen 为 true 时渲染', () => {
+  it('应该在 isOpen 为 true 时渲染', () => {
     renderWithTheme(
       <Modal isOpen={true}>
         <div>Modal content</div>
@@ -50,7 +50,7 @@ describe('Modal 组件', () => {
     expect(screen.getByRole('dialog')).toBeInTheDocument();
   });
 
-  it('it('应该在点击关闭按钮时调用 onClose', () => {
+  it('应该在点击关闭按钮时调用 onClose', () => {
     const handleClose = jest.fn();
     renderWithTheme(
       <Modal isOpen={true} onClose={handleClose}>
@@ -64,7 +64,7 @@ describe('Modal 组件', () => {
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
 
-  it('it('应该在点击背景时调用 onClose', () => {
+  it('应该在点击背景时调用 onClose', () => {
     const handleClose = jest.fn();
     const { container } = renderWithTheme(
       <Modal isOpen={true} onClose={handleClose}>
@@ -78,7 +78,7 @@ describe('Modal 组件', () => {
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
 
-  it('it('应该在点击模态框内容时不调用 onClose', () => {
+  it('应该在点击模态框内容时不调用 onClose', () => {
     const handleClose = jest.fn();
     renderWithTheme(
       <Modal isOpen={true} onClose={handleClose}>
@@ -92,7 +92,7 @@ describe('Modal 组件', () => {
     expect(handleClose).not.toHaveBeenCalled();
   });
 
-  it('it('应该在按 ESC 键时调用 onClose', () => {
+  it('应该在按 ESC 键时调用 onClose', () => {
     const handleClose = jest.fn();
     renderWithTheme(
       <Modal isOpen={true} onClose={handleClose}>
@@ -105,7 +105,7 @@ describe('Modal 组件', () => {
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
 
-  it('it('应该在按其他键时不调用 onClose', () => {
+  it('应该在按其他键时不调用 onClose', () => {
     const handleClose = jest.fn();
     renderWithTheme(
       <Modal isOpen={true} onClose={handleClose}>
@@ -118,7 +118,7 @@ describe('Modal 组件', () => {
     expect(handleClose).not.toHaveBeenCalled();
   });
 
-  it('it('应该在打开时禁用 body 滚动', () => {
+  it('应该在打开时禁用 body 滚动', () => {
     renderWithTheme(
       <Modal isOpen={true}>
         <div>Modal content</div>
@@ -128,7 +128,7 @@ describe('Modal 组件', () => {
     expect(document.body.style.overflow).toBe('hidden');
   });
 
-  it('it('应该在关闭时恢复 body 滚动', () => {
+  it('应该在关闭时恢复 body 滚动', () => {
     const handleClose = jest.fn();
     const { unmount } = renderWithTheme(
       <Modal isOpen={true} onClose={handleClose}>
@@ -142,7 +142,7 @@ describe('Modal 组件', () => {
     expect(document.body.style.overflow).toBe('unset');
   });
 
-  it('it('应该在没有 onClose 时不显示关闭按钮', () => {
+  it('应该在没有 onClose 时不显示关闭按钮', () => {
     renderWithTheme(
       <Modal isOpen={true}>
         <div>Modal content</div>
@@ -152,7 +152,7 @@ describe('Modal 组件', () => {
     expect(screen.queryByLabelText('Close modal')).not.toBeInTheDocument();
   });
 
-  it('it('应该应用自定义 className', () => {
+  it('应该应用自定义 className', () => {
     renderWithTheme(
       <Modal isOpen={true} className="custom-class">
         <div>Modal content</div>
@@ -163,7 +163,7 @@ describe('Modal 组件', () => {
     expect(modal).toHaveClass('custom-class');
   });
 
-  it('it('应该正确渲染复杂内容', () => {
+  it('应该正确渲染复杂内容', () => {
     renderWithTheme(
       <Modal isOpen={true}>
         <div>
@@ -177,7 +177,7 @@ describe('Modal 组件', () => {
     expect(screen.getByText('Modal description')).toBeInTheDocument();
   });
 
-  it('it('应该应用正确的样式', () => {
+  it('应该应用正确的样式', () => {
     renderWithTheme(
       <Modal isOpen={true}>
         <div>Modal content</div>
@@ -192,7 +192,7 @@ describe('Modal 组件', () => {
     });
   });
 
-  it('it('应该在切换 isOpen 时正确处理事件监听器', () => {
+  it('应该在切换 isOpen 时正确处理事件监听器', () => {
     const handleClose = jest.fn();
     renderWithTheme(
       <Modal isOpen={true} onClose={handleClose}>

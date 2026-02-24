@@ -11,7 +11,7 @@ import React from 'react';
 ;
 
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
+
 import '@testing-library/jest-dom';
 import { AITokenGenerator } from './AITokenGenerator';
 import { ThemeProvider } from '../theme/ThemeProvider';
@@ -21,17 +21,17 @@ const renderWithTheme = (component: React.ReactElement) => {
 };
 
 describe('AITokenGenerator', () => {
-  it('it('应该渲染组件', () => {
+  it('应该渲染组件', () => {
     renderWithTheme(<AITokenGenerator />);
     expect(screen.getByText('AI Token 生成器')).toBeInTheDocument();
   });
 
-  it('it('应该显示基础颜色输入', () => {
+  it('应该显示基础颜色输入', () => {
     renderWithTheme(<AITokenGenerator />);
     expect(screen.getByText('基础颜色')).toBeInTheDocument();
   });
 
-  it('it('应该显示色彩和谐选项', () => {
+  it('应该显示色彩和谐选项', () => {
     renderWithTheme(<AITokenGenerator />);
     expect(screen.getByText('互补色')).toBeInTheDocument();
     expect(screen.getByText('类似色')).toBeInTheDocument();
@@ -40,28 +40,28 @@ describe('AITokenGenerator', () => {
     expect(screen.getByText('单色')).toBeInTheDocument();
   });
 
-  it('it('应该显示间距比例滑块', () => {
+  it('应该显示间距比例滑块', () => {
     renderWithTheme(<AITokenGenerator />);
     expect(screen.getByText(/间距比例:/)).toBeInTheDocument();
   });
 
-  it('it('应该显示包含色相和色调复选框', () => {
+  it('应该显示包含色相和色调复选框', () => {
     renderWithTheme(<AITokenGenerator />);
     expect(screen.getByText('包含色相')).toBeInTheDocument();
     expect(screen.getByText('包含色调')).toBeInTheDocument();
   });
 
-  it('it('应该显示生成令牌按钮', () => {
+  it('应该显示生成令牌按钮', () => {
     renderWithTheme(<AITokenGenerator />);
     expect(screen.getByText('生成令牌')).toBeInTheDocument();
   });
 
-  it('it('应该支持自定义类名', () => {
+  it('应该支持自定义类名', () => {
     const { container } = renderWithTheme(<AITokenGenerator className="custom-class" />);
     expect(container.querySelector('.custom-class')).toBeInTheDocument();
   });
 
-  it('it('应该调用 onGenerate 回调', () => {
+  it('应该调用 onGenerate 回调', () => {
     const onGenerate = jest.fn();
     renderWithTheme(<AITokenGenerator onGenerate={onGenerate} />);
     
@@ -71,14 +71,14 @@ describe('AITokenGenerator', () => {
     expect(onGenerate).toHaveBeenCalled();
   });
 
-  it('it('应该支持选择色彩和谐', () => {
+  it('应该支持选择色彩和谐', () => {
     renderWithTheme(<AITokenGenerator />);
     
     const harmonyButton = screen.getByText('互补色');
     fireEvent.click(harmonyButton);
   });
 
-  it('it('应该支持切换包含色相', () => {
+  it('应该支持切换包含色相', () => {
     renderWithTheme(<AITokenGenerator />);
     
     const shadesCheckbox = screen.getByText('包含色相').querySelector('input[type="checkbox"]');
@@ -87,7 +87,7 @@ describe('AITokenGenerator', () => {
     }
   });
 
-  it('it('应该支持切换包含色调', () => {
+  it('应该支持切换包含色调', () => {
     renderWithTheme(<AITokenGenerator />);
     
     const tintsCheckbox = screen.getByText('包含色调').querySelector('input[type="checkbox"]');

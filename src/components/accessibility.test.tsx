@@ -26,13 +26,13 @@ describe('Accessibility Tests', () => {
   };
 
   describe('Button', () => {
-    it('it('should not have accessibility violations', async () => {
+    it('should not have accessibility violations', async () => {
       const { container } = renderWithTheme(<Button>Click me</Button>);
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
 
-    it('it('should not have accessibility violations when disabled', async () => {
+    it('should not have accessibility violations when disabled', async () => {
       const { container } = renderWithTheme(<Button disabled>Disabled</Button>);
       const results = await axe(container);
       expect(results).toHaveNoViolations();
@@ -40,13 +40,13 @@ describe('Accessibility Tests', () => {
   });
 
   describe('Input', () => {
-    it('it('should not have accessibility violations', async () => {
+    it('should not have accessibility violations', async () => {
       const { container } = renderWithTheme(<Input placeholder="Enter text" />);
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
 
-    it('it('should not have accessibility violations when disabled', async () => {
+    it('should not have accessibility violations when disabled', async () => {
       const { container } = renderWithTheme(<Input disabled placeholder="Disabled input" />);
       const results = await axe(container);
       expect(results).toHaveNoViolations();
@@ -54,7 +54,7 @@ describe('Accessibility Tests', () => {
   });
 
   describe('Card', () => {
-    it('it('should not have accessibility violations', async () => {
+    it('should not have accessibility violations', async () => {
       const { container } = renderWithTheme(
         <Card>
           <CardHeader>
@@ -69,13 +69,13 @@ describe('Accessibility Tests', () => {
   });
 
   describe('Badge', () => {
-    it('it('should not have accessibility violations', async () => {
+    it('should not have accessibility violations', async () => {
       const { container } = renderWithTheme(<Badge>Badge</Badge>);
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
 
-    it('it('should not have accessibility violations for all variants', async () => {
+    it('should not have accessibility violations for all variants', async () => {
       const variants: Array<'default' | 'secondary' | 'destructive' | 'outline'> = ['default', 'secondary', 'destructive', 'outline'];
       
       for (const variant of variants) {
@@ -87,7 +87,7 @@ describe('Accessibility Tests', () => {
   });
 
   describe('Avatar', () => {
-    it('it('should not have accessibility violations with image', async () => {
+    it('should not have accessibility violations with image', async () => {
       const { container } = renderWithTheme(
         <Avatar src="https://example.com/avatar.jpg" alt="User avatar" />
       );
@@ -95,7 +95,7 @@ describe('Accessibility Tests', () => {
       expect(results).toHaveNoViolations();
     });
 
-    it('it('should not have accessibility violations with fallback', async () => {
+    it('should not have accessibility violations with fallback', async () => {
       const { container } = renderWithTheme(<Avatar fallback="AB" alt="User avatar" />);
       const results = await axe(container);
       expect(results).toHaveNoViolations();
@@ -103,7 +103,7 @@ describe('Accessibility Tests', () => {
   });
 
   describe('ThemeToggle', () => {
-    it('it('should not have accessibility violations', async () => {
+    it('should not have accessibility violations', async () => {
       const { container } = renderWithTheme(<ThemeToggle />);
       const results = await axe(container);
       expect(results).toHaveNoViolations();

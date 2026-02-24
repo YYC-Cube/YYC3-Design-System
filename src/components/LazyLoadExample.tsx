@@ -71,8 +71,9 @@ export const LazyLoadExample: React.FC<LazyLoadExampleProps> = ({ className = ''
 
   return (
     <div className={className} style={{ padding: '2rem' }}>
-      <Card style={{ marginBottom: '2rem' }}>
-        <CardHeader>
+      <div style={{ marginBottom: '2rem' }}>
+        <Card>
+          <CardHeader>
           <h2 style={{ margin: 0, fontSize: '1.5rem' }}>组件懒加载示例</h2>
         </CardHeader>
         <CardContent>
@@ -89,8 +90,8 @@ export const LazyLoadExample: React.FC<LazyLoadExampleProps> = ({ className = ''
                 <LazyModal
                   isOpen={showModal}
                   onClose={() => setShowModal(false)}
-                  title="懒加载模态框"
                 >
+                  <h2 style={{ margin: '0 0 1rem 0', fontSize: '1.5rem' }}>懒加载模态框</h2>
                   <p>这是一个懒加载的模态框组件</p>
                 </LazyModal>
               )}
@@ -111,9 +112,11 @@ export const LazyLoadExample: React.FC<LazyLoadExampleProps> = ({ className = ''
           </div>
         </CardContent>
       </Card>
+      </div>
 
-      <Card style={{ marginBottom: '2rem' }}>
-        <CardHeader>
+      <div style={{ marginBottom: '2rem' }}>
+        <Card>
+          <CardHeader>
           <h2 style={{ margin: 0, fontSize: '1.5rem' }}>资源懒加载示例</h2>
         </CardHeader>
         <CardContent>
@@ -150,6 +153,7 @@ export const LazyLoadExample: React.FC<LazyLoadExampleProps> = ({ className = ''
           </div>
         </CardContent>
       </Card>
+      </div>
 
       <Card>
         <CardHeader>

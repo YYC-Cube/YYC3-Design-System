@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { AvatarProps } from '../../types/tokens';
 import { useTheme } from '../theme/useTheme';
+import { observeLazyImage } from '../utils/image-lazy-loader';
 
 export const Avatar: React.FC<AvatarProps> = ({
   src,
@@ -13,6 +14,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   const { tokens } = useTheme();
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   const getSizeStyle = (): React.CSSProperties => {
     switch (size) {
@@ -78,15 +80,27 @@ export const Avatar: React.FC<AvatarProps> = ({
     setImageLoaded(true);
   };
 
+  useEffect(() => {
+    if (imgRef.current && src && !imageError) {
+      const unobserve = observeLazyImage(imgRef.current, {
+        placeholder: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PC9zdmc+',
+        errorPlaceholder: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmZjZGNkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5OTk5OTkiIGZvbnQtc2l6ZT0iMTQiPuaXoDwvdGV4dD48L3N2Zz4=',
+        onLoad: handleImageLoad,
+        onError: handleImageError,
+      });
+      return unobserve;
+    }
+  }, [src, imageError]);
+
   return (
     <div style={avatarStyle} className={className} role="img" aria-label={alt} data-testid={dataTestId}>
       {src && !imageError && (
         <img
-          src={src}
+          ref={imgRef}
+          data-src={src}
           alt={alt}
           style={imageStyle}
-          onError={handleImageError}
-          onLoad={handleImageLoad}
+          loading="lazy"
         />
       )}
       {(!src || imageError || !imageLoaded) && (

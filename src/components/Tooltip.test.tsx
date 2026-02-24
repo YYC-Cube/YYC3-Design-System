@@ -12,7 +12,7 @@ import React from 'react';
 ;
 
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { screen, fireEvent, waitFor, act } from '@testing-library/dom';;;
+
 import '@testing-library/jest-dom';
 import { Tooltip } from './Tooltip';
 import { ThemeProvider } from '../theme/ThemeProvider';
@@ -31,7 +31,7 @@ describe('Tooltip 组件', () => {
     jest.useRealTimers();
   });
 
-  it('it('应该正确渲染子元素', () => {
+  it('应该正确渲染子元素', () => {
     renderWithTheme(
       <Tooltip content="Tooltip content">
         <button>Hover me</button>
@@ -41,7 +41,7 @@ describe('Tooltip 组件', () => {
     expect(screen.getByText('Hover me')).toBeInTheDocument();
   });
 
-  it('it('鼠标悬停后应该显示 tooltip', async () => {
+  it('鼠标悬停后应该显示 tooltip', async () => {
     renderWithTheme(
       <Tooltip content="Tooltip content">
         <button>Hover me</button>
@@ -60,7 +60,7 @@ describe('Tooltip 组件', () => {
     });
   });
 
-  it('it('鼠标离开后应该隐藏 tooltip', async () => {
+  it('鼠标离开后应该隐藏 tooltip', async () => {
     renderWithTheme(
       <Tooltip content="Tooltip content">
         <button>Hover me</button>
@@ -85,7 +85,7 @@ describe('Tooltip 组件', () => {
     });
   });
 
-  it('it('应该支持不同的 placement 选项', async () => {
+  it('应该支持不同的 placement 选项', async () => {
     const placements: Array<'top' | 'bottom' | 'left' | 'right'> = ['top', 'bottom', 'left', 'right'];
 
     for (const placement of placements) {
@@ -110,7 +110,7 @@ describe('Tooltip 组件', () => {
     }
   });
 
-  it('it('应该应用自定义 className', () => {
+  it('应该应用自定义 className', () => {
     renderWithTheme(
       <Tooltip content="Tooltip content" className="custom-class">
         <button>Hover me</button>
@@ -121,7 +121,7 @@ describe('Tooltip 组件', () => {
     expect(wrapper).toHaveClass('custom-class');
   });
 
-  it('it('应该正确清理 timeout', () => {
+  it('应该正确清理 timeout', () => {
     const { unmount } = renderWithTheme(
       <Tooltip content="Tooltip content">
         <button>Hover me</button>
@@ -140,7 +140,7 @@ describe('Tooltip 组件', () => {
     expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument();
   });
 
-  it('it('应该在快速悬停时取消之前的 timeout', async () => {
+  it('应该在快速悬停时取消之前的 timeout', async () => {
     renderWithTheme(
       <Tooltip content="Tooltip content">
         <button>Hover me</button>
@@ -166,7 +166,7 @@ describe('Tooltip 组件', () => {
     });
   });
 
-  it('it('应该正确处理无效的 placement（使用默认值）', async () => {
+  it('应该正确处理无效的 placement（使用默认值）', async () => {
     renderWithTheme(
       <Tooltip content="Tooltip content" placement={'invalid' as any}>
         <button>Hover me</button>
@@ -185,7 +185,7 @@ describe('Tooltip 组件', () => {
     });
   });
 
-  it('it('应该正确设置 role 属性', async () => {
+  it('应该正确设置 role 属性', async () => {
     renderWithTheme(
       <Tooltip content="Tooltip content">
         <button>Hover me</button>
@@ -205,7 +205,7 @@ describe('Tooltip 组件', () => {
     });
   });
 
-  it('it('应该正确设置 wrapper 样式', () => {
+  it('应该正确设置 wrapper 样式', () => {
     renderWithTheme(
       <Tooltip content="Tooltip content">
         <button>Hover me</button>
@@ -216,7 +216,7 @@ describe('Tooltip 组件', () => {
     expect(wrapper).toBeInTheDocument();
   });
 
-  it('it('应该正确设置 tooltip 样式', async () => {
+  it('应该正确设置 tooltip 样式', async () => {
     renderWithTheme(
       <Tooltip content="Tooltip content">
         <button>Hover me</button>
@@ -236,7 +236,7 @@ describe('Tooltip 组件', () => {
     });
   });
 
-  it('it('应该正确处理复杂内容', async () => {
+  it('应该正确处理复杂内容', async () => {
     renderWithTheme(
       <Tooltip content={<div><strong>Bold</strong> text</div>}>
         <button>Hover me</button>
@@ -256,7 +256,7 @@ describe('Tooltip 组件', () => {
     });
   });
 
-  it('it('应该在未悬停时不显示 tooltip', () => {
+  it('应该在未悬停时不显示 tooltip', () => {
     renderWithTheme(
       <Tooltip content="Tooltip content">
         <button>Hover me</button>
@@ -266,7 +266,7 @@ describe('Tooltip 组件', () => {
     expect(screen.queryByText('Tooltip content')).not.toBeInTheDocument();
   });
 
-  it('it('应该正确处理多次快速悬停', async () => {
+  it('应该正确处理多次快速悬停', async () => {
     renderWithTheme(
       <Tooltip content="Tooltip content">
         <button>Hover me</button>

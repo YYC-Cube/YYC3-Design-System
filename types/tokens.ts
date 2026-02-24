@@ -71,7 +71,7 @@ export interface InputProps {
   placeholder?: string;
   disabled?: boolean;
   value?: string;
-  onChange?: (value: string | React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (value: string) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   autoFocus?: boolean;

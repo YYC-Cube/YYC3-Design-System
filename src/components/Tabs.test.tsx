@@ -11,7 +11,7 @@ import React from 'react';
 ;
 
 import { render, fireEvent, waitFor } from '@testing-library/react'
-import { screen, fireEvent, waitFor } from '@testing-library/dom';;;
+
 
 import { Tabs, TabList, Tab, TabPanel } from './Tabs';
 import { ThemeProvider } from '../theme/ThemeProvider';
@@ -21,7 +21,7 @@ describe('Tabs 组件', () => {
     return render(<ThemeProvider initial="light">{component}</ThemeProvider>);
   };
 
-  it('it('应该正确渲染 Tabs 组件', () => {
+  it('应该正确渲染 Tabs 组件', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -38,7 +38,7 @@ describe('Tabs 组件', () => {
     expect(screen.getByText('Panel 1')).toBeInTheDocument();
   });
 
-  it('it('应该默认显示第一个标签面板', () => {
+  it('应该默认显示第一个标签面板', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -56,7 +56,7 @@ describe('Tabs 组件', () => {
     expect(panel2).toHaveStyle({ display: 'none' });
   });
 
-  it('it('应该在点击标签时切换面板', () => {
+  it('应该在点击标签时切换面板', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -77,7 +77,7 @@ describe('Tabs 组件', () => {
     expect(panel1).toHaveStyle({ display: 'none' });
   });
 
-  it('it('应该正确设置 active tab 的样式', () => {
+  it('应该正确设置 active tab 的样式', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -103,7 +103,7 @@ describe('Tabs 组件', () => {
     });
   });
 
-  it('it('应该在切换时更新样式', () => {
+  it('应该在切换时更新样式', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -125,7 +125,7 @@ describe('Tabs 组件', () => {
     });
   });
 
-  it('it('应该正确设置 role 属性', () => {
+  it('应该正确设置 role 属性', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -140,7 +140,7 @@ describe('Tabs 组件', () => {
     expect(screen.getByRole('tabpanel')).toBeInTheDocument();
   });
 
-  it('it('应该正确设置 aria-selected 属性', () => {
+  it('应该正确设置 aria-selected 属性', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -158,7 +158,7 @@ describe('Tabs 组件', () => {
     expect(tab2).toHaveAttribute('aria-selected', 'false');
   });
 
-  it('it('应该正确设置 aria-hidden 属性', () => {
+  it('应该正确设置 aria-hidden 属性', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -176,7 +176,7 @@ describe('Tabs 组件', () => {
     expect(panel2).toHaveAttribute('aria-hidden', 'true');
   });
 
-  it('it('应该应用自定义 className', () => {
+  it('应该应用自定义 className', () => {
     const { container } = renderWithTheme(
       <Tabs defaultValue="tab1" className="custom-tabs">
         <TabList className="custom-list">
@@ -192,7 +192,7 @@ describe('Tabs 组件', () => {
     expect(container.querySelector('.custom-panel')).toBeInTheDocument();
   });
 
-  it('it('应该在 Tab 不在 Tabs 中时抛出错误', () => {
+  it('应该在 Tab 不在 Tabs 中时抛出错误', () => {
     expect(() => {
       renderWithTheme(
         <div>
@@ -202,7 +202,7 @@ describe('Tabs 组件', () => {
     }).toThrow('Tab must be used within Tabs');
   });
 
-  it('it('应该在 TabPanel 不在 Tabs 中时抛出错误', () => {
+  it('应该在 TabPanel 不在 Tabs 中时抛出错误', () => {
     expect(() => {
       renderWithTheme(
         <div>
@@ -212,7 +212,7 @@ describe('Tabs 组件', () => {
     }).toThrow('TabPanel must be used within Tabs');
   });
 
-  it('it('应该正确处理多个标签', () => {
+  it('应该正确处理多个标签', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -231,7 +231,7 @@ describe('Tabs 组件', () => {
     expect(screen.getByText('Tab 3')).toBeInTheDocument();
   });
 
-  it('it('应该在多次点击时正确切换', () => {
+  it('应该在多次点击时正确切换', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -258,7 +258,7 @@ describe('Tabs 组件', () => {
     expect(screen.getByText('Panel 2')).toBeInTheDocument();
   });
 
-  it('it('应该正确设置 TabList 的样式', () => {
+  it('应该正确设置 TabList 的样式', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -277,7 +277,7 @@ describe('Tabs 组件', () => {
     });
   });
 
-  it('it('应该正确设置 Tab 的样式', () => {
+  it('应该正确设置 Tab 的样式', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -295,7 +295,7 @@ describe('Tabs 组件', () => {
     });
   });
 
-  it('it('应该正确设置 TabPanel 的样式', () => {
+  it('应该正确设置 TabPanel 的样式', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -311,7 +311,7 @@ describe('Tabs 组件', () => {
     });
   });
 
-  it('it('应该在非激活时隐藏 TabPanel', () => {
+  it('应该在非激活时隐藏 TabPanel', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -327,7 +327,7 @@ describe('Tabs 组件', () => {
     expect(panel2).toHaveAttribute('aria-hidden', 'true');
   });
 
-  it('it('应该正确处理空 children', () => {
+  it('应该正确处理空 children', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -341,7 +341,7 @@ describe('Tabs 组件', () => {
     expect(screen.getByRole('tabpanel')).toBeInTheDocument();
   });
 
-  it('it('应该正确处理复杂内容', () => {
+  it('应该正确处理复杂内容', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>
@@ -367,7 +367,7 @@ describe('Tabs 组件', () => {
     expect(screen.getByText('Content')).toBeInTheDocument();
   });
 
-  it('it('应该在切换时正确更新 aria-selected', () => {
+  it('应该在切换时正确更新 aria-selected', () => {
     renderWithTheme(
       <Tabs defaultValue="tab1">
         <TabList>

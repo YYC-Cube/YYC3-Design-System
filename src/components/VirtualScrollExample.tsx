@@ -32,7 +32,7 @@ export const VirtualScrollExample: React.FC = () => {
       generatedItems.push({
         id: i,
         name: `项目 ${i + 1}`,
-        value: Math.floor(Math.random() * 1000),
+        value: (i * 17) % 1000,
         description: `这是项目 ${i + 1} 的详细描述信息，用于演示虚拟滚动的性能优势。`,
       });
     }
@@ -69,7 +69,8 @@ export const VirtualScrollExample: React.FC = () => {
     setUseGrid(prev => !prev);
   }, []);
 
-  const renderItem = useCallback((item: ListItem, index: number) => {
+  const renderItem = useCallback((item: unknown, index: number) => {
+    const listItem = item as ListItem;
     return (
       <div
         style={{
@@ -80,19 +81,20 @@ export const VirtualScrollExample: React.FC = () => {
         }}
       >
         <div style={{ fontWeight: 600, marginBottom: '0.5rem' }}>
-          {item.name}
+          {listItem.name}
         </div>
         <div style={{ fontSize: '0.875rem', color: '#666', marginBottom: '0.25rem' }}>
-          {item.description}
+          {listItem.description}
         </div>
         <div style={{ fontSize: '0.875rem', color: '#999' }}>
-          值: {item.value}
+          值: {listItem.value}
         </div>
       </div>
     );
   }, []);
 
-  const renderGridItem = useCallback((item: ListItem, index: number) => {
+  const renderGridItem = useCallback((item: unknown, index: number) => {
+    const listItem = item as ListItem;
     return (
       <div
         style={{
@@ -107,10 +109,10 @@ export const VirtualScrollExample: React.FC = () => {
         }}
       >
         <div style={{ fontWeight: 600, marginBottom: '0.5rem' }}>
-          {item.name}
+          {listItem.name}
         </div>
         <div style={{ fontSize: '0.875rem', color: '#666' }}>
-          {item.value}
+          {listItem.value}
         </div>
       </div>
     );
@@ -120,34 +122,35 @@ export const VirtualScrollExample: React.FC = () => {
     <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
       <h1 style={{ marginBottom: '2rem' }}>虚拟滚动示例</h1>
 
-      <Card style={{ marginBottom: '2rem' }}>
-        <h2 style={{ marginBottom: '1rem' }}>配置选项</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1rem' }}>
-          <div>
-            <Input
-              label="项目数量"
-              type="number"
-              value={itemCount.toString()}
-              onChange={handleItemCountChange}
-            />
+      <div style={{ marginBottom: '2rem' }}>
+        <Card>
+          <h2 style={{ marginBottom: '1rem' }}>配置选项</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1rem' }}>
+            <div>
+              <Input
+                label="项目数量"
+                type="number"
+                value={itemCount.toString()}
+                onChange={handleItemCountChange}
+              />
+            </div>
+            <div>
+              <Input
+                label="容器高度"
+                type="number"
+                value={containerHeight.toString()}
+                onChange={handleContainerHeightChange}
+              />
+            </div>
+            <div>
+              <Input
+                label="搜索关键词"
+                placeholder="输入关键词过滤..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+            </div>
           </div>
-          <div>
-            <Input
-              label="容器高度"
-              type="number"
-              value={containerHeight.toString()}
-              onChange={handleContainerHeightChange}
-            />
-          </div>
-          <div>
-            <Input
-              label="搜索关键词"
-              placeholder="输入关键词过滤..."
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-          </div>
-        </div>
         <div style={{ marginBottom: '1rem' }}>
           <Button onClick={handleToggleView}>
             {useGrid ? '切换到列表视图' : '切换到网格视图'}
@@ -155,14 +158,16 @@ export const VirtualScrollExample: React.FC = () => {
         </div>
         <div style={{ fontSize: '0.875rem', color: '#666' }}>
           <strong>当前状态：</strong>
-          总项目数: {items.length} | 
-          过滤后: {filteredItems.length} | 
+          总项目数: {items.length} |
+          过滤后: {filteredItems.length} |
           视图模式: {useGrid ? '网格' : '列表'}
         </div>
       </Card>
+      </div>
 
-      <Card style={{ marginBottom: '2rem' }}>
-        <h2 style={{ marginBottom: '1rem' }}>虚拟滚动列表</h2>
+      <div style={{ marginBottom: '2rem' }}>
+        <Card>
+          <h2 style={{ marginBottom: '1rem' }}>虚拟滚动列表</h2>
         <div style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#666' }}>
           该列表使用虚拟滚动技术，只渲染可见区域的项目，大幅提升性能。
           即使有 {filteredItems.length} 个项目，也只渲染约 {Math.ceil(containerHeight / 50)} 个可见项目。
@@ -187,9 +192,11 @@ export const VirtualScrollExample: React.FC = () => {
           />
         )}
       </Card>
+      </div>
 
-      <Card style={{ marginBottom: '2rem' }}>
-        <h2 style={{ marginBottom: '1rem' }}>性能对比</h2>
+      <div style={{ marginBottom: '2rem' }}>
+        <Card>
+          <h2 style={{ marginBottom: '1rem' }}>性能对比</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
           <div style={{ padding: '1rem', backgroundColor: '#f9f9f9', borderRadius: '0.25rem' }}>
             <h3 style={{ marginBottom: '0.5rem' }}>传统列表</h3>
@@ -221,6 +228,7 @@ export const VirtualScrollExample: React.FC = () => {
           </p>
         </div>
       </Card>
+      </div>
 
       <Card>
         <h2 style={{ marginBottom: '1rem' }}>虚拟滚动优势</h2>
