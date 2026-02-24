@@ -219,11 +219,11 @@ export const createGenericComponent = function<
   return Component as React.ForwardRefExoticComponent<GenericComponentPropsWithExtra<E, P> & React.RefAttributes<E>>;
 };
 
-export const withGenericComponentEffect = function<P extends object>(
+export const withGenericComponentEffect = function<P extends React.HTMLAttributes<HTMLElement>>(
   WrappedComponent: React.ComponentType<P>,
   displayName: string
 ) {
-  const EnhancedComponent = forwardRef<unknown, P>((props, ref) => {
+  const EnhancedComponent = forwardRef<HTMLElement, P>((props, ref) => {
     React.useEffect(() => {
       console.warn(`${displayName} mounted with props:`, props);
       return () => {
@@ -231,7 +231,7 @@ export const withGenericComponentEffect = function<P extends object>(
       };
     }, [props]);
 
-    return React.createElement(WrappedComponent, { ...props, ref } as P & { ref?: React.Ref<unknown> });
+    return React.createElement(WrappedComponent, { ...props, ref } as any);
   });
 
   EnhancedComponent.displayName = `withEffect(${displayName})`;
