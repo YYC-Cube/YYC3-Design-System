@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # YYC³ Design System
+  yyc3-design-system:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: yyc3-design-system
+    ports:
+      - "3200:3200"
+    environment:
+      - NODE_ENV=production
+      - PORT=3200
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - yyc3-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3200', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Development environment
+  yyc3-design-system-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: yyc3-design-system-dev
+    ports:
+      - "3201:3200"
+      - "6006:6006"  # Storybook port
+    environment:
+      - NODE_ENV=development
+      - PORT=3200
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/dist
+    networks:
+      - yyc3-network
+    command: npm run dev
+    profiles:
+      - dev
+
+  # Nginx reverse proxy
+  nginx:
+    image: nginx:alpine
+    container_name: yyc3-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - yyc3-design-system
+    networks:
+      - yyc3-network
+    restart: unless-stopped
+    profiles:
+      - production
+
+networks:
+  yyc3-network:
+    driver: bridge
+
+volumes:
+  logs:
+    driver: local
