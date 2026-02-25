@@ -1,6 +1,8 @@
-import React, { memo } from 'react';
+import * as React from 'react';
 import { ButtonProps } from '../../types/tokens';
 import { useTheme } from '../theme/useTheme';
+
+const { memo } = React;
 
 export const Button = memo<ButtonProps>(({
   children,

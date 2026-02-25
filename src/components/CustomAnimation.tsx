@@ -10,9 +10,13 @@
  * @license MIT
  */
 
-import React, { useState, useMemo, useCallback, useEffect, ReactNode } from 'react';
+import * as React from 'react';
 import { registerCustomAnimation, createCustomAnimation } from '../utils/animations-enhanced';
 import type { EnhancedAnimationConfig } from '../../types/animations';
+
+const { useState, useMemo, useCallback, useEffect } = React;
+
+type ReactNode = React.ReactNode;
 
 export interface CustomKeyframeStep {
   percentage: number;
@@ -80,7 +84,7 @@ export const CustomAnimation: React.FC<CustomAnimationProps> = ({
     const duration = config?.duration || definition.duration || 'normal';
     const easing = config?.easing || definition.easing || 'ease-in-out';
     const delay = config?.delay || definition.delay || 0;
-    const repeat = config?.repeat || 1;
+    const repeat = config?.repeat ||1;
     const direction = config?.direction || 'normal';
     const fillMode = config?.fillMode || 'both';
 
@@ -91,7 +95,7 @@ export const CustomAnimation: React.FC<CustomAnimationProps> = ({
     };
 
     const easingMap: Record<'ease-in' | 'ease-out' | 'ease-in-out' | 'bounce' | 'elastic' | 'back', string> = {
-      'ease-in': 'cubic-bezier(0.4, 0, 1, 1)',
+      'ease-in': 'cubic-bezier(0.4, 0, 1,1)',
       'ease-out': 'cubic-bezier(0, 0, 0.2, 1)',
       'ease-in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
       bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
@@ -102,7 +106,7 @@ export const CustomAnimation: React.FC<CustomAnimationProps> = ({
     return {
       animation: `${animationName} ${durationMap[duration]} ${easingMap[easing]} ${delay}ms ${repeat} ${direction} ${fillMode}`,
     };
-  }, [disabled, isAnimating, trigger, definition, config, animationName]);
+  }, [isAnimating, trigger, definition, config, animationName]);
 
   useEffect(() => {
     if (shouldRegister && !animationRegisteredRef.current) {

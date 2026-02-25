@@ -1,5 +1,7 @@
-import React, { memo } from 'react';
+import * as React from 'react';
 import { useTheme } from '../theme/useTheme';
+
+const { memo } = React;
 
 interface CardProps {
   children: React.ReactNode;

@@ -7,6 +7,8 @@
  * @created 2026-02-23
  */
 
+/// <reference types="@testing-library/jest-dom" />
+
 import { render, fireEvent, screen } from '@testing-library/react';
 import { Dropdown } from '../Dropdown';
 import { Button } from '../Button';

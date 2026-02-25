@@ -10,7 +10,7 @@
  * @license MIT
  */
 
-import React, { useState, useCallback, useEffect, useMemo, ChangeEvent } from 'react';
+import * as React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './Card';
 import { Input } from './Input';
 import { Button } from './Button';
@@ -18,6 +18,10 @@ import { Grid } from './Grid';
 import { themePresets, type ThemePreset, createCustomPreset, mergePresetTokens } from '../theme/ThemePresets';
 import { useTheme } from '../theme/useTheme';
 import type { DesignTokens } from '../../types/tokens';
+
+const { useState, useCallback, useMemo } = React;
+
+type ChangeEvent<T = Element> = React.ChangeEvent<T>;
 
 export interface ThemeEditorProps {
   onSave?: (theme: ThemePreset) => void;
@@ -104,24 +108,24 @@ export const ThemeEditor: React.FC<ThemeEditorProps> = ({
   initialPresetId = 'light',
   showPreview = true,
 }) => {
-  const { tokens: themeTokens, setTokens: setTheme } = useTheme();
-  const [selectedPreset, setSelectedPreset] = useState<ThemePreset | null>(null);
+  const { setTokens: setTheme } = useTheme();
+
+  const initialPreset = useMemo(() =>
+    themePresets.find(p => p.id === initialPresetId) || null,
+    [initialPresetId]
+  );
+
+  const [selectedPreset, setSelectedPreset] = useState<ThemePreset | null>(() => initialPreset);
   const [customTokens, setCustomTokens] = useState<Partial<DesignTokens>>({});
-  const [themeName, setThemeName] = useState('');
-  const [themeDescription, setThemeDescription] = useState('');
+  const [themeName, setThemeName] = useState(() =>
+    initialPreset ? `${initialPreset.name} (自定义)` : ''
+  );
+  const [themeDescription, setThemeDescription] = useState(() =>
+    initialPreset ? `${initialPreset.description} - 自定义版本` : ''
+  );
   const [activeCategory, setActiveCategory] = useState(tokenGroups[0].category);
   const [showImportModal, setShowImportModal] = useState(false);
   const [importData, setImportData] = useState('');
-
-  useEffect(() => {
-    const preset = themePresets.find(p => p.id === initialPresetId);
-    if (preset) {
-      setSelectedPreset(preset);
-      setCustomTokens({});
-      setThemeName(`${preset.name} (自定义)`);
-      setThemeDescription(`${preset.description} - 自定义版本`);
-    }
-  }, [initialPresetId]);
 
   const handlePresetChange = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     const presetId = e.target.value;
@@ -171,7 +175,7 @@ export const ThemeEditor: React.FC<ThemeEditorProps> = ({
       exportPreset.tokens = mergePresetTokens(selectedPreset, customTokens);
       const exportData = JSON.stringify(exportPreset, null, 2);
       onExport?.(exportPreset);
-      
+
       const blob = new Blob([exportData], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
