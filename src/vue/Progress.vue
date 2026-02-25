@@ -39,7 +39,7 @@ const containerStyle = computed(() => ({
 const barStyle = computed(() => ({
   flex: '1',
   height: '0.5rem',
-  backgroundColor: currentTokens.value['color.muted'] as string || '#e5e7eb',
+  backgroundColor: currentTokens.value['color.card'] as string || '#e5e7eb',
   borderRadius: currentTokens.value['radius.sm'] as string || '0.25rem',
   overflow: 'hidden',
 }));
@@ -56,18 +56,23 @@ const fillStyle = computed(() => {
       styles.backgroundColor = currentTokens.value['color.primary'] as string || '#d45a5f';
       break;
     case 'success':
-      styles.backgroundColor = currentTokens.value['color.success'] as string || '#10b981';
+      styles.backgroundColor = currentTokens.value['color.primary'] as string || '#d45a5f';
       break;
     case 'warning':
-      styles.backgroundColor = currentTokens.value['color.warning'] as string || '#f59e0b';
+      styles.backgroundColor = currentTokens.value['color.ring'] as string || '#f59e0b';
       break;
     case 'error':
-      styles.backgroundColor = currentTokens.value['color.error'] as string || '#ef4444';
+      styles.backgroundColor = currentTokens.value['color.destructive'] as string || '#ef4444';
       break;
   }
 
   return styles;
 });
+
+const finalFillStyle = computed(() => ({
+  ...fillStyle.value,
+  width: `${percentage.value}%`,
+}));
 
 const percentage = computed(() => {
   return Math.min(100, Math.max(0, (props.value / props.max) * 100));
@@ -84,7 +89,7 @@ const valueStyle = computed(() => ({
 <template>
   <div :style="containerStyle">
     <div :style="barStyle">
-      <div :style="fillStyle" :style="{ width: percentage + '%' }"></div>
+      <div :style="finalFillStyle"></div>
     </div>
     <span v-if="showValue" :style="valueStyle">{{ Math.round(percentage) }}%</span>
   </div>

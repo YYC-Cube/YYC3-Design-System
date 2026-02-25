@@ -52,7 +52,7 @@ const modalStyle = computed(() => ({
   width: '90%',
   maxHeight: '90vh',
   overflowY: 'auto' as const,
-  boxShadow: currentTokens.value['shadow.lg'] as string || '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+  boxShadow: currentTokens.value['shadow.card'] as string || '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
 }));
 
 const headerStyle = computed(() => ({
@@ -61,12 +61,12 @@ const headerStyle = computed(() => ({
   alignItems: 'center',
   marginBottom: '1rem',
   paddingBottom: '0.75rem',
-  borderBottom: `1px solid ${currentTokens.value['color.border'] as string || '#e5e5e5'}`,
+  borderBottom: `1px solid ${currentTokens.value['color.ring'] as string || '#e5e5e5'}`,
 }));
 
 const titleStyle = computed(() => ({
   margin: '0',
-  fontSize: currentTokens.value['font-size.h2'] as string || '1.5rem',
+  fontSize: currentTokens.value['font-size.heading-2'] as string || '1.5rem',
   fontWeight: '600',
   color: currentTokens.value['color.foreground'] as string || '#000',
 }));
