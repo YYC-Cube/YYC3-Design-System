@@ -14,9 +14,14 @@ import { AnimationOptimizationExample } from '../AnimationOptimizationExample';
 
 const typedScreen = screen as any;
 
+interface MockItem {
+  id: number;
+  name: string;
+}
+
 describe('组件性能测试', () => {
   describe('VirtualList 组件', () => {
-    const mockItems = Array.from({ length: 1000 }, (_, i) => ({
+    const mockItems = Array.from<MockItem>({ length: 1000 }, (_, i) => ({
       id: i,
       name: `Item ${i}`,
     }));

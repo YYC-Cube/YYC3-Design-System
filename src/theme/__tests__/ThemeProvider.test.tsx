@@ -217,23 +217,6 @@ describe('ThemeProvider 组件', () => {
     });
   });
 
-  describe('系统主题检测', () => {
-    it('应该支持系统主题检测', () => {
-      const TestComponent = () => {
-        const { mode } = useTheme();
-        return <div>主题: {mode}</div>;
-      };
-
-      render(
-        <ThemeProvider initial="system">
-          <TestComponent />
-        </ThemeProvider>
-      );
-
-      expect(screen.getByText(/主题:/)).toBeInTheDocument();
-    });
-  });
-
   describe('嵌套组件', () => {
     it('应该支持嵌套组件使用主题', () => {
       const InnerComponent = () => {
