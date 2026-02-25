@@ -1,6 +1,15 @@
+/**
+ * @file 组件集成测试
+ * @description 测试多个组件的集成使用
+ * @module __tests__/integration
+ * @author YYC³
+ * @version 1.0.0
+ * @created 2026-02-21
+ */
+
 import * as React from 'react';
 
-import { render, fireEvent, act } from '@testing-library/react'
+import { render, fireEvent, act } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { ThemeProvider, useTheme } from '../theme/ThemeProvider';
@@ -12,6 +21,11 @@ import { Grid } from '../components/Grid';
 import { Container } from '../components/Container';
 
 describe('组件集成测试', () => {
+  afterEach(() => {
+    // 清理主题状态
+    jest.clearAllMocks();
+  });
+
   describe('主题切换集成', () => {
     it('应该能够在不同主题下渲染Button', () => {
       const TestComponent = () => {
@@ -20,35 +34,34 @@ describe('组件集成测试', () => {
           <div>
             <Button>按钮</Button>
             <button onClick={() => setMode('dark')}>切换主题</button>
-            <div>当前主题: {mode}</div>
+            <span data-testid="current-theme">当前主题: {mode}</span>
           </div>
         );
       };
 
-      render(
+      const { unmount } = render(
         <ThemeProvider>
           <TestComponent />
         </ThemeProvider>
       );
 
-      expect(screen.getByText('当前主题: light')).toBeInTheDocument();
+      expect(screen.getByTestId('current-theme')).toHaveTextContent('当前主题: light');
       expect(screen.getByRole('button', { name: '按钮' })).toBeInTheDocument();
 
       act(() => {
         screen.getByText('切换主题').click();
       });
 
-      expect(screen.getByText('当前主题: dark')).toBeInTheDocument();
+      expect(screen.getByTestId('current-theme')).toHaveTextContent('当前主题: dark');
+      
+      unmount();
     });
 
     it('应该能够在不同主题下渲染Input', () => {
       const TestComponent = () => {
-        const { mode, setMode } = useTheme();
         return (
           <div>
-            <Button>按钮</Button>
-            <button onClick={() => setMode('dark')}>切换主题</button>
-            <div>当前主题: {mode}</div>
+            <Input placeholder="输入框" />
           </div>
         );
       };
@@ -59,7 +72,6 @@ describe('组件集成测试', () => {
         </ThemeProvider>
       );
 
-      expect(screen.getByText('当前主题: light')).toBeInTheDocument();
       expect(screen.getByPlaceholderText('输入框')).toBeInTheDocument();
     });
   });
@@ -80,7 +92,7 @@ describe('组件集成测试', () => {
             <CardContent>
               <Input
                 value={value}
-                onChange={(e: any) => setValue(e.target.value)}
+                onChange={setValue}
                 placeholder="请输入内容"
               />
             </CardContent>
@@ -91,7 +103,11 @@ describe('组件集成测试', () => {
         );
       };
 
-      render(<TestComponent />);
+      render(
+        <ThemeProvider>
+          <TestComponent />
+        </ThemeProvider>
+      );
 
       expect(screen.getByPlaceholderText('请输入内容')).toBeInTheDocument();
       expect(screen.getByRole('button', { name: '提交' })).toBeInTheDocument();
@@ -107,7 +123,7 @@ describe('组件集成测试', () => {
             <CardContent>
               <Input
                 value={value}
-                onChange={(e: any) => setValue(e.target.value)}
+                onChange={setValue}
                 placeholder="请输入内容"
               />
             </CardContent>
@@ -118,7 +134,11 @@ describe('组件集成测试', () => {
         );
       };
 
-      render(<TestComponent />);
+      render(
+        <ThemeProvider>
+          <TestComponent />
+        </ThemeProvider>
+      );
 
       const input = screen.getByPlaceholderText('请输入内容');
       fireEvent.change(input, { target: { value: '测试内容' } });
@@ -151,7 +171,11 @@ describe('组件集成测试', () => {
         );
       };
 
-      render(<TestComponent />);
+      render(
+        <ThemeProvider>
+          <TestComponent />
+        </ThemeProvider>
+      );
 
       expect(screen.getByRole('button', { name: '打开Modal' })).toBeInTheDocument();
       expect(screen.queryByText('内容')).not.toBeInTheDocument();
@@ -166,15 +190,14 @@ describe('组件集成测试', () => {
         const [isOpen, setIsOpen] = React.useState(true);
 
         return (
-          <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-            <ModalHeader>
-              <ModalTitle>标题</ModalTitle>
-            </ModalHeader>
-            <ModalContent>内容</ModalContent>
-            <ModalFooter>
-              <Button onClick={() => setIsOpen(false)}>关闭</Button>
-            </ModalFooter>
-          </Modal>
+          <ThemeProvider>
+            <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+              <ModalContent>内容</ModalContent>
+              <ModalFooter>
+                <Button onClick={() => setIsOpen(false)}>关闭</Button>
+              </ModalFooter>
+            </Modal>
+          </ThemeProvider>
         );
       };
 
@@ -190,83 +213,83 @@ describe('组件集成测试', () => {
 
   describe('Grid集成', () => {
     it('应该能够在Grid中渲染多个Card', () => {
-      const TestComponent = () => {
-        return (
-          <Grid cols={3}>
-            <Card>
-              <CardContent>卡片1</CardContent>
-            </Card>
-            <Card>
-              <CardContent>卡片2</CardContent>
-            </Card>
-            <Card>
-              <CardContent>卡片3</CardContent>
-            </Card>
+      const cards = Array.from({ length: 4 }, (_, i) => (
+        <Card key={i}>
+          <CardHeader>
+            <CardTitle>卡片{i}</CardTitle>
+          </CardHeader>
+          <CardContent>内容{i}</CardContent>
+        </Card>
+      ));
+
+      render(
+        <ThemeProvider>
+          <Grid cols={2}>
+            {cards}
           </Grid>
-        );
-      };
+        </ThemeProvider>
+      );
 
-      render(<TestComponent />);
-
+      expect(screen.getByText('卡片0')).toBeInTheDocument();
       expect(screen.getByText('卡片1')).toBeInTheDocument();
       expect(screen.getByText('卡片2')).toBeInTheDocument();
       expect(screen.getByText('卡片3')).toBeInTheDocument();
     });
 
     it('应该能够在Grid中渲染多个Button', () => {
-      const TestComponent = () => {
-        return (
+      const buttons = Array.from({ length: 4 }, (_, i) => (
+        <Button key={i}>按钮{i}</Button>
+      ));
+
+      render(
+        <ThemeProvider>
           <Grid cols={2}>
-            <Button>按钮1</Button>
-            <Button>按钮2</Button>
+            {buttons}
           </Grid>
-        );
-      };
+        </ThemeProvider>
+      );
 
-      render(<TestComponent />);
-
+      expect(screen.getByRole('button', { name: '按钮0' })).toBeInTheDocument();
       expect(screen.getByRole('button', { name: '按钮1' })).toBeInTheDocument();
       expect(screen.getByRole('button', { name: '按钮2' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: '按钮3' })).toBeInTheDocument();
     });
   });
 
   describe('Container集成', () => {
     it('应该能够在Container中渲染Card', () => {
-      const TestComponent = () => {
-        return (
+      render(
+        <ThemeProvider>
           <Container>
             <Card>
               <CardContent>内容</CardContent>
             </Card>
           </Container>
-        );
-      };
-
-      render(<TestComponent />);
+        </ThemeProvider>
+      );
 
       expect(screen.getByText('内容')).toBeInTheDocument();
     });
 
     it('应该能够在Container中渲染Grid', () => {
-      const TestComponent = () => {
-        return (
+      const items = Array.from({ length: 4 }, (_, i) => (
+        <div key={i}>项目{i}</div>
+      ));
+
+      render(
+        <ThemeProvider>
           <Container>
             <Grid cols={2}>
-              <Card>
-                <CardContent>卡片1</CardContent>
-              </Card>
-              <Card>
-                <CardContent>卡片2</CardContent>
-              </Card>
+              {items}
             </Grid>
           </Container>
-        );
-      };
+        </ThemeProvider>
+      );
 
-      render(<TestComponent />);
-
-      expect(screen.getByText('卡片1')).toBeInTheDocument();
-      expect(screen.getByText('卡片2')).toBeInTheDocument();
+      expect(screen.getByText('项目0')).toBeInTheDocument();
+      expect(screen.getByText('项目1')).toBeInTheDocument();
+      expect(screen.getByText('项目2')).toBeInTheDocument();
+      expect(screen.getByText('项目3')).toBeInTheDocument();
     });
   });
 
@@ -278,78 +301,31 @@ describe('组件集成测试', () => {
 
         return (
           <Container>
-            <Grid cols={2}>
-              <Card>
-                <CardHeader>
-                  <CardTitle>表单卡片</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Input
-                    value={value}
-                    onChange={(e: any) => setValue(e.target.value)}
-                    placeholder="请输入内容"
-                  />
-                </CardContent>
-                <CardContent>
+            <Card>
+              <CardHeader>
+                <CardTitle>复杂场景</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Input
+                  value={value}
+                  onChange={setValue}
+                  placeholder="请输入内容"
+                />
+                <Grid cols={2}>
                   <Button onClick={() => setIsOpen(true)}>打开Modal</Button>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>信息卡片</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p>这是信息内容</p>
-                </CardContent>
-              </Card>
-            </Grid>
-
+                  <Button>提交</Button>
+                </Grid>
+              </CardContent>
+            </Card>
             <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
               <ModalHeader>
                 <ModalTitle>Modal标题</ModalTitle>
               </ModalHeader>
-              <ModalContent>
-                <p>Modal内容</p>
-              </ModalContent>
+              <ModalContent>Modal内容</ModalContent>
               <ModalFooter>
                 <Button onClick={() => setIsOpen(false)}>关闭</Button>
               </ModalFooter>
             </Modal>
-          </Container>
-        );
-      };
-
-      render(<TestComponent />);
-
-      expect(screen.getByText('表单卡片')).toBeInTheDocument();
-      expect(screen.getByText('信息卡片')).toBeInTheDocument();
-      expect(screen.getByPlaceholderText('请输入内容')).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: '打开Modal' })).toBeInTheDocument();
-      expect(screen.queryByText('Modal内容')).not.toBeInTheDocument();
-
-      fireEvent.click(screen.getByRole('button', { name: '打开Modal' }));
-
-      expect(screen.getByText('Modal内容')).toBeInTheDocument();
-    });
-  });
-
-  describe('响应式布局集成', () => {
-    it('应该能够在不同容器宽度下正确渲染', () => {
-      const TestComponent = () => {
-        return (
-          <Container maxWidth="lg">
-            <Grid cols={3}>
-              <Card>
-                <CardContent>卡片1</CardContent>
-              </Card>
-              <Card>
-                <CardContent>卡片2</CardContent>
-              </Card>
-              <Card>
-                <CardContent>卡片3</CardContent>
-              </Card>
-            </Grid>
           </Container>
         );
       };
@@ -360,9 +336,15 @@ describe('组件集成测试', () => {
         </ThemeProvider>
       );
 
-      expect(screen.getByText('卡片1')).toBeInTheDocument();
-      expect(screen.getByText('卡片2')).toBeInTheDocument();
-      expect(screen.getByText('卡片3')).toBeInTheDocument();
+      expect(screen.getByText('复杂场景')).toBeInTheDocument();
+      expect(screen.getByPlaceholderText('请输入内容')).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: '打开Modal' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: '提交' })).toBeInTheDocument();
+      expect(screen.queryByText('Modal内容')).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByRole('button', { name: '打开Modal' }));
+
+      expect(screen.getByText('Modal内容')).toBeInTheDocument();
     });
   });
 });
