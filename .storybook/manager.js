@@ -1,4 +1,3 @@
-import { addons } from '@storybook/addons';
 import { create } from '@storybook/theming';
 import './theme-switcher';
 
@@ -9,6 +8,4 @@ const theme = create({
   brandImage: null,
 });
 
-addons.setConfig({
-  theme,
-});
+export default theme;

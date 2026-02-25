@@ -14,7 +14,6 @@ const config: StorybookConfig = {
   stories: [
     '../src/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|ts|tsx)',
-    '../stories/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: [
     '@storybook/addon-links',
@@ -93,14 +92,6 @@ const config: StorybookConfig = {
       include: [
         'react',
         'react-dom',
-        '@radix-ui/react-dialog',
-        '@radix-ui/react-dropdown-menu',
-        '@radix-ui/react-tabs',
-        '@radix-ui/react-select',
-        '@radix-ui/react-switch',
-        '@radix-ui/react-slider',
-        '@radix-ui/react-checkbox',
-        '@radix-ui/react-radio-group',
         'zustand',
         'clsx',
         'tailwind-merge',
