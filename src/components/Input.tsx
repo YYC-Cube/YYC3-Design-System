@@ -1,4 +1,5 @@
-import React, { memo, useCallback } from 'react';
+import * as React from 'react';
+import { memo, useCallback } from 'react';
 import { InputProps } from '../../types/tokens';
 import { useTheme } from '../theme/useTheme';
 
@@ -12,6 +13,7 @@ export const Input = memo<InputProps>(({
   onChange,
   required = false,
   name,
+  readOnly = false,
   'data-testid': dataTestId,
   className = '',
 }) => {
@@ -31,7 +33,7 @@ export const Input = memo<InputProps>(({
     color: tokens['color.foreground'] as string || '#000',
     backgroundColor: tokens['color.background'] as string || '#fff',
     opacity: disabled ? 0.5 : 1,
-    cursor: disabled ? 'not-allowed' : 'text',
+    cursor: disabled ? 'not-allowed' : (readOnly ? 'default' : 'text'),
     transition: 'all 0.2s ease',
     outline: 'none',
     width: '100%',
@@ -67,6 +69,7 @@ export const Input = memo<InputProps>(({
         onBlur={handleBlur}
         required={required}
         name={name}
+        readOnly={readOnly}
         data-testid={dataTestId}
         style={inputStyle}
         className={className}

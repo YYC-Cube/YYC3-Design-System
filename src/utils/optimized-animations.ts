@@ -21,6 +21,8 @@ export const animationEasings: Record<AnimationEasing, string> = {
   'ease-out': 'cubic-bezier(0, 0, 0.2, 1)',
   'ease-in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
   bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+  elastic: 'cubic-bezier(0.68, -0.6, 0.32, 1.6)',
+  back: 'cubic-bezier(0.36, 0, 0.66, -0.56)',
 };
 
 const animationKeyframes: Record<AnimationKeyframe, string> = {

@@ -78,6 +78,7 @@ export interface InputProps {
   autoFocus?: boolean;
   required?: boolean;
   name?: string;
+  readOnly?: boolean;
   'data-testid'?: string;
   className?: string;
 }

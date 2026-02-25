@@ -25,7 +25,7 @@ export interface AnimationTokens {
 }
 
 export type AnimationDuration = 'fast' | 'normal' | 'slow';
-export type AnimationEasing = 'ease-in' | 'ease-out' | 'ease-in-out' | 'bounce';
+export type AnimationEasing = 'ease-in' | 'ease-out' | 'ease-in-out' | 'bounce' | 'elastic' | 'back';
 export type AnimationKeyframe = 'fade-in' | 'fade-out' | 'slide-in-up' | 'slide-in-down' | 'slide-in-left' | 'slide-in-right' | 'scale-in' | 'scale-out' | 'rotate-in' | 'bounce-in';
 
 export interface AnimationConfig {
