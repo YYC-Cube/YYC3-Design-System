@@ -37,7 +37,7 @@ const checkboxStyle = computed(() => {
     alignItems: 'center',
     gap: '0.5rem',
     cursor: props.disabled ? 'not-allowed' : 'pointer',
-    opacity: props.disabled ? 0.5 : 1,
+    opacity: props.disabled ? '0.5' : '1',
     fontSize: currentTokens.value['font-size.body'] as string || '1rem',
     fontFamily: currentTokens.value['typography.font-sans'] as string || 'system-ui',
   };

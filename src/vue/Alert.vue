@@ -45,20 +45,20 @@ const alertStyle = computed(() => {
 
   switch (props.variant) {
     case 'default':
-      styles.backgroundColor = currentTokens.value['color.muted'] as string || '#f8f9ef';
+      styles.backgroundColor = currentTokens.value['color.card'] as string || '#f8f9ef';
       styles.color = currentTokens.value['color.foreground'] as string || '#000';
-      styles.border = `1px solid ${currentTokens.value['color.border'] as string || '#e5e5e5'}`;
+      styles.border = `1px solid ${currentTokens.value['color.ring'] as string || '#e5e5e5'}`;
       break;
     case 'destructive':
-      styles.backgroundColor = currentTokens.value['color.error'] as string || '#ef4444';
-      styles.color = currentTokens.value['color.error-foreground'] as string || '#fff';
+      styles.backgroundColor = currentTokens.value['color.destructive'] as string || '#ef4444';
+      styles.color = currentTokens.value['color.background'] as string || '#fff';
       break;
     case 'success':
-      styles.backgroundColor = currentTokens.value['color.success'] as string || '#10b981';
+      styles.backgroundColor = currentTokens.value['color.primary'] as string || '#10b981';
       styles.color = '#fff';
       break;
     case 'warning':
-      styles.backgroundColor = currentTokens.value['color.warning'] as string || '#f59e0b';
+      styles.backgroundColor = currentTokens.value['color.ring'] as string || '#f59e0b';
       styles.color = '#fff';
       break;
   }
@@ -66,7 +66,7 @@ const alertStyle = computed(() => {
   return styles;
 });
 
-const iconMap = {
+const iconMap: Record<'default' | 'destructive' | 'success' | 'warning', string> = {
   default: 'ℹ️',
   destructive: '⚠️',
   success: '✅',

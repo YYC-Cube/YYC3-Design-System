@@ -1,20 +1,5 @@
-import * as React from 'react';
-import { useState, useCallback, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/Card';
-import { Button } from '../components/Button';
-import { Input } from '../components/Input';
-import { Badge } from '../components/Badge';
-import { useTheme } from '../theme/useTheme';
-import { tokenGenerator } from './token-generator';
-import { GeneratedTokens, GeneratedColorToken, DesignTokens } from '../../types/tokens';
+import { GeneratedTokens, GeneratedColorToken } from '../../types/tokens';
 import culori from 'culori';
-
-type TokenValue = string | number | Record<string, string | number>;
-
-const getTokenValue = (tokens: Record<string, unknown>, key: string): string => {
-  const value = tokens[key];
-  return typeof value === 'string' ? value : '#000000';
-};
 
 export interface ColorSpaceValue {
   hex: string;
@@ -65,7 +50,6 @@ export class EnhancedAITokenGenerator {
       includeTints = true,
       targetContrast = 'AA',
       optimizeForAccessibility = true,
-      colorSpace = 'hex',
     } = options;
 
     const colors = this.harmonies[harmony](baseColor);
@@ -111,7 +95,7 @@ export class EnhancedAITokenGenerator {
         shades.forEach((shade, shadeIndex) => {
           const shadeSpaces = this.getAllColorSpaces(shade);
           const shadeContrast = this.calculateContrastRatio(shade, '#ffffff');
-          
+
           const enhancedShade: EnhancedColorToken = {
             name: `${colorName}-${shadeIndex * 100}`,
             value: {
@@ -124,7 +108,7 @@ export class EnhancedAITokenGenerator {
             wcagAA: shadeContrast >= 4.5,
             wcagAAA: shadeContrast >= 7,
           };
-          
+
           colorTokens[`${colorName}-${shadeIndex * 100}`] = enhancedShade;
           generatedTokens[`${colorName}-${shadeIndex * 100}`] = enhancedShade;
         });
@@ -135,7 +119,7 @@ export class EnhancedAITokenGenerator {
         tints.forEach((tint, tintIndex) => {
           const tintSpaces = this.getAllColorSpaces(tint);
           const tintContrast = this.calculateContrastRatio(tint, '#ffffff');
-          
+
           const enhancedTint: EnhancedColorToken = {
             name: `${colorName}-${tintIndex * 100 + 50}`,
             value: {
@@ -148,7 +132,7 @@ export class EnhancedAITokenGenerator {
             wcagAA: tintContrast >= 4.5,
             wcagAAA: tintContrast >= 7,
           };
-          
+
           colorTokens[`${colorName}-${tintIndex * 100 + 50}`] = enhancedTint;
           generatedTokens[`${colorName}-${tintIndex * 100 + 50}`] = enhancedTint;
         });
@@ -216,10 +200,10 @@ export class EnhancedAITokenGenerator {
 
       const adjustment = currentRatio < targetRatio * 0.5 ? 0.05 : 0.01;
       const newLightness = Math.max(0.05, Math.min(0.95, hsl.l + (hsl.l > 0.5 ? -adjustment : adjustment)));
-      
+
       const newColor: culori.Hsl = { h: hsl.h || 0, s: hsl.s, l: newLightness, mode: 'hsl' };
       optimized = culori.formatter.hex(newColor);
-      
+
       iterations++;
     }
 
@@ -414,7 +398,7 @@ export class EnhancedAITokenGenerator {
 
       const enhancedColors = tokens.enhancedColors || {};
       const lowContrastColors = Object.entries(enhancedColors).filter(([_, color]) => !color.wcagAA);
-      
+
       if (lowContrastColors.length > 0) {
         recommendations.push(`发现 ${lowContrastColors.length} 个颜色未达到 WCAG AA 对比度标准`);
         recommendations.push('建议启用智能对比度优化功能');
@@ -423,7 +407,7 @@ export class EnhancedAITokenGenerator {
 
     const spacing = tokens.spacing || {};
     const spacingValues = Object.values(spacing);
-    
+
     if (spacingValues.length > 0) {
       const values = spacingValues.map(s => {
         if (typeof s === 'string') return parseInt(s);

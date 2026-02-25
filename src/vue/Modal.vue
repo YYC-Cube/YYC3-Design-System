@@ -92,7 +92,7 @@ const handleOverlayClick = (event: MouseEvent) => {
   }
 };
 
-watch(() => props.open, (newVal) => {
+watch(() => props.open, (newVal: boolean) => {
   if (newVal) {
     document.body.style.overflow = 'hidden';
   } else {

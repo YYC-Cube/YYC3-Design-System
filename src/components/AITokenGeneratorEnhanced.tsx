@@ -8,8 +8,6 @@ import { useTheme } from '../theme/useTheme';
 import { enhancedTokenGenerator, TokenGenerationEnhancedOptions, EnhancedColorToken } from '../ai/token-generator-enhanced';
 import { GeneratedTokens } from '../../types/tokens';
 
-type TokenValue = string | number | Record<string, string | number>;
-
 const getTokenValue = (tokens: Record<string, unknown>, key: string): string => {
   const value = tokens[key];
   return typeof value === 'string' ? value : '#000000';

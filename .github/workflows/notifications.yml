@@ -22,7 +22,8 @@ jobs:
         with:
           status: success
           text: 'CI/CD Pipeline completed successfully'
-          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Send failure notification
         uses: 8398a7/action-slack@v3
@@ -30,7 +31,8 @@ jobs:
         with:
           status: failure
           text: 'CI/CD Pipeline failed'
-          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   discord-notification:
     name: Discord Notification
@@ -41,7 +43,7 @@ jobs:
         if: env.DISCORD_WEBHOOK_URL != ''
         uses: sarisia/actions-status-discord@v1
         with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
           status: ${{ job.status }}
           title: ${{ github.event.workflow_run.name }}
           description: "Workflow: ${{ github.event.workflow_run.name }}\nStatus: ${{ github.event.workflow_run.conclusion }}\nBranch: ${{ github.event.workflow_run.head_branch }}\nCommit: ${{ github.event.workflow_run.head_sha }}"
@@ -109,7 +111,7 @@ jobs:
           status: ${{ job.status }}
           text: 'Weekly Build Report generated'
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   alert-on-critical-failures:
     name: Alert on Critical Failures
