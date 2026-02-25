@@ -619,6 +619,7 @@ export type ButtonProps = CommonProps & {
 };
 
 export type InputProps = CommonProps & {
+  defaultValue?: string;
   type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'color';
   label?: string;
   placeholder?: string;

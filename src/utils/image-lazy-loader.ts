@@ -353,4 +353,5 @@ export default {
   createLazyImageWithPlaceholder,
   getLazyImageStats,
   destroyAllLazyImages,
+  clearImageCache,
 };

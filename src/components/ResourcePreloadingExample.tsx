@@ -109,12 +109,9 @@ export const ResourcePreloadingExample: React.FC<ResourcePreloadingExampleProps>
   ];
 
   useEffect(() => {
-    const stats = getResourcePreloaderStats();
-    setResourceStats(stats);
-
     const hints = generatePreloadHints(sampleResources, sampleOrigins);
     setPreloadHints(hints);
-  }, []);
+  }, [sampleResources, sampleOrigins]);
 
   const handlePreloadSingle = useCallback(async () => {
     setPreloading(true);
@@ -130,7 +127,7 @@ export const ResourcePreloadingExample: React.FC<ResourcePreloadingExampleProps>
     } finally {
       setPreloading(false);
     }
-  }, []);
+  }, [sampleResources]);
 
   const handlePreloadBatch = useCallback(async () => {
     setPreloading(true);
@@ -158,7 +155,7 @@ export const ResourcePreloadingExample: React.FC<ResourcePreloadingExampleProps>
     } finally {
       setPreloading(false);
     }
-  }, []);
+  }, [sampleResources]);
 
   const handlePreloadWithProgress = useCallback(async () => {
     setPreloading(true);
@@ -204,7 +201,7 @@ export const ResourcePreloadingExample: React.FC<ResourcePreloadingExampleProps>
     } catch (error) {
       console.error('资源预取失败:', error);
     }
-  }, []);
+  }, [sampleResources]);
 
   const handlePrefetchBatch = useCallback(async () => {
     try {
@@ -223,7 +220,7 @@ export const ResourcePreloadingExample: React.FC<ResourcePreloadingExampleProps>
     } catch (error) {
       console.error('批量资源预取失败:', error);
     }
-  }, []);
+  }, [sampleResources]);
 
   const handleClearAll = useCallback(() => {
     clearAllResources();

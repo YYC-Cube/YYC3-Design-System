@@ -1,0 +1,14 @@
+# ESLint ignore patterns
+node_modules/**
+dist/**
+build/**
+**/*.stories.ts
+**/*.stories.tsx
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+**/*.mjs
+scripts/**/*.mjs
+scripts/*.js
+scripts/*.mjs

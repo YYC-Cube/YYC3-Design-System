@@ -119,7 +119,7 @@ ModalHeader.displayName = 'ModalHeader';
 
 export const ModalTitle = memo<{ children: React.ReactNode; className?: string }>(({ children, className }) => {
   const { tokens } = useTheme();
-  
+
   const titleStyle: React.CSSProperties = {
     fontSize: tokens['font-size.heading-2'] as string || '1.5rem',
     fontWeight: '600',
@@ -128,9 +128,9 @@ export const ModalTitle = memo<{ children: React.ReactNode; className?: string }
   };
 
   return (
-    <h3 style={titleStyle} className={className}>
+    <h2 style={titleStyle} className={className}>
       {children}
-    </h3>
+    </h2>
   );
 });
 

@@ -9,8 +9,9 @@
 
 import { execSync } from 'child_process';
 import { writeFileSync } from 'fs';
+import console from 'console';
+import process from 'process';
 
-// eslint-disable-next-line no-console
 console.log('🔍 收集所有测试错误...\n');
 
 try {

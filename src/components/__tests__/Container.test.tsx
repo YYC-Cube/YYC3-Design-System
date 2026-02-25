@@ -1,12 +1,10 @@
 import * as React from 'react';
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import '@testing-library/jest-dom';
-import { Container } from '../Container'
-import { ThemeProvider } from '../../theme/ThemeProvider';;
+import { Container } from '../Container';
+import { ThemeProvider } from '../../theme/ThemeProvider';
 
 describe('Container 组件', () => {
   describe('基础渲染', () => {

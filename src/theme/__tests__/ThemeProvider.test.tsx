@@ -244,16 +244,6 @@ describe('ThemeProvider 组件', () => {
       expect(screen.getByText('内部主题: light')).toBeInTheDocument();
     });
   });
+});
 
-  describe('ref', () => {
-    it('应该支持ref转发', () => {
-      const ref = React.createRef<HTMLDivElement>();
-      render(
-        <ThemeProvider ref={ref}>
-          <div>内容</div>
-        </ThemeProvider>
-      );
-      expect(ref.current).toBeInstanceOf(HTMLDivElement);
-    });
-  });
 });

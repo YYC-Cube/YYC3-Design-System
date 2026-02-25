@@ -1,12 +1,10 @@
 import * as React from 'react';
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import '@testing-library/jest-dom';
-import { Grid } from '../Grid'
-import { ThemeProvider } from '../../theme/ThemeProvider';;
+import { Grid } from '../Grid';
+import { ThemeProvider } from '../../theme/ThemeProvider';
 
 describe('Grid 组件', () => {
   describe('基础渲染', () => {

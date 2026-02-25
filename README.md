@@ -735,28 +735,58 @@ import { useDebounce, useThrottle, useMemoizedCallback } from '@yyc3/design-syst
 
 ## CI/CD
 
-项目包含 GitHub Actions 工作流，在以下情况下自动运行：
+项目包含完整的 GitHub Actions 工作流，在以下情况下自动运行：
 
-- 推送到 `main` 分支
-- 针对包含令牌变更的 Pull Request
+- 推送到 `main` 或 `develop` 分支
+- 针对 `main` 或 `develop` 分支的 Pull Request
 
 ### 工作流
 
 | 工作流 | 触发条件 | 功能 |
 |--------|----------|------|
+| `typecheck.yml` | Push/PR | TypeScript 类型检查 |
+| `build.yml` | Push/PR | 项目构建与 Lint |
+| `test.yml` | Push/PR | 单元测试与覆盖率 |
+| `security-scan.yml` | Push/PR/定时 | 安全扫描 |
 | `test-and-build.yml` | Push/PR | 基础测试与构建 |
 | `test-and-report-pr-comment.yml` | Push/PR | PR 评论与 Check 注释 |
 
 ### CI 流程
 
-1. 安装依赖
-2. 运行 OKLCH 转换测试
-3. 运行单元测试
-4. 构建设计令牌
-5. 生成 OKLCH 报告
-6. 上传构建产物
-7. 发布 PR 评论
-8. 创建 GitHub Check
+#### 类型检查流程
+
+1. 检出代码
+2. 设置 Node.js 18 环境
+3. 安装依赖 (`npm ci`)
+4. 运行 TypeScript 类型检查 (`npm run typecheck`)
+5. 验证类型检查结果
+
+#### 构建流程
+
+1. 检出代码
+2. 设置 Node.js 18 环境
+3. 安装依赖 (`npm ci`)
+4. 运行 Lint (`npm run lint`)
+5. 构建项目 (`npm run build`)
+6. 验证构建产物
+7. 上传构建产物
+
+#### 测试流程
+
+1. 检出代码
+2. 设置 Node.js 环境（16.x, 18.x, 20.x 矩阵）
+3. 安装依赖 (`npm ci`)
+4. 运行测试 (`npm test`)
+5. 生成覆盖率报告 (`npm run test:coverage`)
+6. 上传覆盖率到 Codecov
+7. 上传测试结果
+
+#### 安全扫描流程
+
+1. npm audit 安全审计
+2. Snyk 安全扫描
+3. 依赖审查
+4. CodeQL 代码分析
 
 详细配置请参考 [`.github/workflows/README.md`](.github/workflows/README.md)
 

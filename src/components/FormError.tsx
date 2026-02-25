@@ -14,6 +14,7 @@ import { memo, ReactNode } from 'react';
 import { useTheme } from '../theme/ThemeProvider';
 
 export interface FormErrorProps {
+  message?: string;
   errors?: Record<string, any>;
   name?: string;
   className?: string;

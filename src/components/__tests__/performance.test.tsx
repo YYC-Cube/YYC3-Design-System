@@ -21,7 +21,7 @@ interface MockItem {
 
 describe('组件性能测试', () => {
   describe('VirtualList 组件', () => {
-    const mockItems = Array.from<MockItem>({ length: 1000 }, (_, i) => ({
+    const mockItems = Array.from({ length: 1000 }, (_, i): MockItem => ({
       id: i,
       name: `Item ${i}`,
     }));
@@ -32,7 +32,7 @@ describe('组件性能测试', () => {
           items={mockItems}
           itemHeight={50}
           containerHeight={500}
-          renderItem={(item) => <div key={item.id}>{item.name}</div>}
+          renderItem={(item: MockItem) => <div key={item.id}>{item.name}</div>}
         />
       );
 
@@ -45,7 +45,7 @@ describe('组件性能测试', () => {
           items={mockItems}
           itemHeight={50}
           containerHeight={500}
-          renderItem={(item) => <div key={item.id}>{item.name}</div>}
+          renderItem={(item: MockItem) => <div key={item.id}>{item.name}</div>}
         />
       );
 
@@ -59,7 +59,7 @@ describe('组件性能测试', () => {
           items={mockItems}
           itemHeight={(index) => (index % 2 === 0 ? 100 : 50)}
           containerHeight={500}
-          renderItem={(item) => <div key={item.id}>{item.name}</div>}
+          renderItem={(item: MockItem) => <div key={item.id}>{item.name}</div>}
         />
       );
 
@@ -72,7 +72,7 @@ describe('组件性能测试', () => {
           items={mockItems}
           itemHeight={50}
           containerHeight={500}
-          renderItem={(item) => <div key={item.id}>{item.name}</div>}
+          renderItem={(item: MockItem) => <div key={item.id}>{item.name}</div>}
           scrollToIndex={500}
         />
       );
@@ -90,7 +90,7 @@ describe('组件性能测试', () => {
           items={[]}
           itemHeight={50}
           containerHeight={500}
-          renderItem={(item) => <div key={item.id}>{item.name}</div>}
+          renderItem={(item: MockItem) => <div key={item.id}>{item.name}</div>}
         />
       );
 
@@ -129,7 +129,7 @@ describe('组件性能测试', () => {
           itemHeight={100}
           containerWidth={500}
           containerHeight={500}
-          renderItem={(item) => <div key={item.id}>{item.name}</div>}
+          renderItem={(item: MockItem) => <div key={item.id}>{item.name}</div>}
         />
       );
 
@@ -144,7 +144,7 @@ describe('组件性能测试', () => {
           itemHeight={100}
           containerWidth={500}
           containerHeight={500}
-          renderItem={(item) => <div key={item.id}>{item.name}</div>}
+          renderItem={(item: MockItem) => <div key={item.id}>{item.name}</div>}
         />
       );
 
@@ -161,7 +161,7 @@ describe('组件性能测试', () => {
           containerWidth={500}
           containerHeight={500}
           columns={5}
-          renderItem={(item) => <div key={item.id}>{item.name}</div>}
+          renderItem={(item: MockItem) => <div key={item.id}>{item.name}</div>}
         />
       );
 
@@ -176,7 +176,7 @@ describe('组件性能测试', () => {
           itemHeight={100}
           containerWidth={500}
           containerHeight={500}
-          renderItem={(item) => <div key={item.id}>{item.name}</div>}
+          renderItem={(item: MockItem) => <div key={item.id}>{item.name}</div>}
         />
       );
 
@@ -286,7 +286,7 @@ describe('组件性能测试', () => {
           items={mockItems}
           itemHeight={50}
           containerHeight={500}
-          renderItem={(item) => <div key={item.id}>{item.name}</div>}
+          renderItem={(item: MockItem) => <div key={item.id}>{item.name}</div>}
         />
       );
 
@@ -302,7 +302,7 @@ describe('组件性能测试', () => {
           items={mockItems}
           itemHeight={50}
           containerHeight={500}
-          renderItem={(item) => <div key={item.id}>{item.name}</div>}
+          renderItem={(item: MockItem) => <div key={item.id}>{item.name}</div>}
         />
       );
 

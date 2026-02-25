@@ -4,6 +4,7 @@ import { useTheme } from '../theme/useTheme';
 
 export const Input = memo<InputProps>(({
   type = 'text',
+  defaultValue,
   label,
   placeholder = '',
   disabled = false,
