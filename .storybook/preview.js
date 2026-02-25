@@ -37,6 +37,6 @@ export const parameters = {
     current: 'light',
     darkClass: 'dark',
     lightClass: 'light',
-    stylePreview: true
+    stylePreview: false
   }
 };
