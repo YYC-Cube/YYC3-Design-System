@@ -1,5 +1,4 @@
 import { create } from '@storybook/theming';
-import './theme-switcher';
 
 const theme = create({
   base: 'light',
