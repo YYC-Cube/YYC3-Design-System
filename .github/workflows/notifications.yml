@@ -1,0 +1,159 @@
+name: Notifications and Alerts
+
+on:
+  workflow_run:
+    workflows: [CI/CD Pipeline, Code Quality Check, Performance Monitoring, Test Coverage Report]
+    types: [completed]
+  schedule:
+    - cron: '0 9 * * 1'
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  slack-notification:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.event == 'push' || github.event_name == 'schedule'
+    steps:
+      - name: Send success notification
+        if: github.event.workflow_run.conclusion == 'success'
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          text: 'CI/CD Pipeline completed successfully'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send failure notification
+        if: github.event.workflow_run.conclusion == 'failure'
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          text: 'CI/CD Pipeline failed'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  discord-notification:
+    name: Discord Notification
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.event == 'push' || github.event_name == 'schedule'
+    steps:
+      - name: Send Discord notification
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          status: ${{ job.status }}
+          title: ${{ github.event.workflow_run.name }}
+          description: "Workflow: ${{ github.event.workflow_run.name }}\nStatus: ${{ github.event.workflow_run.conclusion }}\nBranch: ${{ github.event.workflow_run.head_branch }}\nCommit: ${{ github.event.workflow_run.head_sha }}"
+          url: ${{ github.event.workflow_run.html_url }}
+          color: ${{ github.event.workflow_run.conclusion == 'success' && '0x57F287' || github.event.workflow_run.conclusion == 'failure' && '0xED4245' || '0xFEE75C' }}
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+  github-status:
+    name: GitHub Status Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get workflow run status
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: workflow } = await github.rest.actions.getWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.event.workflow_run.id
+            });
+
+            const status = workflow.conclusion === 'success' ? 'success' : 'failure';
+
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: workflow.head_sha,
+              state: status,
+              description: `Workflow ${workflow.name} ${status}`,
+              context: 'ci/cd'
+            });
+
+  daily-report:
+    name: Daily Build Report
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate daily report
+        run: |
+          COMMITS=$(git log --since="7 days ago" --pretty=format:"%h - %s" | wc -l)
+          BUILD_SIZE=$(du -sh node_modules | cut -f1)
+
+          echo "## Weekly Build Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Commits this week: $COMMITS" >> $GITHUB_STEP_SUMMARY
+          echo "- Node modules size: $BUILD_SIZE" >> $GITHUB_STEP_SUMMARY
+          echo "- Report date: $(date)" >> $GITHUB_STEP_SUMMARY
+
+      - name: Send daily report to Slack
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          text: 'Weekly Build Report generated'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  alert-on-critical-failures:
+    name: Alert on Critical Failures
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'failure'
+    steps:
+      - name: Check for critical failures
+        run: |
+          echo "## Critical Failure Alert" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Workflow: ${{ github.event.workflow_run.name }}" >> $GITHUB_STEP_SUMMARY
+          echo "Status: FAILED" >> $GITHUB_STEP_SUMMARY
+          echo "Branch: ${{ github.event.workflow_run.head_branch }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Create GitHub issue for failure
+        if: github.event.workflow_run.conclusion == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issueTitle = `CI/CD Failure: ${{ github.event.workflow_run.name }}`;
+            const issueBody = "## CI/CD Pipeline Failure\n\n**Workflow**: ${{ github.event.workflow_run.name }}\n**Status**: Failed\n**Branch**: ${{ github.event.workflow_run.head_branch }}\n**Commit**: ${{ github.event.workflow_run.head_sha }}\n\n**Workflow URL**: ${{ github.event.workflow_run.html_url }}\n\nPlease investigate failure and fix issues.";
+
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              creator: context.actor
+            });
+
+            const existingIssue = issues.find(issue => issue.title === issueTitle);
+
+            if (!existingIssue) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issueTitle,
+                body: issueBody,
+                labels: ['bug', 'ci-cd']
+              });
+            }
