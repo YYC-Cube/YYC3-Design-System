@@ -40,8 +40,8 @@ jobs:
     if: github.event.workflow_run.event == 'push' || github.event_name == 'schedule'
     steps:
       - name: Send Discord notification
-        if: env.DISCORD_WEBHOOK_URL != ''
         uses: sarisia/actions-status-discord@v1
+        if: always()
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
           status: ${{ job.status }}
