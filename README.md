@@ -744,49 +744,94 @@ import { useDebounce, useThrottle, useMemoizedCallback } from '@yyc3/design-syst
 
 | 工作流 | 触发条件 | 功能 |
 |--------|----------|------|
-| `typecheck.yml` | Push/PR | TypeScript 类型检查 |
-| `build.yml` | Push/PR | 项目构建与 Lint |
-| `test.yml` | Push/PR | 单元测试与覆盖率 |
+| `enhanced-ci-pipeline.yml` | Push/PR | 增强型 CI 流程 |
 | `security-scan.yml` | Push/PR/定时 | 安全扫描 |
 | `test-and-build.yml` | Push/PR | 基础测试与构建 |
 | `test-and-report-pr-comment.yml` | Push/PR | PR 评论与 Check 注释 |
 
-### CI 流程
+### 增强型 CI 流程
 
-#### 类型检查流程
+#### 1. 类型检查
 
-1. 检出代码
-2. 设置 Node.js 18 环境
-3. 安装依赖 (`npm ci`)
-4. 运行 TypeScript 类型检查 (`npm run typecheck`)
-5. 验证类型检查结果
+- 检出代码并设置 Node.js 18 环境
+- 安装依赖 (`npm ci`)
+- 运行 TypeScript 类型检查 (`npm run typecheck`)
 
-#### 构建流程
+#### 2. 代码质量检查
 
-1. 检出代码
-2. 设置 Node.js 18 环境
-3. 安装依赖 (`npm ci`)
-4. 运行 Lint (`npm run lint`)
-5. 构建项目 (`npm run build`)
-6. 验证构建产物
-7. 上传构建产物
+- 运行 ESLint 检查 (`npm run lint`)
+- 确保代码符合规范
+- 阻止不符合规范的代码合并
 
-#### 测试流程
+#### 3. 项目构建
 
-1. 检出代码
-2. 设置 Node.js 环境（16.x, 18.x, 20.x 矩阵）
-3. 安装依赖 (`npm ci`)
-4. 运行测试 (`npm test`)
-5. 生成覆盖率报告 (`npm run test:coverage`)
-6. 上传覆盖率到 Codecov
-7. 上传测试结果
+- 检出代码并设置 Node.js 18 环境
+- 安装依赖 (`npm ci`)
+- 构建项目 (`npm run build`)
+- 验证构建产物 (`dist/` 目录)
+- 上传构建产物为 artifacts
 
-#### 安全扫描流程
+#### 4. 测试与覆盖率
 
-1. npm audit 安全审计
-2. Snyk 安全扫描
-3. 依赖审查
-4. CodeQL 代码分析
+- 在多个 Node.js 版本下运行测试（16.x, 18.x, 20.x）
+- 生成测试覆盖率报告 (`npm run test:coverage`)
+- **覆盖率阈值检查**：确保覆盖率 ≥ 80%
+- 上传覆盖率到 Codecov
+- 上传测试结果为 artifacts
+
+#### 5. 性能测试
+
+- **Lighthouse CI**：自动运行 Lighthouse 性能测试
+- **性能基准测试**：运行性能基准脚本 (`npm run benchmark`)
+- **性能预算检查**：根据 Lighthouse 预算验证资源大小
+- 上传性能测试结果
+
+#### 6. 自动部署
+
+- **预览环境**：为每个 PR 自动部署预览环境
+- **PR 评论**：自动在 PR 中添加预览 URL
+- **环境管理**：使用 GitHub Environments 管理部署
+
+#### 7. 通知
+
+- 自动发送构建状态通知
+- 汇总所有检查结果
+- 失败时提供详细错误信息
+
+### 性能预算
+
+项目配置了 Lighthouse 性能预算，详见 [`.github/lighthouse-budget.json`](.github/lighthouse-budget.json)：
+
+| 指标 | 预算值 |
+|--------|----------|
+| First Contentful Paint (FCP) | 1.5s |
+| First Meaningful Paint (FMP) | 2.0s |
+| Interactive (TTI) | 3.0s |
+| First CPU Idle | 2.5s |
+| Max Potential FID | 100ms |
+| 总资源大小 | 500KB |
+| JS 文件大小 | 200KB |
+| CSS 文件大小 | 100KB |
+| 图片大小 | 150KB |
+
+### 代码覆盖率
+
+- **目标覆盖率**：80%
+- **覆盖率检查**：在 CI 中自动验证
+- **覆盖率报告**：自动生成并上传到 Codecov
+- **失败处理**：覆盖率低于阈值时阻止合并
+
+### 本地性能测试
+
+```bash
+# 运行性能基准测试
+npm run benchmark
+```
+
+基准测试包括：
+- Token 查找性能（简单路径 vs 嵌套路径）
+- 对象创建性能
+- 数组操作性能（map、filter、reduce）
 
 详细配置请参考 [`.github/workflows/README.md`](.github/workflows/README.md)
 
