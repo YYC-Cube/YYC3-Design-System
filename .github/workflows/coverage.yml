@@ -37,17 +37,17 @@ jobs:
             STATEMENTS=$(cat coverage/coverage-summary.json | grep -oP '(?<="statements":\{)[^}]*' | grep -oP '(?<="pct":)\d+' | head -1)
             BRANCHES=$(cat coverage/coverage-summary.json | grep -oP '(?<="branches":\{)[^}]*' | grep -oP '(?<="pct":)\d+' | head -1)
             FUNCTIONS=$(cat coverage/coverage-summary.json | grep -oP '(?<="functions":\{)[^}]*' | grep -oP '(?<="pct":)\d+' | head -1)
-
+            
             echo "Total coverage: $TOTAL%"
             echo "Statements: $STATEMENTS%"
             echo "Branches: $BRANCHES%"
             echo "Functions: $FUNCTIONS%"
-
+            
             echo "TOTAL=$TOTAL" >> $GITHUB_ENV
             echo "STATEMENTS=$STATEMENTS" >> $GITHUB_ENV
             echo "BRANCHES=$BRANCHES" >> $GITHUB_ENV
             echo "FUNCTIONS=$FUNCTIONS" >> $GITHUB_ENV
-
+            
             if [ "$TOTAL" -lt "${{ env.COVERAGE_THRESHOLD }}" ]; then
               echo "Coverage ($TOTAL%) is below threshold (${{ env.COVERAGE_THRESHOLD }}%)"
               exit 1
@@ -138,7 +138,7 @@ jobs:
           git checkout HEAD~1
           npm ci
           npm test -- --coverage --watchAll=false
-
+          
           if [ -f "coverage/coverage-summary.json" ]; then
             PREVIOUS=$(cat coverage/coverage-summary.json | grep -oP '(?<="total":\{)[^}]*' | grep -oP '(?<="pct":)\d+' | head -1)
             echo "Previous coverage: $PREVIOUS%"
@@ -151,7 +151,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "- Previous coverage: ${{ env.PREVIOUS }}%" >> $GITHUB_STEP_SUMMARY
           echo "- Current coverage: ${{ env.CURRENT }}%" >> $GITHUB_STEP_SUMMARY
-
+          
           CHANGE=$((CURRENT - PREVIOUS))
           if [ $CHANGE -gt 0 ]; then
             echo "- Change: +$CHANGE% ✅" >> $GITHUB_STEP_SUMMARY
@@ -163,20 +163,28 @@ jobs:
 
       - name: Comment on coverage change
         if: github.event_name == 'pull_request'
-        run: |
-          echo "## Coverage Comparison" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- Previous coverage: ${{ env.PREVIOUS }}%" >> $GITHUB_STEP_SUMMARY
-          echo "- Current coverage: ${{ env.CURRENT }}%" >> $GITHUB_STEP_SUMMARY
-
-          CHANGE=$((${{ env.CURRENT }} - ${{ env.PREVIOUS }}))
-          if [ $CHANGE -gt 0 ]; then
-            echo "- Change: +$CHANGE% ✅" >> $GITHUB_STEP_SUMMARY
-          elif [ $CHANGE -lt 0 ]; then
-            echo "- Change: $CHANGE% ⚠️" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "- Change: No change" >> $GITHUB_STEP_SUMMARY
-          fi
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const change = parseInt(process.env.CURRENT) - parseInt(process.env.PREVIOUS);
+            let emoji = '➖';
+            if (change > 0) emoji = '✅';
+            else if (change < 0) emoji = '⚠️';
+            
+            const body = `
+            ## Coverage Comparison
+            
+            - Previous coverage: ${process.env.PREVIOUS}%
+            - Current coverage: ${process.env.CURRENT}%
+            - Change: ${change > 0 ? '+' : ''}${change}% ${emoji}
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
 
   coverage-by-file:
     name: Coverage by File
@@ -204,7 +212,7 @@ jobs:
             echo "" >> $GITHUB_STEP_SUMMARY
             echo "| File | Statements | Branches | Functions | Lines |" >> $GITHUB_STEP_SUMMARY
             echo "|------|-----------|----------|-----------|-------|" >> $GITHUB_STEP_SUMMARY
-
+            
             cat coverage/coverage-summary.json | jq -r '. | to_entries[] | select(.key | startswith("src/")) | "| \(.key) | \(.value.statements.pct)% | \(.value.branches.pct)% | \(.value.functions.pct)% | \(.value.lines.pct)% |"' >> $GITHUB_STEP_SUMMARY || true
           fi
 
@@ -213,6 +221,6 @@ jobs:
           if [ -f "coverage/coverage-summary.json" ]; then
             echo "## Files with Low Coverage (< 50%)" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
-
+            
             cat coverage/coverage-summary.json | jq -r '. | to_entries[] | select(.key | startswith("src/")) | select(.value.statements.pct < 50) | "- \(.key): \(.value.statements.pct)%"' >> $GITHUB_STEP_SUMMARY || echo "No files with low coverage" >> $GITHUB_STEP_SUMMARY
           fi
