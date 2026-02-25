@@ -312,26 +312,14 @@ jobs:
 
       - name: Create summary comment
         if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const summary = `
-            ## CI/CD Pipeline Results
-
-            | Job | Status |
-            |-----|--------|
-            | Type Check | ${{ needs.typecheck.result }} |
-            | Lint | ${{ needs.lint.result }} |
-            | Test | ${{ needs.test.result }} |
-            | Build | ${{ needs.build.result }} |
-            | Chromatic | ${{ needs.chromatic.result }} |
-            | Lighthouse | ${{ needs.lighthouse.result }} |
-
-            `;
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: summary
-            });
+        run: |
+          echo "## CI/CD Pipeline Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Type Check | ${{ needs.typecheck.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Lint | ${{ needs.lint.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Test | ${{ needs.test.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Build | ${{ needs.build.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Chromatic | ${{ needs.chromatic.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Lighthouse | ${{ needs.lighthouse.result }} |" >> $GITHUB_STEP_SUMMARY

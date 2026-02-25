@@ -37,11 +37,11 @@ jobs:
             TOTAL_SIZE=$(du -sh dist | cut -f1)
             FILE_COUNT=$(find dist -type f | wc -l)
             LARGEST_FILE=$(find dist -type f -exec du -h {} + | sort -rh | head -1)
-            
+
             echo "Total bundle size: $TOTAL_SIZE"
             echo "Total files: $FILE_COUNT"
             echo "Largest file: $LARGEST_FILE"
-            
+
             echo "TOTAL_SIZE=$TOTAL_SIZE" >> $GITHUB_ENV
             echo "FILE_COUNT=$FILE_COUNT" >> $GITHUB_ENV
             echo "LARGEST_FILE=$LARGEST_FILE" >> $GITHUB_ENV
@@ -57,23 +57,12 @@ jobs:
 
       - name: Comment on PR
         if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const body = `
-            ## Bundle Size Analysis
-            
-            - Total bundle size: ${process.env.TOTAL_SIZE}
-            - Total files: ${process.env.FILE_COUNT}
-            - Largest file: ${process.env.LARGEST_FILE}
-            `;
-            
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: body
-            });
+        run: |
+          echo "## Bundle Size Analysis" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Total bundle size: ${{ env.TOTAL_SIZE }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Total files: ${{ env.FILE_COUNT }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Largest file: ${{ env.LARGEST_FILE }}" >> $GITHUB_STEP_SUMMARY
 
   lighthouse-performance:
     name: Lighthouse Performance Test
@@ -121,13 +110,13 @@ jobs:
         run: |
           echo "## Lighthouse Performance Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           if [ -f ".lighthouseci/lhr-report.json" ]; then
             PERFORMANCE=$(cat .lighthouseci/lhr-report.json | jq -r '.categories.performance.score * 100' 2>/dev/null || echo "N/A")
             ACCESSIBILITY=$(cat .lighthouseci/lhr-report.json | jq -r '.categories.accessibility.score * 100' 2>/dev/null || echo "N/A")
             BEST_PRACTICES=$(cat .lighthouseci/lhr-report.json | jq -r '.categories["best-practices"].score * 100' 2>/dev/null || echo "N/A")
             SEO=$(cat .lighthouseci/lhr-report.json | jq -r '.categories.seo.score * 100' 2>/dev/null || echo "N/A")
-            
+
             echo "- Performance: $PERFORMANCE%" >> $GITHUB_STEP_SUMMARY
             echo "- Accessibility: $ACCESSIBILITY%" >> $GITHUB_STEP_SUMMARY
             echo "- Best Practices: $BEST_PRACTICES%" >> $GITHUB_STEP_SUMMARY
@@ -156,7 +145,7 @@ jobs:
           npm run build
           END_TIME=$(date +%s)
           BUILD_TIME=$((END_TIME - START_TIME))
-          
+
           echo "Build time: $BUILD_TIME seconds"
           echo "BUILD_TIME=$BUILD_TIME" >> $GITHUB_ENV
 
@@ -190,13 +179,13 @@ jobs:
           if [ -f "package.json" ]; then
             npm list --depth=0 --json > dependency-list.json
             cat dependency-list.json | jq -r '.dependencies | to_entries | .[] | "\(.key): \(.value.version)"' > dependencies.txt
-            
+
             TOTAL_SIZE=$(du -sh node_modules | cut -f1)
             DEP_COUNT=$(cat dependencies.txt | wc -l)
-            
+
             echo "Total dependency size: $TOTAL_SIZE"
             echo "Total dependencies: $DEP_COUNT"
-            
+
             echo "TOTAL_SIZE=$TOTAL_SIZE" >> $GITHUB_ENV
             echo "DEP_COUNT=$DEP_COUNT" >> $GITHUB_ENV
           fi
@@ -251,21 +240,10 @@ jobs:
 
       - name: Comment on size change
         if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const body = `
-            ## Performance Regression Check
-            
-            - Previous build size: ${process.env.PREV_SIZE}
-            - Current build size: ${process.env.CURRENT_SIZE}
-            
-            Please review any significant size changes.
-            `;
-            
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: body
-            });
+        run: |
+          echo "## Performance Regression Check" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Previous build size: ${{ env.PREV_SIZE }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Current build size: ${{ env.CURRENT_SIZE }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Size change detected. Please review." >> $GITHUB_STEP_SUMMARY
