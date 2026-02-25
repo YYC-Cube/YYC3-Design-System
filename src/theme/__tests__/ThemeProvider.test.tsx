@@ -109,7 +109,7 @@ describe('ThemeProvider 组件', () => {
   describe('useTheme Hook', () => {
     it('应该返回当前主题', () => {
       const TestComponent = () => {
-        const { theme } = useTheme();
+        const { mode } = useTheme();
         return <div>主题: {mode}</div>;
       };
 
@@ -124,7 +124,7 @@ describe('ThemeProvider 组件', () => {
 
     it('应该返回setTheme函数', () => {
       const TestComponent = () => {
-        const { setTheme } = useTheme();
+        const { setMode } = useTheme();
         return (
           <button onClick={() => setMode('dark')}>切换主题</button>
         );
@@ -143,7 +143,7 @@ describe('ThemeProvider 组件', () => {
 
     it('应该在ThemeProvider外使用时抛出错误', () => {
       const TestComponent = () => {
-        const { theme } = useTheme();
+        const { mode } = useTheme();
         return <div>主题: {mode}</div>;
       };
 
@@ -162,7 +162,7 @@ describe('ThemeProvider 组件', () => {
       localStorage.setItem('theme', 'dark');
 
       const TestComponent = () => {
-        const { theme } = useTheme();
+        const { mode } = useTheme();
         return <div>主题: {mode}</div>;
       };
 
@@ -203,7 +203,7 @@ describe('ThemeProvider 组件', () => {
   describe('主题属性', () => {
     it('应该提供主题颜色', () => {
       const TestComponent = () => {
-        const { theme } = useTheme();
+        const { mode } = useTheme();
         return <div>主题: {mode}</div>;
       };
 
@@ -220,7 +220,7 @@ describe('ThemeProvider 组件', () => {
   describe('系统主题检测', () => {
     it('应该支持系统主题检测', () => {
       const TestComponent = () => {
-        const { theme } = useTheme();
+        const { mode } = useTheme();
         return <div>主题: {mode}</div>;
       };
 
@@ -237,12 +237,12 @@ describe('ThemeProvider 组件', () => {
   describe('嵌套组件', () => {
     it('应该支持嵌套组件使用主题', () => {
       const InnerComponent = () => {
-        const { theme } = useTheme();
+        const { mode } = useTheme();
         return <div>内部主题: {mode}</div>;
       };
 
       const OuterComponent = () => {
-        const { theme } = useTheme();
+        const { mode } = useTheme();
         return (
           <div>
             <div>外部主题: {mode}</div>

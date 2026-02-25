@@ -330,6 +330,15 @@ export const destroyAllLazyImages = (): void => {
   });
 };
 
+export const clearImageCache = (): void => {
+  const images = document.querySelectorAll<HTMLImageElement>('img[data-src]');
+  images.forEach((img) => {
+    unobserveLazyImage(img);
+    img.src = '';
+    img.removeAttribute('data-src');
+  });
+};
+
 export default {
   setLazyImageConfig,
   getLazyImageConfig,
