@@ -17,22 +17,20 @@ jobs:
     if: github.event.workflow_run.event == 'push' || github.event_name == 'schedule'
     steps:
       - name: Send success notification
-        if: github.event.workflow_run.conclusion == 'success'
         uses: 8398a7/action-slack@v3
+        if: github.event.workflow_run.conclusion == 'success'
         with:
           status: success
           text: 'CI/CD Pipeline completed successfully'
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Send failure notification
-        if: github.event.workflow_run.conclusion == 'failure'
         uses: 8398a7/action-slack@v3
+        if: github.event.workflow_run.conclusion == 'failure'
         with:
           status: failure
           text: 'CI/CD Pipeline failed'
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   discord-notification:
     name: Discord Notification
@@ -40,17 +38,15 @@ jobs:
     if: github.event.workflow_run.event == 'push' || github.event_name == 'schedule'
     steps:
       - name: Send Discord notification
+        if: env.DISCORD_WEBHOOK_URL != ''
         uses: sarisia/actions-status-discord@v1
-        if: always()
         with:
-          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
           status: ${{ job.status }}
           title: ${{ github.event.workflow_run.name }}
           description: "Workflow: ${{ github.event.workflow_run.name }}\nStatus: ${{ github.event.workflow_run.conclusion }}\nBranch: ${{ github.event.workflow_run.head_branch }}\nCommit: ${{ github.event.workflow_run.head_sha }}"
           url: ${{ github.event.workflow_run.html_url }}
           color: ${{ github.event.workflow_run.conclusion == 'success' && '0x57F287' || github.event.workflow_run.conclusion == 'failure' && '0xED4245' || '0xFEE75C' }}
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
 
   github-status:
     name: GitHub Status Check

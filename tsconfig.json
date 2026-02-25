@@ -44,7 +44,6 @@
     "**/*.spec.ts",
     "**/*.spec.tsx",
     "**/*.js",
-    "src/svelte",
     "tests/**",
     "src/**/__tests__/**"
   ]

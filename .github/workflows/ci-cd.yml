@@ -302,12 +302,11 @@ jobs:
     steps:
       - name: Send Slack notification
         uses: 8398a7/action-slack@v3
-        if: secrets.SLACK_WEBHOOK_URL != ''
         with:
           status: ${{ job.status }}
           text: 'CI/CD Pipeline completed'
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: env.SLACK_WEBHOOK_URL != ''
 
       - name: Create summary comment
         if: github.event_name == 'pull_request'
