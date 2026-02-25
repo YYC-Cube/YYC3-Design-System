@@ -5,7 +5,7 @@ on:
     workflows: [CI/CD Pipeline, Code Quality Check, Performance Monitoring, Test Coverage Report]
     types: [completed]
   schedule:
-    - cron: '0 9 * * 1'
+    - cron: '0 9 * * MON'
 
 env:
   NODE_VERSION: '18'

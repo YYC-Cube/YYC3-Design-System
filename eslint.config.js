@@ -15,6 +15,7 @@ export default [
       'public/service-worker.js',
       'dist/**',
       'build/**',
+      '.storybook/**',
     ],
   },
   {
