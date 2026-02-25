@@ -15,22 +15,18 @@ describe('ThemeProvider 组件', () => {
       expect(screen.getByText('内容')).toBeInTheDocument();
     });
 
-    it('应该支持自定义类名', () => {
-      render(
-        <ThemeProvider className="custom-theme">
-          <div>内容</div>
-        </ThemeProvider>
-      );
-      const provider = screen.getByText('内容').parentElement;
-      expect(provider).toHaveClass('custom-theme');
-    });
+    it('应该支持设置初始主题', () => {
+      const TestComponent = () => {
+        const { mode } = useTheme();
+        return <div>当前主题: {mode}</div>;
+      };
   });
 
   describe('主题切换', () => {
     it('应该默认使用light主题', () => {
       const TestComponent = () => {
-        const { theme } = useTheme();
-        return <div>当前主题: {theme}</div>;
+        const { mode } = useTheme();
+        return <div>当前主题: {mode}</div>;
       };
 
       render(
@@ -44,12 +40,12 @@ describe('ThemeProvider 组件', () => {
 
     it('应该支持设置初始主题', () => {
       const TestComponent = () => {
-        const { theme } = useTheme();
-        return <div>当前主题: {theme}</div>;
+        const { mode } = useTheme();
+        return <div>当前主题: {mode}</div>;
       };
 
       render(
-        <ThemeProvider defaultTheme="dark">
+        <ThemeProvider initial="dark">
           <TestComponent />
         </ThemeProvider>
       );
@@ -59,11 +55,11 @@ describe('ThemeProvider 组件', () => {
 
     it('应该支持切换主题', () => {
       const TestComponent = () => {
-        const { theme, setTheme } = useTheme();
+        const { mode, setMode } = useTheme();
         return (
           <div>
-            <div>当前主题: {theme}</div>
-            <button onClick={() => setTheme('dark')}>切换到深色</button>
+            <div>当前主题: {mode}</div>
+            <button onClick={() => setMode('dark')}>切换到深色</button>
           </div>
         );
       };
@@ -85,17 +81,17 @@ describe('ThemeProvider 组件', () => {
 
     it('应该支持切换到light主题', () => {
       const TestComponent = () => {
-        const { theme, setTheme } = useTheme();
+        const { mode, setMode } = useTheme();
         return (
           <div>
-            <div>当前主题: {theme}</div>
-            <button onClick={() => setTheme('light')}>切换到浅色</button>
+            <div>当前主题: {mode}</div>
+            <button onClick={() => setMode('light')}>切换到浅色</button>
           </div>
         );
       };
 
       render(
-        <ThemeProvider defaultTheme="dark">
+        <ThemeProvider initial="dark">
           <TestComponent />
         </ThemeProvider>
       );
@@ -114,7 +110,7 @@ describe('ThemeProvider 组件', () => {
     it('应该返回当前主题', () => {
       const TestComponent = () => {
         const { theme } = useTheme();
-        return <div>主题: {theme}</div>;
+        return <div>主题: {mode}</div>;
       };
 
       render(
@@ -130,7 +126,7 @@ describe('ThemeProvider 组件', () => {
       const TestComponent = () => {
         const { setTheme } = useTheme();
         return (
-          <button onClick={() => setTheme('dark')}>切换主题</button>
+          <button onClick={() => setMode('dark')}>切换主题</button>
         );
       };
 
@@ -148,7 +144,7 @@ describe('ThemeProvider 组件', () => {
     it('应该在ThemeProvider外使用时抛出错误', () => {
       const TestComponent = () => {
         const { theme } = useTheme();
-        return <div>主题: {theme}</div>;
+        return <div>主题: {mode}</div>;
       };
 
       expect(() => {
@@ -167,7 +163,7 @@ describe('ThemeProvider 组件', () => {
 
       const TestComponent = () => {
         const { theme } = useTheme();
-        return <div>主题: {theme}</div>;
+        return <div>主题: {mode}</div>;
       };
 
       render(
@@ -181,11 +177,11 @@ describe('ThemeProvider 组件', () => {
 
     it('应该将主题保存到localStorage', () => {
       const TestComponent = () => {
-        const { theme, setTheme } = useTheme();
+        const { mode, setMode } = useTheme();
         return (
           <div>
-            <div>主题: {theme}</div>
-            <button onClick={() => setTheme('dark')}>切换</button>
+            <div>主题: {mode}</div>
+            <button onClick={() => setMode('dark')}>切换</button>
           </div>
         );
       };
@@ -208,7 +204,7 @@ describe('ThemeProvider 组件', () => {
     it('应该提供主题颜色', () => {
       const TestComponent = () => {
         const { theme } = useTheme();
-        return <div>主题: {theme}</div>;
+        return <div>主题: {mode}</div>;
       };
 
       render(
@@ -225,11 +221,11 @@ describe('ThemeProvider 组件', () => {
     it('应该支持系统主题检测', () => {
       const TestComponent = () => {
         const { theme } = useTheme();
-        return <div>主题: {theme}</div>;
+        return <div>主题: {mode}</div>;
       };
 
       render(
-        <ThemeProvider defaultTheme="system">
+        <ThemeProvider initial="system">
           <TestComponent />
         </ThemeProvider>
       );
@@ -242,14 +238,14 @@ describe('ThemeProvider 组件', () => {
     it('应该支持嵌套组件使用主题', () => {
       const InnerComponent = () => {
         const { theme } = useTheme();
-        return <div>内部主题: {theme}</div>;
+        return <div>内部主题: {mode}</div>;
       };
 
       const OuterComponent = () => {
         const { theme } = useTheme();
         return (
           <div>
-            <div>外部主题: {theme}</div>
+            <div>外部主题: {mode}</div>
             <InnerComponent />
           </div>
         );

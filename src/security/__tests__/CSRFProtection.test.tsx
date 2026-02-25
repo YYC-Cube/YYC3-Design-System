@@ -8,9 +8,7 @@
  */
 
 import * as React from 'react';
-;
-
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent, waitFor, cleanup } from '@testing-library/react'
 import { screen } from '@testing-library/dom';
 
 import { CSRFProvider, CSRFProtectedForm, useCSRF, CSRFProtectedFetch, withCSRFProtection, createCSRFMiddleware, validateCSRFToken, createStrictConfig, createModerateConfig, createPermissiveConfig } from '../CSRFProtection';
