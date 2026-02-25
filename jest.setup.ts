@@ -27,6 +27,41 @@ global.performance = {
     totalJSHeapSize: 2000000,
     jsHeapSizeLimit: 10000000,
   },
+  mark: jest.fn(),
+  measure: jest.fn(),
+  getEntriesByName: jest.fn(() => []),
+  getEntriesByType: jest.fn(() => []),
+  clearMarks: jest.fn(),
+  clearMeasures: jest.fn(),
+} as any;
+
+global.PerformanceObserver = class PerformanceObserver {
+  private callback: any;
+  private entries: any[] = [];
+
+  constructor(callback: any) {
+    this.callback = callback;
+  }
+
+  observe(_options: any) {
+    this.entries = [];
+    (global.performance as any).getEntriesByType = jest.fn((type: string) => {
+      if (type === 'paint') {
+        return [
+          { name: 'first-contentful-paint', startTime: 1000 }
+        ];
+      }
+      return this.entries;
+    });
+  }
+
+  disconnect() {
+    this.entries = [];
+  }
+
+  takeRecords() {
+    return this.entries;
+  }
 } as any;
 
 const OriginalURL = global.URL;
