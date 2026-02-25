@@ -11,10 +11,12 @@ export type ResourceType = 'script' | 'style' | 'image' | 'font' | 'document' | 
 
 export type PreloadPriority = 'high' | 'low' | 'auto';
 
+export type ReferrerPolicyType = '' | 'no-referrer' | 'no-referrer-when-downgrade' | 'same-origin' | 'origin' | 'strict-origin' | 'origin-when-cross-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url';
+
 export interface PreloadOptions {
   priority?: PreloadPriority;
   crossOrigin?: 'anonymous' | 'use-credentials' | boolean;
-  referrerPolicy?: ReferrerPolicy;
+  referrerPolicy?: ReferrerPolicyType;
   integrity?: string;
   timeout?: number;
   onLoad?: (resource: string) => void;

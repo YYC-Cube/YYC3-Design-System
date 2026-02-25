@@ -42,3 +42,10 @@ export interface AnimatedProps {
   className?: string;
   trigger?: 'mount' | 'hover' | 'click';
 }
+
+export interface EnhancedAnimationConfig extends Omit<AnimationConfig, 'delay'> {
+  stagger?: number;
+  delay?: number;
+  repeat?: number;
+  direction?: 'normal' | 'reverse' | 'alternate' | 'alternate-reverse';
+}

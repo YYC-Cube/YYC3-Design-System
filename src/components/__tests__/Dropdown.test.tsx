@@ -7,14 +7,10 @@
  * @created 2026-02-23
  */
 
-;
-
-import { render, fireEvent } from '@testing-library/react'
-import { screen } from '@testing-library/dom';
-
+import { render, fireEvent, screen } from '@testing-library/react';
 import { Dropdown } from '../Dropdown';
-import { Button } from '../Button'
-import { ThemeProvider } from '../../theme/ThemeProvider';;
+import { Button } from '../Button';
+import { ThemeProvider } from '../../theme/ThemeProvider';
 
 describe('Dropdown', () => {
   const mockOptions = [
@@ -24,19 +20,23 @@ describe('Dropdown', () => {
   ];
 
   it('应该渲染下拉菜单', () => {
-    render(<ThemeProvider>
-      <Dropdown options={mockOptions}>
-        <Button>点击</Button>
-      </Dropdown>
+    render(
+      <ThemeProvider>
+        <Dropdown options={mockOptions}>
+          <Button>点击</Button>
+        </Dropdown>
+      </ThemeProvider>
     );
     expect(screen.getByText('点击')).toBeInTheDocument();
   });
 
   it('点击时应该显示下拉菜单', () => {
-    render(<ThemeProvider>
-      <Dropdown options={mockOptions}>
-        <Button>点击</Button>
-      </Dropdown>
+    render(
+      <ThemeProvider>
+        <Dropdown options={mockOptions}>
+          <Button>点击</Button>
+        </Dropdown>
+      </ThemeProvider>
     );
     const trigger = screen.getByText('点击');
     fireEvent.click(trigger);
@@ -48,10 +48,12 @@ describe('Dropdown', () => {
     const optionsWithClick = [
       { key: '1', label: '选项1', onClick: mockOnClick },
     ];
-    render(<ThemeProvider>
-      <Dropdown options={optionsWithClick}>
-        <Button>点击</Button>
-      </Dropdown>
+    render(
+      <ThemeProvider>
+        <Dropdown options={optionsWithClick}>
+          <Button>点击</Button>
+        </Dropdown>
+      </ThemeProvider>
     );
     const trigger = screen.getByText('点击');
     fireEvent.click(trigger);
@@ -65,10 +67,12 @@ describe('Dropdown', () => {
       { key: '1', label: '选项1' },
       { key: '2', label: '选项2', disabled: true },
     ];
-    render(<ThemeProvider>
-      <Dropdown options={disabledOptions}>
-        <Button>点击</Button>
-      </Dropdown>
+    render(
+      <ThemeProvider>
+        <Dropdown options={disabledOptions}>
+          <Button>点击</Button>
+        </Dropdown>
+      </ThemeProvider>
     );
     const trigger = screen.getByText('点击');
     fireEvent.click(trigger);
@@ -82,10 +86,12 @@ describe('Dropdown', () => {
       { key: 'divider', label: '', divider: true },
       { key: '2', label: '选项2' },
     ];
-    render(<ThemeProvider>
-      <Dropdown options={optionsWithDivider}>
-        <Button>点击</Button>
-      </Dropdown>
+    render(
+      <ThemeProvider>
+        <Dropdown options={optionsWithDivider}>
+          <Button>点击</Button>
+        </Dropdown>
+      </ThemeProvider>
     );
     const trigger = screen.getByText('点击');
     fireEvent.click(trigger);
@@ -97,10 +103,12 @@ describe('Dropdown', () => {
     const optionsWithIcon = [
       { key: '1', label: '选项1', icon: '📄' },
     ];
-    render(<ThemeProvider>
-      <Dropdown options={optionsWithIcon}>
-        <Button>点击</Button>
-      </Dropdown>
+    render(
+      <ThemeProvider>
+        <Dropdown options={optionsWithIcon}>
+          <Button>点击</Button>
+        </Dropdown>
+      </ThemeProvider>
     );
     const trigger = screen.getByText('点击');
     fireEvent.click(trigger);
@@ -118,10 +126,12 @@ describe('Dropdown', () => {
         ],
       },
     ];
-    render(<ThemeProvider>
-      <Dropdown options={nestedOptions}>
-        <Button>点击</Button>
-      </Dropdown>
+    render(
+      <ThemeProvider>
+        <Dropdown options={nestedOptions}>
+          <Button>点击</Button>
+        </Dropdown>
+      </ThemeProvider>
     );
     const trigger = screen.getByText('点击');
     fireEvent.click(trigger);
@@ -130,10 +140,12 @@ describe('Dropdown', () => {
   });
 
   it('应该支持hover触发', () => {
-    render(<ThemeProvider>
-      <Dropdown options={mockOptions} trigger="hover">
-        <Button>悬停</Button>
-      </Dropdown>
+    render(
+      <ThemeProvider>
+        <Dropdown options={mockOptions} trigger="hover">
+          <Button>悬停</Button>
+        </Dropdown>
+      </ThemeProvider>
     );
     const trigger = screen.getByText('悬停');
     fireEvent.mouseEnter(trigger);
@@ -141,26 +153,32 @@ describe('Dropdown', () => {
   });
 
   it('应该支持受控visible', () => {
-    const { rerender } = render(<ThemeProvider>
-      <Dropdown options={mockOptions} visible={false}>
-        <Button>点击</Button>
-      </Dropdown>
+    const { rerender } = render(
+      <ThemeProvider>
+        <Dropdown options={mockOptions} visible={false}>
+          <Button>点击</Button>
+        </Dropdown>
+      </ThemeProvider>
     );
     expect(screen.queryByText('选项1')).not.toBeInTheDocument();
 
-    rerender(<ThemeProvider>
-      <Dropdown options={mockOptions} visible={true}>
-        <Button>点击</Button>
-      </Dropdown>
+    rerender(
+      <ThemeProvider>
+        <Dropdown options={mockOptions} visible={true}>
+          <Button>点击</Button>
+        </Dropdown>
+      </ThemeProvider>
     );
     expect(screen.getByText('选项1')).toBeInTheDocument();
   });
 
   it('应该支持禁用状态', () => {
-    render(<ThemeProvider>
-      <Dropdown options={mockOptions} disabled>
-        <Button>点击</Button>
-      </Dropdown>
+    render(
+      <ThemeProvider>
+        <Dropdown options={mockOptions} disabled>
+          <Button>点击</Button>
+        </Dropdown>
+      </ThemeProvider>
     );
     const trigger = screen.getByText('点击');
     fireEvent.click(trigger);
@@ -168,10 +186,12 @@ describe('Dropdown', () => {
   });
 
   it('应该支持不同placement', () => {
-    render(<ThemeProvider>
-      <Dropdown options={mockOptions} placement="topLeft">
-        <Button>点击</Button>
-      </Dropdown>
+    render(
+      <ThemeProvider>
+        <Dropdown options={mockOptions} placement="topLeft">
+          <Button>点击</Button>
+        </Dropdown>
+      </ThemeProvider>
     );
     const trigger = screen.getByText('点击');
     fireEvent.click(trigger);
@@ -179,10 +199,12 @@ describe('Dropdown', () => {
   });
 
   it('应该支持键盘导航', () => {
-    render(<ThemeProvider>
-      <Dropdown options={mockOptions}>
-        <Button>点击</Button>
-      </Dropdown>
+    render(
+      <ThemeProvider>
+        <Dropdown options={mockOptions}>
+          <Button>点击</Button>
+        </Dropdown>
+      </ThemeProvider>
     );
     const trigger = screen.getByText('点击');
     fireEvent.click(trigger);
@@ -191,10 +213,12 @@ describe('Dropdown', () => {
   });
 
   it('应该支持ESC键关闭', () => {
-    render(<ThemeProvider>
-      <Dropdown options={mockOptions}>
-        <Button>点击</Button>
-      </Dropdown>
+    render(
+      <ThemeProvider>
+        <Dropdown options={mockOptions}>
+          <Button>点击</Button>
+        </Dropdown>
+      </ThemeProvider>
     );
     const trigger = screen.getByText('点击');
     fireEvent.click(trigger);
@@ -204,10 +228,12 @@ describe('Dropdown', () => {
   });
 
   it('应该支持自定义类名', () => {
-    const { container } = render(<ThemeProvider>
-      <Dropdown options={mockOptions} className="custom-dropdown">
-        <Button>点击</Button>
-      </Dropdown>
+    const { container } = render(
+      <ThemeProvider>
+        <Dropdown options={mockOptions} className="custom-dropdown">
+          <Button>点击</Button>
+        </Dropdown>
+      </ThemeProvider>
     );
     expect(container.querySelector('.custom-dropdown')).toBeInTheDocument();
   });

@@ -7,7 +7,7 @@
  * @created 2026-02-22
  */
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 
 export interface VirtualScrollOptions {
   itemCount: number;
@@ -89,7 +89,7 @@ export const debounce = <T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number
 ): ((...args: Parameters<T>) => void) => {
-  let timeout: NodeJS.Timeout | null = null;
+  let timeout: ReturnType<typeof setTimeout> | null = null;
 
   return (...args: Parameters<T>) => {
     if (timeout) {
@@ -122,8 +122,10 @@ export const throttle = <T extends (...args: unknown[]) => unknown>(
 
 export const useVirtualScroll = (options: VirtualScrollOptions) => {
   const [scrollTop, setScrollTop] = useState(0);
-  const [state, setState] = useState<VirtualScrollState>(() =>
-    calculateVirtualScrollState(0, options)
+  
+  const state = useMemo(() => 
+    calculateVirtualScrollState(scrollTop, options), 
+    [scrollTop, options]
   );
 
   const handleScroll = useCallback(
@@ -133,11 +135,6 @@ export const useVirtualScroll = (options: VirtualScrollOptions) => {
     },
     []
   );
-
-  useEffect(() => {
-    const newState = calculateVirtualScrollState(scrollTop, options);
-    setState(newState);
-  }, [scrollTop, options]);
 
   return {
     scrollTop,

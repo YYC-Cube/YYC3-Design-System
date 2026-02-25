@@ -5,14 +5,37 @@
  * @author YYC³
  * @version 1.0.0
  * @created 2026-02-22
+ * @updated 2026-02-25
  */
 
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
+import viteCompression from 'vite-plugin-compression';
 
-export default defineConfig({
-  plugins: [react()],
+export default defineConfig(({ mode }) => ({
+  plugins: [
+    react(),
+    visualizer({
+      filename: './dist/stats.html',
+      open: false,
+      gzipSize: true,
+      brotliSize: true,
+    }),
+    viteCompression({
+      algorithm: 'gzip',
+      ext: '.gz',
+      threshold: 10240,
+      deleteOriginFile: false,
+    }),
+    viteCompression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      threshold: 10240,
+      deleteOriginFile: false,
+    }),
+  ],
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
@@ -21,7 +44,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: false,
+    sourcemap: mode === 'development',
     minify: 'terser',
     target: 'es2015',
     cssCodeSplit: true,
@@ -48,9 +71,9 @@ export default defineConfig({
     },
     terserOptions: {
       compress: {
-        drop_console: false,
+        drop_console: mode === 'production',
         drop_debugger: true,
-        pure_funcs: ['console.log'],
+        pure_funcs: mode === 'production' ? ['console.log', 'console.info', 'console.debug'] : [],
         arrows: true,
         collapse_vars: true,
         comparisons: true,
@@ -67,23 +90,40 @@ export default defineConfig({
         switches: true,
         toplevel: true,
         typeofs: true,
+        unused: true,
+        dead_code: true,
+        conditionals: true,
+        evaluate: true,
+        booleans: true,
+        if_return: true,
+        join_vars: true,
       },
       mangle: {
         safari10: true,
+        toplevel: true,
       },
       output: {
         comments: false,
+        beautify: false,
       },
+      ecma: 2015,
+      keep_classnames: false,
+      keep_fnames: false,
     },
     chunkSizeWarningLimit: 500,
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
     },
+    maxParallelFileOps: 8,
+    dynamicImportVarsOptions: {
+      warnOnError: true,
+    },
   },
   optimizeDeps: {
     include: ['react', 'react-dom'],
     exclude: [],
+    force: false,
   },
   server: {
     port: 3200,
@@ -94,7 +134,11 @@ export default defineConfig({
     },
   },
   css: {
-    devSourcemap: false,
+    devSourcemap: mode === 'development',
     postcss: './postcss.config.js',
   },
-});
+  esbuild: {
+    logOverride: { 'this-is-undefined-in-esm': 'silent' },
+    legalComments: 'none',
+  },
+}));

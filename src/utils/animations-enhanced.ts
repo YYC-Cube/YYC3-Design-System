@@ -1,4 +1,4 @@
-import { AnimationConfig, AnimationDuration, AnimationEasing } from '../../types/animations';
+import { AnimationDuration, AnimationEasing, EnhancedAnimationConfig } from '../../types/animations';
 
 export const animationDurations: Record<AnimationDuration, string> = {
   fast: '150ms',
@@ -14,13 +14,6 @@ export const animationEasings: Record<AnimationEasing, string> = {
   elastic: 'cubic-bezier(0.68, -0.6, 0.32, 1.6)',
   back: 'cubic-bezier(0.36, 0, 0.66, -0.56)',
 };
-
-export interface EnhancedAnimationConfig extends Omit<AnimationConfig, 'delay'> {
-  stagger?: number;
-  delay?: number;
-  repeat?: number;
-  direction?: 'normal' | 'reverse' | 'alternate' | 'alternate-reverse';
-}
 
 export interface KeyframeAnimation {
   name: string;
