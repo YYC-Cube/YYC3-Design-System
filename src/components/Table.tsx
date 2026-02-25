@@ -222,6 +222,12 @@ const sortedData = useMemo(() => {
     zIndex: 1,
   };
 
+  const emptyStateStyles: React.CSSProperties = {
+    padding: '40px',
+    textAlign: 'center',
+    color: tokens['color.text.secondary'] as string || '#999',
+  };
+
   const renderCell = (column: TableColumn<T>, record: T, index: number) => {
     const value = column.dataIndex ? record[column.dataIndex] : record;
     return column.render ? column.render(value, record, index) : value as React.ReactNode;
@@ -230,7 +236,7 @@ const sortedData = useMemo(() => {
   return (
     <div style={{ position: 'relative' }} className={className} data-testid={dataTestId}>
       {loading && (
-        <div style={loadingOverlay}>
+        <div style={loadingOverlay} role="status" aria-live="polite">
           <div>加载中...</div>
         </div>
       )}
@@ -269,7 +275,13 @@ const sortedData = useMemo(() => {
             </thead>
           )}
           <tbody>
-            {sortedData.map((record, index) => {
+            {sortedData.length === 0 ? (
+              <tr>
+                <td colSpan={columns.length + (rowSelection ? 1 : 0)} style={emptyStateStyles}>
+                  暂无数据
+                </td>
+              </tr>
+            ) : sortedData.map((record, index) => {
               const key = getRowKey(record, index);
               const isSelected = selectedRowKeys.includes(key);
               const rowProps = onRow?.(record, index) || {};

@@ -1122,9 +1122,10 @@ describe('GenericComponent - 边界情况', () => {
   });
 
   it('应该处理特殊字符在文本中', () => {
-    render(<GenericComponent>Test &lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;</GenericComponent>);
-    const element = screen.getByText("Test <script>alert(&apos;xss&apos;)</script>");
+    const { container } = render(<GenericComponent>Test &lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;</GenericComponent>);
+    const element = container.querySelector('div');
     expect(element).toBeInTheDocument();
+    expect(element?.innerHTML).toContain('&lt;script&gt;');
   });
 
   it('应该处理超长文本', () => {
