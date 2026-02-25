@@ -20,10 +20,6 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/addon-a11y',
-    '@storybook/addon-viewport',
-    '@storybook/addon-backgrounds',
-    '@storybook/addon-measure',
-    '@storybook/addon-outline',
     'storybook-addon-performance',
   ],
   framework: {
@@ -44,12 +40,6 @@ const config: StorybookConfig = {
   core: {
     disableTelemetry: true,
     builder: '@storybook/builder-vite',
-  },
-  features: {
-    storySort: {
-      method: 'alphabetical',
-      order: ['Intro', 'Components', 'Utilities', 'Hooks', 'AI Features', '*'],
-    },
   },
   viteFinal: async (config) => {
     config.build = {
