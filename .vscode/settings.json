@@ -25,5 +25,6 @@
     "**/dist/**": true,
     "**/build/**": true,
     "**/.git/**": true
-  }
+  },
+  "github.copilot.nextEditSuggestions.enabled": true
 }
