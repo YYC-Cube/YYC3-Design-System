@@ -7,7 +7,7 @@
  * @created 2026-02-23
  */
 
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import { Breadcrumb } from '../Breadcrumb'
@@ -82,8 +82,9 @@ describe('Breadcrumb', () => {
 
   it('应该支持自定义分隔符组件', () => {
     const customSeparator = <span className="custom-separator">→</span>;
-    render(<ThemeProvider><Breadcrumb items={mockItems} separator={customSeparator} /></ThemeProvider>);
-    expect(screen.getByText('→')).toBeInTheDocument();
+    const { container } = render(<ThemeProvider><Breadcrumb items={mockItems} separator={customSeparator} /></ThemeProvider>);
+    const customSeparators = container.querySelectorAll('.custom-separator');
+    expect(customSeparators.length).toBe(2);
   });
 
   it('应该正确处理空项', () => {
