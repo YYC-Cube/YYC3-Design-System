@@ -99,7 +99,7 @@ const loadDOMPurify = async (): Promise<Window['DOMPurify'] | null> => {
   
   try {
     const dompurify = await import('dompurify');
-    const purify = (dompurify as { default?: Window['DOMPurify'] }).default || (dompurify as Window['DOMPurify']);
+    const purify = (dompurify as unknown as { default?: Window['DOMPurify'] }).default || (dompurify as unknown as Window['DOMPurify']);
     return purify;
   } catch (error) {
     console.error('Failed to load DOMPurify:', error);
