@@ -11,7 +11,7 @@
  */
 
 import { memo, ReactNode } from 'react';
-import { useTheme } from '../theme/ThemeProvider';
+import { useTheme } from '../context/ThemeContext';
 
 export interface FormErrorProps {
   message?: string;
@@ -21,56 +21,58 @@ export interface FormErrorProps {
   'data-testid'?: string;
 }
 
-export const FormError = memo(({ errors, name, className = '', 'data-testid': dataTestId }: FormErrorProps) => {
-  const { tokens } = useTheme();
+export const FormError = memo(
+  ({ errors, name, className = '', 'data-testid': dataTestId }: FormErrorProps) => {
+    const { tokens } = useTheme();
 
-  const error = name && errors ? errors[name] : null;
+    const error = name && errors ? errors[name] : null;
 
-  if (!error) {
-    return null;
+    if (!error) {
+      return null;
+    }
+
+    const containerStyles = {
+      display: 'flex',
+      flexDirection: 'column' as const,
+      gap: '4px',
+      marginTop: '8px',
+    };
+
+    const errorItemStyles = {
+      display: 'flex',
+      alignItems: 'center' as const,
+      gap: '4px',
+      fontSize: '12px',
+      color: (tokens['color.error'] as string) || '#ff4d4f',
+    };
+
+    const iconStyles = {
+      fontSize: '14px',
+    };
+
+    const getErrorMessage = (error: any): string => {
+      if (typeof error === 'string') {
+        return error;
+      }
+      if (error?.message) {
+        return error.message;
+      }
+      return '验证失败';
+    };
+
+    const errorMessages = Array.isArray(error) ? error : [error];
+
+    return (
+      <div className={className} style={containerStyles} data-testid={dataTestId}>
+        {errorMessages.map((err, index) => (
+          <div key={index} style={errorItemStyles}>
+            <span style={iconStyles}>⚠️</span>
+            <span>{getErrorMessage(err)}</span>
+          </div>
+        ))}
+      </div>
+    );
   }
-
-  const containerStyles = {
-    display: 'flex',
-    flexDirection: 'column' as const,
-    gap: '4px',
-    marginTop: '8px',
-  };
-
-  const errorItemStyles = {
-    display: 'flex',
-    alignItems: 'center' as const,
-    gap: '4px',
-    fontSize: '12px',
-    color: tokens['color.error'] as string || '#ff4d4f',
-  };
-
-  const iconStyles = {
-    fontSize: '14px',
-  };
-
-  const getErrorMessage = (error: any): string => {
-    if (typeof error === 'string') {
-      return error;
-    }
-    if (error?.message) {
-      return error.message;
-    }
-    return '验证失败';
-  };
-
-  const errorMessages = Array.isArray(error) ? error : [error];
-
-  return (
-    <div className={className} style={containerStyles} data-testid={dataTestId}>
-      {errorMessages.map((err, index) => (
-        <div key={index} style={errorItemStyles}>
-          <span style={iconStyles}>⚠️</span>
-          <span>{getErrorMessage(err)}</span>
-        </div>
-      ))}
-    </div>
-  );
-});
+);
 
 FormError.displayName = 'FormError';

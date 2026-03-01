@@ -48,15 +48,13 @@ const formatMetric = (metric: Metric | undefined): string | undefined => {
   return `${metric.name}: ${metric.value.toFixed(2)} ${metric.rating === 'good' ? '✓' : '⚠'}`;
 };
 
-const createPerformanceReport = (
-  metrics: {
-    fcp?: Metric;
-    lcp?: Metric;
-    inp?: Metric;
-    cls?: Metric;
-    ttfb?: Metric;
-  }
-): PerformanceReport => {
+const createPerformanceReport = (metrics: {
+  fcp?: Metric;
+  lcp?: Metric;
+  inp?: Metric;
+  cls?: Metric;
+  ttfb?: Metric;
+}): PerformanceReport => {
   return {
     fcp: metrics.fcp,
     lcp: metrics.lcp,
@@ -129,7 +127,13 @@ export const reportWebVitals = async (
   } = {};
 
   const onPerfEntry = (metric: unknown): void => {
-    const perfMetric = metric as { name: string; value: number; rating?: 'good' | 'needs-improvement' | 'poor'; id?: string; delta?: number };
+    const perfMetric = metric as {
+      name: string;
+      value: number;
+      rating?: 'good' | 'needs-improvement' | 'poor';
+      id?: string;
+      delta?: number;
+    };
     const formattedMetric: Metric = {
       name: perfMetric.name,
       value: perfMetric.value,
@@ -214,10 +218,10 @@ export const getMetricsSummary = (): {
     };
   }
 
-  const fcpValues = metricsBuffer.filter(m => m.fcp).map(m => m.fcp!.value);
-  const lcpValues = metricsBuffer.filter(m => m.lcp).map(m => m.lcp!.value);
-  const inpValues = metricsBuffer.filter(m => m.inp).map(m => m.inp!.value);
-  const clsValues = metricsBuffer.filter(m => m.cls).map(m => m.cls!.value);
+  const fcpValues = metricsBuffer.filter((m) => m.fcp).map((m) => m.fcp!.value);
+  const lcpValues = metricsBuffer.filter((m) => m.lcp).map((m) => m.lcp!.value);
+  const inpValues = metricsBuffer.filter((m) => m.inp).map((m) => m.inp!.value);
+  const clsValues = metricsBuffer.filter((m) => m.cls).map((m) => m.cls!.value);
 
   const averageFCP = fcpValues.reduce((a, b) => a + b, 0) / fcpValues.length;
   const averageLCP = lcpValues.reduce((a, b) => a + b, 0) / lcpValues.length;
@@ -225,9 +229,9 @@ export const getMetricsSummary = (): {
   const averageCLS = clsValues.reduce((a, b) => a + b, 0) / clsValues.length;
 
   const allMetrics = [...fcpValues, ...lcpValues, ...inpValues, ...clsValues];
-  const goodMetrics = allMetrics.filter(m => m <= 1500).length;
-  const warningMetrics = allMetrics.filter(m => m > 1500 && m <= 2500).length;
-  const poorMetrics = allMetrics.filter(m => m > 2500).length;
+  const goodMetrics = allMetrics.filter((m) => m <= 1500).length;
+  const warningMetrics = allMetrics.filter((m) => m > 1500 && m <= 2500).length;
+  const poorMetrics = allMetrics.filter((m) => m > 2500).length;
 
   return {
     totalReports: metricsBuffer.length,
@@ -243,11 +247,15 @@ export const getMetricsSummary = (): {
 
 export const exportMetricsAsJSON = (): string => {
   const summary = getMetricsSummary();
-  return JSON.stringify({
-    summary,
-    reports: metricsBuffer,
-    exportedAt: new Date().toISOString(),
-  }, null, 2);
+  return JSON.stringify(
+    {
+      summary,
+      reports: metricsBuffer,
+      exportedAt: new Date().toISOString(),
+    },
+    null,
+    2
+  );
 };
 
 export const exportMetricsAsCSV = (): string => {
@@ -256,7 +264,7 @@ export const exportMetricsAsCSV = (): string => {
   }
 
   const headers = ['timestamp', 'url', 'fcp', 'lcp', 'inp', 'cls', 'ttfb'];
-  const rows = metricsBuffer.map(report => [
+  const rows = metricsBuffer.map((report) => [
     report.timestamp,
     report.url,
     report.fcp?.value || '',
@@ -266,7 +274,7 @@ export const exportMetricsAsCSV = (): string => {
     report.ttfb?.value || '',
   ]);
 
-  return [headers.join(','), ...rows.map(row => row.join(','))].join('\n');
+  return [headers.join(','), ...rows.map((row) => row.join(','))].join('\n');
 };
 
 export const downloadMetricsReport = (format: 'json' | 'csv' = 'json'): void => {

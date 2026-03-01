@@ -44,7 +44,7 @@ export const WithSearch: Story = {
       generateButton.dispatchEvent(new Event('click', { bubbles: true }));
     }
 
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
     const searchInput = canvasElement.querySelector('input[type="text"]') as HTMLInputElement;
     if (searchInput) {
@@ -62,11 +62,12 @@ export const QuickWins: Story = {
       generateButton.dispatchEvent(new Event('click', { bubbles: true }));
     }
 
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
-    const quickWinsButton = Array.from(canvasElement.querySelectorAll('.badge'))
-      .find(badge => badge.textContent === '快速见效');
-    
+    const quickWinsButton = Array.from(canvasElement.querySelectorAll('.badge')).find(
+      (badge) => badge.textContent === '快速见效'
+    );
+
     if (quickWinsButton) {
       quickWinsButton.dispatchEvent(new Event('click', { bubbles: true }));
     }
@@ -81,11 +82,12 @@ export const ColorCategory: Story = {
       generateButton.dispatchEvent(new Event('click', { bubbles: true }));
     }
 
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
-    const colorButton = Array.from(canvasElement.querySelectorAll('.badge'))
-      .find(badge => badge.textContent === '颜色');
-    
+    const colorButton = Array.from(canvasElement.querySelectorAll('.badge')).find(
+      (badge) => badge.textContent === '颜色'
+    );
+
     if (colorButton) {
       colorButton.dispatchEvent(new Event('click', { bubbles: true }));
     }

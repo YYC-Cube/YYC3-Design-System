@@ -6,7 +6,7 @@ import { screen } from '@testing-library/dom';
 
 import '@testing-library/jest-dom';
 import { Input } from '../Input'
-import { ThemeProvider } from '../../theme/ThemeProvider';;
+import { ThemeProvider } from '../../context/ThemeContext';;
 
 describe('Input 组件', () => {
   describe('基础渲染', () => {

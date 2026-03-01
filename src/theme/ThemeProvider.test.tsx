@@ -1,4 +1,4 @@
-import { render, fireEvent, act } from '@testing-library/react'
+import { render, fireEvent, act } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { ThemeProvider, useTheme } from './ThemeProvider';
@@ -25,9 +25,7 @@ describe('ThemeProvider', () => {
       return (
         <div>
           <div data-testid="primary-color">{String(tokens['color.primary'] || '')}</div>
-          <button onClick={() => setTokens({ 'color.primary': '#ff0000' })}>
-            Update
-          </button>
+          <button onClick={() => setTokens({ 'color.primary': '#ff0000' })}>Update</button>
         </div>
       );
     };

@@ -8,13 +8,20 @@
  */
 
 import * as React from 'react';
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import '@testing-library/jest-dom';
-import { Slot, createPolymorphicComponent, createSlot, mergeProps, overrideProps, createAsChildComponent, polymorphic, withAsChild } from './Polymorphic';
+import {
+  Slot,
+  createPolymorphicComponent,
+  createSlot,
+  mergeProps,
+  overrideProps,
+  createAsChildComponent,
+  polymorphic,
+  withAsChild,
+} from './Polymorphic';
 
 describe('Polymorphic', () => {
   describe('createPolymorphicComponent', () => {
@@ -154,8 +161,12 @@ describe('Polymorphic', () => {
       const handleClick = jest.fn();
       const { container } = render(
         <>
-          <TestComponent as="button" onClick={handleClick}>Button</TestComponent>
-          <TestComponent as="a" href="#">Link</TestComponent>
+          <TestComponent as="button" onClick={handleClick}>
+            Button
+          </TestComponent>
+          <TestComponent as="a" href="#">
+            Link
+          </TestComponent>
         </>
       );
       const button = container.querySelector('button');
@@ -168,12 +179,7 @@ describe('Polymorphic', () => {
     it('应该支持 ARIA 属性', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       const { container } = render(
-        <TestComponent
-          as="button"
-          aria-label="Test Button"
-          aria-disabled="true"
-          role="button"
-        >
+        <TestComponent as="button" aria-label="Test Button" aria-disabled="true" role="button">
           Button
         </TestComponent>
       );
@@ -186,11 +192,7 @@ describe('Polymorphic', () => {
     it('应该支持自定义 data 属性', () => {
       const TestComponent = createPolymorphicComponent('TestComponent');
       const { container } = render(
-        <TestComponent
-          data-test="test-value"
-          data-custom="custom-value"
-          data-id="123"
-        >
+        <TestComponent data-test="test-value" data-custom="custom-value" data-id="123">
           Test Content
         </TestComponent>
       );
@@ -257,11 +259,7 @@ describe('Polymorphic', () => {
     });
 
     it('应该支持自定义元素类型', () => {
-      render(
-        <Slot as="button">
-          Button Content
-        </Slot>
-      );
+      render(<Slot as="button">Button Content</Slot>);
       const element = screen.getByText('Button Content');
       expect(element.tagName).toBe('BUTTON');
     });
@@ -269,7 +267,9 @@ describe('Polymorphic', () => {
     it('应该在 asChild 模式下合并属性', () => {
       const { container } = render(
         <Slot asChild>
-          <button className="slot-class" data-testid="slot">Button Content</button>
+          <button className="slot-class" data-testid="slot">
+            Button Content
+          </button>
         </Slot>
       );
       const element = container.querySelector('button');
@@ -288,11 +288,7 @@ describe('Polymorphic', () => {
     });
 
     it('应该处理非 React 元素子节点', () => {
-      render(
-        <Slot>
-          Text Content
-        </Slot>
-      );
+      render(<Slot>Text Content</Slot>);
       expect(screen.getByText('Text Content')).toBeInTheDocument();
     });
 
@@ -403,11 +399,7 @@ describe('Polymorphic', () => {
 
     it('应该支持自定义 data 属性', () => {
       const { container } = render(
-        <Slot
-          data-test="test-value"
-          data-custom="custom-value"
-          data-id="123"
-        >
+        <Slot data-test="test-value" data-custom="custom-value" data-id="123">
           Test Content
         </Slot>
       );
@@ -454,11 +446,7 @@ describe('Polymorphic', () => {
 
     it('应该支持自定义元素类型', () => {
       const TestSlot = createSlot('TestSlot');
-      const { container } = render(
-        <TestSlot as={'button' as any}>
-          Button Content
-        </TestSlot>
-      );
+      const { container } = render(<TestSlot as={'button' as any}>Button Content</TestSlot>);
       const element = container.querySelector('button');
       expect(element).toBeInTheDocument();
     });
@@ -479,11 +467,7 @@ describe('Polymorphic', () => {
     it('应该支持自定义 data 属性', () => {
       const TestSlot = createSlot('TestSlot');
       const { container } = render(
-        <TestSlot
-          data-test="test-value"
-          data-custom="custom-value"
-          data-id="123"
-        >
+        <TestSlot data-test="test-value" data-custom="custom-value" data-id="123">
           Test Content
         </TestSlot>
       );
@@ -575,19 +559,19 @@ describe('Polymorphic', () => {
 
   describe('createAsChildComponent', () => {
     it('应该创建支持 asChild 的组件', () => {
-      const TestComponent = createAsChildComponent<{ asChild?: boolean; children?: React.ReactNode }>(
-        'TestComponent',
-        (props) => <div data-testid="test">{props.children}</div>
-      );
+      const TestComponent = createAsChildComponent<{
+        asChild?: boolean;
+        children?: React.ReactNode;
+      }>('TestComponent', (props) => <div data-testid="test">{props.children}</div>);
       render(<TestComponent>Test Content</TestComponent>);
       expect(screen.getByTestId('test')).toBeInTheDocument();
     });
 
     it('应该有正确的 displayName', () => {
-      const TestComponent = createAsChildComponent<{ asChild?: boolean; children?: React.ReactNode }>(
-        'TestComponent',
-        (props) => <div data-testid="test">{props.children}</div>
-      );
+      const TestComponent = createAsChildComponent<{
+        asChild?: boolean;
+        children?: React.ReactNode;
+      }>('TestComponent', (props) => <div data-testid="test">{props.children}</div>);
       expect(TestComponent.displayName).toBe('TestComponent');
     });
   });
@@ -618,7 +602,7 @@ describe('Polymorphic', () => {
         <div data-testid="base">{children}</div>
       );
       const WrappedComponent = withAsChild(BaseComponent, 'WrappedComponent') as any;
-      
+
       const { container } = render(
         <WrappedComponent asChild>
           <button>Button Content</button>
@@ -633,7 +617,7 @@ describe('Polymorphic', () => {
         <div data-testid="base">{children}</div>
       );
       const WrappedComponent = withAsChild(BaseComponent, 'WrappedComponent');
-      
+
       render(<WrappedComponent>Default Content</WrappedComponent>);
       expect(screen.getByText('Default Content')).toBeInTheDocument();
     });
@@ -643,10 +627,12 @@ describe('Polymorphic', () => {
         <div data-testid="base">{children}</div>
       );
       const WrappedComponent = withAsChild(BaseComponent, 'WrappedComponent') as any;
-      
+
       const { container } = render(
         <WrappedComponent asChild>
-          <button className="wrapped-class" data-testid="wrapped">Button Content</button>
+          <button className="wrapped-class" data-testid="wrapped">
+            Button Content
+          </button>
         </WrappedComponent>
       );
       const element = container.querySelector('button');
@@ -667,7 +653,7 @@ describe('Polymorphic', () => {
         <div data-testid="base">{children}</div>
       );
       const WrappedComponent = withAsChild(BaseComponent, 'WrappedComponent') as any;
-      
+
       const { container } = render(
         <WrappedComponent asChild={true}>
           <a href="https://example.com">Link</a>
@@ -683,7 +669,7 @@ describe('Polymorphic', () => {
       );
       const WrappedComponent = withAsChild(BaseComponent, 'WrappedComponent') as any;
       const ref = React.createRef<HTMLButtonElement>();
-      
+
       render(
         <WrappedComponent asChild>
           <button ref={ref}>Button Content</button>

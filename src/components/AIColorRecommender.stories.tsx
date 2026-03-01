@@ -96,7 +96,7 @@ export const SelectedScheme: Story = {
       generateButton.dispatchEvent(new Event('click', { bubbles: true }));
     }
 
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
     const schemes = canvasElement.querySelectorAll('[class*="cursor-pointer"]');
     if (schemes.length > 1) {

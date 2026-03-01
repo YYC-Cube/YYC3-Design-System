@@ -45,7 +45,7 @@ export interface CustomAnimationProps {
 }
 
 const generateKeyframesString = (keyframes: CustomKeyframeStep[]): string => {
-  const steps = keyframes.map(step => {
+  const steps = keyframes.map((step) => {
     const styles = Object.entries(step.styles)
       .map(([prop, value]) => `${prop}: ${value}`)
       .join('; ');
@@ -84,7 +84,7 @@ export const CustomAnimation: React.FC<CustomAnimationProps> = ({
     const duration = config?.duration || definition.duration || 'normal';
     const easing = config?.easing || definition.easing || 'ease-in-out';
     const delay = config?.delay || definition.delay || 0;
-    const repeat = config?.repeat ||1;
+    const repeat = config?.repeat || 1;
     const direction = config?.direction || 'normal';
     const fillMode = config?.fillMode || 'both';
 
@@ -94,7 +94,10 @@ export const CustomAnimation: React.FC<CustomAnimationProps> = ({
       slow: '500ms',
     };
 
-    const easingMap: Record<'ease-in' | 'ease-out' | 'ease-in-out' | 'bounce' | 'elastic' | 'back', string> = {
+    const easingMap: Record<
+      'ease-in' | 'ease-out' | 'ease-in-out' | 'bounce' | 'elastic' | 'back',
+      string
+    > = {
       'ease-in': 'cubic-bezier(0.4, 0, 1,1)',
       'ease-out': 'cubic-bezier(0, 0, 0.2, 1)',
       'ease-in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -110,15 +113,11 @@ export const CustomAnimation: React.FC<CustomAnimationProps> = ({
 
   useEffect(() => {
     if (shouldRegister && !animationRegisteredRef.current) {
-      const customAnimation = createCustomAnimation(
-        definition.name,
-        keyframesString,
-        {
-          duration: definition.duration,
-          easing: definition.easing,
-          delay: definition.delay,
-        }
-      );
+      const customAnimation = createCustomAnimation(definition.name, keyframesString, {
+        duration: definition.duration,
+        easing: definition.easing,
+        delay: definition.delay,
+      });
 
       registerCustomAnimation(customAnimation);
       animationRegisteredRef.current = true;
@@ -127,7 +126,7 @@ export const CustomAnimation: React.FC<CustomAnimationProps> = ({
 
   const handleClick = useCallback(() => {
     if (trigger === 'click' && !disabled) {
-      setIsAnimating(prev => !prev);
+      setIsAnimating((prev) => !prev);
     }
   }, [trigger, disabled]);
 
@@ -146,10 +145,13 @@ export const CustomAnimation: React.FC<CustomAnimationProps> = ({
     onAnimationIteration?.();
   }, [onAnimationIteration]);
 
-  const containerStyle = useMemo(() => ({
-    cursor: trigger === 'click' ? 'pointer' : 'default',
-    ...animationStyle,
-  }), [trigger, disabled, animationStyle]);
+  const containerStyle = useMemo(
+    () => ({
+      cursor: trigger === 'click' ? 'pointer' : 'default',
+      ...animationStyle,
+    }),
+    [trigger, disabled, animationStyle]
+  );
 
   return (
     <>

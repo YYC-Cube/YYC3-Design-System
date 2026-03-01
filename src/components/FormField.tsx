@@ -13,11 +13,13 @@
 import { memo, ReactNode, LabelHTMLAttributes } from 'react';
 import React from 'react';
 import { Controller, FieldValues, FieldPath, FieldPathValue, Control } from 'react-hook-form';
-import { useTheme } from '../theme/ThemeProvider';
+import { useTheme } from '../context/ThemeContext';
 import { useFormField } from './Form';
 
-export interface FormFieldProps<TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>
-  extends Omit<LabelHTMLAttributes<HTMLDivElement>, 'children'> {
+export interface FormFieldProps<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+> extends Omit<LabelHTMLAttributes<HTMLDivElement>, 'children'> {
   name: TName;
   control?: Control<TFieldValues>;
   label?: string;
@@ -38,7 +40,10 @@ export interface FormFieldProps<TFieldValues extends FieldValues = FieldValues, 
   'data-testid'?: string;
 }
 
-const FormFieldComponent = <TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>({
+const FormFieldComponent = <
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+>({
   name,
   control,
   label,
@@ -64,19 +69,19 @@ const FormFieldComponent = <TFieldValues extends FieldValues = FieldValues, TNam
   const labelStyles = {
     fontSize: '14px',
     fontWeight: 500,
-    color: tokens['color.text.primary'] as string || '#333',
+    color: (tokens['color.text.primary'] as string) || '#333',
     marginBottom: '4px',
   };
 
   const errorStyles = {
     fontSize: '12px',
-    color: tokens['color.error'] as string || '#ff4d4f',
+    color: (tokens['color.error'] as string) || '#ff4d4f',
     marginTop: '4px',
   };
 
   const descriptionStyles = {
     fontSize: '12px',
-    color: tokens['color.text.secondary'] as string || '#666',
+    color: (tokens['color.text.secondary'] as string) || '#666',
     marginTop: '2px',
   };
 
@@ -87,17 +92,25 @@ const FormFieldComponent = <TFieldValues extends FieldValues = FieldValues, TNam
       {label && (
         <label style={labelStyles} {...labelProps}>
           {label}
-          {required && <span style={{ color: tokens['color.error'] as string || '#ff4d4f', marginLeft: '4px' }}>*</span>}
+          {required && (
+            <span
+              style={{ color: (tokens['color.error'] as string) || '#ff4d4f', marginLeft: '4px' }}
+            >
+              *
+            </span>
+          )}
         </label>
       )}
       <Controller
         name={name}
         control={currentControl}
-        render={({ field }) => children({
-          ...field,
-          name,
-          disabled: field.disabled,
-        }) as React.ReactElement}
+        render={({ field }) =>
+          children({
+            ...field,
+            name,
+            disabled: field.disabled,
+          }) as React.ReactElement
+        }
       />
       {description && <div style={descriptionStyles}>{description}</div>}
       {error && <div style={errorStyles}>{error}</div>}

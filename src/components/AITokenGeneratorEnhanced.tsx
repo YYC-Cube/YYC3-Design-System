@@ -5,7 +5,11 @@ import { Button } from './Button';
 import { Input } from './Input';
 import { Badge } from './Badge';
 import { useTheme } from '../theme/useTheme';
-import { enhancedTokenGenerator, TokenGenerationEnhancedOptions, EnhancedColorToken } from '../ai/token-generator-enhanced';
+import {
+  enhancedTokenGenerator,
+  TokenGenerationEnhancedOptions,
+  EnhancedColorToken,
+} from '../ai/token-generator-enhanced';
 import { GeneratedTokens } from '../../types/tokens';
 
 const getTokenValue = (tokens: Record<string, unknown>, key: string): string => {
@@ -14,7 +18,9 @@ const getTokenValue = (tokens: Record<string, unknown>, key: string): string => 
 };
 
 export interface AITokenGeneratorEnhancedProps {
-  onGenerate?: (tokens: GeneratedTokens & { enhancedColors: Record<string, EnhancedColorToken> }) => void;
+  onGenerate?: (
+    tokens: GeneratedTokens & { enhancedColors: Record<string, EnhancedColorToken> }
+  ) => void;
   className?: string;
 }
 
@@ -24,14 +30,26 @@ export const AITokenGeneratorEnhanced: React.FC<AITokenGeneratorEnhancedProps> =
 }) => {
   const { tokens } = useTheme();
   const [baseColor, setBaseColor] = useState('#d45a5f');
-  const [harmony, setHarmony] = useState<'complementary' | 'analogous' | 'triadic' | 'tetradic' | 'monochromatic' | 'split-complementary' | 'double-complementary'>('monochromatic');
+  const [harmony, setHarmony] = useState<
+    | 'complementary'
+    | 'analogous'
+    | 'triadic'
+    | 'tetradic'
+    | 'monochromatic'
+    | 'split-complementary'
+    | 'double-complementary'
+  >('monochromatic');
   const [scale, setScale] = useState(10);
   const [includeShades, setIncludeShades] = useState(true);
   const [includeTints, setIncludeTints] = useState(true);
   const [targetContrast, setTargetContrast] = useState<'AA' | 'AAA'>('AA');
   const [optimizeForAccessibility, setOptimizeForAccessibility] = useState(true);
-  const [selectedColorSpace, setSelectedColorSpace] = useState<'hex' | 'hsl' | 'lab' | 'rgb' | 'oklch'>('hex');
-  const [generatedTokens, setGeneratedTokens] = useState<GeneratedTokens & { enhancedColors: Record<string, EnhancedColorToken> } | null>(null);
+  const [selectedColorSpace, setSelectedColorSpace] = useState<
+    'hex' | 'hsl' | 'lab' | 'rgb' | 'oklch'
+  >('hex');
+  const [generatedTokens, setGeneratedTokens] = useState<
+    (GeneratedTokens & { enhancedColors: Record<string, EnhancedColorToken> }) | null
+  >(null);
   const [recommendations, setRecommendations] = useState<string[]>([]);
 
   const handleGenerate = useCallback(() => {
@@ -54,7 +72,17 @@ export const AITokenGeneratorEnhanced: React.FC<AITokenGeneratorEnhancedProps> =
     if (onGenerate) {
       onGenerate(newTokens);
     }
-  }, [baseColor, harmony, scale, includeShades, includeTints, targetContrast, optimizeForAccessibility, selectedColorSpace, onGenerate]);
+  }, [
+    baseColor,
+    harmony,
+    scale,
+    includeShades,
+    includeTints,
+    targetContrast,
+    optimizeForAccessibility,
+    selectedColorSpace,
+    onGenerate,
+  ]);
 
   const harmonies = [
     { value: 'complementary', label: '互补色' },
@@ -94,27 +122,23 @@ export const AITokenGeneratorEnhanced: React.FC<AITokenGeneratorEnhancedProps> =
       <CardContent className="space-y-6">
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               基础颜色
             </label>
             <div className="flex gap-2">
-              <Input
-                type="color"
-                value={baseColor}
-                onChange={setBaseColor}
-                className="w-16 h-10"
-              />
-              <Input
-                type="text"
-                value={baseColor}
-                onChange={setBaseColor}
-                placeholder="#d45a5f"
-              />
+              <Input type="color" value={baseColor} onChange={setBaseColor} className="w-16 h-10" />
+              <Input type="text" value={baseColor} onChange={setBaseColor} placeholder="#d45a5f" />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               色彩和谐
             </label>
             <div className="flex flex-wrap gap-2">
@@ -124,8 +148,10 @@ export const AITokenGeneratorEnhanced: React.FC<AITokenGeneratorEnhancedProps> =
                   variant={harmony === h.value ? 'default' : 'outline'}
                   style={{
                     cursor: 'pointer',
-                    background: harmony === h.value ? getTokenValue(tokens, 'color.primary') : 'transparent',
-                    color: harmony === h.value ? '#ffffff' : getTokenValue(tokens, 'color.foreground'),
+                    background:
+                      harmony === h.value ? getTokenValue(tokens, 'color.primary') : 'transparent',
+                    color:
+                      harmony === h.value ? '#ffffff' : getTokenValue(tokens, 'color.foreground'),
                     borderColor: getTokenValue(tokens, 'color.primary'),
                   }}
                   onClick={() => setHarmony(h.value)}
@@ -137,7 +163,10 @@ export const AITokenGeneratorEnhanced: React.FC<AITokenGeneratorEnhancedProps> =
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               色彩空间
             </label>
             <div className="flex flex-wrap gap-2">
@@ -147,8 +176,14 @@ export const AITokenGeneratorEnhanced: React.FC<AITokenGeneratorEnhancedProps> =
                   variant={selectedColorSpace === cs.value ? 'default' : 'outline'}
                   style={{
                     cursor: 'pointer',
-                    background: selectedColorSpace === cs.value ? getTokenValue(tokens, 'color.primary') : 'transparent',
-                    color: selectedColorSpace === cs.value ? '#ffffff' : getTokenValue(tokens, 'color.foreground'),
+                    background:
+                      selectedColorSpace === cs.value
+                        ? getTokenValue(tokens, 'color.primary')
+                        : 'transparent',
+                    color:
+                      selectedColorSpace === cs.value
+                        ? '#ffffff'
+                        : getTokenValue(tokens, 'color.foreground'),
                     borderColor: getTokenValue(tokens, 'color.primary'),
                   }}
                   onClick={() => setSelectedColorSpace(cs.value)}
@@ -160,7 +195,10 @@ export const AITokenGeneratorEnhanced: React.FC<AITokenGeneratorEnhancedProps> =
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               间距比例: {scale}
             </label>
             <input
@@ -178,7 +216,10 @@ export const AITokenGeneratorEnhanced: React.FC<AITokenGeneratorEnhancedProps> =
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               可访问性标准
             </label>
             <div className="flex gap-2">
@@ -188,8 +229,14 @@ export const AITokenGeneratorEnhanced: React.FC<AITokenGeneratorEnhancedProps> =
                   variant={targetContrast === level ? 'default' : 'outline'}
                   style={{
                     cursor: 'pointer',
-                    background: targetContrast === level ? getTokenValue(tokens, 'color.primary') : 'transparent',
-                    color: targetContrast === level ? '#ffffff' : getTokenValue(tokens, 'color.foreground'),
+                    background:
+                      targetContrast === level
+                        ? getTokenValue(tokens, 'color.primary')
+                        : 'transparent',
+                    color:
+                      targetContrast === level
+                        ? '#ffffff'
+                        : getTokenValue(tokens, 'color.foreground'),
                     borderColor: getTokenValue(tokens, 'color.primary'),
                   }}
                   onClick={() => setTargetContrast(level)}
@@ -208,7 +255,10 @@ export const AITokenGeneratorEnhanced: React.FC<AITokenGeneratorEnhancedProps> =
                 onChange={(e) => setIncludeShades(e.target.checked)}
                 className="w-4 h-4"
               />
-              <span className="text-sm" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+              <span
+                className="text-sm"
+                style={{ color: getTokenValue(tokens, 'color.foreground') }}
+              >
                 包含色相
               </span>
             </label>
@@ -220,7 +270,10 @@ export const AITokenGeneratorEnhanced: React.FC<AITokenGeneratorEnhancedProps> =
                 onChange={(e) => setIncludeTints(e.target.checked)}
                 className="w-4 h-4"
               />
-              <span className="text-sm" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+              <span
+                className="text-sm"
+                style={{ color: getTokenValue(tokens, 'color.foreground') }}
+              >
                 包含色调
               </span>
             </label>
@@ -232,7 +285,10 @@ export const AITokenGeneratorEnhanced: React.FC<AITokenGeneratorEnhancedProps> =
                 onChange={(e) => setOptimizeForAccessibility(e.target.checked)}
                 className="w-4 h-4"
               />
-              <span className="text-sm" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+              <span
+                className="text-sm"
+                style={{ color: getTokenValue(tokens, 'color.foreground') }}
+              >
                 智能对比度优化
               </span>
             </label>
@@ -245,7 +301,10 @@ export const AITokenGeneratorEnhanced: React.FC<AITokenGeneratorEnhancedProps> =
 
         {recommendations.length > 0 && (
           <div className="space-y-2">
-            <h3 className="text-sm font-medium" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <h3
+              className="text-sm font-medium"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               AI 推荐
             </h3>
             <div className="space-y-2">
@@ -258,7 +317,10 @@ export const AITokenGeneratorEnhanced: React.FC<AITokenGeneratorEnhancedProps> =
                     border: `1px solid ${getTokenValue(tokens, 'color.border')}`,
                   }}
                 >
-                  <p className="text-sm" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                  <p
+                    className="text-sm"
+                    style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                  >
                     💡 {rec}
                   </p>
                 </div>
@@ -269,51 +331,59 @@ export const AITokenGeneratorEnhanced: React.FC<AITokenGeneratorEnhancedProps> =
 
         {generatedTokens && (
           <div className="space-y-2">
-            <h3 className="text-sm font-medium" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <h3
+              className="text-sm font-medium"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               生成的令牌 ({selectedColorSpace.toUpperCase()})
             </h3>
             <div className="space-y-2">
-              {Object.entries(generatedTokens.enhancedColors).slice(0, 10).map(([name, color]) => (
-                <div
-                  key={name}
-                  className="p-3 rounded-lg"
-                  style={{
-                    background: getTokenValue(tokens, 'color.card'),
-                    border: `1px solid ${getTokenValue(tokens, 'color.border')}`,
-                  }}
-                >
-                  <div className="flex items-center gap-3 mb-2">
-                    <div
-                      className="w-8 h-8 rounded"
-                      style={{ background: color.value.hex }}
-                    />
-                    <div className="flex-1">
-                      <p className="text-sm font-medium" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
-                        {name}
-                      </p>
-                      <p className="text-xs" style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
-                        {color.colorSpaces[selectedColorSpace]}
-                      </p>
+              {Object.entries(generatedTokens.enhancedColors)
+                .slice(0, 10)
+                .map(([name, color]) => (
+                  <div
+                    key={name}
+                    className="p-3 rounded-lg"
+                    style={{
+                      background: getTokenValue(tokens, 'color.card'),
+                      border: `1px solid ${getTokenValue(tokens, 'color.border')}`,
+                    }}
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 rounded" style={{ background: color.value.hex }} />
+                      <div className="flex-1">
+                        <p
+                          className="text-sm font-medium"
+                          style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                        >
+                          {name}
+                        </p>
+                        <p
+                          className="text-xs"
+                          style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}
+                        >
+                          {color.colorSpaces[selectedColorSpace]}
+                        </p>
+                      </div>
+                      <Badge
+                        style={{
+                          background: getContrastBadgeColor(color.wcagAA, color.wcagAAA),
+                          color: '#ffffff',
+                        }}
+                      >
+                        {getContrastBadgeText(color.wcagAA, color.wcagAAA)}
+                      </Badge>
                     </div>
-                    <Badge
-                      style={{
-                        background: getContrastBadgeColor(color.wcagAA, color.wcagAAA),
-                        color: '#ffffff',
-                      }}
-                    >
-                      {getContrastBadgeText(color.wcagAA, color.wcagAAA)}
-                    </Badge>
+                    <div className="flex gap-4 text-xs">
+                      <span style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
+                        对比度: {color.contrastRatio.toFixed(2)}:1
+                      </span>
+                      <span style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
+                        前景色: {color.value.foreground}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex gap-4 text-xs">
-                    <span style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
-                      对比度: {color.contrastRatio.toFixed(2)}:1
-                    </span>
-                    <span style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
-                      前景色: {color.value.foreground}
-                    </span>
-                  </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         )}

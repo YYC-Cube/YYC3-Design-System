@@ -10,12 +10,15 @@
  * @license MIT
  */
 
-import { memo, ReactNode, FormHTMLAttributes, useCallback } from 'react';
+import React, { memo, ReactNode, FormHTMLAttributes, useCallback } from 'react';
 import { useForm, FormProvider, useFormContext } from 'react-hook-form';
 import type { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-export interface FormProps<T = Record<string, unknown>> extends Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> {
+export interface FormProps<T = Record<string, unknown>> extends Omit<
+  FormHTMLAttributes<HTMLFormElement>,
+  'onSubmit'
+> {
   schema?: z.ZodType<any>;
   defaultValues?: any;
   onSubmit: (data: T) => void | Promise<void>;
@@ -24,7 +27,7 @@ export interface FormProps<T = Record<string, unknown>> extends Omit<FormHTMLAtt
   'data-testid'?: string;
 }
 
-const FormComponent = <T = Record<string, unknown>>({
+const FormComponent = <T = Record<string, unknown>,>({
   schema,
   defaultValues,
   onSubmit,
@@ -38,13 +41,16 @@ const FormComponent = <T = Record<string, unknown>>({
     defaultValues: defaultValues,
   });
 
-  const handleSubmit = useCallback(async (data: T) => {
-    try {
-      await onSubmit(data);
-    } catch (error) {
-      console.error('Form submission error:', error);
-    }
-  }, [onSubmit]);
+  const handleSubmit = useCallback(
+    async (data: T) => {
+      try {
+        await onSubmit(data);
+      } catch (error) {
+        console.error('Form submission error:', error);
+      }
+    },
+    [onSubmit]
+  );
 
   const containerStyles = {
     display: 'flex',

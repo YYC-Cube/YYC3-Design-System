@@ -46,10 +46,7 @@ export class FontPreloader {
   private maxCacheSize: number;
   private maxCacheAge: number;
 
-  constructor(options?: {
-    maxCacheSize?: number;
-    maxCacheAge?: number;
-  }) {
+  constructor(options?: { maxCacheSize?: number; maxCacheAge?: number }) {
     this.cache = new Map();
     this.loading = new Map();
     this.maxCacheSize = options?.maxCacheSize || 20;
@@ -76,7 +73,8 @@ export class FontPreloader {
     let oldestKey: string | null = null;
     let oldestTimestamp = Infinity;
 
-    for (const [key, entry] of this.cache.entries()) {
+    const entries = Array.from(this.cache.entries());
+    for (const [key, entry] of entries) {
       if (entry.timestamp < oldestTimestamp) {
         oldestTimestamp = entry.timestamp;
         oldestKey = key;
@@ -92,7 +90,8 @@ export class FontPreloader {
     let lruKey: string | null = null;
     let minAccessCount = Infinity;
 
-    for (const [key, entry] of this.cache.entries()) {
+    const entries = Array.from(this.cache.entries());
+    for (const [key, entry] of entries) {
       if (entry.accessCount < minAccessCount) {
         minAccessCount = entry.accessCount;
         lruKey = key;
@@ -145,19 +144,13 @@ export class FontPreloader {
       return this.loading.get(key)!;
     }
 
-    const promise = this.loadFontWithRetry(
-      fontFamily,
-      fontSrc,
-      fontWeight,
-      fontStyle,
-      {
-        timeout,
-        retryCount,
-        retryDelay,
-        onLoad,
-        onError,
-      }
-    ).then((result) => {
+    const promise = this.loadFontWithRetry(fontFamily, fontSrc, fontWeight, fontStyle, {
+      timeout,
+      retryCount,
+      retryDelay,
+      onLoad,
+      onError,
+    }).then((result) => {
       this.loading.delete(key);
 
       if (result.success && result.font && useCache) {
@@ -225,7 +218,7 @@ export class FontPreloader {
   ): Promise<FontPreloadResult> {
     return new Promise((resolve, reject) => {
       const startTime = performance.now();
-      let timeoutId: NodeJS.Timeout;
+      let timeoutId: ReturnType<typeof setTimeout>;
 
       const fontFace = new FontFace(fontFamily, `url(${fontSrc})`, {
         weight: fontWeight,
@@ -291,23 +284,21 @@ export class FontPreloader {
     const results: FontPreloadResult[] = [];
     let loaded = 0;
 
-    const promises = fonts.map(
-      ({ fontFamily, fontSrc, fontWeight, fontStyle, options }, index) => {
-        return this.preloadFont(fontFamily, fontSrc, {
-          ...options,
-          fontWeight,
-          fontStyle,
-          onLoad: (font) => {
-            loaded++;
-            onProgress(loaded, fonts.length);
-            options?.onLoad?.(font);
-          },
-        }).then((result) => {
-          results[index] = result;
-          return result;
-        });
-      }
-    );
+    const promises = fonts.map(({ fontFamily, fontSrc, fontWeight, fontStyle, options }, index) => {
+      return this.preloadFont(fontFamily, fontSrc, {
+        ...options,
+        fontWeight,
+        fontStyle,
+        onLoad: (font) => {
+          loaded++;
+          onProgress(loaded, fonts.length);
+          options?.onLoad?.(font);
+        },
+      }).then((result) => {
+        results[index] = result;
+        return result;
+      });
+    });
 
     return Promise.all(promises).then(() => results);
   }
@@ -344,7 +335,8 @@ export class FontPreloader {
 
   clearExpiredCache(): void {
     const now = Date.now();
-    for (const [key, entry] of this.cache.entries()) {
+    const entries = Array.from(this.cache.entries());
+    for (const [key, entry] of entries) {
       if (now - entry.timestamp > this.maxCacheAge) {
         this.cache.delete(key);
       }
@@ -366,7 +358,8 @@ export class FontPreloader {
   } {
     const cacheEntries: FontInfo[] = [];
 
-    for (const [key, entry] of this.cache.entries()) {
+    const entries = Array.from(this.cache.entries());
+    for (const [key, entry] of entries) {
       const [family, weight, style] = key.split('-');
       cacheEntries.push({
         family,
@@ -514,10 +507,7 @@ export const isFontLoaded = (fontFamily: string): boolean => {
   return document.fonts.check(`16px ${fontFamily}`);
 };
 
-export const waitForFontLoad = (
-  fontFamily: string,
-  timeout: number = 10000
-): Promise<boolean> => {
+export const waitForFontLoad = (fontFamily: string, timeout: number = 10000): Promise<boolean> => {
   return new Promise((resolve) => {
     if (isFontLoaded(fontFamily)) {
       resolve(true);
@@ -539,12 +529,12 @@ export const waitForFontLoad = (
 };
 
 export const getAvailableFonts = (): string[] => {
-  const fonts = document.fonts.values();
+  const fonts = Array.from(document.fonts.values());
   const fontFamilies = new Set<string>();
 
-  for (const font of fonts) {
+  fonts.forEach((font) => {
     fontFamilies.add(font.family);
-  }
+  });
 
   return Array.from(fontFamilies);
 };

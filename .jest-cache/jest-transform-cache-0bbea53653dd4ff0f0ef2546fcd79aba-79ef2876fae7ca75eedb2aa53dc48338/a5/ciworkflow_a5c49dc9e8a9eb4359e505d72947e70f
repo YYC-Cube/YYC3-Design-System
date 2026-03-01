@@ -1,0 +1,456 @@
+68595a07fa76476c8a4f7b4bc7c5a119
+"use strict";
+
+/**
+ * YYC³ Design System — CI/CD Workflow Definition (GitHub Actions)
+ *
+ * Pipeline: typecheck → lint → test → coverage → build → performance → visual-regression → deploy
+ *
+ * Five-High / Five-Standard / Five-Implementation Coverage:
+ *   ✅ 自动化 (Automation)       — Full CI pipeline
+ *   ✅ 高可访问性 (A11y)         — jest-axe + Lighthouse accessibility audit
+ *   ✅ 高一致性 (Consistency)    — ESLint + Prettier + locale validation
+ *   ✅ 高性能 (Performance)      — Lighthouse CI + bundle size budget
+ *   ✅ 高可扩展性 (Extensibility) — Matrix builds, modular pipeline
+ *   ✅ 可视化 (Visualization)    — Chromatic visual regression
+ */
+/* istanbul ignore next */
+function cov_297w388bsm() {
+  var path = "/Users/yanyu/Downloads/yyc3-Design-System/src/utils/ci-workflow.ts";
+  var hash = "31b7ed14866413bd4b12c052a3e78341db3514a5";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/yanyu/Downloads/yyc3-Design-System/src/utils/ci-workflow.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 15,
+          column: 0
+        },
+        end: {
+          line: 15,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 16,
+          column: 0
+        },
+        end: {
+          line: 16,
+          column: 81
+        }
+      },
+      "2": {
+        start: {
+          line: 17,
+          column: 0
+        },
+        end: {
+          line: 291,
+          column: 2
+        }
+      },
+      "3": {
+        start: {
+          line: 295,
+          column: 0
+        },
+        end: {
+          line: 313,
+          column: 2
+        }
+      },
+      "4": {
+        start: {
+          line: 317,
+          column: 0
+        },
+        end: {
+          line: 346,
+          column: 2
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    f: {},
+    b: {},
+    inputSourceMap: {
+      file: "/Users/yanyu/Downloads/yyc3-Design-System/src/utils/ci-workflow.ts",
+      mappings: ";AAAA;;;;;;;;;;;;GAYG;;;AAEU,QAAA,YAAY,GAAG;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CAkR3B,CAAC;AAEF;;GAEG;AACU,QAAA,cAAc,GAAG;IAC5B,IAAI,EAAE,8BAA8B;IACpC,UAAU,EAAE,mBAAmB;IAC/B,SAAS,EAAE,cAAc;IACzB,MAAM,EAAE,+CAA+C;IACvD,cAAc,EAAE,+CAA+C;IAC/D,IAAI,EAAE,wBAAwB;IAC9B,YAAY,EAAE,cAAc;IAC5B,eAAe,EAAE,iBAAiB;IAClC,WAAW,EAAE,6BAA6B;IAC1C,UAAU,EAAE,iBAAiB;IAC7B,aAAa,EAAE,sBAAsB;IACrC,kBAAkB,EAAE,qCAAqC;IACzD,cAAc,EAAE,uBAAuB;IACvC,iBAAiB,EAAE,iBAAiB;IACpC,EAAE,EAAE,6EAA6E;IACjF,QAAQ,EAAE,8BAA8B;IACxC,SAAS,EAAE,oDAAoD;CAChE,CAAC;AAEF;;GAEG;AACU,QAAA,eAAe,GAAG;IAC7B,UAAU;IACV,IAAI,EAAE,SAAS;IACf,SAAS,EAAE,SAAS;IACpB,aAAa,EAAE,SAAS;IACxB,wBAAwB,EAAE,SAAS;IACnC,YAAY,EAAE,SAAS;IACvB,wBAAwB,EAAE,SAAS;IACnC,2BAA2B,EAAE,QAAQ;IACrC,6BAA6B,EAAE,SAAS;IACxC,UAAU,EAAE,QAAQ;IACpB,iBAAiB,EAAE,QAAQ;IAC3B,oBAAoB,EAAE,QAAQ;IAE9B,MAAM;IACN,kBAAkB,EAAE,SAAS;IAE7B,uBAAuB;IACvB,MAAM,EAAE,QAAQ;IAChB,kCAAkC,EAAE,QAAQ;IAC5C,2BAA2B,EAAE,QAAQ;IACrC,2BAA2B,EAAE,QAAQ;IACrC,wBAAwB,EAAE,SAAS;IACnC,QAAQ,EAAE,QAAQ;IAClB,6BAA6B,EAAE,QAAQ;IAEvC,YAAY;IACZ,KAAK,EAAE,QAAQ;IACf,aAAa,EAAE,SAAS;IAExB,uBAAuB;IACvB,WAAW,EAAE,SAAS;IACtB,SAAS,EAAE,SAAS;CACrB,CAAC",
+      names: [],
+      sources: ["/Users/yanyu/Downloads/yyc3-Design-System/src/utils/ci-workflow.ts"],
+      sourcesContent: ["/**\n * YYC\xB3 Design System \u2014 CI/CD Workflow Definition (GitHub Actions)\n *\n * Pipeline: typecheck \u2192 lint \u2192 test \u2192 coverage \u2192 build \u2192 performance \u2192 visual-regression \u2192 deploy\n *\n * Five-High / Five-Standard / Five-Implementation Coverage:\n *   \u2705 \u81EA\u52A8\u5316 (Automation)       \u2014 Full CI pipeline\n *   \u2705 \u9AD8\u53EF\u8BBF\u95EE\u6027 (A11y)         \u2014 jest-axe + Lighthouse accessibility audit\n *   \u2705 \u9AD8\u4E00\u81F4\u6027 (Consistency)    \u2014 ESLint + Prettier + locale validation\n *   \u2705 \u9AD8\u6027\u80FD (Performance)      \u2014 Lighthouse CI + bundle size budget\n *   \u2705 \u9AD8\u53EF\u6269\u5C55\u6027 (Extensibility) \u2014 Matrix builds, modular pipeline\n *   \u2705 \u53EF\u89C6\u5316 (Visualization)    \u2014 Chromatic visual regression\n */\n\nexport const workflowYaml = `\nname: YYC\xB3 Design System CI/CD\n\non:\n  push:\n    branches: [main, develop]\n  pull_request:\n    branches: [main]\n\nenv:\n  NODE_VERSION: '20'\n  PNPM_VERSION: '9'\n\nconcurrency:\n  group: ci-\\${{ github.ref }}\n  cancel-in-progress: true\n\njobs:\n  # \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n  # Stage 1: Typecheck + Lint + Format\n  # \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n  quality:\n    name: Code Quality\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: pnpm/action-setup@v4\n        with:\n          version: \\${{ env.PNPM_VERSION }}\n      - uses: actions/setup-node@v4\n        with:\n          node-version: \\${{ env.NODE_VERSION }}\n          cache: 'pnpm'\n      - run: pnpm install --frozen-lockfile\n\n      - name: TypeScript Check\n        run: pnpm exec tsc --noEmit\n\n      - name: ESLint\n        run: pnpm lint\n\n      - name: Prettier Check\n        run: pnpm format:check\n\n      - name: Locale Validation\n        run: pnpm validate:locales\n\n  # \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n  # Stage 2: Unit + Integration + A11y Tests\n  # \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n  test:\n    name: Tests\n    runs-on: ubuntu-latest\n    needs: quality\n    steps:\n      - uses: actions/checkout@v4\n      - uses: pnpm/action-setup@v4\n        with:\n          version: \\${{ env.PNPM_VERSION }}\n      - uses: actions/setup-node@v4\n        with:\n          node-version: \\${{ env.NODE_VERSION }}\n          cache: 'pnpm'\n      - run: pnpm install --frozen-lockfile\n\n      - name: Unit + Integration Tests\n        run: pnpm test -- --coverage --ci --reporters=default --reporters=jest-junit\n        env:\n          JEST_JUNIT_OUTPUT_DIR: test-results\n\n      - name: Upload Coverage\n        uses: actions/upload-artifact@v4\n        with:\n          name: coverage\n          path: coverage/\n          retention-days: 14\n\n      - name: Upload Test Results\n        if: always()\n        uses: actions/upload-artifact@v4\n        with:\n          name: test-results\n          path: test-results/\n          retention-days: 14\n\n      - name: Coverage Threshold Check\n        run: |\n          COVERAGE=$(cat coverage/coverage-summary.json | jq '.total.lines.pct')\n          echo \"Line coverage: \\${COVERAGE}%\"\n          if (( $(echo \"\\$COVERAGE < 80\" | bc -l) )); then\n            echo \"::error::Coverage \\${COVERAGE}% is below 80% threshold\"\n            exit 1\n          fi\n\n  # \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n  # Stage 3: Build + Bundle Analysis\n  # \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n  build:\n    name: Build\n    runs-on: ubuntu-latest\n    needs: quality\n    steps:\n      - uses: actions/checkout@v4\n      - uses: pnpm/action-setup@v4\n        with:\n          version: \\${{ env.PNPM_VERSION }}\n      - uses: actions/setup-node@v4\n        with:\n          node-version: \\${{ env.NODE_VERSION }}\n          cache: 'pnpm'\n      - run: pnpm install --frozen-lockfile\n\n      - name: Build Application\n        run: pnpm build\n\n      - name: Build Tokens\n        run: node build-tokens.mjs\n\n      - name: Bundle Size Check\n        run: |\n          JS_SIZE=$(du -sk dist/assets/*.js 2>/dev/null | awk '{sum+=$1} END {print sum+0}')\n          CSS_SIZE=$(du -sk dist/assets/*.css 2>/dev/null | awk '{sum+=$1} END {print sum+0}')\n          TOTAL_SIZE=$((JS_SIZE + CSS_SIZE))\n          echo \"JS: \\${JS_SIZE}KB | CSS: \\${CSS_SIZE}KB | Total: \\${TOTAL_SIZE}KB\"\n\n          if [ \"\\$JS_SIZE\" -gt 200 ]; then\n            echo \"::error::JS bundle \\${JS_SIZE}KB exceeds 200KB budget\"\n            exit 1\n          fi\n          if [ \"\\$TOTAL_SIZE\" -gt 500 ]; then\n            echo \"::error::Total bundle \\${TOTAL_SIZE}KB exceeds 500KB budget\"\n            exit 1\n          fi\n          echo \"\u2705 Bundle size within budget\"\n\n      - name: Upload Build Artifacts\n        uses: actions/upload-artifact@v4\n        with:\n          name: dist\n          path: dist/\n          retention-days: 7\n\n  # \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n  # Stage 4: E2E Tests (Playwright)\n  # \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n  e2e:\n    name: E2E Tests\n    runs-on: ubuntu-latest\n    needs: build\n    steps:\n      - uses: actions/checkout@v4\n      - uses: pnpm/action-setup@v4\n        with:\n          version: \\${{ env.PNPM_VERSION }}\n      - uses: actions/setup-node@v4\n        with:\n          node-version: \\${{ env.NODE_VERSION }}\n          cache: 'pnpm'\n      - run: pnpm install --frozen-lockfile\n\n      - name: Install Playwright Browsers\n        run: npx playwright install --with-deps chromium\n\n      - name: Download Build\n        uses: actions/download-artifact@v4\n        with:\n          name: dist\n          path: dist/\n\n      - name: Run E2E Tests\n        run: pnpm test:e2e --project=chromium\n        env:\n          CI: true\n\n      - name: Upload E2E Results\n        if: always()\n        uses: actions/upload-artifact@v4\n        with:\n          name: e2e-results\n          path: |\n            test-results/\n            playwright-report/\n          retention-days: 14\n\n  # \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n  # Stage 5: Performance Audit (Lighthouse CI)\n  # \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n  performance:\n    name: Performance Audit\n    runs-on: ubuntu-latest\n    needs: build\n    steps:\n      - uses: actions/checkout@v4\n      - uses: pnpm/action-setup@v4\n        with:\n          version: \\${{ env.PNPM_VERSION }}\n      - uses: actions/setup-node@v4\n        with:\n          node-version: \\${{ env.NODE_VERSION }}\n          cache: 'pnpm'\n      - run: pnpm install --frozen-lockfile\n\n      - name: Download Build\n        uses: actions/download-artifact@v4\n        with:\n          name: dist\n          path: dist/\n\n      - name: Run Lighthouse CI\n        run: |\n          npx @lhci/cli autorun \\\\\n            --collect.staticDistDir=dist \\\\\n            --assert.assertions.categories:performance=error \\\\\n            --assert.assertions.categories:accessibility=error \\\\\n            --assert.assertions.first-contentful-paint=\"error;maxNumericValue=1500\" \\\\\n            --assert.assertions.largest-contentful-paint=\"error;maxNumericValue=2500\" \\\\\n            --assert.assertions.cumulative-layout-shift=\"error;maxNumericValue=0.1\"\n\n  # \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n  # Stage 6: Visual Regression (Chromatic)\n  # \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n  visual:\n    name: Visual Regression\n    runs-on: ubuntu-latest\n    needs: quality\n    if: github.event_name == 'pull_request'\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          fetch-depth: 0  # Needed for TurboSnap\n      - uses: pnpm/action-setup@v4\n        with:\n          version: \\${{ env.PNPM_VERSION }}\n      - uses: actions/setup-node@v4\n        with:\n          node-version: \\${{ env.NODE_VERSION }}\n          cache: 'pnpm'\n      - run: pnpm install --frozen-lockfile\n\n      - name: Build Storybook\n        run: pnpm build-storybook\n\n      - name: Run Chromatic\n        uses: chromaui/action@latest\n        with:\n          projectToken: \\${{ secrets.CHROMATIC_PROJECT_TOKEN }}\n          exitZeroOnChanges: false\n          exitOnceUploaded: true\n          onlyChanged: true\n\n  # \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n  # Stage 7: Deploy (on main only)\n  # \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n  deploy:\n    name: Deploy\n    runs-on: ubuntu-latest\n    needs: [test, build, e2e, performance]\n    if: github.ref == 'refs/heads/main' && github.event_name == 'push'\n    steps:\n      - uses: actions/checkout@v4\n\n      - name: Download Build\n        uses: actions/download-artifact@v4\n        with:\n          name: dist\n          path: dist/\n\n      - name: Deploy to Production\n        run: echo \"\uD83D\uDE80 Deploy step \u2014 configure your deployment target here\"\n        # Examples:\n        # - Vercel: npx vercel --prod --token=\\${{ secrets.VERCEL_TOKEN }}\n        # - Netlify: npx netlify deploy --prod --dir=dist\n        # - AWS S3: aws s3 sync dist/ s3://your-bucket/\n        # - GitHub Pages: uses: peaceiris/actions-gh-pages@v4\n`;\n\n/**\n * Recommended package.json scripts\n */\nexport const packageScripts = {\n  lint: 'eslint src/ --max-warnings 0',\n  'lint:fix': 'eslint src/ --fix',\n  typecheck: 'tsc --noEmit',\n  format: \"prettier --write 'src/**/*.{ts,tsx,css,json}'\",\n  'format:check': \"prettier --check 'src/**/*.{ts,tsx,css,json}'\",\n  test: 'jest --passWithNoTests',\n  'test:watch': 'jest --watch',\n  'test:coverage': 'jest --coverage',\n  'test:a11y': 'jest --testPathPattern=a11y',\n  'test:e2e': 'playwright test',\n  'test:e2e:ui': 'playwright test --ui',\n  'validate:locales': 'ts-node src/qa/locale-validation.ts',\n  'build:tokens': 'node build-tokens.mjs',\n  'build-storybook': 'storybook build',\n  qa: 'pnpm typecheck && pnpm lint && pnpm test -- --coverage && pnpm format:check',\n  'qa:fix': 'pnpm lint:fix && pnpm format',\n  chromatic: 'chromatic --project-token=$CHROMATIC_PROJECT_TOKEN',\n};\n\n/**\n * Recommended devDependencies\n */\nexport const devDependencies = {\n  // Testing\n  jest: '^29.7.0',\n  'ts-jest': '^29.2.0',\n  '@jest/types': '^29.6.0',\n  'jest-environment-jsdom': '^29.7.0',\n  'jest-junit': '^16.0.0',\n  '@testing-library/react': '^16.0.0',\n  '@testing-library/jest-dom': '^6.5.0',\n  '@testing-library/user-event': '^14.5.0',\n  'jest-axe': '^9.0.0',\n  '@types/jest-axe': '^3.5.0',\n  'identity-obj-proxy': '^3.0.0',\n\n  // E2E\n  '@playwright/test': '^1.48.0',\n\n  // Linting & Formatting\n  eslint: '^9.0.0',\n  '@typescript-eslint/eslint-plugin': '^8.0.0',\n  '@typescript-eslint/parser': '^8.0.0',\n  'eslint-plugin-react-hooks': '^5.0.0',\n  'eslint-plugin-jsx-a11y': '^6.10.0',\n  prettier: '^3.4.0',\n  'prettier-plugin-tailwindcss': '^0.6.0',\n\n  // Git hooks\n  husky: '^9.1.0',\n  'lint-staged': '^15.2.0',\n\n  // Performance & Visual\n  '@lhci/cli': '^0.14.0',\n  chromatic: '^11.0.0',\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "31b7ed14866413bd4b12c052a3e78341db3514a5"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_297w388bsm = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_297w388bsm();
+cov_297w388bsm().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_297w388bsm().s[1]++;
+exports.devDependencies = exports.packageScripts = exports.workflowYaml = void 0;
+/* istanbul ignore next */
+cov_297w388bsm().s[2]++;
+exports.workflowYaml = `
+name: YYC³ Design System CI/CD
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  NODE_VERSION: '20'
+  PNPM_VERSION: '9'
+
+concurrency:
+  group: ci-\${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ═══════════════════════════════════════════════
+  # Stage 1: Typecheck + Lint + Format
+  # ═══════════════════════════════════════════════
+  quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: \${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: \${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+
+      - name: TypeScript Check
+        run: pnpm exec tsc --noEmit
+
+      - name: ESLint
+        run: pnpm lint
+
+      - name: Prettier Check
+        run: pnpm format:check
+
+      - name: Locale Validation
+        run: pnpm validate:locales
+
+  # ═══════════════════════════════════════════════
+  # Stage 2: Unit + Integration + A11y Tests
+  # ═══════════════════════════════════════════════
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    needs: quality
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: \${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: \${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+
+      - name: Unit + Integration Tests
+        run: pnpm test -- --coverage --ci --reporters=default --reporters=jest-junit
+        env:
+          JEST_JUNIT_OUTPUT_DIR: test-results
+
+      - name: Upload Coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 14
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results/
+          retention-days: 14
+
+      - name: Coverage Threshold Check
+        run: |
+          COVERAGE=$(cat coverage/coverage-summary.json | jq '.total.lines.pct')
+          echo "Line coverage: \${COVERAGE}%"
+          if (( $(echo "\$COVERAGE < 80" | bc -l) )); then
+            echo "::error::Coverage \${COVERAGE}% is below 80% threshold"
+            exit 1
+          fi
+
+  # ═══════════════════════════════════════════════
+  # Stage 3: Build + Bundle Analysis
+  # ═══════════════════════════════════════════════
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: quality
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: \${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: \${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build Application
+        run: pnpm build
+
+      - name: Build Tokens
+        run: node build-tokens.mjs
+
+      - name: Bundle Size Check
+        run: |
+          JS_SIZE=$(du -sk dist/assets/*.js 2>/dev/null | awk '{sum+=$1} END {print sum+0}')
+          CSS_SIZE=$(du -sk dist/assets/*.css 2>/dev/null | awk '{sum+=$1} END {print sum+0}')
+          TOTAL_SIZE=$((JS_SIZE + CSS_SIZE))
+          echo "JS: \${JS_SIZE}KB | CSS: \${CSS_SIZE}KB | Total: \${TOTAL_SIZE}KB"
+
+          if [ "\$JS_SIZE" -gt 200 ]; then
+            echo "::error::JS bundle \${JS_SIZE}KB exceeds 200KB budget"
+            exit 1
+          fi
+          if [ "\$TOTAL_SIZE" -gt 500 ]; then
+            echo "::error::Total bundle \${TOTAL_SIZE}KB exceeds 500KB budget"
+            exit 1
+          fi
+          echo "✅ Bundle size within budget"
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7
+
+  # ═══════════════════════════════════════════════
+  # Stage 4: E2E Tests (Playwright)
+  # ═══════════════════════════════════════════════
+  e2e:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: \${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: \${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Download Build
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Run E2E Tests
+        run: pnpm test:e2e --project=chromium
+        env:
+          CI: true
+
+      - name: Upload E2E Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-results
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 14
+
+  # ═══════════════════════════════════════════════
+  # Stage 5: Performance Audit (Lighthouse CI)
+  # ═══════════════════════════════════════════════
+  performance:
+    name: Performance Audit
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: \${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: \${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+
+      - name: Download Build
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Run Lighthouse CI
+        run: |
+          npx @lhci/cli autorun \\
+            --collect.staticDistDir=dist \\
+            --assert.assertions.categories:performance=error \\
+            --assert.assertions.categories:accessibility=error \\
+            --assert.assertions.first-contentful-paint="error;maxNumericValue=1500" \\
+            --assert.assertions.largest-contentful-paint="error;maxNumericValue=2500" \\
+            --assert.assertions.cumulative-layout-shift="error;maxNumericValue=0.1"
+
+  # ═══════════════════════════════════════════════
+  # Stage 6: Visual Regression (Chromatic)
+  # ═══════════════════════════════════════════════
+  visual:
+    name: Visual Regression
+    runs-on: ubuntu-latest
+    needs: quality
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Needed for TurboSnap
+      - uses: pnpm/action-setup@v4
+        with:
+          version: \${{ env.PNPM_VERSION }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: \${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build Storybook
+        run: pnpm build-storybook
+
+      - name: Run Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: \${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          exitZeroOnChanges: false
+          exitOnceUploaded: true
+          onlyChanged: true
+
+  # ═══════════════════════════════════════════════
+  # Stage 7: Deploy (on main only)
+  # ═══════════════════════════════════════════════
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: [test, build, e2e, performance]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Build
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Deploy to Production
+        run: echo "🚀 Deploy step — configure your deployment target here"
+        # Examples:
+        # - Vercel: npx vercel --prod --token=\${{ secrets.VERCEL_TOKEN }}
+        # - Netlify: npx netlify deploy --prod --dir=dist
+        # - AWS S3: aws s3 sync dist/ s3://your-bucket/
+        # - GitHub Pages: uses: peaceiris/actions-gh-pages@v4
+`;
+/**
+ * Recommended package.json scripts
+ */
+/* istanbul ignore next */
+cov_297w388bsm().s[3]++;
+exports.packageScripts = {
+  lint: 'eslint src/ --max-warnings 0',
+  'lint:fix': 'eslint src/ --fix',
+  typecheck: 'tsc --noEmit',
+  format: "prettier --write 'src/**/*.{ts,tsx,css,json}'",
+  'format:check': "prettier --check 'src/**/*.{ts,tsx,css,json}'",
+  test: 'jest --passWithNoTests',
+  'test:watch': 'jest --watch',
+  'test:coverage': 'jest --coverage',
+  'test:a11y': 'jest --testPathPattern=a11y',
+  'test:e2e': 'playwright test',
+  'test:e2e:ui': 'playwright test --ui',
+  'validate:locales': 'ts-node src/qa/locale-validation.ts',
+  'build:tokens': 'node build-tokens.mjs',
+  'build-storybook': 'storybook build',
+  qa: 'pnpm typecheck && pnpm lint && pnpm test -- --coverage && pnpm format:check',
+  'qa:fix': 'pnpm lint:fix && pnpm format',
+  chromatic: 'chromatic --project-token=$CHROMATIC_PROJECT_TOKEN'
+};
+/**
+ * Recommended devDependencies
+ */
+/* istanbul ignore next */
+cov_297w388bsm().s[4]++;
+exports.devDependencies = {
+  // Testing
+  jest: '^29.7.0',
+  'ts-jest': '^29.2.0',
+  '@jest/types': '^29.6.0',
+  'jest-environment-jsdom': '^29.7.0',
+  'jest-junit': '^16.0.0',
+  '@testing-library/react': '^16.0.0',
+  '@testing-library/jest-dom': '^6.5.0',
+  '@testing-library/user-event': '^14.5.0',
+  'jest-axe': '^9.0.0',
+  '@types/jest-axe': '^3.5.0',
+  'identity-obj-proxy': '^3.0.0',
+  // E2E
+  '@playwright/test': '^1.48.0',
+  // Linting & Formatting
+  eslint: '^9.0.0',
+  '@typescript-eslint/eslint-plugin': '^8.0.0',
+  '@typescript-eslint/parser': '^8.0.0',
+  'eslint-plugin-react-hooks': '^5.0.0',
+  'eslint-plugin-jsx-a11y': '^6.10.0',
+  prettier: '^3.4.0',
+  'prettier-plugin-tailwindcss': '^0.6.0',
+  // Git hooks
+  husky: '^9.1.0',
+  'lint-staged': '^15.2.0',
+  // Performance & Visual
+  '@lhci/cli': '^0.14.0',
+  chromatic: '^11.0.0'
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMjk3dzM4OGJzbSIsInBhdGgiLCJoYXNoIiwiZ2xvYmFsIiwiRnVuY3Rpb24iLCJnY3YiLCJjb3ZlcmFnZURhdGEiLCJzdGF0ZW1lbnRNYXAiLCJzdGFydCIsImxpbmUiLCJjb2x1bW4iLCJlbmQiLCJmbk1hcCIsImJyYW5jaE1hcCIsInMiLCJmIiwiYiIsImlucHV0U291cmNlTWFwIiwiZmlsZSIsIm1hcHBpbmdzIiwibmFtZXMiLCJzb3VyY2VzIiwic291cmNlc0NvbnRlbnQiLCJ2ZXJzaW9uIiwiX2NvdmVyYWdlU2NoZW1hIiwiY292ZXJhZ2UiLCJhY3R1YWxDb3ZlcmFnZSIsImV4cG9ydHMiLCJ3b3JrZmxvd1lhbWwiLCJwYWNrYWdlU2NyaXB0cyIsImxpbnQiLCJ0eXBlY2hlY2siLCJmb3JtYXQiLCJ0ZXN0IiwicWEiLCJjaHJvbWF0aWMiLCJkZXZEZXBlbmRlbmNpZXMiLCJqZXN0IiwiZXNsaW50IiwicHJldHRpZXIiLCJodXNreSJdLCJzb3VyY2VzIjpbIi9Vc2Vycy95YW55dS9Eb3dubG9hZHMveXljMy1EZXNpZ24tU3lzdGVtL3NyYy91dGlscy9jaS13b3JrZmxvdy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIFlZQ8KzIERlc2lnbiBTeXN0ZW0g4oCUIENJL0NEIFdvcmtmbG93IERlZmluaXRpb24gKEdpdEh1YiBBY3Rpb25zKVxuICpcbiAqIFBpcGVsaW5lOiB0eXBlY2hlY2sg4oaSIGxpbnQg4oaSIHRlc3Qg4oaSIGNvdmVyYWdlIOKGkiBidWlsZCDihpIgcGVyZm9ybWFuY2Ug4oaSIHZpc3VhbC1yZWdyZXNzaW9uIOKGkiBkZXBsb3lcbiAqXG4gKiBGaXZlLUhpZ2ggLyBGaXZlLVN0YW5kYXJkIC8gRml2ZS1JbXBsZW1lbnRhdGlvbiBDb3ZlcmFnZTpcbiAqICAg4pyFIOiHquWKqOWMliAoQXV0b21hdGlvbikgICAgICAg4oCUIEZ1bGwgQ0kgcGlwZWxpbmVcbiAqICAg4pyFIOmrmOWPr+iuv+mXruaApyAoQTExeSkgICAgICAgICDigJQgamVzdC1heGUgKyBMaWdodGhvdXNlIGFjY2Vzc2liaWxpdHkgYXVkaXRcbiAqICAg4pyFIOmrmOS4gOiHtOaApyAoQ29uc2lzdGVuY3kpICAgIOKAlCBFU0xpbnQgKyBQcmV0dGllciArIGxvY2FsZSB2YWxpZGF0aW9uXG4gKiAgIOKchSDpq5jmgKfog70gKFBlcmZvcm1hbmNlKSAgICAgIOKAlCBMaWdodGhvdXNlIENJICsgYnVuZGxlIHNpemUgYnVkZ2V0XG4gKiAgIOKchSDpq5jlj6/mianlsZXmgKcgKEV4dGVuc2liaWxpdHkpIOKAlCBNYXRyaXggYnVpbGRzLCBtb2R1bGFyIHBpcGVsaW5lXG4gKiAgIOKchSDlj6/op4bljJYgKFZpc3VhbGl6YXRpb24pICAgIOKAlCBDaHJvbWF0aWMgdmlzdWFsIHJlZ3Jlc3Npb25cbiAqL1xuXG5leHBvcnQgY29uc3Qgd29ya2Zsb3dZYW1sID0gYFxubmFtZTogWVlDwrMgRGVzaWduIFN5c3RlbSBDSS9DRFxuXG5vbjpcbiAgcHVzaDpcbiAgICBicmFuY2hlczogW21haW4sIGRldmVsb3BdXG4gIHB1bGxfcmVxdWVzdDpcbiAgICBicmFuY2hlczogW21haW5dXG5cbmVudjpcbiAgTk9ERV9WRVJTSU9OOiAnMjAnXG4gIFBOUE1fVkVSU0lPTjogJzknXG5cbmNvbmN1cnJlbmN5OlxuICBncm91cDogY2ktXFwke3sgZ2l0aHViLnJlZiB9fVxuICBjYW5jZWwtaW4tcHJvZ3Jlc3M6IHRydWVcblxuam9iczpcbiAgIyDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZBcbiAgIyBTdGFnZSAxOiBUeXBlY2hlY2sgKyBMaW50ICsgRm9ybWF0XG4gICMg4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQXG4gIHF1YWxpdHk6XG4gICAgbmFtZTogQ29kZSBRdWFsaXR5XG4gICAgcnVucy1vbjogdWJ1bnR1LWxhdGVzdFxuICAgIHN0ZXBzOlxuICAgICAgLSB1c2VzOiBhY3Rpb25zL2NoZWNrb3V0QHY0XG4gICAgICAtIHVzZXM6IHBucG0vYWN0aW9uLXNldHVwQHY0XG4gICAgICAgIHdpdGg6XG4gICAgICAgICAgdmVyc2lvbjogXFwke3sgZW52LlBOUE1fVkVSU0lPTiB9fVxuICAgICAgLSB1c2VzOiBhY3Rpb25zL3NldHVwLW5vZGVAdjRcbiAgICAgICAgd2l0aDpcbiAgICAgICAgICBub2RlLXZlcnNpb246IFxcJHt7IGVudi5OT0RFX1ZFUlNJT04gfX1cbiAgICAgICAgICBjYWNoZTogJ3BucG0nXG4gICAgICAtIHJ1bjogcG5wbSBpbnN0YWxsIC0tZnJvemVuLWxvY2tmaWxlXG5cbiAgICAgIC0gbmFtZTogVHlwZVNjcmlwdCBDaGVja1xuICAgICAgICBydW46IHBucG0gZXhlYyB0c2MgLS1ub0VtaXRcblxuICAgICAgLSBuYW1lOiBFU0xpbnRcbiAgICAgICAgcnVuOiBwbnBtIGxpbnRcblxuICAgICAgLSBuYW1lOiBQcmV0dGllciBDaGVja1xuICAgICAgICBydW46IHBucG0gZm9ybWF0OmNoZWNrXG5cbiAgICAgIC0gbmFtZTogTG9jYWxlIFZhbGlkYXRpb25cbiAgICAgICAgcnVuOiBwbnBtIHZhbGlkYXRlOmxvY2FsZXNcblxuICAjIOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkFxuICAjIFN0YWdlIDI6IFVuaXQgKyBJbnRlZ3JhdGlvbiArIEExMXkgVGVzdHNcbiAgIyDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZBcbiAgdGVzdDpcbiAgICBuYW1lOiBUZXN0c1xuICAgIHJ1bnMtb246IHVidW50dS1sYXRlc3RcbiAgICBuZWVkczogcXVhbGl0eVxuICAgIHN0ZXBzOlxuICAgICAgLSB1c2VzOiBhY3Rpb25zL2NoZWNrb3V0QHY0XG4gICAgICAtIHVzZXM6IHBucG0vYWN0aW9uLXNldHVwQHY0XG4gICAgICAgIHdpdGg6XG4gICAgICAgICAgdmVyc2lvbjogXFwke3sgZW52LlBOUE1fVkVSU0lPTiB9fVxuICAgICAgLSB1c2VzOiBhY3Rpb25zL3NldHVwLW5vZGVAdjRcbiAgICAgICAgd2l0aDpcbiAgICAgICAgICBub2RlLXZlcnNpb246IFxcJHt7IGVudi5OT0RFX1ZFUlNJT04gfX1cbiAgICAgICAgICBjYWNoZTogJ3BucG0nXG4gICAgICAtIHJ1bjogcG5wbSBpbnN0YWxsIC0tZnJvemVuLWxvY2tmaWxlXG5cbiAgICAgIC0gbmFtZTogVW5pdCArIEludGVncmF0aW9uIFRlc3RzXG4gICAgICAgIHJ1bjogcG5wbSB0ZXN0IC0tIC0tY292ZXJhZ2UgLS1jaSAtLXJlcG9ydGVycz1kZWZhdWx0IC0tcmVwb3J0ZXJzPWplc3QtanVuaXRcbiAgICAgICAgZW52OlxuICAgICAgICAgIEpFU1RfSlVOSVRfT1VUUFVUX0RJUjogdGVzdC1yZXN1bHRzXG5cbiAgICAgIC0gbmFtZTogVXBsb2FkIENvdmVyYWdlXG4gICAgICAgIHVzZXM6IGFjdGlvbnMvdXBsb2FkLWFydGlmYWN0QHY0XG4gICAgICAgIHdpdGg6XG4gICAgICAgICAgbmFtZTogY292ZXJhZ2VcbiAgICAgICAgICBwYXRoOiBjb3ZlcmFnZS9cbiAgICAgICAgICByZXRlbnRpb24tZGF5czogMTRcblxuICAgICAgLSBuYW1lOiBVcGxvYWQgVGVzdCBSZXN1bHRzXG4gICAgICAgIGlmOiBhbHdheXMoKVxuICAgICAgICB1c2VzOiBhY3Rpb25zL3VwbG9hZC1hcnRpZmFjdEB2NFxuICAgICAgICB3aXRoOlxuICAgICAgICAgIG5hbWU6IHRlc3QtcmVzdWx0c1xuICAgICAgICAgIHBhdGg6IHRlc3QtcmVzdWx0cy9cbiAgICAgICAgICByZXRlbnRpb24tZGF5czogMTRcblxuICAgICAgLSBuYW1lOiBDb3ZlcmFnZSBUaHJlc2hvbGQgQ2hlY2tcbiAgICAgICAgcnVuOiB8XG4gICAgICAgICAgQ09WRVJBR0U9JChjYXQgY292ZXJhZ2UvY292ZXJhZ2Utc3VtbWFyeS5qc29uIHwganEgJy50b3RhbC5saW5lcy5wY3QnKVxuICAgICAgICAgIGVjaG8gXCJMaW5lIGNvdmVyYWdlOiBcXCR7Q09WRVJBR0V9JVwiXG4gICAgICAgICAgaWYgKCggJChlY2hvIFwiXFwkQ09WRVJBR0UgPCA4MFwiIHwgYmMgLWwpICkpOyB0aGVuXG4gICAgICAgICAgICBlY2hvIFwiOjplcnJvcjo6Q292ZXJhZ2UgXFwke0NPVkVSQUdFfSUgaXMgYmVsb3cgODAlIHRocmVzaG9sZFwiXG4gICAgICAgICAgICBleGl0IDFcbiAgICAgICAgICBmaVxuXG4gICMg4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQXG4gICMgU3RhZ2UgMzogQnVpbGQgKyBCdW5kbGUgQW5hbHlzaXNcbiAgIyDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZBcbiAgYnVpbGQ6XG4gICAgbmFtZTogQnVpbGRcbiAgICBydW5zLW9uOiB1YnVudHUtbGF0ZXN0XG4gICAgbmVlZHM6IHF1YWxpdHlcbiAgICBzdGVwczpcbiAgICAgIC0gdXNlczogYWN0aW9ucy9jaGVja291dEB2NFxuICAgICAgLSB1c2VzOiBwbnBtL2FjdGlvbi1zZXR1cEB2NFxuICAgICAgICB3aXRoOlxuICAgICAgICAgIHZlcnNpb246IFxcJHt7IGVudi5QTlBNX1ZFUlNJT04gfX1cbiAgICAgIC0gdXNlczogYWN0aW9ucy9zZXR1cC1ub2RlQHY0XG4gICAgICAgIHdpdGg6XG4gICAgICAgICAgbm9kZS12ZXJzaW9uOiBcXCR7eyBlbnYuTk9ERV9WRVJTSU9OIH19XG4gICAgICAgICAgY2FjaGU6ICdwbnBtJ1xuICAgICAgLSBydW46IHBucG0gaW5zdGFsbCAtLWZyb3plbi1sb2NrZmlsZVxuXG4gICAgICAtIG5hbWU6IEJ1aWxkIEFwcGxpY2F0aW9uXG4gICAgICAgIHJ1bjogcG5wbSBidWlsZFxuXG4gICAgICAtIG5hbWU6IEJ1aWxkIFRva2Vuc1xuICAgICAgICBydW46IG5vZGUgYnVpbGQtdG9rZW5zLm1qc1xuXG4gICAgICAtIG5hbWU6IEJ1bmRsZSBTaXplIENoZWNrXG4gICAgICAgIHJ1bjogfFxuICAgICAgICAgIEpTX1NJWkU9JChkdSAtc2sgZGlzdC9hc3NldHMvKi5qcyAyPi9kZXYvbnVsbCB8IGF3ayAne3N1bSs9JDF9IEVORCB7cHJpbnQgc3VtKzB9JylcbiAgICAgICAgICBDU1NfU0laRT0kKGR1IC1zayBkaXN0L2Fzc2V0cy8qLmNzcyAyPi9kZXYvbnVsbCB8IGF3ayAne3N1bSs9JDF9IEVORCB7cHJpbnQgc3VtKzB9JylcbiAgICAgICAgICBUT1RBTF9TSVpFPSQoKEpTX1NJWkUgKyBDU1NfU0laRSkpXG4gICAgICAgICAgZWNobyBcIkpTOiBcXCR7SlNfU0laRX1LQiB8IENTUzogXFwke0NTU19TSVpFfUtCIHwgVG90YWw6IFxcJHtUT1RBTF9TSVpFfUtCXCJcblxuICAgICAgICAgIGlmIFsgXCJcXCRKU19TSVpFXCIgLWd0IDIwMCBdOyB0aGVuXG4gICAgICAgICAgICBlY2hvIFwiOjplcnJvcjo6SlMgYnVuZGxlIFxcJHtKU19TSVpFfUtCIGV4Y2VlZHMgMjAwS0IgYnVkZ2V0XCJcbiAgICAgICAgICAgIGV4aXQgMVxuICAgICAgICAgIGZpXG4gICAgICAgICAgaWYgWyBcIlxcJFRPVEFMX1NJWkVcIiAtZ3QgNTAwIF07IHRoZW5cbiAgICAgICAgICAgIGVjaG8gXCI6OmVycm9yOjpUb3RhbCBidW5kbGUgXFwke1RPVEFMX1NJWkV9S0IgZXhjZWVkcyA1MDBLQiBidWRnZXRcIlxuICAgICAgICAgICAgZXhpdCAxXG4gICAgICAgICAgZmlcbiAgICAgICAgICBlY2hvIFwi4pyFIEJ1bmRsZSBzaXplIHdpdGhpbiBidWRnZXRcIlxuXG4gICAgICAtIG5hbWU6IFVwbG9hZCBCdWlsZCBBcnRpZmFjdHNcbiAgICAgICAgdXNlczogYWN0aW9ucy91cGxvYWQtYXJ0aWZhY3RAdjRcbiAgICAgICAgd2l0aDpcbiAgICAgICAgICBuYW1lOiBkaXN0XG4gICAgICAgICAgcGF0aDogZGlzdC9cbiAgICAgICAgICByZXRlbnRpb24tZGF5czogN1xuXG4gICMg4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQXG4gICMgU3RhZ2UgNDogRTJFIFRlc3RzIChQbGF5d3JpZ2h0KVxuICAjIOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkFxuICBlMmU6XG4gICAgbmFtZTogRTJFIFRlc3RzXG4gICAgcnVucy1vbjogdWJ1bnR1LWxhdGVzdFxuICAgIG5lZWRzOiBidWlsZFxuICAgIHN0ZXBzOlxuICAgICAgLSB1c2VzOiBhY3Rpb25zL2NoZWNrb3V0QHY0XG4gICAgICAtIHVzZXM6IHBucG0vYWN0aW9uLXNldHVwQHY0XG4gICAgICAgIHdpdGg6XG4gICAgICAgICAgdmVyc2lvbjogXFwke3sgZW52LlBOUE1fVkVSU0lPTiB9fVxuICAgICAgLSB1c2VzOiBhY3Rpb25zL3NldHVwLW5vZGVAdjRcbiAgICAgICAgd2l0aDpcbiAgICAgICAgICBub2RlLXZlcnNpb246IFxcJHt7IGVudi5OT0RFX1ZFUlNJT04gfX1cbiAgICAgICAgICBjYWNoZTogJ3BucG0nXG4gICAgICAtIHJ1bjogcG5wbSBpbnN0YWxsIC0tZnJvemVuLWxvY2tmaWxlXG5cbiAgICAgIC0gbmFtZTogSW5zdGFsbCBQbGF5d3JpZ2h0IEJyb3dzZXJzXG4gICAgICAgIHJ1bjogbnB4IHBsYXl3cmlnaHQgaW5zdGFsbCAtLXdpdGgtZGVwcyBjaHJvbWl1bVxuXG4gICAgICAtIG5hbWU6IERvd25sb2FkIEJ1aWxkXG4gICAgICAgIHVzZXM6IGFjdGlvbnMvZG93bmxvYWQtYXJ0aWZhY3RAdjRcbiAgICAgICAgd2l0aDpcbiAgICAgICAgICBuYW1lOiBkaXN0XG4gICAgICAgICAgcGF0aDogZGlzdC9cblxuICAgICAgLSBuYW1lOiBSdW4gRTJFIFRlc3RzXG4gICAgICAgIHJ1bjogcG5wbSB0ZXN0OmUyZSAtLXByb2plY3Q9Y2hyb21pdW1cbiAgICAgICAgZW52OlxuICAgICAgICAgIENJOiB0cnVlXG5cbiAgICAgIC0gbmFtZTogVXBsb2FkIEUyRSBSZXN1bHRzXG4gICAgICAgIGlmOiBhbHdheXMoKVxuICAgICAgICB1c2VzOiBhY3Rpb25zL3VwbG9hZC1hcnRpZmFjdEB2NFxuICAgICAgICB3aXRoOlxuICAgICAgICAgIG5hbWU6IGUyZS1yZXN1bHRzXG4gICAgICAgICAgcGF0aDogfFxuICAgICAgICAgICAgdGVzdC1yZXN1bHRzL1xuICAgICAgICAgICAgcGxheXdyaWdodC1yZXBvcnQvXG4gICAgICAgICAgcmV0ZW50aW9uLWRheXM6IDE0XG5cbiAgIyDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZBcbiAgIyBTdGFnZSA1OiBQZXJmb3JtYW5jZSBBdWRpdCAoTGlnaHRob3VzZSBDSSlcbiAgIyDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZDilZBcbiAgcGVyZm9ybWFuY2U6XG4gICAgbmFtZTogUGVyZm9ybWFuY2UgQXVkaXRcbiAgICBydW5zLW9uOiB1YnVudHUtbGF0ZXN0XG4gICAgbmVlZHM6IGJ1aWxkXG4gICAgc3RlcHM6XG4gICAgICAtIHVzZXM6IGFjdGlvbnMvY2hlY2tvdXRAdjRcbiAgICAgIC0gdXNlczogcG5wbS9hY3Rpb24tc2V0dXBAdjRcbiAgICAgICAgd2l0aDpcbiAgICAgICAgICB2ZXJzaW9uOiBcXCR7eyBlbnYuUE5QTV9WRVJTSU9OIH19XG4gICAgICAtIHVzZXM6IGFjdGlvbnMvc2V0dXAtbm9kZUB2NFxuICAgICAgICB3aXRoOlxuICAgICAgICAgIG5vZGUtdmVyc2lvbjogXFwke3sgZW52Lk5PREVfVkVSU0lPTiB9fVxuICAgICAgICAgIGNhY2hlOiAncG5wbSdcbiAgICAgIC0gcnVuOiBwbnBtIGluc3RhbGwgLS1mcm96ZW4tbG9ja2ZpbGVcblxuICAgICAgLSBuYW1lOiBEb3dubG9hZCBCdWlsZFxuICAgICAgICB1c2VzOiBhY3Rpb25zL2Rvd25sb2FkLWFydGlmYWN0QHY0XG4gICAgICAgIHdpdGg6XG4gICAgICAgICAgbmFtZTogZGlzdFxuICAgICAgICAgIHBhdGg6IGRpc3QvXG5cbiAgICAgIC0gbmFtZTogUnVuIExpZ2h0aG91c2UgQ0lcbiAgICAgICAgcnVuOiB8XG4gICAgICAgICAgbnB4IEBsaGNpL2NsaSBhdXRvcnVuIFxcXFxcbiAgICAgICAgICAgIC0tY29sbGVjdC5zdGF0aWNEaXN0RGlyPWRpc3QgXFxcXFxuICAgICAgICAgICAgLS1hc3NlcnQuYXNzZXJ0aW9ucy5jYXRlZ29yaWVzOnBlcmZvcm1hbmNlPWVycm9yIFxcXFxcbiAgICAgICAgICAgIC0tYXNzZXJ0LmFzc2VydGlvbnMuY2F0ZWdvcmllczphY2Nlc3NpYmlsaXR5PWVycm9yIFxcXFxcbiAgICAgICAgICAgIC0tYXNzZXJ0LmFzc2VydGlvbnMuZmlyc3QtY29udGVudGZ1bC1wYWludD1cImVycm9yO21heE51bWVyaWNWYWx1ZT0xNTAwXCIgXFxcXFxuICAgICAgICAgICAgLS1hc3NlcnQuYXNzZXJ0aW9ucy5sYXJnZXN0LWNvbnRlbnRmdWwtcGFpbnQ9XCJlcnJvcjttYXhOdW1lcmljVmFsdWU9MjUwMFwiIFxcXFxcbiAgICAgICAgICAgIC0tYXNzZXJ0LmFzc2VydGlvbnMuY3VtdWxhdGl2ZS1sYXlvdXQtc2hpZnQ9XCJlcnJvcjttYXhOdW1lcmljVmFsdWU9MC4xXCJcblxuICAjIOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkFxuICAjIFN0YWdlIDY6IFZpc3VhbCBSZWdyZXNzaW9uIChDaHJvbWF0aWMpXG4gICMg4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQXG4gIHZpc3VhbDpcbiAgICBuYW1lOiBWaXN1YWwgUmVncmVzc2lvblxuICAgIHJ1bnMtb246IHVidW50dS1sYXRlc3RcbiAgICBuZWVkczogcXVhbGl0eVxuICAgIGlmOiBnaXRodWIuZXZlbnRfbmFtZSA9PSAncHVsbF9yZXF1ZXN0J1xuICAgIHN0ZXBzOlxuICAgICAgLSB1c2VzOiBhY3Rpb25zL2NoZWNrb3V0QHY0XG4gICAgICAgIHdpdGg6XG4gICAgICAgICAgZmV0Y2gtZGVwdGg6IDAgICMgTmVlZGVkIGZvciBUdXJib1NuYXBcbiAgICAgIC0gdXNlczogcG5wbS9hY3Rpb24tc2V0dXBAdjRcbiAgICAgICAgd2l0aDpcbiAgICAgICAgICB2ZXJzaW9uOiBcXCR7eyBlbnYuUE5QTV9WRVJTSU9OIH19XG4gICAgICAtIHVzZXM6IGFjdGlvbnMvc2V0dXAtbm9kZUB2NFxuICAgICAgICB3aXRoOlxuICAgICAgICAgIG5vZGUtdmVyc2lvbjogXFwke3sgZW52Lk5PREVfVkVSU0lPTiB9fVxuICAgICAgICAgIGNhY2hlOiAncG5wbSdcbiAgICAgIC0gcnVuOiBwbnBtIGluc3RhbGwgLS1mcm96ZW4tbG9ja2ZpbGVcblxuICAgICAgLSBuYW1lOiBCdWlsZCBTdG9yeWJvb2tcbiAgICAgICAgcnVuOiBwbnBtIGJ1aWxkLXN0b3J5Ym9va1xuXG4gICAgICAtIG5hbWU6IFJ1biBDaHJvbWF0aWNcbiAgICAgICAgdXNlczogY2hyb21hdWkvYWN0aW9uQGxhdGVzdFxuICAgICAgICB3aXRoOlxuICAgICAgICAgIHByb2plY3RUb2tlbjogXFwke3sgc2VjcmV0cy5DSFJPTUFUSUNfUFJPSkVDVF9UT0tFTiB9fVxuICAgICAgICAgIGV4aXRaZXJvT25DaGFuZ2VzOiBmYWxzZVxuICAgICAgICAgIGV4aXRPbmNlVXBsb2FkZWQ6IHRydWVcbiAgICAgICAgICBvbmx5Q2hhbmdlZDogdHJ1ZVxuXG4gICMg4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQXG4gICMgU3RhZ2UgNzogRGVwbG95IChvbiBtYWluIG9ubHkpXG4gICMg4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQ4pWQXG4gIGRlcGxveTpcbiAgICBuYW1lOiBEZXBsb3lcbiAgICBydW5zLW9uOiB1YnVudHUtbGF0ZXN0XG4gICAgbmVlZHM6IFt0ZXN0LCBidWlsZCwgZTJlLCBwZXJmb3JtYW5jZV1cbiAgICBpZjogZ2l0aHViLnJlZiA9PSAncmVmcy9oZWFkcy9tYWluJyAmJiBnaXRodWIuZXZlbnRfbmFtZSA9PSAncHVzaCdcbiAgICBzdGVwczpcbiAgICAgIC0gdXNlczogYWN0aW9ucy9jaGVja291dEB2NFxuXG4gICAgICAtIG5hbWU6IERvd25sb2FkIEJ1aWxkXG4gICAgICAgIHVzZXM6IGFjdGlvbnMvZG93bmxvYWQtYXJ0aWZhY3RAdjRcbiAgICAgICAgd2l0aDpcbiAgICAgICAgICBuYW1lOiBkaXN0XG4gICAgICAgICAgcGF0aDogZGlzdC9cblxuICAgICAgLSBuYW1lOiBEZXBsb3kgdG8gUHJvZHVjdGlvblxuICAgICAgICBydW46IGVjaG8gXCLwn5qAIERlcGxveSBzdGVwIOKAlCBjb25maWd1cmUgeW91ciBkZXBsb3ltZW50IHRhcmdldCBoZXJlXCJcbiAgICAgICAgIyBFeGFtcGxlczpcbiAgICAgICAgIyAtIFZlcmNlbDogbnB4IHZlcmNlbCAtLXByb2QgLS10b2tlbj1cXCR7eyBzZWNyZXRzLlZFUkNFTF9UT0tFTiB9fVxuICAgICAgICAjIC0gTmV0bGlmeTogbnB4IG5ldGxpZnkgZGVwbG95IC0tcHJvZCAtLWRpcj1kaXN0XG4gICAgICAgICMgLSBBV1MgUzM6IGF3cyBzMyBzeW5jIGRpc3QvIHMzOi8veW91ci1idWNrZXQvXG4gICAgICAgICMgLSBHaXRIdWIgUGFnZXM6IHVzZXM6IHBlYWNlaXJpcy9hY3Rpb25zLWdoLXBhZ2VzQHY0XG5gO1xuXG4vKipcbiAqIFJlY29tbWVuZGVkIHBhY2thZ2UuanNvbiBzY3JpcHRzXG4gKi9cbmV4cG9ydCBjb25zdCBwYWNrYWdlU2NyaXB0cyA9IHtcbiAgbGludDogJ2VzbGludCBzcmMvIC0tbWF4LXdhcm5pbmdzIDAnLFxuICAnbGludDpmaXgnOiAnZXNsaW50IHNyYy8gLS1maXgnLFxuICB0eXBlY2hlY2s6ICd0c2MgLS1ub0VtaXQnLFxuICBmb3JtYXQ6IFwicHJldHRpZXIgLS13cml0ZSAnc3JjLyoqLyoue3RzLHRzeCxjc3MsanNvbn0nXCIsXG4gICdmb3JtYXQ6Y2hlY2snOiBcInByZXR0aWVyIC0tY2hlY2sgJ3NyYy8qKi8qLnt0cyx0c3gsY3NzLGpzb259J1wiLFxuICB0ZXN0OiAnamVzdCAtLXBhc3NXaXRoTm9UZXN0cycsXG4gICd0ZXN0OndhdGNoJzogJ2plc3QgLS13YXRjaCcsXG4gICd0ZXN0OmNvdmVyYWdlJzogJ2plc3QgLS1jb3ZlcmFnZScsXG4gICd0ZXN0OmExMXknOiAnamVzdCAtLXRlc3RQYXRoUGF0dGVybj1hMTF5JyxcbiAgJ3Rlc3Q6ZTJlJzogJ3BsYXl3cmlnaHQgdGVzdCcsXG4gICd0ZXN0OmUyZTp1aSc6ICdwbGF5d3JpZ2h0IHRlc3QgLS11aScsXG4gICd2YWxpZGF0ZTpsb2NhbGVzJzogJ3RzLW5vZGUgc3JjL3FhL2xvY2FsZS12YWxpZGF0aW9uLnRzJyxcbiAgJ2J1aWxkOnRva2Vucyc6ICdub2RlIGJ1aWxkLXRva2Vucy5tanMnLFxuICAnYnVpbGQtc3Rvcnlib29rJzogJ3N0b3J5Ym9vayBidWlsZCcsXG4gIHFhOiAncG5wbSB0eXBlY2hlY2sgJiYgcG5wbSBsaW50ICYmIHBucG0gdGVzdCAtLSAtLWNvdmVyYWdlICYmIHBucG0gZm9ybWF0OmNoZWNrJyxcbiAgJ3FhOmZpeCc6ICdwbnBtIGxpbnQ6Zml4ICYmIHBucG0gZm9ybWF0JyxcbiAgY2hyb21hdGljOiAnY2hyb21hdGljIC0tcHJvamVjdC10b2tlbj0kQ0hST01BVElDX1BST0pFQ1RfVE9LRU4nLFxufTtcblxuLyoqXG4gKiBSZWNvbW1lbmRlZCBkZXZEZXBlbmRlbmNpZXNcbiAqL1xuZXhwb3J0IGNvbnN0IGRldkRlcGVuZGVuY2llcyA9IHtcbiAgLy8gVGVzdGluZ1xuICBqZXN0OiAnXjI5LjcuMCcsXG4gICd0cy1qZXN0JzogJ14yOS4yLjAnLFxuICAnQGplc3QvdHlwZXMnOiAnXjI5LjYuMCcsXG4gICdqZXN0LWVudmlyb25tZW50LWpzZG9tJzogJ14yOS43LjAnLFxuICAnamVzdC1qdW5pdCc6ICdeMTYuMC4wJyxcbiAgJ0B0ZXN0aW5nLWxpYnJhcnkvcmVhY3QnOiAnXjE2LjAuMCcsXG4gICdAdGVzdGluZy1saWJyYXJ5L2plc3QtZG9tJzogJ142LjUuMCcsXG4gICdAdGVzdGluZy1saWJyYXJ5L3VzZXItZXZlbnQnOiAnXjE0LjUuMCcsXG4gICdqZXN0LWF4ZSc6ICdeOS4wLjAnLFxuICAnQHR5cGVzL2plc3QtYXhlJzogJ14zLjUuMCcsXG4gICdpZGVudGl0eS1vYmotcHJveHknOiAnXjMuMC4wJyxcblxuICAvLyBFMkVcbiAgJ0BwbGF5d3JpZ2h0L3Rlc3QnOiAnXjEuNDguMCcsXG5cbiAgLy8gTGludGluZyAmIEZvcm1hdHRpbmdcbiAgZXNsaW50OiAnXjkuMC4wJyxcbiAgJ0B0eXBlc2NyaXB0LWVzbGludC9lc2xpbnQtcGx1Z2luJzogJ144LjAuMCcsXG4gICdAdHlwZXNjcmlwdC1lc2xpbnQvcGFyc2VyJzogJ144LjAuMCcsXG4gICdlc2xpbnQtcGx1Z2luLXJlYWN0LWhvb2tzJzogJ141LjAuMCcsXG4gICdlc2xpbnQtcGx1Z2luLWpzeC1hMTF5JzogJ142LjEwLjAnLFxuICBwcmV0dGllcjogJ14zLjQuMCcsXG4gICdwcmV0dGllci1wbHVnaW4tdGFpbHdpbmRjc3MnOiAnXjAuNi4wJyxcblxuICAvLyBHaXQgaG9va3NcbiAgaHVza3k6ICdeOS4xLjAnLFxuICAnbGludC1zdGFnZWQnOiAnXjE1LjIuMCcsXG5cbiAgLy8gUGVyZm9ybWFuY2UgJiBWaXN1YWxcbiAgJ0BsaGNpL2NsaSc6ICdeMC4xNC4wJyxcbiAgY2hyb21hdGljOiAnXjExLjAuMCcsXG59O1xuIl0sIm1hcHBpbmdzIjoiOztBQUFBOzs7Ozs7Ozs7Ozs7O0FBQUE7QUFBQSxTQUFBQSxlQUFBO0VBQUEsSUFBQUMsSUFBQTtFQUFBLElBQUFDLElBQUE7RUFBQSxJQUFBQyxNQUFBLE9BQUFDLFFBQUE7RUFBQSxJQUFBQyxHQUFBO0VBQUEsSUFBQUMsWUFBQTtJQUFBTCxJQUFBO0lBQUFNLFlBQUE7TUFBQTtRQUFBQyxLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO0lBQUE7SUFBQUUsS0FBQTtJQUFBQyxTQUFBO0lBQUFDLENBQUE7TUFBQTtNQUFBO01BQUE7TUFBQTtNQUFBO0lBQUE7SUFB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

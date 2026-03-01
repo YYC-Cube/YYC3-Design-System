@@ -16,12 +16,7 @@ export const Grid = React.forwardRef<HTMLDivElement, GridProps>(
     };
 
     return (
-      <div
-        ref={ref}
-        className={cn('grid', className)}
-        style={gridStyle}
-        {...props}
-      >
+      <div ref={ref} className={cn('grid', className)} style={gridStyle} {...props}>
         {children}
       </div>
     );

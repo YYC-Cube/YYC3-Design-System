@@ -30,7 +30,9 @@ export interface ImageOptimizationExampleProps {
   className?: string;
 }
 
-export const ImageOptimizationExample: React.FC<ImageOptimizationExampleProps> = ({ className = '' }) => {
+export const ImageOptimizationExample: React.FC<ImageOptimizationExampleProps> = ({
+  className = '',
+}) => {
   const [preloading, setPreloading] = useState(false);
   const [preloadProgress, setPreloadProgress] = useState({ loaded: 0, total: 0 });
   const [imageStats, setImageStats] = useState({
@@ -182,7 +184,13 @@ export const ImageOptimizationExample: React.FC<ImageOptimizationExampleProps> =
             <h2 style={{ margin: 0, fontSize: '1.5rem' }}>图片优化统计</h2>
           </CardHeader>
           <CardContent>
-            <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              }}
+            >
               <div>
                 <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>页面图片统计</h3>
                 <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.8', fontSize: '0.875rem' }}>
@@ -230,7 +238,13 @@ export const ImageOptimizationExample: React.FC<ImageOptimizationExampleProps> =
             <h2 style={{ margin: 0, fontSize: '1.5rem' }}>图片预加载</h2>
           </CardHeader>
           <CardContent>
-            <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              }}
+            >
               <div>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>单张预加载</h3>
                 <p style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#64748b' }}>
@@ -308,7 +322,13 @@ export const ImageOptimizationExample: React.FC<ImageOptimizationExampleProps> =
             <p style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#64748b' }}>
               以下图片根据屏幕尺寸自动选择合适的分辨率和格式
             </p>
-            <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              }}
+            >
               <div>
                 <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>基础响应式图片</h3>
                 <ResponsiveImage

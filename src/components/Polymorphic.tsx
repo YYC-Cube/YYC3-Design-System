@@ -8,11 +8,7 @@
  */
 
 import React, { ElementType, forwardRef } from 'react';
-import type {
-  ComponentWithRef,
-  MergeProps,
-  OverrideProps
-} from '../types/advanced-types';
+import type { ComponentWithRef, MergeProps, OverrideProps } from '../types/advanced-types';
 
 export type AsChildProps<T extends ElementType> = {
   asChild?: boolean;
@@ -23,28 +19,27 @@ export type SlotProps<T extends ElementType = 'div'> = {
   children?: React.ReactNode;
 } & AsChildProps<T>;
 
-export type PolymorphicComponent<T extends ElementType = 'div', P extends object = object> = ComponentWithRef<
-  T,
-  P
->;
+export type PolymorphicComponent<
+  T extends ElementType = 'div',
+  P extends object = object,
+> = ComponentWithRef<T, P>;
 
-export const createPolymorphicComponent = (
-  displayName: string
-) => {
-  const Component = forwardRef<ElementType, SlotProps<ElementType> & Record<string, unknown>>((props, ref) => {
-    const { as, children, ...rest } = props;
-    const ElementType = (as || 'div') as ElementType;
+export const createPolymorphicComponent = (displayName: string) => {
+  const Component = forwardRef<ElementType, SlotProps<ElementType> & Record<string, unknown>>(
+    (props, ref) => {
+      const { as, children, ...rest } = props;
+      const ElementType = (as || 'div') as ElementType;
 
-    return React.createElement(
-      ElementType,
-      { ...rest, ref },
-      children as React.ReactNode
-    );
-  });
+      return React.createElement(ElementType, { ...rest, ref }, children as React.ReactNode);
+    }
+  );
 
   Component.displayName = displayName;
 
-  return Component as PolymorphicComponent<ElementType, SlotProps<ElementType> & Record<string, unknown>>;
+  return Component as PolymorphicComponent<
+    ElementType,
+    SlotProps<ElementType> & Record<string, unknown>
+  >;
 };
 
 export const Slot = <T extends ElementType = 'div'>({
@@ -53,8 +48,10 @@ export const Slot = <T extends ElementType = 'div'>({
   children,
   ...rest
 }: SlotProps<T> & Record<string, unknown>) => {
-  const ElementType = asChild ? (children as React.ReactElement)?.type : (as || 'div');
-  const Child = asChild ? children : React.createElement(ElementType, rest, children as React.ReactNode);
+  const ElementType = asChild ? (children as React.ReactElement)?.type : as || 'div';
+  const Child = asChild
+    ? children
+    : React.createElement(ElementType, rest, children as React.ReactNode);
 
   if (!React.isValidElement(Child)) {
     return Child as React.ReactElement;
@@ -72,7 +69,7 @@ export const Slot = <T extends ElementType = 'div'>({
           (childRef as React.MutableRefObject<unknown>).current = refValue;
         }
       }
-    }
+    },
   });
 };
 
@@ -80,7 +77,8 @@ Slot.displayName = 'Slot';
 
 export const createSlot = <T extends ElementType = 'div'>(displayName: string) => {
   const SlotComponent = Slot as React.ComponentType<SlotProps<T> & Record<string, unknown>>;
-  (SlotComponent as React.ComponentType<SlotProps<T> & Record<string, unknown>>).displayName = displayName;
+  (SlotComponent as React.ComponentType<SlotProps<T> & Record<string, unknown>>).displayName =
+    displayName;
   return SlotComponent;
 };
 
@@ -105,7 +103,9 @@ export const createAsChildComponent = <P extends object = object>(
   return Component as PolymorphicComponent<ElementType, P>;
 };
 
-export const polymorphic = <T extends ElementType = 'div', P extends object = object>(displayName: string): PolymorphicComponent<T, P> => {
+export const polymorphic = <T extends ElementType = 'div', P extends object = object>(
+  displayName: string
+): PolymorphicComponent<T, P> => {
   return createPolymorphicComponent(displayName) as PolymorphicComponent<T, P>;
 };
 
@@ -132,12 +132,16 @@ export const withAsChild = <T extends ElementType = 'div', P extends object = ob
               (childRef as React.MutableRefObject<unknown>).current = childRefValue;
             }
           }
-        }
+        },
       });
     }
 
     const ElementType = (as || 'div') as ElementType;
-    return React.createElement(ElementType, { ...restProps, ref }, propsRecord.children as React.ReactNode);
+    return React.createElement(
+      ElementType,
+      { ...restProps, ref },
+      propsRecord.children as React.ReactNode
+    );
   });
 
   Wrapped.displayName = displayName;
@@ -153,5 +157,5 @@ export default {
   overrideProps,
   createAsChildComponent,
   polymorphic,
-  withAsChild
+  withAsChild,
 };

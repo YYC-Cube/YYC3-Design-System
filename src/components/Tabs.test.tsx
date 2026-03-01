@@ -8,14 +8,11 @@
  */
 
 import * as React from 'react';
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
-
 import { Tabs, TabList, Tab, TabPanel } from './Tabs';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 describe('Tabs 组件', () => {
   const renderWithTheme = (component: React.ReactElement) => {
@@ -33,7 +30,7 @@ describe('Tabs 组件', () => {
         <TabPanel value="tab2">Panel 2</TabPanel>
       </Tabs>
     );
-    
+
     expect(screen.getByText('Tab 1')).toBeInTheDocument();
     expect(screen.getByText('Tab 2')).toBeInTheDocument();
     expect(screen.getByText('Panel 1')).toBeInTheDocument();
@@ -50,9 +47,9 @@ describe('Tabs 组件', () => {
         <TabPanel value="tab2">Panel 2</TabPanel>
       </Tabs>
     );
-    
+
     expect(screen.getByText('Panel 1')).toBeInTheDocument();
-    
+
     const panel2 = screen.getByText('Panel 2');
     expect(panel2).toHaveStyle({ display: 'none' });
   });
@@ -68,12 +65,12 @@ describe('Tabs 组件', () => {
         <TabPanel value="tab2">Panel 2</TabPanel>
       </Tabs>
     );
-    
+
     const tab2 = screen.getByText('Tab 2');
     fireEvent.click(tab2);
-    
+
     expect(screen.getByText('Panel 2')).toBeInTheDocument();
-    
+
     const panel1 = screen.getByText('Panel 1');
     expect(panel1).toHaveStyle({ display: 'none' });
   });
@@ -88,16 +85,16 @@ describe('Tabs 组件', () => {
         <TabPanel value="tab1">Panel 1</TabPanel>
       </Tabs>
     );
-    
+
     const tab1 = screen.getByText('Tab 1');
     const tab2 = screen.getByText('Tab 2');
-    
+
     expect(tab1).toHaveStyle({
       backgroundColor: 'rgb(224, 106, 112)',
       color: 'rgb(255, 255, 255)',
       fontWeight: '600',
     });
-    
+
     expect(tab2).toHaveStyle({
       color: 'rgb(240, 240, 240)',
       fontWeight: '400',
@@ -115,10 +112,10 @@ describe('Tabs 组件', () => {
         <TabPanel value="tab2">Panel 2</TabPanel>
       </Tabs>
     );
-    
+
     const tab2 = screen.getByText('Tab 2');
     fireEvent.click(tab2);
-    
+
     expect(tab2).toHaveStyle({
       backgroundColor: 'rgb(224, 106, 112)',
       color: 'rgb(255, 255, 255)',
@@ -135,7 +132,7 @@ describe('Tabs 组件', () => {
         <TabPanel value="tab1">Panel 1</TabPanel>
       </Tabs>
     );
-    
+
     expect(screen.getByRole('tablist')).toBeInTheDocument();
     expect(screen.getByRole('tab')).toBeInTheDocument();
     expect(screen.getByRole('tabpanel')).toBeInTheDocument();
@@ -151,10 +148,10 @@ describe('Tabs 组件', () => {
         <TabPanel value="tab1">Panel 1</TabPanel>
       </Tabs>
     );
-    
+
     const tab1 = screen.getByText('Tab 1');
     const tab2 = screen.getByText('Tab 2');
-    
+
     expect(tab1).toHaveAttribute('aria-selected', 'true');
     expect(tab2).toHaveAttribute('aria-selected', 'false');
   });
@@ -169,10 +166,10 @@ describe('Tabs 组件', () => {
         <TabPanel value="tab2">Panel 2</TabPanel>
       </Tabs>
     );
-    
+
     const panel1 = screen.getByText('Panel 1');
     const panel2 = screen.getByText('Panel 2');
-    
+
     expect(panel1).toHaveAttribute('aria-hidden', 'false');
     expect(panel2).toHaveAttribute('aria-hidden', 'true');
   });
@@ -181,12 +178,16 @@ describe('Tabs 组件', () => {
     const { container } = renderWithTheme(
       <Tabs defaultValue="tab1" className="custom-tabs">
         <TabList className="custom-list">
-          <Tab value="tab1" className="custom-tab">Tab 1</Tab>
+          <Tab value="tab1" className="custom-tab">
+            Tab 1
+          </Tab>
         </TabList>
-        <TabPanel value="tab1" className="custom-panel">Panel 1</TabPanel>
+        <TabPanel value="tab1" className="custom-panel">
+          Panel 1
+        </TabPanel>
       </Tabs>
     );
-    
+
     expect(container.querySelector('.custom-tabs')).toBeInTheDocument();
     expect(container.querySelector('.custom-list')).toBeInTheDocument();
     expect(container.querySelector('.custom-tab')).toBeInTheDocument();
@@ -226,7 +227,7 @@ describe('Tabs 组件', () => {
         <TabPanel value="tab3">Panel 3</TabPanel>
       </Tabs>
     );
-    
+
     expect(screen.getByText('Tab 1')).toBeInTheDocument();
     expect(screen.getByText('Tab 2')).toBeInTheDocument();
     expect(screen.getByText('Tab 3')).toBeInTheDocument();
@@ -245,16 +246,16 @@ describe('Tabs 组件', () => {
         <TabPanel value="tab3">Panel 3</TabPanel>
       </Tabs>
     );
-    
+
     const tab2 = screen.getByText('Tab 2');
     const tab3 = screen.getByText('Tab 3');
-    
+
     fireEvent.click(tab2);
     expect(screen.getByText('Panel 2')).toBeInTheDocument();
-    
+
     fireEvent.click(tab3);
     expect(screen.getByText('Panel 3')).toBeInTheDocument();
-    
+
     fireEvent.click(tab2);
     expect(screen.getByText('Panel 2')).toBeInTheDocument();
   });
@@ -268,7 +269,7 @@ describe('Tabs 组件', () => {
         <TabPanel value="tab1">Panel 1</TabPanel>
       </Tabs>
     );
-    
+
     const tabList = screen.getByRole('tablist');
     expect(tabList).toHaveStyle({
       display: 'flex',
@@ -287,7 +288,7 @@ describe('Tabs 组件', () => {
         <TabPanel value="tab1">Panel 1</TabPanel>
       </Tabs>
     );
-    
+
     const tab = screen.getByRole('tab');
     expect(tab).toHaveStyle({
       padding: '0.5rem 1rem',
@@ -305,7 +306,7 @@ describe('Tabs 组件', () => {
         <TabPanel value="tab1">Panel 1</TabPanel>
       </Tabs>
     );
-    
+
     const panel = screen.getByRole('tabpanel');
     expect(panel).toHaveStyle({
       display: 'block',
@@ -322,7 +323,7 @@ describe('Tabs 组件', () => {
         <TabPanel value="tab2">Panel 2</TabPanel>
       </Tabs>
     );
-    
+
     const panel2 = screen.getByText('Panel 2');
     expect(panel2).toHaveStyle({ display: 'none' });
     expect(panel2).toHaveAttribute('aria-hidden', 'true');
@@ -337,7 +338,7 @@ describe('Tabs 组件', () => {
         <TabPanel value="tab1">Content 1</TabPanel>
       </Tabs>
     );
-    
+
     expect(screen.getByRole('tab')).toBeInTheDocument();
     expect(screen.getByRole('tabpanel')).toBeInTheDocument();
   });
@@ -361,7 +362,7 @@ describe('Tabs 组件', () => {
         </TabPanel>
       </Tabs>
     );
-    
+
     expect(screen.getByText('Tab 1')).toBeInTheDocument();
     expect(screen.getByText('Icon')).toBeInTheDocument();
     expect(screen.getByText('Panel 1')).toBeInTheDocument();
@@ -379,15 +380,15 @@ describe('Tabs 组件', () => {
         <TabPanel value="tab2">Panel 2</TabPanel>
       </Tabs>
     );
-    
+
     const tab1 = screen.getByText('Tab 1');
     const tab2 = screen.getByText('Tab 2');
-    
+
     expect(tab1).toHaveAttribute('aria-selected', 'true');
     expect(tab2).toHaveAttribute('aria-selected', 'false');
-    
+
     fireEvent.click(tab2);
-    
+
     expect(tab1).toHaveAttribute('aria-selected', 'false');
     expect(tab2).toHaveAttribute('aria-selected', 'true');
   });

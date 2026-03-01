@@ -59,12 +59,34 @@ export interface RequestConfig {
   signal?: AbortSignal | null;
 }
 
-type BodyInit = Blob | ArrayBuffer | ArrayBufferView | FormData | URLSearchParams | ReadableStream<Uint8Array> | string;
-type RequestCache = 'default' | 'force-cache' | 'no-cache' | 'no-store' | 'only-if-cached' | 'reload';
+type BodyInit =
+  | Blob
+  | ArrayBuffer
+  | ArrayBufferView
+  | FormData
+  | URLSearchParams
+  | ReadableStream<Uint8Array>
+  | string;
+type RequestCache =
+  | 'default'
+  | 'force-cache'
+  | 'no-cache'
+  | 'no-store'
+  | 'only-if-cached'
+  | 'reload';
 type RequestCredentials = 'include' | 'omit' | 'same-origin';
 type RequestMode = 'cors' | 'navigate' | 'no-cors' | 'same-origin';
 type RequestRedirect = 'error' | 'follow' | 'manual';
-type ReferrerPolicy = '' | 'no-referrer' | 'no-referrer-when-downgrade' | 'origin' | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url';
+type ReferrerPolicy =
+  | ''
+  | 'no-referrer'
+  | 'no-referrer-when-downgrade'
+  | 'origin'
+  | 'origin-when-cross-origin'
+  | 'same-origin'
+  | 'strict-origin'
+  | 'strict-origin-when-cross-origin'
+  | 'unsafe-url';
 
 export interface CSRFContextType {
   token: string | null;
@@ -92,13 +114,13 @@ const DEFAULT_CONFIG: CSRFConfig = {
   requireSamesite: 'strict',
   requireSecure: true,
   allowMethodOverride: ['GET', 'HEAD', 'OPTIONS', 'TRACE'],
-  ignorePaths: []
+  ignorePaths: [],
 };
 
 const generateRandomToken = (length: number = 32): string => {
   const array = new Uint8Array(length);
   crypto.getRandomValues(array);
-  return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+  return Array.from(array, (byte) => byte.toString(16).padStart(2, '0')).join('');
 };
 
 export const CSRFProvider: React.FC<{
@@ -118,8 +140,8 @@ export const CSRFProvider: React.FC<{
           method: 'POST',
           credentials: 'include',
           headers: {
-            'Content-Type': 'application/json'
-          }
+            'Content-Type': 'application/json',
+          },
         });
 
         if (response.ok) {
@@ -144,68 +166,71 @@ export const CSRFProvider: React.FC<{
       value: newToken,
       expires,
       headerName: currentConfig.current.headerName!,
-      parameterName: currentConfig.current.parameterName!
+      parameterName: currentConfig.current.parameterName!,
     };
 
-    setTokens(prev => new Map(prev).set(newToken, tokenData));
+    setTokens((prev) => new Map(prev).set(newToken, tokenData));
 
     return newToken;
   }, [serverEndpoint]);
 
-  const validateToken = useCallback((inputToken: string): boolean => {
-    if (!inputToken) {
-      const error: CSRFValidationError = {
-        type: 'missing_token',
-        message: 'CSRF token is missing',
-        timestamp: Date.now()
-      };
-      currentConfig.current.onValidationError?.(error);
-      return false;
-    }
+  const validateToken = useCallback(
+    (inputToken: string): boolean => {
+      if (!inputToken) {
+        const error: CSRFValidationError = {
+          type: 'missing_token',
+          message: 'CSRF token is missing',
+          timestamp: Date.now(),
+        };
+        currentConfig.current.onValidationError?.(error);
+        return false;
+      }
 
-    const tokenData = tokens.get(inputToken);
+      const tokenData = tokens.get(inputToken);
 
-    if (!tokenData) {
-      const error: CSRFValidationError = {
-        type: 'invalid_token',
-        token: inputToken,
-        message: 'CSRF token is invalid',
-        timestamp: Date.now()
-      };
-      currentConfig.current.onValidationError?.(error);
-      return false;
-    }
+      if (!tokenData) {
+        const error: CSRFValidationError = {
+          type: 'invalid_token',
+          token: inputToken,
+          message: 'CSRF token is invalid',
+          timestamp: Date.now(),
+        };
+        currentConfig.current.onValidationError?.(error);
+        return false;
+      }
 
-    if (Date.now() > tokenData.expires) {
-      const error: CSRFValidationError = {
-        type: 'expired_token',
-        token: inputToken,
-        message: 'CSRF token has expired',
-        timestamp: Date.now()
-      };
-      currentConfig.current.onValidationError?.(error);
-      currentConfig.current.onTokenExpiry?.();
-      return false;
-    }
+      if (Date.now() > tokenData.expires) {
+        const error: CSRFValidationError = {
+          type: 'expired_token',
+          token: inputToken,
+          message: 'CSRF token has expired',
+          timestamp: Date.now(),
+        };
+        currentConfig.current.onValidationError?.(error);
+        currentConfig.current.onTokenExpiry?.();
+        return false;
+      }
 
-    if (tokenData.value !== inputToken) {
-      const error: CSRFValidationError = {
-        type: 'mismatch',
-        token: inputToken,
-        expected: tokenData.value,
-        message: 'CSRF token does not match',
-        timestamp: Date.now()
-      };
-      currentConfig.current.onValidationError?.(error);
-      return false;
-    }
+      if (tokenData.value !== inputToken) {
+        const error: CSRFValidationError = {
+          type: 'mismatch',
+          token: inputToken,
+          expected: tokenData.value,
+          message: 'CSRF token does not match',
+          timestamp: Date.now(),
+        };
+        currentConfig.current.onValidationError?.(error);
+        return false;
+      }
 
-    if (currentConfig.current.customValidator) {
-      return currentConfig.current.customValidator(inputToken);
-    }
+      if (currentConfig.current.customValidator) {
+        return currentConfig.current.customValidator(inputToken);
+      }
 
-    return true;
-  }, [tokens]);
+      return true;
+    },
+    [tokens]
+  );
 
   const refreshTokens = useCallback(() => {
     generateToken();
@@ -217,47 +242,58 @@ export const CSRFProvider: React.FC<{
     setTokens(new Map());
   }, []);
 
-  const addToRequest = useCallback((request: RequestConfig): RequestConfig => {
-    const currentToken = tokenRef.current || token;
-    if (!currentToken) return request;
+  const addToRequest = useCallback(
+    (request: RequestConfig): RequestConfig => {
+      const currentToken = tokenRef.current || token;
+      if (!currentToken) return request;
 
-    return {
-      ...request,
-      headers: {
-        ...request.headers,
-        [currentConfig.current.headerName!]: currentToken
+      return {
+        ...request,
+        headers: {
+          ...request.headers,
+          [currentConfig.current.headerName!]: currentToken,
+        },
+      };
+    },
+    [token]
+  );
+
+  const addToForm = useCallback(
+    (form: HTMLFormElement): void => {
+      const currentToken = tokenRef.current || token;
+      if (!currentToken) return;
+
+      let input = form.querySelector(
+        `input[name="${currentConfig.current.parameterName}"]`
+      ) as HTMLInputElement;
+
+      if (!input) {
+        input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = currentConfig.current.parameterName!;
+        form.appendChild(input);
       }
-    };
-  }, [token]);
 
-  const addToForm = useCallback((form: HTMLFormElement): void => {
-    const currentToken = tokenRef.current || token;
-    if (!currentToken) return;
+      input.value = currentToken;
+    },
+    [token]
+  );
 
-    let input = form.querySelector(`input[name="${currentConfig.current.parameterName}"]`) as HTMLInputElement;
+  const addToURL = useCallback(
+    (url: string): string => {
+      const currentToken = tokenRef.current || token;
+      if (!currentToken) return url;
 
-    if (!input) {
-      input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = currentConfig.current.parameterName!;
-      form.appendChild(input);
-    }
-
-    input.value = currentToken;
-  }, [token]);
-
-  const addToURL = useCallback((url: string): string => {
-    const currentToken = tokenRef.current || token;
-    if (!currentToken) return url;
-
-    try {
-      const urlObj = new URL(url, window.location.origin);
-      urlObj.searchParams.set(currentConfig.current.parameterName!, currentToken);
-      return urlObj.toString();
-    } catch {
-      return url;
-    }
-  }, [token]);
+      try {
+        const urlObj = new URL(url, window.location.origin);
+        urlObj.searchParams.set(currentConfig.current.parameterName!, currentToken);
+        return urlObj.toString();
+      } catch {
+        return url;
+      }
+    },
+    [token]
+  );
 
   const contextValue: CSRFContextType = {
     token,
@@ -268,7 +304,7 @@ export const CSRFProvider: React.FC<{
     addToRequest,
     addToForm,
     addToURL,
-    config: currentConfig.current
+    config: currentConfig.current,
   };
 
   useEffect(() => {
@@ -292,7 +328,7 @@ export const CSRFProvider: React.FC<{
 
       tokens.forEach((tokenData, tokenKey) => {
         if (now > tokenData.expires) {
-          setTokens(prev => {
+          setTokens((prev) => {
             const next = new Map(prev);
             next.delete(tokenKey);
             return next;
@@ -309,11 +345,7 @@ export const CSRFProvider: React.FC<{
     return () => clearInterval(interval);
   }, [tokens, generateToken]);
 
-  return (
-    <CSRFContext.Provider value={contextValue}>
-      {children}
-    </CSRFContext.Provider>
-  );
+  return <CSRFContext.Provider value={contextValue}>{children}</CSRFContext.Provider>;
 };
 
 export const useCSRF = (): CSRFContextType => {
@@ -324,20 +356,15 @@ export const useCSRF = (): CSRFContextType => {
   return context;
 };
 
-export const CSRFProtectedForm: React.FC<{
-  children: React.ReactNode;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-  action?: string;
-  className?: string;
-} & React.FormHTMLAttributes<HTMLFormElement>> = ({
-  children,
-  onSubmit,
-  method = 'POST',
-  action,
-  className,
-  ...props
-}) => {
+export const CSRFProtectedForm: React.FC<
+  {
+    children: React.ReactNode;
+    onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+    method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+    action?: string;
+    className?: string;
+  } & React.FormHTMLAttributes<HTMLFormElement>
+> = ({ children, onSubmit, method = 'POST', action, className, ...props }) => {
   const { addToForm } = useCSRF();
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -347,10 +374,13 @@ export const CSRFProtectedForm: React.FC<{
     }
   }, [addToForm]);
 
-  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSubmit(e);
-  }, [onSubmit]);
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      onSubmit(e);
+    },
+    [onSubmit]
+  );
 
   return (
     <form
@@ -392,18 +422,20 @@ export const withCSRFProtection = <P extends object>(
 export const createCSRFMiddleware = (csrfContext: CSRFContextType) => {
   return {
     fetch: (url: string, options?: RequestConfig): Promise<Response> => {
-      return CSRFProtectedFetch(
-        url,
-        options || {},
-        csrfContext
-      );
+      return CSRFProtectedFetch(url, options || {}, csrfContext);
     },
     XMLHttpRequest: () => {
       const xhr = new XMLHttpRequest();
       const originalOpen = xhr.open.bind(xhr);
       const originalSetRequestHeader = xhr.setRequestHeader.bind(xhr);
 
-      xhr.open = function(method: string, url: string | URL, async?: boolean, user?: string | null, password?: string | null) {
+      xhr.open = function (
+        method: string,
+        url: string | URL,
+        async?: boolean,
+        user?: string | null,
+        password?: string | null
+      ) {
         let urlStr: string;
         if (typeof url === 'string') {
           urlStr = url;
@@ -413,12 +445,12 @@ export const createCSRFMiddleware = (csrfContext: CSRFContextType) => {
         return originalOpen(method, urlStr, async ?? true, user ?? null, password ?? null);
       };
 
-      xhr.setRequestHeader = function(name: string, value: string) {
+      xhr.setRequestHeader = function (name: string, value: string) {
         return originalSetRequestHeader(name, value);
       };
 
       const originalSend = xhr.send.bind(xhr);
-      xhr.send = function(body?: CSRFRequestBody) {
+      xhr.send = function (body?: CSRFRequestBody) {
         const token = csrfContext.token;
         if (token) {
           this.setRequestHeader(csrfContext.config.headerName!, token);
@@ -427,7 +459,7 @@ export const createCSRFMiddleware = (csrfContext: CSRFContextType) => {
       };
 
       return xhr;
-    }
+    },
   };
 };
 
@@ -461,7 +493,7 @@ export const createStrictConfig = (): Partial<CSRFConfig> => ({
   requireSecure: true,
   doubleSubmitCookie: true,
   regenerateOnLoad: true,
-  storageType: 'session'
+  storageType: 'session',
 });
 
 export const createModerateConfig = (): Partial<CSRFConfig> => ({
@@ -471,7 +503,7 @@ export const createModerateConfig = (): Partial<CSRFConfig> => ({
   requireSecure: true,
   doubleSubmitCookie: true,
   regenerateOnLoad: false,
-  storageType: 'memory'
+  storageType: 'memory',
 });
 
 export const createPermissiveConfig = (): Partial<CSRFConfig> => ({
@@ -481,7 +513,7 @@ export const createPermissiveConfig = (): Partial<CSRFConfig> => ({
   requireSecure: false,
   doubleSubmitCookie: false,
   regenerateOnLoad: false,
-  storageType: 'local'
+  storageType: 'local',
 });
 
 export default {
@@ -494,5 +526,5 @@ export default {
   validateCSRFToken,
   createStrictConfig,
   createModerateConfig,
-  createPermissiveConfig
+  createPermissiveConfig,
 };

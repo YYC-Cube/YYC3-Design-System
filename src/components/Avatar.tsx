@@ -32,15 +32,15 @@ export const Avatar: React.FC<AvatarProps> = ({
   };
 
   const sizeStyle = getSizeStyle();
-  const radius = tokens['radius.lg'] as string || '0.5rem';
+  const radius = (tokens['radius.lg'] as string) || '0.5rem';
 
   const avatarStyle: React.CSSProperties = {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: radius,
-    backgroundColor: tokens['color.primary'] as string || '#d45a5f',
-    color: tokens['color.primary-foreground'] as string || '#fff',
+    backgroundColor: (tokens['color.primary'] as string) || '#d45a5f',
+    color: (tokens['color.primary-foreground'] as string) || '#fff',
     overflow: 'hidden',
     ...sizeStyle,
     transition: 'all 0.2s ease',
@@ -83,8 +83,10 @@ export const Avatar: React.FC<AvatarProps> = ({
   useEffect(() => {
     if (imgRef.current && src && !imageError) {
       const unobserve = observeLazyImage(imgRef.current, {
-        placeholder: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PC9zdmc+',
-        errorPlaceholder: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmZjZGNkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5OTk5OTkiIGZvbnQtc2l6ZT0iMTQiPuaXoDwvdGV4dD48L3N2Zz4=',
+        placeholder:
+          'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PC9zdmc+',
+        errorPlaceholder:
+          'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmZjZGNkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5OTk5OTkiIGZvbnQtc2l6ZT0iMTQiPuaXoDwvdGV4dD48L3N2Zz4=',
         onLoad: handleImageLoad,
         onError: handleImageError,
       });
@@ -93,15 +95,15 @@ export const Avatar: React.FC<AvatarProps> = ({
   }, [src, imageError]);
 
   return (
-    <div style={avatarStyle} className={className} role="img" aria-label={alt} data-testid={dataTestId}>
+    <div
+      style={avatarStyle}
+      className={className}
+      role="img"
+      aria-label={alt}
+      data-testid={dataTestId}
+    >
       {src && !imageError && (
-        <img
-          ref={imgRef}
-          data-src={src}
-          alt={alt}
-          style={imageStyle}
-          loading="lazy"
-        />
+        <img ref={imgRef} data-src={src} alt={alt} style={imageStyle} loading="lazy" />
       )}
       {(!src || imageError || !imageLoaded) && (
         <span style={fallbackStyle}>{getFallbackText()}</span>

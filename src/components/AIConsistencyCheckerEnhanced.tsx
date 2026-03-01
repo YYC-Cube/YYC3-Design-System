@@ -4,7 +4,12 @@ import { Card, CardContent, CardHeader, CardTitle } from './Card';
 import { Button } from './Button';
 import { Badge } from './Badge';
 import { useTheme } from '../theme/useTheme';
-import { enhancedConsistencyChecker, ConsistencyReport, ConsistencyIssue, ConsistencyCheckOptions } from '../ai/consistency-checker-enhanced';
+import {
+  enhancedConsistencyChecker,
+  ConsistencyReport,
+  ConsistencyIssue,
+  ConsistencyCheckOptions,
+} from '../ai/consistency-checker-enhanced';
 import { DesignTokens } from '../../types/tokens';
 
 type TokenValue = string | number | Record<string, string | number>;
@@ -47,7 +52,7 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
       checkAccessibility: true,
       checkNaming: true,
     };
-    
+
     setTimeout(() => {
       const newReport = enhancedConsistencyChecker.check(tokensToCheck, options);
       setReport(newReport);
@@ -55,22 +60,29 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
     }, 100);
   }, [tokensToCheck, autoFix, targetContrast]);
 
-  const handleFixIssue = useCallback((issue: ConsistencyIssue) => {
-    if (issue.fixAction && onFixIssue) {
-      const fixedTokens = issue.fixAction();
-      onFixIssue(issue.id);
-      setReport(prev => prev ? {
-        ...prev,
-        fixedTokens,
-        issues: prev.issues.filter(i => i.id !== issue.id),
-        summary: {
-          error: prev.summary.error - (issue.severity === 'error' ? 1 : 0),
-          warning: prev.summary.warning - (issue.severity === 'warning' ? 1 : 0),
-          info: prev.summary.info - (issue.severity === 'info' ? 1 : 0),
-        },
-      } : null);
-    }
-  }, [onFixIssue]);
+  const handleFixIssue = useCallback(
+    (issue: ConsistencyIssue) => {
+      if (issue.fixAction && onFixIssue) {
+        const fixedTokens = issue.fixAction();
+        onFixIssue(issue.id);
+        setReport((prev) =>
+          prev
+            ? {
+                ...prev,
+                fixedTokens,
+                issues: prev.issues.filter((i) => i.id !== issue.id),
+                summary: {
+                  error: prev.summary.error - (issue.severity === 'error' ? 1 : 0),
+                  warning: prev.summary.warning - (issue.severity === 'warning' ? 1 : 0),
+                  info: prev.summary.info - (issue.severity === 'info' ? 1 : 0),
+                },
+              }
+            : null
+        );
+      }
+    },
+    [onFixIssue]
+  );
 
   const handleAutoFixAll = useCallback(() => {
     const options: ConsistencyCheckOptions = {
@@ -79,7 +91,7 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
       checkAccessibility: true,
       checkNaming: true,
     };
-    
+
     const newReport = enhancedConsistencyChecker.check(tokensToCheck, options);
     if (newReport.fixedTokens && onAutoFix) {
       onAutoFix(newReport.fixedTokens);
@@ -149,7 +161,7 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
     };
   }, [checkInterval]);
 
-  const autoFixableIssues = report?.issues.filter(i => i.autoFixable) || [];
+  const autoFixableIssues = report?.issues.filter((i) => i.autoFixable) || [];
 
   return (
     <Card className={className}>
@@ -157,9 +169,7 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
         <div className="flex items-center justify-between">
           <CardTitle>AI 设计一致性检查 (增强版)</CardTitle>
           {realtimeCheck && (
-            <Badge style={{ background: '#10b981', color: '#ffffff' }}>
-              实时检查
-            </Badge>
+            <Badge style={{ background: '#10b981', color: '#ffffff' }}>实时检查</Badge>
           )}
         </div>
       </CardHeader>
@@ -168,13 +178,9 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
           <Button onClick={handleCheck} disabled={isChecking} className="flex-1">
             {isChecking ? '检查中...' : '开始检查'}
           </Button>
-          
+
           {autoFixableIssues.length > 0 && (
-            <Button 
-              onClick={handleAutoFixAll}
-              variant="secondary"
-              className="flex-1"
-            >
+            <Button onClick={handleAutoFixAll} variant="secondary" className="flex-1">
               自动修复 ({autoFixableIssues.length})
             </Button>
           )}
@@ -188,13 +194,19 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
               onChange={(e) => setAutoFix(e.target.checked)}
               className="w-4 h-4"
             />
-            <span className="text-sm" style={{ color: getTokenValue(themeTokens, 'color.foreground') }}>
+            <span
+              className="text-sm"
+              style={{ color: getTokenValue(themeTokens, 'color.foreground') }}
+            >
               启用自动修复
             </span>
           </label>
 
           <label className="flex items-center gap-2 cursor-pointer">
-            <span className="text-sm" style={{ color: getTokenValue(themeTokens, 'color.foreground') }}>
+            <span
+              className="text-sm"
+              style={{ color: getTokenValue(themeTokens, 'color.foreground') }}
+            >
               对比度标准:
             </span>
             <select
@@ -215,17 +227,23 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
 
         {report && (
           <>
-            <div className="text-center p-6 rounded-lg" style={{
-              background: getTokenValue(themeTokens, 'color.card'),
-              border: `2px solid ${getScoreColor(report.overallScore)}`,
-            }}>
+            <div
+              className="text-center p-6 rounded-lg"
+              style={{
+                background: getTokenValue(themeTokens, 'color.card'),
+                border: `2px solid ${getScoreColor(report.overallScore)}`,
+              }}
+            >
               <div
                 className="text-5xl font-bold mb-2"
                 style={{ color: getScoreColor(report.overallScore) }}
               >
                 {report.overallScore}
               </div>
-              <div className="text-sm mb-4" style={{ color: getTokenValue(themeTokens, 'color.muted-foreground') }}>
+              <div
+                className="text-sm mb-4"
+                style={{ color: getTokenValue(themeTokens, 'color.muted-foreground') }}
+              >
                 一致性评分
               </div>
               <div className="flex justify-center gap-4">
@@ -243,7 +261,10 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
 
             {report.recommendations.length > 0 && (
               <div className="space-y-2">
-                <h3 className="text-sm font-medium" style={{ color: getTokenValue(themeTokens, 'color.foreground') }}>
+                <h3
+                  className="text-sm font-medium"
+                  style={{ color: getTokenValue(themeTokens, 'color.foreground') }}
+                >
                   AI 推荐
                 </h3>
                 <div className="space-y-2">
@@ -256,7 +277,10 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
                         border: `1px solid ${getTokenValue(themeTokens, 'color.border')}`,
                       }}
                     >
-                      <p className="text-sm" style={{ color: getTokenValue(themeTokens, 'color.foreground') }}>
+                      <p
+                        className="text-sm"
+                        style={{ color: getTokenValue(themeTokens, 'color.foreground') }}
+                      >
                         💡 {rec}
                       </p>
                     </div>
@@ -267,7 +291,10 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
 
             {report.issues.length > 0 && (
               <div className="space-y-3">
-                <h3 className="text-sm font-medium" style={{ color: getTokenValue(themeTokens, 'color.foreground') }}>
+                <h3
+                  className="text-sm font-medium"
+                  style={{ color: getTokenValue(themeTokens, 'color.foreground') }}
+                >
                   检测到的问题 ({report.issues.length})
                 </h3>
                 <div className="space-y-2">
@@ -308,12 +335,18 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
                           </Badge>
                         )}
                       </div>
-                      
-                      <p className="text-sm mb-2" style={{ color: getTokenValue(themeTokens, 'color.foreground') }}>
+
+                      <p
+                        className="text-sm mb-2"
+                        style={{ color: getTokenValue(themeTokens, 'color.foreground') }}
+                      >
                         {issue.message}
                       </p>
-                      
-                      <p className="text-xs mb-3" style={{ color: getTokenValue(themeTokens, 'color.muted-foreground') }}>
+
+                      <p
+                        className="text-xs mb-3"
+                        style={{ color: getTokenValue(themeTokens, 'color.muted-foreground') }}
+                      >
                         建议: {issue.suggestion}
                       </p>
 
@@ -331,8 +364,14 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
                       )}
 
                       {selectedIssue === issue.id && (
-                        <div className="mt-3 pt-3 border-t" style={{ borderColor: getTokenValue(themeTokens, 'color.border') }}>
-                          <p className="text-xs mb-2" style={{ color: getTokenValue(themeTokens, 'color.muted-foreground') }}>
+                        <div
+                          className="mt-3 pt-3 border-t"
+                          style={{ borderColor: getTokenValue(themeTokens, 'color.border') }}
+                        >
+                          <p
+                            className="text-xs mb-2"
+                            style={{ color: getTokenValue(themeTokens, 'color.muted-foreground') }}
+                          >
                             影响的令牌:
                           </p>
                           <div className="flex flex-wrap gap-1">
@@ -358,15 +397,24 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
             )}
 
             {report.issues.length === 0 && (
-              <div className="text-center p-8 rounded-lg" style={{
-                background: getTokenValue(themeTokens, 'color.card'),
-                border: `2px solid #10b981`,
-              }}>
+              <div
+                className="text-center p-8 rounded-lg"
+                style={{
+                  background: getTokenValue(themeTokens, 'color.card'),
+                  border: `2px solid #10b981`,
+                }}
+              >
                 <div className="text-4xl mb-2">✅</div>
-                <p className="text-lg font-medium mb-2" style={{ color: getTokenValue(themeTokens, 'color.foreground') }}>
+                <p
+                  className="text-lg font-medium mb-2"
+                  style={{ color: getTokenValue(themeTokens, 'color.foreground') }}
+                >
                   完美！
                 </p>
-                <p className="text-sm" style={{ color: getTokenValue(themeTokens, 'color.muted-foreground') }}>
+                <p
+                  className="text-sm"
+                  style={{ color: getTokenValue(themeTokens, 'color.muted-foreground') }}
+                >
                   未发现一致性问题
                 </p>
               </div>

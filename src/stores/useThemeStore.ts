@@ -28,7 +28,10 @@ export interface ThemeState {
   resetTheme: () => void;
 }
 
-const defaultTheme: Omit<ThemeState, 'setMode' | 'setPrimaryColor' | 'setBorderRadius' | 'setFontSize' | 'resetTheme'> = {
+const defaultTheme: Omit<
+  ThemeState,
+  'setMode' | 'setPrimaryColor' | 'setBorderRadius' | 'setFontSize' | 'resetTheme'
+> = {
   mode: 'light',
   primaryColor: '#d45a5f',
   borderRadius: 4,

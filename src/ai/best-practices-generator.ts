@@ -12,7 +12,13 @@ import { UsageReport } from './usage-analyzer';
 
 export interface BestPractice {
   id: string;
-  category: 'color' | 'spacing' | 'typography' | 'accessibility' | 'performance' | 'maintainability';
+  category:
+    | 'color'
+    | 'spacing'
+    | 'typography'
+    | 'accessibility'
+    | 'performance'
+    | 'maintainability';
   priority: 'critical' | 'high' | 'medium' | 'low';
   title: string;
   description: string;
@@ -44,11 +50,9 @@ export class BestPracticesGenerator {
       title: '使用语义化颜色命名',
       description: '使用描述性名称而非具体颜色值，如 primary、secondary、success 等',
       rationale: '语义化命名使设计系统更易于理解和维护，支持主题切换',
-      implementation: '定义语义化令牌：color.primary、color.secondary、color.success、color.warning、color.error',
-      examples: [
-        '✓ color.primary = #d45a5f',
-        '✗ color.red = #d45a5f',
-      ],
+      implementation:
+        '定义语义化令牌：color.primary、color.secondary、color.success、color.warning、color.error',
+      examples: ['✓ color.primary = #d45a5f', '✗ color.red = #d45a5f'],
     },
     {
       id: 'color-002',
@@ -234,8 +238,8 @@ export class BestPracticesGenerator {
     }
 
     const summary = this.calculateSummary(practices);
-    const quickWins = practices.filter(p => p.priority === 'critical' || p.priority === 'high');
-    const longTermGoals = practices.filter(p => p.priority === 'medium' || p.priority === 'low');
+    const quickWins = practices.filter((p) => p.priority === 'critical' || p.priority === 'high');
+    const longTermGoals = practices.filter((p) => p.priority === 'medium' || p.priority === 'low');
 
     return {
       summary,
@@ -252,7 +256,7 @@ export class BestPracticesGenerator {
     const prioritized = [...practices];
 
     if (report.categories.color.score < 80) {
-      prioritized.forEach(p => {
+      prioritized.forEach((p) => {
         if (p.category === 'color' && p.priority !== 'critical') {
           p.priority = 'high';
         }
@@ -260,7 +264,7 @@ export class BestPracticesGenerator {
     }
 
     if (report.categories.accessibility.score < 80) {
-      prioritized.forEach(p => {
+      prioritized.forEach((p) => {
         if (p.category === 'accessibility' && p.priority !== 'critical') {
           p.priority = 'high';
         }
@@ -270,14 +274,11 @@ export class BestPracticesGenerator {
     return prioritized;
   }
 
-  private prioritizeBasedOnUsage(
-    practices: BestPractice[],
-    report: UsageReport
-  ): BestPractice[] {
+  private prioritizeBasedOnUsage(practices: BestPractice[], report: UsageReport): BestPractice[] {
     const prioritized = [...practices];
 
     if (report.summary.coverage < 60) {
-      prioritized.forEach(p => {
+      prioritized.forEach((p) => {
         if (p.category === 'maintainability' && p.priority !== 'critical') {
           p.priority = 'high';
         }
@@ -290,10 +291,10 @@ export class BestPracticesGenerator {
   private calculateSummary(practices: BestPractice[]) {
     return {
       total: practices.length,
-      critical: practices.filter(p => p.priority === 'critical').length,
-      high: practices.filter(p => p.priority === 'high').length,
-      medium: practices.filter(p => p.priority === 'medium').length,
-      low: practices.filter(p => p.priority === 'low').length,
+      critical: practices.filter((p) => p.priority === 'critical').length,
+      high: practices.filter((p) => p.priority === 'high').length,
+      medium: practices.filter((p) => p.priority === 'medium').length,
+      low: practices.filter((p) => p.priority === 'low').length,
     };
   }
 
@@ -307,7 +308,7 @@ export class BestPracticesGenerator {
       ...this.maintainabilityBestPractices,
     ];
 
-    return allPractices.filter(p => p.category === category);
+    return allPractices.filter((p) => p.category === category);
   }
 
   getPracticesByPriority(priority: BestPractice['priority']): BestPractice[] {
@@ -320,7 +321,7 @@ export class BestPracticesGenerator {
       ...this.maintainabilityBestPractices,
     ];
 
-    return allPractices.filter(p => p.priority === priority);
+    return allPractices.filter((p) => p.priority === priority);
   }
 
   searchPractices(query: string): BestPractice[] {
@@ -334,10 +335,11 @@ export class BestPracticesGenerator {
     ];
 
     const lowerQuery = query.toLowerCase();
-    return allPractices.filter(p =>
-      p.title.toLowerCase().includes(lowerQuery) ||
-      p.description.toLowerCase().includes(lowerQuery) ||
-      p.category.toLowerCase().includes(lowerQuery)
+    return allPractices.filter(
+      (p) =>
+        p.title.toLowerCase().includes(lowerQuery) ||
+        p.description.toLowerCase().includes(lowerQuery) ||
+        p.category.toLowerCase().includes(lowerQuery)
     );
   }
 }

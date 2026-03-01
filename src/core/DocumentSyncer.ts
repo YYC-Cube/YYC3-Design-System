@@ -38,7 +38,14 @@ export interface SyncResult {
 }
 
 export interface SyncEvent {
-  type: 'sync.started' | 'sync.completed' | 'sync.failed' | 'file.created' | 'file.updated' | 'file.deleted' | 'file.skipped';
+  type:
+    | 'sync.started'
+    | 'sync.completed'
+    | 'sync.failed'
+    | 'file.created'
+    | 'file.updated'
+    | 'file.deleted'
+    | 'file.skipped';
   timestamp: number;
   data: any;
 }
@@ -69,7 +76,7 @@ export class DocumentSyncer {
   private emit(event: SyncEvent): void {
     const listeners = this.eventListeners.get(event.type);
     if (listeners) {
-      listeners.forEach(callback => callback(event));
+      listeners.forEach((callback) => callback(event));
     }
   }
 
@@ -94,7 +101,11 @@ export class DocumentSyncer {
         data: { config },
       });
 
-      const sourceFiles = this.getFiles(config.source, config.includePatterns, config.excludePatterns);
+      const sourceFiles = this.getFiles(
+        config.source,
+        config.includePatterns,
+        config.excludePatterns
+      );
 
       for (const file of sourceFiles) {
         result.filesProcessed++;
@@ -171,7 +182,11 @@ export class DocumentSyncer {
     return result;
   }
 
-  private getFiles(directory: string, includePatterns: string[], excludePatterns: string[]): string[] {
+  private getFiles(
+    directory: string,
+    includePatterns: string[],
+    excludePatterns: string[]
+  ): string[] {
     const files: string[] = [];
 
     const scanDir = (dir: string, baseDir: string = dir): void => {
@@ -203,17 +218,15 @@ export class DocumentSyncer {
       return true;
     }
 
-    return patterns.some(pattern => this.matchPattern(filePath, pattern));
+    return patterns.some((pattern) => this.matchPattern(filePath, pattern));
   }
 
   private shouldExclude(filePath: string, patterns: string[]): boolean {
-    return patterns.some(pattern => this.matchPattern(filePath, pattern));
+    return patterns.some((pattern) => this.matchPattern(filePath, pattern));
   }
 
   private matchPattern(filePath: string, pattern: string): boolean {
-    const regex = new RegExp(
-      '^' + pattern.replace(/\*/g, '.*').replace(/\?/g, '.') + '$'
-    );
+    const regex = new RegExp('^' + pattern.replace(/\*/g, '.*').replace(/\?/g, '.') + '$');
     return regex.test(filePath);
   }
 
@@ -307,7 +320,7 @@ export class DocumentSyncer {
 
     if (result.errors.length > 0) {
       lines.push('Errors:');
-      result.errors.forEach(error => {
+      result.errors.forEach((error) => {
         lines.push(`  - ${error}`);
       });
       lines.push('');

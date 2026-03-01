@@ -92,7 +92,7 @@ class PerformanceReporter {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            ...(this.config.apiKey && { 'Authorization': `Bearer ${this.config.apiKey}` }),
+            ...(this.config.apiKey && { Authorization: `Bearer ${this.config.apiKey}` }),
           },
           body: JSON.stringify({
             reports,
@@ -129,8 +129,10 @@ class PerformanceReporter {
         }
 
         const delay = (this.config.retryDelay || 1000) * Math.pow(2, attempt);
-        console.warn(`[PerformanceReporter] Attempt ${attempt + 1} failed, retrying in ${delay}ms...`);
-        await new Promise(resolve => setTimeout(resolve, delay));
+        console.warn(
+          `[PerformanceReporter] Attempt ${attempt + 1} failed, retrying in ${delay}ms...`
+        );
+        await new Promise((resolve) => setTimeout(resolve, delay));
       }
     }
 

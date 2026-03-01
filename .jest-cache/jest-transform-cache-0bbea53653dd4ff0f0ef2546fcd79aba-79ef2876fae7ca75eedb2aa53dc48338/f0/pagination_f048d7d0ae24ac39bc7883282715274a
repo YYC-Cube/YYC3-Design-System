@@ -1,0 +1,688 @@
+951dc22daaa365838edc659fa94ce91e
+"use strict";
+
+/* istanbul ignore next */
+function cov_i3t2qcx18() {
+  var path = "/Users/yanyu/Downloads/yyc3-Design-System/src/components/ui/pagination.tsx";
+  var hash = "3ad60dab3fb1171e2d70cf0ba638dc31ae926cf6";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/yanyu/Downloads/yyc3-Design-System/src/components/ui/pagination.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 32
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 0
+        },
+        end: {
+          line: 4,
+          column: 46
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 0
+        },
+        end: {
+          line: 5,
+          column: 40
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 0
+        },
+        end: {
+          line: 6,
+          column: 40
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 0
+        },
+        end: {
+          line: 7,
+          column: 48
+        }
+      },
+      "6": {
+        start: {
+          line: 8,
+          column: 0
+        },
+        end: {
+          line: 8,
+          column: 40
+        }
+      },
+      "7": {
+        start: {
+          line: 9,
+          column: 0
+        },
+        end: {
+          line: 9,
+          column: 48
+        }
+      },
+      "8": {
+        start: {
+          line: 10,
+          column: 22
+        },
+        end: {
+          line: 10,
+          column: 50
+        }
+      },
+      "9": {
+        start: {
+          line: 11,
+          column: 23
+        },
+        end: {
+          line: 11,
+          column: 46
+        }
+      },
+      "10": {
+        start: {
+          line: 12,
+          column: 16
+        },
+        end: {
+          line: 12,
+          column: 34
+        }
+      },
+      "11": {
+        start: {
+          line: 13,
+          column: 17
+        },
+        end: {
+          line: 13,
+          column: 36
+        }
+      },
+      "12": {
+        start: {
+          line: 15,
+          column: 4
+        },
+        end: {
+          line: 15,
+          column: 209
+        }
+      },
+      "13": {
+        start: {
+          line: 18,
+          column: 4
+        },
+        end: {
+          line: 18,
+          column: 166
+        }
+      },
+      "14": {
+        start: {
+          line: 21,
+          column: 4
+        },
+        end: {
+          line: 21,
+          column: 86
+        }
+      },
+      "15": {
+        start: {
+          line: 24,
+          column: 4
+        },
+        end: {
+          line: 27,
+          column: 37
+        }
+      },
+      "16": {
+        start: {
+          line: 30,
+          column: 4
+        },
+        end: {
+          line: 30,
+          column: 346
+        }
+      },
+      "17": {
+        start: {
+          line: 33,
+          column: 4
+        },
+        end: {
+          line: 33,
+          column: 339
+        }
+      },
+      "18": {
+        start: {
+          line: 36,
+          column: 4
+        },
+        end: {
+          line: 36,
+          column: 376
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "Pagination",
+        decl: {
+          start: {
+            line: 14,
+            column: 9
+          },
+          end: {
+            line: 14,
+            column: 19
+          }
+        },
+        loc: {
+          start: {
+            line: 14,
+            column: 45
+          },
+          end: {
+            line: 16,
+            column: 1
+          }
+        },
+        line: 14
+      },
+      "1": {
+        name: "PaginationContent",
+        decl: {
+          start: {
+            line: 17,
+            column: 9
+          },
+          end: {
+            line: 17,
+            column: 26
+          }
+        },
+        loc: {
+          start: {
+            line: 17,
+            column: 52
+          },
+          end: {
+            line: 19,
+            column: 1
+          }
+        },
+        line: 17
+      },
+      "2": {
+        name: "PaginationItem",
+        decl: {
+          start: {
+            line: 20,
+            column: 9
+          },
+          end: {
+            line: 20,
+            column: 23
+          }
+        },
+        loc: {
+          start: {
+            line: 20,
+            column: 38
+          },
+          end: {
+            line: 22,
+            column: 1
+          }
+        },
+        line: 20
+      },
+      "3": {
+        name: "PaginationLink",
+        decl: {
+          start: {
+            line: 23,
+            column: 9
+          },
+          end: {
+            line: 23,
+            column: 23
+          }
+        },
+        loc: {
+          start: {
+            line: 23,
+            column: 74
+          },
+          end: {
+            line: 28,
+            column: 1
+          }
+        },
+        line: 23
+      },
+      "4": {
+        name: "PaginationPrevious",
+        decl: {
+          start: {
+            line: 29,
+            column: 9
+          },
+          end: {
+            line: 29,
+            column: 27
+          }
+        },
+        loc: {
+          start: {
+            line: 29,
+            column: 53
+          },
+          end: {
+            line: 31,
+            column: 1
+          }
+        },
+        line: 29
+      },
+      "5": {
+        name: "PaginationNext",
+        decl: {
+          start: {
+            line: 32,
+            column: 9
+          },
+          end: {
+            line: 32,
+            column: 23
+          }
+        },
+        loc: {
+          start: {
+            line: 32,
+            column: 49
+          },
+          end: {
+            line: 34,
+            column: 1
+          }
+        },
+        line: 32
+      },
+      "6": {
+        name: "PaginationEllipsis",
+        decl: {
+          start: {
+            line: 35,
+            column: 9
+          },
+          end: {
+            line: 35,
+            column: 27
+          }
+        },
+        loc: {
+          start: {
+            line: 35,
+            column: 53
+          },
+          end: {
+            line: 37,
+            column: 1
+          }
+        },
+        line: 35
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 23,
+            column: 47
+          },
+          end: {
+            line: 23,
+            column: 60
+          }
+        },
+        type: "default-arg",
+        locations: [{
+          start: {
+            line: 23,
+            column: 54
+          },
+          end: {
+            line: 23,
+            column: 60
+          }
+        }],
+        line: 23
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 24,
+            column: 58
+          },
+          end: {
+            line: 24,
+            column: 87
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 24,
+            column: 69
+          },
+          end: {
+            line: 24,
+            column: 75
+          }
+        }, {
+          start: {
+            line: 24,
+            column: 78
+          },
+          end: {
+            line: 24,
+            column: 87
+          }
+        }],
+        line: 24
+      },
+      "2": {
+        loc: {
+          start: {
+            line: 25,
+            column: 21
+          },
+          end: {
+            line: 25,
+            column: 51
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 25,
+            column: 32
+          },
+          end: {
+            line: 25,
+            column: 41
+          }
+        }, {
+          start: {
+            line: 25,
+            column: 44
+          },
+          end: {
+            line: 25,
+            column: 51
+          }
+        }],
+        line: 25
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    },
+    b: {
+      "0": [0],
+      "1": [0, 0],
+      "2": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/yanyu/Downloads/yyc3-Design-System/src/components/ui/pagination.tsx",
+      mappings: ";;AAkGE,gCAAU;AACV,8CAAiB;AACjB,wCAAc;AACd,wCAAc;AACd,gDAAkB;AAClB,wCAAc;AACd,gDAAkB;;AAvGpB,+CAAqF;AAErF,mCAA6B;AAC7B,qCAAkD;AAElD,SAAS,UAAU,CAAC,EAAE,SAAS,EAAE,GAAG,KAAK,EAA+B;IACtE,OAAO,CACL,gCACE,IAAI,EAAC,YAAY,gBACN,YAAY,eACb,YAAY,EACtB,SAAS,EAAE,IAAA,UAAE,EAAC,oCAAoC,EAAE,SAAS,CAAC,KAC1D,KAAK,GACT,CACH,CAAC;AACJ,CAAC;AAED,SAAS,iBAAiB,CAAC,EAAE,SAAS,EAAE,GAAG,KAAK,EAA8B;IAC5E,OAAO,CACL,4CACY,oBAAoB,EAC9B,SAAS,EAAE,IAAA,UAAE,EAAC,kCAAkC,EAAE,SAAS,CAAC,KACxD,KAAK,GACT,CACH,CAAC;AACJ,CAAC;AAED,SAAS,cAAc,CAAC,EAAE,GAAG,KAAK,EAA8B;IAC9D,OAAO,4CAAc,iBAAiB,KAAK,KAAK,GAAI,CAAC;AACvD,CAAC;AAOD,SAAS,cAAc,CAAC,EAAE,SAAS,EAAE,QAAQ,EAAE,IAAI,GAAG,MAAM,EAAE,GAAG,KAAK,EAAuB;IAC3F,OAAO,CACL,8CACgB,QAAQ,CAAC,CAAC,CAAC,MAAM,CAAC,CAAC,CAAC,SAAS,eACjC,iBAAiB,iBACd,QAAQ,EACrB,SAAS,EAAE,IAAA,UAAE,EACX,IAAA,uBAAc,EAAC;YACb,OAAO,EAAE,QAAQ,CAAC,CAAC,CAAC,SAAS,CAAC,CAAC,CAAC,OAAO;YACvC,IAAI;SACL,CAAC,EACF,SAAS,CACV,KACG,KAAK,GACT,CACH,CAAC;AACJ,CAAC;AAED,SAAS,kBAAkB,CAAC,EAAE,SAAS,EAAE,GAAG,KAAK,EAA+C;IAC9F,OAAO,CACL,wBAAC,cAAc,kBACF,qBAAqB,EAChC,IAAI,EAAC,SAAS,EACd,SAAS,EAAE,IAAA,UAAE,EAAC,wBAAwB,EAAE,SAAS,CAAC,KAC9C,KAAK,aAET,uBAAC,8BAAe,KAAG,EACnB,iCAAM,SAAS,EAAC,iBAAiB,yBAAgB,IAClC,CAClB,CAAC;AACJ,CAAC;AAED,SAAS,cAAc,CAAC,EAAE,SAAS,EAAE,GAAG,KAAK,EAA+C;IAC1F,OAAO,CACL,wBAAC,cAAc,kBACF,iBAAiB,EAC5B,IAAI,EAAC,SAAS,EACd,SAAS,EAAE,IAAA,UAAE,EAAC,wBAAwB,EAAE,SAAS,CAAC,KAC9C,KAAK,aAET,iCAAM,SAAS,EAAC,iBAAiB,qBAAY,EAC7C,uBAAC,+BAAgB,KAAG,IACL,CAClB,CAAC;AACJ,CAAC;AAED,SAAS,kBAAkB,CAAC,EAAE,SAAS,EAAE,GAAG,KAAK,EAAgC;IAC/E,OAAO,CACL,oEAEY,qBAAqB,EAC/B,SAAS,EAAE,IAAA,UAAE,EAAC,yCAAyC,EAAE,SAAS,CAAC,KAC/D,KAAK,aAET,uBAAC,iCAAkB,IAAC,SAAS,EAAC,QAAQ,GAAG,EACzC,iCAAM,SAAS,EAAC,SAAS,2BAAkB,IACtC,CACR,CAAC;AACJ,CAAC",
+      names: [],
+      sources: ["/Users/yanyu/Downloads/yyc3-Design-System/src/components/ui/pagination.tsx"],
+      sourcesContent: ["import * as React from 'react';\nimport { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from 'lucide-react';\n\nimport { cn } from './utils';\nimport { Button, buttonVariants } from './button';\n\nfunction Pagination({ className, ...props }: React.ComponentProps<'nav'>) {\n  return (\n    <nav\n      role=\"navigation\"\n      aria-label=\"pagination\"\n      data-slot=\"pagination\"\n      className={cn('mx-auto flex w-full justify-center', className)}\n      {...props}\n    />\n  );\n}\n\nfunction PaginationContent({ className, ...props }: React.ComponentProps<'ul'>) {\n  return (\n    <ul\n      data-slot=\"pagination-content\"\n      className={cn('flex flex-row items-center gap-1', className)}\n      {...props}\n    />\n  );\n}\n\nfunction PaginationItem({ ...props }: React.ComponentProps<'li'>) {\n  return <li data-slot=\"pagination-item\" {...props} />;\n}\n\ntype PaginationLinkProps = {\n  isActive?: boolean;\n} & Pick<React.ComponentProps<typeof Button>, 'size'> &\n  React.ComponentProps<'a'>;\n\nfunction PaginationLink({ className, isActive, size = 'icon', ...props }: PaginationLinkProps) {\n  return (\n    <a\n      aria-current={isActive ? 'page' : undefined}\n      data-slot=\"pagination-link\"\n      data-active={isActive}\n      className={cn(\n        buttonVariants({\n          variant: isActive ? 'outline' : 'ghost',\n          size,\n        }),\n        className\n      )}\n      {...props}\n    />\n  );\n}\n\nfunction PaginationPrevious({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {\n  return (\n    <PaginationLink\n      aria-label=\"Go to previous page\"\n      size=\"default\"\n      className={cn('gap-1 px-2.5 sm:pl-2.5', className)}\n      {...props}\n    >\n      <ChevronLeftIcon />\n      <span className=\"hidden sm:block\">Previous</span>\n    </PaginationLink>\n  );\n}\n\nfunction PaginationNext({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {\n  return (\n    <PaginationLink\n      aria-label=\"Go to next page\"\n      size=\"default\"\n      className={cn('gap-1 px-2.5 sm:pr-2.5', className)}\n      {...props}\n    >\n      <span className=\"hidden sm:block\">Next</span>\n      <ChevronRightIcon />\n    </PaginationLink>\n  );\n}\n\nfunction PaginationEllipsis({ className, ...props }: React.ComponentProps<'span'>) {\n  return (\n    <span\n      aria-hidden\n      data-slot=\"pagination-ellipsis\"\n      className={cn('flex size-9 items-center justify-center', className)}\n      {...props}\n    >\n      <MoreHorizontalIcon className=\"size-4\" />\n      <span className=\"sr-only\">More pages</span>\n    </span>\n  );\n}\n\nexport {\n  Pagination,\n  PaginationContent,\n  PaginationLink,\n  PaginationItem,\n  PaginationPrevious,\n  PaginationNext,\n  PaginationEllipsis,\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "3ad60dab3fb1171e2d70cf0ba638dc31ae926cf6"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_i3t2qcx18 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_i3t2qcx18();
+cov_i3t2qcx18().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_i3t2qcx18().s[1]++;
+exports.Pagination = Pagination;
+/* istanbul ignore next */
+cov_i3t2qcx18().s[2]++;
+exports.PaginationContent = PaginationContent;
+/* istanbul ignore next */
+cov_i3t2qcx18().s[3]++;
+exports.PaginationLink = PaginationLink;
+/* istanbul ignore next */
+cov_i3t2qcx18().s[4]++;
+exports.PaginationItem = PaginationItem;
+/* istanbul ignore next */
+cov_i3t2qcx18().s[5]++;
+exports.PaginationPrevious = PaginationPrevious;
+/* istanbul ignore next */
+cov_i3t2qcx18().s[6]++;
+exports.PaginationNext = PaginationNext;
+/* istanbul ignore next */
+cov_i3t2qcx18().s[7]++;
+exports.PaginationEllipsis = PaginationEllipsis;
+const jsx_runtime_1 =
+/* istanbul ignore next */
+(cov_i3t2qcx18().s[8]++, require("react/jsx-runtime"));
+const lucide_react_1 =
+/* istanbul ignore next */
+(cov_i3t2qcx18().s[9]++, require("lucide-react"));
+const utils_1 =
+/* istanbul ignore next */
+(cov_i3t2qcx18().s[10]++, require("./utils"));
+const button_1 =
+/* istanbul ignore next */
+(cov_i3t2qcx18().s[11]++, require("./button"));
+function Pagination({
+  className,
+  ...props
+}) {
+  /* istanbul ignore next */
+  cov_i3t2qcx18().f[0]++;
+  cov_i3t2qcx18().s[12]++;
+  return (0, jsx_runtime_1.jsx)("nav", {
+    role: "navigation",
+    "aria-label": "pagination",
+    "data-slot": "pagination",
+    className: (0, utils_1.cn)('mx-auto flex w-full justify-center', className),
+    ...props
+  });
+}
+function PaginationContent({
+  className,
+  ...props
+}) {
+  /* istanbul ignore next */
+  cov_i3t2qcx18().f[1]++;
+  cov_i3t2qcx18().s[13]++;
+  return (0, jsx_runtime_1.jsx)("ul", {
+    "data-slot": "pagination-content",
+    className: (0, utils_1.cn)('flex flex-row items-center gap-1', className),
+    ...props
+  });
+}
+function PaginationItem({
+  ...props
+}) {
+  /* istanbul ignore next */
+  cov_i3t2qcx18().f[2]++;
+  cov_i3t2qcx18().s[14]++;
+  return (0, jsx_runtime_1.jsx)("li", {
+    "data-slot": "pagination-item",
+    ...props
+  });
+}
+function PaginationLink({
+  className,
+  isActive,
+  size =
+  /* istanbul ignore next */
+  (cov_i3t2qcx18().b[0][0]++, 'icon'),
+  ...props
+}) {
+  /* istanbul ignore next */
+  cov_i3t2qcx18().f[3]++;
+  cov_i3t2qcx18().s[15]++;
+  return (0, jsx_runtime_1.jsx)("a", {
+    "aria-current": isActive ?
+    /* istanbul ignore next */
+    (cov_i3t2qcx18().b[1][0]++, 'page') :
+    /* istanbul ignore next */
+    (cov_i3t2qcx18().b[1][1]++, undefined),
+    "data-slot": "pagination-link",
+    "data-active": isActive,
+    className: (0, utils_1.cn)((0, button_1.buttonVariants)({
+      variant: isActive ?
+      /* istanbul ignore next */
+      (cov_i3t2qcx18().b[2][0]++, 'outline') :
+      /* istanbul ignore next */
+      (cov_i3t2qcx18().b[2][1]++, 'ghost'),
+      size
+    }), className),
+    ...props
+  });
+}
+function PaginationPrevious({
+  className,
+  ...props
+}) {
+  /* istanbul ignore next */
+  cov_i3t2qcx18().f[4]++;
+  cov_i3t2qcx18().s[16]++;
+  return (0, jsx_runtime_1.jsxs)(PaginationLink, {
+    "aria-label": "Go to previous page",
+    size: "default",
+    className: (0, utils_1.cn)('gap-1 px-2.5 sm:pl-2.5', className),
+    ...props,
+    children: [(0, jsx_runtime_1.jsx)(lucide_react_1.ChevronLeftIcon, {}), (0, jsx_runtime_1.jsx)("span", {
+      className: "hidden sm:block",
+      children: "Previous"
+    })]
+  });
+}
+function PaginationNext({
+  className,
+  ...props
+}) {
+  /* istanbul ignore next */
+  cov_i3t2qcx18().f[5]++;
+  cov_i3t2qcx18().s[17]++;
+  return (0, jsx_runtime_1.jsxs)(PaginationLink, {
+    "aria-label": "Go to next page",
+    size: "default",
+    className: (0, utils_1.cn)('gap-1 px-2.5 sm:pr-2.5', className),
+    ...props,
+    children: [(0, jsx_runtime_1.jsx)("span", {
+      className: "hidden sm:block",
+      children: "Next"
+    }), (0, jsx_runtime_1.jsx)(lucide_react_1.ChevronRightIcon, {})]
+  });
+}
+function PaginationEllipsis({
+  className,
+  ...props
+}) {
+  /* istanbul ignore next */
+  cov_i3t2qcx18().f[6]++;
+  cov_i3t2qcx18().s[18]++;
+  return (0, jsx_runtime_1.jsxs)("span", {
+    "aria-hidden": true,
+    "data-slot": "pagination-ellipsis",
+    className: (0, utils_1.cn)('flex size-9 items-center justify-center', className),
+    ...props,
+    children: [(0, jsx_runtime_1.jsx)(lucide_react_1.MoreHorizontalIcon, {
+      className: "size-4"
+    }), (0, jsx_runtime_1.jsx)("span", {
+      className: "sr-only",
+      children: "More pages"
+    })]
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfaTN0MnFjeDE4IiwiYWN0dWFsQ292ZXJhZ2UiLCJzIiwiZXhwb3J0cyIsIlBhZ2luYXRpb24iLCJQYWdpbmF0aW9uQ29udGVudCIsIlBhZ2luYXRpb25MaW5rIiwiUGFnaW5hdGlvbkl0ZW0iLCJQYWdpbmF0aW9uUHJldmlvdXMiLCJQYWdpbmF0aW9uTmV4dCIsIlBhZ2luYXRpb25FbGxpcHNpcyIsImx1Y2lkZV9yZWFjdF8xIiwicmVxdWlyZSIsInV0aWxzXzEiLCJidXR0b25fMSIsImNsYXNzTmFtZSIsInByb3BzIiwiZiIsImpzeF9ydW50aW1lXzEiLCJqc3giLCJyb2xlIiwiY24iLCJpc0FjdGl2ZSIsInNpemUiLCJiIiwidW5kZWZpbmVkIiwiYnV0dG9uVmFyaWFudHMiLCJ2YXJpYW50IiwianN4cyIsImNoaWxkcmVuIiwiQ2hldnJvbkxlZnRJY29uIiwiQ2hldnJvblJpZ2h0SWNvbiIsIk1vcmVIb3Jpem9udGFsSWNvbiJdLCJzb3VyY2VzIjpbIi9Vc2Vycy95YW55dS9Eb3dubG9hZHMveXljMy1EZXNpZ24tU3lzdGVtL3NyYy9jb21wb25lbnRzL3VpL3BhZ2luYXRpb24udHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCAqIGFzIFJlYWN0IGZyb20gJ3JlYWN0JztcbmltcG9ydCB7IENoZXZyb25MZWZ0SWNvbiwgQ2hldnJvblJpZ2h0SWNvbiwgTW9yZUhvcml6b250YWxJY29uIH0gZnJvbSAnbHVjaWRlLXJlYWN0JztcblxuaW1wb3J0IHsgY24gfSBmcm9tICcuL3V0aWxzJztcbmltcG9ydCB7IEJ1dHRvbiwgYnV0dG9uVmFyaWFudHMgfSBmcm9tICcuL2J1dHRvbic7XG5cbmZ1bmN0aW9uIFBhZ2luYXRpb24oeyBjbGFzc05hbWUsIC4uLnByb3BzIH06IFJlYWN0LkNvbXBvbmVudFByb3BzPCduYXYnPikge1xuICByZXR1cm4gKFxuICAgIDxuYXZcbiAgICAgIHJvbGU9XCJuYXZpZ2F0aW9uXCJcbiAgICAgIGFyaWEtbGFiZWw9XCJwYWdpbmF0aW9uXCJcbiAgICAgIGRhdGEtc2xvdD1cInBhZ2luYXRpb25cIlxuICAgICAgY2xhc3NOYW1lPXtjbignbXgtYXV0byBmbGV4IHctZnVsbCBqdXN0aWZ5LWNlbnRlcicsIGNsYXNzTmFtZSl9XG4gICAgICB7Li4ucHJvcHN9XG4gICAgLz5cbiAgKTtcbn1cblxuZnVuY3Rpb24gUGFnaW5hdGlvbkNvbnRlbnQoeyBjbGFzc05hbWUsIC4uLnByb3BzIH06IFJlYWN0LkNvbXBvbmVudFByb3BzPCd1bCc+KSB7XG4gIHJldHVybiAoXG4gICAgPHVsXG4gICAgICBkYXRhLXNsb3Q9XCJwYWdpbmF0aW9uLWNvbnRlbnRcIlxuICAgICAgY2xhc3NOYW1lPXtjbignZmxleCBmbGV4LXJvdyBpdGVtcy1jZW50ZXIgZ2FwLTEnLCBjbGFzc05hbWUpfVxuICAgICAgey4uLnByb3BzfVxuICAgIC8+XG4gICk7XG59XG5cbmZ1bmN0aW9uIFBhZ2luYXRpb25JdGVtKHsgLi4ucHJvcHMgfTogUmVhY3QuQ29tcG9uZW50UHJvcHM8J2xpJz4pIHtcbiAgcmV0dXJuIDxsaSBkYXRhLXNsb3Q9XCJwYWdpbmF0aW9uLWl0ZW1cIiB7Li4ucHJvcHN9IC8+O1xufVxuXG50eXBlIFBhZ2luYXRpb25MaW5rUHJvcHMgPSB7XG4gIGlzQWN0aXZlPzogYm9vbGVhbjtcbn0gJiBQaWNrPFJlYWN0LkNvbXBvbmVudFByb3BzPHR5cGVvZiBCdXR0b24+LCAnc2l6ZSc+ICZcbiAgUmVhY3QuQ29tcG9uZW50UHJvcHM8J2EnPjtcblxuZnVuY3Rpb24gUGFnaW5hdGlvbkxpbmsoeyBjbGFzc05hbWUsIGlzQWN0aXZlLCBzaXplID0gJ2ljb24nLCAuLi5wcm9wcyB9OiBQYWdpbmF0aW9uTGlua1Byb3BzKSB7XG4gIHJldHVybiAoXG4gICAgPGFcbiAgICAgIGFyaWEtY3VycmVudD17aXNBY3RpdmUgPyAncGFnZScgOiB1bmRlZmluZWR9XG4gICAgICBkYXRhLXNsb3Q9XCJwYWdpbmF0aW9uLWxpbmtcIlxuICAgICAgZGF0YS1hY3RpdmU9e2lzQWN0aXZlfVxuICAgICAgY2xhc3NOYW1lPXtjbihcbiAgICAgICAgYnV0dG9uVmFyaWFudHMoe1xuICAgICAgICAgIHZhcmlhbnQ6IGlzQWN0aXZlID8gJ291dGxpbmUnIDogJ2dob3N0JyxcbiAgICAgICAgICBzaXplLFxuICAgICAgICB9KSxcbiAgICAgICAgY2xhc3NOYW1lXG4gICAgICApfVxuICAgICAgey4uLnByb3BzfVxuICAgIC8+XG4gICk7XG59XG5cbmZ1bmN0aW9uIFBhZ2luYXRpb25QcmV2aW91cyh7IGNsYXNzTmFtZSwgLi4ucHJvcHMgfTogUmVhY3QuQ29tcG9uZW50UHJvcHM8dHlwZW9mIFBhZ2luYXRpb25MaW5rPikge1xuICByZXR1cm4gKFxuICAgIDxQYWdpbmF0aW9uTGlua1xuICAgICAgYXJpYS1sYWJlbD1cIkdvIHRvIHByZXZpb3VzIHBhZ2VcIlxuICAgICAgc2l6ZT1cImRlZmF1bHRcIlxuICAgICAgY2xhc3NOYW1lPXtjbignZ2FwLTEgcHgtMi41IHNtOnBsLTIuNScsIGNsYXNzTmFtZSl9XG4gICAgICB7Li4ucHJvcHN9XG4gICAgPlxuICAgICAgPENoZXZyb25MZWZ0SWNvbiAvPlxuICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiaGlkZGVuIHNtOmJsb2NrXCI+UHJldmlvdXM8L3NwYW4+XG4gICAgPC9QYWdpbmF0aW9uTGluaz5cbiAgKTtcbn1cblxuZnVuY3Rpb24gUGFnaW5hdGlvbk5leHQoeyBjbGFzc05hbWUsIC4uLnByb3BzIH06IFJlYWN0LkNvbXBvbmVudFByb3BzPHR5cGVvZiBQYWdpbmF0aW9uTGluaz4pIHtcbiAgcmV0dXJuIChcbiAgICA8UGFnaW5hdGlvbkxpbmtcbiAgICAgIGFyaWEtbGFiZWw9XCJHbyB0byBuZXh0IHBhZ2VcIlxuICAgICAgc2l6ZT1cImRlZmF1bHRcIlxuICAgICAgY2xhc3NOYW1lPXtjbignZ2FwLTEgcHgtMi41IHNtOnByLTIuNScsIGNsYXNzTmFtZSl9XG4gICAgICB7Li4ucHJvcHN9XG4gICAgPlxuICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiaGlkZGVuIHNtOmJsb2NrXCI+TmV4dDwvc3Bhbj5cbiAgICAgIDxDaGV2cm9uUmlnaHRJY29uIC8+XG4gICAgPC9QYWdpbmF0aW9uTGluaz5cbiAgKTtcbn1cblxuZnVuY3Rpb24gUGFnaW5hdGlvbkVsbGlwc2lzKHsgY2xhc3NOYW1lLCAuLi5wcm9wcyB9OiBSZWFjdC5Db21wb25lbnRQcm9wczwnc3Bhbic+KSB7XG4gIHJldHVybiAoXG4gICAgPHNwYW5cbiAgICAgIGFyaWEtaGlkZGVuXG4gICAgICBkYXRhLXNsb3Q9XCJwYWdpbmF0aW9uLWVsbGlwc2lzXCJcbiAgICAgIGNsYXNzTmFtZT17Y24oJ2ZsZXggc2l6ZS05IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlcicsIGNsYXNzTmFtZSl9XG4gICAgICB7Li4ucHJvcHN9XG4gICAgPlxuICAgICAgPE1vcmVIb3Jpem9udGFsSWNvbiBjbGFzc05hbWU9XCJzaXplLTRcIiAvPlxuICAgICAgPHNwYW4gY2xhc3NOYW1lPVwic3Itb25seVwiPk1vcmUgcGFnZXM8L3NwYW4+XG4gICAgPC9zcGFuPlxuICApO1xufVxuXG5leHBvcnQge1xuICBQYWdpbmF0aW9uLFxuICBQYWdpbmF0aW9uQ29udGVudCxcbiAgUGFnaW5hdGlvbkxpbmssXG4gIFBhZ2luYXRpb25JdGVtLFxuICBQYWdpbmF0aW9uUHJldmlvdXMsXG4gIFBhZ2luYXRpb25OZXh0LFxuICBQYWdpbmF0aW9uRWxsaXBzaXMsXG59O1xuIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7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

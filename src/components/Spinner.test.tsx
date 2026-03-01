@@ -1,18 +1,12 @@
 import * as React from 'react';
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 import { Spinner } from './Spinner';
 
 const renderWithTheme = (component: React.ReactElement) => {
-  return render(
-    <ThemeProvider>
-      {component}
-    </ThemeProvider>
-  );
+  return render(<ThemeProvider>{component}</ThemeProvider>);
 };
 
 describe('Spinner', () => {
@@ -33,7 +27,7 @@ describe('Spinner', () => {
       const { container } = renderWithTheme(<Spinner />);
       const spinner = container.querySelector('div[role="status"]');
       expect(spinner).toHaveStyle({
-        animation: 'spin 1s linear infinite'
+        animation: 'spin 1s linear infinite',
       });
     });
   });
@@ -44,7 +38,7 @@ describe('Spinner', () => {
       const spinner = container.querySelector('div[role="status"]');
       expect(spinner).toHaveStyle({
         width: '1rem',
-        height: '1rem'
+        height: '1rem',
       });
     });
 
@@ -53,7 +47,7 @@ describe('Spinner', () => {
       const spinner = container.querySelector('div[role="status"]');
       expect(spinner).toHaveStyle({
         width: '1.5rem',
-        height: '1.5rem'
+        height: '1.5rem',
       });
     });
 
@@ -62,7 +56,7 @@ describe('Spinner', () => {
       const spinner = container.querySelector('div[role="status"]');
       expect(spinner).toHaveStyle({
         width: '2rem',
-        height: '2rem'
+        height: '2rem',
       });
     });
   });
@@ -72,7 +66,7 @@ describe('Spinner', () => {
       const { container } = renderWithTheme(<Spinner />);
       const spinner = container.querySelector('div[role="status"]');
       expect(spinner).toHaveStyle({
-        borderRadius: '50%'
+        borderRadius: '50%',
       });
     });
 
@@ -95,7 +89,7 @@ describe('Spinner', () => {
       const { container } = renderWithTheme(<Spinner />);
       const spinner = container.querySelector('div[role="status"]');
       expect(spinner).toHaveStyle({
-        borderTopColor: expect.any(String)
+        borderTopColor: expect.any(String),
       });
     });
   });

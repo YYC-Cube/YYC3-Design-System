@@ -1,14 +1,10 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { ThemeProvider } from '../../theme/ThemeProvider';
+import { ThemeProvider } from '../../context/ThemeContext';
 import { AIAccessibilityChecker } from '../AIAccessibilityChecker';
 
 const renderWithTheme = (component: React.ReactElement) => {
-  return render(
-    <ThemeProvider>
-      {component}
-    </ThemeProvider>
-  );
+  return render(<ThemeProvider>{component}</ThemeProvider>);
 };
 
 describe('AIAccessibilityChecker', () => {
@@ -54,7 +50,7 @@ describe('AIAccessibilityChecker', () => {
 
   it('应该允许切换 WCAG 级别', () => {
     renderWithTheme(<AIAccessibilityChecker />);
-    
+
     const select = screen.getByText('WCAG AA (4.5:1)').closest('select');
     if (select) {
       fireEvent.change(select, { target: { value: 'AAA' } });
@@ -64,9 +60,9 @@ describe('AIAccessibilityChecker', () => {
 
   it('应该允许启用/禁用检查项目', () => {
     renderWithTheme(<AIAccessibilityChecker />);
-    
+
     const checkboxes = screen.getAllByRole('checkbox');
-    checkboxes.forEach(checkbox => {
+    checkboxes.forEach((checkbox) => {
       const checkboxElement = checkbox as HTMLInputElement;
       if (checkboxElement.checked) {
         fireEvent.click(checkbox);
@@ -77,20 +73,20 @@ describe('AIAccessibilityChecker', () => {
 
   it('应该在点击开始检查时执行检查', () => {
     renderWithTheme(<AIAccessibilityChecker />);
-    
+
     const button = screen.getByText('开始检查');
     fireEvent.click(button);
-    
+
     expect(screen.getByText('检查中...')).toBeInTheDocument();
   });
 
   it('应该显示可访问性评分', async () => {
     renderWithTheme(<AIAccessibilityChecker />);
-    
+
     fireEvent.click(screen.getByText('开始检查'));
-    
+
     jest.advanceTimersByTime(100);
-    
+
     await waitFor(() => {
       expect(screen.getByText('可访问性评分')).toBeInTheDocument();
     });
@@ -98,11 +94,11 @@ describe('AIAccessibilityChecker', () => {
 
   it('应该显示 WCAG 合规等级', async () => {
     renderWithTheme(<AIAccessibilityChecker />);
-    
+
     fireEvent.click(screen.getByText('开始检查'));
-    
+
     jest.advanceTimersByTime(100);
-    
+
     await waitFor(() => {
       const wcagBadge = screen.queryByText(/WCAG/);
       expect(wcagBadge !== null).toBe(true);
@@ -111,11 +107,11 @@ describe('AIAccessibilityChecker', () => {
 
   it('应该显示问题摘要', async () => {
     renderWithTheme(<AIAccessibilityChecker />);
-    
+
     fireEvent.click(screen.getByText('开始检查'));
-    
+
     jest.advanceTimersByTime(100);
-    
+
     await waitFor(() => {
       const summaryBadges = screen.queryAllByText(/严重:|中等:|轻微:/);
       expect(summaryBadges.length > 0).toBe(true);
@@ -124,11 +120,11 @@ describe('AIAccessibilityChecker', () => {
 
   it('应该显示 AI 建议', async () => {
     renderWithTheme(<AIAccessibilityChecker />);
-    
+
     fireEvent.click(screen.getByText('开始检查'));
-    
+
     jest.advanceTimersByTime(100);
-    
+
     await waitFor(() => {
       expect(screen.getByText('AI 建议')).toBeInTheDocument();
     });
@@ -136,11 +132,11 @@ describe('AIAccessibilityChecker', () => {
 
   it('应该显示检测到的问题列表', async () => {
     renderWithTheme(<AIAccessibilityChecker />);
-    
+
     fireEvent.click(screen.getByText('开始检查'));
-    
+
     jest.advanceTimersByTime(100);
-    
+
     await waitFor(() => {
       const issuesHeading = screen.queryByText(/检测到的问题/);
       expect(issuesHeading !== null).toBe(true);
@@ -149,11 +145,11 @@ describe('AIAccessibilityChecker', () => {
 
   it('应该允许展开问题详情', async () => {
     renderWithTheme(<AIAccessibilityChecker />);
-    
+
     fireEvent.click(screen.getByText('开始检查'));
-    
+
     jest.advanceTimersByTime(100);
-    
+
     await waitFor(() => {
       const issueCard = screen.queryByText(/建议:/);
       if (issueCard) {
@@ -164,11 +160,11 @@ describe('AIAccessibilityChecker', () => {
 
   it('应该显示修复按钮当存在可修复的问题', async () => {
     renderWithTheme(<AIAccessibilityChecker />);
-    
+
     fireEvent.click(screen.getByText('开始检查'));
-    
+
     jest.advanceTimersByTime(100);
-    
+
     await waitFor(() => {
       const fixButton = screen.queryByText(/修复此问题/);
       const autoFixButton = screen.queryByText(/自动修复/);
@@ -187,11 +183,11 @@ describe('AIAccessibilityChecker', () => {
     document.body.appendChild(mockElement);
 
     renderWithTheme(<AIAccessibilityChecker targetElement={mockElement} />);
-    
+
     fireEvent.click(screen.getByText('开始检查'));
-    
+
     jest.advanceTimersByTime(100);
-    
+
     await waitFor(() => {
       expect(screen.getByText('完美！')).toBeInTheDocument();
       expect(screen.getByText(/页面完全符合 WCAG/)).toBeInTheDocument();
@@ -202,24 +198,24 @@ describe('AIAccessibilityChecker', () => {
 
   it('应该定期执行自动检查', () => {
     const setIntervalSpy = jest.spyOn(window, 'setInterval');
-    
+
     renderWithTheme(<AIAccessibilityChecker autoCheck />);
-    
+
     expect(setIntervalSpy).toHaveBeenCalled();
-    
+
     setIntervalSpy.mockRestore();
   });
 
   it('应该在组件卸载时清除定时器', () => {
     const clearIntervalSpy = jest.spyOn(window, 'clearInterval');
     const setIntervalSpy = jest.spyOn(window, 'setInterval');
-    
+
     const { unmount } = renderWithTheme(<AIAccessibilityChecker autoCheck />);
-    
+
     unmount();
-    
+
     expect(clearIntervalSpy).toHaveBeenCalled();
-    
+
     clearIntervalSpy.mockRestore();
     setIntervalSpy.mockRestore();
   });

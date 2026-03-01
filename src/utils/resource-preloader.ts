@@ -11,7 +11,16 @@ export type ResourceType = 'script' | 'style' | 'image' | 'font' | 'document' | 
 
 export type PreloadPriority = 'high' | 'low' | 'auto';
 
-export type ReferrerPolicyType = '' | 'no-referrer' | 'no-referrer-when-downgrade' | 'same-origin' | 'origin' | 'strict-origin' | 'origin-when-cross-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url';
+export type ReferrerPolicyType =
+  | ''
+  | 'no-referrer'
+  | 'no-referrer-when-downgrade'
+  | 'same-origin'
+  | 'origin'
+  | 'strict-origin'
+  | 'origin-when-cross-origin'
+  | 'strict-origin-when-cross-origin'
+  | 'unsafe-url';
 
 export interface PreloadOptions {
   priority?: PreloadPriority;
@@ -67,11 +76,7 @@ export class ResourcePreloader {
     this.loadingResources = new Map();
   }
 
-  preloadResource(
-    url: string,
-    type: ResourceType,
-    options?: PreloadOptions
-  ): Promise<boolean> {
+  preloadResource(url: string, type: ResourceType, options?: PreloadOptions): Promise<boolean> {
     if (this.preloadedResources.has(url)) {
       return Promise.resolve(true);
     }
@@ -224,20 +229,12 @@ export class ResourcePreloader {
     });
   }
 
-  prefetch(
-    url: string,
-    options?: PrefetchOptions
-  ): Promise<boolean> {
+  prefetch(url: string, options?: PrefetchOptions): Promise<boolean> {
     if (this.prefetchedResources.has(url)) {
       return Promise.resolve(true);
     }
 
-    const {
-      priority = 'auto',
-      timeout = 10000,
-      onLoad,
-      onError,
-    } = options || {};
+    const { priority = 'auto', timeout = 10000, onLoad, onError } = options || {};
 
     return new Promise<boolean>((resolve) => {
       const link = document.createElement('link');
@@ -308,52 +305,31 @@ export class ResourcePreloader {
     return processAll().then(() => results);
   }
 
-  preloadScript(
-    url: string,
-    options?: PreloadOptions
-  ): Promise<boolean> {
+  preloadScript(url: string, options?: PreloadOptions): Promise<boolean> {
     return this.preloadResource(url, 'script', options);
   }
 
-  preloadStyle(
-    url: string,
-    options?: PreloadOptions
-  ): Promise<boolean> {
+  preloadStyle(url: string, options?: PreloadOptions): Promise<boolean> {
     return this.preloadResource(url, 'style', options);
   }
 
-  preloadImage(
-    url: string,
-    options?: PreloadOptions
-  ): Promise<boolean> {
+  preloadImage(url: string, options?: PreloadOptions): Promise<boolean> {
     return this.preloadResource(url, 'image', options);
   }
 
-  preloadFont(
-    url: string,
-    options?: PreloadOptions
-  ): Promise<boolean> {
+  preloadFont(url: string, options?: PreloadOptions): Promise<boolean> {
     return this.preloadResource(url, 'font', options);
   }
 
-  preloadDocument(
-    url: string,
-    options?: PreloadOptions
-  ): Promise<boolean> {
+  preloadDocument(url: string, options?: PreloadOptions): Promise<boolean> {
     return this.preloadResource(url, 'document', options);
   }
 
-  preloadFetch(
-    url: string,
-    options?: PreloadOptions
-  ): Promise<boolean> {
+  preloadFetch(url: string, options?: PreloadOptions): Promise<boolean> {
     return this.preloadResource(url, 'fetch', options);
   }
 
-  preloadWorker(
-    url: string,
-    options?: PreloadOptions
-  ): Promise<boolean> {
+  preloadWorker(url: string, options?: PreloadOptions): Promise<boolean> {
     return this.preloadResource(url, 'worker', options);
   }
 
@@ -406,10 +382,7 @@ export class ResourcePreloader {
     };
   }
 
-  generatePreloadHints(
-    resources: ResourcePreloadConfig[],
-    origins: PreconnectConfig[]
-  ): string {
+  generatePreloadHints(resources: ResourcePreloadConfig[], origins: PreconnectConfig[]): string {
     let hints = '';
 
     origins.forEach((origin) => {
@@ -480,10 +453,7 @@ export const preloadBelowFoldResources = (
   return defaultResourcePreloader.preloadBelowFoldResources(resources);
 };
 
-export const preconnect = (
-  origin: string,
-  options?: PreconnectOptions
-): void => {
+export const preconnect = (origin: string, options?: PreconnectOptions): void => {
   defaultResourcePreloader.preconnect(origin, options);
 };
 
@@ -491,10 +461,7 @@ export const preconnectOrigins = (origins: PreconnectConfig[]): void => {
   defaultResourcePreloader.preconnectOrigins(origins);
 };
 
-export const prefetch = (
-  url: string,
-  options?: PrefetchOptions
-): Promise<boolean> => {
+export const prefetch = (url: string, options?: PrefetchOptions): Promise<boolean> => {
   return defaultResourcePreloader.prefetch(url, options);
 };
 
@@ -508,52 +475,31 @@ export const prefetchResources = (
   return defaultResourcePreloader.prefetchResources(resources, options);
 };
 
-export const preloadScript = (
-  url: string,
-  options?: PreloadOptions
-): Promise<boolean> => {
+export const preloadScript = (url: string, options?: PreloadOptions): Promise<boolean> => {
   return defaultResourcePreloader.preloadScript(url, options);
 };
 
-export const preloadStyle = (
-  url: string,
-  options?: PreloadOptions
-): Promise<boolean> => {
+export const preloadStyle = (url: string, options?: PreloadOptions): Promise<boolean> => {
   return defaultResourcePreloader.preloadStyle(url, options);
 };
 
-export const preloadImage = (
-  url: string,
-  options?: PreloadOptions
-): Promise<boolean> => {
+export const preloadImage = (url: string, options?: PreloadOptions): Promise<boolean> => {
   return defaultResourcePreloader.preloadImage(url, options);
 };
 
-export const preloadFont = (
-  url: string,
-  options?: PreloadOptions
-): Promise<boolean> => {
+export const preloadFont = (url: string, options?: PreloadOptions): Promise<boolean> => {
   return defaultResourcePreloader.preloadFont(url, options);
 };
 
-export const preloadDocument = (
-  url: string,
-  options?: PreloadOptions
-): Promise<boolean> => {
+export const preloadDocument = (url: string, options?: PreloadOptions): Promise<boolean> => {
   return defaultResourcePreloader.preloadDocument(url, options);
 };
 
-export const preloadFetch = (
-  url: string,
-  options?: PreloadOptions
-): Promise<boolean> => {
+export const preloadFetch = (url: string, options?: PreloadOptions): Promise<boolean> => {
   return defaultResourcePreloader.preloadFetch(url, options);
 };
 
-export const preloadWorker = (
-  url: string,
-  options?: PreloadOptions
-): Promise<boolean> => {
+export const preloadWorker = (url: string, options?: PreloadOptions): Promise<boolean> => {
   return defaultResourcePreloader.preloadWorker(url, options);
 };
 

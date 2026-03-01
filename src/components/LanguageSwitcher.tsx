@@ -12,7 +12,7 @@
 
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useTheme } from '../theme/ThemeProvider';
+import { useTheme } from '../context/ThemeContext';
 
 export interface LanguageOption {
   code: string;
@@ -30,76 +30,75 @@ const languages: LanguageOption[] = [
   { code: 'en-US', name: 'English', flag: '🇺🇸' },
 ];
 
-export const LanguageSwitcher = memo<LanguageSwitcherProps>(({
-  className = '',
-  'data-testid': dataTestId,
-}) => {
-  const { i18n } = useTranslation();
-  const { tokens } = useTheme();
+export const LanguageSwitcher = memo<LanguageSwitcherProps>(
+  ({ className = '', 'data-testid': dataTestId }) => {
+    const { i18n } = useTranslation();
+    const { tokens } = useTheme();
 
-  const currentLanguage = i18n.language;
+    const currentLanguage = i18n.language;
 
-  const handleLanguageChange = (languageCode: string) => {
-    i18n.changeLanguage(languageCode);
-  };
+    const handleLanguageChange = (languageCode: string) => {
+      i18n.changeLanguage(languageCode);
+    };
 
-  const containerStyles = {
-    display: 'flex',
-    alignItems: 'center' as const,
-    gap: '8px',
-  };
+    const containerStyles = {
+      display: 'flex',
+      alignItems: 'center' as const,
+      gap: '8px',
+    };
 
-  const buttonStyles = {
-    display: 'flex',
-    alignItems: 'center' as const,
-    gap: '4px',
-    padding: '8px 12px',
-    borderRadius: '4px',
-    border: `1px solid ${tokens['color.border'] as string || '#e0e0e0'}`,
-    backgroundColor: tokens['color.background'] as string || '#fff',
-    cursor: 'pointer',
-    transition: 'all 0.2s',
-    fontSize: '14px',
-    color: tokens['color.text.primary'] as string || '#333',
-  };
+    const buttonStyles = {
+      display: 'flex',
+      alignItems: 'center' as const,
+      gap: '4px',
+      padding: '8px 12px',
+      borderRadius: '4px',
+      border: `1px solid ${(tokens['color.border'] as string) || '#e0e0e0'}`,
+      backgroundColor: (tokens['color.background'] as string) || '#fff',
+      cursor: 'pointer',
+      transition: 'all 0.2s',
+      fontSize: '14px',
+      color: (tokens['color.text.primary'] as string) || '#333',
+    };
 
-  const buttonHoverStyles = {
-    ...buttonStyles,
-    backgroundColor: tokens['color.hover'] as string || '#f5f5f5',
-  };
+    const buttonHoverStyles = {
+      ...buttonStyles,
+      backgroundColor: (tokens['color.hover'] as string) || '#f5f5f5',
+    };
 
-  const flagStyles = {
-    fontSize: '16px',
-  };
+    const flagStyles = {
+      fontSize: '16px',
+    };
 
-  const nameStyles = {
-    fontSize: '14px',
-  };
+    const nameStyles = {
+      fontSize: '14px',
+    };
 
-  const currentLanguageData = languages.find(lang => lang.code === currentLanguage);
+    const currentLanguageData = languages.find((lang) => lang.code === currentLanguage);
 
-  return (
-    <div className={className} style={containerStyles} data-testid={dataTestId}>
-      {languages.map((language) => {
-        const isCurrent = language.code === currentLanguage;
-        const styles = isCurrent ? buttonHoverStyles : buttonStyles;
+    return (
+      <div className={className} style={containerStyles} data-testid={dataTestId}>
+        {languages.map((language) => {
+          const isCurrent = language.code === currentLanguage;
+          const styles = isCurrent ? buttonHoverStyles : buttonStyles;
 
-        return (
-          <button
-            key={language.code}
-            onClick={() => handleLanguageChange(language.code)}
-            style={styles}
-            title={language.name}
-            aria-label={`Switch to ${language.name}`}
-            aria-current={isCurrent ? 'true' : undefined}
-          >
-            <span style={flagStyles}>{language.flag}</span>
-            <span style={nameStyles}>{language.name}</span>
-          </button>
-        );
-      })}
-    </div>
-  );
-});
+          return (
+            <button
+              key={language.code}
+              onClick={() => handleLanguageChange(language.code)}
+              style={styles}
+              title={language.name}
+              aria-label={`Switch to ${language.name}`}
+              aria-current={isCurrent ? 'true' : undefined}
+            >
+              <span style={flagStyles}>{language.flag}</span>
+              <span style={nameStyles}>{language.name}</span>
+            </button>
+          );
+        })}
+      </div>
+    );
+  }
+);
 
 LanguageSwitcher.displayName = 'LanguageSwitcher';

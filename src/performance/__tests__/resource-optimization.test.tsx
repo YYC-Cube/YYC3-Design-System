@@ -7,12 +7,22 @@
  * @created 2026-02-19
  */
 
-;
-
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react';
 
 import '@testing-library/jest-dom';
-import { imageCache, resourceCache, compressImage, generateResponsiveImageUrls, createBlurHash, preloadImage, preloadResource, useImageOptimization, useResourcePreload, createImageOptimizationConfig, createResourcePreloadConfig } from '../resource-optimization';
+import {
+  imageCache,
+  resourceCache,
+  compressImage,
+  generateResponsiveImageUrls,
+  createBlurHash,
+  preloadImage,
+  preloadResource,
+  useImageOptimization,
+  useResourcePreload,
+  createImageOptimizationConfig,
+  createResourcePreloadConfig,
+} from '../resource-optimization';
 import * as React from 'react';
 
 global.fetch = jest.fn() as any;
@@ -110,7 +120,7 @@ describe('Resource Optimization Module', () => {
     it('应该处理图像加载失败', async () => {
       const mockImage = {
         onload: null as (() => void) | null,
-        onerror: null as (() => void) | null
+        onerror: null as (() => void) | null,
       };
 
       global.Image = jest.fn(() => {
@@ -122,9 +132,9 @@ describe('Resource Optimization Module', () => {
         return mockImage;
       }) as any;
 
-      await expect(
-        compressImage(new File(['mock'], 'test.png') as any)
-      ).rejects.toThrow('Failed to load image');
+      await expect(compressImage(new File(['mock'], 'test.png') as any)).rejects.toThrow(
+        'Failed to load image'
+      );
     });
 
     it('应该生成响应式图像URL', () => {
@@ -159,7 +169,7 @@ describe('Resource Optimization Module', () => {
 
     it('应该支持自定义图像格式', () => {
       const config = createImageOptimizationConfig({
-        format: 'webp'
+        format: 'webp',
       });
 
       expect(config.format).toBe('webp');
@@ -167,7 +177,7 @@ describe('Resource Optimization Module', () => {
 
     it('应该支持自定义质量设置', () => {
       const config = createImageOptimizationConfig({
-        quality: 0.9
+        quality: 0.9,
       });
 
       expect(config.quality).toBe(0.9);
@@ -176,7 +186,7 @@ describe('Resource Optimization Module', () => {
     it('应该支持自定义图像尺寸', () => {
       const config = createImageOptimizationConfig({
         maxWidth: 1920,
-        maxHeight: 1080
+        maxHeight: 1080,
       });
 
       expect(config.maxWidth).toBe(1920);
@@ -186,7 +196,7 @@ describe('Resource Optimization Module', () => {
     it('应该支持自定义断点', () => {
       const breakpoints = [320, 640, 960, 1280];
       const config = createImageOptimizationConfig({
-        breakpoints
+        breakpoints,
       });
 
       expect(config.breakpoints).toEqual(breakpoints);
@@ -194,7 +204,7 @@ describe('Resource Optimization Module', () => {
 
     it('应该支持启用占位符', () => {
       const config = createImageOptimizationConfig({
-        enablePlaceholder: true
+        enablePlaceholder: true,
       });
 
       expect(config.enablePlaceholder).toBe(true);
@@ -202,7 +212,7 @@ describe('Resource Optimization Module', () => {
 
     it('应该支持启用响应式图像', () => {
       const config = createImageOptimizationConfig({
-        enableResponsiveImages: true
+        enableResponsiveImages: true,
       });
 
       expect(config.enableResponsiveImages).toBe(true);
@@ -213,7 +223,7 @@ describe('Resource Optimization Module', () => {
     it('应该预加载图像', async () => {
       const mockImage = {
         onload: null as (() => void) | null,
-        onerror: null as (() => void) | null
+        onerror: null as (() => void) | null,
       };
 
       global.Image = jest.fn(() => {
@@ -235,7 +245,7 @@ describe('Resource Optimization Module', () => {
     it('应该从缓存加载图像', async () => {
       const mockImage = {
         onload: null as (() => void) | null,
-        onerror: null as (() => void) | null
+        onerror: null as (() => void) | null,
       };
 
       global.Image = jest.fn(() => {
@@ -259,7 +269,7 @@ describe('Resource Optimization Module', () => {
 
     it('应该预加载fetch资源', async () => {
       (global.fetch as any).mockResolvedValueOnce({
-        ok: true
+        ok: true,
       });
 
       const result = await preloadResource('https://example.com/data.json', 'fetch');
@@ -271,7 +281,7 @@ describe('Resource Optimization Module', () => {
     it('应该处理预加载失败', async () => {
       const mockImage = {
         onload: null as (() => void) | null,
-        onerror: null as (() => void) | null
+        onerror: null as (() => void) | null,
       };
 
       global.Image = jest.fn(() => {
@@ -293,7 +303,7 @@ describe('Resource Optimization Module', () => {
       let attemptCount = 0;
       const mockImage = {
         onload: null as (() => void) | null,
-        onerror: null as (() => void) | null
+        onerror: null as (() => void) | null,
       };
 
       global.Image = jest.fn(() => {
@@ -314,7 +324,7 @@ describe('Resource Optimization Module', () => {
 
       const result = await preloadImage('https://example.com/retry.jpg', {
         retryCount: 3,
-        retryDelay: 50
+        retryDelay: 50,
       });
 
       expect(result.success).toBe(true);
@@ -334,7 +344,7 @@ describe('Resource Optimization Module', () => {
       const TestComponent = () => {
         const imageOpt = useImageOptimization({
           maxWidth: 800,
-          quality: 0.8
+          quality: 0.8,
         });
 
         return (
@@ -349,16 +359,22 @@ describe('Resource Optimization Module', () => {
 
       const { container } = render(<TestComponent />);
 
-      expect(container.querySelector('[data-testid="compress-type"]')).toHaveTextContent('function');
+      expect(container.querySelector('[data-testid="compress-type"]')).toHaveTextContent(
+        'function'
+      );
       expect(container.querySelector('[data-testid="preload-type"]')).toHaveTextContent('function');
-      expect(container.querySelector('[data-testid="generate-type"]')).toHaveTextContent('function');
-      expect(container.querySelector('[data-testid="blurhash-type"]')).toHaveTextContent('function');
+      expect(container.querySelector('[data-testid="generate-type"]')).toHaveTextContent(
+        'function'
+      );
+      expect(container.querySelector('[data-testid="blurhash-type"]')).toHaveTextContent(
+        'function'
+      );
     });
 
     it('应该使用资源预加载hook', () => {
       const TestComponent = () => {
         const resourcePreload = useResourcePreload({
-          preloadPriority: 'high'
+          preloadPriority: 'high',
         });
 
         return (
@@ -373,16 +389,20 @@ describe('Resource Optimization Module', () => {
 
       const { container } = render(<TestComponent />);
 
-      expect(container.querySelector('[data-testid="preload-func-type"]')).toHaveTextContent('function');
+      expect(container.querySelector('[data-testid="preload-func-type"]')).toHaveTextContent(
+        'function'
+      );
       expect(container.querySelector('[data-testid="progress"]')).toHaveTextContent('0');
       expect(container.querySelector('[data-testid="results"]')).toHaveTextContent('0');
-      expect(container.querySelector('[data-testid="clear-cache-type"]')).toHaveTextContent('function');
+      expect(container.querySelector('[data-testid="clear-cache-type"]')).toHaveTextContent(
+        'function'
+      );
     });
 
     it('应该调用资源预加载hook的preload函数', async () => {
       const mockImage = {
         onload: null as (() => void) | null,
-        onerror: null as (() => void) | null
+        onerror: null as (() => void) | null,
       };
 
       global.Image = jest.fn(() => {
@@ -399,16 +419,16 @@ describe('Resource Optimization Module', () => {
         const [loaded, setLoaded] = React.useState(false);
 
         const handleLoad = async () => {
-          await resourcePreload.preload([
-            { url: 'https://example.com/image.jpg', type: 'image' }
-          ]);
+          await resourcePreload.preload([{ url: 'https://example.com/image.jpg', type: 'image' }]);
           setLoaded(true);
         };
 
         return (
           <div>
             <div data-testid="loaded">{loaded ? 'yes' : 'no'}</div>
-            <button data-testid="load-btn" onClick={handleLoad}>Load</button>
+            <button data-testid="load-btn" onClick={handleLoad}>
+              Load
+            </button>
           </div>
         );
       };
@@ -436,7 +456,9 @@ describe('Resource Optimization Module', () => {
         return (
           <div>
             <div data-testid="cleared">{cleared ? 'yes' : 'no'}</div>
-            <button data-testid="clear-btn" onClick={handleClear}>Clear</button>
+            <button data-testid="clear-btn" onClick={handleClear}>
+              Clear
+            </button>
           </div>
         );
       };
@@ -449,7 +471,7 @@ describe('Resource Optimization Module', () => {
       await waitFor(() => {
         expect(container.querySelector('[data-testid="cleared"]')).toHaveTextContent('yes');
       });
-      
+
       expect(imageCache.size()).toBe(0);
       expect(resourceCache.size()).toBe(0);
     });
@@ -459,7 +481,7 @@ describe('Resource Optimization Module', () => {
     it('应该创建图像优化配置', () => {
       const config = createImageOptimizationConfig({
         maxWidth: 1920,
-        quality: 0.9
+        quality: 0.9,
       });
 
       expect(config.maxWidth).toBe(1920);
@@ -470,7 +492,7 @@ describe('Resource Optimization Module', () => {
     it('应该创建资源预加载配置', () => {
       const config = createResourcePreloadConfig({
         preloadPriority: 'high',
-        preloadTimeout: 5000
+        preloadTimeout: 5000,
       });
 
       expect(config.preloadPriority).toBe('high');

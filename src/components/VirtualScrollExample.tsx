@@ -45,7 +45,7 @@ export const VirtualScrollExample: React.FC = () => {
     }
     const lowerSearchTerm = searchTerm.toLowerCase();
     return items.filter(
-      item =>
+      (item) =>
         item.name.toLowerCase().includes(lowerSearchTerm) ||
         item.description.toLowerCase().includes(lowerSearchTerm)
     );
@@ -66,7 +66,7 @@ export const VirtualScrollExample: React.FC = () => {
   }, []);
 
   const handleToggleView = useCallback(() => {
-    setUseGrid(prev => !prev);
+    setUseGrid((prev) => !prev);
   }, []);
 
   const renderItem = useCallback((item: unknown, index: number) => {
@@ -80,15 +80,11 @@ export const VirtualScrollExample: React.FC = () => {
           backgroundColor: index % 2 === 0 ? '#f9f9f9' : '#ffffff',
         }}
       >
-        <div style={{ fontWeight: 600, marginBottom: '0.5rem' }}>
-          {listItem.name}
-        </div>
+        <div style={{ fontWeight: 600, marginBottom: '0.5rem' }}>{listItem.name}</div>
         <div style={{ fontSize: '0.875rem', color: '#666', marginBottom: '0.25rem' }}>
           {listItem.description}
         </div>
-        <div style={{ fontSize: '0.875rem', color: '#999' }}>
-          值: {listItem.value}
-        </div>
+        <div style={{ fontSize: '0.875rem', color: '#999' }}>值: {listItem.value}</div>
       </div>
     );
   }, []);
@@ -108,12 +104,8 @@ export const VirtualScrollExample: React.FC = () => {
           justifyContent: 'center',
         }}
       >
-        <div style={{ fontWeight: 600, marginBottom: '0.5rem' }}>
-          {listItem.name}
-        </div>
-        <div style={{ fontSize: '0.875rem', color: '#666' }}>
-          {listItem.value}
-        </div>
+        <div style={{ fontWeight: 600, marginBottom: '0.5rem' }}>{listItem.name}</div>
+        <div style={{ fontSize: '0.875rem', color: '#666' }}>{listItem.value}</div>
       </div>
     );
   }, []);
@@ -125,7 +117,14 @@ export const VirtualScrollExample: React.FC = () => {
       <div style={{ marginBottom: '2rem' }}>
         <Card>
           <h2 style={{ marginBottom: '1rem' }}>配置选项</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1rem' }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              gap: '1rem',
+              marginBottom: '1rem',
+            }}
+          >
             <div>
               <Input
                 label="项目数量"
@@ -151,90 +150,108 @@ export const VirtualScrollExample: React.FC = () => {
               />
             </div>
           </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <Button onClick={handleToggleView}>
-            {useGrid ? '切换到列表视图' : '切换到网格视图'}
-          </Button>
-        </div>
-        <div style={{ fontSize: '0.875rem', color: '#666' }}>
-          <strong>当前状态：</strong>
-          总项目数: {items.length} |
-          过滤后: {filteredItems.length} |
-          视图模式: {useGrid ? '网格' : '列表'}
-        </div>
-      </Card>
+          <div style={{ marginBottom: '1rem' }}>
+            <Button onClick={handleToggleView}>
+              {useGrid ? '切换到列表视图' : '切换到网格视图'}
+            </Button>
+          </div>
+          <div style={{ fontSize: '0.875rem', color: '#666' }}>
+            <strong>当前状态：</strong>
+            总项目数: {items.length} | 过滤后: {filteredItems.length} | 视图模式:{' '}
+            {useGrid ? '网格' : '列表'}
+          </div>
+        </Card>
       </div>
 
       <div style={{ marginBottom: '2rem' }}>
         <Card>
           <h2 style={{ marginBottom: '1rem' }}>虚拟滚动列表</h2>
-        <div style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#666' }}>
-          该列表使用虚拟滚动技术，只渲染可见区域的项目，大幅提升性能。
-          即使有 {filteredItems.length} 个项目，也只渲染约 {Math.ceil(containerHeight / 50)} 个可见项目。
-        </div>
-        {useGrid ? (
-          <VirtualGrid
-            items={filteredItems}
-            itemHeight={120}
-            itemWidth={200}
-            containerHeight={containerHeight}
-            containerWidth={800}
-            renderItem={renderGridItem}
-            gap={10}
-          />
-        ) : (
-          <VirtualList
-            items={filteredItems}
-            itemHeight={100}
-            containerHeight={containerHeight}
-            renderItem={renderItem}
-            overscan={5}
-          />
-        )}
-      </Card>
+          <div style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#666' }}>
+            该列表使用虚拟滚动技术，只渲染可见区域的项目，大幅提升性能。 即使有{' '}
+            {filteredItems.length} 个项目，也只渲染约 {Math.ceil(containerHeight / 50)} 个可见项目。
+          </div>
+          {useGrid ? (
+            <VirtualGrid
+              items={filteredItems}
+              itemHeight={120}
+              itemWidth={200}
+              containerHeight={containerHeight}
+              containerWidth={800}
+              renderItem={renderGridItem}
+              gap={10}
+            />
+          ) : (
+            <VirtualList
+              items={filteredItems}
+              itemHeight={100}
+              containerHeight={containerHeight}
+              renderItem={renderItem}
+              overscan={5}
+            />
+          )}
+        </Card>
       </div>
 
       <div style={{ marginBottom: '2rem' }}>
         <Card>
           <h2 style={{ marginBottom: '1rem' }}>性能对比</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
-          <div style={{ padding: '1rem', backgroundColor: '#f9f9f9', borderRadius: '0.25rem' }}>
-            <h3 style={{ marginBottom: '0.5rem' }}>传统列表</h3>
-            <ul style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
-              <li>渲染所有 {filteredItems.length} 个项目</li>
-              <li>DOM 节点数: {filteredItems.length}</li>
-              <li>内存占用: ~{filteredItems.length * 10}KB</li>
-              <li>首次渲染: ~{filteredItems.length * 0.5}ms</li>
-              <li>滚动性能: 卡顿</li>
-            </ul>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              gap: '1rem',
+            }}
+          >
+            <div style={{ padding: '1rem', backgroundColor: '#f9f9f9', borderRadius: '0.25rem' }}>
+              <h3 style={{ marginBottom: '0.5rem' }}>传统列表</h3>
+              <ul style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
+                <li>渲染所有 {filteredItems.length} 个项目</li>
+                <li>DOM 节点数: {filteredItems.length}</li>
+                <li>内存占用: ~{filteredItems.length * 10}KB</li>
+                <li>首次渲染: ~{filteredItems.length * 0.5}ms</li>
+                <li>滚动性能: 卡顿</li>
+              </ul>
+            </div>
+            <div style={{ padding: '1rem', backgroundColor: '#e8f5e9', borderRadius: '0.25rem' }}>
+              <h3 style={{ marginBottom: '0.5rem' }}>虚拟滚动列表</h3>
+              <ul style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
+                <li>只渲染可见项目</li>
+                <li>DOM 节点数: ~{Math.ceil(containerHeight / 50)}</li>
+                <li>内存占用: ~{Math.ceil(containerHeight / 50) * 10}KB</li>
+                <li>首次渲染: ~{Math.ceil(containerHeight / 50) * 0.5}ms</li>
+                <li>滚动性能: 流畅</li>
+              </ul>
+            </div>
           </div>
-          <div style={{ padding: '1rem', backgroundColor: '#e8f5e9', borderRadius: '0.25rem' }}>
-            <h3 style={{ marginBottom: '0.5rem' }}>虚拟滚动列表</h3>
-            <ul style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
-              <li>只渲染可见项目</li>
-              <li>DOM 节点数: ~{Math.ceil(containerHeight / 50)}</li>
-              <li>内存占用: ~{Math.ceil(containerHeight / 50) * 10}KB</li>
-              <li>首次渲染: ~{Math.ceil(containerHeight / 50) * 0.5}ms</li>
-              <li>滚动性能: 流畅</li>
-            </ul>
+          <div
+            style={{
+              marginTop: '1rem',
+              padding: '1rem',
+              backgroundColor: '#fff3e0',
+              borderRadius: '0.25rem',
+            }}
+          >
+            <h3 style={{ marginBottom: '0.5rem' }}>性能提升</h3>
+            <p style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
+              <strong>DOM 节点减少:</strong>{' '}
+              {((1 - Math.ceil(containerHeight / 50) / filteredItems.length) * 100).toFixed(1)}%
+              <br />
+              <strong>内存占用减少:</strong>{' '}
+              {((1 - Math.ceil(containerHeight / 50) / filteredItems.length) * 100).toFixed(1)}%
+              <br />
+              <strong>渲染速度提升:</strong>{' '}
+              {(filteredItems.length / Math.ceil(containerHeight / 50)).toFixed(1)}x
+            </p>
           </div>
-        </div>
-        <div style={{ marginTop: '1rem', padding: '1rem', backgroundColor: '#fff3e0', borderRadius: '0.25rem' }}>
-          <h3 style={{ marginBottom: '0.5rem' }}>性能提升</h3>
-          <p style={{ fontSize: '0.875rem', lineHeight: '1.6' }}>
-            <strong>DOM 节点减少:</strong> {((1 - Math.ceil(containerHeight / 50) / filteredItems.length) * 100).toFixed(1)}%<br />
-            <strong>内存占用减少:</strong> {((1 - Math.ceil(containerHeight / 50) / filteredItems.length) * 100).toFixed(1)}%<br />
-            <strong>渲染速度提升:</strong> {(filteredItems.length / Math.ceil(containerHeight / 50)).toFixed(1)}x
-          </p>
-        </div>
-      </Card>
+        </Card>
       </div>
 
       <Card>
         <h2 style={{ marginBottom: '1rem' }}>虚拟滚动优势</h2>
         <ul style={{ lineHeight: '1.8' }}>
           <li>
-            <strong>大幅减少 DOM 节点数量：</strong> 只渲染可见区域的项目，即使有 100,000 个项目，也只渲染约 20 个可见项目
+            <strong>大幅减少 DOM 节点数量：</strong> 只渲染可见区域的项目，即使有 100,000
+            个项目，也只渲染约 20 个可见项目
           </li>
           <li>
             <strong>降低内存占用：</strong> 减少不必要的 DOM 节点和 React 组件实例，显著降低内存使用

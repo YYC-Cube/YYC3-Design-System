@@ -1,8 +1,8 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button';
-import { ThemeProvider } from '../theme/ThemeProvider';
-import { useTheme } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
+import { useTheme } from '../context/ThemeContext';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -94,7 +94,7 @@ export const Disabled: Story = {
 
 export const LiveTokens = () => {
   const { setTokens, tokens } = useTheme();
-  
+
   const handleColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const patch = {
       color: {

@@ -8,14 +8,12 @@
  */
 
 import * as React from 'react';
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import '@testing-library/jest-dom';
 import { AITokenGenerator } from './AITokenGenerator';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 const renderWithTheme = (component: React.ReactElement) => {
   return render(<ThemeProvider>{component}</ThemeProvider>);
@@ -65,23 +63,23 @@ describe('AITokenGenerator', () => {
   it('应该调用 onGenerate 回调', () => {
     const onGenerate = jest.fn();
     renderWithTheme(<AITokenGenerator onGenerate={onGenerate} />);
-    
+
     const generateButton = screen.getByText('生成令牌');
     fireEvent.click(generateButton);
-    
+
     expect(onGenerate).toHaveBeenCalled();
   });
 
   it('应该支持选择色彩和谐', () => {
     renderWithTheme(<AITokenGenerator />);
-    
+
     const harmonyButton = screen.getByText('互补色');
     fireEvent.click(harmonyButton);
   });
 
   it('应该支持切换包含色相', () => {
     renderWithTheme(<AITokenGenerator />);
-    
+
     const shadesCheckbox = screen.getByText('包含色相').querySelector('input[type="checkbox"]');
     if (shadesCheckbox) {
       fireEvent.click(shadesCheckbox);
@@ -90,7 +88,7 @@ describe('AITokenGenerator', () => {
 
   it('应该支持切换包含色调', () => {
     renderWithTheme(<AITokenGenerator />);
-    
+
     const tintsCheckbox = screen.getByText('包含色调').querySelector('input[type="checkbox"]');
     if (tintsCheckbox) {
       fireEvent.click(tintsCheckbox);

@@ -40,7 +40,8 @@ export class ConsistencyChecker {
   };
 
   private namingPatterns = {
-    color: /^(color|bg|text|border|ring|shadow|foreground|background|destructive|primary|secondary|muted|accent|card|popover|input|ring)/,
+    color:
+      /^(color|bg|text|border|ring|shadow|foreground|background|destructive|primary|secondary|muted|accent|card|popover|input|ring)/,
     spacing: /^(padding|margin|gap|space|width|height|max|min)/,
     typography: /^(font|line|letter|word)/,
     animation: /^(animation|transition|duration|easing|delay|timing|function|keyframes)/,
@@ -69,8 +70,8 @@ export class ConsistencyChecker {
 
   private checkColorConsistency(tokens: DesignTokens): ConsistencyIssue[] {
     const issues: ConsistencyIssue[] = [];
-    const colorKeys = Object.keys(tokens).filter(key => 
-      key.includes('color') || key.includes('bg') || key.includes('text')
+    const colorKeys = Object.keys(tokens).filter(
+      (key) => key.includes('color') || key.includes('bg') || key.includes('text')
     );
 
     if (colorKeys.length === 0) {
@@ -115,8 +116,12 @@ export class ConsistencyChecker {
 
   private checkSpacingConsistency(tokens: DesignTokens): ConsistencyIssue[] {
     const issues: ConsistencyIssue[] = [];
-    const spacingKeys = Object.keys(tokens).filter(key => 
-      key.includes('spacing') || key.includes('gap') || key.includes('padding') || key.includes('margin')
+    const spacingKeys = Object.keys(tokens).filter(
+      (key) =>
+        key.includes('spacing') ||
+        key.includes('gap') ||
+        key.includes('padding') ||
+        key.includes('margin')
     );
 
     if (spacingKeys.length === 0) {
@@ -129,11 +134,14 @@ export class ConsistencyChecker {
       });
     }
 
-    const spacingValues = spacingKeys.map(key => {
-      const value = tokens[key];
-      const numValue = typeof value === 'string' ? parseFloat(value) : (typeof value === 'number' ? value : NaN);
-      return numValue;
-    }).filter(v => !isNaN(v));
+    const spacingValues = spacingKeys
+      .map((key) => {
+        const value = tokens[key];
+        const numValue =
+          typeof value === 'string' ? parseFloat(value) : typeof value === 'number' ? value : NaN;
+        return numValue;
+      })
+      .filter((v) => !isNaN(v));
 
     const uniqueValues = new Set(spacingValues);
     if (spacingValues.length > 0 && uniqueValues.size > spacingValues.length * 0.8) {
@@ -151,8 +159,8 @@ export class ConsistencyChecker {
 
   private checkTypographyConsistency(tokens: DesignTokens): ConsistencyIssue[] {
     const issues: ConsistencyIssue[] = [];
-    const fontKeys = Object.keys(tokens).filter(key => 
-      key.includes('font') || key.includes('line') || key.includes('letter')
+    const fontKeys = Object.keys(tokens).filter(
+      (key) => key.includes('font') || key.includes('line') || key.includes('letter')
     );
 
     if (fontKeys.length === 0) {
@@ -165,7 +173,7 @@ export class ConsistencyChecker {
       });
     }
 
-    const fontSizeKeys = fontKeys.filter(key => key.includes('font-size'));
+    const fontSizeKeys = fontKeys.filter((key) => key.includes('font-size'));
     if (fontSizeKeys.length === 0) {
       issues.push({
         id: 'typography-002',
@@ -182,14 +190,16 @@ export class ConsistencyChecker {
   private checkAccessibility(tokens: DesignTokens): ConsistencyIssue[] {
     const issues: ConsistencyIssue[] = [];
 
-    const textColors = Object.keys(tokens).filter(key => key.includes('text'));
-    const bgColors = Object.keys(tokens).filter(key => key.includes('bg') || key.includes('background'));
+    const textColors = Object.keys(tokens).filter((key) => key.includes('text'));
+    const bgColors = Object.keys(tokens).filter(
+      (key) => key.includes('bg') || key.includes('background')
+    );
 
-    textColors.forEach(textKey => {
-      bgColors.forEach(bgKey => {
+    textColors.forEach((textKey) => {
+      bgColors.forEach((bgKey) => {
         const textColor = tokens[textKey];
         const bgColor = tokens[bgKey];
-        
+
         if (typeof textColor === 'string' && typeof bgColor === 'string') {
           const contrast = this.calculateContrastRatio(textColor, bgColor);
           if (contrast < this.minContrastRatios.normal) {
@@ -212,9 +222,11 @@ export class ConsistencyChecker {
   private checkNamingConvention(tokens: DesignTokens): ConsistencyIssue[] {
     const issues: ConsistencyIssue[] = [];
 
-    Object.keys(tokens).forEach(key => {
-      const hasValidPrefix = Object.values(this.namingPatterns).some(pattern => pattern.test(key));
-      
+    Object.keys(tokens).forEach((key) => {
+      const hasValidPrefix = Object.values(this.namingPatterns).some((pattern) =>
+        pattern.test(key)
+      );
+
       if (!hasValidPrefix) {
         issues.push({
           id: 'naming-001',
@@ -227,7 +239,7 @@ export class ConsistencyChecker {
       }
     });
 
-    const hasCamelCase = Object.keys(tokens).some(key => /[A-Z]/.test(key));
+    const hasCamelCase = Object.keys(tokens).some((key) => /[A-Z]/.test(key));
     if (hasCamelCase) {
       issues.push({
         id: 'naming-002',
@@ -250,7 +262,7 @@ export class ConsistencyChecker {
       naming: { score: 100, issues: 0 },
     };
 
-    issues.forEach(issue => {
+    issues.forEach((issue) => {
       const category = categories[issue.category];
       if (category) {
         category.issues++;
@@ -264,7 +276,7 @@ export class ConsistencyChecker {
       }
     });
 
-    Object.keys(categories).forEach(key => {
+    Object.keys(categories).forEach((key) => {
       const category = categories[key as keyof typeof categories];
       if (category) {
         category.score = Math.max(0, category.score);
@@ -275,15 +287,15 @@ export class ConsistencyChecker {
   }
 
   private calculateOverallScore(categories: ConsistencyReport['categories']): number {
-    const scores = Object.values(categories).map(c => c.score);
+    const scores = Object.values(categories).map((c) => c.score);
     return Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
   }
 
   private generateRecommendations(issues: ConsistencyIssue[]): string[] {
     const recommendations: string[] = [];
 
-    const errorCount = issues.filter(i => i.severity === 'error').length;
-    const warningCount = issues.filter(i => i.severity === 'warning').length;
+    const errorCount = issues.filter((i) => i.severity === 'error').length;
+    const warningCount = issues.filter((i) => i.severity === 'warning').length;
 
     if (errorCount > 0) {
       recommendations.push(`优先修复 ${errorCount} 个严重问题以确保设计系统可用性`);
@@ -293,17 +305,17 @@ export class ConsistencyChecker {
       recommendations.push(`解决 ${warningCount} 个警告问题以提高设计系统质量`);
     }
 
-    const hasColorIssues = issues.some(i => i.category === 'color');
+    const hasColorIssues = issues.some((i) => i.category === 'color');
     if (hasColorIssues) {
       recommendations.push('建立完整的颜色系统，包括主色、辅助色、中性色等');
     }
 
-    const hasSpacingIssues = issues.some(i => i.category === 'spacing');
+    const hasSpacingIssues = issues.some((i) => i.category === 'spacing');
     if (hasSpacingIssues) {
       recommendations.push('使用一致的间距比例（如 4px、8px、16px 等）');
     }
 
-    const hasAccessibilityIssues = issues.some(i => i.category === 'accessibility');
+    const hasAccessibilityIssues = issues.some((i) => i.category === 'accessibility');
     if (hasAccessibilityIssues) {
       recommendations.push('确保所有文本颜色与背景色对比度符合 WCAG 标准');
     }
@@ -325,8 +337,7 @@ export class ConsistencyChecker {
     const g = parseInt(hex.substr(2, 2), 16) / 255;
     const b = parseInt(hex.substr(4, 2), 16) / 255;
 
-    const toLinear = (c: number) => 
-      c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    const toLinear = (c: number) => (c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
 
     const R = toLinear(r);
     const G = toLinear(g);

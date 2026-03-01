@@ -8,11 +8,11 @@
  */
 
 import * as React from 'react';
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { AIBestPractices } from './AIBestPractices';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 const renderWithTheme = (component: React.ReactElement) => {
   return render(<ThemeProvider>{component}</ThemeProvider>);
@@ -36,7 +36,7 @@ describe('AIBestPractices', () => {
 
   it('应该支持点击生成建议按钮', () => {
     renderWithTheme(<AIBestPractices />);
-    
+
     const generateButton = screen.getByText('生成建议');
     fireEvent.click(generateButton);
   });

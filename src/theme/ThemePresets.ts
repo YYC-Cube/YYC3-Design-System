@@ -386,11 +386,11 @@ export const themePresets: ThemePreset[] = [
 ];
 
 export const getPresetById = (id: string): ThemePreset | undefined => {
-  return themePresets.find(preset => preset.id === id);
+  return themePresets.find((preset) => preset.id === id);
 };
 
 export const getPresetByName = (name: string): ThemePreset | undefined => {
-  return themePresets.find(preset => preset.name.toLowerCase() === name.toLowerCase());
+  return themePresets.find((preset) => preset.name.toLowerCase() === name.toLowerCase());
 };
 
 export const getAllPresets = (): ThemePreset[] => {
@@ -417,7 +417,7 @@ export const mergePresetTokens = (
   overrides: Partial<DesignTokens>
 ): DesignTokens => {
   const merged: DesignTokens = { ...basePreset.tokens };
-  Object.keys(overrides).forEach(key => {
+  Object.keys(overrides).forEach((key) => {
     const value = overrides[key];
     if (value !== undefined) {
       merged[key] = value;

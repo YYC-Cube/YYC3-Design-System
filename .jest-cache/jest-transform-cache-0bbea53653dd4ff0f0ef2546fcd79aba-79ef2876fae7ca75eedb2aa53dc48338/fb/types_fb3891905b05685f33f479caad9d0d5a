@@ -1,0 +1,60 @@
+b919690332d6414f749fba6ca7ff51a8
+"use strict";
+
+/* istanbul ignore next */
+function cov_27shv9cp3k() {
+  var path = "/Users/yanyu/Downloads/yyc3-Design-System/src/performance/types.ts";
+  var hash = "86cb0ee15191e626c2bd8875dc8b8940a745effa";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/yanyu/Downloads/yyc3-Design-System/src/performance/types.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {},
+    s: {
+      "0": 0
+    },
+    f: {},
+    b: {},
+    inputSourceMap: {
+      file: "/Users/yanyu/Downloads/yyc3-Design-System/src/performance/types.ts",
+      mappings: "",
+      names: [],
+      sources: ["/Users/yanyu/Downloads/yyc3-Design-System/src/performance/types.ts"],
+      sourcesContent: ["export interface PerformanceMetrics {\n  FCP?: number;\n  LCP?: number;\n  FID?: number;\n  CLS?: number;\n  TTFB?: number;\n}\n\nexport interface PerformanceReport {\n  metrics: PerformanceMetrics;\n  timestamp: number;\n  url: string;\n}\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "86cb0ee15191e626c2bd8875dc8b8940a745effa"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_27shv9cp3k = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_27shv9cp3k();
+cov_27shv9cp3k().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL3lhbnl1L0Rvd25sb2Fkcy95eWMzLURlc2lnbi1TeXN0ZW0vc3JjL3BlcmZvcm1hbmNlL3R5cGVzLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBpbnRlcmZhY2UgUGVyZm9ybWFuY2VNZXRyaWNzIHtcbiAgRkNQPzogbnVtYmVyO1xuICBMQ1A/OiBudW1iZXI7XG4gIEZJRD86IG51bWJlcjtcbiAgQ0xTPzogbnVtYmVyO1xuICBUVEZCPzogbnVtYmVyO1xufVxuXG5leHBvcnQgaW50ZXJmYWNlIFBlcmZvcm1hbmNlUmVwb3J0IHtcbiAgbWV0cmljczogUGVyZm9ybWFuY2VNZXRyaWNzO1xuICB0aW1lc3RhbXA6IG51bWJlcjtcbiAgdXJsOiBzdHJpbmc7XG59XG4iXSwibWFwcGluZ3MiOiIiLCJpZ25vcmVMaXN0IjpbXX0=

@@ -1,16 +1,22 @@
 declare module 'culori' {
   type ColorMode = 'rgb' | 'hsl' | 'lab' | 'lch' | 'oklch' | 'hsv' | 'hwb' | 'cmyk' | 'xyz' | 'yiq';
-  
+
   type RGBColor = { r: number; g: number; b: number; mode?: 'rgb' };
   type HSLColor = { h: number; s: number; l: number; mode?: 'hsl' };
   type LABColor = { l: number; a: number; b: number; mode?: 'lab' };
   type LCHColor = { l: number; c: number; h: number; mode?: 'lch' };
   type OKLCHColor = { l: number; c: number; h: number; mode?: 'oklch' };
-  
-  type Color = RGBColor | HSLColor | LABColor | LCHColor | OKLCHColor | {
-    mode: ColorMode;
-    [key: string]: number | string;
-  };
+
+  type Color =
+    | RGBColor
+    | HSLColor
+    | LABColor
+    | LCHColor
+    | OKLCHColor
+    | {
+        mode: ColorMode;
+        [key: string]: number | string;
+      };
 
   export function converter(mode: ColorMode): (color: Color | string) => Color | null;
   export function formatHex(color: Color): string;

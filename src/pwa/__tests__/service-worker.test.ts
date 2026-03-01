@@ -29,9 +29,9 @@ describe('Service Worker Module', () => {
         cacheableResponse: {
           statuses: [0, 200],
           headers: {
-            'Content-Type': 'application/json'
-          }
-        }
+            'Content-Type': 'application/json',
+          },
+        },
       };
 
       expect(strategy.name).toBe('test-strategy');
@@ -47,14 +47,14 @@ describe('Service Worker Module', () => {
         'network-first',
         'cache-only',
         'network-only',
-        'stale-while-revalidate'
+        'stale-while-revalidate',
       ];
 
-      strategies.forEach(strategy => {
+      strategies.forEach((strategy) => {
         const cacheStrategy: CacheStrategy = {
           name: `test-${strategy}`,
           urlPattern: '/test/*',
-          strategy: strategy
+          strategy: strategy,
         };
 
         expect(cacheStrategy.strategy).toBeDefined();
@@ -65,7 +65,7 @@ describe('Service Worker Module', () => {
       const minimalStrategy = {
         name: 'minimal',
         urlPattern: '/minimal/*',
-        strategy: 'network-first'
+        strategy: 'network-first',
       };
 
       expect(minimalStrategy.name).toBe('minimal');
@@ -77,7 +77,7 @@ describe('Service Worker Module', () => {
   describe('Service Worker生命周期', () => {
     it('应该处理install事件', () => {
       const mockEvent = {
-        waitUntil: jest.fn()
+        waitUntil: jest.fn(),
       };
 
       expect(mockEvent.waitUntil).toBeDefined();
@@ -85,7 +85,7 @@ describe('Service Worker Module', () => {
 
     it('应该处理activate事件', () => {
       const mockEvent = {
-        waitUntil: jest.fn()
+        waitUntil: jest.fn(),
       };
 
       expect(mockEvent.waitUntil).toBeDefined();
@@ -94,7 +94,7 @@ describe('Service Worker Module', () => {
     it('应该处理fetch事件', () => {
       const mockEvent = {
         request: { url: 'https://example.com/test' },
-        respondWith: jest.fn()
+        respondWith: jest.fn(),
       };
 
       expect(mockEvent.request).toBeDefined();
@@ -106,7 +106,7 @@ describe('Service Worker Module', () => {
     it('应该实现cache-first策略', async () => {
       const mockCache = {
         match: jest.fn(),
-        put: jest.fn()
+        put: jest.fn(),
       };
 
       mockCache.match.mockResolvedValueOnce(new Response('cached', { status: 200 }));
@@ -119,9 +119,7 @@ describe('Service Worker Module', () => {
     });
 
     it('应该实现network-first策略', async () => {
-      const mockFetch = jest.fn().mockResolvedValueOnce(
-        new Response('network', { status: 200 })
-      );
+      const mockFetch = jest.fn().mockResolvedValueOnce(new Response('network', { status: 200 }));
 
       const request = new Request('https://example.com/api/data');
       const response = await mockFetch(request);
@@ -133,7 +131,7 @@ describe('Service Worker Module', () => {
     it('应该实现stale-while-revalidate策略', async () => {
       const mockCache = {
         match: jest.fn(),
-        put: jest.fn()
+        put: jest.fn(),
       };
 
       mockCache.match.mockResolvedValueOnce(new Response('stale', { status: 200 }));
@@ -152,17 +150,17 @@ describe('Service Worker Module', () => {
       const cacheEntry = {
         response: new Response('data'),
         timestamp: now - 3600001,
-        maxAge: 3600000
+        maxAge: 3600000,
       };
 
-      const isExpired = (now - cacheEntry.timestamp) > cacheEntry.maxAge;
+      const isExpired = now - cacheEntry.timestamp > cacheEntry.maxAge;
       expect(isExpired).toBe(true);
     });
 
     it('应该支持maxEntries限制', () => {
       const cacheEntries = Array.from({ length: 150 }, (_, i) => ({
         url: `/api/data/${i}`,
-        data: `data-${i}`
+        data: `data-${i}`,
       }));
 
       const maxEntries = 100;
@@ -189,7 +187,7 @@ describe('Service Worker Module', () => {
     it('应该正确注册Service Worker', () => {
       const mockRegistration = {
         scope: '/',
-        updateViaCache: '/sw.js'
+        updateViaCache: '/sw.js',
       };
 
       expect(mockRegistration.scope).toBe('/');
@@ -200,8 +198,8 @@ describe('Service Worker Module', () => {
       const registration = {
         active: {
           state: 'activated',
-          scriptURL: '/sw.js'
-        }
+          scriptURL: '/sw.js',
+        },
       };
 
       expect(registration.active.state).toBe('activated');
@@ -217,17 +215,12 @@ describe('Service Worker Module', () => {
 
   describe('离线支持', () => {
     it('应该缓存离线资源', () => {
-      const offlineResources = [
-        '/index.html',
-        '/manifest.json',
-        '/styles.css',
-        '/app.js'
-      ];
+      const offlineResources = ['/index.html', '/manifest.json', '/styles.css', '/app.js'];
 
       const cacheStrategy = {
         name: 'offline-assets',
-        urlPattern: offlineResources.map(r => r),
-        strategy: 'cache-only'
+        urlPattern: offlineResources.map((r) => r),
+        strategy: 'cache-only',
       };
 
       expect(cacheStrategy.urlPattern.length).toBe(offlineResources.length);
@@ -247,8 +240,8 @@ describe('Service Worker Module', () => {
         body: 'This is a test notification',
         icon: '/icon.png',
         data: {
-          url: '/details'
-        }
+          url: '/details',
+        },
       };
 
       expect(notification.title).toBe('Test Notification');
@@ -258,7 +251,7 @@ describe('Service Worker Module', () => {
 
     it('应该支持通知权限', () => {
       const mockNotification = {
-        requestPermission: jest.fn().mockResolvedValue('granted')
+        requestPermission: jest.fn().mockResolvedValue('granted'),
       };
 
       expect(mockNotification.requestPermission).toBeDefined();
@@ -277,7 +270,7 @@ describe('Service Worker Module', () => {
     it('应该提示用户更新', () => {
       const updateAvailable = {
         newVersion: '1.1.0',
-        message: 'New version available'
+        message: 'New version available',
       };
 
       expect(updateAvailable.newVersion).toBe('1.1.0');
@@ -290,10 +283,10 @@ describe('Service Worker Module', () => {
       const responses = [
         { status: 200, statusText: 'OK' },
         { status: 404, statusText: 'Not Found' },
-        { status: 500, statusText: 'Internal Server Error' }
+        { status: 500, statusText: 'Internal Server Error' },
       ];
 
-      responses.forEach(response => {
+      responses.forEach((response) => {
         expect(response.status).toBeDefined();
         expect(response.statusText).toBeDefined();
       });
@@ -303,7 +296,7 @@ describe('Service Worker Module', () => {
       const headers = new Headers({
         'Content-Type': 'application/json',
         'Cache-Control': 'max-age=3600',
-        'ETag': 'abc123'
+        ETag: 'abc123',
       });
 
       expect(headers.get('Content-Type')).toBe('application/json');
@@ -314,18 +307,13 @@ describe('Service Worker Module', () => {
 
   describe('性能优化', () => {
     it('应该支持预缓存关键资源', () => {
-      const criticalResources = [
-        '/index.html',
-        '/main.js',
-        '/styles.css',
-        '/logo.png'
-      ];
+      const criticalResources = ['/index.html', '/main.js', '/styles.css', '/logo.png'];
 
       const preCacheStrategy = {
         name: 'precache',
         urlPattern: criticalResources,
         strategy: 'cache-first',
-        maxAge: Infinity
+        maxAge: Infinity,
       };
 
       expect(preCacheStrategy.urlPattern.length).toBe(criticalResources.length);
@@ -335,7 +323,7 @@ describe('Service Worker Module', () => {
     it('应该支持后台同步', () => {
       const syncConfig = {
         url: '/api/sync',
-        interval: 300000
+        interval: 300000,
       };
 
       expect(syncConfig.url).toBe('/api/sync');

@@ -8,10 +8,21 @@
  */
 
 import * as React from 'react';
-import { render, fireEvent, waitFor, cleanup, act } from '@testing-library/react'
+import { render, fireEvent, waitFor, cleanup, act } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
-import { CSPProvider, useCSP, CSPScript, CSPStyle, CSPImg, createStrictCSPConfig, createModerateCSPConfig, createPermissiveCSPConfig, generateNonce, withCSP } from '../CSPProvider';
+import {
+  CSPProvider,
+  useCSP,
+  CSPScript,
+  CSPStyle,
+  CSPImg,
+  createStrictCSPConfig,
+  createModerateCSPConfig,
+  createPermissiveCSPConfig,
+  generateNonce,
+  withCSP,
+} from '../CSPProvider';
 
 describe('CSP Provider Module', () => {
   beforeEach(() => {
@@ -43,7 +54,7 @@ describe('CSP Provider Module', () => {
     it('应该支持自定义配置', () => {
       const customConfig = {
         'script-src': "'self'",
-        'style-src': "'self' 'unsafe-inline'"
+        'style-src': "'self' 'unsafe-inline'",
       };
 
       const TestComponent = () => {
@@ -73,9 +84,7 @@ describe('CSP Provider Module', () => {
       const TestComponent = () => {
         const { nonce } = useCSP();
 
-        return (
-          <div data-testid="nonce">{nonce}</div>
-        );
+        return <div data-testid="nonce">{nonce}</div>;
       };
 
       render(
@@ -92,9 +101,7 @@ describe('CSP Provider Module', () => {
       const TestComponent = () => {
         const { nonce } = useCSP();
 
-        return (
-          <div data-testid="nonce">{nonce || 'no nonce'}</div>
-        );
+        return <div data-testid="nonce">{nonce || 'no nonce'}</div>;
       };
 
       render(
@@ -111,9 +118,7 @@ describe('CSP Provider Module', () => {
       const TestComponent = () => {
         const { enabled } = useCSP();
 
-        return (
-          <div data-testid="enabled">{enabled ? 'enabled' : 'disabled'}</div>
-        );
+        return <div data-testid="enabled">{enabled ? 'enabled' : 'disabled'}</div>;
       };
 
       render(
@@ -132,9 +137,7 @@ describe('CSP Provider Module', () => {
       const TestComponent = () => {
         const { config } = useCSP();
 
-        return (
-          <div data-testid="config">{config.reportOnly ? 'report-only' : 'enforce'}</div>
-        );
+        return <div data-testid="config">{config.reportOnly ? 'report-only' : 'enforce'}</div>;
       };
 
       render(
@@ -150,7 +153,7 @@ describe('CSP Provider Module', () => {
 
     it('应该合并默认配置和自定义配置', () => {
       const customConfig = {
-        'script-src': "'self'"
+        'script-src': "'self'",
       };
 
       const TestComponent = () => {
@@ -234,7 +237,9 @@ describe('CSP Provider Module', () => {
 
     it('应该在report-only模式下使用正确的meta标签', () => {
       const metaTagExists = () => {
-        return document.querySelector('meta[http-equiv="Content-Security-Policy-Report-Only"]') !== null;
+        return (
+          document.querySelector('meta[http-equiv="Content-Security-Policy-Report-Only"]') !== null
+        );
       };
 
       render(
@@ -294,7 +299,9 @@ describe('CSP Provider Module', () => {
 
         return (
           <div>
-            <div data-testid="has-update">{typeof csp.updateConfig === 'function' ? 'has-update' : 'no-update'}</div>
+            <div data-testid="has-update">
+              {typeof csp.updateConfig === 'function' ? 'has-update' : 'no-update'}
+            </div>
           </div>
         );
       };
@@ -321,7 +328,9 @@ describe('CSP Provider Module', () => {
         return (
           <div>
             <div data-testid="updated">{updated ? 'updated' : 'not-updated'}</div>
-            <button data-testid="update" onClick={handleUpdate}>Update</button>
+            <button data-testid="update" onClick={handleUpdate}>
+              Update
+            </button>
           </div>
         );
       };
@@ -351,9 +360,7 @@ describe('CSP Provider Module', () => {
       const TestComponent = () => {
         return (
           <div>
-            <CSPScript nonce={customNonce}>
-              console.log(&quot;test&quot;);
-            </CSPScript>
+            <CSPScript nonce={customNonce}>console.log(&quot;test&quot;);</CSPScript>
           </div>
         );
       };
@@ -370,11 +377,7 @@ describe('CSP Provider Module', () => {
 
     it('应该在禁用时正常渲染', () => {
       const TestComponent = () => {
-        return (
-          <CSPScript>
-            console.log(&quot;test&quot;);
-          </CSPScript>
-        );
+        return <CSPScript>console.log(&quot;test&quot;);</CSPScript>;
       };
 
       render(
@@ -395,9 +398,7 @@ describe('CSP Provider Module', () => {
       const TestComponent = () => {
         return (
           <div>
-            <CSPStyle nonce={customNonce}>
-              {`body { color: red; }`}
-            </CSPStyle>
+            <CSPStyle nonce={customNonce}>{`body { color: red; }`}</CSPStyle>
           </div>
         );
       };
@@ -414,11 +415,7 @@ describe('CSP Provider Module', () => {
 
     it('应该在禁用时正常渲染', () => {
       const TestComponent = () => {
-        return (
-          <CSPStyle>
-            {`body { color: red; }`}
-          </CSPStyle>
-        );
+        return <CSPStyle>{`body { color: red; }`}</CSPStyle>;
       };
 
       render(
@@ -439,9 +436,7 @@ describe('CSP Provider Module', () => {
       const TestComponent = () => {
         const { config } = useCSP();
 
-        return (
-          <div data-testid="config">{config.onViolation ? 'has-handler' : 'no-handler'}</div>
-        );
+        return <div data-testid="config">{config.onViolation ? 'has-handler' : 'no-handler'}</div>;
       };
 
       render(
@@ -536,7 +531,7 @@ describe('CSP Provider Module', () => {
     it('应该生成基本的CSP标签', () => {
       const config = {
         'default-src': "'self'",
-        'script-src': "'self'"
+        'script-src': "'self'",
       };
 
       const TestComponent = () => {
@@ -557,7 +552,7 @@ describe('CSP Provider Module', () => {
       const config = {
         'default-src': "'self'",
         'upgrade-insecure-requests': true,
-        'block-all-mixed-content': true
+        'block-all-mixed-content': true,
       };
 
       const TestComponent = () => {
@@ -577,7 +572,7 @@ describe('CSP Provider Module', () => {
     it('应该处理undefined值', () => {
       const config = {
         'default-src': "'self'",
-        'script-src': undefined
+        'script-src': undefined,
       };
 
       const TestComponent = () => {
@@ -598,7 +593,7 @@ describe('CSP Provider Module', () => {
   describe('isURLAllowed', () => {
     it('应该允许self URL', () => {
       const config = {
-        'img-src': "'self'"
+        'img-src': "'self'",
       };
 
       const TestComponent = () => {
@@ -621,7 +616,7 @@ describe('CSP Provider Module', () => {
 
     it('应该允许data URL', () => {
       const config = {
-        'img-src': "'self' data:"
+        'img-src': "'self' data:",
       };
 
       const TestComponent = () => {
@@ -644,7 +639,7 @@ describe('CSP Provider Module', () => {
 
     it('应该允许https URL', () => {
       const config = {
-        'img-src': "'self' https:"
+        'img-src': "'self' https:",
       };
 
       const TestComponent = () => {
@@ -667,7 +662,7 @@ describe('CSP Provider Module', () => {
 
     it('应该允许http URL', () => {
       const config = {
-        'img-src': "'self' http:"
+        'img-src': "'self' http:",
       };
 
       const TestComponent = () => {
@@ -712,16 +707,18 @@ describe('CSP Provider Module', () => {
 
         const handleUpdate = async () => {
           await updateConfig({ 'script-src': "'self'" });
-          setUpdateCount(prev => prev + 1);
+          setUpdateCount((prev) => prev + 1);
           await updateConfig({ 'style-src': "'self'" });
-          setUpdateCount(prev => prev + 1);
+          setUpdateCount((prev) => prev + 1);
         };
 
         return (
           <div>
             <div data-testid="update-count">{updateCount}</div>
             <div data-testid="script-src">{config['script-src']}</div>
-            <button data-testid="update" onClick={handleUpdate}>Update</button>
+            <button data-testid="update" onClick={handleUpdate}>
+              Update
+            </button>
           </div>
         );
       };
@@ -938,7 +935,9 @@ describe('CSP Provider Module', () => {
           <div>
             <div data-testid="enabled">{csp.enabled ? 'enabled' : 'disabled'}</div>
             <div data-testid="has-config">{csp.config ? 'has-config' : 'no-config'}</div>
-            <div data-testid="has-update">{typeof csp.updateConfig === 'function' ? 'has-update' : 'no-update'}</div>
+            <div data-testid="has-update">
+              {typeof csp.updateConfig === 'function' ? 'has-update' : 'no-update'}
+            </div>
           </div>
         );
       };

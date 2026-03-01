@@ -9,7 +9,7 @@
 
 import * as React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 import { AIPerformanceOptimizer } from './AIPerformanceOptimizer';
 
 const meta: Meta<typeof AIPerformanceOptimizer> = {
@@ -56,7 +56,13 @@ const WithTheme = ({ children }: { children: React.ReactNode }) => {
 };
 
 export const Default: Story = {
-  decorators: [(Story) => <WithTheme><Story /></WithTheme>],
+  decorators: [
+    (Story) => (
+      <WithTheme>
+        <Story />
+      </WithTheme>
+    ),
+  ],
   args: {
     onApplyOptimization: (recommendation) => console.log('Applied optimization:', recommendation),
     onExportPlan: (plan) => console.log('Exported plan:', plan),
@@ -65,7 +71,13 @@ export const Default: Story = {
 };
 
 export const WithGoodMetrics: Story = {
-  decorators: [(Story) => <WithTheme><Story /></WithTheme>],
+  decorators: [
+    (Story) => (
+      <WithTheme>
+        <Story />
+      </WithTheme>
+    ),
+  ],
   args: {
     initialMetrics: {
       FCP: 1.5,
@@ -92,7 +104,13 @@ export const WithGoodMetrics: Story = {
 };
 
 export const WithPoorMetrics: Story = {
-  decorators: [(Story) => <WithTheme><Story /></WithTheme>],
+  decorators: [
+    (Story) => (
+      <WithTheme>
+        <Story />
+      </WithTheme>
+    ),
+  ],
   args: {
     initialMetrics: {
       FCP: 4.5,
@@ -119,7 +137,13 @@ export const WithPoorMetrics: Story = {
 };
 
 export const Interactive: Story = {
-  decorators: [(Story) => <WithTheme><Story /></WithTheme>],
+  decorators: [
+    (Story) => (
+      <WithTheme>
+        <Story />
+      </WithTheme>
+    ),
+  ],
   args: {
     onApplyOptimization: (recommendation) => console.log('Applied optimization:', recommendation),
     onExportPlan: (plan) => console.log('Exported plan:', plan),

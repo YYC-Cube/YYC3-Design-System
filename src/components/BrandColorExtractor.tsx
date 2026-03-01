@@ -3,7 +3,11 @@ import { useState, useCallback, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './Card';
 import { Button } from './Button';
 import { useTheme } from '../theme/useTheme';
-import { brandColorExtractor, BrandColorPalette, ExtractionOptions } from '../ai/brand-color-extractor';
+import {
+  brandColorExtractor,
+  BrandColorPalette,
+  ExtractionOptions,
+} from '../ai/brand-color-extractor';
 
 export interface BrandColorExtractorProps {
   className?: string;
@@ -136,7 +140,10 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
       <CardContent className="space-y-6">
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue('color.foreground') }}
+            >
               上传图片
             </label>
             <input
@@ -158,7 +165,10 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue('color.foreground') }}
+            >
               输入图片 URL
             </label>
             <input
@@ -179,17 +189,26 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
         {imagePreview && (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+              <label
+                className="block text-sm font-medium mb-2"
+                style={{ color: getTokenValue('color.foreground') }}
+              >
                 图片预览
               </label>
-              <div className="rounded-lg overflow-hidden border-2" style={{ borderColor: getTokenValue('color.border') }}>
+              <div
+                className="rounded-lg overflow-hidden border-2"
+                style={{ borderColor: getTokenValue('color.border') }}
+              >
                 <img src={imagePreview} alt="Preview" className="w-full h-auto" />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+                <label
+                  className="block text-sm font-medium mb-2"
+                  style={{ color: getTokenValue('color.foreground') }}
+                >
                   提取颜色数量
                 </label>
                 <input
@@ -197,7 +216,9 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
                   min={3}
                   max={20}
                   value={options.colorCount}
-                  onChange={(e) => setOptions(prev => ({ ...prev, colorCount: parseInt(e.target.value) || 10 }))}
+                  onChange={(e) =>
+                    setOptions((prev) => ({ ...prev, colorCount: parseInt(e.target.value) || 10 }))
+                  }
                   className="w-full p-2 rounded-lg border"
                   style={{
                     borderColor: getTokenValue('color.border'),
@@ -208,7 +229,10 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+                <label
+                  className="block text-sm font-medium mb-2"
+                  style={{ color: getTokenValue('color.foreground') }}
+                >
                   最小饱和度
                 </label>
                 <input
@@ -217,7 +241,12 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
                   max={1}
                   step={0.05}
                   value={options.minimumSaturation}
-                  onChange={(e) => setOptions(prev => ({ ...prev, minimumSaturation: parseFloat(e.target.value) || 0.1 }))}
+                  onChange={(e) =>
+                    setOptions((prev) => ({
+                      ...prev,
+                      minimumSaturation: parseFloat(e.target.value) || 0.1,
+                    }))
+                  }
                   className="w-full p-2 rounded-lg border"
                   style={{
                     borderColor: getTokenValue('color.border'),
@@ -228,7 +257,10 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+                <label
+                  className="block text-sm font-medium mb-2"
+                  style={{ color: getTokenValue('color.foreground') }}
+                >
                   最小亮度
                 </label>
                 <input
@@ -237,7 +269,12 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
                   max={1}
                   step={0.05}
                   value={options.minimumBrightness}
-                  onChange={(e) => setOptions(prev => ({ ...prev, minimumBrightness: parseFloat(e.target.value) || 0.1 }))}
+                  onChange={(e) =>
+                    setOptions((prev) => ({
+                      ...prev,
+                      minimumBrightness: parseFloat(e.target.value) || 0.1,
+                    }))
+                  }
                   className="w-full p-2 rounded-lg border"
                   style={{
                     borderColor: getTokenValue('color.border'),
@@ -248,7 +285,10 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+                <label
+                  className="block text-sm font-medium mb-2"
+                  style={{ color: getTokenValue('color.foreground') }}
+                >
                   最大亮度
                 </label>
                 <input
@@ -257,7 +297,12 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
                   max={1}
                   step={0.05}
                   value={options.maximumBrightness}
-                  onChange={(e) => setOptions(prev => ({ ...prev, maximumBrightness: parseFloat(e.target.value) || 0.95 }))}
+                  onChange={(e) =>
+                    setOptions((prev) => ({
+                      ...prev,
+                      maximumBrightness: parseFloat(e.target.value) || 0.95,
+                    }))
+                  }
                   className="w-full p-2 rounded-lg border"
                   style={{
                     borderColor: getTokenValue('color.border'),
@@ -273,7 +318,9 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
                 <input
                   type="checkbox"
                   checked={options.excludeWhite}
-                  onChange={(e) => setOptions(prev => ({ ...prev, excludeWhite: e.target.checked }))}
+                  onChange={(e) =>
+                    setOptions((prev) => ({ ...prev, excludeWhite: e.target.checked }))
+                  }
                   className="w-4 h-4"
                 />
                 <span className="text-sm" style={{ color: getTokenValue('color.foreground') }}>
@@ -285,7 +332,9 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
                 <input
                   type="checkbox"
                   checked={options.excludeBlack}
-                  onChange={(e) => setOptions(prev => ({ ...prev, excludeBlack: e.target.checked }))}
+                  onChange={(e) =>
+                    setOptions((prev) => ({ ...prev, excludeBlack: e.target.checked }))
+                  }
                   className="w-4 h-4"
                 />
                 <span className="text-sm" style={{ color: getTokenValue('color.foreground') }}>
@@ -297,7 +346,9 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
                 <input
                   type="checkbox"
                   checked={options.smartSelection}
-                  onChange={(e) => setOptions(prev => ({ ...prev, smartSelection: e.target.checked }))}
+                  onChange={(e) =>
+                    setOptions((prev) => ({ ...prev, smartSelection: e.target.checked }))
+                  }
                   className="w-4 h-4"
                 />
                 <span className="text-sm" style={{ color: getTokenValue('color.foreground') }}>
@@ -318,10 +369,13 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
         )}
 
         {error && (
-          <div className="p-4 rounded-lg" style={{
-            background: '#fee2e2',
-            border: '2px solid #dc2626',
-          }}>
+          <div
+            className="p-4 rounded-lg"
+            style={{
+              background: '#fee2e2',
+              border: '2px solid #dc2626',
+            }}
+          >
             <p className="text-sm" style={{ color: '#991b1b' }}>
               ⚠️ {error}
             </p>
@@ -330,11 +384,17 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
 
         {palette && (
           <div className="space-y-6">
-            <div className="p-4 rounded-lg" style={{
-              background: getTokenValue('color.card'),
-              border: `2px solid ${getTokenValue('color.border')}`,
-            }}>
-              <h3 className="text-sm font-medium mb-4" style={{ color: getTokenValue('color.foreground') }}>
+            <div
+              className="p-4 rounded-lg"
+              style={{
+                background: getTokenValue('color.card'),
+                border: `2px solid ${getTokenValue('color.border')}`,
+              }}
+            >
+              <h3
+                className="text-sm font-medium mb-4"
+                style={{ color: getTokenValue('color.foreground') }}
+              >
                 提取的品牌色
               </h3>
 
@@ -344,7 +404,10 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
                 {renderColorSwatch(palette.accent, '强调色')}
               </div>
 
-              <h4 className="text-xs font-medium mb-3" style={{ color: getTokenValue('color.muted-foreground') }}>
+              <h4
+                className="text-xs font-medium mb-3"
+                style={{ color: getTokenValue('color.muted-foreground') }}
+              >
                 中性色
               </h4>
               <div className="grid grid-cols-3 gap-4">
@@ -355,11 +418,17 @@ export const BrandColorExtractor: React.FC<BrandColorExtractorProps> = ({
             </div>
 
             {palette.suggestedScales.length > 0 && (
-              <div className="p-4 rounded-lg" style={{
-                background: getTokenValue('color.card'),
-                border: `2px solid ${getTokenValue('color.border')}`,
-              }}>
-                <h3 className="text-sm font-medium mb-4" style={{ color: getTokenValue('color.foreground') }}>
+              <div
+                className="p-4 rounded-lg"
+                style={{
+                  background: getTokenValue('color.card'),
+                  border: `2px solid ${getTokenValue('color.border')}`,
+                }}
+              >
+                <h3
+                  className="text-sm font-medium mb-4"
+                  style={{ color: getTokenValue('color.foreground') }}
+                >
                   建议的颜色比例尺
                 </h3>
                 <div className="flex flex-wrap gap-1">

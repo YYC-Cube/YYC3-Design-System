@@ -252,7 +252,13 @@ export const ResourcePreloadingExample: React.FC<ResourcePreloadingExampleProps>
             <h2 style={{ margin: 0, fontSize: '1.5rem' }}>资源预加载统计</h2>
           </CardHeader>
           <CardContent>
-            <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+              }}
+            >
               <div>
                 <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>预加载统计</h3>
                 <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.8', fontSize: '0.875rem' }}>
@@ -307,7 +313,13 @@ export const ResourcePreloadingExample: React.FC<ResourcePreloadingExampleProps>
             <h2 style={{ margin: 0, fontSize: '1.5rem' }}>资源预加载</h2>
           </CardHeader>
           <CardContent>
-            <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              }}
+            >
               <div>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>单张预加载</h3>
                 <p style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#64748b' }}>
@@ -360,7 +372,13 @@ export const ResourcePreloadingExample: React.FC<ResourcePreloadingExampleProps>
             <h2 style={{ margin: 0, fontSize: '1.5rem' }}>预连接和预取</h2>
           </CardHeader>
           <CardContent>
-            <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              }}
+            >
               <div>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>预连接</h3>
                 <p style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#64748b' }}>
@@ -400,69 +418,61 @@ export const ResourcePreloadingExample: React.FC<ResourcePreloadingExampleProps>
             <h2 style={{ margin: 0, fontSize: '1.5rem' }}>资源类型预加载</h2>
           </CardHeader>
           <CardContent>
-            <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              }}
+            >
               <div>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>脚本预加载</h3>
                 <p style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#64748b' }}>
                   预加载 JavaScript 文件
                 </p>
-                <Button onClick={() => preloadScript(sampleResources[0].url)}>
-                  预加载脚本
-                </Button>
+                <Button onClick={() => preloadScript(sampleResources[0].url)}>预加载脚本</Button>
               </div>
               <div>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>样式预加载</h3>
                 <p style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#64748b' }}>
                   预加载 CSS 文件
                 </p>
-                <Button onClick={() => preloadStyle(sampleResources[1].url)}>
-                  预加载样式
-                </Button>
+                <Button onClick={() => preloadStyle(sampleResources[1].url)}>预加载样式</Button>
               </div>
               <div>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>图片预加载</h3>
                 <p style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#64748b' }}>
                   预加载图片文件
                 </p>
-                <Button onClick={() => preloadImage(sampleResources[2].url)}>
-                  预加载图片
-                </Button>
+                <Button onClick={() => preloadImage(sampleResources[2].url)}>预加载图片</Button>
               </div>
               <div>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>字体预加载</h3>
                 <p style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#64748b' }}>
                   预加载字体文件
                 </p>
-                <Button onClick={() => preloadFont(sampleResources[3].url)}>
-                  预加载字体
-                </Button>
+                <Button onClick={() => preloadFont(sampleResources[3].url)}>预加载字体</Button>
               </div>
               <div>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>文档预加载</h3>
                 <p style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#64748b' }}>
                   预加载文档资源
                 </p>
-                <Button onClick={() => preloadDocument(sampleResources[4].url)}>
-                  预加载文档
-                </Button>
+                <Button onClick={() => preloadDocument(sampleResources[4].url)}>预加载文档</Button>
               </div>
               <div>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>Fetch 预加载</h3>
                 <p style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#64748b' }}>
                   预加载 Fetch 请求
                 </p>
-                <Button onClick={() => preloadFetch(sampleResources[4].url)}>
-                  预加载 Fetch
-                </Button>
+                <Button onClick={() => preloadFetch(sampleResources[4].url)}>预加载 Fetch</Button>
               </div>
               <div>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>Worker 预加载</h3>
                 <p style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#64748b' }}>
                   预加载 Web Worker
                 </p>
-                <Button onClick={() => preloadWorker(sampleResources[5].url)}>
-                  预加载 Worker
-                </Button>
+                <Button onClick={() => preloadWorker(sampleResources[5].url)}>预加载 Worker</Button>
               </div>
             </div>
           </CardContent>
@@ -475,7 +485,13 @@ export const ResourcePreloadingExample: React.FC<ResourcePreloadingExampleProps>
             <h2 style={{ margin: 0, fontSize: '1.5rem' }}>缓存管理</h2>
           </CardHeader>
           <CardContent>
-            <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              }}
+            >
               <div>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>清空所有缓存</h3>
                 <p style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#64748b' }}>

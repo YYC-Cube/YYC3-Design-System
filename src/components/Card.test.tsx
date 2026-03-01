@@ -7,14 +7,12 @@
  * @created 2026-02-18
  */
 
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import * as React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './Card';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 function renderWithTheme(ui: React.ReactElement) {
   return render(<ThemeProvider initial="light">{ui}</ThemeProvider>);
@@ -137,13 +135,22 @@ describe('Card 组件', () => {
   });
 
   it('应该正确处理 React 元素 children', () => {
-    renderWithTheme(<Card><span>Custom</span></Card>);
+    renderWithTheme(
+      <Card>
+        <span>Custom</span>
+      </Card>
+    );
 
     expect(screen.getByText('Custom')).toBeInTheDocument();
   });
 
   it('应该正确处理多个 children', () => {
-    renderWithTheme(<Card><p>First</p><p>Second</p></Card>);
+    renderWithTheme(
+      <Card>
+        <p>First</p>
+        <p>Second</p>
+      </Card>
+    );
 
     expect(screen.getByText('First')).toBeInTheDocument();
     expect(screen.getByText('Second')).toBeInTheDocument();

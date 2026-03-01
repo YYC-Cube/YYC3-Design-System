@@ -12,7 +12,7 @@
 import { render, fireEvent, screen } from '@testing-library/react';
 import { Dropdown } from '../Dropdown';
 import { Button } from '../Button';
-import { ThemeProvider } from '../../theme/ThemeProvider';
+import { ThemeProvider } from '../../context/ThemeContext';
 
 describe('Dropdown', () => {
   const mockOptions = [
@@ -47,9 +47,7 @@ describe('Dropdown', () => {
 
   it('应该调用选项的onClick回调', () => {
     const mockOnClick = jest.fn();
-    const optionsWithClick = [
-      { key: '1', label: '选项1', onClick: mockOnClick },
-    ];
+    const optionsWithClick = [{ key: '1', label: '选项1', onClick: mockOnClick }];
     render(
       <ThemeProvider>
         <Dropdown options={optionsWithClick}>
@@ -102,9 +100,7 @@ describe('Dropdown', () => {
   });
 
   it('应该支持图标', () => {
-    const optionsWithIcon = [
-      { key: '1', label: '选项1', icon: '📄' },
-    ];
+    const optionsWithIcon = [{ key: '1', label: '选项1', icon: '📄' }];
     render(
       <ThemeProvider>
         <Dropdown options={optionsWithIcon}>

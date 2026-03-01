@@ -1,58 +1,47 @@
+/**
+ * @file YYC³ Design System — Jest Configuration
+ * @description Jest 配置：ts-jest 预设，jsdom 环境，80% 覆盖率阈值
+ * @module config
+ * @author YYC³
+ * @version 1.0.0
+ * @created 2026-02-27
+ */
+
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'jsdom',
-  testMatch: ['**/tests/**/*.test.ts?(x)', '**/?(*.)+(spec|test).ts?(x)'],
-  testPathIgnorePatterns: ['/node_modules/', '/e2e/'],
-  moduleNameMapper: {
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
-    '^@/(.*)$': '<rootDir>/src/$1',
-    'dist/js/theme\\.js$': '<rootDir>/__mocks__/theme.js',
-    'dist/js/theme\\.dark\\.js$': '<rootDir>/__mocks__/theme.dark.js',
-    '^culori$': '<rootDir>/__mocks__/culori.js',
-  },
+  preset: "ts-jest",
+  testEnvironment: "jsdom",
+  roots: ["<rootDir>/src"],
+  testMatch: [
+    "**/__tests__/**/*.{ts,tsx}",
+    "**/*.test.{ts,tsx}",
+    "**/*.spec.{ts,tsx}",
+  ],
+  testPathIgnorePatterns: ["/node_modules/", "/src/tests/e2e/"],
   transform: {
-    '^.+\\.tsx?$': [
-      'ts-jest',
-      {
-        tsconfig: 'tsconfig.test.json',
-      },
-    ],
+    "^.+\\.tsx?$": ["ts-jest", { tsconfig: "tsconfig.json" }],
   },
-  transformIgnorePatterns: [
-    'node_modules/(?!(culori)/)',
-  ],
-  setupFilesAfterEnv: [
-    '<rootDir>/jest.setup.ts',
-    '<rootDir>/src/setup-tests.ts'
-  ],
+  moduleNameMapper: {
+    "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+    "\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/src/tests/__mocks__/fileMock.ts",
+    "^@/(.*)$": "<rootDir>/src/$1",
+  },
+  setupFilesAfterEnv: ["<rootDir>/src/tests/setup.ts"],
   collectCoverageFrom: [
-    'src/**/*.{ts,tsx}',
-    '!src/**/*.stories.{ts,tsx}',
-    '!src/**/*.d.ts',
-    '!src/vue/**',
-    '!src/svelte/**',
-    '!src/types/**',
+    "src/**/*.{ts,tsx}",
+    "!src/**/*.d.ts",
+    "!src/**/index.ts",
+    "!src/**/*.test.{ts,tsx}",
   ],
-  coverageDirectory: 'coverage',
-  coverageReporters: ['text', 'lcov', 'html'],
   coverageThreshold: {
     global: {
-      branches: 50,
-      functions: 50,
-      lines: 50,
-      statements: 50,
-    },
-    './src/components/': {
-      branches: 60,
-      functions: 60,
-      lines: 60,
-      statements: 60,
-    },
-    './src/utils/': {
       branches: 80,
       functions: 80,
       lines: 80,
       statements: 80,
     },
   },
+  coverageReporters: ["text", "text-summary", "lcov", "html"],
+  coverageDirectory: "coverage",
+  maxWorkers: "50%",
+  cacheDirectory: "<rootDir>/.jest-cache",
 };

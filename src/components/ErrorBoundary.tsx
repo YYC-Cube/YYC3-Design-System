@@ -13,7 +13,7 @@
 import { Component, ReactNode, ErrorInfo } from 'react';
 import { errorLogger } from '../core/ErrorLogger';
 import { ErrorBoundaryState } from '../types/error';
-import { useTheme } from '../theme/ThemeProvider';
+import { useTheme } from '../context/ThemeContext';
 
 export interface ErrorBoundaryProps {
   children: ReactNode;
@@ -47,8 +47,8 @@ export const ErrorFallback = ({
     justifyContent: 'center' as const,
     minHeight: '400px',
     padding: '40px',
-    backgroundColor: tokens['color.background'] as string || '#fff',
-    color: tokens['color.text.primary'] as string || '#333',
+    backgroundColor: (tokens['color.background'] as string) || '#fff',
+    color: (tokens['color.text.primary'] as string) || '#333',
   };
 
   const iconStyles = {
@@ -60,7 +60,7 @@ export const ErrorFallback = ({
     fontSize: '24px',
     fontWeight: 'bold' as const,
     marginBottom: '12px',
-    color: tokens['color.error'] as string || '#ff4d4f',
+    color: (tokens['color.error'] as string) || '#ff4d4f',
   };
 
   const messageStyles = {
@@ -68,11 +68,11 @@ export const ErrorFallback = ({
     marginBottom: '24px',
     textAlign: 'center' as const,
     maxWidth: '600px',
-    color: tokens['color.text.secondary'] as string || '#666',
+    color: (tokens['color.text.secondary'] as string) || '#666',
   };
 
   const detailsStyles = {
-    backgroundColor: tokens['color.surface'] as string || '#f5f5f5',
+    backgroundColor: (tokens['color.surface'] as string) || '#f5f5f5',
     padding: '16px',
     borderRadius: '4px',
     marginBottom: '24px',
@@ -85,20 +85,20 @@ export const ErrorFallback = ({
     fontSize: '14px',
     fontWeight: 'bold' as const,
     marginBottom: '8px',
-    color: tokens['color.text.primary'] as string || '#333',
+    color: (tokens['color.text.primary'] as string) || '#333',
   };
 
   const detailsTextStyles = {
     fontSize: '12px',
     fontFamily: 'monospace',
-    color: tokens['color.text.secondary'] as string || '#666',
+    color: (tokens['color.text.secondary'] as string) || '#666',
     whiteSpace: 'pre-wrap' as const,
     wordBreak: 'break-word' as const,
   };
 
   const buttonStyles = {
     padding: '10px 20px',
-    backgroundColor: tokens['color.primary'] as string || '#d45a5f',
+    backgroundColor: (tokens['color.primary'] as string) || '#d45a5f',
     color: '#fff',
     border: 'none',
     borderRadius: '4px',
@@ -117,9 +117,7 @@ export const ErrorFallback = ({
     <div className={className} style={containerStyles} data-testid={dataTestId}>
       <div style={iconStyles}>⚠️</div>
       <h1 style={titleStyles}>出错了</h1>
-      <p style={messageStyles}>
-        抱歉，应用程序遇到了一个错误。请尝试刷新页面或联系支持团队。
-      </p>
+      <p style={messageStyles}>抱歉，应用程序遇到了一个错误。请尝试刷新页面或联系支持团队。</p>
 
       {errorInfo && (
         <details style={detailsStyles}>

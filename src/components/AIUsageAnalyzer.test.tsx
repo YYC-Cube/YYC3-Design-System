@@ -8,14 +8,12 @@
  */
 
 import * as React from 'react';
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import '@testing-library/jest-dom';
 import { AIUsageAnalyzer } from './AIUsageAnalyzer';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 const renderWithTheme = (component: React.ReactElement) => {
   return render(<ThemeProvider>{component}</ThemeProvider>);
@@ -39,7 +37,7 @@ describe('AIUsageAnalyzer', () => {
 
   it('应该支持点击开始分析按钮', () => {
     renderWithTheme(<AIUsageAnalyzer />);
-    
+
     const analyzeButton = screen.getByText('开始分析');
     fireEvent.click(analyzeButton);
   });

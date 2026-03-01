@@ -34,7 +34,7 @@ export const memoize = <T extends (...args: any[]) => any>(
 ): T => {
   return ((...args: Parameters<T>) => {
     const key = keyGenerator ? keyGenerator(...args) : JSON.stringify(args);
-    
+
     if (performanceCache.has(key)) {
       return performanceCache.get(key);
     }
@@ -82,10 +82,7 @@ export const throttle = <T extends (...args: any[]) => any>(
   };
 };
 
-export const useDebounce = <T extends (...args: any[]) => any>(
-  fn: T,
-  delay: number
-): T => {
+export const useDebounce = <T extends (...args: any[]) => any>(fn: T, delay: number): T => {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   return useCallback(
@@ -99,10 +96,7 @@ export const useDebounce = <T extends (...args: any[]) => any>(
   ) as T;
 };
 
-export const useThrottle = <T extends (...args: any[]) => any>(
-  fn: T,
-  limit: number
-): T => {
+export const useThrottle = <T extends (...args: any[]) => any>(fn: T, limit: number): T => {
   const inThrottleRef = useRef(false);
   const lastResultRef = useRef<ReturnType<T> | undefined>(undefined);
 
@@ -157,10 +151,7 @@ export const useIdleCallback = <T extends (...args: any[]) => any>(
   ) as T;
 };
 
-export const measurePerformance = (
-  fn: () => void,
-  _label: string = 'performance'
-): number => {
+export const measurePerformance = (fn: () => void, _label: string = 'performance'): number => {
   const start = performance.now();
   fn();
   const end = performance.now();
@@ -226,7 +217,7 @@ export class PerformanceMonitor {
 
     if (now - this.lastFrameTime >= this.options.sampleInterval!) {
       this.metrics.fps = Math.round((this.frameCount * 1000) / delta);
-      
+
       if (this.options.onThresholdExceeded && this.metrics.renderTime > this.options.threshold!) {
         this.options.onThresholdExceeded(this.getMetrics());
       }
@@ -273,9 +264,7 @@ export const usePerformanceMonitor = (options: PerformanceOptions = {}) => {
   };
 };
 
-export const batchDOMUpdates = <T>(
-  updates: Array<() => T>
-): T[] => {
+export const batchDOMUpdates = <T>(updates: Array<() => T>): T[] => {
   return updates.map((update) => update());
 };
 

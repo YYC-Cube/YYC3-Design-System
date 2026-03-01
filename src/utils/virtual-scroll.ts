@@ -29,12 +29,7 @@ export const calculateVirtualScrollState = (
   scrollTop: number,
   options: VirtualScrollOptions
 ): VirtualScrollState => {
-  const {
-    itemCount,
-    itemHeight,
-    containerHeight,
-    overscan = 5,
-  } = options;
+  const { itemCount, itemHeight, containerHeight, overscan = 5 } = options;
 
   const totalHeight = itemCount * itemHeight;
   const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - overscan);
@@ -54,18 +49,11 @@ export const calculateVirtualScrollState = (
   };
 };
 
-export const getVisibleItems = <T,>(
-  items: T[],
-  startIndex: number,
-  endIndex: number
-): T[] => {
+export const getVisibleItems = <T>(items: T[], startIndex: number, endIndex: number): T[] => {
   return items.slice(startIndex, endIndex + 1);
 };
 
-export const getItemStyle = (
-  index: number,
-  itemHeight: number
-): React.CSSProperties => {
+export const getItemStyle = (index: number, itemHeight: number): React.CSSProperties => {
   return {
     position: 'absolute' as const,
     top: `${index * itemHeight}px`,
@@ -75,9 +63,7 @@ export const getItemStyle = (
   };
 };
 
-export const getContainerStyle = (
-  totalHeight: number
-): React.CSSProperties => {
+export const getContainerStyle = (totalHeight: number): React.CSSProperties => {
   return {
     position: 'relative' as const,
     height: `${totalHeight}px`,
@@ -122,19 +108,16 @@ export const throttle = <T extends (...args: unknown[]) => unknown>(
 
 export const useVirtualScroll = (options: VirtualScrollOptions) => {
   const [scrollTop, setScrollTop] = useState(0);
-  
-  const state = useMemo(() => 
-    calculateVirtualScrollState(scrollTop, options), 
+
+  const state = useMemo(
+    () => calculateVirtualScrollState(scrollTop, options),
     [scrollTop, options]
   );
 
-  const handleScroll = useCallback(
-    (event: React.UIEvent<HTMLDivElement>) => {
-      const newScrollTop = event.currentTarget.scrollTop;
-      setScrollTop(newScrollTop);
-    },
-    []
-  );
+  const handleScroll = useCallback((event: React.UIEvent<HTMLDivElement>) => {
+    const newScrollTop = event.currentTarget.scrollTop;
+    setScrollTop(newScrollTop);
+  }, []);
 
   return {
     scrollTop,
@@ -164,13 +147,7 @@ export const calculateDynamicVirtualScrollState = (
   scrollTop: number,
   options: DynamicItemHeightOptions
 ): DynamicVirtualScrollState => {
-  const {
-    itemCount,
-    estimatedItemHeight,
-    containerHeight,
-    getItemHeight,
-    overscan = 5,
-  } = options;
+  const { itemCount, estimatedItemHeight, containerHeight, getItemHeight, overscan = 5 } = options;
 
   const itemPositions: number[] = [];
   let currentPosition = 0;

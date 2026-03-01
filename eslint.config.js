@@ -16,6 +16,9 @@ export default [
       'dist/**',
       'build/**',
       '.storybook/**',
+      '.chromatic/**',
+      '__mocks__/**',
+      'config/**',
     ],
   },
   {

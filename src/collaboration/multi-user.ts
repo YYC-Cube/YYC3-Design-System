@@ -52,7 +52,7 @@ export class MultiUserManager {
       const usersData = localStorage.getItem('yyc3_users');
       if (usersData) {
         const users = JSON.parse(usersData) as User[];
-        users.forEach(user => {
+        users.forEach((user) => {
           this.users.set(user.id, user);
         });
       }
@@ -153,11 +153,11 @@ export class MultiUserManager {
   }
 
   getOnlineUsers(): User[] {
-    return this.getAllUsers().filter(user => user.isOnline);
+    return this.getAllUsers().filter((user) => user.isOnline);
   }
 
   getUserByEmail(email: string): User | undefined {
-    return this.getAllUsers().find(user => user.email === email);
+    return this.getAllUsers().find((user) => user.email === email);
   }
 
   hasPermission(userId: string, permission: Permission): boolean {
@@ -264,7 +264,7 @@ export class MultiUserManager {
       }
     });
 
-    inactiveUsers.forEach(userId => {
+    inactiveUsers.forEach((userId) => {
       this.leaveSession(userId);
     });
 
@@ -277,7 +277,7 @@ export class MultiUserManager {
 
   getUserActivities(userId: string, limit: number = 50): UserActivity[] {
     return this.activities
-      .filter(activity => activity.userId === userId)
+      .filter((activity) => activity.userId === userId)
       .slice(-limit)
       .reverse();
   }
@@ -302,7 +302,7 @@ export class MultiUserManager {
     try {
       const users = JSON.parse(usersJson) as User[];
       this.users.clear();
-      users.forEach(user => {
+      users.forEach((user) => {
         this.users.set(user.id, user);
       });
       this.saveToStorage();
@@ -327,10 +327,10 @@ export class MultiUserManager {
       activeSessions: this.sessions.size,
       totalActivities: this.activities.length,
       roles: {
-        owner: this.getAllUsers().filter(u => u.role === 'owner').length,
-        admin: this.getAllUsers().filter(u => u.role === 'admin').length,
-        editor: this.getAllUsers().filter(u => u.role === 'editor').length,
-        viewer: this.getAllUsers().filter(u => u.role === 'viewer').length,
+        owner: this.getAllUsers().filter((u) => u.role === 'owner').length,
+        admin: this.getAllUsers().filter((u) => u.role === 'admin').length,
+        editor: this.getAllUsers().filter((u) => u.role === 'editor').length,
+        viewer: this.getAllUsers().filter((u) => u.role === 'viewer').length,
       },
     };
   }

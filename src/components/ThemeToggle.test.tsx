@@ -1,11 +1,9 @@
 import * as React from 'react';
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import { ThemeToggle } from './ThemeToggle';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 describe('ThemeToggle', () => {
   beforeEach(() => {
@@ -109,7 +107,7 @@ describe('ThemeToggle', () => {
   it('应该正确处理多次点击', () => {
     renderWithTheme(<ThemeToggle />, 'light');
     const button = screen.getByRole('button');
-    
+
     expect(button).toHaveTextContent('🌙');
     fireEvent.click(button);
     expect(button).toHaveTextContent('☀️');

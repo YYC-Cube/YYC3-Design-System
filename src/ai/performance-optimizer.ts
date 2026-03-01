@@ -116,7 +116,8 @@ const generateIssue = (
         type = 'critical';
         impact = 'high';
         description = `最大内容绘制时间为 ${value.toFixed(2)}${threshold.unit}，超过推荐值 ${threshold.good}${threshold.unit}。页面主要内容的渲染速度较慢。`;
-        recommendation = '优化图片（使用 WebP、懒加载）、压缩资源、减少 JavaScript 执行时间、使用 HTTP/2。';
+        recommendation =
+          '优化图片（使用 WebP、懒加载）、压缩资源、减少 JavaScript 执行时间、使用 HTTP/2。';
         codeExample = `
 <img src="image.webp" loading="lazy" alt="...">
 <picture>
@@ -172,7 +173,8 @@ worker.postMessage(data);
         type = 'warning';
         impact = 'medium';
         description = `累积布局偏移为 ${value.toFixed(3)}，超过推荐值 ${threshold.good}。页面存在明显的布局跳动。`;
-        recommendation = '为图片和广告预留空间、避免在现有内容上方插入内容、使用 CSS transform 进行动画。';
+        recommendation =
+          '为图片和广告预留空间、避免在现有内容上方插入内容、使用 CSS transform 进行动画。';
         codeExample = `
 /* 预留图片空间 */
 .image-container {
@@ -202,7 +204,8 @@ worker.postMessage(data);
         type = 'critical';
         impact = 'high';
         description = `首字节时间为 ${value.toFixed(0)}${threshold.unit}，超过推荐值 ${threshold.good}${threshold.unit}。服务器响应或网络延迟较慢。`;
-        recommendation = '优化服务器响应时间、使用 CDN、启用 HTTP 缓存、优化 DNS 查询、减少重定向。';
+        recommendation =
+          '优化服务器响应时间、使用 CDN、启用 HTTP 缓存、优化 DNS 查询、减少重定向。';
         codeExample = `
 // HTTP 缓存头
 Cache-Control: max-age=31536000, public
@@ -263,7 +266,8 @@ export { usedFunction } from './library';
         type = 'warning';
         impact = 'medium';
         description = `渲染时间为 ${value.toFixed(0)}${threshold.unit}，超过推荐值 ${threshold.good}${threshold.unit}。组件渲染性能需要优化。`;
-        recommendation = '使用 React.memo、useMemo、useCallback 优化组件、虚拟化长列表、避免不必要的重新渲染。';
+        recommendation =
+          '使用 React.memo、useMemo、useCallback 优化组件、虚拟化长列表、避免不必要的重新渲染。';
         codeExample = `
 // 使用 React.memo
 const MemoizedComponent = React.memo(({ data }) => {
@@ -402,7 +406,7 @@ export class PerformanceOptimizer {
 
     const quickWins = issues
       .filter((i) => i.effort === 'low' && i.type !== 'info')
-      .sort((a, b) => b.impact === 'high' ? 1 : -1);
+      .sort((a, b) => (b.impact === 'high' ? 1 : -1));
 
     const longTermImprovements = issues
       .filter((i) => i.effort === 'high' || i.effort === 'medium')
@@ -436,12 +440,13 @@ export class PerformanceOptimizer {
 
     issues.forEach((issue) => {
       const weight = issue.type === 'critical' ? 3 : issue.type === 'warning' ? 2 : 1;
-      const severityMultiplier = issue.impact === 'high' ? 1.5 : issue.impact === 'medium' ? 1 : 0.5;
-      totalScore += (100 - (weight * 20)) * severityMultiplier;
+      const severityMultiplier =
+        issue.impact === 'high' ? 1.5 : issue.impact === 'medium' ? 1 : 0.5;
+      totalScore += (100 - weight * 20) * severityMultiplier;
       weightSum += weight;
     });
 
-    return Math.max(0, Math.min(100, 100 - (totalScore / weightSum)));
+    return Math.max(0, Math.min(100, 100 - totalScore / weightSum));
   }
 
   private calculateGrade(score: number): 'A' | 'B' | 'C' | 'D' | 'F' {
@@ -453,10 +458,13 @@ export class PerformanceOptimizer {
   }
 
   private identifyPriorityAreas(issues: PerformanceIssue[]): string[] {
-    const categoryCount = issues.reduce((acc, issue) => {
-      acc[issue.category] = (acc[issue.category] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
+    const categoryCount = issues.reduce(
+      (acc, issue) => {
+        acc[issue.category] = (acc[issue.category] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
 
     const sortedCategories = Object.entries(categoryCount)
       .sort(([, a], [, b]) => b - a)
@@ -488,7 +496,10 @@ export class PerformanceOptimizer {
     return 40;
   }
 
-  getMetricGrade(value: number | undefined, metric: keyof typeof performanceThresholds): 'excellent' | 'good' | 'needs improvement' | 'critical' {
+  getMetricGrade(
+    value: number | undefined,
+    metric: keyof typeof performanceThresholds
+  ): 'excellent' | 'good' | 'needs improvement' | 'critical' {
     if (value === undefined) return 'needs improvement';
 
     const threshold = performanceThresholds[metric];

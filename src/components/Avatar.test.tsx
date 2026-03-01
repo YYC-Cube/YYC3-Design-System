@@ -7,15 +7,13 @@
  * @created 2026-02-18
  */
 
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import '@testing-library/jest-dom';
 import * as React from 'react';
 import { Avatar } from './Avatar';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 const renderWithTheme = (component: React.ReactElement) => {
   return render(<ThemeProvider>{component}</ThemeProvider>);
@@ -35,12 +33,7 @@ describe('Avatar 组件', () => {
   });
 
   it('应该渲染图片', () => {
-    renderWithTheme(
-      <Avatar
-        src="https://example.com/avatar.jpg"
-        alt="John Doe"
-      />
-    );
+    renderWithTheme(<Avatar src="https://example.com/avatar.jpg" alt="John Doe" />);
 
     const img = screen.getByAltText('John Doe');
     expect(img).toBeInTheDocument();
@@ -48,12 +41,7 @@ describe('Avatar 组件', () => {
   });
 
   it('应该在图片加载失败时显示 fallback', () => {
-    renderWithTheme(
-      <Avatar
-        src="https://example.com/invalid.jpg"
-        alt="John Doe"
-      />
-    );
+    renderWithTheme(<Avatar src="https://example.com/invalid.jpg" alt="John Doe" />);
 
     const img = screen.getByAltText('John Doe');
     fireEvent(img, new ErrorEvent('error'));
@@ -64,7 +52,7 @@ describe('Avatar 组件', () => {
   it('应该支持不同的尺寸', () => {
     const sizes = ['sm', 'md', 'lg', 'xl'] as const;
 
-    sizes.forEach(size => {
+    sizes.forEach((size) => {
       const { unmount } = renderWithTheme(<Avatar alt="Test" size={size} />);
       const avatar = screen.getByRole('img');
       expect(avatar).toBeInTheDocument();
@@ -112,12 +100,7 @@ describe('Avatar 组件', () => {
   });
 
   it('应该在图片加载时正确显示', () => {
-    renderWithTheme(
-      <Avatar
-        src="https://example.com/avatar.jpg"
-        alt="John Doe"
-      />
-    );
+    renderWithTheme(<Avatar src="https://example.com/avatar.jpg" alt="John Doe" />);
 
     const img = screen.getByAltText('John Doe');
     img.onload?.(new Event('load'));
@@ -147,12 +130,7 @@ describe('Avatar 组件', () => {
   });
 
   it('应该在图片加载成功后隐藏 fallback', () => {
-    renderWithTheme(
-      <Avatar
-        src="https://example.com/avatar.jpg"
-        alt="John Doe"
-      />
-    );
+    renderWithTheme(<Avatar src="https://example.com/avatar.jpg" alt="John Doe" />);
 
     const avatar = screen.getByRole('img');
     const span = avatar.querySelector('span');
@@ -169,12 +147,7 @@ describe('Avatar 组件', () => {
   });
 
   it('应该在图片加载前显示 fallback', () => {
-    renderWithTheme(
-      <Avatar
-        src="https://example.com/avatar.jpg"
-        alt="John Doe"
-      />
-    );
+    renderWithTheme(<Avatar src="https://example.com/avatar.jpg" alt="John Doe" />);
 
     const avatar = screen.getByRole('img');
     const span = avatar.querySelector('span');
@@ -182,24 +155,14 @@ describe('Avatar 组件', () => {
   });
 
   it('应该正确处理图片加载状态', () => {
-    renderWithTheme(
-      <Avatar
-        src="https://example.com/avatar.jpg"
-        alt="John Doe"
-      />
-    );
+    renderWithTheme(<Avatar src="https://example.com/avatar.jpg" alt="John Doe" />);
 
     const img = screen.getByAltText('John Doe');
     expect(img).toBeInTheDocument();
   });
 
   it('应该正确处理图片加载错误状态', () => {
-    renderWithTheme(
-      <Avatar
-        src="https://example.com/invalid.jpg"
-        alt="John Doe"
-      />
-    );
+    renderWithTheme(<Avatar src="https://example.com/invalid.jpg" alt="John Doe" />);
 
     const img = screen.getByAltText('John Doe');
     fireEvent(img, new ErrorEvent('error'));
@@ -231,12 +194,7 @@ describe('Avatar 组件', () => {
   });
 
   it('应该在图片加载失败时显示 fallback 并设置错误状态', () => {
-    renderWithTheme(
-      <Avatar
-        src="https://example.com/invalid.jpg"
-        alt="John Doe"
-      />
-    );
+    renderWithTheme(<Avatar src="https://example.com/invalid.jpg" alt="John Doe" />);
 
     const img = screen.getByAltText('John Doe');
     fireEvent(img, new ErrorEvent('error'));
@@ -245,12 +203,7 @@ describe('Avatar 组件', () => {
   });
 
   it('应该在图片加载成功时设置加载状态', () => {
-    renderWithTheme(
-      <Avatar
-        src="https://example.com/avatar.jpg"
-        alt="John Doe"
-      />
-    );
+    renderWithTheme(<Avatar src="https://example.com/avatar.jpg" alt="John Doe" />);
 
     const img = screen.getByAltText('John Doe');
     fireEvent(img, new Event('load'));
@@ -304,12 +257,7 @@ describe('Avatar 组件', () => {
   });
 
   it('应该在图片加载失败时隐藏图片并显示 fallback', () => {
-    renderWithTheme(
-      <Avatar
-        src="https://example.com/invalid.jpg"
-        alt="John Doe"
-      />
-    );
+    renderWithTheme(<Avatar src="https://example.com/invalid.jpg" alt="John Doe" />);
 
     const img = screen.getByAltText('John Doe');
     expect(img).toBeInTheDocument();
@@ -320,12 +268,7 @@ describe('Avatar 组件', () => {
   });
 
   it('应该在图片加载成功时隐藏 fallback', () => {
-    renderWithTheme(
-      <Avatar
-        src="https://example.com/avatar.jpg"
-        alt="John Doe"
-      />
-    );
+    renderWithTheme(<Avatar src="https://example.com/avatar.jpg" alt="John Doe" />);
 
     const img = screen.getByAltText('John Doe');
     expect(img).toBeInTheDocument();

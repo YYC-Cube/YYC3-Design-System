@@ -184,14 +184,12 @@ export const LazyImage: React.FC<LazyImageProps> = ({
   };
 
   return (
-    <div style={containerStyle} className={`lazy-image-container ${className}`} data-testid={dataTestId}>
-      <img
-        ref={imgRef}
-        alt={alt}
-        className="lazy-image"
-        style={imageStyle}
-        loading="lazy"
-      />
+    <div
+      style={containerStyle}
+      className={`lazy-image-container ${className}`}
+      data-testid={dataTestId}
+    >
+      <img ref={imgRef} alt={alt} className="lazy-image" style={imageStyle} loading="lazy" />
       {isLoading && (
         <div className="lazy-image-placeholder" style={placeholderStyle}>
           {placeholderText || 'Loading...'}
@@ -235,12 +233,7 @@ export const LazyImageGrid: React.FC<LazyImageGridProps> = ({
   return (
     <div style={gridStyle} className={`lazy-image-grid ${className}`} data-testid={dataTestId}>
       {images.map((image, index) => (
-        <LazyImage
-          key={image.id || index}
-          src={image.src}
-          alt={image.alt}
-          {...imageProps}
-        />
+        <LazyImage key={image.id || index} src={image.src} alt={image.alt} {...imageProps} />
       ))}
     </div>
   );
@@ -286,7 +279,11 @@ export const LazyImageGallery: React.FC<LazyImageGalleryProps> = ({
   };
 
   return (
-    <div style={galleryStyle} className={`lazy-image-gallery ${className}`} data-testid={dataTestId}>
+    <div
+      style={galleryStyle}
+      className={`lazy-image-gallery ${className}`}
+      data-testid={dataTestId}
+    >
       {images.map((image, index) => (
         <div
           key={image.id || index}
@@ -299,11 +296,7 @@ export const LazyImageGallery: React.FC<LazyImageGalleryProps> = ({
             e.currentTarget.style.transform = 'scale(1)';
           }}
         >
-          <LazyImage
-            src={image.thumbnail || image.src}
-            alt={image.alt}
-            {...imageProps}
-          />
+          <LazyImage src={image.thumbnail || image.src} alt={image.alt} {...imageProps} />
         </div>
       ))}
       {selectedIndex !== null && (

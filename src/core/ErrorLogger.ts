@@ -10,7 +10,15 @@
  * @license MIT
  */
 
-import { ErrorLog, ErrorLevel, ErrorCategory, ErrorContext, ErrorLogFilters, ErrorReportingConfig, ErrorNotification } from '../types/error';
+import {
+  ErrorLog,
+  ErrorLevel,
+  ErrorCategory,
+  ErrorContext,
+  ErrorLogFilters,
+  ErrorReportingConfig,
+  ErrorNotification,
+} from '../types/error';
 
 export class ErrorLogger {
   private logs: ErrorLog[] = [];
@@ -151,7 +159,7 @@ export class ErrorLogger {
       duration: 5000,
     };
 
-    this.notificationCallbacks.forEach(callback => callback(notification));
+    this.notificationCallbacks.forEach((callback) => callback(notification));
   }
 
   log(log: ErrorLog): void {
@@ -177,9 +185,14 @@ export class ErrorLogger {
     this.notify(fullLog);
 
     if (typeof console !== 'undefined') {
-      const consoleMethod = log.level === ErrorLevel.DEBUG ? 'debug' :
-                          log.level === ErrorLevel.INFO ? 'info' :
-                          log.level === ErrorLevel.WARN ? 'warn' : 'error';
+      const consoleMethod =
+        log.level === ErrorLevel.DEBUG
+          ? 'debug'
+          : log.level === ErrorLevel.INFO
+            ? 'info'
+            : log.level === ErrorLevel.WARN
+              ? 'warn'
+              : 'error';
       console[consoleMethod](`[${log.category.toUpperCase()}]`, log.message, log.context);
     }
   }
@@ -250,25 +263,25 @@ export class ErrorLogger {
 
     if (filters) {
       if (filters.level) {
-        filteredLogs = filteredLogs.filter(log => log.level === filters.level);
+        filteredLogs = filteredLogs.filter((log) => log.level === filters.level);
       }
       if (filters.category) {
-        filteredLogs = filteredLogs.filter(log => log.category === filters.category);
+        filteredLogs = filteredLogs.filter((log) => log.category === filters.category);
       }
       if (filters.startTime) {
-        filteredLogs = filteredLogs.filter(log => log.context.timestamp >= filters.startTime!);
+        filteredLogs = filteredLogs.filter((log) => log.context.timestamp >= filters.startTime!);
       }
       if (filters.endTime) {
-        filteredLogs = filteredLogs.filter(log => log.context.timestamp <= filters.endTime!);
+        filteredLogs = filteredLogs.filter((log) => log.context.timestamp <= filters.endTime!);
       }
       if (filters.component) {
-        filteredLogs = filteredLogs.filter(log => log.context.component === filters.component);
+        filteredLogs = filteredLogs.filter((log) => log.context.component === filters.component);
       }
       if (filters.handled !== undefined) {
-        filteredLogs = filteredLogs.filter(log => log.handled === filters.handled);
+        filteredLogs = filteredLogs.filter((log) => log.handled === filters.handled);
       }
       if (filters.reported !== undefined) {
-        filteredLogs = filteredLogs.filter(log => log.reported === filters.reported);
+        filteredLogs = filteredLogs.filter((log) => log.reported === filters.reported);
       }
     }
 

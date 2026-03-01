@@ -1,0 +1,398 @@
+/**
+ * @file 资源优化测试
+ * @description 测试资源优化相关的工具函数
+ * @module __tests__/resource-optimization.test
+ * @author YYC³
+ * @version 1.0.0
+ * @created 2026-02-22
+ */
+
+import {
+  observeLazyImage,
+  preloadLazyImage,
+  clearImageCache,
+} from '../../utils/image-lazy-loader';
+
+import { preloadFont, clearFontCache, getFontPreloaderStats } from '../../utils/font-preloader';
+
+import {
+  preloadResource,
+  preloadResources,
+  preloadCriticalResources,
+  preconnect,
+  preconnectOrigins,
+  prefetch,
+  prefetchResources,
+  preloadScript,
+  preloadStyle,
+  preloadImage as preloadResourceImage,
+  preloadFont as preloadResourceFont,
+  isPreloaded,
+  isPreconnected,
+  isPrefetched,
+  clearAllResources,
+  getResourcePreloaderStats,
+  generatePreloadHints,
+} from '../resource-preloader';
+
+describe('资源优化测试', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    jest.clearAllTimers();
+    clearImageCache();
+    clearFontCache();
+    clearAllResources();
+  });
+
+  afterEach(() => {
+    jest.clearAllTimers();
+  });
+
+  describe('图片懒加载测试', () => {
+    it('应该观察图片并延迟加载', () => {
+      const mockElement = document.createElement('img');
+      const mockObserver = {
+        observe: jest.fn(),
+        disconnect: jest.fn(),
+      };
+      jest.spyOn(window, 'IntersectionObserver').mockImplementation((_callback) => {
+        mockObserver.observe = jest.fn();
+        return mockObserver as any;
+      });
+
+      const unobserve = observeLazyImage(mockElement, {
+        placeholder: 'data:image/svg+xml;base64,placeholder',
+      });
+
+      expect(mockObserver.observe).toHaveBeenCalledWith(mockElement);
+
+      unobserve();
+      expect(mockObserver.disconnect).toHaveBeenCalled();
+    });
+
+    it('应该使用占位符', () => {
+      const mockElement = document.createElement('img');
+      const placeholder = 'data:image/svg+xml;base64,placeholder';
+
+      observeLazyImage(mockElement, { placeholder });
+
+      expect(mockElement.src).toBe(placeholder);
+    });
+
+    it('应该处理加载完成', () => {
+      const mockElement = document.createElement('img');
+      const onLoad = jest.fn();
+
+      observeLazyImage(mockElement, { onLoad });
+
+      mockElement.dispatchEvent(new Event('load'));
+
+      expect(onLoad).toHaveBeenCalled();
+    });
+
+    it('应该处理加载错误', () => {
+      const mockElement = document.createElement('img');
+      const onError = jest.fn();
+
+      observeLazyImage(mockElement, { onError });
+
+      mockElement.dispatchEvent(new Event('error'));
+
+      expect(onError).toHaveBeenCalled();
+    });
+  });
+
+  describe('图片预加载测试', () => {
+    it('应该预加载单张图片', async () => {
+      jest.useFakeTimers();
+
+      const mockSrc = 'https://example.com/image.jpg';
+      let resolveLoad: () => void;
+      const loadPromise = new Promise<void>((resolve) => {
+        resolveLoad = resolve;
+      });
+
+      const mockImage = {
+        onload: null as ((ev: Event) => any) | null,
+        onerror: null as ((ev: Event) => any) | null,
+        src: '',
+      };
+
+      jest
+        .spyOn(window, 'Image')
+        .mockImplementation(() => {
+          setTimeout(() => {
+            if (mockImage.onload) {
+              mockImage.onload.call(mockImage, new Event('load'));
+            }
+            resolveLoad();
+          }, 100);
+
+          return mockImage as unknown as HTMLImageElement;
+        });
+
+      await preloadLazyImage(mockSrc);
+
+      expect(mockImage.onload).toBeDefined();
+      await loadPromise;
+
+      jest.useRealTimers();
+    }, 10000);
+  });
+
+  describe('字体预加载测试', () => {
+    it('应该预加载单个字体', async () => {
+      const mockFont = {
+        fontFamily: 'Test Font',
+        fontSrc: 'https://example.com/font.woff2',
+      };
+
+      await preloadFont(mockFont.fontFamily, mockFont.fontSrc);
+
+      const stats = getFontPreloaderStats();
+      expect(stats).toBeDefined();
+    });
+
+    it('应该清空字体缓存', async () => {
+      const mockFont = {
+        fontFamily: 'Test Font',
+        fontSrc: 'https://example.com/font.woff2',
+      };
+
+      await preloadFont(mockFont.fontFamily, mockFont.fontSrc);
+
+      clearFontCache();
+
+      const stats = getFontPreloaderStats();
+      expect(stats.cacheSize).toBe(0);
+    });
+  });
+
+  describe('资源预加载测试', () => {
+    it('应该预加载单个资源', async () => {
+      const mockUrl = 'https://example.com/script.js';
+
+      preloadResource(mockUrl, 'script');
+
+      expect(isPreloaded(mockUrl)).toBe(true);
+    });
+
+    it('应该批量预加载资源', async () => {
+      const mockResources = [
+        { url: 'https://example.com/script.js', type: 'script' as const },
+        { url: 'https://example.com/style.css', type: 'style' as const },
+      ];
+
+      preloadResources(mockResources);
+
+      expect(isPreloaded(mockResources[0].url)).toBe(true);
+      expect(isPreloaded(mockResources[1].url)).toBe(true);
+    });
+
+    it('应该预加载关键资源', async () => {
+      const mockResources = [{ url: 'https://example.com/script.js', type: 'script' as const }];
+
+      preloadCriticalResources(mockResources);
+
+      expect(isPreloaded(mockResources[0].url)).toBe(true);
+    });
+
+    it('应该预连接到源', async () => {
+      const mockUrl = 'https://example.com';
+
+      preconnect(mockUrl);
+
+      expect(isPreconnected(mockUrl)).toBe(true);
+    });
+
+    it('应该批量预连接到源', async () => {
+      const mockUrls = ['https://example1.com', 'https://example2.com'];
+
+      preconnectOrigins(mockUrls);
+
+      expect(isPreconnected(mockUrls[0])).toBe(true);
+      expect(isPreconnected(mockUrls[1])).toBe(true);
+    });
+
+    it('应该预取资源', async () => {
+      const mockUrl = 'https://example.com/script.js';
+
+      prefetch(mockUrl, 'script');
+
+      expect(isPrefetched(mockUrl)).toBe(true);
+    });
+
+    it('应该批量预取资源', async () => {
+      const mockResources = [
+        { url: 'https://example.com/script.js', type: 'script' as const },
+        { url: 'https://example.com/style.css', type: 'style' as const },
+      ];
+
+      prefetchResources(mockResources);
+
+      expect(isPrefetched(mockResources[0].url)).toBe(true);
+      expect(isPrefetched(mockResources[1].url)).toBe(true);
+    });
+
+    it('应该预加载脚本', async () => {
+      const mockUrl = 'https://example.com/script.js';
+
+      preloadScript(mockUrl);
+
+      expect(isPreloaded(mockUrl)).toBe(true);
+    });
+
+    it('应该预加载样式', async () => {
+      const mockUrl = 'https://example.com/style.css';
+
+      preloadStyle(mockUrl);
+
+      expect(isPreloaded(mockUrl)).toBe(true);
+    });
+
+    it('应该预加载图片', async () => {
+      const mockUrl = 'https://example.com/image.jpg';
+
+      preloadResourceImage(mockUrl);
+
+      expect(isPreloaded(mockUrl)).toBe(true);
+    });
+
+    it('应该预加载字体', async () => {
+      const mockUrl = 'https://example.com/font.woff2';
+
+      preloadResourceFont(mockUrl);
+
+      expect(isPreloaded(mockUrl)).toBe(true);
+    });
+
+    it('应该清空所有资源缓存', async () => {
+      const mockUrl = 'https://example.com/script.js';
+
+      preloadResource(mockUrl, 'script');
+
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      expect(getResourcePreloaderStats().count).toBeGreaterThan(0);
+
+      clearAllResources();
+
+      expect(getResourcePreloaderStats().count).toBe(0);
+    });
+
+    it('应该生成预加载提示', async () => {
+      const mockUrl = 'https://example.com/script.js';
+
+      preloadResource(mockUrl, 'script');
+
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      const hints = generatePreloadHints();
+      expect(hints.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('性能基准测试', () => {
+    it('应该测量图片加载性能', async () => {
+      jest.useFakeTimers();
+
+      const mockSrc = 'https://example.com/image.jpg';
+      let resolveLoad: () => void;
+      const loadPromise = new Promise<void>((resolve) => {
+        resolveLoad = resolve;
+      });
+
+      const mockImage = {
+        onload: null as ((ev: Event) => any) | null,
+        onerror: null as ((ev: Event) => any) | null,
+        src: '',
+      };
+
+      jest
+        .spyOn(window, 'Image')
+        .mockImplementation(() => {
+          setTimeout(() => {
+            if (mockImage.onload) {
+              mockImage.onload(new Event('load'));
+            }
+            resolveLoad();
+          }, 100);
+
+          return mockImage as unknown as HTMLImageElement;
+        });
+
+      const start = performance.now();
+
+      await preloadLazyImage(mockSrc);
+
+      jest.runAllTimers();
+      await loadPromise;
+
+      const end = performance.now();
+      const loadTime = end - start;
+
+      expect(loadTime).toBeLessThan(1000);
+
+      jest.useRealTimers();
+    }, 10000);
+
+    it('应该测量字体加载性能', async () => {
+      jest.useFakeTimers();
+
+      jest.spyOn(document.head, 'appendChild').mockImplementation((node) => {
+        setTimeout(() => {
+          const event = new Event('load');
+          (node as HTMLElement).dispatchEvent(event);
+        }, 100);
+        return node;
+      });
+
+      const mockFont = {
+        fontFamily: 'Test Font',
+        fontSrc: 'https://example.com/font.woff2',
+      };
+
+      const start = performance.now();
+
+      await preloadFont(mockFont.fontFamily, mockFont.fontSrc);
+
+      jest.runAllTimers();
+      await new Promise(resolve => setTimeout(resolve, 200));
+
+      const end = performance.now();
+      const loadTime = end - start;
+
+      expect(loadTime).toBeLessThan(500);
+
+      jest.useRealTimers();
+    }, 10000);
+
+    it('应该测量资源预加载性能', async () => {
+      jest.useFakeTimers();
+
+      jest.spyOn(document.head, 'appendChild').mockImplementation((node) => {
+        setTimeout(() => {
+          const event = new Event('load');
+          (node as HTMLElement).dispatchEvent(event);
+        }, 100);
+        return node;
+      });
+
+      const mockUrl = 'https://example.com/script.js';
+
+      const start = performance.now();
+
+      preloadResource(mockUrl, 'script');
+
+      jest.runAllTimers();
+      await new Promise(resolve => setTimeout(resolve, 200));
+
+      const end = performance.now();
+      const loadTime = end - start;
+
+      expect(loadTime).toBeLessThan(500);
+
+      jest.useRealTimers();
+    }, 10000);
+  });
+});

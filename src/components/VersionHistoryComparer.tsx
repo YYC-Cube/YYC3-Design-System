@@ -4,7 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from './Card';
 import { Button } from './Button';
 import { Badge } from './Badge';
 import { useTheme } from '../theme/useTheme';
-import { versionHistoryComparer, TokenVersion, VersionComparison } from '../ai/version-history-comparer';
+import {
+  versionHistoryComparer,
+  TokenVersion,
+  VersionComparison,
+} from '../ai/version-history-comparer';
 import { DesignTokens } from '../types/global';
 
 export interface VersionHistoryComparerProps {
@@ -63,16 +67,22 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
     setViewMode('comparison');
   }, [selectedVersion1, selectedVersion2]);
 
-  const handleRestoreVersion = useCallback((version: TokenVersion) => {
-    if (onVersionRestore) {
-      onVersionRestore(version.tokens);
-    }
-  }, [onVersionRestore]);
+  const handleRestoreVersion = useCallback(
+    (version: TokenVersion) => {
+      if (onVersionRestore) {
+        onVersionRestore(version.tokens);
+      }
+    },
+    [onVersionRestore]
+  );
 
-  const handleDeleteVersion = useCallback((versionId: string) => {
-    versionHistoryComparer.deleteVersion(versionId);
-    loadVersions();
-  }, [loadVersions]);
+  const handleDeleteVersion = useCallback(
+    (versionId: string) => {
+      versionHistoryComparer.deleteVersion(versionId);
+      loadVersions();
+    },
+    [loadVersions]
+  );
 
   const handleExportVersions = useCallback(() => {
     const data = versionHistoryComparer.exportVersions();
@@ -85,23 +95,26 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
     URL.revokeObjectURL(url);
   }, []);
 
-  const handleImportVersions = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        if (e.target?.result) {
-          try {
-            versionHistoryComparer.importVersions(e.target.result as string);
-            loadVersions();
-          } catch (error) {
-            console.error('Failed to import versions:', error);
+  const handleImportVersions = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          if (e.target?.result) {
+            try {
+              versionHistoryComparer.importVersions(e.target.result as string);
+              loadVersions();
+            } catch (error) {
+              console.error('Failed to import versions:', error);
+            }
           }
-        }
-      };
-      reader.readAsText(file);
-    }
-  }, [loadVersions]);
+        };
+        reader.readAsText(file);
+      }
+    },
+    [loadVersions]
+  );
 
   useEffect(() => {
     const loadedVersions = versionHistoryComparer.getVersions();
@@ -121,11 +134,12 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
       }`}
       style={{
         background: getTokenValue('color.card'),
-        borderColor: selectedVersion1 === version.id
-          ? getTokenValue('color.primary')
-          : selectedVersion2 === version.id
-          ? getTokenValue('color.secondary')
-          : getTokenValue('color.border'),
+        borderColor:
+          selectedVersion1 === version.id
+            ? getTokenValue('color.primary')
+            : selectedVersion2 === version.id
+              ? getTokenValue('color.secondary')
+              : getTokenValue('color.border'),
       }}
     >
       <div className="flex items-start justify-between mb-2">
@@ -147,9 +161,10 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
             onClick={() => setSelectedVersion1(version.id)}
             className="w-6 h-6 rounded text-xs"
             style={{
-              background: selectedVersion1 === version.id
-                ? getTokenValue('color.primary')
-                : getTokenValue('color.muted'),
+              background:
+                selectedVersion1 === version.id
+                  ? getTokenValue('color.primary')
+                  : getTokenValue('color.muted'),
               color: '#ffffff',
             }}
           >
@@ -159,9 +174,10 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
             onClick={() => setSelectedVersion2(version.id)}
             className="w-6 h-6 rounded text-xs"
             style={{
-              background: selectedVersion2 === version.id
-                ? getTokenValue('color.secondary')
-                : getTokenValue('color.muted'),
+              background:
+                selectedVersion2 === version.id
+                  ? getTokenValue('color.secondary')
+                  : getTokenValue('color.muted'),
               color: '#ffffff',
             }}
           >
@@ -197,22 +213,20 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
       className="p-3 rounded-lg border-2"
       style={{
         background: getTokenValue('color.card'),
-        borderColor: change.type === 'added'
-          ? '#16a34a'
-          : change.type === 'removed'
-          ? '#dc2626'
-          : '#ea580c',
+        borderColor:
+          change.type === 'added' ? '#16a34a' : change.type === 'removed' ? '#dc2626' : '#ea580c',
       }}
     >
       <div className="flex items-start justify-between mb-2">
         <div className="flex gap-2 flex-wrap">
           <Badge
             style={{
-              background: change.type === 'added'
-                ? '#16a34a'
-                : change.type === 'removed'
-                ? '#dc2626'
-                : '#ea580c',
+              background:
+                change.type === 'added'
+                  ? '#16a34a'
+                  : change.type === 'removed'
+                    ? '#dc2626'
+                    : '#ea580c',
               color: '#ffffff',
             }}
           >
@@ -233,8 +247,8 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
               change.impact === 'high'
                 ? '#dc2626'
                 : change.impact === 'medium'
-                ? '#ea580c'
-                : '#65a30d',
+                  ? '#ea580c'
+                  : '#65a30d',
             color: '#ffffff',
           }}
         >
@@ -295,7 +309,10 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+                <label
+                  className="block text-sm font-medium mb-2"
+                  style={{ color: getTokenValue('color.foreground') }}
+                >
                   版本名称
                 </label>
                 <input
@@ -313,7 +330,10 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+                <label
+                  className="block text-sm font-medium mb-2"
+                  style={{ color: getTokenValue('color.foreground') }}
+                >
                   版本描述
                 </label>
                 <input
@@ -331,7 +351,11 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
               </div>
             </div>
 
-            <Button onClick={handleSaveVersion} disabled={!newVersionName.trim()} className="w-full">
+            <Button
+              onClick={handleSaveVersion}
+              disabled={!newVersionName.trim()}
+              className="w-full"
+            >
               保存当前版本
             </Button>
 
@@ -343,19 +367,30 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
                 <Button variant="secondary" className="w-full">
                   导入版本
                 </Button>
-                <input type="file" accept=".json" onChange={handleImportVersions} className="hidden" />
+                <input
+                  type="file"
+                  accept=".json"
+                  onChange={handleImportVersions}
+                  className="hidden"
+                />
               </label>
             </div>
 
-            <h3 className="text-sm font-medium" style={{ color: getTokenValue('color.foreground') }}>
+            <h3
+              className="text-sm font-medium"
+              style={{ color: getTokenValue('color.foreground') }}
+            >
               版本历史 ({versions.length})
             </h3>
 
             {versions.length === 0 ? (
-              <div className="text-center p-8 rounded-lg" style={{
-                background: getTokenValue('color.card'),
-                border: `2px solid ${getTokenValue('color.border')}`,
-              }}>
+              <div
+                className="text-center p-8 rounded-lg"
+                style={{
+                  background: getTokenValue('color.card'),
+                  border: `2px solid ${getTokenValue('color.border')}`,
+                }}
+              >
                 <p className="text-sm" style={{ color: getTokenValue('color.muted-foreground') }}>
                   暂无保存的版本
                 </p>
@@ -376,11 +411,17 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
 
         {viewMode === 'comparison' && comparison && (
           <div className="space-y-6">
-            <div className="p-4 rounded-lg" style={{
-              background: getTokenValue('color.card'),
-              border: `2px solid ${getTokenValue('color.border')}`,
-            }}>
-              <h3 className="text-sm font-medium mb-4" style={{ color: getTokenValue('color.foreground') }}>
+            <div
+              className="p-4 rounded-lg"
+              style={{
+                background: getTokenValue('color.card'),
+                border: `2px solid ${getTokenValue('color.border')}`,
+              }}
+            >
+              <h3
+                className="text-sm font-medium mb-4"
+                style={{ color: getTokenValue('color.foreground') }}
+              >
                 对比摘要
               </h3>
 
@@ -389,7 +430,10 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
                   <div className="text-2xl font-bold mb-1" style={{ color: '#16a34a' }}>
                     {comparison.summary.addedCount}
                   </div>
-                  <div className="text-xs" style={{ color: getTokenValue('color.muted-foreground') }}>
+                  <div
+                    className="text-xs"
+                    style={{ color: getTokenValue('color.muted-foreground') }}
+                  >
                     新增
                   </div>
                 </div>
@@ -398,7 +442,10 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
                   <div className="text-2xl font-bold mb-1" style={{ color: '#dc2626' }}>
                     {comparison.summary.removedCount}
                   </div>
-                  <div className="text-xs" style={{ color: getTokenValue('color.muted-foreground') }}>
+                  <div
+                    className="text-xs"
+                    style={{ color: getTokenValue('color.muted-foreground') }}
+                  >
                     删除
                   </div>
                 </div>
@@ -407,14 +454,20 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
                   <div className="text-2xl font-bold mb-1" style={{ color: '#ea580c' }}>
                     {comparison.summary.modifiedCount}
                   </div>
-                  <div className="text-xs" style={{ color: getTokenValue('color.muted-foreground') }}>
+                  <div
+                    className="text-xs"
+                    style={{ color: getTokenValue('color.muted-foreground') }}
+                  >
                     修改
                   </div>
                 </div>
               </div>
 
               <div className="text-center mt-4">
-                <div className="text-3xl font-bold mb-1" style={{ color: getTokenValue('color.primary') }}>
+                <div
+                  className="text-3xl font-bold mb-1"
+                  style={{ color: getTokenValue('color.primary') }}
+                >
                   {comparison.summary.totalChanges}
                 </div>
                 <div className="text-xs" style={{ color: getTokenValue('color.muted-foreground') }}>
@@ -425,7 +478,10 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
 
             {comparison.added.length > 0 && (
               <div className="space-y-2">
-                <h4 className="text-sm font-medium" style={{ color: getTokenValue('color.foreground') }}>
+                <h4
+                  className="text-sm font-medium"
+                  style={{ color: getTokenValue('color.foreground') }}
+                >
                   新增的令牌 ({comparison.added.length})
                 </h4>
                 <div className="space-y-2">
@@ -436,7 +492,10 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
 
             {comparison.removed.length > 0 && (
               <div className="space-y-2">
-                <h4 className="text-sm font-medium" style={{ color: getTokenValue('color.foreground') }}>
+                <h4
+                  className="text-sm font-medium"
+                  style={{ color: getTokenValue('color.foreground') }}
+                >
                   删除的令牌 ({comparison.removed.length})
                 </h4>
                 <div className="space-y-2">
@@ -447,7 +506,10 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
 
             {comparison.modified.length > 0 && (
               <div className="space-y-2">
-                <h4 className="text-sm font-medium" style={{ color: getTokenValue('color.foreground') }}>
+                <h4
+                  className="text-sm font-medium"
+                  style={{ color: getTokenValue('color.foreground') }}
+                >
                   修改的令牌 ({comparison.modified.length})
                 </h4>
                 <div className="space-y-2">
@@ -463,10 +525,13 @@ export const VersionHistoryComparer: React.FC<VersionHistoryComparerProps> = ({
         )}
 
         {viewMode === 'cross-project' && (
-          <div className="text-center p-8 rounded-lg" style={{
-            background: getTokenValue('color.card'),
-            border: `2px solid ${getTokenValue('color.border')}`,
-          }}>
+          <div
+            className="text-center p-8 rounded-lg"
+            style={{
+              background: getTokenValue('color.card'),
+              border: `2px solid ${getTokenValue('color.border')}`,
+            }}
+          >
             <p className="text-sm mb-4" style={{ color: getTokenValue('color.muted-foreground') }}>
               跨项目对比功能需要配置其他项目的设计令牌
             </p>

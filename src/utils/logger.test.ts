@@ -47,7 +47,9 @@ describe('logger', () => {
 
       logger.debug('Debug message', 'arg1', 'arg2', { key: 'value' });
 
-      expect(consoleWarnSpy).toHaveBeenCalledWith('Debug message', 'arg1', 'arg2', { key: 'value' });
+      expect(consoleWarnSpy).toHaveBeenCalledWith('Debug message', 'arg1', 'arg2', {
+        key: 'value',
+      });
       consoleWarnSpy.mockRestore();
     });
   });
@@ -143,7 +145,9 @@ describe('logger', () => {
 
       logger.error('Error message', 'arg1', 'arg2', { key: 'value' });
 
-      expect(consoleErrorSpy).toHaveBeenCalledWith('Error message', 'arg1', 'arg2', { key: 'value' });
+      expect(consoleErrorSpy).toHaveBeenCalledWith('Error message', 'arg1', 'arg2', {
+        key: 'value',
+      });
       consoleErrorSpy.mockRestore();
     });
 

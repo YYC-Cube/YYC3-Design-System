@@ -59,8 +59,15 @@ export class ColorRecommender {
     const harmonies = this.moodHarmonies[mood] || ['complementary', 'analogous'];
     const schemes: ColorScheme[] = [];
 
-    harmonies.forEach(harmony => {
-      const scheme = this.generateScheme(baseColor, harmony, purpose, mood, accessibility, maxColors);
+    harmonies.forEach((harmony) => {
+      const scheme = this.generateScheme(
+        baseColor,
+        harmony,
+        purpose,
+        mood,
+        accessibility,
+        maxColors
+      );
       if (scheme) {
         schemes.push(scheme);
       }
@@ -88,7 +95,10 @@ export class ColorRecommender {
       colors,
       harmony,
       mood,
-      accessibility: this.checkAccessibility(colors, this.accessibilityRatios[accessibility as keyof typeof this.accessibilityRatios]),
+      accessibility: this.checkAccessibility(
+        colors,
+        this.accessibilityRatios[accessibility as keyof typeof this.accessibilityRatios]
+      ),
     };
 
     return scheme;
@@ -135,7 +145,7 @@ export class ColorRecommender {
 
       case 'monochromatic':
         for (let i = 1; i < count; i++) {
-          const lightness = 0.2 + (i * 0.6 / count);
+          const lightness = 0.2 + (i * 0.6) / count;
           colors.push(this.adjustLightness(baseColor, lightness - 0.5));
         }
         break;
@@ -145,16 +155,30 @@ export class ColorRecommender {
   }
 
   private adjustHue(color: string, degrees: number): string {
-    const hsl = culori.converter('hsl')(color) as { h: number; s: number; l: number; mode?: 'hsl' } | null;
+    const hsl = culori.converter('hsl')(color) as {
+      h: number;
+      s: number;
+      l: number;
+      mode?: 'hsl';
+    } | null;
     if (!hsl) return color;
     const adjusted = { ...hsl, h: ((hsl.h || 0) + degrees + 360) % 360, mode: 'hsl' as const };
     return culori.formatter.hex(adjusted);
   }
 
   private adjustLightness(color: string, delta: number): string {
-    const hsl = culori.converter('hsl')(color) as { h: number; s: number; l: number; mode?: 'hsl' } | null;
+    const hsl = culori.converter('hsl')(color) as {
+      h: number;
+      s: number;
+      l: number;
+      mode?: 'hsl';
+    } | null;
     if (!hsl) return color;
-    const adjusted = { ...hsl, l: Math.max(0, Math.min(1, (hsl.l || 0.5) + delta)), mode: 'hsl' as const };
+    const adjusted = {
+      ...hsl,
+      l: Math.max(0, Math.min(1, (hsl.l || 0.5) + delta)),
+      mode: 'hsl' as const,
+    };
     return culori.formatter.hex(adjusted);
   }
 
@@ -215,7 +239,12 @@ export class ColorRecommender {
   }
 
   private getLuminance(color: string): number {
-    const rgb = culori.converter('rgb')(color) as { r: number; g: number; b: number; mode?: 'rgb' } | null;
+    const rgb = culori.converter('rgb')(color) as {
+      r: number;
+      g: number;
+      b: number;
+      mode?: 'rgb';
+    } | null;
     if (!rgb) return 0;
     const r = this.sRGBToLinear(rgb.r || 0);
     const g = this.sRGBToLinear(rgb.g || 0);
@@ -244,8 +273,10 @@ export class ColorRecommender {
   private calculateColorVariance(colors: string[]): number {
     if (colors.length < 2) return 0;
 
-    const hsls = colors.map(c => culori.converter('hsl')(c) as { h: number; s: number; l: number; mode?: 'hsl' } | null);
-    const hues = hsls.map(h => h?.h || 0);
+    const hsls = colors.map(
+      (c) => culori.converter('hsl')(c) as { h: number; s: number; l: number; mode?: 'hsl' } | null
+    );
+    const hues = hsls.map((h) => h?.h || 0);
     const avgHue = hues.reduce((a, b) => a + b, 0) / hues.length;
     const hueVariance = hues.reduce((sum, h) => sum + Math.pow(h - avgHue, 2), 0) / hues.length;
 
@@ -253,7 +284,12 @@ export class ColorRecommender {
   }
 
   analyzeColorMood(color: string): string {
-    const hsl = culori.converter('hsl')(color) as { h: number; s: number; l: number; mode?: 'hsl' } | null;
+    const hsl = culori.converter('hsl')(color) as {
+      h: number;
+      s: number;
+      l: number;
+      mode?: 'hsl';
+    } | null;
     if (!hsl) return 'professional';
     const hue = hsl.h || 0;
     const saturation = hsl.s || 0;
@@ -302,7 +338,7 @@ export class ColorRecommender {
     let bestColor = candidateColors[0];
     let bestRatio = 0;
 
-    candidateColors.forEach(color => {
+    candidateColors.forEach((color) => {
       const ratio = this.calculateContrastRatio(baseColor, color);
       if (ratio > bestRatio) {
         bestRatio = ratio;

@@ -1,0 +1,160 @@
+e6b78df6de74b247845dde5807651b0c
+"use strict";
+
+/* istanbul ignore next */
+function cov_1nhggvsxg4() {
+  var path = "/Users/yanyu/Downloads/yyc3-Design-System/src/components/ColorContrastChecker.stories.tsx";
+  var hash = "b87c6812a37d1c4fcb89a833e6c30761977e31eb";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/yanyu/Downloads/yyc3-Design-System/src/components/ColorContrastChecker.stories.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 44
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 31
+        },
+        end: {
+          line: 4,
+          column: 64
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 13
+        },
+        end: {
+          line: 12,
+          column: 1
+        }
+      },
+      "4": {
+        start: {
+          line: 13,
+          column: 0
+        },
+        end: {
+          line: 13,
+          column: 23
+        }
+      },
+      "5": {
+        start: {
+          line: 14,
+          column: 0
+        },
+        end: {
+          line: 16,
+          column: 2
+        }
+      },
+      "6": {
+        start: {
+          line: 17,
+          column: 0
+        },
+        end: {
+          line: 24,
+          column: 2
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    },
+    f: {},
+    b: {},
+    inputSourceMap: {
+      file: "/Users/yanyu/Downloads/yyc3-Design-System/src/components/ColorContrastChecker.stories.tsx",
+      mappings: ";;;AACA,iEAA8D;AAE9D,MAAM,IAAI,GAAsC;IAC9C,KAAK,EAAE,4BAA4B;IACnC,SAAS,EAAE,2CAAoB;IAC/B,IAAI,EAAE,CAAC,UAAU,CAAC;IAClB,UAAU,EAAE;QACV,MAAM,EAAE,YAAY;KACrB;CACF,CAAC;AAEF,kBAAe,IAAI,CAAC;AAGP,QAAA,OAAO,GAAU;IAC5B,IAAI,EAAE,EAAE;CACT,CAAC;AAEW,QAAA,QAAQ,GAAU;IAC7B,UAAU,EAAE;QACV,WAAW,EAAE;YACX,OAAO,EAAE,MAAM;SAChB;KACF;IACD,IAAI,EAAE,EAAE;CACT,CAAC",
+      names: [],
+      sources: ["/Users/yanyu/Downloads/yyc3-Design-System/src/components/ColorContrastChecker.stories.tsx"],
+      sourcesContent: ["import type { Meta, StoryObj } from '@storybook/react';\nimport { ColorContrastChecker } from './ColorContrastChecker';\n\nconst meta: Meta<typeof ColorContrastChecker> = {\n  title: 'Tools/ColorContrastChecker',\n  component: ColorContrastChecker,\n  tags: ['autodocs'],\n  parameters: {\n    layout: 'fullscreen',\n  },\n};\n\nexport default meta;\ntype Story = StoryObj<typeof ColorContrastChecker>;\n\nexport const Default: Story = {\n  args: {},\n};\n\nexport const DarkMode: Story = {\n  parameters: {\n    backgrounds: {\n      default: 'dark',\n    },\n  },\n  args: {},\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "b87c6812a37d1c4fcb89a833e6c30761977e31eb"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1nhggvsxg4 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_1nhggvsxg4();
+cov_1nhggvsxg4().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_1nhggvsxg4().s[1]++;
+exports.DarkMode = exports.Default = void 0;
+const ColorContrastChecker_1 =
+/* istanbul ignore next */
+(cov_1nhggvsxg4().s[2]++, require("./ColorContrastChecker"));
+const meta =
+/* istanbul ignore next */
+(cov_1nhggvsxg4().s[3]++, {
+  title: 'Tools/ColorContrastChecker',
+  component: ColorContrastChecker_1.ColorContrastChecker,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'fullscreen'
+  }
+});
+/* istanbul ignore next */
+cov_1nhggvsxg4().s[4]++;
+exports.default = meta;
+/* istanbul ignore next */
+cov_1nhggvsxg4().s[5]++;
+exports.Default = {
+  args: {}
+};
+/* istanbul ignore next */
+cov_1nhggvsxg4().s[6]++;
+exports.DarkMode = {
+  parameters: {
+    backgrounds: {
+      default: 'dark'
+    }
+  },
+  args: {}
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMW5oZ2d2c3hnNCIsImFjdHVhbENvdmVyYWdlIiwicyIsIkNvbG9yQ29udHJhc3RDaGVja2VyXzEiLCJyZXF1aXJlIiwibWV0YSIsInRpdGxlIiwiY29tcG9uZW50IiwiQ29sb3JDb250cmFzdENoZWNrZXIiLCJ0YWdzIiwicGFyYW1ldGVycyIsImxheW91dCIsImV4cG9ydHMiLCJkZWZhdWx0IiwiRGVmYXVsdCIsImFyZ3MiLCJEYXJrTW9kZSIsImJhY2tncm91bmRzIl0sInNvdXJjZXMiOlsiL1VzZXJzL3lhbnl1L0Rvd25sb2Fkcy95eWMzLURlc2lnbi1TeXN0ZW0vc3JjL2NvbXBvbmVudHMvQ29sb3JDb250cmFzdENoZWNrZXIuc3Rvcmllcy50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHR5cGUgeyBNZXRhLCBTdG9yeU9iaiB9IGZyb20gJ0BzdG9yeWJvb2svcmVhY3QnO1xuaW1wb3J0IHsgQ29sb3JDb250cmFzdENoZWNrZXIgfSBmcm9tICcuL0NvbG9yQ29udHJhc3RDaGVja2VyJztcblxuY29uc3QgbWV0YTogTWV0YTx0eXBlb2YgQ29sb3JDb250cmFzdENoZWNrZXI+ID0ge1xuICB0aXRsZTogJ1Rvb2xzL0NvbG9yQ29udHJhc3RDaGVja2VyJyxcbiAgY29tcG9uZW50OiBDb2xvckNvbnRyYXN0Q2hlY2tlcixcbiAgdGFnczogWydhdXRvZG9jcyddLFxuICBwYXJhbWV0ZXJzOiB7XG4gICAgbGF5b3V0OiAnZnVsbHNjcmVlbicsXG4gIH0sXG59O1xuXG5leHBvcnQgZGVmYXVsdCBtZXRhO1xudHlwZSBTdG9yeSA9IFN0b3J5T2JqPHR5cGVvZiBDb2xvckNvbnRyYXN0Q2hlY2tlcj47XG5cbmV4cG9ydCBjb25zdCBEZWZhdWx0OiBTdG9yeSA9IHtcbiAgYXJnczoge30sXG59O1xuXG5leHBvcnQgY29uc3QgRGFya01vZGU6IFN0b3J5ID0ge1xuICBwYXJhbWV0ZXJzOiB7XG4gICAgYmFja2dyb3VuZHM6IHtcbiAgICAgIGRlZmF1bHQ6ICdkYXJrJyxcbiAgICB9LFxuICB9LFxuICBhcmdzOiB7fSxcbn07XG4iXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFpQkU7SUFBQUEsY0FBQSxZQUFBQSxDQUFBO01BQUEsT0FBQUMsY0FBQTtJQUFBO0VBQUE7RUFBQSxPQUFBQSxjQUFBO0FBQUE7QUFBQUQsY0FBQTtBQUFBQSxjQUFBLEdBQUFFLENBQUE7Ozs7Ozs7QUFoQkYsTUFBQUMsc0JBQUE7QUFBQTtBQUFBLENBQUFILGNBQUEsR0FBQUUsQ0FBQSxPQUFBRSxPQUFBO0FBRUEsTUFBTUMsSUFBSTtBQUFBO0FBQUEsQ0FBQUwsY0FBQSxHQUFBRSxDQUFBLE9BQXNDO0VBQzlDSSxLQUFLLEVBQUUsNEJBQTRCO0VBQ25DQyxTQUFTLEVBQUVKLHNCQUFBLENBQUFLLG9CQUFvQjtFQUMvQkMsSUFBSSxFQUFFLENBQUMsVUFBVSxDQUFDO0VBQ2xCQyxVQUFVLEVBQUU7SUFDVkMsTUFBTSxFQUFFOztDQUVYO0FBQUM7QUFBQVgsY0FBQSxHQUFBRSxDQUFBO0FBRUZVLE9BQUEsQ0FBQUMsT0FBQSxHQUFlUixJQUFJO0FBQUM7QUFBQUwsY0FBQSxHQUFBRSxDQUFBO0FBR1BVLE9BQUEsQ0FBQUUsT0FBTyxHQUFVO0VBQzVCQyxJQUFJLEVBQUU7Q0FDUDtBQUFDO0FBQUFmLGNBQUEsR0FBQUUsQ0FBQTtBQUVXVSxPQUFBLENBQUFJLFFBQVEsR0FBVTtFQUM3Qk4sVUFBVSxFQUFFO0lBQ1ZPLFdBQVcsRUFBRTtNQUNYSixPQUFPLEVBQUU7O0dBRVo7RUFDREUsSUFBSSxFQUFFO0NBQ1AiLCJpZ25vcmVMaXN0IjpbXX0=

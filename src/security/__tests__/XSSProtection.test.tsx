@@ -8,11 +8,9 @@
  */
 
 import * as React from 'react';
-;
-;
-import { XSSProvider, useXSS } from '../XSSProtection'
-import { render, cleanup, fireEvent, waitFor, act } from '@testing-library/react'
-import { screen } from '@testing-library/dom';;
+import { XSSProvider, useXSS } from '../XSSProtection';
+import { render, cleanup, fireEvent, waitFor, act } from '@testing-library/react';
+import { screen } from '@testing-library/dom';
 
 describe('XSS Protection Module', () => {
   beforeEach(() => {
@@ -32,11 +30,7 @@ describe('XSS Protection Module', () => {
 
         return (
           <div>
-            <input
-              data-testid="input"
-              value={dirty}
-              onChange={(e) => setDirty(e.target.value)}
-            />
+            <input data-testid="input" value={dirty} onChange={(e) => setDirty(e.target.value)} />
             <div data-testid="output">{clean}</div>
           </div>
         );
@@ -62,7 +56,7 @@ describe('XSS Protection Module', () => {
     it('应该支持自定义配置', async () => {
       const customConfig = {
         allowedTags: ['b', 'i', 'em'],
-        allowedAttributes: {}
+        allowedAttributes: {},
       };
 
       const TestComponent = () => {
@@ -74,11 +68,7 @@ describe('XSS Protection Module', () => {
           sanitize(input).then(setClean);
         }, [input, sanitize]);
 
-        return (
-          <div data-testid="output">
-            {clean}
-          </div>
-        );
+        return <div data-testid="output">{clean}</div>;
       };
 
       render(
@@ -88,11 +78,11 @@ describe('XSS Protection Module', () => {
       );
 
       const output = screen.getByTestId('output');
-      
+
       await waitFor(() => {
         expect(output.textContent).toContain('bold');
       });
-      
+
       expect(output.textContent).not.toContain('<script>');
     });
 
@@ -105,11 +95,7 @@ describe('XSS Protection Module', () => {
           sanitize('&lt;script&gt;alert(1)&lt;/script&gt;').then(setClean);
         }, [sanitize]);
 
-        return (
-          <div data-testid="output">
-            {clean}
-          </div>
-        );
+        return <div data-testid="output">{clean}</div>;
       };
 
       render(
@@ -119,7 +105,7 @@ describe('XSS Protection Module', () => {
       );
 
       const output = screen.getByTestId('output');
-      
+
       await waitFor(() => {
         expect(output.textContent).toBeDefined();
       });
@@ -134,11 +120,7 @@ describe('XSS Protection Module', () => {
           sanitize('<div onclick="alert(1)">click</div>').then(setClean);
         }, [sanitize]);
 
-        return (
-          <div data-testid="output">
-            {clean}
-          </div>
-        );
+        return <div data-testid="output">{clean}</div>;
       };
 
       render(
@@ -148,7 +130,7 @@ describe('XSS Protection Module', () => {
       );
 
       const output = screen.getByTestId('output');
-      
+
       await waitFor(() => {
         expect(output.textContent).not.toContain('onclick');
       });
@@ -165,11 +147,7 @@ describe('XSS Protection Module', () => {
           sanitize('<p>safe content</p>').then(setClean);
         }, [sanitize]);
 
-        return (
-          <div data-testid="output">
-            {clean}
-          </div>
-        );
+        return <div data-testid="output">{clean}</div>;
       };
 
       render(
@@ -179,7 +157,7 @@ describe('XSS Protection Module', () => {
       );
 
       const output = screen.getByTestId('output');
-      
+
       await waitFor(() => {
         expect(output).toBeInTheDocument();
       });
@@ -194,11 +172,7 @@ describe('XSS Protection Module', () => {
           sanitize('').then(setClean);
         }, [sanitize]);
 
-        return (
-          <div data-testid="output">
-            {clean}
-          </div>
-        );
+        return <div data-testid="output">{clean}</div>;
       };
 
       render(
@@ -208,7 +182,7 @@ describe('XSS Protection Module', () => {
       );
 
       const output = screen.getByTestId('output');
-      
+
       await waitFor(() => {
         expect(output.textContent).toBe('');
       });
@@ -241,7 +215,7 @@ describe('XSS Protection Module', () => {
 
       const outputNull = screen.getByTestId('output-null');
       const outputUndefined = screen.getByTestId('output-undefined');
-      
+
       await waitFor(() => {
         expect(outputNull).toBeInTheDocument();
         expect(outputUndefined).toBeInTheDocument();
@@ -257,11 +231,7 @@ describe('XSS Protection Module', () => {
           sanitize('<>&"\'').then(setClean);
         }, [sanitize]);
 
-        return (
-          <div data-testid="output">
-            {clean}
-          </div>
-        );
+        return <div data-testid="output">{clean}</div>;
       };
 
       render(
@@ -271,7 +241,7 @@ describe('XSS Protection Module', () => {
       );
 
       const output = screen.getByTestId('output');
-      
+
       await waitFor(() => {
         expect(output.textContent).toBeDefined();
       });
@@ -288,11 +258,7 @@ describe('XSS Protection Module', () => {
           sanitize('<script>alert("xss")</script>').then(setClean);
         }, [sanitize]);
 
-        return (
-          <div data-testid="output">
-            {clean}
-          </div>
-        );
+        return <div data-testid="output">{clean}</div>;
       };
 
       render(
@@ -302,7 +268,7 @@ describe('XSS Protection Module', () => {
       );
 
       const output = screen.getByTestId('output');
-      
+
       await waitFor(() => {
         expect(output.textContent).not.toContain('<script>');
         expect(output.textContent).not.toContain('alert');
@@ -318,11 +284,7 @@ describe('XSS Protection Module', () => {
           sanitize('<iframe src="evil.com"></iframe>').then(setClean);
         }, [sanitize]);
 
-        return (
-          <div data-testid="output">
-            {clean}
-          </div>
-        );
+        return <div data-testid="output">{clean}</div>;
       };
 
       render(
@@ -332,7 +294,7 @@ describe('XSS Protection Module', () => {
       );
 
       const output = screen.getByTestId('output');
-      
+
       await waitFor(() => {
         expect(output.textContent).not.toContain('<iframe');
       });
@@ -347,11 +309,7 @@ describe('XSS Protection Module', () => {
           sanitize('<a href="javascript:alert(1)">click</a>').then(setClean);
         }, [sanitize]);
 
-        return (
-          <div data-testid="output">
-            {clean}
-          </div>
-        );
+        return <div data-testid="output">{clean}</div>;
       };
 
       render(
@@ -361,7 +319,7 @@ describe('XSS Protection Module', () => {
       );
 
       const output = screen.getByTestId('output');
-      
+
       await waitFor(() => {
         expect(output.textContent).not.toContain('javascript:');
       });
@@ -376,11 +334,7 @@ describe('XSS Protection Module', () => {
           sanitize('<div onmouseover="alert(1)">hover</div>').then(setClean);
         }, [sanitize]);
 
-        return (
-          <div data-testid="output">
-            {clean}
-          </div>
-        );
+        return <div data-testid="output">{clean}</div>;
       };
 
       render(
@@ -390,7 +344,7 @@ describe('XSS Protection Module', () => {
       );
 
       const output = screen.getByTestId('output');
-      
+
       await waitFor(() => {
         expect(output.textContent).not.toContain('onmouseover');
       });
@@ -405,11 +359,7 @@ describe('XSS Protection Module', () => {
           sanitize('<img src="data:text/html,<script>alert(1)</script>">').then(setClean);
         }, [sanitize]);
 
-        return (
-          <div data-testid="output">
-            {clean}
-          </div>
-        );
+        return <div data-testid="output">{clean}</div>;
       };
 
       render(
@@ -419,7 +369,7 @@ describe('XSS Protection Module', () => {
       );
 
       const output = screen.getByTestId('output');
-      
+
       await waitFor(() => {
         expect(output.textContent).not.toContain('data:');
       });
@@ -436,11 +386,7 @@ describe('XSS Protection Module', () => {
           sanitize('<p><strong>bold</strong> and <em>italic</em></p>').then(setClean);
         }, [sanitize]);
 
-        return (
-          <div data-testid="output">
-            {clean}
-          </div>
-        );
+        return <div data-testid="output">{clean}</div>;
       };
 
       render(
@@ -450,7 +396,7 @@ describe('XSS Protection Module', () => {
       );
 
       const output = screen.getByTestId('output');
-      
+
       await waitFor(() => {
         expect(output.textContent).toContain('bold');
         expect(output.textContent).toContain('italic');
@@ -466,11 +412,7 @@ describe('XSS Protection Module', () => {
           sanitize('<a href="https://example.com">safe link</a>').then(setClean);
         }, [sanitize]);
 
-        return (
-          <div data-testid="output">
-            {clean}
-          </div>
-        );
+        return <div data-testid="output">{clean}</div>;
       };
 
       render(
@@ -480,7 +422,7 @@ describe('XSS Protection Module', () => {
       );
 
       const output = screen.getByTestId('output');
-      
+
       await waitFor(() => {
         expect(output.textContent).toContain('safe link');
       });
@@ -495,11 +437,7 @@ describe('XSS Protection Module', () => {
           sanitize('<img src="https://example.com/image.jpg" alt="image">').then(setClean);
         }, [sanitize]);
 
-        return (
-          <div data-testid="output">
-            {clean}
-          </div>
-        );
+        return <div data-testid="output">{clean}</div>;
       };
 
       render(
@@ -509,7 +447,7 @@ describe('XSS Protection Module', () => {
       );
 
       const output = screen.getByTestId('output');
-      
+
       await waitFor(() => {
         expect(output.textContent).toBeDefined();
       });

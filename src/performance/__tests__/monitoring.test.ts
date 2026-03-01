@@ -37,7 +37,7 @@ describe('性能监控测试', () => {
 
     it('应该正确销毁性能监控', () => {
       initPerformanceMonitoring();
-      
+
       expect(() => {
         destroyPerformanceMonitoring();
       }).not.toThrow();

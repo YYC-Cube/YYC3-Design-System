@@ -9,14 +9,12 @@
 
 import * as React from 'react';
 
-;
-
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import '@testing-library/jest-dom';
 import { Tooltip } from './Tooltip';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 const renderWithTheme = (component: React.ReactElement) => {
   return render(<ThemeProvider>{component}</ThemeProvider>);
@@ -87,7 +85,12 @@ describe('Tooltip 组件', () => {
   });
 
   it('应该支持不同的 placement 选项', async () => {
-    const placements: Array<'top' | 'bottom' | 'left' | 'right'> = ['top', 'bottom', 'left', 'right'];
+    const placements: Array<'top' | 'bottom' | 'left' | 'right'> = [
+      'top',
+      'bottom',
+      'left',
+      'right',
+    ];
 
     for (const placement of placements) {
       const { unmount } = renderWithTheme(
@@ -239,7 +242,13 @@ describe('Tooltip 组件', () => {
 
   it('应该正确处理复杂内容', async () => {
     renderWithTheme(
-      <Tooltip content={<div><strong>Bold</strong> text</div>}>
+      <Tooltip
+        content={
+          <div>
+            <strong>Bold</strong> text
+          </div>
+        }
+      >
         <button>Hover me</button>
       </Tooltip>
     );
@@ -275,18 +284,18 @@ describe('Tooltip 组件', () => {
     );
 
     const button = screen.getByText('Hover me');
-    
+
     fireEvent.mouseEnter(button);
     act(() => {
       jest.advanceTimersByTime(100);
     });
-    
+
     fireEvent.mouseLeave(button);
     fireEvent.mouseEnter(button);
     act(() => {
       jest.advanceTimersByTime(100);
     });
-    
+
     fireEvent.mouseLeave(button);
     fireEvent.mouseEnter(button);
     act(() => {

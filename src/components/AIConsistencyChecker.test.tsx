@@ -8,14 +8,12 @@
  */
 
 import * as React from 'react';
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import '@testing-library/jest-dom';
 import { AIConsistencyChecker } from './AIConsistencyChecker';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 const renderWithTheme = (component: React.ReactElement) => {
   return render(<ThemeProvider>{component}</ThemeProvider>);
@@ -43,18 +41,18 @@ describe('AIConsistencyChecker', () => {
         primary: '#ff0000',
         secondary: '#00ff00',
         background: '#ffffff',
-        foreground: '#000000'
-      }
+        foreground: '#000000',
+      },
     };
     renderWithTheme(<AIConsistencyChecker tokens={customTokens as any} />);
-    
+
     const checkButton = screen.getByText('开始检查');
     expect(checkButton).toBeInTheDocument();
   });
 
   it('应该支持点击开始检查按钮', () => {
     renderWithTheme(<AIConsistencyChecker />);
-    
+
     const checkButton = screen.getByText('开始检查');
     fireEvent.click(checkButton);
   });

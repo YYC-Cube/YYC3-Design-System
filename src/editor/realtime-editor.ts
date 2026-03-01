@@ -11,8 +11,22 @@ import { DesignTokens, ColorToken, ShadowToken, TypographyTokens } from '../../t
 
 export interface TokenChange {
   tokenName: string;
-  oldValue: string | number | ColorToken | ShadowToken | TypographyTokens | Record<string, string | number> | undefined;
-  newValue: string | number | ColorToken | ShadowToken | TypographyTokens | Record<string, string | number> | undefined;
+  oldValue:
+    | string
+    | number
+    | ColorToken
+    | ShadowToken
+    | TypographyTokens
+    | Record<string, string | number>
+    | undefined;
+  newValue:
+    | string
+    | number
+    | ColorToken
+    | ShadowToken
+    | TypographyTokens
+    | Record<string, string | number>
+    | undefined;
   timestamp: Date;
   userId?: string;
 }
@@ -48,12 +62,21 @@ export class RealtimeEditor {
   }
 
   private notify(): void {
-    this.listeners.forEach(listener => listener(this.state));
+    this.listeners.forEach((listener) => listener(this.state));
   }
 
-  updateToken(tokenName: string, value: string | number | ColorToken | ShadowToken | TypographyTokens | Record<string, string | number>): void {
+  updateToken(
+    tokenName: string,
+    value:
+      | string
+      | number
+      | ColorToken
+      | ShadowToken
+      | TypographyTokens
+      | Record<string, string | number>
+  ): void {
     const oldValue = this.state.tokens[tokenName];
-    
+
     if (oldValue !== value) {
       const change: TokenChange = {
         tokenName,
@@ -82,7 +105,7 @@ export class RealtimeEditor {
   deleteToken(tokenName: string): void {
     if (this.state.tokens[tokenName] !== undefined) {
       const oldValue = this.state.tokens[tokenName];
-      
+
       const change: TokenChange = {
         tokenName,
         oldValue,
@@ -196,7 +219,7 @@ export class RealtimeEditor {
   importChanges(changesJson: string): void {
     try {
       const changes = JSON.parse(changesJson) as TokenChange[];
-      changes.forEach(change => {
+      changes.forEach((change) => {
         if (change.newValue === undefined) {
           delete this.state.tokens[change.tokenName];
         } else {
@@ -230,9 +253,7 @@ export class RealtimeEditor {
 
   searchTokens(query: string): string[] {
     const lowerQuery = query.toLowerCase();
-    return Object.keys(this.state.tokens).filter(
-      name => name.toLowerCase().includes(lowerQuery)
-    );
+    return Object.keys(this.state.tokens).filter((name) => name.toLowerCase().includes(lowerQuery));
   }
 
   getTokensByCategory(category: string): DesignTokens {

@@ -84,7 +84,11 @@ export class ImagePreloader {
   }
 
   private processQueue(): void {
-    if (this.processing || this.currentLoads >= this.maxConcurrentLoads || this.queue.length === 0) {
+    if (
+      this.processing ||
+      this.currentLoads >= this.maxConcurrentLoads ||
+      this.queue.length === 0
+    ) {
       return;
     }
 
@@ -102,10 +106,7 @@ export class ImagePreloader {
     this.processing = false;
   }
 
-  private async loadImage(
-    src: string,
-    options?: PreloadImageOptions
-  ): Promise<PreloadImageResult> {
+  private async loadImage(src: string, options?: PreloadImageOptions): Promise<PreloadImageResult> {
     const {
       timeout = 10000,
       retryCount = 3,
@@ -197,7 +198,7 @@ export class ImagePreloader {
     return new Promise((resolve, reject) => {
       const startTime = performance.now();
       const img = new Image();
-      let timeoutId: NodeJS.Timeout;
+      let timeoutId: ReturnType<typeof setTimeout>;
 
       const cleanup = () => {
         if (timeoutId) {

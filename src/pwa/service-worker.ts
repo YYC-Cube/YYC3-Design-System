@@ -27,14 +27,14 @@ declare global {
   }
 
   interface URLPatternResult {
-    protocol: { input: string, groups: Record<string, string> };
-    username: { input: string, groups: Record<string, string> };
-    password: { input: string, groups: Record<string, string> };
-    hostname: { input: string, groups: Record<string, string> };
-    port: { input: string, groups: Record<string, string> };
-    pathname: { input: string, groups: Record<string, string> };
-    search: { input: string, groups: Record<string, string> };
-    hash: { input: string, groups: Record<string, string> };
+    protocol: { input: string; groups: Record<string, string> };
+    username: { input: string; groups: Record<string, string> };
+    password: { input: string; groups: Record<string, string> };
+    hostname: { input: string; groups: Record<string, string> };
+    port: { input: string; groups: Record<string, string> };
+    pathname: { input: string; groups: Record<string, string> };
+    search: { input: string; groups: Record<string, string> };
+    hash: { input: string; groups: Record<string, string> };
   }
 }
 
@@ -56,7 +56,12 @@ export interface ServiceWorkerConfig {
 export interface CacheStrategy {
   name: string;
   urlPattern: string | RegExp | object;
-  strategy: 'cache-first' | 'network-first' | 'cache-only' | 'network-only' | 'stale-while-revalidate';
+  strategy:
+    | 'cache-first'
+    | 'network-first'
+    | 'cache-only'
+    | 'network-only'
+    | 'stale-while-revalidate';
   maxAge?: number;
   maxEntries?: number;
   cacheableResponse?: {
@@ -93,7 +98,7 @@ class ServiceWorkerManager {
     installed: false,
     active: false,
     controlled: false,
-    updateAvailable: false
+    updateAvailable: false,
   };
   private listeners: Set<(status: ServiceWorkerStatus) => void> = new Set();
   private updateIntervalId: number | null = null;
@@ -114,11 +119,11 @@ class ServiceWorkerManager {
         enabled: false,
         tag: 'background-sync',
         minRetention: 60000,
-        maxRetention: 86400000
+        maxRetention: 86400000,
       },
       pushNotifications: config.pushNotifications ?? {
-        enabled: false
-      }
+        enabled: false,
+      },
     };
 
     if (this.config.enabled && 'serviceWorker' in navigator) {
@@ -133,31 +138,30 @@ class ServiceWorkerManager {
         urlPattern: /\.(?:js|css|png|jpg|jpeg|svg|gif|webp|woff|woff2|ttf|eot)$/,
         strategy: 'cache-first',
         maxAge: 30 * 24 * 60 * 60 * 1000,
-        maxEntries: 100
+        maxEntries: 100,
       },
       {
         name: 'api-responses',
         urlPattern: /^\/api\//,
         strategy: 'network-first',
         maxAge: 5 * 60 * 1000,
-        maxEntries: 50
+        maxEntries: 50,
       },
       {
         name: 'html-pages',
         urlPattern: /\.(?:html)$/,
         strategy: 'stale-while-revalidate',
         maxAge: 24 * 60 * 60 * 1000,
-        maxEntries: 20
-      }
+        maxEntries: 20,
+      },
     ];
   }
 
   private async initialize(): Promise<void> {
     try {
-      this.registration = await navigator.serviceWorker.register(
-        '/service-worker.js',
-        { scope: this.config.scope }
-      );
+      this.registration = await navigator.serviceWorker.register('/service-worker.js', {
+        scope: this.config.scope,
+      });
 
       this.status.installed = true;
       this.status.active = !!this.registration.active;
@@ -165,7 +169,7 @@ class ServiceWorkerManager {
 
       this.setupEventListeners();
       this.startUpdateCheck();
-      
+
       this.notifyStatusChange();
     } catch (error) {
       console.error('Service Worker registration failed:', error);
@@ -218,7 +222,7 @@ class ServiceWorkerManager {
   }
 
   private notifyStatusChange(): void {
-    this.listeners.forEach(listener => listener({ ...this.status }));
+    this.listeners.forEach((listener) => listener({ ...this.status }));
   }
 
   public onStatusChange(callback: (status: ServiceWorkerStatus) => void): () => void {
@@ -254,7 +258,7 @@ class ServiceWorkerManager {
     try {
       const caches = await window.caches.open(this.config.cacheName);
       const keys = await caches.keys();
-      await Promise.all(keys.map(key => caches.delete(key)));
+      await Promise.all(keys.map((key) => caches.delete(key)));
     } catch (error) {
       console.error('Failed to clear cache:', error);
     }
@@ -268,7 +272,7 @@ class ServiceWorkerManager {
       for (const cacheName of cacheNames) {
         const cache = await window.caches.open(cacheName);
         const keys = await cache.keys();
-        
+
         for (const request of keys) {
           const response = await cache.match(request);
           if (response) {
@@ -297,7 +301,7 @@ class ServiceWorkerManager {
           entries.push({
             url: request.url,
             timestamp: Date.now(),
-            size: parseInt(response.headers.get('content-length') || '0', 10)
+            size: parseInt(response.headers.get('content-length') || '0', 10),
           });
         }
       }
@@ -342,7 +346,9 @@ class ServiceWorkerManager {
     try {
       const subscription = await this.registration.pushManager.subscribe({
         userVisibleOnly,
-        applicationServerKey: applicationServerKey || this.config.pushNotifications.subscriptionOptions?.applicationServerKey
+        applicationServerKey:
+          applicationServerKey ||
+          this.config.pushNotifications.subscriptionOptions?.applicationServerKey,
       });
 
       return subscription;
@@ -400,7 +406,7 @@ export const useServiceWorker = (config?: ServiceWorkerConfig) => {
     installed: false,
     active: false,
     controlled: false,
-    updateAvailable: false
+    updateAvailable: false,
   });
 
   const managerRef = React.useRef<ServiceWorkerManager | null>(null);
@@ -413,20 +419,20 @@ export const useServiceWorker = (config?: ServiceWorkerConfig) => {
   React.useEffect(() => {
     if (!managerRef.current) {
       managerRef.current = createServiceWorkerManager(configRef.current);
-      
+
       const unsubscribe = managerRef.current.onStatusChange(setStatus);
-      
+
       return () => {
         unsubscribe();
         managerRef.current?.destroy();
       };
     }
-    
+
     return undefined;
   }, []);
 
   const update = React.useCallback(async () => {
-    return await managerRef.current?.update() ?? false;
+    return (await managerRef.current?.update()) ?? false;
   }, []);
 
   const skipWaiting = React.useCallback(async () => {
@@ -438,26 +444,31 @@ export const useServiceWorker = (config?: ServiceWorkerConfig) => {
   }, []);
 
   const getCacheSize = React.useCallback(async () => {
-    return await managerRef.current?.getCacheSize() ?? 0;
+    return (await managerRef.current?.getCacheSize()) ?? 0;
   }, []);
 
   const getCacheEntries = React.useCallback(async () => {
-    return await managerRef.current?.getCacheEntries() ?? [];
+    return (await managerRef.current?.getCacheEntries()) ?? [];
   }, []);
 
-  const subscribeToPush = React.useCallback(async (
-    userVisibleOnly?: boolean,
-    applicationServerKey?: string
-  ) => {
-    return await managerRef.current?.subscribeToPushNotifications(userVisibleOnly, applicationServerKey) ?? null;
-  }, []);
+  const subscribeToPush = React.useCallback(
+    async (userVisibleOnly?: boolean, applicationServerKey?: string) => {
+      return (
+        (await managerRef.current?.subscribeToPushNotifications(
+          userVisibleOnly,
+          applicationServerKey
+        )) ?? null
+      );
+    },
+    []
+  );
 
   const unsubscribeFromPush = React.useCallback(async () => {
-    return await managerRef.current?.unsubscribeFromPushNotifications() ?? false;
+    return (await managerRef.current?.unsubscribeFromPushNotifications()) ?? false;
   }, []);
 
   const getPushSubscription = React.useCallback(async () => {
-    return await managerRef.current?.getPushSubscription() ?? null;
+    return (await managerRef.current?.getPushSubscription()) ?? null;
   }, []);
 
   return {
@@ -469,12 +480,12 @@ export const useServiceWorker = (config?: ServiceWorkerConfig) => {
     getCacheEntries,
     subscribeToPush,
     unsubscribeFromPush,
-    getPushSubscription
+    getPushSubscription,
   };
 };
 
 export default {
   ServiceWorkerManager,
   createServiceWorkerManager,
-  useServiceWorker
+  useServiceWorker,
 };

@@ -1,4 +1,8 @@
-import { AnimationDuration, AnimationEasing, EnhancedAnimationConfig } from '../../types/animations';
+import {
+  AnimationDuration,
+  AnimationEasing,
+  EnhancedAnimationConfig,
+} from '../../types/animations';
 
 export const animationDurations: Record<AnimationDuration, string> = {
   fast: '150ms',
@@ -539,9 +543,18 @@ export const getAnimationString = (
     return 'none';
   }
 
-  const duration = config?.duration ? animationDurations[config.duration] : animationDurations[animation.duration || 'normal'];
-  const easing = config?.easing ? animationEasings[config.easing] : animationEasings[animation.easing || 'ease-in-out'];
-  const delay = config?.delay !== undefined ? `${config.delay}ms` : (animation.delay !== undefined ? `${animation.delay}ms` : '0ms');
+  const duration = config?.duration
+    ? animationDurations[config.duration]
+    : animationDurations[animation.duration || 'normal'];
+  const easing = config?.easing
+    ? animationEasings[config.easing]
+    : animationEasings[animation.easing || 'ease-in-out'];
+  const delay =
+    config?.delay !== undefined
+      ? `${config.delay}ms`
+      : animation.delay !== undefined
+        ? `${animation.delay}ms`
+        : '0ms';
   const repeat = config?.repeat || 1;
   const direction = config?.direction || 'normal';
   const fillMode = config?.fillMode || 'both';
@@ -576,7 +589,7 @@ export const injectGlobalKeyframes = (): void => {
   const style = document.createElement('style');
   style.id = 'enhanced-animations';
   style.textContent = Object.values(enhancedAnimations)
-    .map(anim => anim.keyframes)
+    .map((anim) => anim.keyframes)
     .join('\n');
 
   document.head.appendChild(style);

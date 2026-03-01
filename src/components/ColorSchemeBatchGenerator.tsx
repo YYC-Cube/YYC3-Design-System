@@ -4,7 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from './Card';
 import { Button } from './Button';
 import { Badge } from './Badge';
 import { useTheme } from '../theme/useTheme';
-import { colorSchemeBatchGenerator, ColorScheme, BatchGenerationOptions } from '../ai/color-scheme-batch-generator';
+import {
+  colorSchemeBatchGenerator,
+  ColorScheme,
+  BatchGenerationOptions,
+} from '../ai/color-scheme-batch-generator';
 
 export interface ColorSchemeBatchGeneratorProps {
   className?: string;
@@ -51,12 +55,15 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
     handleGenerate();
   }, []);
 
-  const handleSchemeClick = useCallback((scheme: ColorScheme) => {
-    setSelectedScheme(scheme);
-    if (onSchemeSelected) {
-      onSchemeSelected(scheme);
-    }
-  }, [onSchemeSelected]);
+  const handleSchemeClick = useCallback(
+    (scheme: ColorScheme) => {
+      setSelectedScheme(scheme);
+      if (onSchemeSelected) {
+        onSchemeSelected(scheme);
+      }
+    },
+    [onSchemeSelected]
+  );
 
   const renderSchemeCard = (scheme: ColorScheme) => (
     <div
@@ -106,11 +113,7 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
       </div>
 
       <div className="flex gap-2 mb-3">
-        <div
-          className="w-8 h-8 rounded"
-          style={{ backgroundColor: scheme.primary }}
-          title="主色"
-        />
+        <div className="w-8 h-8 rounded" style={{ backgroundColor: scheme.primary }} title="主色" />
         <div
           className="w-8 h-8 rounded"
           style={{ backgroundColor: scheme.secondary }}
@@ -142,20 +145,23 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
       <CardContent className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue('color.foreground') }}
+            >
               基础颜色
             </label>
             <div className="flex gap-2">
               <input
                 type="color"
                 value={options.baseColor}
-                onChange={(e) => setOptions(prev => ({ ...prev, baseColor: e.target.value }))}
+                onChange={(e) => setOptions((prev) => ({ ...prev, baseColor: e.target.value }))}
                 className="w-12 h-12 rounded cursor-pointer"
               />
               <input
                 type="text"
                 value={options.baseColor}
-                onChange={(e) => setOptions(prev => ({ ...prev, baseColor: e.target.value }))}
+                onChange={(e) => setOptions((prev) => ({ ...prev, baseColor: e.target.value }))}
                 className="flex-1 p-2 rounded-lg border font-mono"
                 style={{
                   borderColor: getTokenValue('color.border'),
@@ -167,7 +173,10 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue('color.foreground') }}
+            >
               生成数量
             </label>
             <input
@@ -175,7 +184,9 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
               min={1}
               max={50}
               value={options.numberOfSchemes}
-              onChange={(e) => setOptions(prev => ({ ...prev, numberOfSchemes: parseInt(e.target.value) || 10 }))}
+              onChange={(e) =>
+                setOptions((prev) => ({ ...prev, numberOfSchemes: parseInt(e.target.value) || 10 }))
+              }
               className="w-full p-2 rounded-lg border"
               style={{
                 borderColor: getTokenValue('color.border'),
@@ -186,7 +197,10 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue('color.foreground') }}
+            >
               颜色比例尺步数
             </label>
             <input
@@ -194,7 +208,9 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
               min={3}
               max={20}
               value={options.scaleSteps}
-              onChange={(e) => setOptions(prev => ({ ...prev, scaleSteps: parseInt(e.target.value) || 10 }))}
+              onChange={(e) =>
+                setOptions((prev) => ({ ...prev, scaleSteps: parseInt(e.target.value) || 10 }))
+              }
               className="w-full p-2 rounded-lg border"
               style={{
                 borderColor: getTokenValue('color.border'),
@@ -205,12 +221,17 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue('color.foreground') }}
+            >
               可访问性标准
             </label>
             <select
               value={options.targetContrast}
-              onChange={(e) => setOptions(prev => ({ ...prev, targetContrast: e.target.value as 'AA' | 'AAA' }))}
+              onChange={(e) =>
+                setOptions((prev) => ({ ...prev, targetContrast: e.target.value as 'AA' | 'AAA' }))
+              }
               className="w-full p-2 rounded-lg border"
               style={{
                 borderColor: getTokenValue('color.border'),
@@ -225,7 +246,10 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+          <label
+            className="block text-sm font-medium mb-2"
+            style={{ color: getTokenValue('color.foreground') }}
+          >
             和谐类型
           </label>
           <div className="flex flex-wrap gap-2">
@@ -246,8 +270,8 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
                     const current = options.harmonyTypes || [];
                     const newTypes = e.target.checked
                       ? [...current, type]
-                      : current.filter(t => t !== type);
-                    setOptions(prev => ({ ...prev, harmonyTypes: newTypes }));
+                      : current.filter((t) => t !== type);
+                    setOptions((prev) => ({ ...prev, harmonyTypes: newTypes }));
                   }}
                   className="w-4 h-4"
                 />
@@ -264,7 +288,7 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
             <input
               type="checkbox"
               checked={options.includeShades}
-              onChange={(e) => setOptions(prev => ({ ...prev, includeShades: e.target.checked }))}
+              onChange={(e) => setOptions((prev) => ({ ...prev, includeShades: e.target.checked }))}
               className="w-4 h-4"
             />
             <span className="text-sm" style={{ color: getTokenValue('color.foreground') }}>
@@ -276,7 +300,7 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
             <input
               type="checkbox"
               checked={options.includeTints}
-              onChange={(e) => setOptions(prev => ({ ...prev, includeTints: e.target.checked }))}
+              onChange={(e) => setOptions((prev) => ({ ...prev, includeTints: e.target.checked }))}
               className="w-4 h-4"
             />
             <span className="text-sm" style={{ color: getTokenValue('color.foreground') }}>
@@ -288,7 +312,9 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
             <input
               type="checkbox"
               checked={options.optimizeForAccessibility}
-              onChange={(e) => setOptions(prev => ({ ...prev, optimizeForAccessibility: e.target.checked }))}
+              onChange={(e) =>
+                setOptions((prev) => ({ ...prev, optimizeForAccessibility: e.target.checked }))
+              }
               className="w-4 h-4"
             />
             <span className="text-sm" style={{ color: getTokenValue('color.foreground') }}>
@@ -303,20 +329,29 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
 
         {schemes.length > 0 && (
           <div className="space-y-4">
-            <h3 className="text-sm font-medium" style={{ color: getTokenValue('color.foreground') }}>
+            <h3
+              className="text-sm font-medium"
+              style={{ color: getTokenValue('color.foreground') }}
+            >
               生成的配色方案 ({schemes.length})
             </h3>
-            
+
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {schemes.map(renderSchemeCard)}
             </div>
 
             {selectedScheme && (
-              <div className="space-y-4 p-4 rounded-lg" style={{
-                background: getTokenValue('color.card'),
-                border: `2px solid ${getTokenValue('color.border')}`,
-              }}>
-                <h3 className="text-sm font-medium mb-4" style={{ color: getTokenValue('color.foreground') }}>
+              <div
+                className="space-y-4 p-4 rounded-lg"
+                style={{
+                  background: getTokenValue('color.card'),
+                  border: `2px solid ${getTokenValue('color.border')}`,
+                }}
+              >
+                <h3
+                  className="text-sm font-medium mb-4"
+                  style={{ color: getTokenValue('color.foreground') }}
+                >
                   选中的配色方案详情
                 </h3>
 
@@ -329,10 +364,16 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
                         borderColor: getTokenValue('color.border'),
                       }}
                     />
-                    <div className="text-xs font-mono" style={{ color: getTokenValue('color.foreground') }}>
+                    <div
+                      className="text-xs font-mono"
+                      style={{ color: getTokenValue('color.foreground') }}
+                    >
                       {selectedScheme.primary}
                     </div>
-                    <div className="text-xs" style={{ color: getTokenValue('color.muted-foreground') }}>
+                    <div
+                      className="text-xs"
+                      style={{ color: getTokenValue('color.muted-foreground') }}
+                    >
                       主色
                     </div>
                   </div>
@@ -345,10 +386,16 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
                         borderColor: getTokenValue('color.border'),
                       }}
                     />
-                    <div className="text-xs font-mono" style={{ color: getTokenValue('color.foreground') }}>
+                    <div
+                      className="text-xs font-mono"
+                      style={{ color: getTokenValue('color.foreground') }}
+                    >
                       {selectedScheme.secondary}
                     </div>
-                    <div className="text-xs" style={{ color: getTokenValue('color.muted-foreground') }}>
+                    <div
+                      className="text-xs"
+                      style={{ color: getTokenValue('color.muted-foreground') }}
+                    >
                       次要色
                     </div>
                   </div>
@@ -361,16 +408,25 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
                         borderColor: getTokenValue('color.border'),
                       }}
                     />
-                    <div className="text-xs font-mono" style={{ color: getTokenValue('color.foreground') }}>
+                    <div
+                      className="text-xs font-mono"
+                      style={{ color: getTokenValue('color.foreground') }}
+                    >
                       {selectedScheme.accent}
                     </div>
-                    <div className="text-xs" style={{ color: getTokenValue('color.muted-foreground') }}>
+                    <div
+                      className="text-xs"
+                      style={{ color: getTokenValue('color.muted-foreground') }}
+                    >
                       强调色
                     </div>
                   </div>
                 </div>
 
-                <h4 className="text-xs font-medium mb-3" style={{ color: getTokenValue('color.muted-foreground') }}>
+                <h4
+                  className="text-xs font-medium mb-3"
+                  style={{ color: getTokenValue('color.muted-foreground') }}
+                >
                   中性色
                 </h4>
                 <div className="grid grid-cols-3 gap-4 mb-6">
@@ -382,10 +438,16 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
                         borderColor: getTokenValue('color.border'),
                       }}
                     />
-                    <div className="text-xs font-mono" style={{ color: getTokenValue('color.foreground') }}>
+                    <div
+                      className="text-xs font-mono"
+                      style={{ color: getTokenValue('color.foreground') }}
+                    >
                       {selectedScheme.neutrals.light}
                     </div>
-                    <div className="text-xs" style={{ color: getTokenValue('color.muted-foreground') }}>
+                    <div
+                      className="text-xs"
+                      style={{ color: getTokenValue('color.muted-foreground') }}
+                    >
                       浅色
                     </div>
                   </div>
@@ -398,10 +460,16 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
                         borderColor: getTokenValue('color.border'),
                       }}
                     />
-                    <div className="text-xs font-mono" style={{ color: getTokenValue('color.foreground') }}>
+                    <div
+                      className="text-xs font-mono"
+                      style={{ color: getTokenValue('color.foreground') }}
+                    >
                       {selectedScheme.neutrals.medium}
                     </div>
-                    <div className="text-xs" style={{ color: getTokenValue('color.muted-foreground') }}>
+                    <div
+                      className="text-xs"
+                      style={{ color: getTokenValue('color.muted-foreground') }}
+                    >
                       中色
                     </div>
                   </div>
@@ -414,16 +482,25 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
                         borderColor: getTokenValue('color.border'),
                       }}
                     />
-                    <div className="text-xs font-mono" style={{ color: getTokenValue('color.foreground') }}>
+                    <div
+                      className="text-xs font-mono"
+                      style={{ color: getTokenValue('color.foreground') }}
+                    >
                       {selectedScheme.neutrals.dark}
                     </div>
-                    <div className="text-xs" style={{ color: getTokenValue('color.muted-foreground') }}>
+                    <div
+                      className="text-xs"
+                      style={{ color: getTokenValue('color.muted-foreground') }}
+                    >
                       深色
                     </div>
                   </div>
                 </div>
 
-                <h4 className="text-xs font-medium mb-3" style={{ color: getTokenValue('color.muted-foreground') }}>
+                <h4
+                  className="text-xs font-medium mb-3"
+                  style={{ color: getTokenValue('color.muted-foreground') }}
+                >
                   颜色比例尺
                 </h4>
                 <div className="flex flex-wrap gap-1 mb-6">
@@ -438,11 +515,14 @@ export const ColorSchemeBatchGenerator: React.FC<ColorSchemeBatchGeneratorProps>
                 </div>
 
                 <div className="flex gap-4">
-                  <Button onClick={() => {
-                    if (onSchemeSelected && selectedScheme) {
-                      onSchemeSelected(selectedScheme);
-                    }
-                  }} className="flex-1">
+                  <Button
+                    onClick={() => {
+                      if (onSchemeSelected && selectedScheme) {
+                        onSchemeSelected(selectedScheme);
+                      }
+                    }}
+                    className="flex-1"
+                  >
                     使用此配色方案
                   </Button>
                   <Button

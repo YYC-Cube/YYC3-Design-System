@@ -66,7 +66,16 @@ export const VirtualList = memo(function VirtualList<T>({
       containerHeight,
       overscan,
     });
-  }, [scrollTop, items.length, itemHeight, estimatedItemHeight, containerHeight, overscan, dynamicHeight, customGetItemHeight]);
+  }, [
+    scrollTop,
+    items.length,
+    itemHeight,
+    estimatedItemHeight,
+    containerHeight,
+    overscan,
+    dynamicHeight,
+    customGetItemHeight,
+  ]);
 
   const visibleItems = useMemo(() => {
     return getVisibleItems(items, startIndex, endIndex);
@@ -89,12 +98,7 @@ export const VirtualList = memo(function VirtualList<T>({
   const keyGetter = getItemKey || getItemKeyDefault;
 
   return (
-    <div
-      ref={containerRef}
-      style={containerStyle}
-      onScroll={handleScroll}
-      className={className}
-    >
+    <div ref={containerRef} style={containerStyle} onScroll={handleScroll} className={className}>
       <div style={{ position: 'relative', height: `${totalHeight}px` }}>
         {visibleItems.map((item, index) => {
           const actualIndex = startIndex + index;
@@ -103,10 +107,7 @@ export const VirtualList = memo(function VirtualList<T>({
             : getItemStyle(actualIndex, itemHeight);
 
           return (
-            <div
-              key={keyGetter(item, actualIndex)}
-              style={itemStyle}
-            >
+            <div key={keyGetter(item, actualIndex)} style={itemStyle}>
               {renderItem(item, actualIndex)}
             </div>
           );
@@ -196,12 +197,7 @@ export const VirtualGrid = memo(function VirtualGrid<T>({
   const keyGetter = getItemKey || getItemKeyDefault;
 
   return (
-    <div
-      ref={containerRef}
-      style={containerStyle}
-      onScroll={handleScroll}
-      className={className}
-    >
+    <div ref={containerRef} style={containerStyle} onScroll={handleScroll} className={className}>
       <div
         style={{
           position: 'relative' as const,
@@ -222,10 +218,7 @@ export const VirtualGrid = memo(function VirtualGrid<T>({
           };
 
           return (
-            <div
-              key={keyGetter(item, actualIndex)}
-              style={itemStyle}
-            >
+            <div key={keyGetter(item, actualIndex)} style={itemStyle}>
               {renderItem(item, actualIndex)}
             </div>
           );

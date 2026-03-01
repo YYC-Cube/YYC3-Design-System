@@ -87,13 +87,7 @@ export class DocumentMapper {
         syncOnCommit: true,
         syncOnPush: true,
         syncOnPull: true,
-        excludePatterns: [
-          'node_modules/**',
-          'dist/**',
-          'build/**',
-          '.git/**',
-          '*.log',
-        ],
+        excludePatterns: ['node_modules/**', 'dist/**', 'build/**', '.git/**', '*.log'],
       },
       notificationRules: {
         enabled: true,
@@ -122,7 +116,7 @@ export class DocumentMapper {
   }
 
   addDocument(metadata: DocumentMetadata): void {
-    const existingIndex = this.docMap.documents.findIndex(doc => doc.id === metadata.id);
+    const existingIndex = this.docMap.documents.findIndex((doc) => doc.id === metadata.id);
 
     if (existingIndex >= 0) {
       this.docMap.documents[existingIndex] = metadata;
@@ -134,12 +128,12 @@ export class DocumentMapper {
   }
 
   removeDocument(documentId: string): void {
-    this.docMap.documents = this.docMap.documents.filter(doc => doc.id !== documentId);
+    this.docMap.documents = this.docMap.documents.filter((doc) => doc.id !== documentId);
     this.saveDocMap();
   }
 
   getDocument(documentId: string): DocumentMetadata | undefined {
-    return this.docMap.documents.find(doc => doc.id === documentId);
+    return this.docMap.documents.find((doc) => doc.id === documentId);
   }
 
   getDocuments(filter?: Partial<DocumentMetadata>): DocumentMetadata[] {
@@ -147,18 +141,16 @@ export class DocumentMapper {
 
     if (filter) {
       if (filter.type) {
-        documents = documents.filter(doc => doc.type === filter.type);
+        documents = documents.filter((doc) => doc.type === filter.type);
       }
       if (filter.status) {
-        documents = documents.filter(doc => doc.status === filter.status);
+        documents = documents.filter((doc) => doc.status === filter.status);
       }
       if (filter.category) {
-        documents = documents.filter(doc => doc.category === filter.category);
+        documents = documents.filter((doc) => doc.category === filter.category);
       }
       if (filter.tags && filter.tags.length > 0) {
-        documents = documents.filter(doc =>
-          filter.tags!.some(tag => doc.tags.includes(tag))
-        );
+        documents = documents.filter((doc) => filter.tags!.some((tag) => doc.tags.includes(tag)));
       }
     }
 
@@ -166,7 +158,7 @@ export class DocumentMapper {
   }
 
   updateDocument(documentId: string, updates: Partial<DocumentMetadata>): void {
-    const index = this.docMap.documents.findIndex(doc => doc.id === documentId);
+    const index = this.docMap.documents.findIndex((doc) => doc.id === documentId);
 
     if (index >= 0) {
       this.docMap.documents[index] = {
@@ -186,14 +178,12 @@ export class DocumentMapper {
     }
 
     return document.dependencies
-      .map(depId => this.getDocument(depId))
+      .map((depId) => this.getDocument(depId))
       .filter((doc): doc is DocumentMetadata => doc !== undefined);
   }
 
   getDependents(documentId: string): DocumentMetadata[] {
-    return this.docMap.documents.filter(doc =>
-      doc.dependencies.includes(documentId)
-    );
+    return this.docMap.documents.filter((doc) => doc.dependencies.includes(documentId));
   }
 
   validateDependencies(documentId: string): { valid: boolean; missing: string[] } {

@@ -46,7 +46,9 @@ export interface FontOptimizationExampleProps {
   className?: string;
 }
 
-export const FontOptimizationExample: React.FC<FontOptimizationExampleProps> = ({ className = '' }) => {
+export const FontOptimizationExample: React.FC<FontOptimizationExampleProps> = ({
+  className = '',
+}) => {
   const [preloading, setPreloading] = useState(false);
   const [preloadProgress, setPreloadProgress] = useState({ loaded: 0, total: 0 });
   const [fontStats, setFontStats] = useState({
@@ -55,14 +57,17 @@ export const FontOptimizationExample: React.FC<FontOptimizationExampleProps> = (
     cacheEntries: [] as FontInfo[],
   });
   const [charAnalysis, setCharAnalysis] = useState<CharacterAnalysis | null>(null);
-  const [fontPerformance, setFontPerformance] = useState<ReturnType<typeof analyzeFontPerformance> | null>(null);
+  const [fontPerformance, setFontPerformance] = useState<ReturnType<
+    typeof analyzeFontPerformance
+  > | null>(null);
   const [availableFonts, setAvailableFonts] = useState<string[]>([]);
   const [subsetReport, setSubsetReport] = useState<FontSubsetReport | null>(null);
 
   const sampleFonts = [
     {
       fontFamily: 'Inter',
-      fontSrc: 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2',
+      fontSrc:
+        'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2',
       fontWeight: '400',
       fontStyle: 'normal',
     },
@@ -74,7 +79,8 @@ export const FontOptimizationExample: React.FC<FontOptimizationExampleProps> = (
     },
     {
       fontFamily: 'Open Sans',
-      fontSrc: 'https://fonts.gstatic.com/s/opensans/v35/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2',
+      fontSrc:
+        'https://fonts.gstatic.com/s/opensans/v35/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2',
       fontWeight: '400',
       fontStyle: 'normal',
     },
@@ -200,7 +206,13 @@ export const FontOptimizationExample: React.FC<FontOptimizationExampleProps> = (
             <h2 style={{ margin: 0, fontSize: '1.5rem' }}>字体优化统计</h2>
           </CardHeader>
           <CardContent>
-            <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              }}
+            >
               <div>
                 <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>字体缓存统计</h3>
                 <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.8', fontSize: '0.875rem' }}>
@@ -220,7 +232,15 @@ export const FontOptimizationExample: React.FC<FontOptimizationExampleProps> = (
               </div>
               <div>
                 <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>可用字体</h3>
-                <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.8', fontSize: '0.875rem', maxHeight: '200px', overflow: 'auto' }}>
+                <ul
+                  style={{
+                    paddingLeft: '1.5rem',
+                    lineHeight: '1.8',
+                    fontSize: '0.875rem',
+                    maxHeight: '200px',
+                    overflow: 'auto',
+                  }}
+                >
                   {availableFonts.map((font) => (
                     <li key={font}>{font}</li>
                   ))}
@@ -240,7 +260,13 @@ export const FontOptimizationExample: React.FC<FontOptimizationExampleProps> = (
             <h2 style={{ margin: 0, fontSize: '1.5rem' }}>字体预加载</h2>
           </CardHeader>
           <CardContent>
-            <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              }}
+            >
               <div>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>单张预加载</h3>
                 <p style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#64748b' }}>
@@ -291,7 +317,13 @@ export const FontOptimizationExample: React.FC<FontOptimizationExampleProps> = (
             <h2 style={{ margin: 0, fontSize: '1.5rem' }}>字体子集化</h2>
           </CardHeader>
           <CardContent>
-            <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              }}
+            >
               <div>
                 <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem' }}>字符分析</h3>
                 <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.8', fontSize: '0.875rem' }}>
@@ -332,18 +364,41 @@ export const FontOptimizationExample: React.FC<FontOptimizationExampleProps> = (
             <h2 style={{ margin: 0, fontSize: '1.5rem' }}>字体显示优化</h2>
           </CardHeader>
           <CardContent>
-            <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              }}
+            >
               <div>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>系统字体栈</h3>
                 <p style={{ marginBottom: '1rem', fontSize: '0.875rem', color: '#64748b' }}>
                   使用系统字体栈，提供最佳性能和兼容性
                 </p>
-                <div style={{ padding: '1rem', backgroundColor: '#f0f0f0', borderRadius: '0.25rem', fontSize: '0.875rem' }}>
-                  <strong>无衬线字体:</strong><br />
+                <div
+                  style={{
+                    padding: '1rem',
+                    backgroundColor: '#f0f0f0',
+                    borderRadius: '0.25rem',
+                    fontSize: '0.875rem',
+                  }}
+                >
+                  <strong>无衬线字体:</strong>
+                  <br />
                   {getSystemFontStack()}
                 </div>
-                <div style={{ marginTop: '1rem', padding: '1rem', backgroundColor: '#f0f0f0', borderRadius: '0.25rem', fontSize: '0.875rem' }}>
-                  <strong>等宽字体:</strong><br />
+                <div
+                  style={{
+                    marginTop: '1rem',
+                    padding: '1rem',
+                    backgroundColor: '#f0f0f0',
+                    borderRadius: '0.25rem',
+                    fontSize: '0.875rem',
+                  }}
+                >
+                  <strong>等宽字体:</strong>
+                  <br />
                   {getMonospaceFontStack()}
                 </div>
               </div>
@@ -365,22 +420,42 @@ export const FontOptimizationExample: React.FC<FontOptimizationExampleProps> = (
             <h2 style={{ margin: 0, fontSize: '1.5rem' }}>字体示例</h2>
           </CardHeader>
           <CardContent>
-            <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              }}
+            >
               <div>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>Inter 字体</h3>
-                <div style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.5rem', lineHeight: '1.6' }}>
+                <div
+                  style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.5rem', lineHeight: '1.6' }}
+                >
                   {sampleText}
                 </div>
               </div>
               <div>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>Roboto 字体</h3>
-                <div style={{ fontFamily: 'Roboto, sans-serif', fontSize: '1.5rem', lineHeight: '1.6' }}>
+                <div
+                  style={{
+                    fontFamily: 'Roboto, sans-serif',
+                    fontSize: '1.5rem',
+                    lineHeight: '1.6',
+                  }}
+                >
                   {sampleText}
                 </div>
               </div>
               <div>
                 <h3 style={{ marginBottom: '1rem', fontSize: '1rem' }}>Open Sans 字体</h3>
-                <div style={{ fontFamily: 'Open Sans, sans-serif', fontSize: '1.5rem', lineHeight: '1.6' }}>
+                <div
+                  style={{
+                    fontFamily: 'Open Sans, sans-serif',
+                    fontSize: '1.5rem',
+                    lineHeight: '1.6',
+                  }}
+                >
                   {sampleText}
                 </div>
               </div>

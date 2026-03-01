@@ -94,7 +94,10 @@ export const AIConsistencyChecker: React.FC<AIConsistencyCheckerProps> = ({
               >
                 {report.overallScore}
               </div>
-              <div className="text-sm" style={{ color: getTokenValue(themeTokens, 'color.muted-foreground') }}>
+              <div
+                className="text-sm"
+                style={{ color: getTokenValue(themeTokens, 'color.muted-foreground') }}
+              >
                 一致性评分
               </div>
             </div>
@@ -109,13 +112,13 @@ export const AIConsistencyChecker: React.FC<AIConsistencyCheckerProps> = ({
                     border: `1px solid ${getTokenValue(themeTokens, 'color.border')}`,
                   }}
                 >
-                  <div
-                    className="text-lg font-bold"
-                    style={{ color: getScoreColor(value.score) }}
-                  >
+                  <div className="text-lg font-bold" style={{ color: getScoreColor(value.score) }}>
                     {value.score}
                   </div>
-                  <div className="text-xs mt-1" style={{ color: getTokenValue(themeTokens, 'color.muted-foreground') }}>
+                  <div
+                    className="text-xs mt-1"
+                    style={{ color: getTokenValue(themeTokens, 'color.muted-foreground') }}
+                  >
                     {key}
                   </div>
                   <div className="text-xs mt-1" style={{ color: getSeverityColor('error') }}>
@@ -127,7 +130,10 @@ export const AIConsistencyChecker: React.FC<AIConsistencyCheckerProps> = ({
 
             {report.issues.length > 0 && (
               <div className="space-y-3">
-                <h3 className="text-sm font-medium" style={{ color: getTokenValue(themeTokens, 'color.foreground') }}>
+                <h3
+                  className="text-sm font-medium"
+                  style={{ color: getTokenValue(themeTokens, 'color.foreground') }}
+                >
                   发现的问题 ({report.issues.length})
                 </h3>
                 <div className="space-y-2">
@@ -169,11 +175,17 @@ export const AIConsistencyChecker: React.FC<AIConsistencyCheckerProps> = ({
                           </span>
                         )}
                       </div>
-                      <p className="text-sm mb-2" style={{ color: getTokenValue(themeTokens, 'color.foreground') }}>
+                      <p
+                        className="text-sm mb-2"
+                        style={{ color: getTokenValue(themeTokens, 'color.foreground') }}
+                      >
                         {issue.message}
                       </p>
                       {issue.suggestion && (
-                        <p className="text-xs" style={{ color: getTokenValue(themeTokens, 'color.muted-foreground') }}>
+                        <p
+                          className="text-xs"
+                          style={{ color: getTokenValue(themeTokens, 'color.muted-foreground') }}
+                        >
                           建议: {issue.suggestion}
                         </p>
                       )}
@@ -195,7 +207,10 @@ export const AIConsistencyChecker: React.FC<AIConsistencyCheckerProps> = ({
 
             {report.recommendations.length > 0 && (
               <div className="space-y-2">
-                <h3 className="text-sm font-medium" style={{ color: getTokenValue(themeTokens, 'color.foreground') }}>
+                <h3
+                  className="text-sm font-medium"
+                  style={{ color: getTokenValue(themeTokens, 'color.foreground') }}
+                >
                   改进建议
                 </h3>
                 <ul className="space-y-2">

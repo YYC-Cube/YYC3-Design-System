@@ -94,7 +94,7 @@ class ResourceCacheManager<T = unknown> implements ResourceCache<T> {
 
     this.cache.set(key, {
       value,
-      expiry: Date.now() + ttl
+      expiry: Date.now() + ttl,
     });
   }
 
@@ -122,12 +122,7 @@ export const compressImage = async (
   file: File,
   config: ImageOptimizationConfig = {}
 ): Promise<Blob> => {
-  const {
-    maxWidth = 1920,
-    maxHeight = 1080,
-    quality = 0.8,
-    format = 'jpeg'
-  } = config;
+  const { maxWidth = 1920, maxHeight = 1080, quality = 0.8, format = 'jpeg' } = config;
 
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -172,16 +167,16 @@ export const generateResponsiveImageUrls = (
   format: string = 'webp'
 ): Array<{ src: string; width: number; media?: string }> => {
   const url = new URL(baseUrl, window.location.origin);
-  
-  return breakpoints.map(width => {
+
+  return breakpoints.map((width) => {
     const searchParams = new URLSearchParams(url.search);
     searchParams.set('w', width.toString());
     searchParams.set('f', format);
-    
+
     return {
       src: `${url.origin}${url.pathname}?${searchParams.toString()}`,
       width,
-      media: `(max-width: ${width}px)`
+      media: `(max-width: ${width}px)`,
     };
   });
 };
@@ -192,28 +187,28 @@ export const createBlurHash = async (
 ): Promise<string> => {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
-  
+
   if (!ctx) return '';
-  
+
   canvas.width = size;
   canvas.height = size;
-  
+
   ctx.drawImage(image, 0, 0, size, size);
-  
+
   const imageData = ctx.getImageData(0, 0, size, size);
   const data = imageData.data;
-  
+
   let hash = '';
   for (let i = 0; i < data.length; i += 4) {
     const r = data[i];
     const g = data[i + 1];
     const b = data[i + 2];
     const a = data[i + 3];
-    
+
     const value = (r << 24) | (g << 16) | (b << 8) | a;
     hash += value.toString(16).padStart(8, '0');
   }
-  
+
   return hash.substring(0, 20);
 };
 
@@ -221,18 +216,14 @@ export const preloadImage = (
   src: string,
   config: ResourcePreloadConfig = {}
 ): Promise<PreloadResult> => {
-  const {
-    retryCount = 3,
-    retryDelay = 1000,
-    cacheEnabled = true
-  } = config;
+  const { retryCount = 3, retryDelay = 1000, cacheEnabled = true } = config;
 
   if (cacheEnabled && imageCache.has(src)) {
     return Promise.resolve({
       success: true,
       resource: src,
       duration: 0,
-      cached: true
+      cached: true,
     });
   }
 
@@ -245,7 +236,7 @@ export const preloadImage = (
 
       img.onload = () => {
         const duration = performance.now() - startTime;
-        
+
         if (cacheEnabled) {
           imageCache.set(src, img);
         }
@@ -254,13 +245,13 @@ export const preloadImage = (
           success: true,
           resource: src,
           duration,
-          cached: false
+          cached: false,
         });
       };
 
       img.onerror = () => {
         attempts++;
-        
+
         if (attempts < retryCount) {
           setTimeout(attemptLoad, retryDelay);
         } else {
@@ -268,7 +259,7 @@ export const preloadImage = (
             success: false,
             resource: src,
             duration: performance.now() - startTime,
-            cached: false
+            cached: false,
           });
         }
       };
@@ -285,18 +276,14 @@ export const preloadResource = (
   type: 'image' | 'script' | 'style' | 'font' | 'fetch',
   config: ResourcePreloadConfig = {}
 ): Promise<PreloadResult> => {
-  const {
-    retryCount = 3,
-    retryDelay = 1000,
-    cacheEnabled = true
-  } = config;
+  const { retryCount = 3, retryDelay = 1000, cacheEnabled = true } = config;
 
   if (cacheEnabled && resourceCache.has(url)) {
     return Promise.resolve({
       success: true,
       resource: url,
       duration: 0,
-      cached: true
+      cached: true,
     });
   }
 
@@ -323,7 +310,7 @@ export const preloadResource = (
 
           link.onload = () => {
             const duration = performance.now() - startTime;
-            
+
             if (cacheEnabled) {
               resourceCache.set(url, true);
             }
@@ -332,13 +319,13 @@ export const preloadResource = (
               success: true,
               resource: url,
               duration,
-              cached: false
+              cached: false,
             });
           };
 
           link.onerror = () => {
             attempts++;
-            
+
             if (attempts < retryCount) {
               setTimeout(attemptLoad, retryDelay);
             } else {
@@ -346,7 +333,7 @@ export const preloadResource = (
                 success: false,
                 resource: url,
                 duration: performance.now() - startTime,
-                cached: false
+                cached: false,
               });
             }
           };
@@ -358,7 +345,7 @@ export const preloadResource = (
           fetch(url)
             .then(() => {
               const duration = performance.now() - startTime;
-              
+
               if (cacheEnabled) {
                 resourceCache.set(url, true);
               }
@@ -367,12 +354,12 @@ export const preloadResource = (
                 success: true,
                 resource: url,
                 duration,
-                cached: false
+                cached: false,
               });
             })
             .catch(() => {
               attempts++;
-              
+
               if (attempts < retryCount) {
                 setTimeout(attemptLoad, retryDelay);
               } else {
@@ -380,7 +367,7 @@ export const preloadResource = (
                   success: false,
                   resource: url,
                   duration: performance.now() - startTime,
-                  cached: false
+                  cached: false,
                 });
               }
             });
@@ -390,7 +377,7 @@ export const preloadResource = (
             success: false,
             resource: url,
             duration: performance.now() - startTime,
-            cached: false
+            cached: false,
           });
       }
     };
@@ -410,7 +397,7 @@ export const OptimizedImage: React.FC<OptimizedImageOptions> = ({
   fetchPriority = 'auto',
   decoding = 'async',
   onLoad,
-  onError
+  onError,
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentSrc, setCurrentSrc] = useState(src);
@@ -420,7 +407,7 @@ export const OptimizedImage: React.FC<OptimizedImageOptions> = ({
     enableLazyLoading = true,
     enableResponsiveImages = true,
     breakpoints = [320, 640, 768, 1024, 1200, 1920],
-    enablePlaceholder = true
+    enablePlaceholder = true,
   } = config;
 
   const responsiveUrls = useMemo(() => {
@@ -432,19 +419,20 @@ export const OptimizedImage: React.FC<OptimizedImageOptions> = ({
 
   const srcSet = useMemo(() => {
     if (responsiveUrls.length > 0) {
-      return responsiveUrls.map(r => `${r.src} ${r.width}w`).join(', ');
+      return responsiveUrls.map((r) => `${r.src} ${r.width}w`).join(', ');
     }
     return '';
   }, [responsiveUrls]);
 
   const sizes = useMemo(() => {
     if (responsiveUrls.length > 0) {
-      return responsiveUrls.map(r => r.media).join(', ');
+      return responsiveUrls.map((r) => r.media).join(', ');
     }
     return '';
   }, [responsiveUrls]);
 
-  const shouldLazyLoad = enableLazyLoading && loading === 'lazy' && 'IntersectionObserver' in window;
+  const shouldLazyLoad =
+    enableLazyLoading && loading === 'lazy' && 'IntersectionObserver' in window;
 
   useEffect(() => {
     if (!shouldLazyLoad) {
@@ -481,13 +469,10 @@ export const OptimizedImage: React.FC<OptimizedImageOptions> = ({
 
   return (
     <picture>
-      {responsiveUrls.length > 0 && responsiveUrls.map((url, index) => (
-        <source
-          key={index}
-          srcSet={`${url.src} 1x, ${url.src} 2x`}
-          media={url.media}
-        />
-      ))}
+      {responsiveUrls.length > 0 &&
+        responsiveUrls.map((url, index) => (
+          <source key={index} srcSet={`${url.src} 1x, ${url.src} 2x`} media={url.media} />
+        ))}
       <img
         ref={imgRef}
         src={currentSrc}
@@ -504,7 +489,7 @@ export const OptimizedImage: React.FC<OptimizedImageOptions> = ({
         onError={handleError}
         style={{
           opacity: isLoaded ? 1 : 0,
-          transition: 'opacity 0.3s ease-in-out'
+          transition: 'opacity 0.3s ease-in-out',
         }}
       />
       {!isLoaded && enablePlaceholder && (
@@ -519,7 +504,7 @@ export const OptimizedImage: React.FC<OptimizedImageOptions> = ({
             backgroundColor: '#f0f0f0',
             backgroundImage: `linear-gradient(90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%)`,
             backgroundSize: '200% 100%',
-            animation: 'skeleton-loading 1.5s infinite'
+            animation: 'skeleton-loading 1.5s infinite',
           }}
         />
       )}
@@ -557,14 +542,10 @@ export const ResourcePreloader: React.FC<{
 };
 
 export const useImageOptimization = (config: ImageOptimizationConfig = {}) => {
-  const compress = useCallback(
-    (file: File) => compressImage(file, config),
-    [config]
-  );
+  const compress = useCallback((file: File) => compressImage(file, config), [config]);
 
   const preload = useCallback(
-    (src: string, preloadConfig?: ResourcePreloadConfig) =>
-      preloadImage(src, preloadConfig),
+    (src: string, preloadConfig?: ResourcePreloadConfig) => preloadImage(src, preloadConfig),
     []
   );
 
@@ -577,7 +558,7 @@ export const useImageOptimization = (config: ImageOptimizationConfig = {}) => {
     compress,
     preload,
     generateResponsive,
-    createBlurHash
+    createBlurHash,
   };
 };
 
@@ -619,11 +600,13 @@ export const useResourcePreload = (config: ResourcePreloadConfig = {}) => {
     preloading,
     progress,
     results,
-    clearCache
+    clearCache,
   };
 };
 
-export const createImageOptimizationConfig = (overrides?: Partial<ImageOptimizationConfig>): ImageOptimizationConfig => ({
+export const createImageOptimizationConfig = (
+  overrides?: Partial<ImageOptimizationConfig>
+): ImageOptimizationConfig => ({
   maxWidth: 1920,
   maxHeight: 1080,
   quality: 0.8,
@@ -637,17 +620,19 @@ export const createImageOptimizationConfig = (overrides?: Partial<ImageOptimizat
   enableProgressiveLoading: true,
   cacheEnabled: true,
   cacheTimeout: 1800000,
-  ...overrides
+  ...overrides,
 });
 
-export const createResourcePreloadConfig = (overrides?: Partial<ResourcePreloadConfig>): ResourcePreloadConfig => ({
+export const createResourcePreloadConfig = (
+  overrides?: Partial<ResourcePreloadConfig>
+): ResourcePreloadConfig => ({
   maxPreloadCount: 10,
   preloadPriority: 'auto',
   preloadTimeout: 5000,
   retryCount: 3,
   retryDelay: 1000,
   cacheEnabled: true,
-  ...overrides
+  ...overrides,
 });
 
 export default {
@@ -663,5 +648,5 @@ export default {
   createImageOptimizationConfig,
   createResourcePreloadConfig,
   imageCache,
-  resourceCache
+  resourceCache,
 };

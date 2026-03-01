@@ -10,6 +10,7 @@
 ## 核心理念
 
 ### 五高 (Five Highs)
+
 - **高可用** (High Availability): 组件库稳定可靠，支持多框架、多环境
 - **高性能** (High Performance): 轻量级实现，优化渲染性能，支持代码分割
 - **高安全** (High Security): 内置 XSS 防护、CSRF 保护、CSP 策略
@@ -17,6 +18,7 @@
 - **高可维护** (High Maintainability): 清晰的代码结构，完整的文档，统一的测试
 
 ### 五标 (Five Standards)
+
 - **标准化** (Standardization): 统一的命名规范、文件结构、API 设计
 - **规范化** (Normalization): 一致的代码风格、类型定义、错误处理
 - **自动化** (Automation): 自动化测试、文档生成、令牌构建
@@ -24,6 +26,7 @@
 - **可视化** (Visualization): Storybook 交互式文档、性能监控、测试报告
 
 ### 五化 (Five Transformations)
+
 - **流程化** (Process-oriented): 清晰的开发流程、PR 审查、版本管理
 - **文档化** (Documented): 完整的 README、API 文档、使用指南
 - **工具化** (Tool-enabled): CLI 工具、构建脚本、开发辅助工具
@@ -35,6 +38,7 @@
 ## 五维构建 (Five Dimensions)
 
 ### 维度一：技术架构
+
 - 设计令牌系统
 - 组件库架构
 - 多框架支持
@@ -43,6 +47,7 @@
 - PWA 支持
 
 ### 维度二：代码质量
+
 - TypeScript 类型安全
 - ESLint 代码规范
 - Jest 测试覆盖
@@ -50,6 +55,7 @@
 - 性能监控
 
 ### 维度三：功能完整性
+
 - 基础 UI 组件
 - 表单组件
 - 布局组件
@@ -57,6 +63,7 @@
 - 国际化支持
 
 ### 维度四：DevOps
+
 - CI/CD 流水线
 - 自动化测试
 - Storybook 文档
@@ -64,6 +71,7 @@
 - 代码质量检查
 
 ### 维度五：业务价值
+
 - 设计一致性
 - 开发效率提升
 - 团队协作支持
@@ -75,9 +83,11 @@
 ## Figma AI 快速原型落地场景
 
 ### 场景一：设计令牌同步
+
 **用户需求**: 从 Figma 提取设计规范，自动生成设计令牌
 
 **提示词指令**:
+
 ```
 你是 YYC³ Design System 的设计令牌同步助手。
 
@@ -107,9 +117,11 @@
 ```
 
 ### 场景二：组件快速生成
+
 **用户需求**: 基于 Figma 设计稿，快速生成 React/Vue/Svelte 组件代码
 
 **提示词指令**:
+
 ```
 你是 YYC³ Design System 的组件生成助手。
 
@@ -139,9 +151,11 @@
 ```
 
 ### 场景三：AI 辅助设计决策
+
 **用户需求**: 在设计过程中提供 AI 辅助，确保设计一致性
 
 **提示词指令**:
+
 ```
 你是 YYC³ Design System 的 AI 设计顾问。
 
@@ -178,9 +192,11 @@ AI 功能:
 ```
 
 ### 场景四：快速原型落地
+
 **用户需求**: 从 Figma 设计稿到可交互的原型，快速验证设计
 
 **提示词指令**:
+
 ```
 你是 YYC³ Design System 的快速原型落地助手。
 
@@ -220,30 +236,35 @@ AI 功能:
 ## 工作流程
 
 ### 阶段一：设计同步
+
 1. 从 Figma 导出设计规范
 2. 使用 AI 令牌生成器生成设计令牌
 3. 运行 `npm run build:tokens` 构建令牌
 4. 验证令牌在 Storybook 中的效果
 
 ### 阶段二：组件开发
+
 1. 使用 AI 组件生成器生成基础组件
 2. 在 Storybook 中预览和测试组件
 3. 根据设计稿调整组件样式
 4. 编写单元测试确保质量
 
 ### 阶段三：原型构建
+
 1. 使用快速原型生成器创建页面原型
 2. 配置路由和导航
 3. 集成 Mock 数据
 4. 在浏览器中验证交互
 
 ### 阶段四：质量保证
+
 1. 运行 `npm run lint` 检查代码质量
 2. 运行 `npm run typecheck` 验证类型
 3. 运行 `npm run test` 执行测试
 4. 使用 AI 一致性检查器确保设计一致性
 
 ### 阶段五：部署发布
+
 1. 构建 Storybook 文档
 2. 运行性能测试
 3. 通过 CI/CD 自动化部署
@@ -254,24 +275,28 @@ AI 功能:
 ## 工具链
 
 ### 开发工具
+
 - **编辑器**: VS Code + YYC³ 插件
 - **包管理**: npm / yarn
 - **版本控制**: Git + GitHub Actions
 - **代码质量**: ESLint + Prettier + TypeScript
 
 ### 设计工具
+
 - **设计工具**: Figma
 - **设计系统**: Style Dictionary
 - **颜色空间**: OKLCH
 - **原型工具**: Storybook
 
 ### AI 工具
+
 - **令牌生成**: `npm run yyc3:generate-tokens`
 - **颜色推荐**: `npm run yyc3:recommend-colors`
 - **一致性检查**: `npm run yyc3:audit`
 - **组件推荐**: `npm run yyc3:check`
 
 ### 测试工具
+
 - **单元测试**: Jest
 - **E2E 测试**: Playwright
 - **性能测试**: Lighthouse + Web Vitals
@@ -282,6 +307,7 @@ AI 功能:
 ## 快速参考
 
 ### CLI 命令速查
+
 ```bash
 # 构建设计令牌
 npm run build:tokens
@@ -321,6 +347,7 @@ npm run yyc3:audit
 ```
 
 ### 组件使用示例
+
 ```tsx
 // React 组件
 import { Button } from '@yyc3/design-system';
@@ -366,6 +393,7 @@ const { theme } = useTheme();
 ```
 
 ### 设计令牌使用
+
 ```css
 /* 使用 CSS 变量 */
 .button {
@@ -393,6 +421,7 @@ const { theme } = useTheme();
 ## 质量标准
 
 ### 代码质量指标
+
 - TypeScript 覆盖率: > 95%
 - 测试覆盖率: > 80%
 - ESLint 警告数: 0
@@ -400,6 +429,7 @@ const { theme } = useTheme();
 - 组件可复用性: > 70%
 
 ### 性能指标
+
 - 首次内容绘制 (FCP): < 1.5s
 - 最大内容绘制 (LCP): < 2.5s
 - 首次输入延迟 (FID): < 100ms
@@ -407,6 +437,7 @@ const { theme } = useTheme();
 - Bundle 大小: < 200KB (gzip)
 
 ### 无障碍指标
+
 - 颜色对比度: WCAG 2.1 AA
 - ARIA 标签覆盖率: > 90%
 - 键盘导航: 完整支持
@@ -418,6 +449,7 @@ const { theme } = useTheme();
 ## 扩展指南
 
 ### 添加新组件
+
 1. 在 `src/components/` 创建组件文件
 2. 遵循命名规范 (PascalCase.tsx)
 3. 添加完整的 Props 类型定义
@@ -426,12 +458,14 @@ const { theme } = useTheme();
 6. 更新文档
 
 ### 添加新令牌
+
 1. 在 `design/tokens/` 创建令牌文件
 2. 遵循命名规范 (kebab-case.json)
 3. 运行 `npm run build:tokens` 构建令牌
 4. 更新 `src/theme/` 中的主题引用
 
 ### 添加 AI 功能
+
 1. 在 `src/ai/` 创建功能模块
 2. 实现核心逻辑
 3. 添加 Storybook stories
@@ -443,18 +477,23 @@ const { theme } = useTheme();
 ## 常见问题
 
 ### Q: 如何在不同框架中使用组件？
+
 A: YYC³ Design System 支持 React、Vue、Svelte，使用统一的 API 设计，框架适配层处理差异。
 
 ### Q: 如何自定义主题？
+
 A: 修改 `design/tokens/` 中的令牌文件，运行 `npm run build:tokens` 重新构建。
 
 ### Q: 如何优化性能？
+
 A: 使用 AI 性能优化器 (`npm run yyc3:analyze`) 获取优化建议，实施代码分割和懒加载。
 
 ### Q: 如何确保无障碍？
+
 A: 使用 AI 无障碍检查器 (`npm run yyc3:audit`) 验证设计符合 WCAG 2.1 AA 标准。
 
 ### Q: 如何快速原型？
+
 A: 使用快速原型生成器，基于现有组件快速构建可交互的原型。
 
 ---

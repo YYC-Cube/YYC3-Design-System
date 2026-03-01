@@ -8,9 +8,7 @@
  */
 
 import * as React from 'react';
-;
-
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import '@testing-library/jest-dom';
@@ -28,7 +26,7 @@ import {
   createStrictConfig,
   createModerateConfig,
   createPermissiveConfig,
-  withXSSProtection
+  withXSSProtection,
 } from './XSSProtection';
 
 const TestComponent = () => {
@@ -71,7 +69,7 @@ describe('XSSProtection', () => {
     it('应该支持自定义配置', () => {
       const customConfig = {
         allowedTags: ['p', 'span'],
-        allowedAttributes: { 'p': ['class'] }
+        allowedAttributes: { p: ['class'] },
       };
       render(
         <XSSProvider config={customConfig}>
@@ -168,39 +166,39 @@ describe('XSSProtection', () => {
     });
 
     it('应该支持 onChange 回调', async () => {
-    const handleChange = jest.fn();
-    render(
-      <XSSProvider>
-        <SafeInput value="" onChange={handleChange} />
-      </XSSProvider>
-    );
-    const input = screen.getByRole('textbox');
-    input.click();
-    await waitFor(() => {
-      (input as HTMLInputElement).value = 'new value';
-      input.dispatchEvent(new Event('input', { bubbles: true }));
+      const handleChange = jest.fn();
+      render(
+        <XSSProvider>
+          <SafeInput value="" onChange={handleChange} />
+        </XSSProvider>
+      );
+      const input = screen.getByRole('textbox');
+      input.click();
+      await waitFor(() => {
+        (input as HTMLInputElement).value = 'new value';
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      });
     });
-  });
 
-  it('应该支持 maxLength', () => {
-    render(
-      <XSSProvider>
-        <SafeInput value="test" onChange={jest.fn()} maxLength={10} />
-      </XSSProvider>
-    );
-    const input = screen.getByRole('textbox');
-    expect(input).toHaveAttribute('maxLength', '10');
-  });
+    it('应该支持 maxLength', () => {
+      render(
+        <XSSProvider>
+          <SafeInput value="test" onChange={jest.fn()} maxLength={10} />
+        </XSSProvider>
+      );
+      const input = screen.getByRole('textbox');
+      expect(input).toHaveAttribute('maxLength', '10');
+    });
 
-  it('应该支持 allowedPattern', () => {
-    const pattern = /^[a-z]+$/;
-    render(
-      <XSSProvider>
-        <SafeInput value="test" onChange={jest.fn()} allowedPattern={pattern} />
-      </XSSProvider>
-    );
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
-  });
+    it('应该支持 allowedPattern', () => {
+      const pattern = /^[a-z]+$/;
+      render(
+        <XSSProvider>
+          <SafeInput value="test" onChange={jest.fn()} allowedPattern={pattern} />
+        </XSSProvider>
+      );
+      expect(screen.getByRole('textbox')).toBeInTheDocument();
+    });
   });
 
   describe('createSafeURL', () => {

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Avatar } from './Avatar';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 const meta: Meta<typeof Avatar> = {
   title: 'Components/Avatar',
@@ -102,28 +102,28 @@ export const AvatarGroup: Story = {
   render: () => (
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <div style={{ display: 'flex', marginLeft: '-0.5rem' }}>
-        <Avatar 
-          src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" 
-          alt="Felix" 
-          size="md" 
+        <Avatar
+          src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
+          alt="Felix"
+          size="md"
           style={{ border: '2px solid white', marginLeft: '-0.5rem' }}
         />
-        <Avatar 
-          src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka" 
-          alt="Aneka" 
-          size="md" 
+        <Avatar
+          src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka"
+          alt="Aneka"
+          size="md"
           style={{ border: '2px solid white', marginLeft: '-0.5rem' }}
         />
-        <Avatar 
-          src="https://api.dicebear.com/7.x/avataaars/svg?seed=Zack" 
-          alt="Zack" 
-          size="md" 
+        <Avatar
+          src="https://api.dicebear.com/7.x/avataaars/svg?seed=Zack"
+          alt="Zack"
+          size="md"
           style={{ border: '2px solid white', marginLeft: '-0.5rem' }}
         />
-        <Avatar 
-          alt="+5" 
-          fallback="+5" 
-          size="md" 
+        <Avatar
+          alt="+5"
+          fallback="+5"
+          size="md"
           style={{ border: '2px solid white', marginLeft: '-0.5rem' }}
         />
       </div>

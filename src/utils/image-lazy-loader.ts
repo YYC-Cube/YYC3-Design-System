@@ -32,8 +32,10 @@ const defaultConfig: LazyImageConfig = {
   enabled: true,
   rootMargin: '50px',
   threshold: 0.01,
-  placeholder: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PC9zdmc+',
-  errorPlaceholder: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmZjZGNkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5OTk5OTkiIGZvbnQtc2l6ZT0iMTQiPuaXoDwvdGV4dD48L3N2Zz4=',
+  placeholder:
+    'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PC9zdmc+',
+  errorPlaceholder:
+    'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmZjZGNkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5OTk5OTkiIGZvbnQtc2l6ZT0iMTQiPuaXoDwvdGV4dD48L3N2Zz4=',
   retryCount: 3,
   retryDelay: 1000,
 };
@@ -65,7 +67,7 @@ export const createLazyImageObserver = (
 export const observeLazyImage = (
   element: HTMLImageElement,
   options?: LazyImageOptions
-): () => void => {
+): (() => void) => {
   if (!globalConfig.enabled || !('IntersectionObserver' in window)) {
     loadImage(element, options);
     return () => {};
@@ -151,7 +153,7 @@ export const unobserveLazyImage = (element: HTMLImageElement): void => {
 export const observeAllLazyImages = (
   selector: string = 'img[data-src]',
   options?: LazyImageOptions
-): () => void => {
+): (() => void) => {
   const images = document.querySelectorAll<HTMLImageElement>(selector);
   const unobserveFunctions: Array<() => void> = [];
 
@@ -192,10 +194,7 @@ export const preloadLazyImage = (
   });
 };
 
-export const createLazyImageBatchLoader = (
-  batchSize: number = 5,
-  delay: number = 100
-) => {
+export const createLazyImageBatchLoader = (batchSize: number = 5, delay: number = 100) => {
   let queue: HTMLImageElement[] = [];
   let processing = false;
 
@@ -314,7 +313,9 @@ export const getLazyImageStats = (): {
   error: number;
   pending: number;
 } => {
-  const images = document.querySelectorAll<HTMLImageElement>('img[data-src], img.lazy-loaded, img.lazy-error');
+  const images = document.querySelectorAll<HTMLImageElement>(
+    'img[data-src], img.lazy-loaded, img.lazy-error'
+  );
   const total = images.length;
   const loaded = document.querySelectorAll<HTMLImageElement>('img.lazy-loaded').length;
   const error = document.querySelectorAll<HTMLImageElement>('img.lazy-error').length;

@@ -1,4 +1,9 @@
-import { AnimationConfig, AnimationDuration, AnimationEasing, AnimationKeyframe } from '../../types/animations';
+import {
+  AnimationConfig,
+  AnimationDuration,
+  AnimationEasing,
+  AnimationKeyframe,
+} from '../../types/animations';
 
 export const animationDurations: Record<AnimationDuration, string> = {
   fast: '150ms',
@@ -80,10 +85,7 @@ export const bounceIn = (config?: AnimationConfig): string => {
   return getAnimationString('bounce-in', config);
 };
 
-export const createTransition = (
-  properties: string,
-  config?: AnimationConfig
-): string => {
+export const createTransition = (properties: string, config?: AnimationConfig): string => {
   const duration = config?.duration ? animationDurations[config.duration] : '300ms';
   const easing = config?.easing ? animationEasings[config.easing] : 'ease-in-out';
   const delay = config?.delay || '0ms';

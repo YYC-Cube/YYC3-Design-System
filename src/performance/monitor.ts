@@ -31,9 +31,7 @@ class PerformanceMonitor {
   private measureFCP() {
     const observer = new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      const fcpEntry = entries.find(
-        (entry) => entry.name === 'first-contentful-paint'
-      );
+      const fcpEntry = entries.find((entry) => entry.name === 'first-contentful-paint');
       if (fcpEntry) {
         this.metrics.FCP = fcpEntry.startTime;
         this.report();

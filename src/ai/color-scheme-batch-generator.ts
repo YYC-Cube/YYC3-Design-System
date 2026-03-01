@@ -82,7 +82,8 @@ export class ColorSchemeBatchGenerator {
     optimizeForAccessibility: boolean;
     targetContrast: 'AA' | 'AAA';
   }): ColorScheme {
-    const { baseColor, harmonyType, scaleSteps, includeShades, includeTints, targetContrast } = options;
+    const { baseColor, harmonyType, scaleSteps, includeShades, includeTints, targetContrast } =
+      options;
 
     const colors = this.generateHarmonyColors(baseColor, harmonyType);
     const primary = colors[0];
@@ -127,9 +128,7 @@ export class ColorSchemeBatchGenerator {
         break;
 
       case 'complementary':
-        colors.push(
-          this.hslToHex({ h: (hsl.h + 180) % 360, s: hsl.s, l: hsl.l })
-        );
+        colors.push(this.hslToHex({ h: (hsl.h + 180) % 360, s: hsl.s, l: hsl.l }));
         break;
 
       case 'triadic':
@@ -181,7 +180,12 @@ export class ColorSchemeBatchGenerator {
     };
   }
 
-  private generateScale(baseColor: string, steps: number, includeShades: boolean, includeTints: boolean): string[] {
+  private generateScale(
+    baseColor: string,
+    steps: number,
+    includeShades: boolean,
+    includeTints: boolean
+  ): string[] {
     const scale: string[] = [];
     const hsl = this.hexToHsl(baseColor);
 
@@ -204,7 +208,11 @@ export class ColorSchemeBatchGenerator {
     return scale;
   }
 
-  private calculateAccessibility(color1: string, color2: string, _targetContrast: 'AA' | 'AAA'): {
+  private calculateAccessibility(
+    color1: string,
+    color2: string,
+    _targetContrast: 'AA' | 'AAA'
+  ): {
     aa: boolean;
     aaa: boolean;
     contrastRatio: number;
@@ -232,7 +240,7 @@ export class ColorSchemeBatchGenerator {
   }
 
   private calculateLuminance(rgb: { r: number; g: number; b: number }): number {
-    const [r, g, b] = [rgb.r, rgb.g, rgb.b].map(channel => {
+    const [r, g, b] = [rgb.r, rgb.g, rgb.b].map((channel) => {
       const c = channel <= 0.03928 ? channel / 12.92 : Math.pow((channel + 0.055) / 1.055, 2.4);
       return c;
     });
@@ -270,11 +278,11 @@ export class ColorSchemeBatchGenerator {
 
   private getHarmonyScore(harmony: string): number {
     const scores: Record<string, number> = {
-      'monochromatic': 25,
-      'analogous': 20,
-      'complementary': 20,
-      'triadic': 18,
-      'tetradic': 15,
+      monochromatic: 25,
+      analogous: 20,
+      complementary: 20,
+      triadic: 18,
+      tetradic: 15,
       'split-complementary': 17,
       'double-complementary': 15,
     };
@@ -283,22 +291,22 @@ export class ColorSchemeBatchGenerator {
 
   private getMoodScore(mood: string): number {
     const scores: Record<string, number> = {
-      'balanced': 15,
-      'vibrant': 12,
-      'muted': 10,
-      'light': 8,
-      'dark': 8,
+      balanced: 15,
+      vibrant: 12,
+      muted: 10,
+      light: 8,
+      dark: 8,
     };
     return scores[mood] || 5;
   }
 
   private getHarmonyName(harmony: string): string {
     const names: Record<string, string> = {
-      'monochromatic': '单色',
-      'analogous': '类比',
-      'complementary': '互补',
-      'triadic': '三色',
-      'tetradic': '四色',
+      monochromatic: '单色',
+      analogous: '类比',
+      complementary: '互补',
+      triadic: '三色',
+      tetradic: '四色',
       'split-complementary': '分裂互补',
       'double-complementary': '双重互补',
     };
@@ -368,11 +376,13 @@ export class ColorSchemeBatchGenerator {
 
   private hexToRgb(hex: string): { r: number; g: number; b: number } {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16),
-    } : { r: 0, g: 0, b: 0 };
+    return result
+      ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+        }
+      : { r: 0, g: 0, b: 0 };
   }
 }
 

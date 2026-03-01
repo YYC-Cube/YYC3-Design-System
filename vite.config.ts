@@ -22,19 +22,19 @@ export default defineConfig(({ mode }) => ({
       open: false,
       gzipSize: true,
       brotliSize: true,
-    }),
+    }) as any,
     viteCompression({
       algorithm: 'gzip',
       ext: '.gz',
       threshold: 10240,
       deleteOriginFile: false,
-    }),
+    }) as any,
     viteCompression({
       algorithm: 'brotliCompress',
       ext: '.br',
       threshold: 10240,
       deleteOriginFile: false,
-    }),
+    }) as any,
   ],
   resolve: {
     alias: {
@@ -52,14 +52,26 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks: (id) => {
           if (id.includes('node_modules')) {
-            if (id.includes('react')) {
+            if (id.includes('react') || id.includes('react-dom')) {
               return 'vendor-react';
             }
-            if (id.includes('react-dom')) {
-              return 'vendor-react-dom';
+            if (id.includes('react-router')) {
+              return 'vendor-router';
+            }
+            if (id.includes('lucide-react') || id.includes('framer-motion')) {
+              return 'vendor-ui';
+            }
+            if (id.includes('@radix-ui') || id.includes('@headlessui')) {
+              return 'vendor-components';
+            }
+            if (id.includes('zustand')) {
+              return 'vendor-state';
             }
             if (id.includes('@testing-library')) {
               return 'vendor-testing';
+            }
+            if (id.includes('clsx') || id.includes('tailwind-merge')) {
+              return 'vendor-utils';
             }
             return 'vendor';
           }
@@ -73,7 +85,7 @@ export default defineConfig(({ mode }) => ({
       compress: {
         drop_console: mode === 'production',
         drop_debugger: true,
-        pure_funcs: mode === 'production' ? ['console.log', 'console.info', 'console.debug'] : [],
+        pure_funcs: mode === 'production' ? ['console.log', 'console.info', 'console.debug', 'console.warn'] : [],
         arrows: true,
         collapse_vars: true,
         comparisons: true,
@@ -81,7 +93,7 @@ export default defineConfig(({ mode }) => ({
         hoist_funs: true,
         hoist_props: true,
         hoist_vars: true,
-        inline: true,
+        inline: 2,
         loops: true,
         negate_iife: true,
         properties: true,
@@ -97,14 +109,20 @@ export default defineConfig(({ mode }) => ({
         booleans: true,
         if_return: true,
         join_vars: true,
+        passes: 2,
       },
       mangle: {
         safari10: true,
         toplevel: true,
+        properties: {
+          regex: /^_/,
+        },
       },
       output: {
         comments: false,
         beautify: false,
+        ascii_only: true,
+        wrap_func_args: false,
       },
       ecma: 2015,
       keep_classnames: false,

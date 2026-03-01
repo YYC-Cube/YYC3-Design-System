@@ -150,10 +150,12 @@ export const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   };
 
   return (
-    <div style={containerStyle} className={`responsive-image-container ${className}`} data-testid={dataTestId}>
-      {isLoading && (
-        <div className="responsive-image-placeholder" style={placeholderStyle} />
-      )}
+    <div
+      style={containerStyle}
+      className={`responsive-image-container ${className}`}
+      data-testid={dataTestId}
+    >
+      {isLoading && <div className="responsive-image-placeholder" style={placeholderStyle} />}
       <img
         ref={imgRef}
         src={attributes.src}
@@ -296,18 +298,15 @@ export const PictureImage: React.FC<PictureImageProps> = ({
   };
 
   return (
-    <div style={containerStyle} className={`picture-image-container ${className}`} data-testid={dataTestId}>
-      {isLoading && (
-        <div className="picture-image-placeholder" style={placeholderStyle} />
-      )}
+    <div
+      style={containerStyle}
+      className={`picture-image-container ${className}`}
+      data-testid={dataTestId}
+    >
+      {isLoading && <div className="picture-image-placeholder" style={placeholderStyle} />}
       <picture>
         {sources.map((source, index) => (
-          <source
-            key={index}
-            srcSet={source.srcSet}
-            type={source.type}
-            media={source.media}
-          />
+          <source key={index} srcSet={source.srcSet} type={source.type} media={source.media} />
         ))}
         <img
           ref={imgRef}
@@ -444,10 +443,12 @@ export const ArtDirectionImage: React.FC<ArtDirectionImageProps> = ({
   const fallbackSrc = sources[sources.length - 1]?.src || '';
 
   return (
-    <div style={containerStyle} className={`art-direction-image-container ${className}`} data-testid={dataTestId}>
-      {isLoading && (
-        <div className="art-direction-image-placeholder" style={placeholderStyle} />
-      )}
+    <div
+      style={containerStyle}
+      className={`art-direction-image-container ${className}`}
+      data-testid={dataTestId}
+    >
+      {isLoading && <div className="art-direction-image-placeholder" style={placeholderStyle} />}
       <picture>
         {sources.map((source, index) => (
           <source

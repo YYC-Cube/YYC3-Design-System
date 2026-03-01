@@ -1,0 +1,299 @@
+e4508f0a38b68844a9a21a879c699e87
+"use strict";
+
+/* istanbul ignore next */
+function cov_2rhcf5l2ll() {
+  var path = "/Users/yanyu/Downloads/yyc3-Design-System/src/components/LanguageToggle.tsx";
+  var hash = "c0aa749f74191aca9eb10eda356cb442335218ea";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/yanyu/Downloads/yyc3-Design-System/src/components/LanguageToggle.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 40
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 22
+        },
+        end: {
+          line: 4,
+          column: 50
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 27
+        },
+        end: {
+          line: 5,
+          column: 62
+        }
+      },
+      "4": {
+        start: {
+          line: 6,
+          column: 17
+        },
+        end: {
+          line: 6,
+          column: 36
+        }
+      },
+      "5": {
+        start: {
+          line: 7,
+          column: 18
+        },
+        end: {
+          line: 7,
+          column: 472
+        }
+      },
+      "6": {
+        start: {
+          line: 7,
+          column: 25
+        },
+        end: {
+          line: 7,
+          column: 471
+        }
+      },
+      "7": {
+        start: {
+          line: 9,
+          column: 33
+        },
+        end: {
+          line: 9,
+          column: 70
+        }
+      },
+      "8": {
+        start: {
+          line: 10,
+          column: 4
+        },
+        end: {
+          line: 10,
+          column: 281
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 7,
+            column: 18
+          },
+          end: {
+            line: 7,
+            column: 19
+          }
+        },
+        loc: {
+          start: {
+            line: 7,
+            column: 25
+          },
+          end: {
+            line: 7,
+            column: 471
+          }
+        },
+        line: 7
+      },
+      "1": {
+        name: "LanguageToggle",
+        decl: {
+          start: {
+            line: 8,
+            column: 9
+          },
+          end: {
+            line: 8,
+            column: 23
+          }
+        },
+        loc: {
+          start: {
+            line: 8,
+            column: 26
+          },
+          end: {
+            line: 11,
+            column: 1
+          }
+        },
+        line: 8
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 10,
+            column: 245
+          },
+          end: {
+            line: 10,
+            column: 272
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 10,
+            column: 261
+          },
+          end: {
+            line: 10,
+            column: 265
+          }
+        }, {
+          start: {
+            line: 10,
+            column: 268
+          },
+          end: {
+            line: 10,
+            column: 272
+          }
+        }],
+        line: 10
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0
+    },
+    b: {
+      "0": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/yanyu/Downloads/yyc3-Design-System/src/components/LanguageToggle.tsx",
+      mappings: ";;AA6BA,wCASC;;AA5BD,+DAAuD;AACvD,qCAAkC;AAElC,MAAM,SAAS,GAAG,GAAG,EAAE,CAAC,CACtB,iCACE,SAAS,EAAC,SAAS,EACnB,OAAO,EAAC,WAAW,EACnB,IAAI,EAAC,MAAM,EACX,MAAM,EAAC,cAAc,EACrB,WAAW,EAAC,GAAG,EACf,aAAa,EAAC,OAAO,EACrB,cAAc,EAAC,OAAO,aAEtB,mCAAQ,EAAE,EAAC,IAAI,EAAC,EAAE,EAAC,IAAI,EAAC,CAAC,EAAC,IAAI,GAAG,EACjC,iCAAM,CAAC,EAAC,UAAU,GAAG,EACrB,iCAAM,CAAC,EAAC,4FAA4F,GAAG,IACnG,CACP,CAAC;AAEF,SAAgB,cAAc;IAC5B,MAAM,EAAE,IAAI,EAAE,UAAU,EAAE,GAAG,IAAA,8BAAW,GAAE,CAAC;IAE3C,OAAO,CACL,wBAAC,eAAM,IAAC,OAAO,EAAC,OAAO,EAAC,IAAI,EAAC,IAAI,EAAC,OAAO,EAAE,UAAU,EAAE,SAAS,EAAC,OAAO,aACtE,uBAAC,SAAS,KAAG,EACb,iCAAM,SAAS,EAAC,aAAa,YAAE,IAAI,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,IAAI,GAAQ,IAC3D,CACV,CAAC;AACJ,CAAC",
+      names: [],
+      sources: ["/Users/yanyu/Downloads/yyc3-Design-System/src/components/LanguageToggle.tsx"],
+      sourcesContent: ["/**\n * @file YYC\xB3 \u8BED\u8A00\u5207\u6362\u7EC4\u4EF6\n * @description \u63D0\u4F9B\u4E2D\u82F1\u6587\u5207\u6362\u7684UI\u7EC4\u4EF6\n * @module components\n * @author YYC\xB3\n * @version 1.0.0\n * @created 2026-02-27\n */\n\nimport React from 'react';\nimport { useLanguage } from '../i18n/LanguageProvider';\nimport { Button } from './Button';\n\nconst IconGlobe = () => (\n  <svg\n    className=\"w-4 h-4\"\n    viewBox=\"0 0 24 24\"\n    fill=\"none\"\n    stroke=\"currentColor\"\n    strokeWidth=\"2\"\n    strokeLinecap=\"round\"\n    strokeLinejoin=\"round\"\n  >\n    <circle cx=\"12\" cy=\"12\" r=\"10\" />\n    <path d=\"M2 12h20\" />\n    <path d=\"M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z\" />\n  </svg>\n);\n\nexport function LanguageToggle() {\n  const { lang, toggleLang } = useLanguage();\n\n  return (\n    <Button variant=\"ghost\" size=\"sm\" onClick={toggleLang} className=\"gap-2\">\n      <IconGlobe />\n      <span className=\"font-medium\">{lang === 'zh' ? '\u4E2D\u6587' : 'EN'}</span>\n    </Button>\n  );\n}\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "c0aa749f74191aca9eb10eda356cb442335218ea"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2rhcf5l2ll = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_2rhcf5l2ll();
+cov_2rhcf5l2ll().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_2rhcf5l2ll().s[1]++;
+exports.LanguageToggle = LanguageToggle;
+const jsx_runtime_1 =
+/* istanbul ignore next */
+(cov_2rhcf5l2ll().s[2]++, require("react/jsx-runtime"));
+const LanguageProvider_1 =
+/* istanbul ignore next */
+(cov_2rhcf5l2ll().s[3]++, require("../i18n/LanguageProvider"));
+const Button_1 =
+/* istanbul ignore next */
+(cov_2rhcf5l2ll().s[4]++, require("./Button"));
+/* istanbul ignore next */
+cov_2rhcf5l2ll().s[5]++;
+const IconGlobe = () => {
+  /* istanbul ignore next */
+  cov_2rhcf5l2ll().f[0]++;
+  cov_2rhcf5l2ll().s[6]++;
+  return (0, jsx_runtime_1.jsxs)("svg", {
+    className: "w-4 h-4",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    children: [(0, jsx_runtime_1.jsx)("circle", {
+      cx: "12",
+      cy: "12",
+      r: "10"
+    }), (0, jsx_runtime_1.jsx)("path", {
+      d: "M2 12h20"
+    }), (0, jsx_runtime_1.jsx)("path", {
+      d: "M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+    })]
+  });
+};
+function LanguageToggle() {
+  /* istanbul ignore next */
+  cov_2rhcf5l2ll().f[1]++;
+  const {
+    lang,
+    toggleLang
+  } =
+  /* istanbul ignore next */
+  (cov_2rhcf5l2ll().s[7]++, (0, LanguageProvider_1.useLanguage)());
+  /* istanbul ignore next */
+  cov_2rhcf5l2ll().s[8]++;
+  return (0, jsx_runtime_1.jsxs)(Button_1.Button, {
+    variant: "ghost",
+    size: "sm",
+    onClick: toggleLang,
+    className: "gap-2",
+    children: [(0, jsx_runtime_1.jsx)(IconGlobe, {}), (0, jsx_runtime_1.jsx)("span", {
+      className: "font-medium",
+      children: lang === 'zh' ?
+      /* istanbul ignore next */
+      (cov_2rhcf5l2ll().b[0][0]++, '中文') :
+      /* istanbul ignore next */
+      (cov_2rhcf5l2ll().b[0][1]++, 'EN')
+    })]
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJleHBvcnRzIiwiTGFuZ3VhZ2VUb2dnbGUiLCJMYW5ndWFnZVByb3ZpZGVyXzEiLCJjb3ZfMnJoY2Y1bDJsbCIsInMiLCJyZXF1aXJlIiwiQnV0dG9uXzEiLCJJY29uR2xvYmUiLCJmIiwianN4X3J1bnRpbWVfMSIsImpzeHMiLCJjbGFzc05hbWUiLCJ2aWV3Qm94IiwiZmlsbCIsInN0cm9rZSIsInN0cm9rZVdpZHRoIiwic3Ryb2tlTGluZWNhcCIsInN0cm9rZUxpbmVqb2luIiwiY2hpbGRyZW4iLCJqc3giLCJjeCIsImN5IiwiciIsImQiLCJsYW5nIiwidG9nZ2xlTGFuZyIsInVzZUxhbmd1YWdlIiwiQnV0dG9uIiwidmFyaWFudCIsInNpemUiLCJvbkNsaWNrIiwiYiJdLCJzb3VyY2VzIjpbIi9Vc2Vycy95YW55dS9Eb3dubG9hZHMveXljMy1EZXNpZ24tU3lzdGVtL3NyYy9jb21wb25lbnRzL0xhbmd1YWdlVG9nZ2xlLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEBmaWxlIFlZQ8KzIOivreiogOWIh+aNoue7hOS7tlxuICogQGRlc2NyaXB0aW9uIOaPkOS+m+S4reiLseaWh+WIh+aNoueahFVJ57uE5Lu2XG4gKiBAbW9kdWxlIGNvbXBvbmVudHNcbiAqIEBhdXRob3IgWVlDwrNcbiAqIEB2ZXJzaW9uIDEuMC4wXG4gKiBAY3JlYXRlZCAyMDI2LTAyLTI3XG4gKi9cblxuaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JztcbmltcG9ydCB7IHVzZUxhbmd1YWdlIH0gZnJvbSAnLi4vaTE4bi9MYW5ndWFnZVByb3ZpZGVyJztcbmltcG9ydCB7IEJ1dHRvbiB9IGZyb20gJy4vQnV0dG9uJztcblxuY29uc3QgSWNvbkdsb2JlID0gKCkgPT4gKFxuICA8c3ZnXG4gICAgY2xhc3NOYW1lPVwidy00IGgtNFwiXG4gICAgdmlld0JveD1cIjAgMCAyNCAyNFwiXG4gICAgZmlsbD1cIm5vbmVcIlxuICAgIHN0cm9rZT1cImN1cnJlbnRDb2xvclwiXG4gICAgc3Ryb2tlV2lkdGg9XCIyXCJcbiAgICBzdHJva2VMaW5lY2FwPVwicm91bmRcIlxuICAgIHN0cm9rZUxpbmVqb2luPVwicm91bmRcIlxuICA+XG4gICAgPGNpcmNsZSBjeD1cIjEyXCIgY3k9XCIxMlwiIHI9XCIxMFwiIC8+XG4gICAgPHBhdGggZD1cIk0yIDEyaDIwXCIgLz5cbiAgICA8cGF0aCBkPVwiTTEyIDJhMTUuMyAxNS4zIDAgMCAxIDQgMTAgMTUuMyAxNS4zIDAgMCAxLTQgMTAgMTUuMyAxNS4zIDAgMCAxLTQtMTAgMTUuMyAxNS4zIDAgMCAxIDQtMTB6XCIgLz5cbiAgPC9zdmc+XG4pO1xuXG5leHBvcnQgZnVuY3Rpb24gTGFuZ3VhZ2VUb2dnbGUoKSB7XG4gIGNvbnN0IHsgbGFuZywgdG9nZ2xlTGFuZyB9ID0gdXNlTGFuZ3VhZ2UoKTtcblxuICByZXR1cm4gKFxuICAgIDxCdXR0b24gdmFyaWFudD1cImdob3N0XCIgc2l6ZT1cInNtXCIgb25DbGljaz17dG9nZ2xlTGFuZ30gY2xhc3NOYW1lPVwiZ2FwLTJcIj5cbiAgICAgIDxJY29uR2xvYmUgLz5cbiAgICAgIDxzcGFuIGNsYXNzTmFtZT1cImZvbnQtbWVkaXVtXCI+e2xhbmcgPT09ICd6aCcgPyAn5Lit5paHJyA6ICdFTid9PC9zcGFuPlxuICAgIDwvQnV0dG9uPlxuICApO1xufVxuIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQTZCQUEsT0FBQSxDQUFBQyxjQUFBLEdBQUFBLGNBQUE7Ozs7QUFuQkEsTUFBQUMsa0JBQUE7QUFBQTtBQUFBLENBQUFDLGNBQUEsR0FBQUMsQ0FBQSxPQUFBQyxPQUFBO0FBQ0EsTUFBQUMsUUFBQTtBQUFBO0FBQUEsQ0FBQUgsY0FBQSxHQUFBQyxDQUFBLE9BQUFDLE9BQUE7QUFBa0M7QUFBQUYsY0FBQSxHQUFBQyxDQUFBO0FBRWxDLE1BQU1HLFNBQVMsR0FBR0EsQ0FBQSxLQUNoQjtFQUFBO0VBQUFKLGNBQUEsR0FBQUssQ0FBQTtFQUFBTCxjQUFBLEdBQUFDLENBQUE7RUFBQSxXQUFBSyxhQUFBLENBQUFDLElBQUE7SUFDRUMsU0FBUyxFQUFDLFNBQVM7SUFDbkJDLE9BQU8sRUFBQyxXQUFXO0lBQ25CQyxJQUFJLEVBQUMsTUFBTTtJQUNYQyxNQUFNLEVBQUMsY0FBYztJQUNyQkMsV0FBVyxFQUFDLEdBQUc7SUFDZkMsYUFBYSxFQUFDLE9BQU87SUFDckJDLGNBQWMsRUFBQyxPQUFPO0lBQUFDLFFBQUEsR0FFdEIsSUFBQVQsYUFBQSxDQUFBVSxHQUFBO01BQVFDLEVBQUUsRUFBQyxJQUFJO01BQUNDLEVBQUUsRUFBQyxJQUFJO01BQUNDLENBQUMsRUFBQztJQUFJLEVBQUcsRUFDakMsSUFBQWIsYUFBQSxDQUFBVSxHQUFBO01BQU1JLENBQUMsRUFBQztJQUFVLEVBQUcsRUFDckIsSUFBQWQsYUFBQSxDQUFBVSxHQUFBO01BQU1JLENBQUMsRUFBQztJQUE0RixFQUFHO0VBQUEsRUFDbkc7QUFEbUcsQ0FFMUc7QUFFRCxTQUFnQnRCLGNBQWNBLENBQUE7RUFBQTtFQUFBRSxjQUFBLEdBQUFLLENBQUE7RUFDNUIsTUFBTTtJQUFFZ0IsSUFBSTtJQUFFQztFQUFVLENBQUU7RUFBQTtFQUFBLENBQUF0QixjQUFBLEdBQUFDLENBQUEsT0FBRyxJQUFBRixrQkFBQSxDQUFBd0IsV0FBVyxHQUFFO0VBQUM7RUFBQXZCLGNBQUEsR0FBQUMsQ0FBQTtFQUUzQyxPQUNFLElBQUFLLGFBQUEsQ0FBQUMsSUFBQSxFQUFDSixRQUFBLENBQUFxQixNQUFNO0lBQUNDLE9BQU8sRUFBQyxPQUFPO0lBQUNDLElBQUksRUFBQyxJQUFJO0lBQUNDLE9BQU8sRUFBRUwsVUFBVTtJQUFFZCxTQUFTLEVBQUMsT0FBTztJQUFBTyxRQUFBLEdBQ3RFLElBQUFULGFBQUEsQ0FBQVUsR0FBQSxFQUFDWixTQUFTLEtBQUcsRUFDYixJQUFBRSxhQUFBLENBQUFVLEdBQUE7TUFBTVIsU0FBUyxFQUFDLGFBQWE7TUFBQU8sUUFBQSxFQUFFTSxJQUFJLEtBQUssSUFBSTtNQUFBO01BQUEsQ0FBQXJCLGNBQUEsR0FBQTRCLENBQUEsVUFBRyxJQUFJO01BQUE7TUFBQSxDQUFBNUIsY0FBQSxHQUFBNEIsQ0FBQSxVQUFHLElBQUk7SUFBQSxFQUFRO0VBQUEsRUFDM0Q7QUFFYiIsImlnbm9yZUxpc3QiOltdfQ==

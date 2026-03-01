@@ -1,0 +1,319 @@
+cd13face20181328bd2fd984d11915ad
+"use strict";
+
+/* istanbul ignore next */
+function cov_oi8sp38vq() {
+  var path = "/Users/yanyu/Downloads/yyc3-Design-System/src/components/DocsLayout.tsx";
+  var hash = "c78116e04e54857dd4bb53808e6c6a30acef6f21";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/yanyu/Downloads/yyc3-Design-System/src/components/DocsLayout.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 32
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 22
+        },
+        end: {
+          line: 4,
+          column: 50
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 20
+        },
+        end: {
+          line: 39,
+          column: 1
+        }
+      },
+      "4": {
+        start: {
+          line: 41,
+          column: 4
+        },
+        end: {
+          line: 41,
+          column: 1329
+        }
+      },
+      "5": {
+        start: {
+          line: 41,
+          column: 692
+        },
+        end: {
+          line: 41,
+          column: 1220
+        }
+      },
+      "6": {
+        start: {
+          line: 41,
+          column: 946
+        },
+        end: {
+          line: 41,
+          column: 1196
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "DocsLayout",
+        decl: {
+          start: {
+            line: 40,
+            column: 9
+          },
+          end: {
+            line: 40,
+            column: 19
+          }
+        },
+        loc: {
+          start: {
+            line: 40,
+            column: 34
+          },
+          end: {
+            line: 42,
+            column: 1
+          }
+        },
+        line: 40
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 41,
+            column: 678
+          },
+          end: {
+            line: 41,
+            column: 679
+          }
+        },
+        loc: {
+          start: {
+            line: 41,
+            column: 692
+          },
+          end: {
+            line: 41,
+            column: 1220
+          }
+        },
+        line: 41
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 41,
+            column: 935
+          },
+          end: {
+            line: 41,
+            column: 936
+          }
+        },
+        loc: {
+          start: {
+            line: 41,
+            column: 946
+          },
+          end: {
+            line: 41,
+            column: 1196
+          }
+        },
+        line: 41
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/yanyu/Downloads/yyc3-Design-System/src/components/DocsLayout.tsx",
+      mappings: ";;AA2DA,gCAiCC;;AArED,MAAM,WAAW,GAAiB;IAChC;QACE,KAAK,EAAE,iBAAiB;QACxB,KAAK,EAAE;YACL,EAAE,KAAK,EAAE,cAAc,EAAE,IAAI,EAAE,oBAAoB,EAAE;YACrD,EAAE,KAAK,EAAE,cAAc,EAAE,IAAI,EAAE,oBAAoB,EAAE;YACrD,EAAE,KAAK,EAAE,aAAa,EAAE,IAAI,EAAE,mBAAmB,EAAE;SACpD;KACF;IACD;QACE,KAAK,EAAE,eAAe;QACtB,KAAK,EAAE;YACL,EAAE,KAAK,EAAE,gBAAgB,EAAE,IAAI,EAAE,eAAe,EAAE;YAClD,EAAE,KAAK,EAAE,eAAe,EAAE,IAAI,EAAE,cAAc,EAAE;YAChD,EAAE,KAAK,EAAE,eAAe,EAAE,IAAI,EAAE,qBAAqB,EAAE;SACxD;KACF;IACD;QACE,KAAK,EAAE,YAAY;QACnB,KAAK,EAAE;YACL,EAAE,KAAK,EAAE,QAAQ,EAAE,IAAI,EAAE,yBAAyB,EAAE;YACpD,EAAE,KAAK,EAAE,MAAM,EAAE,IAAI,EAAE,uBAAuB,EAAE;YAChD,EAAE,KAAK,EAAE,OAAO,EAAE,IAAI,EAAE,wBAAwB,EAAE;YAClD,EAAE,KAAK,EAAE,UAAU,EAAE,IAAI,EAAE,2BAA2B,EAAE;SACzD;KACF;IACD;QACE,KAAK,EAAE,mBAAmB;QAC1B,KAAK,EAAE;YACL,EAAE,KAAK,EAAE,SAAS,EAAE,IAAI,EAAE,eAAe,EAAE;YAC3C,EAAE,KAAK,EAAE,gBAAgB,EAAE,IAAI,EAAE,YAAY,EAAE;YAC/C,EAAE,KAAK,EAAE,aAAa,EAAE,IAAI,EAAE,mBAAmB,EAAE;SACpD;KACF;CACF,CAAC;AAEF,SAAgB,UAAU,CAAC,EAAE,QAAQ,EAAmB;IACtD,OAAO,CACL,gCAAK,SAAS,EAAC,4BAA4B,YACzC,iCAAK,SAAS,EAAC,MAAM,aACnB,mCAAO,SAAS,EAAC,+EAA+E,aAC9F,iCAAK,SAAS,EAAC,MAAM,aACnB,+BAAI,SAAS,EAAC,mCAAmC,+BAAe,EAChE,8BAAG,SAAS,EAAC,oCAAoC,4CAAgC,IAC7E,EACN,gCAAK,SAAS,EAAC,WAAW,YACvB,WAAW,CAAC,GAAG,CAAC,CAAC,OAAO,EAAE,EAAE,CAAC,CAC5B,4CACE,+BAAI,SAAS,EAAC,4CAA4C,YAAE,OAAO,CAAC,KAAK,GAAM,EAC/E,+BAAI,SAAS,EAAC,WAAW,YACtB,OAAO,CAAC,KAAK,CAAC,GAAG,CAAC,CAAC,IAAI,EAAE,EAAE,CAAC,CAC3B,yCACE,8BACE,IAAI,EAAE,IAAI,CAAC,IAAI,EACf,SAAS,EAAC,gHAAgH,YAEzH,IAAI,CAAC,KAAK,GACT,IANG,IAAI,CAAC,IAAI,CAOb,CACN,CAAC,GACC,KAbG,OAAO,CAAC,KAAK,CAcjB,CACP,CAAC,GACE,IACA,EACR,iCAAM,SAAS,EAAC,sBAAsB,YAAE,QAAQ,GAAQ,IACpD,GACF,CACP,CAAC;AACJ,CAAC",
+      names: [],
+      sources: ["/Users/yanyu/Downloads/yyc3-Design-System/src/components/DocsLayout.tsx"],
+      sourcesContent: ["/**\n * @file YYC\xB3 \u6587\u6863\u5E03\u5C40\u7EC4\u4EF6\n * @description \u6587\u6863\u9875\u9762\u7684\u5E03\u5C40\u7ED3\u6784\uFF0C\u5305\u542B\u4FA7\u8FB9\u680F\u5BFC\u822A\n * @module components\n * @author YYC\xB3\n * @version 1.0.0\n * @created 2026-02-27\n */\n\nimport React from 'react';\n\ninterface DocsLayoutProps {\n  children: React.ReactNode;\n}\n\ninterface DocSection {\n  title: string;\n  items: Array<{\n    title: string;\n    path: string;\n  }>;\n}\n\nconst docSections: DocSection[] = [\n  {\n    title: 'Getting Started',\n    items: [\n      { title: 'Introduction', path: '/docs/introduction' },\n      { title: 'Installation', path: '/docs/installation' },\n      { title: 'Quick Start', path: '/docs/quick-start' },\n    ],\n  },\n  {\n    title: 'Core Concepts',\n    items: [\n      { title: 'Theming System', path: '/docs/theming' },\n      { title: 'Design Tokens', path: '/docs/tokens' },\n      { title: 'Accessibility', path: '/docs/accessibility' },\n    ],\n  },\n  {\n    title: 'Components',\n    items: [\n      { title: 'Button', path: '/docs/components/button' },\n      { title: 'Card', path: '/docs/components/card' },\n      { title: 'Input', path: '/docs/components/input' },\n      { title: 'Progress', path: '/docs/components/progress' },\n    ],\n  },\n  {\n    title: 'Quality Assurance',\n    items: [\n      { title: 'Testing', path: '/docs/testing' },\n      { title: 'CI/CD Pipeline', path: '/docs/cicd' },\n      { title: 'Performance', path: '/docs/performance' },\n    ],\n  },\n];\n\nexport function DocsLayout({ children }: DocsLayoutProps) {\n  return (\n    <div className=\"min-h-screen bg-background\">\n      <div className=\"flex\">\n        <aside className=\"w-64 border-r border-border bg-card p-6 h-screen sticky top-0 overflow-y-auto\">\n          <div className=\"mb-6\">\n            <h1 className=\"text-xl font-bold text-foreground\">YYC\xB3 Docs</h1>\n            <p className=\"text-sm text-muted-foreground mt-1\">Design System Documentation</p>\n          </div>\n          <nav className=\"space-y-6\">\n            {docSections.map((section) => (\n              <div key={section.title}>\n                <h2 className=\"text-sm font-semibold text-foreground mb-2\">{section.title}</h2>\n                <ul className=\"space-y-1\">\n                  {section.items.map((item) => (\n                    <li key={item.path}>\n                      <a\n                        href={item.path}\n                        className=\"block text-sm text-muted-foreground hover:text-foreground hover:bg-muted rounded px-2 py-1.5 transition-colors\"\n                      >\n                        {item.title}\n                      </a>\n                    </li>\n                  ))}\n                </ul>\n              </div>\n            ))}\n          </nav>\n        </aside>\n        <main className=\"flex-1 p-8 max-w-4xl\">{children}</main>\n      </div>\n    </div>\n  );\n}\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "c78116e04e54857dd4bb53808e6c6a30acef6f21"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_oi8sp38vq = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_oi8sp38vq();
+cov_oi8sp38vq().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_oi8sp38vq().s[1]++;
+exports.DocsLayout = DocsLayout;
+const jsx_runtime_1 =
+/* istanbul ignore next */
+(cov_oi8sp38vq().s[2]++, require("react/jsx-runtime"));
+const docSections =
+/* istanbul ignore next */
+(cov_oi8sp38vq().s[3]++, [{
+  title: 'Getting Started',
+  items: [{
+    title: 'Introduction',
+    path: '/docs/introduction'
+  }, {
+    title: 'Installation',
+    path: '/docs/installation'
+  }, {
+    title: 'Quick Start',
+    path: '/docs/quick-start'
+  }]
+}, {
+  title: 'Core Concepts',
+  items: [{
+    title: 'Theming System',
+    path: '/docs/theming'
+  }, {
+    title: 'Design Tokens',
+    path: '/docs/tokens'
+  }, {
+    title: 'Accessibility',
+    path: '/docs/accessibility'
+  }]
+}, {
+  title: 'Components',
+  items: [{
+    title: 'Button',
+    path: '/docs/components/button'
+  }, {
+    title: 'Card',
+    path: '/docs/components/card'
+  }, {
+    title: 'Input',
+    path: '/docs/components/input'
+  }, {
+    title: 'Progress',
+    path: '/docs/components/progress'
+  }]
+}, {
+  title: 'Quality Assurance',
+  items: [{
+    title: 'Testing',
+    path: '/docs/testing'
+  }, {
+    title: 'CI/CD Pipeline',
+    path: '/docs/cicd'
+  }, {
+    title: 'Performance',
+    path: '/docs/performance'
+  }]
+}]);
+function DocsLayout({
+  children
+}) {
+  /* istanbul ignore next */
+  cov_oi8sp38vq().f[0]++;
+  cov_oi8sp38vq().s[4]++;
+  return (0, jsx_runtime_1.jsx)("div", {
+    className: "min-h-screen bg-background",
+    children: (0, jsx_runtime_1.jsxs)("div", {
+      className: "flex",
+      children: [(0, jsx_runtime_1.jsxs)("aside", {
+        className: "w-64 border-r border-border bg-card p-6 h-screen sticky top-0 overflow-y-auto",
+        children: [(0, jsx_runtime_1.jsxs)("div", {
+          className: "mb-6",
+          children: [(0, jsx_runtime_1.jsx)("h1", {
+            className: "text-xl font-bold text-foreground",
+            children: "YYC\u00B3 Docs"
+          }), (0, jsx_runtime_1.jsx)("p", {
+            className: "text-sm text-muted-foreground mt-1",
+            children: "Design System Documentation"
+          })]
+        }), (0, jsx_runtime_1.jsx)("nav", {
+          className: "space-y-6",
+          children: docSections.map(section => {
+            /* istanbul ignore next */
+            cov_oi8sp38vq().f[1]++;
+            cov_oi8sp38vq().s[5]++;
+            return (0, jsx_runtime_1.jsxs)("div", {
+              children: [(0, jsx_runtime_1.jsx)("h2", {
+                className: "text-sm font-semibold text-foreground mb-2",
+                children: section.title
+              }), (0, jsx_runtime_1.jsx)("ul", {
+                className: "space-y-1",
+                children: section.items.map(item => {
+                  /* istanbul ignore next */
+                  cov_oi8sp38vq().f[2]++;
+                  cov_oi8sp38vq().s[6]++;
+                  return (0, jsx_runtime_1.jsx)("li", {
+                    children: (0, jsx_runtime_1.jsx)("a", {
+                      href: item.path,
+                      className: "block text-sm text-muted-foreground hover:text-foreground hover:bg-muted rounded px-2 py-1.5 transition-colors",
+                      children: item.title
+                    })
+                  }, item.path);
+                })
+              })]
+            }, section.title);
+          })
+        })]
+      }), (0, jsx_runtime_1.jsx)("main", {
+        className: "flex-1 p-8 max-w-4xl",
+        children: children
+      })]
+    })
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3Zfb2k4c3AzOHZxIiwiYWN0dWFsQ292ZXJhZ2UiLCJzIiwiZXhwb3J0cyIsIkRvY3NMYXlvdXQiLCJkb2NTZWN0aW9ucyIsInRpdGxlIiwiaXRlbXMiLCJwYXRoIiwiY2hpbGRyZW4iLCJmIiwianN4X3J1bnRpbWVfMSIsImpzeCIsImNsYXNzTmFtZSIsImpzeHMiLCJtYXAiLCJzZWN0aW9uIiwiaXRlbSIsImhyZWYiXSwic291cmNlcyI6WyIvVXNlcnMveWFueXUvRG93bmxvYWRzL3l5YzMtRGVzaWduLVN5c3RlbS9zcmMvY29tcG9uZW50cy9Eb2NzTGF5b3V0LnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEBmaWxlIFlZQ8KzIOaWh+aho+W4g+WxgOe7hOS7tlxuICogQGRlc2NyaXB0aW9uIOaWh+aho+mhtemdoueahOW4g+WxgOe7k+aehO+8jOWMheWQq+S+p+i+ueagj+WvvOiIqlxuICogQG1vZHVsZSBjb21wb25lbnRzXG4gKiBAYXV0aG9yIFlZQ8KzXG4gKiBAdmVyc2lvbiAxLjAuMFxuICogQGNyZWF0ZWQgMjAyNi0wMi0yN1xuICovXG5cbmltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG5cbmludGVyZmFjZSBEb2NzTGF5b3V0UHJvcHMge1xuICBjaGlsZHJlbjogUmVhY3QuUmVhY3ROb2RlO1xufVxuXG5pbnRlcmZhY2UgRG9jU2VjdGlvbiB7XG4gIHRpdGxlOiBzdHJpbmc7XG4gIGl0ZW1zOiBBcnJheTx7XG4gICAgdGl0bGU6IHN0cmluZztcbiAgICBwYXRoOiBzdHJpbmc7XG4gIH0+O1xufVxuXG5jb25zdCBkb2NTZWN0aW9uczogRG9jU2VjdGlvbltdID0gW1xuICB7XG4gICAgdGl0bGU6ICdHZXR0aW5nIFN0YXJ0ZWQnLFxuICAgIGl0ZW1zOiBbXG4gICAgICB7IHRpdGxlOiAnSW50cm9kdWN0aW9uJywgcGF0aDogJy9kb2NzL2ludHJvZHVjdGlvbicgfSxcbiAgICAgIHsgdGl0bGU6ICdJbnN0YWxsYXRpb24nLCBwYXRoOiAnL2RvY3MvaW5zdGFsbGF0aW9uJyB9LFxuICAgICAgeyB0aXRsZTogJ1F1aWNrIFN0YXJ0JywgcGF0aDogJy9kb2NzL3F1aWNrLXN0YXJ0JyB9LFxuICAgIF0sXG4gIH0sXG4gIHtcbiAgICB0aXRsZTogJ0NvcmUgQ29uY2VwdHMnLFxuICAgIGl0ZW1zOiBbXG4gICAgICB7IHRpdGxlOiAnVGhlbWluZyBTeXN0ZW0nLCBwYXRoOiAnL2RvY3MvdGhlbWluZycgfSxcbiAgICAgIHsgdGl0bGU6ICdEZXNpZ24gVG9rZW5zJywgcGF0aDogJy9kb2NzL3Rva2VucycgfSxcbiAgICAgIHsgdGl0bGU6ICdBY2Nlc3NpYmlsaXR5JywgcGF0aDogJy9kb2NzL2FjY2Vzc2liaWxpdHknIH0sXG4gICAgXSxcbiAgfSxcbiAge1xuICAgIHRpdGxlOiAnQ29tcG9uZW50cycsXG4gICAgaXRlbXM6IFtcbiAgICAgIHsgdGl0bGU6ICdCdXR0b24nLCBwYXRoOiAnL2RvY3MvY29tcG9uZW50cy9idXR0b24nIH0sXG4gICAgICB7IHRpdGxlOiAnQ2FyZCcsIHBhdGg6ICcvZG9jcy9jb21wb25lbnRzL2NhcmQnIH0sXG4gICAgICB7IHRpdGxlOiAnSW5wdXQnLCBwYXRoOiAnL2RvY3MvY29tcG9uZW50cy9pbnB1dCcgfSxcbiAgICAgIHsgdGl0bGU6ICdQcm9ncmVzcycsIHBhdGg6ICcvZG9jcy9jb21wb25lbnRzL3Byb2dyZXNzJyB9LFxuICAgIF0sXG4gIH0sXG4gIHtcbiAgICB0aXRsZTogJ1F1YWxpdHkgQXNzdXJhbmNlJyxcbiAgICBpdGVtczogW1xuICAgICAgeyB0aXRsZTogJ1Rlc3RpbmcnLCBwYXRoOiAnL2RvY3MvdGVzdGluZycgfSxcbiAgICAgIHsgdGl0bGU6ICdDSS9DRCBQaXBlbGluZScsIHBhdGg6ICcvZG9jcy9jaWNkJyB9LFxuICAgICAgeyB0aXRsZTogJ1BlcmZvcm1hbmNlJywgcGF0aDogJy9kb2NzL3BlcmZvcm1hbmNlJyB9LFxuICAgIF0sXG4gIH0sXG5dO1xuXG5leHBvcnQgZnVuY3Rpb24gRG9jc0xheW91dCh7IGNoaWxkcmVuIH06IERvY3NMYXlvdXRQcm9wcykge1xuICByZXR1cm4gKFxuICAgIDxkaXYgY2xhc3NOYW1lPVwibWluLWgtc2NyZWVuIGJnLWJhY2tncm91bmRcIj5cbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleFwiPlxuICAgICAgICA8YXNpZGUgY2xhc3NOYW1lPVwidy02NCBib3JkZXItciBib3JkZXItYm9yZGVyIGJnLWNhcmQgcC02IGgtc2NyZWVuIHN0aWNreSB0b3AtMCBvdmVyZmxvdy15LWF1dG9cIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1iLTZcIj5cbiAgICAgICAgICAgIDxoMSBjbGFzc05hbWU9XCJ0ZXh0LXhsIGZvbnQtYm9sZCB0ZXh0LWZvcmVncm91bmRcIj5ZWUPCsyBEb2NzPC9oMT5cbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInRleHQtc20gdGV4dC1tdXRlZC1mb3JlZ3JvdW5kIG10LTFcIj5EZXNpZ24gU3lzdGVtIERvY3VtZW50YXRpb248L3A+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPG5hdiBjbGFzc05hbWU9XCJzcGFjZS15LTZcIj5cbiAgICAgICAgICAgIHtkb2NTZWN0aW9ucy5tYXAoKHNlY3Rpb24pID0+IChcbiAgICAgICAgICAgICAgPGRpdiBrZXk9e3NlY3Rpb24udGl0bGV9PlxuICAgICAgICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJ0ZXh0LXNtIGZvbnQtc2VtaWJvbGQgdGV4dC1mb3JlZ3JvdW5kIG1iLTJcIj57c2VjdGlvbi50aXRsZX08L2gyPlxuICAgICAgICAgICAgICAgIDx1bCBjbGFzc05hbWU9XCJzcGFjZS15LTFcIj5cbiAgICAgICAgICAgICAgICAgIHtzZWN0aW9uLml0ZW1zLm1hcCgoaXRlbSkgPT4gKFxuICAgICAgICAgICAgICAgICAgICA8bGkga2V5PXtpdGVtLnBhdGh9PlxuICAgICAgICAgICAgICAgICAgICAgIDxhXG4gICAgICAgICAgICAgICAgICAgICAgICBocmVmPXtpdGVtLnBhdGh9XG4gICAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJibG9jayB0ZXh0LXNtIHRleHQtbXV0ZWQtZm9yZWdyb3VuZCBob3Zlcjp0ZXh0LWZvcmVncm91bmQgaG92ZXI6YmctbXV0ZWQgcm91bmRlZCBweC0yIHB5LTEuNSB0cmFuc2l0aW9uLWNvbG9yc1wiXG4gICAgICAgICAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgICAgICAgICAge2l0ZW0udGl0bGV9XG4gICAgICAgICAgICAgICAgICAgICAgPC9hPlxuICAgICAgICAgICAgICAgICAgICA8L2xpPlxuICAgICAgICAgICAgICAgICAgKSl9XG4gICAgICAgICAgICAgICAgPC91bD5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICApKX1cbiAgICAgICAgICA8L25hdj5cbiAgICAgICAgPC9hc2lkZT5cbiAgICAgICAgPG1haW4gY2xhc3NOYW1lPVwiZmxleC0xIHAtOCBtYXgtdy00eGxcIj57Y2hpbGRyZW59PC9tYWluPlxuICAgICAgPC9kaXY+XG4gICAgPC9kaXY+XG4gICk7XG59XG4iXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQWtDSTtJQUFBQSxhQUFBLFlBQUFBLENBQUE7TUFBQSxPQUFBQyxjQUFBO0lBQUE7RUFBQTtFQUFBLE9BQUFBLGNBQUE7QUFBQTtBQUFBRCxhQUFBO0FBQUFBLGFBQUEsR0FBQUUsQ0FBQTs7Ozs7O0FBeUJKQyxPQUFBLENBQUFDLFVBQUEsR0FBQUEsVUFBQTs7OztBQXBDQSxNQUFNQyxXQUFXO0FBQUE7QUFBQSxDQUFBTCxhQUFBLEdB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

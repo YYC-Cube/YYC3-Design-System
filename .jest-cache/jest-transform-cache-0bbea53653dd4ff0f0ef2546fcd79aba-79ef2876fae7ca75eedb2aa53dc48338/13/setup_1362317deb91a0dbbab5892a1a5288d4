@@ -1,0 +1,20 @@
+d016d78e3bf1f19b5e1c1d55f988196d
+"use strict";
+/**
+ * @file YYC³ Design System — Jest Setup
+ * @description Jest 测试环境配置：jest-dom + jest-axe
+ * @module tests
+ * @author YYC³
+ * @version 1.0.0
+ * @created 2026-02-27
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+require("@testing-library/jest-dom");
+try {
+    const { toHaveNoViolations } = require('jest-axe');
+    expect.extend({ toHaveNoViolations });
+}
+catch (e) {
+    console.warn('jest-axe matcher not available:', e);
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lhbnl1L0Rvd25sb2Fkcy95eWMzLURlc2lnbi1TeXN0ZW0vc3JjL3Rlc3RzL3NldHVwLnRzIiwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7OztHQU9HOztBQUVILHFDQUFtQztBQUVuQyxJQUFJLENBQUM7SUFDSCxNQUFNLEVBQUUsa0JBQWtCLEVBQUUsR0FBRyxPQUFPLENBQUMsVUFBVSxDQUFDLENBQUM7SUFDbkQsTUFBTSxDQUFDLE1BQU0sQ0FBQyxFQUFFLGtCQUFrQixFQUFFLENBQUMsQ0FBQztBQUN4QyxDQUFDO0FBQUMsT0FBTyxDQUFDLEVBQUUsQ0FBQztJQUNYLE9BQU8sQ0FBQyxJQUFJLENBQUMsaUNBQWlDLEVBQUUsQ0FBQyxDQUFDLENBQUM7QUFDckQsQ0FBQyIsIm5hbWVzIjpbXSwic291cmNlcyI6WyIvVXNlcnMveWFueXUvRG93bmxvYWRzL3l5YzMtRGVzaWduLVN5c3RlbS9zcmMvdGVzdHMvc2V0dXAudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBAZmlsZSBZWUPCsyBEZXNpZ24gU3lzdGVtIOKAlCBKZXN0IFNldHVwXG4gKiBAZGVzY3JpcHRpb24gSmVzdCDmtYvor5Xnjq/looPphY3nva7vvJpqZXN0LWRvbSArIGplc3QtYXhlXG4gKiBAbW9kdWxlIHRlc3RzXG4gKiBAYXV0aG9yIFlZQ8KzXG4gKiBAdmVyc2lvbiAxLjAuMFxuICogQGNyZWF0ZWQgMjAyNi0wMi0yN1xuICovXG5cbmltcG9ydCAnQHRlc3RpbmctbGlicmFyeS9qZXN0LWRvbSc7XG5cbnRyeSB7XG4gIGNvbnN0IHsgdG9IYXZlTm9WaW9sYXRpb25zIH0gPSByZXF1aXJlKCdqZXN0LWF4ZScpO1xuICBleHBlY3QuZXh0ZW5kKHsgdG9IYXZlTm9WaW9sYXRpb25zIH0pO1xufSBjYXRjaCAoZSkge1xuICBjb25zb2xlLndhcm4oJ2plc3QtYXhlIG1hdGNoZXIgbm90IGF2YWlsYWJsZTonLCBlKTtcbn1cbiJdLCJ2ZXJzaW9uIjozfQ==

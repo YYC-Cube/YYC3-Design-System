@@ -32,7 +32,9 @@ export const AIColorRecommender: React.FC<AIColorRecommenderProps> = ({
   const { tokens } = useTheme();
   const [baseColor, setBaseColor] = useState('#d45a5f');
   const [purpose, setPurpose] = useState<'brand' | 'ui' | 'data' | 'marketing'>('ui');
-  const [mood, setMood] = useState<'professional' | 'playful' | 'calm' | 'energetic' | 'luxury'>('professional');
+  const [mood, setMood] = useState<'professional' | 'playful' | 'calm' | 'energetic' | 'luxury'>(
+    'professional'
+  );
   const [accessibility, setAccessibility] = useState<'AA' | 'AAA'>('AA');
   const [schemes, setSchemes] = useState<ColorScheme[]>([]);
   const [selectedScheme, setSelectedScheme] = useState<ColorScheme | null>(null);
@@ -50,12 +52,15 @@ export const AIColorRecommender: React.FC<AIColorRecommenderProps> = ({
     setSelectedScheme(null);
   }, [baseColor, purpose, mood, accessibility]);
 
-  const handleSelectScheme = useCallback((scheme: ColorScheme) => {
-    setSelectedScheme(scheme);
-    if (onSelectScheme) {
-      onSelectScheme(scheme);
-    }
-  }, [onSelectScheme]);
+  const handleSelectScheme = useCallback(
+    (scheme: ColorScheme) => {
+      setSelectedScheme(scheme);
+      if (onSelectScheme) {
+        onSelectScheme(scheme);
+      }
+    },
+    [onSelectScheme]
+  );
 
   const purposes = [
     { value: 'brand', label: '品牌' },
@@ -85,27 +90,23 @@ export const AIColorRecommender: React.FC<AIColorRecommenderProps> = ({
       <CardContent className="space-y-6">
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               基础颜色
             </label>
             <div className="flex gap-2">
-              <Input
-                type="color"
-                value={baseColor}
-                onChange={setBaseColor}
-                className="w-16 h-10"
-              />
-              <Input
-                type="text"
-                value={baseColor}
-                onChange={setBaseColor}
-                placeholder="#d45a5f"
-              />
+              <Input type="color" value={baseColor} onChange={setBaseColor} className="w-16 h-10" />
+              <Input type="text" value={baseColor} onChange={setBaseColor} placeholder="#d45a5f" />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               用途
             </label>
             <div className="flex flex-wrap gap-2">
@@ -115,8 +116,10 @@ export const AIColorRecommender: React.FC<AIColorRecommenderProps> = ({
                   variant={purpose === p.value ? 'default' : 'outline'}
                   style={{
                     cursor: 'pointer',
-                    background: purpose === p.value ? getTokenValue(tokens, 'color.primary') : 'transparent',
-                    color: purpose === p.value ? '#ffffff' : getTokenValue(tokens, 'color.foreground'),
+                    background:
+                      purpose === p.value ? getTokenValue(tokens, 'color.primary') : 'transparent',
+                    color:
+                      purpose === p.value ? '#ffffff' : getTokenValue(tokens, 'color.foreground'),
                     borderColor: getTokenValue(tokens, 'color.primary'),
                   }}
                   onClick={() => setPurpose(p.value)}
@@ -128,7 +131,10 @@ export const AIColorRecommender: React.FC<AIColorRecommenderProps> = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               情绪
             </label>
             <div className="flex flex-wrap gap-2">
@@ -138,7 +144,8 @@ export const AIColorRecommender: React.FC<AIColorRecommenderProps> = ({
                   variant={mood === m.value ? 'default' : 'outline'}
                   style={{
                     cursor: 'pointer',
-                    background: mood === m.value ? getTokenValue(tokens, 'color.primary') : 'transparent',
+                    background:
+                      mood === m.value ? getTokenValue(tokens, 'color.primary') : 'transparent',
                     color: mood === m.value ? '#ffffff' : getTokenValue(tokens, 'color.foreground'),
                     borderColor: getTokenValue(tokens, 'color.primary'),
                   }}
@@ -151,7 +158,10 @@ export const AIColorRecommender: React.FC<AIColorRecommenderProps> = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               可访问性标准
             </label>
             <div className="flex flex-wrap gap-2">
@@ -161,8 +171,14 @@ export const AIColorRecommender: React.FC<AIColorRecommenderProps> = ({
                   variant={accessibility === a.value ? 'default' : 'outline'}
                   style={{
                     cursor: 'pointer',
-                    background: accessibility === a.value ? getTokenValue(tokens, 'color.primary') : 'transparent',
-                    color: accessibility === a.value ? '#ffffff' : getTokenValue(tokens, 'color.foreground'),
+                    background:
+                      accessibility === a.value
+                        ? getTokenValue(tokens, 'color.primary')
+                        : 'transparent',
+                    color:
+                      accessibility === a.value
+                        ? '#ffffff'
+                        : getTokenValue(tokens, 'color.foreground'),
                     borderColor: getTokenValue(tokens, 'color.primary'),
                   }}
                   onClick={() => setAccessibility(a.value)}
@@ -180,7 +196,10 @@ export const AIColorRecommender: React.FC<AIColorRecommenderProps> = ({
 
         {schemes.length > 0 && (
           <div className="space-y-3">
-            <h3 className="text-sm font-medium" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <h3
+              className="text-sm font-medium"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               推荐方案 ({schemes.length})
             </h3>
             <div className="space-y-3">
@@ -193,16 +212,25 @@ export const AIColorRecommender: React.FC<AIColorRecommenderProps> = ({
                   style={{
                     background: getTokenValue(tokens, 'color.card'),
                     border: `1px solid ${getTokenValue(tokens, 'color.border')}`,
-                    outline: selectedScheme === scheme ? `2px solid ${getTokenValue(tokens, 'color.primary')}` : 'none',
+                    outline:
+                      selectedScheme === scheme
+                        ? `2px solid ${getTokenValue(tokens, 'color.primary')}`
+                        : 'none',
                   }}
                   onClick={() => handleSelectScheme(scheme)}
                 >
                   <div className="flex items-start justify-between mb-2">
                     <div>
-                      <h4 className="text-sm font-medium" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                      <h4
+                        className="text-sm font-medium"
+                        style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                      >
                         {scheme.name}
                       </h4>
-                      <p className="text-xs mt-1" style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
+                      <p
+                        className="text-xs mt-1"
+                        style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}
+                      >
                         {scheme.description}
                       </p>
                     </div>
@@ -210,8 +238,14 @@ export const AIColorRecommender: React.FC<AIColorRecommenderProps> = ({
                       variant={scheme.accessibility === 'AAA' ? 'default' : 'outline'}
                       style={{
                         background: scheme.accessibility === 'AAA' ? '#10b981' : 'transparent',
-                        color: scheme.accessibility === 'AAA' ? '#ffffff' : getTokenValue(tokens, 'color.foreground'),
-                        borderColor: scheme.accessibility === 'AAA' ? '#10b981' : getTokenValue(tokens, 'color.border'),
+                        color:
+                          scheme.accessibility === 'AAA'
+                            ? '#ffffff'
+                            : getTokenValue(tokens, 'color.foreground'),
+                        borderColor:
+                          scheme.accessibility === 'AAA'
+                            ? '#10b981'
+                            : getTokenValue(tokens, 'color.border'),
                       }}
                     >
                       {scheme.accessibility}

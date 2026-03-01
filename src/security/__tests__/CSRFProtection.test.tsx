@@ -8,10 +8,21 @@
  */
 
 import * as React from 'react';
-import { render, fireEvent, waitFor, cleanup } from '@testing-library/react'
+import { render, fireEvent, waitFor, cleanup } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
-import { CSRFProvider, CSRFProtectedForm, useCSRF, CSRFProtectedFetch, withCSRFProtection, createCSRFMiddleware, validateCSRFToken, createStrictConfig, createModerateConfig, createPermissiveConfig } from '../CSRFProtection';
+import {
+  CSRFProvider,
+  CSRFProtectedForm,
+  useCSRF,
+  CSRFProtectedFetch,
+  withCSRFProtection,
+  createCSRFMiddleware,
+  validateCSRFToken,
+  createStrictConfig,
+  createModerateConfig,
+  createPermissiveConfig,
+} from '../CSRFProtection';
 
 global.fetch = jest.fn() as any;
 
@@ -50,7 +61,7 @@ describe('CSRF Protection Module', () => {
     it('应该支持自定义配置', async () => {
       const customConfig = {
         tokenLength: 16,
-        expirationTime: 60000
+        expirationTime: 60000,
       };
 
       const TestComponent = () => {
@@ -84,14 +95,12 @@ describe('CSRF Protection Module', () => {
       const serverToken = 'server-generated-token';
       (global.fetch as any).mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ token: serverToken })
+        json: async () => ({ token: serverToken }),
       });
 
       const TestComponent = () => {
         const { token } = useCSRF();
-        return (
-          <div data-testid="token">{token || 'loading'}</div>
-        );
+        return <div data-testid="token">{token || 'loading'}</div>;
       };
 
       render(
@@ -114,8 +123,12 @@ describe('CSRF Protection Module', () => {
         return (
           <div>
             <div data-testid="token">{token || 'loading'}</div>
-            <button data-testid="refresh" onClick={refreshTokens}>Refresh</button>
-            <button data-testid="clear" onClick={clearTokens}>Clear</button>
+            <button data-testid="refresh" onClick={refreshTokens}>
+              Refresh
+            </button>
+            <button data-testid="clear" onClick={clearTokens}>
+              Clear
+            </button>
           </div>
         );
       };
@@ -149,8 +162,12 @@ describe('CSRF Protection Module', () => {
         return (
           <div>
             <div data-testid="token">{token || 'loading'}</div>
-            <div data-testid="valid">{isValid === null ? 'not-tested' : isValid ? 'valid' : 'invalid'}</div>
-            <button data-testid="validate" onClick={handleValidate}>Validate</button>
+            <div data-testid="valid">
+              {isValid === null ? 'not-tested' : isValid ? 'valid' : 'invalid'}
+            </div>
+            <button data-testid="validate" onClick={handleValidate}>
+              Validate
+            </button>
           </div>
         );
       };
@@ -181,7 +198,9 @@ describe('CSRF Protection Module', () => {
         return (
           <div>
             <div data-testid="token">{token || 'loading'}</div>
-            <button data-testid="refresh" onClick={refreshTokens}>Refresh</button>
+            <button data-testid="refresh" onClick={refreshTokens}>
+              Refresh
+            </button>
           </div>
         );
       };
@@ -214,7 +233,9 @@ describe('CSRF Protection Module', () => {
         return (
           <div>
             <div data-testid="token">{token || 'cleared'}</div>
-            <button data-testid="clear" onClick={clearTokens}>Clear</button>
+            <button data-testid="clear" onClick={clearTokens}>
+              Clear
+            </button>
           </div>
         );
       };
@@ -247,7 +268,7 @@ describe('CSRF Protection Module', () => {
         const handleAdd = () => {
           const request = addToRequest({
             method: 'POST',
-            headers: {}
+            headers: {},
           });
           setHasToken(!!request.headers?.['X-CSRF-Token']);
         };
@@ -256,7 +277,9 @@ describe('CSRF Protection Module', () => {
           <div>
             <div data-testid="token">{token || 'loading'}</div>
             <div data-testid="has-token">{hasToken ? 'yes' : 'no'}</div>
-            <button data-testid="add" onClick={handleAdd}>Add</button>
+            <button data-testid="add" onClick={handleAdd}>
+              Add
+            </button>
           </div>
         );
       };
@@ -294,7 +317,9 @@ describe('CSRF Protection Module', () => {
           <div>
             <div data-testid="token">{token || 'loading'}</div>
             <div data-testid="url">{url || 'no-url'}</div>
-            <button data-testid="add" onClick={handleAdd}>Add</button>
+            <button data-testid="add" onClick={handleAdd}>
+              Add
+            </button>
           </div>
         );
       };
@@ -332,7 +357,9 @@ describe('CSRF Protection Module', () => {
         return (
           <div>
             <div data-testid="url">{url || 'no-url'}</div>
-            <button data-testid="add" onClick={handleAdd}>Add</button>
+            <button data-testid="add" onClick={handleAdd}>
+              Add
+            </button>
           </div>
         );
       };
@@ -361,7 +388,9 @@ describe('CSRF Protection Module', () => {
         const handleAdd = () => {
           if (formRef.current) {
             addToForm(formRef.current);
-            const input = formRef.current.querySelector('input[name="csrf_token"]') as HTMLInputElement;
+            const input = formRef.current.querySelector(
+              'input[name="csrf_token"]'
+            ) as HTMLInputElement;
             setHasToken(!!input && input.value === token);
           }
         };
@@ -371,7 +400,9 @@ describe('CSRF Protection Module', () => {
             <div data-testid="token">{token || 'loading'}</div>
             <div data-testid="has-token">{hasToken ? 'yes' : 'no'}</div>
             <form ref={formRef} data-testid="form">
-              <button type="button" data-testid="add" onClick={handleAdd}>Add</button>
+              <button type="button" data-testid="add" onClick={handleAdd}>
+                Add
+              </button>
             </form>
           </div>
         );
@@ -449,7 +480,7 @@ describe('CSRF Protection Module', () => {
     it('应该在fetch请求中自动添加CSRF token', async () => {
       (global.fetch as any).mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ success: true })
+        json: async () => ({ success: true }),
       });
 
       const TestComponent = () => {
@@ -458,10 +489,14 @@ describe('CSRF Protection Module', () => {
 
         const handleClick = async () => {
           try {
-            const response = await CSRFProtectedFetch('/api/endpoint', {
-              method: 'POST',
-              body: JSON.stringify({ data: 'test' })
-            }, csrfContext);
+            const response = await CSRFProtectedFetch(
+              '/api/endpoint',
+              {
+                method: 'POST',
+                body: JSON.stringify({ data: 'test' }),
+              },
+              csrfContext
+            );
             const data = await response.json();
             setResult(data);
           } catch (error) {
@@ -471,7 +506,9 @@ describe('CSRF Protection Module', () => {
 
         return (
           <div>
-            <button data-testid="fetch" onClick={handleClick}>Fetch</button>
+            <button data-testid="fetch" onClick={handleClick}>
+              Fetch
+            </button>
             <div data-testid="result">{result ? JSON.stringify(result) : 'no-result'}</div>
           </div>
         );
@@ -506,9 +543,13 @@ describe('CSRF Protection Module', () => {
 
         const handleClick = async () => {
           try {
-            await CSRFProtectedFetch('/api/endpoint', {
-              method: 'POST'
-            }, csrfContext);
+            await CSRFProtectedFetch(
+              '/api/endpoint',
+              {
+                method: 'POST',
+              },
+              csrfContext
+            );
           } catch (err) {
             setError((err as Error).message);
           }
@@ -516,7 +557,9 @@ describe('CSRF Protection Module', () => {
 
         return (
           <div>
-            <button data-testid="fetch" onClick={handleClick}>Fetch</button>
+            <button data-testid="fetch" onClick={handleClick}>
+              Fetch
+            </button>
             <div data-testid="error">{error || 'no-error'}</div>
           </div>
         );
@@ -540,7 +583,7 @@ describe('CSRF Protection Module', () => {
     it('应该支持自定义headers', async () => {
       (global.fetch as any).mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ success: true })
+        json: async () => ({ success: true }),
       });
 
       const TestComponent = () => {
@@ -548,18 +591,24 @@ describe('CSRF Protection Module', () => {
         const [called, setCalled] = React.useState(false);
 
         const handleClick = async () => {
-          await CSRFProtectedFetch('/api/endpoint', {
-            method: 'POST',
-            headers: {
-              'X-Custom-Header': 'custom-value'
-            }
-          }, csrfContext);
+          await CSRFProtectedFetch(
+            '/api/endpoint',
+            {
+              method: 'POST',
+              headers: {
+                'X-Custom-Header': 'custom-value',
+              },
+            },
+            csrfContext
+          );
           setCalled(true);
         };
 
         return (
           <div>
-            <button data-testid="fetch" onClick={handleClick}>Fetch</button>
+            <button data-testid="fetch" onClick={handleClick}>
+              Fetch
+            </button>
             <div data-testid="called">{called ? 'called' : 'not-called'}</div>
           </div>
         );
@@ -601,7 +650,7 @@ describe('CSRF Protection Module', () => {
     it('应该支持自定义配置', async () => {
       const customConfig = {
         tokenLength: 16,
-        expirationTime: 60000
+        expirationTime: 60000,
       };
 
       const TestComponent = () => {
@@ -633,7 +682,9 @@ describe('CSRF Protection Module', () => {
       const TestComponent = () => {
         const csrfContext = useCSRF();
         const middleware = createCSRFMiddleware(csrfContext);
-        return <div data-testid="has-middleware">{middleware ? 'has-middleware' : 'no-middleware'}</div>;
+        return (
+          <div data-testid="has-middleware">{middleware ? 'has-middleware' : 'no-middleware'}</div>
+        );
       };
 
       render(
@@ -651,7 +702,7 @@ describe('CSRF Protection Module', () => {
     it('应该提供fetch方法', async () => {
       (global.fetch as any).mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ success: true })
+        json: async () => ({ success: true }),
       });
 
       const TestComponent = () => {
@@ -666,7 +717,9 @@ describe('CSRF Protection Module', () => {
 
         return (
           <div>
-            <button data-testid="fetch" onClick={handleClick}>Fetch</button>
+            <button data-testid="fetch" onClick={handleClick}>
+              Fetch
+            </button>
             <div data-testid="called">{called ? 'called' : 'not-called'}</div>
           </div>
         );
@@ -691,7 +744,11 @@ describe('CSRF Protection Module', () => {
       const TestComponent = () => {
         const csrfContext = useCSRF();
         const middleware = createCSRFMiddleware(csrfContext);
-        return <div data-testid="has-xhr">{typeof middleware.XMLHttpRequest === 'function' ? 'has-xhr' : 'no-xhr'}</div>;
+        return (
+          <div data-testid="has-xhr">
+            {typeof middleware.XMLHttpRequest === 'function' ? 'has-xhr' : 'no-xhr'}
+          </div>
+        );
       };
 
       render(
@@ -719,7 +776,9 @@ describe('CSRF Protection Module', () => {
 
         return (
           <div>
-            <button data-testid="create-xhr" onClick={handleClick}>Create XHR</button>
+            <button data-testid="create-xhr" onClick={handleClick}>
+              Create XHR
+            </button>
             <div data-testid="has-xhr">{hasXHR ? 'yes' : 'no'}</div>
           </div>
         );
@@ -754,7 +813,9 @@ describe('CSRF Protection Module', () => {
 
         return (
           <div>
-            <button data-testid="open-xhr" onClick={handleClick}>Open XHR</button>
+            <button data-testid="open-xhr" onClick={handleClick}>
+              Open XHR
+            </button>
             <div data-testid="opened">{opened ? 'yes' : 'no'}</div>
           </div>
         );
@@ -790,7 +851,9 @@ describe('CSRF Protection Module', () => {
 
         return (
           <div>
-            <button data-testid="set-header" onClick={handleClick}>Set Header</button>
+            <button data-testid="set-header" onClick={handleClick}>
+              Set Header
+            </button>
             <div data-testid="header-set">{headerSet ? 'yes' : 'no'}</div>
           </div>
         );
@@ -826,7 +889,9 @@ describe('CSRF Protection Module', () => {
 
         return (
           <div>
-            <button data-testid="send" onClick={handleClick}>Send</button>
+            <button data-testid="send" onClick={handleClick}>
+              Send
+            </button>
             <div data-testid="sent">{sent ? 'yes' : 'no'}</div>
           </div>
         );
@@ -870,12 +935,12 @@ describe('CSRF Protection Module', () => {
           const request = new Request(new URL('/api/endpoint', window.location.origin).toString(), {
             method: 'POST',
             headers: {
-              'X-CSRF-Token': token
-            }
+              'X-CSRF-Token': token,
+            },
           });
           const isValid = validateCSRFToken(request, token, {
             headerName: 'X-CSRF-Token',
-            parameterName: 'csrf_token'
+            parameterName: 'csrf_token',
           });
           expect(isValid).toBe(true);
         }
@@ -884,11 +949,11 @@ describe('CSRF Protection Module', () => {
 
     it('应该允许安全方法', () => {
       const request = new Request(new URL('/api/endpoint', window.location.origin).toString(), {
-        method: 'GET'
+        method: 'GET',
       });
       const isValid = validateCSRFToken(request, null, {
         headerName: 'X-CSRF-Token',
-        parameterName: 'csrf_token'
+        parameterName: 'csrf_token',
       });
       expect(isValid).toBe(true);
     });
@@ -897,12 +962,12 @@ describe('CSRF Protection Module', () => {
       const request = new Request(new URL('/api/endpoint', window.location.origin).toString(), {
         method: 'POST',
         headers: {
-          'X-CSRF-Token': 'invalid-token'
-        }
+          'X-CSRF-Token': 'invalid-token',
+        },
       });
       const isValid = validateCSRFToken(request, 'valid-token', {
         headerName: 'X-CSRF-Token',
-        parameterName: 'csrf_token'
+        parameterName: 'csrf_token',
       });
       expect(isValid).toBe(false);
     });
@@ -910,11 +975,11 @@ describe('CSRF Protection Module', () => {
     it('应该从URL参数验证token', () => {
       const url = new URL('/api/endpoint?csrf_token=valid-token', window.location.origin);
       const request = new Request(url.toString(), {
-        method: 'POST'
+        method: 'POST',
       });
       const isValid = validateCSRFToken(request, 'valid-token', {
         headerName: 'X-CSRF-Token',
-        parameterName: 'csrf_token'
+        parameterName: 'csrf_token',
       });
       expect(isValid).toBe(true);
     });
@@ -974,8 +1039,12 @@ describe('CSRF Protection Module', () => {
 
         return (
           <div>
-            <div data-testid="valid">{isValid === null ? 'not-tested' : isValid ? 'valid' : 'invalid'}</div>
-            <button data-testid="validate" onClick={handleValidate}>Validate</button>
+            <div data-testid="valid">
+              {isValid === null ? 'not-tested' : isValid ? 'valid' : 'invalid'}
+            </div>
+            <button data-testid="validate" onClick={handleValidate}>
+              Validate
+            </button>
           </div>
         );
       };
@@ -1000,9 +1069,7 @@ describe('CSRF Protection Module', () => {
 
       const TestComponent = () => {
         const { token } = useCSRF();
-        return (
-          <div data-testid="token">{token || 'loading'}</div>
-        );
+        return <div data-testid="token">{token || 'loading'}</div>;
       };
 
       render(
@@ -1033,8 +1100,12 @@ describe('CSRF Protection Module', () => {
         return (
           <div>
             <div data-testid="token">{token || 'loading'}</div>
-            <div data-testid="valid">{isValid === null ? 'not-tested' : isValid ? 'valid' : 'invalid'}</div>
-            <button data-testid="validate" onClick={handleValidate}>Validate</button>
+            <div data-testid="valid">
+              {isValid === null ? 'not-tested' : isValid ? 'valid' : 'invalid'}
+            </div>
+            <button data-testid="validate" onClick={handleValidate}>
+              Validate
+            </button>
           </div>
         );
       };
@@ -1074,8 +1145,12 @@ describe('CSRF Protection Module', () => {
         return (
           <div>
             <div data-testid="token">{token || 'loading'}</div>
-            <div data-testid="valid">{isValid === null ? 'not-tested' : isValid ? 'valid' : 'invalid'}</div>
-            <button data-testid="validate" onClick={handleValidate}>Validate</button>
+            <div data-testid="valid">
+              {isValid === null ? 'not-tested' : isValid ? 'valid' : 'invalid'}
+            </div>
+            <button data-testid="validate" onClick={handleValidate}>
+              Validate
+            </button>
           </div>
         );
       };
@@ -1147,22 +1222,22 @@ describe('CSRF Protection Module', () => {
   describe('方法覆盖功能', () => {
     it('应该允许覆盖的方法', () => {
       const request = new Request(new URL('/api/endpoint', window.location.origin).toString(), {
-        method: 'GET'
+        method: 'GET',
       });
       const isValid = validateCSRFToken(request, null, {
         headerName: 'X-CSRF-Token',
-        parameterName: 'csrf_token'
+        parameterName: 'csrf_token',
       });
       expect(isValid).toBe(true);
     });
 
     it('应该拒绝不允许覆盖的方法', () => {
       const request = new Request(new URL('/api/endpoint', window.location.origin).toString(), {
-        method: 'POST'
+        method: 'POST',
       });
       const isValid = validateCSRFToken(request, null, {
         headerName: 'X-CSRF-Token',
-        parameterName: 'csrf_token'
+        parameterName: 'csrf_token',
       });
       expect(isValid).toBe(false);
     });
@@ -1182,8 +1257,12 @@ describe('CSRF Protection Module', () => {
 
         return (
           <div>
-            <div data-testid="valid">{isValid === null ? 'not-tested' : isValid ? 'valid' : 'invalid'}</div>
-            <button data-testid="validate" onClick={handleValidate}>Validate</button>
+            <div data-testid="valid">
+              {isValid === null ? 'not-tested' : isValid ? 'valid' : 'invalid'}
+            </div>
+            <button data-testid="validate" onClick={handleValidate}>
+              Validate
+            </button>
           </div>
         );
       };
@@ -1202,7 +1281,7 @@ describe('CSRF Protection Module', () => {
         expect(valid.textContent).toBe('invalid');
         expect(onValidationError).toHaveBeenCalledWith(
           expect.objectContaining({
-            type: 'invalid_token'
+            type: 'invalid_token',
           })
         );
       });
@@ -1221,8 +1300,12 @@ describe('CSRF Protection Module', () => {
 
         return (
           <div>
-            <div data-testid="valid">{isValid === null ? 'not-tested' : isValid ? 'valid' : 'invalid'}</div>
-            <button data-testid="validate" onClick={handleValidate}>Validate</button>
+            <div data-testid="valid">
+              {isValid === null ? 'not-tested' : isValid ? 'valid' : 'invalid'}
+            </div>
+            <button data-testid="validate" onClick={handleValidate}>
+              Validate
+            </button>
           </div>
         );
       };
@@ -1241,7 +1324,7 @@ describe('CSRF Protection Module', () => {
         expect(valid.textContent).toBe('invalid');
         expect(onValidationError).toHaveBeenCalledWith(
           expect.objectContaining({
-            type: 'missing_token'
+            type: 'missing_token',
           })
         );
       });
@@ -1275,7 +1358,9 @@ describe('CSRF Protection Module', () => {
 
         return (
           <div>
-            <button data-testid="add" onClick={handleAdd}>Add</button>
+            <button data-testid="add" onClick={handleAdd}>
+              Add
+            </button>
             <div data-testid="result">{result}</div>
           </div>
         );
@@ -1307,7 +1392,9 @@ describe('CSRF Protection Module', () => {
 
         return (
           <div>
-            <button data-testid="add" onClick={handleAdd}>Add</button>
+            <button data-testid="add" onClick={handleAdd}>
+              Add
+            </button>
             <div data-testid="url">{url}</div>
           </div>
         );
@@ -1337,7 +1424,7 @@ describe('CSRF Protection Module', () => {
         const handleRefresh = () => {
           const currentToken = token;
           if (currentToken) {
-            setTokens(prev => [...prev, currentToken]);
+            setTokens((prev) => [...prev, currentToken]);
             refreshTokens();
           }
         };
@@ -1346,7 +1433,9 @@ describe('CSRF Protection Module', () => {
           <div>
             <div data-testid="token">{token || 'loading'}</div>
             <div data-testid="count">{tokens.length}</div>
-            <button data-testid="refresh" onClick={handleRefresh}>Refresh</button>
+            <button data-testid="refresh" onClick={handleRefresh}>
+              Refresh
+            </button>
           </div>
         );
       };

@@ -8,14 +8,11 @@
  */
 
 import * as React from 'react';
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
-
 import { Alert } from './Alert';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 describe('Alert 组件', () => {
   const renderWithTheme = (component: React.ReactElement) => {
@@ -24,7 +21,7 @@ describe('Alert 组件', () => {
 
   it('应该正确渲染默认 Alert', () => {
     renderWithTheme(<Alert>Default alert message</Alert>);
-    
+
     expect(screen.getByText('Default alert message')).toBeInTheDocument();
     expect(screen.getByRole('alert')).toBeInTheDocument();
   });
@@ -46,7 +43,7 @@ describe('Alert 组件', () => {
 
   it('应该应用正确的样式', () => {
     renderWithTheme(<Alert variant="default">Test message</Alert>);
-    
+
     const alert = screen.getByRole('alert');
     expect(alert).toHaveStyle({
       display: 'flex',
@@ -57,7 +54,7 @@ describe('Alert 组件', () => {
 
   it('应该支持 destructive variant', () => {
     renderWithTheme(<Alert variant="destructive">Error message</Alert>);
-    
+
     const alert = screen.getByRole('alert');
     expect(alert).toHaveStyle({
       borderLeft: '4px solid rgb(255, 107, 91)',
@@ -66,7 +63,7 @@ describe('Alert 组件', () => {
 
   it('应该支持 warning variant', () => {
     renderWithTheme(<Alert variant="warning">Warning message</Alert>);
-    
+
     const alert = screen.getByRole('alert');
     expect(alert).toHaveStyle({
       backgroundColor: 'rgb(255, 243, 205)',
@@ -76,7 +73,7 @@ describe('Alert 组件', () => {
 
   it('应该支持 success variant', () => {
     renderWithTheme(<Alert variant="success">Success message</Alert>);
-    
+
     const alert = screen.getByRole('alert');
     expect(alert).toHaveStyle({
       backgroundColor: 'rgb(212, 237, 218)',
@@ -86,7 +83,7 @@ describe('Alert 组件', () => {
 
   it('应该应用自定义 className', () => {
     renderWithTheme(<Alert className="custom-class">Test</Alert>);
-    
+
     const alert = screen.getByRole('alert');
     expect(alert).toHaveClass('custom-class');
   });
@@ -99,14 +96,14 @@ describe('Alert 组件', () => {
         </div>
       </Alert>
     );
-    
+
     expect(screen.getByText('Important:')).toBeInTheDocument();
     expect(screen.getByText('This is a complex alert message.')).toBeInTheDocument();
   });
 
   it('应该正确处理图标样式', () => {
     renderWithTheme(<Alert>Test</Alert>);
-    
+
     const icon = screen.getByText('ℹ️');
     expect(icon).toHaveStyle({
       fontSize: '1.25rem',
@@ -116,7 +113,7 @@ describe('Alert 组件', () => {
   it('应该正确设置边框样式', () => {
     const variants = ['default', 'destructive', 'warning', 'success'] as const;
 
-    variants.forEach(variant => {
+    variants.forEach((variant) => {
       const { unmount } = renderWithTheme(<Alert variant={variant}>Test</Alert>);
       const alert = screen.getByRole('alert');
       expect(alert).toHaveStyle({
@@ -128,7 +125,7 @@ describe('Alert 组件', () => {
 
   it('应该为 default variant 应用正确的样式', () => {
     renderWithTheme(<Alert variant="default">Test</Alert>);
-    
+
     const alert = screen.getByRole('alert');
     expect(alert).toHaveStyle({
       backgroundColor: 'rgb(26, 26, 26)',
@@ -139,7 +136,7 @@ describe('Alert 组件', () => {
 
   it('应该为 destructive variant 应用正确的样式', () => {
     renderWithTheme(<Alert variant="destructive">Test</Alert>);
-    
+
     const alert = screen.getByRole('alert');
     expect(alert).toHaveStyle({
       backgroundColor: 'rgb(255, 107, 91)',
@@ -150,7 +147,7 @@ describe('Alert 组件', () => {
 
   it('应该为 warning variant 应用正确的样式', () => {
     renderWithTheme(<Alert variant="warning">Test</Alert>);
-    
+
     const alert = screen.getByRole('alert');
     expect(alert).toHaveStyle({
       backgroundColor: 'rgb(255, 243, 205)',
@@ -161,7 +158,7 @@ describe('Alert 组件', () => {
 
   it('应该为 success variant 应用正确的样式', () => {
     renderWithTheme(<Alert variant="success">Test</Alert>);
-    
+
     const alert = screen.getByRole('alert');
     expect(alert).toHaveStyle({
       backgroundColor: 'rgb(212, 237, 218)',
@@ -172,7 +169,7 @@ describe('Alert 组件', () => {
 
   it('应该正确设置 gap 样式', () => {
     renderWithTheme(<Alert>Test</Alert>);
-    
+
     const alert = screen.getByRole('alert');
     expect(alert).toHaveStyle({
       gap: '0.5rem',
@@ -181,7 +178,7 @@ describe('Alert 组件', () => {
 
   it('应该正确设置 borderRadius', () => {
     renderWithTheme(<Alert>Test</Alert>);
-    
+
     const alert = screen.getByRole('alert');
     expect(alert).toHaveStyle({
       borderRadius: '0.25rem',
@@ -190,21 +187,21 @@ describe('Alert 组件', () => {
 
   it('应该正确设置 role 属性', () => {
     renderWithTheme(<Alert>Test</Alert>);
-    
+
     const alert = screen.getByRole('alert');
     expect(alert).toBeInTheDocument();
   });
 
   it('应该正确处理默认 variant', () => {
     renderWithTheme(<Alert>Test</Alert>);
-    
+
     const alert = screen.getByRole('alert');
     expect(alert).toBeInTheDocument();
   });
 
   it('应该正确处理无效 variant（使用默认值）', () => {
     renderWithTheme(<Alert variant={'invalid' as any}>Test</Alert>);
-    
+
     const alertElement = screen.getByRole('alert');
     expect(alertElement).toBeInTheDocument();
     expect(alertElement).toHaveStyle({
@@ -222,7 +219,7 @@ describe('Alert 组件', () => {
         <Alert variant="success">Third alert</Alert>
       </>
     );
-    
+
     expect(screen.getByText('First alert')).toBeInTheDocument();
     expect(screen.getByText('Second alert')).toBeInTheDocument();
     expect(screen.getByText('Third alert')).toBeInTheDocument();
@@ -230,14 +227,14 @@ describe('Alert 组件', () => {
 
   it('应该正确处理空 children', () => {
     renderWithTheme(<Alert></Alert>);
-    
+
     const icon = screen.getByText('ℹ️');
     expect(icon).toBeInTheDocument();
   });
 
   it('应该正确处理 null children', () => {
     renderWithTheme(<Alert>{null}</Alert>);
-    
+
     const icon = screen.getByText('ℹ️');
     expect(icon).toBeInTheDocument();
   });
@@ -251,7 +248,7 @@ describe('Alert 组件', () => {
         </>
       </Alert>
     );
-    
+
     expect(screen.getByText('Line 1')).toBeInTheDocument();
     expect(screen.getByText('Line 2')).toBeInTheDocument();
   });
@@ -312,14 +309,14 @@ describe('Alert 组件', () => {
 
   it('应该正确处理未定义的 className', () => {
     renderWithTheme(<Alert>Test</Alert>);
-    
+
     const alertElement = screen.getByRole('alert');
     expect(alertElement).not.toHaveClass();
   });
 
   it('应该正确处理空字符串 className', () => {
     renderWithTheme(<Alert className="">Test</Alert>);
-    
+
     const alertElement = screen.getByRole('alert');
     expect(alertElement).not.toHaveClass();
   });
@@ -327,7 +324,7 @@ describe('Alert 组件', () => {
   describe('当 tokens 缺失时使用默认值', () => {
     it('default variant 应该使用默认背景色', () => {
       renderWithTheme(<Alert variant="default">Test</Alert>);
-      
+
       const alertElement = screen.getByRole('alert');
       expect(alertElement).toHaveStyle({
         backgroundColor: 'rgb(26, 26, 26)',
@@ -336,7 +333,7 @@ describe('Alert 组件', () => {
 
     it('destructive variant 应该使用默认背景色', () => {
       renderWithTheme(<Alert variant="destructive">Test</Alert>);
-      
+
       const alertElement = screen.getByRole('alert');
       expect(alertElement).toHaveStyle({
         backgroundColor: 'rgb(255, 107, 91)',
@@ -345,7 +342,7 @@ describe('Alert 组件', () => {
 
     it('warning variant 应该使用硬编码颜色', () => {
       renderWithTheme(<Alert variant="warning">Test</Alert>);
-      
+
       const alertElement = screen.getByRole('alert');
       expect(alertElement).toHaveStyle({
         backgroundColor: 'rgb(255, 243, 205)',
@@ -354,7 +351,7 @@ describe('Alert 组件', () => {
 
     it('success variant 应该使用硬编码颜色', () => {
       renderWithTheme(<Alert variant="success">Test</Alert>);
-      
+
       const alertElement = screen.getByRole('alert');
       expect(alertElement).toHaveStyle({
         backgroundColor: 'rgb(212, 237, 218)',
@@ -363,7 +360,7 @@ describe('Alert 组件', () => {
 
     it('应该使用默认 borderRadius', () => {
       renderWithTheme(<Alert>Test</Alert>);
-      
+
       const alertElement = screen.getByRole('alert');
       expect(alertElement).toHaveStyle({
         borderRadius: '0.25rem',
@@ -372,7 +369,7 @@ describe('Alert 组件', () => {
 
     it('default variant 应该使用默认前景色', () => {
       renderWithTheme(<Alert variant="default">Test</Alert>);
-      
+
       const alertElement = screen.getByRole('alert');
       expect(alertElement).toHaveStyle({
         color: 'rgb(240, 240, 240)',
@@ -381,7 +378,7 @@ describe('Alert 组件', () => {
 
     it('destructive variant 应该使用默认前景色', () => {
       renderWithTheme(<Alert variant="destructive">Test</Alert>);
-      
+
       const alertElement = screen.getByRole('alert');
       expect(alertElement).toHaveStyle({
         color: 'rgb(255, 255, 255)',
@@ -390,7 +387,7 @@ describe('Alert 组件', () => {
 
     it('default variant 应该使用默认边框色', () => {
       renderWithTheme(<Alert variant="default">Test</Alert>);
-      
+
       const alertElement = screen.getByRole('alert');
       expect(alertElement).toHaveStyle({
         borderLeft: '4px solid rgb(224, 106, 112)',

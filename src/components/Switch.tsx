@@ -35,9 +35,9 @@ export const Switch: React.FC<SwitchProps> = ({
     width: '3rem',
     height: '1.5rem',
     borderRadius: '1rem',
-    backgroundColor: isChecked 
-      ? (tokens['color.primary'] as string || '#d45a5f')
-      : (tokens['color.muted-foreground'] as string || '#ccc'),
+    backgroundColor: isChecked
+      ? (tokens['color.primary'] as string) || '#d45a5f'
+      : (tokens['color.muted-foreground'] as string) || '#ccc',
     cursor: disabled ? 'not-allowed' : 'pointer',
     opacity: disabled ? 0.5 : 1,
     position: 'relative',
@@ -48,7 +48,7 @@ export const Switch: React.FC<SwitchProps> = ({
     width: '1.25rem',
     height: '1.25rem',
     borderRadius: '50%',
-    backgroundColor: tokens['color.foreground'] as string || '#fff',
+    backgroundColor: (tokens['color.foreground'] as string) || '#fff',
     position: 'absolute',
     top: '0.125rem',
     left: isChecked ? '1.625rem' : '0.125rem',
@@ -56,8 +56,8 @@ export const Switch: React.FC<SwitchProps> = ({
   };
 
   return (
-    <div 
-      style={switchStyle} 
+    <div
+      style={switchStyle}
       onClick={disabled ? undefined : handleChange}
       className={className}
       role="switch"

@@ -34,19 +34,19 @@ export const AnimationOptimizationExample: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleToggleFade = useCallback(() => {
-    setShowFade(prev => !prev);
+    setShowFade((prev) => !prev);
   }, []);
 
   const handleToggleSlide = useCallback(() => {
-    setShowSlide(prev => !prev);
+    setShowSlide((prev) => !prev);
   }, []);
 
   const handleToggleScale = useCallback(() => {
-    setShowScale(prev => !prev);
+    setShowScale((prev) => !prev);
   }, []);
 
   const handleToggleBounce = useCallback(() => {
-    setShowBounce(prev => !prev);
+    setShowBounce((prev) => !prev);
   }, []);
 
   const handleSpringStart = useCallback(() => {
@@ -76,25 +76,33 @@ export const AnimationOptimizationExample: React.FC = () => {
 
   const throttledScrollHandler = useThrottledAnimationFrame(handleScroll, 16);
 
-  const fadeStyle = showFade ? {
-    animation: fadeIn({ duration: 'fast' }),
-    ...createOptimizedTransition(['opacity']),
-  } : {};
+  const fadeStyle = showFade
+    ? {
+        animation: fadeIn({ duration: 'fast' }),
+        ...createOptimizedTransition(['opacity']),
+      }
+    : {};
 
-  const slideStyle = showSlide ? {
-    animation: slideInUp({ duration: 'normal' }),
-    ...createOptimizedTransition(['transform', 'opacity']),
-  } : {};
+  const slideStyle = showSlide
+    ? {
+        animation: slideInUp({ duration: 'normal' }),
+        ...createOptimizedTransition(['transform', 'opacity']),
+      }
+    : {};
 
-  const scaleStyle = showScale ? {
-    animation: scaleIn({ duration: 'slow' }),
-    ...createOptimizedTransition(['transform']),
-  } : {};
+  const scaleStyle = showScale
+    ? {
+        animation: scaleIn({ duration: 'slow' }),
+        ...createOptimizedTransition(['transform']),
+      }
+    : {};
 
-  const bounceStyle = showBounce ? {
-    animation: bounceIn({ duration: 'normal' }),
-    ...createOptimizedTransition(['transform']),
-  } : {};
+  const bounceStyle = showBounce
+    ? {
+        animation: bounceIn({ duration: 'normal' }),
+        ...createOptimizedTransition(['transform']),
+      }
+    : {};
 
   const springBarStyle = {
     width: `${springValue}%`,
@@ -149,12 +157,17 @@ export const AnimationOptimizationExample: React.FC = () => {
         <Card>
           <h2 style={{ marginBottom: '1rem' }}>CSS 动画优化</h2>
           <div style={{ marginBottom: '1rem' }}>
-            <Button onClick={handleToggleFade}>
-              {showFade ? '隐藏淡入动画' : '显示淡入动画'}
-            </Button>
+            <Button onClick={handleToggleFade}>{showFade ? '隐藏淡入动画' : '显示淡入动画'}</Button>
           </div>
           <div style={{ marginBottom: '1rem' }}>
-            <div style={{ ...fadeStyle, padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
+            <div
+              style={{
+                ...fadeStyle,
+                padding: '1rem',
+                border: '1px solid #e0e0e0',
+                borderRadius: '0.25rem',
+              }}
+            >
               <h3 style={{ marginBottom: '0.5rem' }}>淡入动画</h3>
               <p style={{ fontSize: '0.875rem', color: '#666' }}>
                 使用 CSS 动画和硬件加速，性能优于 JavaScript 动画
@@ -168,7 +181,14 @@ export const AnimationOptimizationExample: React.FC = () => {
             </Button>
           </div>
           <div style={{ marginBottom: '1rem' }}>
-            <div style={{ ...slideStyle, padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
+            <div
+              style={{
+                ...slideStyle,
+                padding: '1rem',
+                border: '1px solid #e0e0e0',
+                borderRadius: '0.25rem',
+              }}
+            >
               <h3 style={{ marginBottom: '0.5rem' }}>滑入动画</h3>
               <p style={{ fontSize: '0.875rem', color: '#666' }}>
                 使用 transform 和 opacity 过渡，GPU 加速渲染
@@ -182,11 +202,16 @@ export const AnimationOptimizationExample: React.FC = () => {
             </Button>
           </div>
           <div style={{ marginBottom: '1rem' }}>
-            <div style={{ ...scaleStyle, padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
+            <div
+              style={{
+                ...scaleStyle,
+                padding: '1rem',
+                border: '1px solid #e0e0e0',
+                borderRadius: '0.25rem',
+              }}
+            >
               <h3 style={{ marginBottom: '0.5rem' }}>缩放动画</h3>
-              <p style={{ fontSize: '0.875rem', color: '#666' }}>
-                使用 scale 变换，硬件加速渲染
-              </p>
+              <p style={{ fontSize: '0.875rem', color: '#666' }}>使用 scale 变换，硬件加速渲染</p>
             </div>
           </div>
 
@@ -196,7 +221,14 @@ export const AnimationOptimizationExample: React.FC = () => {
             </Button>
           </div>
           <div style={{ marginBottom: '1rem' }}>
-            <div style={{ ...bounceStyle, padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
+            <div
+              style={{
+                ...bounceStyle,
+                padding: '1rem',
+                border: '1px solid #e0e0e0',
+                borderRadius: '0.25rem',
+              }}
+            >
               <h3 style={{ marginBottom: '0.5rem' }}>弹跳动画</h3>
               <p style={{ fontSize: '0.875rem', color: '#666' }}>
                 使用 requestAnimationFrame 进行帧动画，性能最优
@@ -210,18 +242,28 @@ export const AnimationOptimizationExample: React.FC = () => {
         <Card>
           <h2 style={{ marginBottom: '1rem' }}>requestAnimationFrame 优化</h2>
           <div style={{ marginBottom: '1rem' }}>
-            <Button onClick={handleSpringStart}>
-              启动弹簧动画
-            </Button>
+            <Button onClick={handleSpringStart}>启动弹簧动画</Button>
           </div>
-          <div style={{ marginBottom: '1rem', padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
+          <div
+            style={{
+              marginBottom: '1rem',
+              padding: '1rem',
+              border: '1px solid #e0e0e0',
+              borderRadius: '0.25rem',
+            }}
+          >
             <h3 style={{ marginBottom: '0.5rem' }}>弹簧动画进度</h3>
-            <div style={{ marginBottom: '0.5rem', height: '20px', backgroundColor: '#f0f0f0', borderRadius: '4px' }}>
+            <div
+              style={{
+                marginBottom: '0.5rem',
+                height: '20px',
+                backgroundColor: '#f0f0f0',
+                borderRadius: '4px',
+              }}
+            >
               <div style={springBarStyle} />
             </div>
-            <p style={{ fontSize: '0.875rem', color: '#666' }}>
-              当前值: {springValue.toFixed(1)}%
-            </p>
+            <p style={{ fontSize: '0.875rem', color: '#666' }}>当前值: {springValue.toFixed(1)}%</p>
             <p style={{ fontSize: '0.875rem', color: '#666' }}>
               使用 requestAnimationFrame 实现平滑动画，避免卡顿
             </p>
@@ -232,9 +274,23 @@ export const AnimationOptimizationExample: React.FC = () => {
       <div style={{ marginBottom: '2rem' }}>
         <Card>
           <h2 style={{ marginBottom: '1rem' }}>滚动动画优化</h2>
-          <div style={{ marginBottom: '1rem', padding: '1rem', border: '1px solid #e0e0e0', borderRadius: '0.25rem' }}>
+          <div
+            style={{
+              marginBottom: '1rem',
+              padding: '1rem',
+              border: '1px solid #e0e0e0',
+              borderRadius: '0.25rem',
+            }}
+          >
             <h3 style={{ marginBottom: '0.5rem' }}>滚动进度</h3>
-            <div style={{ marginBottom: '0.5rem', height: '10px', backgroundColor: '#f0f0f0', borderRadius: '4px' }}>
+            <div
+              style={{
+                marginBottom: '0.5rem',
+                height: '10px',
+                backgroundColor: '#f0f0f0',
+                borderRadius: '4px',
+              }}
+            >
               <div
                 style={{
                   width: `${scrollProgress}%`,
@@ -249,11 +305,7 @@ export const AnimationOptimizationExample: React.FC = () => {
               滚动进度: {scrollProgress.toFixed(1)}%
             </p>
           </div>
-          <div
-            ref={containerRef}
-            style={scrollContainerStyle}
-            onScroll={throttledScrollHandler}
-          >
+          <div ref={containerRef} style={scrollContainerStyle} onScroll={throttledScrollHandler}>
             {scrollContent}
           </div>
           <p style={{ fontSize: '0.875rem', color: '#666', marginTop: '1rem' }}>
@@ -270,28 +322,24 @@ export const AnimationOptimizationExample: React.FC = () => {
             通常在合成线程上运行，不会阻塞主线程
           </li>
           <li>
-            <strong>使用 transform 和 opacity：</strong> 这些属性可以触发硬件加速，
-            在 GPU 上渲染，性能更优
+            <strong>使用 transform 和 opacity：</strong> 这些属性可以触发硬件加速， 在 GPU
+            上渲染，性能更优
           </li>
           <li>
             <strong>使用 requestAnimationFrame：</strong> 与浏览器的刷新率同步，
             避免不必要的重绘和布局计算
           </li>
           <li>
-            <strong>节流和防抖：</strong> 减少事件处理频率，
-            避免过多的计算和渲染
+            <strong>节流和防抖：</strong> 减少事件处理频率， 避免过多的计算和渲染
           </li>
           <li>
-            <strong>避免布局抖动：</strong> 使用 transform 而非 top/left，
-            避免触发布局和重绘
+            <strong>避免布局抖动：</strong> 使用 transform 而非 top/left， 避免触发布局和重绘
           </li>
           <li>
-            <strong>使用 will-change：</strong> 提前告知浏览器元素将要变化，
-            浏览器可以提前优化
+            <strong>使用 will-change：</strong> 提前告知浏览器元素将要变化， 浏览器可以提前优化
           </li>
           <li>
-            <strong>减少动画复杂度：</strong> 简化动画效果，
-            减少需要计算的属性数量
+            <strong>减少动画复杂度：</strong> 简化动画效果， 减少需要计算的属性数量
           </li>
           <li>
             <strong>考虑减少动画偏好：</strong> 尊重用户的系统设置，

@@ -39,16 +39,21 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
 }) => {
   const { tokens } = useTheme();
   const [description, setDescription] = useState('');
-  const [actionType, setActionType] = useState<'navigation' | 'input' | 'display' | 'feedback' | 'selection' | 'layout'>('display');
+  const [actionType, setActionType] = useState<
+    'navigation' | 'input' | 'display' | 'feedback' | 'selection' | 'layout'
+  >('display');
   const [contentType, setContentType] = useState<'text' | 'image' | 'data' | 'mixed'>('text');
   const [interactionLevel, setInteractionLevel] = useState<'low' | 'medium' | 'high'>('medium');
   const [complexity, setComplexity] = useState<'simple' | 'medium' | 'complex'>('simple');
-  const [accessibilityLevel, setAccessibilityLevel] = useState<'basic' | 'standard' | 'advanced'>('standard');
+  const [accessibilityLevel, setAccessibilityLevel] = useState<'basic' | 'standard' | 'advanced'>(
+    'standard'
+  );
   const [responsiveRequired, setResponsiveRequired] = useState(true);
   const [themeAdaptation, setThemeAdaptation] = useState(true);
   const [animationRequired, setAnimationRequired] = useState(false);
   const [recommendations, setRecommendations] = useState<ComponentRecommendation[]>([]);
-  const [selectedRecommendation, setSelectedRecommendation] = useState<ComponentRecommendation | null>(null);
+  const [selectedRecommendation, setSelectedRecommendation] =
+    useState<ComponentRecommendation | null>(null);
   const [showDetails, setShowDetails] = useState<Record<string, boolean>>({});
 
   const actionTypes = [
@@ -86,17 +91,19 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
   ] as const;
 
   const handleGenerate = useCallback(() => {
-    const requirements: UIRequirement[] = [{
-      description: description || '通用UI组件需求',
-      actionType,
-      contentType,
-      interactionLevel,
-      complexity,
-      accessibilityLevel,
-      responsiveRequired,
-      themeAdaptation: themeAdaptation,
-      animationRequired,
-    }];
+    const requirements: UIRequirement[] = [
+      {
+        description: description || '通用UI组件需求',
+        actionType,
+        contentType,
+        interactionLevel,
+        complexity,
+        accessibilityLevel,
+        responsiveRequired,
+        themeAdaptation: themeAdaptation,
+        animationRequired,
+      },
+    ];
 
     const options: RecommendationOptions = {
       requirements,
@@ -108,14 +115,27 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
     setRecommendations(newRecommendations);
     setSelectedRecommendation(null);
     setShowDetails({});
-  }, [description, actionType, contentType, interactionLevel, complexity, accessibilityLevel, responsiveRequired, themeAdaptation, animationRequired]);
+  }, [
+    description,
+    actionType,
+    contentType,
+    interactionLevel,
+    complexity,
+    accessibilityLevel,
+    responsiveRequired,
+    themeAdaptation,
+    animationRequired,
+  ]);
 
-  const handleSelectRecommendation = useCallback((rec: ComponentRecommendation) => {
-    setSelectedRecommendation(rec);
-    if (onSelectComponent) {
-      onSelectComponent(rec.component);
-    }
-  }, [onSelectComponent]);
+  const handleSelectRecommendation = useCallback(
+    (rec: ComponentRecommendation) => {
+      setSelectedRecommendation(rec);
+      if (onSelectComponent) {
+        onSelectComponent(rec.component);
+      }
+    },
+    [onSelectComponent]
+  );
 
   const toggleDetails = useCallback((component: ComponentType) => {
     setShowDetails((prev) => ({
@@ -125,12 +145,14 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
   }, []);
 
   const getConfidenceColor = (confidence: number): string => {
-    if (confidence >= 80) return tokens['color.success'] as string || '#10b981';
-    if (confidence >= 60) return tokens['color.warning'] as string || '#f59e0b';
-    return tokens['color.destructive'] as string || '#ef4444';
+    if (confidence >= 80) return (tokens['color.success'] as string) || '#10b981';
+    if (confidence >= 60) return (tokens['color.warning'] as string) || '#f59e0b';
+    return (tokens['color.destructive'] as string) || '#ef4444';
   };
 
-  const getComplexityBadgeVariant = (complexity: 'simple' | 'medium' | 'complex'): 'default' | 'secondary' => {
+  const getComplexityBadgeVariant = (
+    complexity: 'simple' | 'medium' | 'complex'
+  ): 'default' | 'secondary' => {
     if (complexity === 'simple') return 'secondary';
     return 'default';
   };
@@ -156,7 +178,10 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
       <CardContent className="space-y-6">
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               需求描述
             </label>
             <Input
@@ -170,7 +195,10 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+              <label
+                className="block text-sm font-medium mb-2"
+                style={{ color: getTokenValue(tokens, 'color.foreground') }}
+              >
                 操作类型
               </label>
               <select
@@ -192,7 +220,10 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+              <label
+                className="block text-sm font-medium mb-2"
+                style={{ color: getTokenValue(tokens, 'color.foreground') }}
+              >
                 内容类型
               </label>
               <select
@@ -214,7 +245,10 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+              <label
+                className="block text-sm font-medium mb-2"
+                style={{ color: getTokenValue(tokens, 'color.foreground') }}
+              >
                 交互级别
               </label>
               <select
@@ -236,7 +270,10 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+              <label
+                className="block text-sm font-medium mb-2"
+                style={{ color: getTokenValue(tokens, 'color.foreground') }}
+              >
                 复杂度
               </label>
               <select
@@ -258,7 +295,10 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+              <label
+                className="block text-sm font-medium mb-2"
+                style={{ color: getTokenValue(tokens, 'color.foreground') }}
+              >
                 可访问性级别
               </label>
               <select
@@ -288,7 +328,10 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
                 onChange={(e) => setResponsiveRequired(e.target.checked)}
                 className="w-4 h-4"
               />
-              <span className="text-sm" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+              <span
+                className="text-sm"
+                style={{ color: getTokenValue(tokens, 'color.foreground') }}
+              >
                 需要响应式
               </span>
             </label>
@@ -300,7 +343,10 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
                 onChange={(e) => setThemeAdaptation(e.target.checked)}
                 className="w-4 h-4"
               />
-              <span className="text-sm" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+              <span
+                className="text-sm"
+                style={{ color: getTokenValue(tokens, 'color.foreground') }}
+              >
                 主题适配
               </span>
             </label>
@@ -312,23 +358,26 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
                 onChange={(e) => setAnimationRequired(e.target.checked)}
                 className="w-4 h-4"
               />
-              <span className="text-sm" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+              <span
+                className="text-sm"
+                style={{ color: getTokenValue(tokens, 'color.foreground') }}
+              >
                 需要动画
               </span>
             </label>
           </div>
 
-          <Button
-            onClick={handleGenerate}
-            className="w-full"
-          >
+          <Button onClick={handleGenerate} className="w-full">
             生成推荐
           </Button>
         </div>
 
         {sortedRecommendations.length > 0 && (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <h3
+              className="text-lg font-semibold"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               推荐组件 ({sortedRecommendations.length})
             </h3>
 
@@ -340,14 +389,21 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
                   style={{
                     borderColor: getTokenValue(tokens, 'color.muted-foreground'),
                     backgroundColor: getTokenValue(tokens, 'color.card'),
-                    borderLeftWidth: selectedRecommendation?.component === rec.component ? '4px' : '1px',
-                    borderLeftColor: selectedRecommendation?.component === rec.component ? getTokenValue(tokens, 'color.primary') : getTokenValue(tokens, 'color.muted-foreground'),
+                    borderLeftWidth:
+                      selectedRecommendation?.component === rec.component ? '4px' : '1px',
+                    borderLeftColor:
+                      selectedRecommendation?.component === rec.component
+                        ? getTokenValue(tokens, 'color.primary')
+                        : getTokenValue(tokens, 'color.muted-foreground'),
                   }}
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h4 className="text-lg font-semibold" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                        <h4
+                          className="text-lg font-semibold"
+                          style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                        >
                           {rec.component}
                         </h4>
                         <Badge
@@ -361,7 +417,10 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
                         </Badge>
                       </div>
 
-                      <p className="text-sm mb-3" style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
+                      <p
+                        className="text-sm mb-3"
+                        style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}
+                      >
                         {rec.reason}
                       </p>
 
@@ -384,10 +443,7 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <Button
-                        size="sm"
-                        onClick={() => handleSelectRecommendation(rec)}
-                      >
+                      <Button size="sm" onClick={() => handleSelectRecommendation(rec)}>
                         选择
                       </Button>
                       <Button
@@ -401,13 +457,22 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
                   </div>
 
                   {showDetails[rec.component] && (
-                    <div className="mt-4 pt-4 border-t" style={{ borderColor: getTokenValue(tokens, 'color.muted-foreground') }}>
+                    <div
+                      className="mt-4 pt-4 border-t"
+                      style={{ borderColor: getTokenValue(tokens, 'color.muted-foreground') }}
+                    >
                       <div className="space-y-4">
                         <div>
-                          <h5 className="font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                          <h5
+                            className="font-medium mb-2"
+                            style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                          >
                             适用场景
                           </h5>
-                          <ul className="list-disc list-inside space-y-1 text-sm" style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
+                          <ul
+                            className="list-disc list-inside space-y-1 text-sm"
+                            style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}
+                          >
                             {rec.useCases.map((useCase) => (
                               <li key={useCase}>{useCase}</li>
                             ))}
@@ -415,10 +480,16 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
                         </div>
 
                         <div>
-                          <h5 className="font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                          <h5
+                            className="font-medium mb-2"
+                            style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                          >
                             最佳实践
                           </h5>
-                          <ul className="list-disc list-inside space-y-1 text-sm" style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
+                          <ul
+                            className="list-disc list-inside space-y-1 text-sm"
+                            style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}
+                          >
                             {rec.bestPractices.map((practice) => (
                               <li key={practice}>{practice}</li>
                             ))}
@@ -427,7 +498,10 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
 
                         {rec.alternatives.length > 0 && (
                           <div>
-                            <h5 className="font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                            <h5
+                              className="font-medium mb-2"
+                              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                            >
                               替代方案
                             </h5>
                             <div className="flex flex-wrap gap-2">
@@ -449,7 +523,10 @@ export const AIComponentRecommender: React.FC<AIComponentRecommenderProps> = ({
         )}
 
         {sortedRecommendations.length === 0 && recommendations.length === 0 && (
-          <div className="text-center py-8" style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
+          <div
+            className="text-center py-8"
+            style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}
+          >
             <p>点击「生成推荐」按钮开始获取AI组件建议</p>
           </div>
         )}

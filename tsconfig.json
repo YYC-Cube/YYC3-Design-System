@@ -4,7 +4,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "allowJs": true,
     "checkJs": false,
@@ -22,6 +22,7 @@
     "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
+    "downlevelIteration": true,
     "typeRoots": ["./node_modules/@types", "./types"],
     "baseUrl": ".",
     "paths": {
@@ -46,6 +47,9 @@
     "**/*.js",
     "tests/**",
     "src/**/__tests__/**",
-    ".storybook/**"
+    "src/vue/**",
+    ".storybook/**",
+    "node_modules/vite/**",
+    "node_modules/rollup/**"
   ]
 }

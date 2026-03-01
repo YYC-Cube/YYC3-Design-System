@@ -71,15 +71,8 @@ export class FontDisplayOptimizer {
     return `/fonts/${fontFamily.replace(/\s+/g, '-').toLowerCase()}.woff2`;
   }
 
-  createFontFace(
-    fontFamily: string,
-    fontSrc: string,
-    options?: FontDisplayOptions
-  ): string {
-    const {
-      strategy = 'swap',
-      fallbackFont = 'sans-serif',
-    } = options || {};
+  createFontFace(fontFamily: string, fontSrc: string, options?: FontDisplayOptions): string {
+    const { strategy = 'swap', fallbackFont = 'sans-serif' } = options || {};
 
     const config = this.configs.get(fontFamily) || {
       fontFamily,
@@ -127,16 +120,8 @@ export class FontDisplayOptimizer {
     `.trim();
   }
 
-  waitForFontLoad(
-    fontFamily: string,
-    options?: FontDisplayOptions
-  ): Promise<FontLoadingState> {
-    const {
-      timeout = 3000,
-      fallbackFont = 'sans-serif',
-      onLoad,
-      onError,
-    } = options || {};
+  waitForFontLoad(fontFamily: string, options?: FontDisplayOptions): Promise<FontLoadingState> {
+    const { timeout = 3000, fallbackFont = 'sans-serif', onLoad, onError } = options || {};
 
     return new Promise((resolve) => {
       const startTime = performance.now();
@@ -195,12 +180,7 @@ export class FontDisplayOptimizer {
     fontFamily: string,
     options?: FontDisplayOptions
   ): () => void {
-    const {
-      showLoadingIndicator = true,
-      hideOnLoad = true,
-      onLoad,
-      onError,
-    } = options || {};
+    const { showLoadingIndicator = true, hideOnLoad = true, onLoad, onError } = options || {};
 
     const originalStyle = element.style.fontFamily;
 
@@ -215,18 +195,17 @@ export class FontDisplayOptimizer {
       }
     };
 
-    this.waitForFontLoad(fontFamily, options)
-      .then((state) => {
-        unobserve();
+    this.waitForFontLoad(fontFamily, options).then((state) => {
+      unobserve();
 
-        if (state.loaded) {
-          element.style.fontFamily = fontFamily;
-          onLoad?.(fontFamily);
-        } else if (state.failed) {
-          element.style.fontFamily = this.configs.get(fontFamily)?.fallback || 'sans-serif';
-          onError?.(fontFamily);
-        }
-      });
+      if (state.loaded) {
+        element.style.fontFamily = fontFamily;
+        onLoad?.(fontFamily);
+      } else if (state.failed) {
+        element.style.fontFamily = this.configs.get(fontFamily)?.fallback || 'sans-serif';
+        onError?.(fontFamily);
+      }
+    });
 
     return unobserve;
   }
@@ -269,11 +248,7 @@ export class FontDisplayOptimizer {
       position?: 'before' | 'after';
     }
   ): void {
-    const {
-      color = '#999',
-      size = 14,
-      position = 'before',
-    } = options || {};
+    const { color = '#999', size = 14, position = 'before' } = options || {};
 
     const indicator = document.createElement('span');
     indicator.className = 'font-loading-indicator';
@@ -334,12 +309,11 @@ export class FontDisplayOptimizer {
   ): void {
     element.style.fontFamily = fallbackFont;
 
-    this.waitForFontLoad(fontFamily, { timeout })
-      .then((state) => {
-        if (state.loaded) {
-          element.style.fontFamily = fontFamily;
-        }
-      });
+    this.waitForFontLoad(fontFamily, { timeout }).then((state) => {
+      if (state.loaded) {
+        element.style.fontFamily = fontFamily;
+      }
+    });
   }
 
   createFOUTPrevention(
@@ -351,18 +325,14 @@ export class FontDisplayOptimizer {
     element.style.visibility = 'hidden';
     element.style.fontFamily = `${fontFamily}, ${fallbackFont}`;
 
-    this.waitForFontLoad(fontFamily, { timeout })
-      .then((state) => {
-        if (state.loaded) {
-          element.style.visibility = 'visible';
-        }
-      });
+    this.waitForFontLoad(fontFamily, { timeout }).then((state) => {
+      if (state.loaded) {
+        element.style.visibility = 'visible';
+      }
+    });
   }
 
-  getOptimalDisplayStrategy(
-    fontFamily: string,
-    isCritical: boolean = false
-  ): FontDisplayStrategy {
+  getOptimalDisplayStrategy(fontFamily: string, isCritical: boolean = false): FontDisplayStrategy {
     if (isCritical) {
       return 'block';
     }
@@ -389,13 +359,7 @@ export class FontDisplayOptimizer {
   }
 
   createMonospaceFontStack(): string {
-    const monospaceFonts = [
-      'SFMono-Regular',
-      'Consolas',
-      'Liberation Mono',
-      'Menlo',
-      'monospace',
-    ];
+    const monospaceFonts = ['SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'monospace'];
 
     return monospaceFonts.join(', ');
   }
@@ -471,13 +435,11 @@ export const observeFontLoading = (
   element: HTMLElement,
   fontFamily: string,
   options?: FontDisplayOptions
-): () => void => {
+): (() => void) => {
   return defaultFontDisplayOptimizer.observeFontLoading(element, fontFamily, options);
 };
 
-export const getFontLoadingState = (
-  fontFamily: string
-): FontLoadingState | undefined => {
+export const getFontLoadingState = (fontFamily: string): FontLoadingState | undefined => {
   return defaultFontDisplayOptimizer.getLoadingState(fontFamily);
 };
 
@@ -487,12 +449,7 @@ export const createFontSwapEffect = (
   fallbackFont: string,
   duration?: number
 ): void => {
-  defaultFontDisplayOptimizer.createFontSwapEffect(
-    element,
-    fontFamily,
-    fallbackFont,
-    duration
-  );
+  defaultFontDisplayOptimizer.createFontSwapEffect(element, fontFamily, fallbackFont, duration);
 };
 
 export const createFOITPrevention = (
@@ -501,12 +458,7 @@ export const createFOITPrevention = (
   fallbackFont: string,
   timeout?: number
 ): void => {
-  defaultFontDisplayOptimizer.createFOITPrevention(
-    element,
-    fontFamily,
-    fallbackFont,
-    timeout
-  );
+  defaultFontDisplayOptimizer.createFOITPrevention(element, fontFamily, fallbackFont, timeout);
 };
 
 export const createFOUTPrevention = (
@@ -515,12 +467,7 @@ export const createFOUTPrevention = (
   fallbackFont: string,
   timeout?: number
 ): void => {
-  defaultFontDisplayOptimizer.createFOUTPrevention(
-    element,
-    fontFamily,
-    fallbackFont,
-    timeout
-  );
+  defaultFontDisplayOptimizer.createFOUTPrevention(element, fontFamily, fallbackFont, timeout);
 };
 
 export const getSystemFontStack = (): string => {

@@ -19,12 +19,14 @@ import { GeneratedTokens, GeneratedColorToken } from '../../types/tokens';
 type TokenValue = string | number | Record<string, string | number>;
 
 const getTokenValue = (tokens: Record<string, unknown>, key: string): string => {
-  const value = key.split('.').reduce<TokenValue | undefined>((obj: TokenValue | undefined, k: string) => {
-    if (typeof obj === 'object' && obj !== null) {
-      return obj[k as keyof TokenValue];
-    }
-    return undefined;
-  }, tokens as TokenValue);
+  const value = key
+    .split('.')
+    .reduce<TokenValue | undefined>((obj: TokenValue | undefined, k: string) => {
+      if (typeof obj === 'object' && obj !== null) {
+        return obj[k as keyof TokenValue];
+      }
+      return undefined;
+    }, tokens as TokenValue);
   return typeof value === 'string' ? value : '#000000';
 };
 
@@ -39,7 +41,9 @@ export const AITokenGenerator: React.FC<AITokenGeneratorProps> = ({
 }) => {
   const { tokens } = useTheme();
   const [baseColor, setBaseColor] = useState('#d45a5f');
-  const [harmony, setHarmony] = useState<'complementary' | 'analogous' | 'triadic' | 'tetradic' | 'monochromatic'>('monochromatic');
+  const [harmony, setHarmony] = useState<
+    'complementary' | 'analogous' | 'triadic' | 'tetradic' | 'monochromatic'
+  >('monochromatic');
   const [scale, setScale] = useState(10);
   const [includeShades, setIncludeShades] = useState(true);
   const [includeTints, setIncludeTints] = useState(true);
@@ -80,27 +84,23 @@ export const AITokenGenerator: React.FC<AITokenGeneratorProps> = ({
       <CardContent className="space-y-6">
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               基础颜色
             </label>
             <div className="flex gap-2">
-              <Input
-                type="color"
-                value={baseColor}
-                onChange={setBaseColor}
-                className="w-16 h-10"
-              />
-              <Input
-                type="text"
-                value={baseColor}
-                onChange={setBaseColor}
-                placeholder="#d45a5f"
-              />
+              <Input type="color" value={baseColor} onChange={setBaseColor} className="w-16 h-10" />
+              <Input type="text" value={baseColor} onChange={setBaseColor} placeholder="#d45a5f" />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               色彩和谐
             </label>
             <div className="flex flex-wrap gap-2">
@@ -110,8 +110,10 @@ export const AITokenGenerator: React.FC<AITokenGeneratorProps> = ({
                   variant={harmony === h.value ? 'default' : 'outline'}
                   style={{
                     cursor: 'pointer',
-                    background: harmony === h.value ? getTokenValue(tokens, 'color.primary') : 'transparent',
-                    color: harmony === h.value ? '#ffffff' : getTokenValue(tokens, 'color.foreground'),
+                    background:
+                      harmony === h.value ? getTokenValue(tokens, 'color.primary') : 'transparent',
+                    color:
+                      harmony === h.value ? '#ffffff' : getTokenValue(tokens, 'color.foreground'),
                     borderColor: getTokenValue(tokens, 'color.primary'),
                   }}
                   onClick={() => setHarmony(h.value)}
@@ -123,7 +125,10 @@ export const AITokenGenerator: React.FC<AITokenGeneratorProps> = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               间距比例: {scale}
             </label>
             <input
@@ -148,7 +153,10 @@ export const AITokenGenerator: React.FC<AITokenGeneratorProps> = ({
                 onChange={(e) => setIncludeShades(e.target.checked)}
                 className="w-4 h-4"
               />
-              <span className="text-sm" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+              <span
+                className="text-sm"
+                style={{ color: getTokenValue(tokens, 'color.foreground') }}
+              >
                 包含色相
               </span>
             </label>
@@ -160,7 +168,10 @@ export const AITokenGenerator: React.FC<AITokenGeneratorProps> = ({
                 onChange={(e) => setIncludeTints(e.target.checked)}
                 className="w-4 h-4"
               />
-              <span className="text-sm" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+              <span
+                className="text-sm"
+                style={{ color: getTokenValue(tokens, 'color.foreground') }}
+              >
                 包含色调
               </span>
             </label>
@@ -173,7 +184,10 @@ export const AITokenGenerator: React.FC<AITokenGeneratorProps> = ({
 
         {recommendations.length > 0 && (
           <div className="space-y-2">
-            <h3 className="text-sm font-medium" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <h3
+              className="text-sm font-medium"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               AI 推荐
             </h3>
             <div className="space-y-2">
@@ -186,7 +200,10 @@ export const AITokenGenerator: React.FC<AITokenGeneratorProps> = ({
                     border: `1px solid ${getTokenValue(tokens, 'color.border')}`,
                   }}
                 >
-                  <p className="text-sm" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                  <p
+                    className="text-sm"
+                    style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                  >
                     💡 {rec}
                   </p>
                 </div>
@@ -197,33 +214,41 @@ export const AITokenGenerator: React.FC<AITokenGeneratorProps> = ({
 
         {generatedTokens && (
           <div className="space-y-2">
-            <h3 className="text-sm font-medium" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+            <h3
+              className="text-sm font-medium"
+              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+            >
               生成的令牌
             </h3>
             <div className="space-y-2">
-              {Object.entries(generatedTokens.colors).slice(0, 8).map(([name, color]: [string, GeneratedColorToken]) => (
-                <div
-                  key={name}
-                  className="flex items-center gap-3 p-2 rounded-lg"
-                  style={{
-                    background: getTokenValue(tokens, 'color.card'),
-                    border: `1px solid ${getTokenValue(tokens, 'color.border')}`,
-                  }}
-                >
+              {Object.entries(generatedTokens.colors)
+                .slice(0, 8)
+                .map(([name, color]: [string, GeneratedColorToken]) => (
                   <div
-                    className="w-8 h-8 rounded"
-                    style={{ background: color.value.hex }}
-                  />
-                  <div className="flex-1">
-                    <p className="text-sm font-medium" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
-                      {name}
-                    </p>
-                    <p className="text-xs" style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
-                      {color.value.hex}
-                    </p>
+                    key={name}
+                    className="flex items-center gap-3 p-2 rounded-lg"
+                    style={{
+                      background: getTokenValue(tokens, 'color.card'),
+                      border: `1px solid ${getTokenValue(tokens, 'color.border')}`,
+                    }}
+                  >
+                    <div className="w-8 h-8 rounded" style={{ background: color.value.hex }} />
+                    <div className="flex-1">
+                      <p
+                        className="text-sm font-medium"
+                        style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                      >
+                        {name}
+                      </p>
+                      <p
+                        className="text-xs"
+                        style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}
+                      >
+                        {color.value.hex}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         )}

@@ -74,9 +74,13 @@ export const analyzeCharacters = (text: string): CharacterAnalysis => {
       charCategories.cyrillic++;
     } else if (code >= 0x0370 && code <= 0x03ff) {
       charCategories.greek++;
-    } else if (code >= 0x4e00 && code <= 0x9fff || code >= 0x3400 && code <= 0x4dbf || code >= 0x20000 && code <= 0x2a6df) {
+    } else if (
+      (code >= 0x4e00 && code <= 0x9fff) ||
+      (code >= 0x3400 && code <= 0x4dbf) ||
+      (code >= 0x20000 && code <= 0x2a6df)
+    ) {
       charCategories.cjk++;
-    } else if (code >= 0x2000 && code <= 0x2FFF) {
+    } else if (code >= 0x2000 && code <= 0x2fff) {
       charCategories.symbols++;
     } else {
       charCategories.other++;
@@ -138,7 +142,9 @@ export const generateSubsetString = (options: FontSubsetOptions): string => {
   }
 
   if (options.includeCJK) {
-    chars.push('的一是在不了有和人这中大为上个国我以要他时来用们生到作地于出就分对成会可主发年动同工也能下过子说产种面而方后多定行学法所民得经十三之进着等部度家电力里如水化高自二理起小物现实加量都两体制机当使点从业本去把性好应开它合还因由其些然前外天政四日那社义事平形相全表间样与关各重新线内数正心反你明看原又么利比或但质气第向道命此变条只没结解问意建月公无系军很情者最立代想已通并提直题党程展五果料象员革位入常文总次品式活设及管特件长求老头基资边流路级少图山统接知较将组见计别她手角期根论运农指几九区强放决西被干做必战先回则任取完举科触广');
+    chars.push(
+      '的一是在不了有和人这中大为上个国我以要他时来用们生到作地于出就分对成会可主发年动同工也能下过子说产种面而方后多定行学法所民得经十三之进着等部度家电力里如水化高自二理起小物现实加量都两体制机当使点从业本去把性好应开它合还因由其些然前外天政四日那社义事平形相全表间样与关各重新线内数正心反你明看原又么利比或但质气第向道命此变条只没结解问意建月公无系军很情者最立代想已通并提直题党程展五果料象员革位入常文总次品式活设及管特件长求老头基资边流路级少图山统接知较将组见计别她手角期根论运农指几九区强放决西被干做必战先回则任取完举科触广'
+    );
   }
 
   if (options.customChars) {
@@ -242,7 +248,11 @@ export const generateUnicodeRanges = (chars: string): string[] => {
     }
   }
 
-  if (ranges.length === 0 || ranges[ranges.length - 1] !== `U+${start.toString(16).toUpperCase()}-${end.toString(16).toUpperCase()}`) {
+  if (
+    ranges.length === 0 ||
+    ranges[ranges.length - 1] !==
+      `U+${start.toString(16).toUpperCase()}-${end.toString(16).toUpperCase()}`
+  ) {
     ranges.push(`U+${start.toString(16).toUpperCase()}-${end.toString(16).toUpperCase()}`);
   }
 
@@ -358,13 +368,13 @@ export const generateFontSubsetReport = (
   subsetChars: string,
   analysis?: CharacterAnalysis
 ): {
-    originalSize: number;
-    subsetSize: number;
-    reduction: number;
-    charCount: number;
-    categories?: CharacterAnalysis['charCategories'];
-    recommendations: string[];
-  } => {
+  originalSize: number;
+  subsetSize: number;
+  reduction: number;
+  charCount: number;
+  categories?: CharacterAnalysis['charCategories'];
+  recommendations: string[];
+} => {
   const subsetSize = getFontSubsetSize(originalSize, subsetChars);
   const reduction = estimateSubsetReduction(originalSize, subsetChars);
 

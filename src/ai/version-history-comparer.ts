@@ -78,11 +78,11 @@ export class VersionHistoryComparer {
   }
 
   getVersion(id: string): TokenVersion | undefined {
-    return this.versions.find(v => v.id === id);
+    return this.versions.find((v) => v.id === id);
   }
 
   deleteVersion(id: string): void {
-    this.versions = this.versions.filter(v => v.id !== id);
+    this.versions = this.versions.filter((v) => v.id !== id);
     this.persistVersions();
   }
 
@@ -144,18 +144,15 @@ export class VersionHistoryComparer {
     currentTokens: DesignTokens,
     projects: { name: string; tokens: DesignTokens }[]
   ): CrossProjectComparison[] {
-    return projects.map(project => {
+    return projects.map((project) => {
       const commonTokens: string[] = [];
       const uniqueToProject: string[] = [];
       const uniqueToCurrent: string[] = [];
       const valueDifferences: TokenValueDifference[] = [];
 
-      const allKeys = new Set([
-        ...Object.keys(currentTokens),
-        ...Object.keys(project.tokens),
-      ]);
+      const allKeys = new Set([...Object.keys(currentTokens), ...Object.keys(project.tokens)]);
 
-      allKeys.forEach(key => {
+      allKeys.forEach((key) => {
         const existsInCurrent = key in currentTokens;
         const existsInProject = key in project.tokens;
 
@@ -203,7 +200,10 @@ export class VersionHistoryComparer {
     });
   }
 
-  private calculateChanges(tokens1: DesignTokens, tokens2: DesignTokens): {
+  private calculateChanges(
+    tokens1: DesignTokens,
+    tokens2: DesignTokens
+  ): {
     added: TokenChange[];
     removed: TokenChange[];
     modified: TokenChange[];
@@ -215,7 +215,7 @@ export class VersionHistoryComparer {
     const removed: TokenChange[] = [];
     const modified: TokenChange[] = [];
 
-    keys2.forEach(key => {
+    keys2.forEach((key) => {
       if (!keys1.has(key)) {
         added.push({
           key,
@@ -236,7 +236,7 @@ export class VersionHistoryComparer {
       }
     });
 
-    keys1.forEach(key => {
+    keys1.forEach((key) => {
       if (!keys2.has(key)) {
         removed.push({
           key,
@@ -320,11 +320,13 @@ export class VersionHistoryComparer {
 
   private hexToRgb(hex: string): { r: number; g: number; b: number } {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16),
-    } : { r: 0, g: 0, b: 0 };
+    return result
+      ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+        }
+      : { r: 0, g: 0, b: 0 };
   }
 
   private persistVersions(): void {

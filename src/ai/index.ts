@@ -20,5 +20,14 @@ export type { ColorScheme, ColorRecommendationOptions } from './color-recommende
 export type { ConsistencyIssue, ConsistencyReport } from './consistency-checker';
 export type { TokenUsage, UsagePattern, UsageReport } from './usage-analyzer';
 export type { BestPractice, BestPracticesReport } from './best-practices-generator';
-export type { ComponentType, UIRequirement, ComponentRecommendation, RecommendationOptions } from './component-recommender';
-export type { PerformanceMetrics, PerformanceIssue, OptimizationPlan } from './performance-optimizer';
+export type {
+  ComponentType,
+  UIRequirement,
+  ComponentRecommendation,
+  RecommendationOptions,
+} from './component-recommender';
+export type {
+  PerformanceMetrics,
+  PerformanceIssue,
+  OptimizationPlan,
+} from './performance-optimizer';

@@ -4,7 +4,7 @@ import { screen } from '@testing-library/dom';
 
 import '@testing-library/jest-dom';
 import { Modal } from '../Modal'
-import { ThemeProvider } from '../../theme/ThemeProvider';
+import { ThemeProvider } from '../../context/ThemeContext';
 
 describe('Modal 组件', () => {
   describe('基础渲染', () => {

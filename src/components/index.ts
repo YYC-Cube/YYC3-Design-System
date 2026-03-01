@@ -20,7 +20,12 @@ export { Divider } from './Divider';
 export { Select } from './Select';
 export { Animated } from './Animated';
 export { AnimatedEnhanced, type AnimationPreset } from './AnimatedEnhanced';
-export { CustomAnimation, type CustomKeyframeStep, type CustomAnimationDefinition, type CustomAnimationProps } from './CustomAnimation';
+export {
+  CustomAnimation,
+  type CustomKeyframeStep,
+  type CustomAnimationDefinition,
+  type CustomAnimationProps,
+} from './CustomAnimation';
 export { ThemeEditor, type ThemeEditorProps } from './ThemeEditor';
 export { TokenPlayground } from './TokenPlayground';
 export { ColorContrastChecker } from './ColorContrastChecker';

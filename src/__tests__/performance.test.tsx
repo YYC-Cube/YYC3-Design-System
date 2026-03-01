@@ -8,10 +8,10 @@
  */
 
 import * as React from 'react';
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
-import { ThemeProvider, useTheme } from '../theme/ThemeProvider';
+import { ThemeProvider, useTheme } from '../context/ThemeContext';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '../components/Card';
@@ -21,7 +21,11 @@ describe('性能测试', () => {
   describe('Button组件性能', () => {
     it('应该快速渲染单个Button', () => {
       const startTime = performance.now();
-      render(<ThemeProvider><Button>按钮</Button></ThemeProvider>);
+      render(
+        <ThemeProvider>
+          <Button>按钮</Button>
+        </ThemeProvider>
+      );
       const endTime = performance.now();
       const renderTime = endTime - startTime;
 
@@ -29,12 +33,14 @@ describe('性能测试', () => {
     });
 
     it('应该快速渲染多个Button', () => {
-      const buttons = Array.from({ length: 100 }, (_, i) => (
-        <Button key={i}>按钮{i}</Button>
-      ));
+      const buttons = Array.from({ length: 100 }, (_, i) => <Button key={i}>按钮{i}</Button>);
 
       const startTime = performance.now();
-      render(<ThemeProvider><div>{buttons}</div></ThemeProvider>);
+      render(
+        <ThemeProvider>
+          <div>{buttons}</div>
+        </ThemeProvider>
+      );
       const endTime = performance.now();
       const renderTime = endTime - startTime;
 
@@ -43,7 +49,11 @@ describe('性能测试', () => {
 
     it('应该快速处理点击事件', () => {
       const handleClick = jest.fn();
-      render(<ThemeProvider><Button onClick={handleClick}>按钮</Button></ThemeProvider>);
+      render(
+        <ThemeProvider>
+          <Button onClick={handleClick}>按钮</Button>
+        </ThemeProvider>
+      );
 
       const startTime = performance.now();
       for (let i = 0; i < 100; i++) {
@@ -60,7 +70,11 @@ describe('性能测试', () => {
   describe('Input组件性能', () => {
     it('应该快速渲染单个Input', () => {
       const startTime = performance.now();
-      render(<ThemeProvider><Input /></ThemeProvider>);
+      render(
+        <ThemeProvider>
+          <Input />
+        </ThemeProvider>
+      );
       const endTime = performance.now();
       const renderTime = endTime - startTime;
 
@@ -69,7 +83,11 @@ describe('性能测试', () => {
 
     it('应该快速处理输入事件', () => {
       const handleChange = jest.fn();
-      render(<ThemeProvider><Input onChange={handleChange} /></ThemeProvider>);
+      render(
+        <ThemeProvider>
+          <Input onChange={handleChange} />
+        </ThemeProvider>
+      );
 
       const input = screen.getByRole('textbox');
       const startTime = performance.now();
@@ -108,7 +126,11 @@ describe('性能测试', () => {
       ));
 
       const startTime = performance.now();
-      render(<ThemeProvider><div>{cards}</div></ThemeProvider>);
+      render(
+        <ThemeProvider>
+          <div>{cards}</div>
+        </ThemeProvider>
+      );
       const endTime = performance.now();
       const renderTime = endTime - startTime;
 
@@ -118,16 +140,12 @@ describe('性能测试', () => {
 
   describe('Grid组件性能', () => {
     it('应该快速渲染Grid', () => {
-      const items = Array.from({ length: 12 }, (_, i) => (
-        <div key={i}>项目{i}</div>
-      ));
+      const items = Array.from({ length: 12 }, (_, i) => <div key={i}>项目{i}</div>);
 
       const startTime = performance.now();
       render(
         <ThemeProvider>
-          <Grid cols={4}>
-            {items}
-          </Grid>
+          <Grid cols={4}>{items}</Grid>
         </ThemeProvider>
       );
       const endTime = performance.now();
@@ -137,16 +155,12 @@ describe('性能测试', () => {
     });
 
     it('应该快速渲染大量Grid项目', () => {
-      const items = Array.from({ length: 100 }, (_, i) => (
-        <div key={i}>项目{i}</div>
-      ));
+      const items = Array.from({ length: 100 }, (_, i) => <div key={i}>项目{i}</div>);
 
       const startTime = performance.now();
       render(
         <ThemeProvider>
-          <Grid cols={10}>
-            {items}
-          </Grid>
+          <Grid cols={10}>{items}</Grid>
         </ThemeProvider>
       );
       const endTime = performance.now();
@@ -159,9 +173,7 @@ describe('性能测试', () => {
   describe('复杂场景性能', () => {
     it('应该快速渲染复杂表单', () => {
       const TestComponent = () => {
-        const [values, setValues] = React.useState(
-          Array.from({ length: 10 }, () => '')
-        );
+        const [values, setValues] = React.useState(Array.from({ length: 10 }, () => ''));
 
         return (
           <Card>
@@ -190,7 +202,11 @@ describe('性能测试', () => {
       };
 
       const startTime = performance.now();
-      render(<ThemeProvider><TestComponent /></ThemeProvider>);
+      render(
+        <ThemeProvider>
+          <TestComponent />
+        </ThemeProvider>
+      );
       const endTime = performance.now();
       const renderTime = endTime - startTime;
 
@@ -210,9 +226,7 @@ describe('性能测试', () => {
       const startTime = performance.now();
       render(
         <ThemeProvider>
-          <Grid cols={4}>
-            {cards}
-          </Grid>
+          <Grid cols={4}>{cards}</Grid>
         </ThemeProvider>
       );
       const endTime = performance.now();
@@ -244,7 +258,11 @@ describe('性能测试', () => {
         </Card>
       ));
 
-      const { unmount } = render(<ThemeProvider><div>{cards}</div></ThemeProvider>);
+      const { unmount } = render(
+        <ThemeProvider>
+          <div>{cards}</div>
+        </ThemeProvider>
+      );
 
       unmount();
 
@@ -256,14 +274,14 @@ describe('性能测试', () => {
     it('应该快速重渲染Button', () => {
       const TestComponent = () => {
         const [count, setCount] = React.useState(0);
-        return (
-          <Button onClick={() => setCount(count + 1)}>
-            点击次数: {count}
-          </Button>
-        );
+        return <Button onClick={() => setCount(count + 1)}>点击次数: {count}</Button>;
       };
 
-      render(<ThemeProvider><TestComponent /></ThemeProvider>);
+      render(
+        <ThemeProvider>
+          <TestComponent />
+        </ThemeProvider>
+      );
 
       const startTime = performance.now();
       for (let i = 0; i < 50; i++) {
@@ -278,16 +296,14 @@ describe('性能测试', () => {
     it('应该快速重渲染Input', () => {
       const TestComponent = () => {
         const [value, setValue] = React.useState('');
-        return (
-          <Input
-            value={value}
-            onChange={setValue}
-            placeholder="输入框"
-          />
-        );
+        return <Input value={value} onChange={setValue} placeholder="输入框" />;
       };
 
-      render(<ThemeProvider><TestComponent /></ThemeProvider>);
+      render(
+        <ThemeProvider>
+          <TestComponent />
+        </ThemeProvider>
+      );
 
       const input = screen.getByPlaceholderText('输入框');
       const startTime = performance.now();
@@ -307,9 +323,7 @@ describe('性能测试', () => {
         const { mode, setMode } = useTheme();
         return (
           <div>
-            <Button onClick={() => setMode(mode === 'light' ? 'dark' : 'light')}>
-              切换主题
-            </Button>
+            <Button onClick={() => setMode(mode === 'light' ? 'dark' : 'light')}>切换主题</Button>
             <div>当前主题: {mode}</div>
           </div>
         );

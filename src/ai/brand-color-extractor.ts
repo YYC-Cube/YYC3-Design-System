@@ -246,7 +246,7 @@ export class BrandColorExtractor {
   }
 
   private selectPrimaryColor(colors: ExtractedColor[]): ExtractedColor {
-    const saturatedColors = colors.filter(c => c.hsl.s > 0.3);
+    const saturatedColors = colors.filter((c) => c.hsl.s > 0.3);
     const candidates = saturatedColors.length > 0 ? saturatedColors : colors;
 
     candidates.sort((a, b) => {
@@ -258,15 +258,12 @@ export class BrandColorExtractor {
     return candidates[0] || colors[0];
   }
 
-  private selectSecondaryColor(
-    colors: ExtractedColor[],
-    primary: ExtractedColor
-  ): ExtractedColor {
+  private selectSecondaryColor(colors: ExtractedColor[], primary: ExtractedColor): ExtractedColor {
     const primaryHue = primary.hsl.h;
     const candidates = colors
-      .filter(c => c.hex !== primary.hex)
-      .filter(c => this.getColorDistance(c.hsl, primary.hsl) > 30)
-      .filter(c => Math.abs(c.hsl.h - primaryHue) > 60 || Math.abs(c.hsl.h - primaryHue) < 30);
+      .filter((c) => c.hex !== primary.hex)
+      .filter((c) => this.getColorDistance(c.hsl, primary.hsl) > 30)
+      .filter((c) => Math.abs(c.hsl.h - primaryHue) > 60 || Math.abs(c.hsl.h - primaryHue) < 30);
 
     if (candidates.length > 0) {
       candidates.sort((a, b) => b.percentage - a.percentage);
@@ -282,8 +279,8 @@ export class BrandColorExtractor {
     secondary: ExtractedColor
   ): ExtractedColor {
     const candidates = colors
-      .filter(c => c.hex !== primary.hex && c.hex !== secondary.hex)
-      .filter(c => {
+      .filter((c) => c.hex !== primary.hex && c.hex !== secondary.hex)
+      .filter((c) => {
         const distToPrimary = this.getColorDistance(c.hsl, primary.hsl);
         const distToSecondary = this.getColorDistance(c.hsl, secondary.hsl);
         return distToPrimary > 40 && distToSecondary > 40;
@@ -302,7 +299,7 @@ export class BrandColorExtractor {
     medium: string;
     dark: string;
   } {
-    const lowSaturationColors = colors.filter(c => c.hsl.s < 0.15);
+    const lowSaturationColors = colors.filter((c) => c.hsl.s < 0.15);
 
     if (lowSaturationColors.length >= 3) {
       lowSaturationColors.sort((a, b) => b.hsl.l - a.hsl.l);
@@ -367,16 +364,18 @@ export class BrandColorExtractor {
   }
 
   private rgbToHex(r: number, g: number, b: number): string {
-    return `#${[r, g, b].map(x => x.toString(16).padStart(2, '0')).join('')}`;
+    return `#${[r, g, b].map((x) => x.toString(16).padStart(2, '0')).join('')}`;
   }
 
   private hexToRgb(hex: string): { r: number; g: number; b: number } {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16),
-    } : { r: 0, g: 0, b: 0 };
+    return result
+      ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+        }
+      : { r: 0, g: 0, b: 0 };
   }
 
   private rgbToHsl(r: number, g: number, b: number): { h: number; s: number; l: number } {

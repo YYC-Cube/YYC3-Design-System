@@ -52,7 +52,7 @@ export class UsageAnalyzer {
 
   recordUsage(tokenName: string, tokenValue: string, file: string, component?: string): void {
     const existing = this.usageData.get(tokenName);
-    
+
     if (existing) {
       existing.usageCount++;
       existing.lastUsed = new Date();
@@ -80,7 +80,7 @@ export class UsageAnalyzer {
   private updateHistoricalData(tokenName: string): void {
     const history = this.historicalData.get(tokenName) || [];
     const current = this.usageData.get(tokenName);
-    
+
     if (current) {
       history.push(current.usageCount);
       if (history.length > 30) {
@@ -92,8 +92,8 @@ export class UsageAnalyzer {
 
   analyzeUsage(): UsageReport {
     const allTokens = Array.from(this.usageData.values());
-    const usedTokens = allTokens.filter(t => t.usageCount > 0);
-    const unusedTokens = allTokens.filter(t => t.usageCount === 0);
+    const usedTokens = allTokens.filter((t) => t.usageCount > 0);
+    const unusedTokens = allTokens.filter((t) => t.usageCount === 0);
     const coverage = (usedTokens.length / Math.max(allTokens.length, 1)) * 100;
 
     return {
@@ -115,14 +115,14 @@ export class UsageAnalyzer {
   }
 
   private analyzeCategory(category: string): UsagePattern {
-    const categoryTokens = Array.from(this.usageData.values()).filter(
-      t => t.tokenName.includes(category)
+    const categoryTokens = Array.from(this.usageData.values()).filter((t) =>
+      t.tokenName.includes(category)
     );
 
     const sortedByUsage = [...categoryTokens].sort((a, b) => b.usageCount - a.usageCount);
     const mostUsed = sortedByUsage.slice(0, 5);
     const leastUsed = sortedByUsage.slice(-5).reverse();
-    const unused = categoryTokens.filter(t => t.usageCount === 0).map(t => t.tokenName);
+    const unused = categoryTokens.filter((t) => t.usageCount === 0).map((t) => t.tokenName);
 
     const trends = {
       increasing: [] as string[],
@@ -130,12 +130,12 @@ export class UsageAnalyzer {
       stable: [] as string[],
     };
 
-    categoryTokens.forEach(token => {
+    categoryTokens.forEach((token) => {
       const history = this.historicalData.get(token.tokenName);
       if (history && history.length >= 3) {
         const recent = history.slice(-3);
         const trend = this.calculateTrend(recent);
-        
+
         if (trend > 0.5) {
           trends.increasing.push(token.tokenName);
         } else if (trend < -0.5) {
@@ -157,7 +157,7 @@ export class UsageAnalyzer {
 
   private calculateTrend(values: number[]): number {
     if (values.length < 2) return 0;
-    
+
     const n = values.length;
     const sumX = (n * (n - 1)) / 2;
     const sumY = values.reduce((a, b) => a + b, 0);
@@ -171,33 +171,25 @@ export class UsageAnalyzer {
   private generateRecommendations(): string[] {
     const recommendations: string[] = [];
     const allTokens = Array.from(this.usageData.values());
-    const unusedTokens = allTokens.filter(t => t.usageCount === 0);
+    const unusedTokens = allTokens.filter((t) => t.usageCount === 0);
 
     if (unusedTokens.length > 0) {
-      recommendations.push(
-        `发现 ${unusedTokens.length} 个未使用的令牌，考虑删除以简化设计系统`
-      );
+      recommendations.push(`发现 ${unusedTokens.length} 个未使用的令牌，考虑删除以简化设计系统`);
     }
 
-    const lowUsageTokens = allTokens.filter(t => t.usageCount > 0 && t.usageCount < 3);
+    const lowUsageTokens = allTokens.filter((t) => t.usageCount > 0 && t.usageCount < 3);
     if (lowUsageTokens.length > 0) {
-      recommendations.push(
-        `${lowUsageTokens.length} 个令牌使用频率较低，评估是否需要保留`
-      );
+      recommendations.push(`${lowUsageTokens.length} 个令牌使用频率较低，评估是否需要保留`);
     }
 
-    const highUsageTokens = allTokens.filter(t => t.usageCount > 50);
+    const highUsageTokens = allTokens.filter((t) => t.usageCount > 50);
     if (highUsageTokens.length > 0) {
-      recommendations.push(
-        `${highUsageTokens.length} 个令牌使用频繁，确保它们符合设计规范`
-      );
+      recommendations.push(`${highUsageTokens.length} 个令牌使用频繁，确保它们符合设计规范`);
     }
 
-    const colorTokens = allTokens.filter(t => t.tokenName.includes('color'));
+    const colorTokens = allTokens.filter((t) => t.tokenName.includes('color'));
     if (colorTokens.length > 20) {
-      recommendations.push(
-        '颜色令牌数量较多，考虑合并相似颜色以简化系统'
-      );
+      recommendations.push('颜色令牌数量较多，考虑合并相似颜色以简化系统');
     }
 
     return recommendations;
@@ -210,33 +202,31 @@ export class UsageAnalyzer {
     const avgUsage = allTokens.reduce((sum, t) => sum + t.usageCount, 0) / allTokens.length;
     insights.push(`平均令牌使用次数: ${avgUsage.toFixed(1)}`);
 
-    const mostUsed = allTokens.reduce((max, t) => t.usageCount > max.usageCount ? t : max);
+    const mostUsed = allTokens.reduce((max, t) => (t.usageCount > max.usageCount ? t : max));
     insights.push(`最常用的令牌: ${mostUsed.tokenName} (${mostUsed.usageCount} 次)`);
 
     const componentUsage = new Map<string, number>();
-    allTokens.forEach(t => {
-      t.components.forEach(c => {
+    allTokens.forEach((t) => {
+      t.components.forEach((c) => {
         componentUsage.set(c, (componentUsage.get(c) || 0) + t.usageCount);
       });
     });
 
-    const topComponent = Array.from(componentUsage.entries())
-      .sort((a, b) => b[1] - a[1])[0];
-    
+    const topComponent = Array.from(componentUsage.entries()).sort((a, b) => b[1] - a[1])[0];
+
     if (topComponent) {
       insights.push(`令牌使用最多的组件: ${topComponent[0]} (${topComponent[1]} 次)`);
     }
 
     const fileUsage = new Map<string, number>();
-    allTokens.forEach(t => {
-      t.files.forEach(f => {
+    allTokens.forEach((t) => {
+      t.files.forEach((f) => {
         fileUsage.set(f, (fileUsage.get(f) || 0) + t.usageCount);
       });
     });
 
-    const topFile = Array.from(fileUsage.entries())
-      .sort((a, b) => b[1] - a[1])[0];
-    
+    const topFile = Array.from(fileUsage.entries()).sort((a, b) => b[1] - a[1])[0];
+
     if (topFile) {
       insights.push(`令牌使用最多的文件: ${topFile[0]} (${topFile[1]} 次)`);
     }
@@ -252,8 +242,8 @@ export class UsageAnalyzer {
 
   getUnusedTokens(): string[] {
     return Array.from(this.usageData.values())
-      .filter(t => t.usageCount === 0)
-      .map(t => t.tokenName);
+      .filter((t) => t.usageCount === 0)
+      .map((t) => t.tokenName);
   }
 
   getTokenUsage(tokenName: string): TokenUsage | undefined {
@@ -261,13 +251,11 @@ export class UsageAnalyzer {
   }
 
   getComponentUsage(componentName: string): TokenUsage[] {
-    return Array.from(this.usageData.values())
-      .filter(t => t.components.includes(componentName));
+    return Array.from(this.usageData.values()).filter((t) => t.components.includes(componentName));
   }
 
   getFileUsage(filePath: string): TokenUsage[] {
-    return Array.from(this.usageData.values())
-      .filter(t => t.files.includes(filePath));
+    return Array.from(this.usageData.values()).filter((t) => t.files.includes(filePath));
   }
 
   clearUsageData(): void {

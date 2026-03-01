@@ -78,7 +78,7 @@ export const AnimatedEnhanced: React.FC<AnimatedEnhancedProps> = ({
 
   const handleClick = useCallback(() => {
     if (trigger === 'click' && !disabled) {
-      setIsAnimating(prev => !prev);
+      setIsAnimating((prev) => !prev);
     }
   }, [trigger, disabled]);
 
@@ -97,10 +97,13 @@ export const AnimatedEnhanced: React.FC<AnimatedEnhancedProps> = ({
     onAnimationIteration?.();
   }, [onAnimationIteration]);
 
-  const containerStyle = useMemo(() => ({
-    cursor: trigger === 'click' ? 'pointer' : 'default',
-    ...animationStyle,
-  }), [trigger, disabled, animationStyle]);
+  const containerStyle = useMemo(
+    () => ({
+      cursor: trigger === 'click' ? 'pointer' : 'default',
+      ...animationStyle,
+    }),
+    [trigger, disabled, animationStyle]
+  );
 
   return (
     <div

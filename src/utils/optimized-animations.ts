@@ -8,7 +8,12 @@
  */
 
 import React from 'react';
-import { AnimationConfig, AnimationDuration, AnimationEasing, AnimationKeyframe } from '../../types/animations';
+import {
+  AnimationConfig,
+  AnimationDuration,
+  AnimationEasing,
+  AnimationKeyframe,
+} from '../../types/animations';
 
 export const animationDurations: Record<AnimationDuration, string> = {
   fast: '150ms',
@@ -90,10 +95,7 @@ export const bounceIn = (config?: AnimationConfig): string => {
   return getAnimationString('bounce-in', config);
 };
 
-export const createTransition = (
-  properties: string,
-  config?: AnimationConfig
-): string => {
+export const createTransition = (properties: string, config?: AnimationConfig): string => {
   const duration = config?.duration ? animationDurations[config.duration] : '300ms';
   const easing = config?.easing ? animationEasings[config.easing] : 'ease-in-out';
   const delay = config?.delay || '0ms';
@@ -115,10 +117,7 @@ export const getWillChangeProperties = (properties: string[]): React.CSSProperti
   };
 };
 
-export const useAnimationFrame = (
-  callback: () => void,
-  deps: React.DependencyList = []
-) => {
+export const useAnimationFrame = (callback: () => void, deps: React.DependencyList = []) => {
   const requestRef = React.useRef<number>(0);
   const previousDeps = React.useRef(deps);
 
@@ -126,12 +125,12 @@ export const useAnimationFrame = (
     const hasChanged = deps.some((dep, i) => dep !== previousDeps.current[i]);
     if (hasChanged) {
       previousDeps.current = deps;
-      
+
       const animate = () => {
         callback();
         requestRef.current = requestAnimationFrame(animate);
       };
-      
+
       requestRef.current = requestAnimationFrame(animate);
     }
 
@@ -143,10 +142,7 @@ export const useAnimationFrame = (
   }, deps);
 };
 
-export const useThrottledAnimationFrame = (
-  callback: () => void,
-  delay: number = 16
-) => {
+export const useThrottledAnimationFrame = (callback: () => void, delay: number = 16) => {
   const lastRunRef = React.useRef<number>(0);
   const requestRef = React.useRef<number>(0);
 
@@ -156,11 +152,11 @@ export const useThrottledAnimationFrame = (
 
     if (timeSinceLastRun >= delay) {
       lastRunRef.current = now;
-      
+
       if (requestRef.current) {
         cancelAnimationFrame(requestRef.current);
       }
-      
+
       requestRef.current = requestAnimationFrame(() => {
         callback();
       });
@@ -184,10 +180,10 @@ export const createSpringAnimation = (
 
     const elapsed = timestamp - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    
+
     const easeProgress = 1 - Math.pow(1 - progress, 3);
     const currentValue = from + (to - from) * easeProgress;
-    
+
     onUpdate(currentValue);
 
     if (progress < 1) {
@@ -222,10 +218,10 @@ export const createScrollAnimation = (
 
     const elapsed = timestamp - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    
+
     const easeProgress = 1 - Math.pow(1 - progress, 3);
     const currentValue = from + (to - from) * easeProgress;
-    
+
     element.scrollTop = currentValue;
 
     if (progress < 1) {
@@ -261,7 +257,7 @@ export const createOptimizedTransition = (
   const delay = config?.delay || '0ms';
 
   return {
-    transition: properties.map(prop => `${prop} ${duration} ${easing} ${delay}`).join(', '),
+    transition: properties.map((prop) => `${prop} ${duration} ${easing} ${delay}`).join(', '),
     ...getHardwareAcceleratedStyle(),
   };
 };

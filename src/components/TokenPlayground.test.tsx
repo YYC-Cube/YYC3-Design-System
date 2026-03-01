@@ -8,14 +8,12 @@
  */
 
 import * as React from 'react';
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import '@testing-library/jest-dom';
 import { TokenPlayground, getTokenValue, getTokenColor, getTokenString } from './TokenPlayground';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 const renderWithTheme = (component: React.ReactElement) => {
   return render(<ThemeProvider>{component}</ThemeProvider>);
@@ -125,7 +123,7 @@ describe('TokenPlayground', () => {
       const { container } = renderWithTheme(<TokenPlayground />);
       const containerDiv = container.firstChild as HTMLElement;
       expect(containerDiv).toHaveStyle({
-        padding: '2rem'
+        padding: '2rem',
       });
     });
 
@@ -149,14 +147,14 @@ describe('TokenPlayground', () => {
     });
 
     it('应该处理深层嵌套路径', () => {
-      const tokens = { 
-        color: { 
-          primary: { 
+      const tokens = {
+        color: {
+          primary: {
             hex: '#ff0000',
             oklch: '',
-            foreground: '#fff'
-          } 
-        } 
+            foreground: '#fff',
+          },
+        },
       };
       const result = getTokenValue(tokens, 'color.primary.hex');
       expect(result).toBe('#ff0000');
@@ -194,10 +192,10 @@ describe('TokenPlayground', () => {
       const tokenItems = container.querySelectorAll('[style*="cursor: pointer"]');
       if (tokenItems.length > 0) {
         const firstToken = tokenItems[0] as HTMLElement;
-        
+
         fireEvent.mouseEnter(firstToken);
         expect(firstToken.style.backgroundColor).not.toBe('transparent');
-        
+
         fireEvent.mouseLeave(firstToken);
         expect(firstToken.style.backgroundColor).toBe('transparent');
       }

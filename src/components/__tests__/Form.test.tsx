@@ -7,7 +7,7 @@
  * @created 2026-02-23
  */
 
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { z } from 'zod';
@@ -15,7 +15,7 @@ import { Form } from '../Form';
 import { FormField } from '../FormField';
 import { FormError } from '../FormError';
 import { Input } from '../Input';
-import { ThemeProvider } from '../../theme/ThemeProvider';
+import { ThemeProvider } from '../../context/ThemeContext';
 
 describe('Form', () => {
   const loginSchema = z.object({
@@ -78,11 +78,7 @@ describe('Form', () => {
   it('应该支持默认值', () => {
     render(
       <ThemeProvider>
-        <Form 
-          schema={loginSchema} 
-          defaultValues={{ username: 'testuser' }} 
-          onSubmit={jest.fn()}
-        >
+        <Form schema={loginSchema} defaultValues={{ username: 'testuser' }} onSubmit={jest.fn()}>
           <FormField name="username" label="用户名">
             {(field) => <Input {...field} />}
           </FormField>

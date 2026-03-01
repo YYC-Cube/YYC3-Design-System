@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Card, CardHeader, CardTitle, CardContent } from './Card';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Card',
@@ -20,9 +20,7 @@ type Story = StoryObj<typeof Card>;
 export const Default: Story = {
   render: () => (
     <Card>
-      <CardContent>
-        这是一个简单的卡片组件，用于展示内容。
-      </CardContent>
+      <CardContent>这是一个简单的卡片组件，用于展示内容。</CardContent>
     </Card>
   ),
 };
@@ -33,9 +31,7 @@ export const WithHeader: Story = {
       <CardHeader>
         <CardTitle>卡片标题</CardTitle>
       </CardHeader>
-      <CardContent>
-        这是一个带有标题的卡片组件。卡片可以包含标题、内容和其他元素。
-      </CardContent>
+      <CardContent>这是一个带有标题的卡片组件。卡片可以包含标题、内容和其他元素。</CardContent>
     </Card>
   ),
 };
@@ -47,25 +43,19 @@ export const MultipleCards: Story = {
         <CardHeader>
           <CardTitle>卡片 1</CardTitle>
         </CardHeader>
-        <CardContent>
-          这是第一个卡片的内容。
-        </CardContent>
+        <CardContent>这是第一个卡片的内容。</CardContent>
       </Card>
       <Card>
         <CardHeader>
           <CardTitle>卡片 2</CardTitle>
         </CardHeader>
-        <CardContent>
-          这是第二个卡片的内容。
-        </CardContent>
+        <CardContent>这是第二个卡片的内容。</CardContent>
       </Card>
       <Card>
         <CardHeader>
           <CardTitle>卡片 3</CardTitle>
         </CardHeader>
-        <CardContent>
-          这是第三个卡片的内容。
-        </CardContent>
+        <CardContent>这是第三个卡片的内容。</CardContent>
       </Card>
     </div>
   ),

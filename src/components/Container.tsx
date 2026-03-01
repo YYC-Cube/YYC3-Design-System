@@ -28,12 +28,7 @@ export const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
     };
 
     return (
-      <div
-        ref={ref}
-        className={cn('container', className)}
-        style={containerStyle}
-        {...props}
-      >
+      <div ref={ref} className={cn('container', className)} style={containerStyle} {...props}>
         {children}
       </div>
     );

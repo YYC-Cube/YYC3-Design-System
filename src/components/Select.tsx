@@ -43,23 +43,29 @@ export const Select: React.FC<SelectProps> = ({
   const isControlled = value !== undefined;
   const currentValue = isControlled ? value : internalValue;
 
-  const selectedOption = useMemo(() => options.find(opt => opt.value === currentValue), [options, currentValue]);
+  const selectedOption = useMemo(
+    () => options.find((opt) => opt.value === currentValue),
+    [options, currentValue]
+  );
 
   const handleToggle = useCallback(() => {
     if (!disabled) {
-      setIsOpen(prev => !prev);
+      setIsOpen((prev) => !prev);
     }
   }, [disabled]);
 
-  const handleSelect = useCallback((optionValue: string) => {
-    if (!isControlled) {
-      setInternalValue(optionValue);
-    }
-    if (onChange) {
-      onChange(optionValue);
-    }
-    setIsOpen(false);
-  }, [isControlled, onChange]);
+  const handleSelect = useCallback(
+    (optionValue: string) => {
+      if (!isControlled) {
+        setInternalValue(optionValue);
+      }
+      if (onChange) {
+        onChange(optionValue);
+      }
+      setIsOpen(false);
+    },
+    [isControlled, onChange]
+  );
 
   const handleClickOutside = useCallback((e: MouseEvent) => {
     if (selectRef.current && !selectRef.current.contains(e.target as Node)) {
@@ -74,62 +80,80 @@ export const Select: React.FC<SelectProps> = ({
     };
   }, [handleClickOutside]);
 
-  const selectStyle = useMemo<React.CSSProperties>(() => ({
-    position: 'relative',
-    display: 'inline-block',
-    minWidth: '200px',
-  }), []);
+  const selectStyle = useMemo<React.CSSProperties>(
+    () => ({
+      position: 'relative',
+      display: 'inline-block',
+      minWidth: '200px',
+    }),
+    []
+  );
 
-  const triggerStyle = useMemo<React.CSSProperties>(() => ({
-    width: '100%',
-    padding: '0.5rem 0.75rem',
-    borderRadius: getTokenValue(tokens.radius, 'md'),
-    border: `1px solid ${getTokenValue(tokens.color, 'muted-foreground')}`,
-    backgroundColor: tokens['color.background'] as string || '#fbfbfc',
-    color: tokens['color.foreground'] as string || '#000',
-    fontSize: tokens['font-size.body'] as string || '1rem',
-    fontFamily: tokens['typography.font-sans'] as string || 'system-ui',
-    cursor: disabled ? 'not-allowed' : 'pointer',
-    opacity: disabled ? 0.5 : 1,
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    transition: 'all 0.2s ease',
-  }), [tokens, disabled]);
+  const triggerStyle = useMemo<React.CSSProperties>(
+    () => ({
+      width: '100%',
+      padding: '0.5rem 0.75rem',
+      borderRadius: getTokenValue(tokens.radius, 'md'),
+      border: `1px solid ${getTokenValue(tokens.color, 'muted-foreground')}`,
+      backgroundColor: (tokens['color.background'] as string) || '#fbfbfc',
+      color: (tokens['color.foreground'] as string) || '#000',
+      fontSize: (tokens['font-size.body'] as string) || '1rem',
+      fontFamily: (tokens['typography.font-sans'] as string) || 'system-ui',
+      cursor: disabled ? 'not-allowed' : 'pointer',
+      opacity: disabled ? 0.5 : 1,
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      transition: 'all 0.2s ease',
+    }),
+    [tokens, disabled]
+  );
 
-  const dropdownStyle = useMemo<React.CSSProperties>(() => ({
-    position: 'absolute',
-    top: '100%',
-    left: 0,
-    right: 0,
-    marginTop: '0.25rem',
-    backgroundColor: tokens['color.card'] as string || '#f8f9ef',
-    borderRadius: getTokenValue(tokens.radius, 'md'),
-    boxShadow: `0 4px 12px rgba(0, 0, 0, 0.15)`,
-    zIndex: 1000,
-    display: isOpen ? 'block' : 'none',
-    maxHeight: '200px',
-    overflowY: 'auto',
-  }), [tokens, isOpen]);
+  const dropdownStyle = useMemo<React.CSSProperties>(
+    () => ({
+      position: 'absolute',
+      top: '100%',
+      left: 0,
+      right: 0,
+      marginTop: '0.25rem',
+      backgroundColor: (tokens['color.card'] as string) || '#f8f9ef',
+      borderRadius: getTokenValue(tokens.radius, 'md'),
+      boxShadow: `0 4px 12px rgba(0, 0, 0, 0.15)`,
+      zIndex: 1000,
+      display: isOpen ? 'block' : 'none',
+      maxHeight: '200px',
+      overflowY: 'auto',
+    }),
+    [tokens, isOpen]
+  );
 
-  const optionStyle = useMemo<React.CSSProperties>(() => ({
-    padding: '0.5rem 0.75rem',
-    cursor: 'pointer',
-    transition: 'background 0.2s ease',
-    fontSize: tokens['font-size.body'] as string || '1rem',
-    fontFamily: tokens['typography.font-sans'] as string || 'system-ui',
-    color: tokens['color.foreground'] as string || '#000',
-  }), [tokens]);
+  const optionStyle = useMemo<React.CSSProperties>(
+    () => ({
+      padding: '0.5rem 0.75rem',
+      cursor: 'pointer',
+      transition: 'background 0.2s ease',
+      fontSize: (tokens['font-size.body'] as string) || '1rem',
+      fontFamily: (tokens['typography.font-sans'] as string) || 'system-ui',
+      color: (tokens['color.foreground'] as string) || '#000',
+    }),
+    [tokens]
+  );
 
-  const handleOptionMouseEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    e.currentTarget.style.backgroundColor = tokens['color.primary'] as string || '#d45a5f';
-    e.currentTarget.style.color = tokens['color.foreground'] as string || '#fff';
-  }, [tokens]);
+  const handleOptionMouseEnter = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      e.currentTarget.style.backgroundColor = (tokens['color.primary'] as string) || '#d45a5f';
+      e.currentTarget.style.color = (tokens['color.foreground'] as string) || '#fff';
+    },
+    [tokens]
+  );
 
-  const handleOptionMouseLeave = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    e.currentTarget.style.backgroundColor = 'transparent';
-    e.currentTarget.style.color = tokens['color.foreground'] as string || '#000';
-  }, [tokens]);
+  const handleOptionMouseLeave = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      e.currentTarget.style.backgroundColor = 'transparent';
+      e.currentTarget.style.color = (tokens['color.foreground'] as string) || '#000';
+    },
+    [tokens]
+  );
 
   return (
     <div ref={selectRef} style={selectStyle} className={className} data-testid={dataTestId}>

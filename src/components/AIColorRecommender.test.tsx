@@ -8,14 +8,12 @@
  */
 
 import * as React from 'react';
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import '@testing-library/jest-dom';
 import { AIColorRecommender } from './AIColorRecommender';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 const renderWithTheme = (component: React.ReactElement) => {
   return render(<ThemeProvider>{component}</ThemeProvider>);
@@ -68,10 +66,10 @@ describe('AIColorRecommender', () => {
   it('应该调用 onSelectScheme 回调', () => {
     const onSelectScheme = jest.fn();
     renderWithTheme(<AIColorRecommender onSelectScheme={onSelectScheme} />);
-    
+
     const generateButton = screen.getByText('生成配色方案');
     fireEvent.click(generateButton);
-    
+
     // 等待生成方案后点击方案
     setTimeout(() => {
       const schemes = screen.queryAllByText(/推荐方案/);
@@ -86,21 +84,21 @@ describe('AIColorRecommender', () => {
 
   it('应该支持选择用途', () => {
     renderWithTheme(<AIColorRecommender />);
-    
+
     const purposeButton = screen.getByText('品牌');
     fireEvent.click(purposeButton);
   });
 
   it('应该支持选择情绪', () => {
     renderWithTheme(<AIColorRecommender />);
-    
+
     const moodButton = screen.getByText('活泼');
     fireEvent.click(moodButton);
   });
 
   it('应该支持选择可访问性标准', () => {
     renderWithTheme(<AIColorRecommender />);
-    
+
     const accessibilityButton = screen.getByText('AAA (7:1)');
     fireEvent.click(accessibilityButton);
   });

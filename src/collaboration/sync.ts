@@ -13,8 +13,20 @@ export interface SyncOperation {
   id: string;
   type: 'create' | 'update' | 'delete';
   tokenName: string;
-  oldValue?: string | number | ColorToken | ShadowToken | TypographyTokens | Record<string, string | number>;
-  newValue?: string | number | ColorToken | ShadowToken | TypographyTokens | Record<string, string | number>;
+  oldValue?:
+    | string
+    | number
+    | ColorToken
+    | ShadowToken
+    | TypographyTokens
+    | Record<string, string | number>;
+  newValue?:
+    | string
+    | number
+    | ColorToken
+    | ShadowToken
+    | TypographyTokens
+    | Record<string, string | number>;
   userId: string;
   userName: string;
   timestamp: Date;
@@ -83,7 +95,7 @@ export class ChangeSyncManager {
 
   private setStatus(status: SyncStatus): void {
     this.status = status;
-    this.listeners.forEach(listener => listener(status, this.state));
+    this.listeners.forEach((listener) => listener(status, this.state));
   }
 
   private generateOperationId(): string {
@@ -105,7 +117,7 @@ export class ChangeSyncManager {
   }
 
   private notifyConflict(conflict: SyncConflict): void {
-    this.conflictListeners.forEach(listener => listener(conflict));
+    this.conflictListeners.forEach((listener) => listener(conflict));
   }
 
   createOperation(
@@ -137,7 +149,8 @@ export class ChangeSyncManager {
       case 'update': {
         const value = operation.newValue;
         if (value !== undefined) {
-          this.state.tokens[operation.tokenName] = typeof value === 'number' ? String(value) : value;
+          this.state.tokens[operation.tokenName] =
+            typeof value === 'number' ? String(value) : value;
         }
         break;
       }
@@ -159,9 +172,9 @@ export class ChangeSyncManager {
   applyRemoteOperations(operations: SyncOperation[]): SyncConflict[] {
     const newConflicts: SyncConflict[] = [];
 
-    operations.forEach(remoteOp => {
+    operations.forEach((remoteOp) => {
       const localOp = this.state.operations.find(
-        op => op.tokenName === remoteOp.tokenName && op.timestamp > remoteOp.timestamp
+        (op) => op.tokenName === remoteOp.tokenName && op.timestamp > remoteOp.timestamp
       );
 
       if (localOp) {
@@ -190,7 +203,7 @@ export class ChangeSyncManager {
   }
 
   resolveConflict(conflictId: string, resolution: 'local' | 'remote' | 'merge'): void {
-    const conflictIndex = this.conflicts.findIndex(c => c.id === conflictId);
+    const conflictIndex = this.conflicts.findIndex((c) => c.id === conflictId);
     if (conflictIndex === -1) return;
 
     const conflict = this.conflicts[conflictIndex];
@@ -217,10 +230,7 @@ export class ChangeSyncManager {
 
   private applyMerge(conflict: SyncConflict): void {
     const { localOperation, remoteOperation } = conflict;
-    const mergedValue = this.mergeValues(
-      localOperation.newValue,
-      remoteOperation.newValue
-    );
+    const mergedValue = this.mergeValues(localOperation.newValue, remoteOperation.newValue);
 
     const mergedOperation: SyncOperation = {
       id: this.generateOperationId(),
@@ -238,9 +248,30 @@ export class ChangeSyncManager {
   }
 
   private mergeValues(
-    local: string | number | ColorToken | ShadowToken | TypographyTokens | Record<string, string | number> | undefined,
-    remote: string | number | ColorToken | ShadowToken | TypographyTokens | Record<string, string | number> | undefined
-  ): string | number | ColorToken | ShadowToken | TypographyTokens | Record<string, string | number> | undefined {
+    local:
+      | string
+      | number
+      | ColorToken
+      | ShadowToken
+      | TypographyTokens
+      | Record<string, string | number>
+      | undefined,
+    remote:
+      | string
+      | number
+      | ColorToken
+      | ShadowToken
+      | TypographyTokens
+      | Record<string, string | number>
+      | undefined
+  ):
+    | string
+    | number
+    | ColorToken
+    | ShadowToken
+    | TypographyTokens
+    | Record<string, string | number>
+    | undefined {
     if (typeof local === 'string' && typeof remote === 'string') {
       return local.length > remote.length ? local : remote;
     }
@@ -253,7 +284,7 @@ export class ChangeSyncManager {
   }
 
   getConflicts(): SyncConflict[] {
-    return this.conflicts.filter(c => !c.resolved);
+    return this.conflicts.filter((c) => !c.resolved);
   }
 
   getAllConflicts(): SyncConflict[] {
@@ -261,7 +292,7 @@ export class ChangeSyncManager {
   }
 
   hasConflicts(): boolean {
-    return this.conflicts.some(c => !c.resolved);
+    return this.conflicts.some((c) => !c.resolved);
   }
 
   getState(): SyncState {
@@ -280,7 +311,7 @@ export class ChangeSyncManager {
   }
 
   getOperationsByUser(userId: string): SyncOperation[] {
-    return this.state.operations.filter(op => op.userId === userId);
+    return this.state.operations.filter((op) => op.userId === userId);
   }
 
   getStatus(): SyncStatus {
@@ -342,7 +373,7 @@ export class ChangeSyncManager {
     return {
       version: this.state.version,
       operationCount: this.state.operations.length,
-      conflictCount: this.conflicts.filter(c => !c.resolved).length,
+      conflictCount: this.conflicts.filter((c) => !c.resolved).length,
       lastSync: this.state.lastSync,
       status: this.status,
       tokenCount: Object.keys(this.state.tokens).length,
@@ -350,9 +381,7 @@ export class ChangeSyncManager {
   }
 }
 
-export const createChangeSyncManager = (
-  initialTokens?: DesignTokens
-): ChangeSyncManager => {
+export const createChangeSyncManager = (initialTokens?: DesignTokens): ChangeSyncManager => {
   return new ChangeSyncManager(initialTokens);
 };
 

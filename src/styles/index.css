@@ -1,24 +1,22 @@
 /**
  * @file 全局样式
- * @description 全局样式文件，包含 Tailwind CSS 指令
+ * @description 全局样式文件，包含 Tailwind CSS 指令和 YYC³ 主题系统
  * @module styles
  * @author YYC³
  * @version 1.0.0
  * @created 2026-02-22
+ * @updated 2026-02-27
  */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import './themes.css';
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  
   body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
   }
 }
 

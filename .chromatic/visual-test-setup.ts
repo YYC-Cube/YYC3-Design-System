@@ -7,7 +7,6 @@
  * @created 2026-02-19
  */
 
-import { setProjectAnnotations } from '@storybook/react';
 import { themes as storybookThemes } from '@storybook/theming';
 import type { Preview } from '@storybook/react';
 

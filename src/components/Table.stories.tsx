@@ -58,9 +58,7 @@ const mockColumns = [
     title: '状态',
     dataIndex: 'status',
     render: (value: unknown) => (
-      <span style={{ color: value === 'Active' ? 'green' : 'red' }}>
-        {value as string}
-      </span>
+      <span style={{ color: value === 'Active' ? 'green' : 'red' }}>{value as string}</span>
     ),
   },
 ];

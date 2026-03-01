@@ -11,7 +11,7 @@ import { render, fireEvent } from '@testing-library/react'
 import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { Pagination } from '../Pagination'
-import { ThemeProvider } from '../../theme/ThemeProvider';;
+import { ThemeProvider } from '../../context/ThemeContext';;
 
 describe('Pagination', () => {
   it('应该渲染分页组件', () => {

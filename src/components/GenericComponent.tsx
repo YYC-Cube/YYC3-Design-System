@@ -16,7 +16,7 @@ import type {
   TypographyProps,
   ARIAAttributes,
   DataAttributes,
-  EventHandlers
+  EventHandlers,
 } from '../types/advanced-types';
 
 export interface GenericComponentProps<E extends ElementType = 'div'> {
@@ -66,12 +66,12 @@ export interface GenericComponentProps<E extends ElementType = 'div'> {
   'data-testid'?: DataAttributes['data-testid'];
 }
 
-export type GenericComponentPropsWithExtra<E extends ElementType = 'div', P extends object = object> = GenericComponentProps<E> & P;
+export type GenericComponentPropsWithExtra<
+  E extends ElementType = 'div',
+  P extends object = object,
+> = GenericComponentProps<E> & P;
 
-export const GenericComponent = forwardRef<
-  ElementType,
-  GenericComponentProps<ElementType>
->(
+export const GenericComponent = forwardRef<ElementType, GenericComponentProps<ElementType>>(
   (props, ref) => {
     const {
       as,
@@ -141,7 +141,7 @@ export const GenericComponent = forwardRef<
       ...(fontWeight !== undefined && { fontWeight }),
       ...(lineHeight !== undefined && { lineHeight }),
       ...(letterSpacing !== undefined && { letterSpacing }),
-      ...(textAlign !== undefined && { textAlign })
+      ...(textAlign !== undefined && { textAlign }),
     } as React.CSSProperties;
 
     return React.createElement(
@@ -171,7 +171,7 @@ export const GenericComponent = forwardRef<
         'aria-invalid': ariaInvalid,
         'aria-required': ariaRequired,
         'data-testid': dataTestId,
-        ...rest
+        ...rest,
       },
       children
     );
@@ -181,45 +181,46 @@ export const GenericComponent = forwardRef<
 GenericComponent.displayName = 'GenericComponent';
 
 export const genericComponentFactory = {
-  create: function<E extends ElementType = 'div', P extends object = object>(
+  create: function <E extends ElementType = 'div', P extends object = object>(
     displayName: string,
     defaultProps?: Partial<GenericComponentPropsWithExtra<E, P>>
   ) {
     return createGenericComponent<E, P>(displayName, defaultProps);
   },
 
-  withEffect: function<P extends object = object>(
+  withEffect: function <P extends object = object>(
     component: React.ComponentType<P>,
     displayName: string
   ) {
     return withGenericComponentEffect<P>(component, displayName);
   },
 
-  withMemo: function<P extends object = object>(
+  withMemo: function <P extends object = object>(
     component: React.ComponentType<P>,
     displayName: string
   ) {
     return withGenericComponentMemo<P>(component, displayName);
-  }
+  },
 };
 
-export const createGenericComponent = function<
+export const createGenericComponent = function <
   E extends ElementType = 'div',
-  P extends object = object
->(
-  displayName: string,
-  defaultProps?: Partial<GenericComponentPropsWithExtra<E, P>>
-) {
+  P extends object = object,
+>(displayName: string, defaultProps?: Partial<GenericComponentPropsWithExtra<E, P>>) {
   const Component = forwardRef<E, GenericComponentPropsWithExtra<E, P>>((props, ref) => {
     const mergedProps = { ...defaultProps, ...props } as GenericComponentPropsWithExtra<E, P>;
-    return React.createElement(GenericComponent, { ...mergedProps, ref } as React.ComponentProps<typeof GenericComponent>);
+    return React.createElement(GenericComponent, { ...mergedProps, ref } as React.ComponentProps<
+      typeof GenericComponent
+    >);
   });
 
   Component.displayName = displayName;
-  return Component as React.ForwardRefExoticComponent<GenericComponentPropsWithExtra<E, P> & React.RefAttributes<E>>;
+  return Component as React.ForwardRefExoticComponent<
+    GenericComponentPropsWithExtra<E, P> & React.RefAttributes<E>
+  >;
 };
 
-export const withGenericComponentEffect = function<P extends React.HTMLAttributes<HTMLElement>>(
+export const withGenericComponentEffect = function <P extends React.HTMLAttributes<HTMLElement>>(
   WrappedComponent: React.ComponentType<P>,
   displayName: string
 ) {
@@ -238,7 +239,7 @@ export const withGenericComponentEffect = function<P extends React.HTMLAttribute
   return EnhancedComponent;
 };
 
-export const withGenericComponentMemo = function<P extends object>(
+export const withGenericComponentMemo = function <P extends object>(
   WrappedComponent: React.ComponentType<P>,
   displayName: string
 ) {
@@ -247,17 +248,14 @@ export const withGenericComponentMemo = function<P extends object>(
   return MemoizedComponent;
 };
 
-export const mergeGenericComponentProps = function<P1 extends object, P2 extends object>(
+export const mergeGenericComponentProps = function <P1 extends object, P2 extends object>(
   props1: P1,
   props2: P2
 ): MergeProps<P1, P2> {
   return { ...props1, ...props2 } as MergeProps<P1, P2>;
 };
 
-export const overrideGenericComponentProps = function<
-  P extends object,
-  O extends Partial<P>
->(
+export const overrideGenericComponentProps = function <P extends object, O extends Partial<P>>(
   base: P,
   overrides: O
 ): MergeProps<P, O> {
@@ -271,5 +269,5 @@ export default {
   withGenericComponentEffect,
   withGenericComponentMemo,
   mergeGenericComponentProps,
-  overrideGenericComponentProps
+  overrideGenericComponentProps,
 };

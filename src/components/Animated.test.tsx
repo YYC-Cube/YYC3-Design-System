@@ -7,9 +7,7 @@
  * @created 2026-02-18
  */
 
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import { Animated } from './Animated';
@@ -26,7 +24,18 @@ describe('Animated 组件', () => {
   });
 
   it('应该支持不同的动画类型', () => {
-    const animations: Array<'fadeIn' | 'fadeOut' | 'slideInUp' | 'slideInDown' | 'slideInLeft' | 'slideInRight' | 'scaleIn' | 'scaleOut' | 'rotateIn' | 'bounceIn'> = [
+    const animations: Array<
+      | 'fadeIn'
+      | 'fadeOut'
+      | 'slideInUp'
+      | 'slideInDown'
+      | 'slideInLeft'
+      | 'slideInRight'
+      | 'scaleIn'
+      | 'scaleOut'
+      | 'rotateIn'
+      | 'bounceIn'
+    > = [
       'fadeIn',
       'fadeOut',
       'slideInUp',
@@ -39,7 +48,7 @@ describe('Animated 组件', () => {
       'bounceIn',
     ];
 
-    animations.forEach(animation => {
+    animations.forEach((animation) => {
       const { unmount } = render(
         <Animated animation={animation}>
           <div>Animated content</div>
@@ -117,7 +126,7 @@ describe('Animated 组件', () => {
     );
 
     const element = screen.getByText('Animated content');
-    
+
     fireEvent.click(element);
     fireEvent.click(element);
 
@@ -132,7 +141,7 @@ describe('Animated 组件', () => {
     );
 
     const element = screen.getByText('Animated content');
-    
+
     fireEvent.mouseEnter(element);
     fireEvent.mouseLeave(element);
     fireEvent.mouseEnter(element);

@@ -1,10 +1,8 @@
 import * as React from 'react';
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 import { Checkbox } from './Checkbox';
 import { Radio } from './Radio';
 import { Switch } from './Switch';
@@ -31,7 +29,7 @@ describe('Checkbox', () => {
   it('should toggle on click', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Checkbox onChange={handleChange}>Label</Checkbox>);
-    
+
     const checkbox = screen.getByRole('checkbox');
     fireEvent.click(checkbox);
     expect(handleChange).toHaveBeenCalledWith(true);
@@ -52,8 +50,12 @@ describe('Radio', () => {
 
   it('should call onChange when clicked', () => {
     const handleChange = jest.fn();
-    renderWithTheme(<Radio value="1" onChange={handleChange}>Option 1</Radio>);
-    
+    renderWithTheme(
+      <Radio value="1" onChange={handleChange}>
+        Option 1
+      </Radio>
+    );
+
     const radio = screen.getByRole('radio');
     fireEvent.click(radio);
     expect(handleChange).toHaveBeenCalledWith('1');
@@ -69,7 +71,7 @@ describe('Switch', () => {
   it('should toggle on click', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Switch onChange={handleChange} />);
-    
+
     const switchEl = screen.getByRole('switch');
     fireEvent.click(switchEl);
     expect(handleChange).toHaveBeenCalledWith(true);
@@ -174,8 +176,12 @@ describe('Modal', () => {
 
   it('should call onClose when backdrop is clicked', () => {
     const handleClose = jest.fn();
-    renderWithTheme(<Modal isOpen={true} onClose={handleClose}>Modal content</Modal>);
-    
+    renderWithTheme(
+      <Modal isOpen={true} onClose={handleClose}>
+        Modal content
+      </Modal>
+    );
+
     const backdrop = screen.getByRole('dialog').parentElement;
     if (backdrop) {
       fireEvent.click(backdrop);
@@ -203,7 +209,7 @@ describe('Tooltip', () => {
 
     const button = screen.getByText('Hover me');
     fireEvent.mouseEnter(button);
-    
+
     setTimeout(() => {
       expect(screen.getByText('Tooltip text')).toBeInTheDocument();
     }, 300);
@@ -239,7 +245,7 @@ describe('Select', () => {
       { value: '2', label: 'Option 2' },
     ];
     renderWithTheme(<Select options={options} />);
-    
+
     const select = screen.getByRole('combobox');
     fireEvent.click(select);
     expect(screen.getByText('Option 1')).toBeInTheDocument();
@@ -252,10 +258,10 @@ describe('Select', () => {
       { value: '2', label: 'Option 2' },
     ];
     renderWithTheme(<Select options={options} onChange={handleChange} />);
-    
+
     const select = screen.getByRole('combobox');
     fireEvent.click(select);
-    
+
     fireEvent.click(screen.getByText('Option 1'));
     expect(handleChange).toHaveBeenCalledWith('1');
   });
@@ -274,13 +280,21 @@ describe('Animated', () => {
   });
 
   it('should animate on hover', () => {
-    const { container } = renderWithTheme(<Animated animation="scaleIn" trigger="hover">Content</Animated>);
+    const { container } = renderWithTheme(
+      <Animated animation="scaleIn" trigger="hover">
+        Content
+      </Animated>
+    );
     const animated = container.querySelector('[style*="transition"]');
     expect(animated).toBeInTheDocument();
   });
 
   it('should animate on click', () => {
-    const { container } = renderWithTheme(<Animated animation="bounceIn" trigger="click">Content</Animated>);
+    const { container } = renderWithTheme(
+      <Animated animation="bounceIn" trigger="click">
+        Content
+      </Animated>
+    );
     const animated = container.querySelector('[style*="cursor: pointer"]');
     expect(animated).toBeInTheDocument();
   });

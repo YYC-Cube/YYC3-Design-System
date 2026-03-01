@@ -63,17 +63,20 @@ export interface RecommendationOptions {
   maxRecommendations?: number;
 }
 
-const componentDatabase: Record<ComponentType, {
-  description: string;
-  actionTypes: string[];
-  contentTypes: string[];
-  interactionLevels: string[];
-  complexities: string[];
-  features: string[];
-  learningCurve: 'easy' | 'moderate' | 'steep';
-  useCases: string[];
-  bestPractices: string[];
-}> = {
+const componentDatabase: Record<
+  ComponentType,
+  {
+    description: string;
+    actionTypes: string[];
+    contentTypes: string[];
+    interactionLevels: string[];
+    complexities: string[];
+    features: string[];
+    learningCurve: 'easy' | 'moderate' | 'steep';
+    useCases: string[];
+    bestPractices: string[];
+  }
+> = {
   Button: {
     description: '用于触发操作或导航的可点击按钮',
     actionTypes: ['navigation', 'action', 'submit', 'cancel'],
@@ -83,7 +86,12 @@ const componentDatabase: Record<ComponentType, {
     features: ['variant', 'size', 'disabled', 'loading', 'icon'],
     learningCurve: 'easy',
     useCases: ['表单提交', '导航链接', '操作触发', '对话框关闭'],
-    bestPractices: ['提供清晰的标签文本', '使用适当的variant区分主要和次要操作', '保持一致性', '提供禁用状态反馈'],
+    bestPractices: [
+      '提供清晰的标签文本',
+      '使用适当的variant区分主要和次要操作',
+      '保持一致性',
+      '提供禁用状态反馈',
+    ],
   },
   Card: {
     description: '用于组织内容的容器组件',
@@ -318,10 +326,7 @@ const componentDatabase: Record<ComponentType, {
   },
 };
 
-const calculateMatchScore = (
-  component: ComponentType,
-  requirements: UIRequirement[]
-): number => {
+const calculateMatchScore = (component: ComponentType, requirements: UIRequirement[]): number => {
   const componentInfo = componentDatabase[component];
   if (!componentInfo) return 0;
 
@@ -342,9 +347,15 @@ const calculateMatchScore = (
     if (req.interactionLevel) {
       if (req.interactionLevel === 'low' && componentInfo.interactionLevels.includes('low')) {
         score += 2;
-      } else if (req.interactionLevel === 'medium' && componentInfo.interactionLevels.includes('medium')) {
+      } else if (
+        req.interactionLevel === 'medium' &&
+        componentInfo.interactionLevels.includes('medium')
+      ) {
         score += 2;
-      } else if (req.interactionLevel === 'high' && componentInfo.interactionLevels.includes('high')) {
+      } else if (
+        req.interactionLevel === 'high' &&
+        componentInfo.interactionLevels.includes('high')
+      ) {
         score += 2;
       }
     }
@@ -367,7 +378,8 @@ export class ComponentRecommender {
   private components: ComponentType[];
 
   constructor(options?: { componentLibrary?: ComponentType[] }) {
-    this.components = options?.componentLibrary || Object.keys(componentDatabase) as ComponentType[];
+    this.components =
+      options?.componentLibrary || (Object.keys(componentDatabase) as ComponentType[]);
   }
 
   generateRecommendations(options: RecommendationOptions): ComponentRecommendation[] {
@@ -473,7 +485,7 @@ export class ComponentRecommender {
     return 'simple';
   }
 
-  getComponentDetails(component: ComponentType): typeof componentDatabase[ComponentType] | null {
+  getComponentDetails(component: ComponentType): (typeof componentDatabase)[ComponentType] | null {
     return componentDatabase[component] || null;
   }
 

@@ -10,7 +10,7 @@
  */
 
 import type { DesignToken } from 'style-dictionary/types/DesignToken';
-import * as React from 'react';
+import type { ReactNode, ComponentProps, FocusEvent, KeyboardEvent, CSSProperties, ReactElement } from 'react';
 
 export type ColorToken = {
   oklch: string;
@@ -193,42 +193,49 @@ export interface ThemeContextValue {
 export type ButtonVariant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
 export type ButtonSize = 'default' | 'sm' | 'lg' | 'icon';
 
-export interface ButtonProps extends Omit<React.ComponentProps<'button'>, 'size'> {
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  children: React.ReactNode;
+export interface ButtonProps extends Omit<ComponentProps<'button'>, 'size'> {
+  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
+  size?: 'default' | 'sm' | 'lg' | 'icon';
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  children: ReactNode;
+  onClick?: () => void;
+  className?: string;
   'data-testid'?: string;
-  'aria-label'?: string;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
 }
 
-export interface InputProps extends Omit<React.ComponentProps<'input'>, 'size' | 'onChange'> {
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'color';
+export interface InputProps extends Omit<ComponentProps<'input'>, 'size' | 'onChange'> {
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
+  size?: 'default' | 'sm' | 'lg';
   label?: string;
   placeholder?: string;
-  disabled?: boolean;
-  value?: string;
-  defaultValue?: string;
-  onChange?: (value: string) => void | React.ChangeEventHandler<HTMLInputElement>;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  value?: string | number;
+  defaultValue?: string | number;
+  onChange?: (value: string) => void;
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
   autoFocus?: boolean;
   required?: boolean;
-  name?: string;
-  'data-testid'?: string;
-  className?: string;
+  disabled?: boolean;
+  error?: boolean;
+  helperText?: string;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
 }
 
 export interface CardProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   'data-testid'?: string;
 }
 
 export interface BadgeProps {
   variant?: 'default' | 'secondary' | 'destructive' | 'outline';
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   onClick?: () => void;
   'data-testid'?: string;
 }
@@ -246,7 +253,7 @@ export interface CheckboxProps {
   checked?: boolean;
   disabled?: boolean;
   onChange?: (checked: boolean) => void;
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
 }
 
@@ -256,7 +263,7 @@ export interface RadioProps {
   checked?: boolean;
   disabled?: boolean;
   onChange?: (value: string) => void;
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
 }
 
@@ -280,43 +287,43 @@ export interface SpinnerProps {
 
 export interface AlertProps {
   variant?: 'default' | 'destructive' | 'warning' | 'success';
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
 export interface TabsProps {
   defaultValue?: string;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
 export interface TabListProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
 export interface TabProps {
   value: string;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
 export interface TabPanelProps {
   value: string;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
 export interface ModalProps {
   isOpen?: boolean;
   onClose?: () => void;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
 export interface TooltipProps {
-  content: React.ReactNode;
-  children: React.ReactElement;
+  content: ReactNode;
+  children: ReactElement;
   placement?: 'top' | 'bottom' | 'left' | 'right';
   className?: string;
 }

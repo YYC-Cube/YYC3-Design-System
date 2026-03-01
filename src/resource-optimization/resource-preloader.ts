@@ -1,4 +1,7 @@
-export function preloadResource(url: string, type: 'script' | 'style' | 'image' | 'font' = 'script'): void {
+export function preloadResource(
+  url: string,
+  type: 'script' | 'style' | 'image' | 'font' = 'script'
+): void {
   if (typeof document === 'undefined') return;
 
   if (type === 'script') {
@@ -28,13 +31,17 @@ export function preloadResource(url: string, type: 'script' | 'style' | 'image' 
   }
 }
 
-export function preloadResources(resources: Array<{ url: string; type: 'script' | 'style' | 'image' | 'font' }>): void {
-  resources.forEach(resource => {
+export function preloadResources(
+  resources: Array<{ url: string; type: 'script' | 'style' | 'image' | 'font' }>
+): void {
+  resources.forEach((resource) => {
     preloadResource(resource.url, resource.type);
   });
 }
 
-export function preloadCriticalResources(resources: Array<{ url: string; type: 'script' | 'style' | 'image' | 'font' }>): void {
+export function preloadCriticalResources(
+  resources: Array<{ url: string; type: 'script' | 'style' | 'image' | 'font' }>
+): void {
   preloadResources(resources);
 }
 
@@ -48,10 +55,13 @@ export function preconnect(url: string): void {
 }
 
 export function preconnectOrigins(urls: string[]): void {
-  urls.forEach(url => preconnect(url));
+  urls.forEach((url) => preconnect(url));
 }
 
-export function prefetch(url: string, type: 'script' | 'style' | 'image' | 'font' = 'script'): void {
+export function prefetch(
+  url: string,
+  type: 'script' | 'style' | 'image' | 'font' = 'script'
+): void {
   if (typeof document === 'undefined') return;
 
   const link = document.createElement('link');
@@ -60,8 +70,10 @@ export function prefetch(url: string, type: 'script' | 'style' | 'image' | 'font
   document.head.appendChild(link);
 }
 
-export function prefetchResources(resources: Array<{ url: string; type: 'script' | 'style' | 'image' | 'font' }>): void {
-  resources.forEach(resource => {
+export function prefetchResources(
+  resources: Array<{ url: string; type: 'script' | 'style' | 'image' | 'font' }>
+): void {
+  resources.forEach((resource) => {
     prefetch(resource.url, resource.type);
   });
 }

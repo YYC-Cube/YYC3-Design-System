@@ -1,0 +1,150 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "YYC\u00b3 Design System Tokens",
+  "description": "Schema for design/tokens.json \u2014 validates all theme color, spacing, animation tokens",
+  "type": "object",
+  "required": ["version", "themes"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "description": { "type": "string" },
+    "themes": {
+      "type": "object",
+      "required": ["future", "cyber", "business", "shared"],
+      "properties": {
+        "future": { "$ref": "#/$defs/themeDefinition" },
+        "cyber": { "$ref": "#/$defs/themeDefinition" },
+        "business": { "$ref": "#/$defs/themeDefinition" },
+        "shared": { "$ref": "#/$defs/sharedTokens" }
+      }
+    }
+  },
+  "$defs": {
+    "oklchColor": {
+      "type": "object",
+      "required": ["hex"],
+      "properties": {
+        "oklch": { "type": "string", "pattern": "^oklch\\(" },
+        "hex": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" }
+      }
+    },
+    "colorSet": {
+      "type": "object",
+      "required": ["primary", "primary-foreground", "background", "foreground", "destructive", "success", "warning"],
+      "properties": {
+        "primary": { "$ref": "#/$defs/oklchColor" },
+        "primary-foreground": { "$ref": "#/$defs/oklchColor" },
+        "primary-highlight": { "$ref": "#/$defs/oklchColor" },
+        "secondary": { "$ref": "#/$defs/oklchColor" },
+        "secondary-foreground": { "$ref": "#/$defs/oklchColor" },
+        "background": { "$ref": "#/$defs/oklchColor" },
+        "foreground": { "$ref": "#/$defs/oklchColor" },
+        "card": { "$ref": "#/$defs/oklchColor" },
+        "card-foreground": { "$ref": "#/$defs/oklchColor" },
+        "muted": { "$ref": "#/$defs/oklchColor" },
+        "muted-foreground": { "$ref": "#/$defs/oklchColor" },
+        "border": { "$ref": "#/$defs/oklchColor" },
+        "ring": { "$ref": "#/$defs/oklchColor" },
+        "destructive": { "$ref": "#/$defs/oklchColor" },
+        "destructive-foreground": { "$ref": "#/$defs/oklchColor" },
+        "success": { "$ref": "#/$defs/oklchColor" },
+        "success-foreground": { "$ref": "#/$defs/oklchColor" },
+        "warning": { "$ref": "#/$defs/oklchColor" },
+        "warning-foreground": { "$ref": "#/$defs/oklchColor" }
+      }
+    },
+    "shadowTokens": {
+      "type": "object",
+      "required": ["sm", "md", "lg", "glow"],
+      "properties": {
+        "sm": { "type": "string" },
+        "md": { "type": "string" },
+        "lg": { "type": "string" },
+        "glow": { "type": "string" }
+      }
+    },
+    "modeDefinition": {
+      "type": "object",
+      "required": ["color"],
+      "properties": {
+        "color": { "$ref": "#/$defs/colorSet" },
+        "shadow": { "$ref": "#/$defs/shadowTokens" }
+      }
+    },
+    "themeDefinition": {
+      "type": "object",
+      "required": ["light", "dark"],
+      "properties": {
+        "light": { "$ref": "#/$defs/modeDefinition" },
+        "dark": { "$ref": "#/$defs/modeDefinition" }
+      }
+    },
+    "sharedTokens": {
+      "type": "object",
+      "required": ["spacing", "radius", "shadow", "animation", "icon"],
+      "properties": {
+        "spacing": {
+          "type": "object",
+          "required": ["1", "2", "3", "4", "5", "6", "7", "8"],
+          "patternProperties": {
+            "^[1-8]$": { "type": "string" }
+          }
+        },
+        "radius": {
+          "type": "object",
+          "required": ["sm", "md", "lg", "xl"],
+          "properties": {
+            "sm": { "type": "string" },
+            "md": { "type": "string" },
+            "lg": { "type": "string" },
+            "xl": { "type": "string" }
+          }
+        },
+        "shadow": { "$ref": "#/$defs/shadowTokens" },
+        "animation": {
+          "type": "object",
+          "required": ["duration", "easing"],
+          "properties": {
+            "duration": {
+              "type": "object",
+              "required": ["fast", "normal", "slow"],
+              "properties": {
+                "fast": { "type": "string", "pattern": "^\\d+ms$" },
+                "normal": { "type": "string", "pattern": "^\\d+ms$" },
+                "slow": { "type": "string", "pattern": "^\\d+ms$" }
+              }
+            },
+            "easing": {
+              "type": "object",
+              "required": ["default", "in", "out", "in-out"],
+              "properties": {
+                "default": { "type": "string" },
+                "in": { "type": "string" },
+                "out": { "type": "string" },
+                "in-out": { "type": "string" }
+              }
+            }
+          }
+        },
+        "icon": {
+          "type": "object",
+          "required": ["xs", "sm", "md", "lg", "xl"],
+          "properties": {
+            "xs": { "type": "string" },
+            "sm": { "type": "string" },
+            "md": { "type": "string" },
+            "lg": { "type": "string" },
+            "xl": { "type": "string" }
+          }
+        },
+        "typography": {
+          "type": "object",
+          "properties": {
+            "font-sans": { "type": "string" },
+            "font-mono": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

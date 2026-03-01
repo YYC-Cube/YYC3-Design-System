@@ -4,7 +4,12 @@ import { Card, CardContent, CardHeader, CardTitle } from './Card';
 import { Button } from './Button';
 import { Badge } from './Badge';
 import { useTheme } from '../theme/useTheme';
-import { accessibilityChecker, AccessibilityReport, AccessibilityIssue, AccessibilityCheckOptions } from '../ai/accessibility-checker';
+import {
+  accessibilityChecker,
+  AccessibilityReport,
+  AccessibilityIssue,
+  AccessibilityCheckOptions,
+} from '../ai/accessibility-checker';
 
 export interface AIAccessibilityCheckerProps {
   className?: string;
@@ -43,7 +48,7 @@ export const AIAccessibilityChecker: React.FC<AIAccessibilityCheckerProps> = ({
 
   const handleCheck = useCallback(() => {
     setIsChecking(true);
-    
+
     setTimeout(() => {
       const elementToCheck = targetElement || document.body;
       const newReport = accessibilityChecker.check(elementToCheck, checkOptions);
@@ -52,30 +57,37 @@ export const AIAccessibilityChecker: React.FC<AIAccessibilityCheckerProps> = ({
     }, 100);
   }, [targetElement, checkOptions]);
 
-  const handleFixIssue = useCallback((issue: AccessibilityIssue) => {
-    if (issue.fixAction) {
-      issue.fixAction();
-      
-      setReport(prev => prev ? {
-        ...prev,
-        issues: prev.issues.filter(i => i.id !== issue.id),
-        summary: {
-          ...prev.summary,
-          [issue.severity]: prev.summary[issue.severity] - 1,
-        },
-      } : null);
+  const handleFixIssue = useCallback(
+    (issue: AccessibilityIssue) => {
+      if (issue.fixAction) {
+        issue.fixAction();
 
-      if (onFixIssue) {
-        onFixIssue(issue);
+        setReport((prev) =>
+          prev
+            ? {
+                ...prev,
+                issues: prev.issues.filter((i) => i.id !== issue.id),
+                summary: {
+                  ...prev.summary,
+                  [issue.severity]: prev.summary[issue.severity] - 1,
+                },
+              }
+            : null
+        );
+
+        if (onFixIssue) {
+          onFixIssue(issue);
+        }
       }
-    }
-  }, [onFixIssue]);
+    },
+    [onFixIssue]
+  );
 
   const handleAutoFixAll = useCallback(() => {
     if (!report) return;
 
     let fixedCount = 0;
-    report.issues.forEach(issue => {
+    report.issues.forEach((issue) => {
       if (issue.autoFixable && issue.fixAction) {
         issue.fixAction();
         fixedCount++;
@@ -161,18 +173,14 @@ export const AIAccessibilityChecker: React.FC<AIAccessibilityCheckerProps> = ({
     };
   }, [autoCheck, checkInterval, handleCheck]);
 
-  const autoFixableIssues = report?.issues.filter(i => i.autoFixable) || [];
+  const autoFixableIssues = report?.issues.filter((i) => i.autoFixable) || [];
 
   return (
     <Card className={className}>
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle>AI 可访问性检查器</CardTitle>
-          {autoCheck && (
-            <Badge style={{ background: '#16a34a', color: '#ffffff' }}>
-              自动检查
-            </Badge>
-          )}
+          {autoCheck && <Badge style={{ background: '#16a34a', color: '#ffffff' }}>自动检查</Badge>}
         </div>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -180,13 +188,9 @@ export const AIAccessibilityChecker: React.FC<AIAccessibilityCheckerProps> = ({
           <Button onClick={handleCheck} disabled={isChecking} className="flex-1 min-w-[120px]">
             {isChecking ? '检查中...' : '开始检查'}
           </Button>
-          
+
           {autoFixableIssues.length > 0 && (
-            <Button 
-              onClick={handleAutoFixAll}
-              variant="secondary"
-              className="flex-1 min-w-[120px]"
-            >
+            <Button onClick={handleAutoFixAll} variant="secondary" className="flex-1 min-w-[120px]">
               自动修复 ({autoFixableIssues.length})
             </Button>
           )}
@@ -194,7 +198,10 @@ export const AIAccessibilityChecker: React.FC<AIAccessibilityCheckerProps> = ({
 
         <div className="flex gap-4 items-center flex-wrap">
           <div className="flex-1">
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue('color.foreground') }}
+            >
               WCAG 级别
             </label>
             <select
@@ -202,7 +209,7 @@ export const AIAccessibilityChecker: React.FC<AIAccessibilityCheckerProps> = ({
               onChange={(e) => {
                 const newLevel = e.target.value as 'A' | 'AA' | 'AAA';
                 setTargetLevel(newLevel);
-                setCheckOptions(prev => ({ ...prev, targetLevel: newLevel }));
+                setCheckOptions((prev) => ({ ...prev, targetLevel: newLevel }));
               }}
               style={{
                 width: '100%',
@@ -221,50 +228,66 @@ export const AIAccessibilityChecker: React.FC<AIAccessibilityCheckerProps> = ({
           </div>
 
           <div className="flex-1">
-            <label className="block text-sm font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: getTokenValue('color.foreground') }}
+            >
               检查项目
             </label>
             <div className="flex flex-wrap gap-2">
-              {Object.entries(checkOptions).filter(([key]) => key !== 'targetLevel').map(([key, value]) => {
-                if (typeof value !== 'boolean') return null;
-                const labels: Record<string, string> = {
-                  checkContrast: '对比度',
-                  checkKeyboard: '键盘',
-                  checkAria: 'ARIA',
-                  checkForms: '表单',
-                  checkHeadings: '标题',
-                };
-                return (
-                  <label key={key} className="flex items-center gap-1 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={value}
-                      onChange={(e) => setCheckOptions(prev => ({ ...prev, [key]: e.target.checked }))}
-                      className="w-4 h-4"
-                    />
-                    <span className="text-sm" style={{ color: getTokenValue('color.foreground') }}>
-                      {labels[key]}
-                    </span>
-                  </label>
-                );
-              })}
+              {Object.entries(checkOptions)
+                .filter(([key]) => key !== 'targetLevel')
+                .map(([key, value]) => {
+                  if (typeof value !== 'boolean') return null;
+                  const labels: Record<string, string> = {
+                    checkContrast: '对比度',
+                    checkKeyboard: '键盘',
+                    checkAria: 'ARIA',
+                    checkForms: '表单',
+                    checkHeadings: '标题',
+                  };
+                  return (
+                    <label key={key} className="flex items-center gap-1 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={value}
+                        onChange={(e) =>
+                          setCheckOptions((prev) => ({ ...prev, [key]: e.target.checked }))
+                        }
+                        className="w-4 h-4"
+                      />
+                      <span
+                        className="text-sm"
+                        style={{ color: getTokenValue('color.foreground') }}
+                      >
+                        {labels[key]}
+                      </span>
+                    </label>
+                  );
+                })}
             </div>
           </div>
         </div>
 
         {report && (
           <>
-            <div className="text-center p-6 rounded-lg" style={{
-              background: getTokenValue('color.card'),
-              border: `2px solid ${getScoreColor(report.overallScore)}`,
-            }}>
+            <div
+              className="text-center p-6 rounded-lg"
+              style={{
+                background: getTokenValue('color.card'),
+                border: `2px solid ${getScoreColor(report.overallScore)}`,
+              }}
+            >
               <div
                 className="text-5xl font-bold mb-2"
                 style={{ color: getScoreColor(report.overallScore) }}
               >
                 {report.overallScore}
               </div>
-              <div className="text-sm mb-4" style={{ color: getTokenValue('color.muted-foreground') }}>
+              <div
+                className="text-sm mb-4"
+                style={{ color: getTokenValue('color.muted-foreground') }}
+              >
                 可访问性评分
               </div>
               <Badge
@@ -277,7 +300,11 @@ export const AIAccessibilityChecker: React.FC<AIAccessibilityCheckerProps> = ({
               </Badge>
             </div>
 
-            {report.summary.critical + report.summary.serious + report.summary.moderate + report.summary.minor > 0 && (
+            {report.summary.critical +
+              report.summary.serious +
+              report.summary.moderate +
+              report.summary.minor >
+              0 && (
               <div className="flex justify-center gap-4 flex-wrap">
                 {report.summary.critical > 0 && (
                   <Badge style={{ background: getSeverityColor('critical'), color: '#ffffff' }}>
@@ -304,7 +331,10 @@ export const AIAccessibilityChecker: React.FC<AIAccessibilityCheckerProps> = ({
 
             {report.recommendations.length > 0 && (
               <div className="space-y-2">
-                <h3 className="text-sm font-medium" style={{ color: getTokenValue('color.foreground') }}>
+                <h3
+                  className="text-sm font-medium"
+                  style={{ color: getTokenValue('color.foreground') }}
+                >
                   AI 建议
                 </h3>
                 <div className="space-y-2">
@@ -328,7 +358,10 @@ export const AIAccessibilityChecker: React.FC<AIAccessibilityCheckerProps> = ({
 
             {report.issues.length > 0 && (
               <div className="space-y-3">
-                <h3 className="text-sm font-medium" style={{ color: getTokenValue('color.foreground') }}>
+                <h3
+                  className="text-sm font-medium"
+                  style={{ color: getTokenValue('color.foreground') }}
+                >
                   检测到的问题 ({report.issues.length})
                 </h3>
                 <div className="space-y-2">
@@ -372,17 +405,21 @@ export const AIAccessibilityChecker: React.FC<AIAccessibilityCheckerProps> = ({
                           </Badge>
                         </div>
                         {issue.autoFixable && (
-                          <Badge style={{ background: '#16a34a', color: '#ffffff' }}>
-                            可修复
-                          </Badge>
+                          <Badge style={{ background: '#16a34a', color: '#ffffff' }}>可修复</Badge>
                         )}
                       </div>
-                      
-                      <p className="text-sm mb-2" style={{ color: getTokenValue('color.foreground') }}>
+
+                      <p
+                        className="text-sm mb-2"
+                        style={{ color: getTokenValue('color.foreground') }}
+                      >
                         {issue.message}
                       </p>
-                      
-                      <p className="text-xs mb-3" style={{ color: getTokenValue('color.muted-foreground') }}>
+
+                      <p
+                        className="text-xs mb-3"
+                        style={{ color: getTokenValue('color.muted-foreground') }}
+                      >
                         建议: {issue.suggestion}
                       </p>
 
@@ -405,12 +442,18 @@ export const AIAccessibilityChecker: React.FC<AIAccessibilityCheckerProps> = ({
             )}
 
             {report.issues.length === 0 && (
-              <div className="text-center p-8 rounded-lg" style={{
-                background: getTokenValue('color.card'),
-                border: `2px solid #16a34a`,
-              }}>
+              <div
+                className="text-center p-8 rounded-lg"
+                style={{
+                  background: getTokenValue('color.card'),
+                  border: `2px solid #16a34a`,
+                }}
+              >
                 <div className="text-4xl mb-2">✅</div>
-                <p className="text-lg font-medium mb-2" style={{ color: getTokenValue('color.foreground') }}>
+                <p
+                  className="text-lg font-medium mb-2"
+                  style={{ color: getTokenValue('color.foreground') }}
+                >
                   完美！
                 </p>
                 <p className="text-sm" style={{ color: getTokenValue('color.muted-foreground') }}>

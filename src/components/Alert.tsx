@@ -34,16 +34,16 @@ export const Alert: React.FC<AlertProps> = ({
       case 'default':
       case 'info':
         return {
-          backgroundColor: tokens['color.background'] as string || '#fbfbfc',
-          borderColor: tokens['color.primary'] as string || '#d45a5f',
-          color: tokens['color.foreground'] as string || '#000',
+          backgroundColor: (tokens['color.background'] as string) || '#fbfbfc',
+          borderColor: (tokens['color.primary'] as string) || '#d45a5f',
+          color: (tokens['color.foreground'] as string) || '#000',
         };
       case 'destructive':
       case 'error':
         return {
-          backgroundColor: tokens['color.destructive'] as string || '#e05a3f',
-          borderColor: tokens['color.destructive'] as string || '#e05a3f',
-          color: tokens['color.destructive-foreground'] as string || '#fff',
+          backgroundColor: (tokens['color.destructive'] as string) || '#e05a3f',
+          borderColor: (tokens['color.destructive'] as string) || '#e05a3f',
+          color: (tokens['color.destructive-foreground'] as string) || '#fff',
         };
       case 'warning':
         return {
@@ -59,15 +59,15 @@ export const Alert: React.FC<AlertProps> = ({
         };
       default:
         return {
-          backgroundColor: tokens['color.background'] as string || '#fbfbfc',
-          borderColor: tokens['color.primary'] as string || '#d45a5f',
-          color: tokens['color.foreground'] as string || '#000',
+          backgroundColor: (tokens['color.background'] as string) || '#fbfbfc',
+          borderColor: (tokens['color.primary'] as string) || '#d45a5f',
+          color: (tokens['color.foreground'] as string) || '#000',
         };
     }
   };
 
   const variantStyles = getVariantStyles();
-  const radius = tokens['radius.md'] as string || '0.25rem';
+  const radius = (tokens['radius.md'] as string) || '0.25rem';
 
   const alertStyle: React.CSSProperties = {
     padding: '1rem',
@@ -95,11 +95,11 @@ export const Alert: React.FC<AlertProps> = ({
   };
 
   return (
-    <div 
+    <div
       ref={alertRef}
-      style={alertStyle} 
-      className={className} 
-      role="alert" 
+      style={alertStyle}
+      className={className}
+      role="alert"
       data-testid={dataTestId}
       onKeyDown={onClose ? handleKeyDown : undefined}
       tabIndex={onClose ? 0 : undefined}
@@ -118,7 +118,7 @@ export const Alert: React.FC<AlertProps> = ({
             border: 'none',
             fontSize: '1.25rem',
             cursor: 'pointer',
-            color: variantStyles.color
+            color: variantStyles.color,
           }}
           aria-label="Close"
         >

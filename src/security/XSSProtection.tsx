@@ -47,59 +47,165 @@ export interface XSSContextType {
 
 const DEFAULT_CONFIG: XSSProtectionConfig = {
   allowedTags: [
-    'a', 'abbr', 'acronym', 'address', 'area', 'article', 'aside', 'audio',
-    'b', 'bdi', 'bdo', 'blockquote', 'br', 'button', 'canvas', 'caption',
-    'cite', 'code', 'col', 'colgroup', 'data', 'datalist', 'dd', 'del',
-    'details', 'dfn', 'dialog', 'div', 'dl', 'dt', 'em', 'embed', 'fieldset',
-    'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-    'header', 'hgroup', 'hr', 'i', 'iframe', 'img', 'input', 'ins', 'kbd',
-    'label', 'legend', 'li', 'link', 'main', 'map', 'mark', 'menu', 'menuitem',
-    'meter', 'nav', 'noscript', 'object', 'ol', 'optgroup', 'option', 'output',
-    'p', 'param', 'picture', 'pre', 'progress', 'q', 'rp', 'rt', 'ruby',
-    's', 'samp', 'section', 'select', 'small', 'source', 'span', 'strong',
-    'sub', 'summary', 'sup', 'table', 'tbody', 'td', 'template', 'textarea',
-    'tfoot', 'th', 'thead', 'time', 'tr', 'track', 'u', 'ul', 'var', 'video',
-    'wbr'
+    'a',
+    'abbr',
+    'acronym',
+    'address',
+    'area',
+    'article',
+    'aside',
+    'audio',
+    'b',
+    'bdi',
+    'bdo',
+    'blockquote',
+    'br',
+    'button',
+    'canvas',
+    'caption',
+    'cite',
+    'code',
+    'col',
+    'colgroup',
+    'data',
+    'datalist',
+    'dd',
+    'del',
+    'details',
+    'dfn',
+    'dialog',
+    'div',
+    'dl',
+    'dt',
+    'em',
+    'embed',
+    'fieldset',
+    'figcaption',
+    'figure',
+    'footer',
+    'form',
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+    'header',
+    'hgroup',
+    'hr',
+    'i',
+    'iframe',
+    'img',
+    'input',
+    'ins',
+    'kbd',
+    'label',
+    'legend',
+    'li',
+    'link',
+    'main',
+    'map',
+    'mark',
+    'menu',
+    'menuitem',
+    'meter',
+    'nav',
+    'noscript',
+    'object',
+    'ol',
+    'optgroup',
+    'option',
+    'output',
+    'p',
+    'param',
+    'picture',
+    'pre',
+    'progress',
+    'q',
+    'rp',
+    'rt',
+    'ruby',
+    's',
+    'samp',
+    'section',
+    'select',
+    'small',
+    'source',
+    'span',
+    'strong',
+    'sub',
+    'summary',
+    'sup',
+    'table',
+    'tbody',
+    'td',
+    'template',
+    'textarea',
+    'tfoot',
+    'th',
+    'thead',
+    'time',
+    'tr',
+    'track',
+    'u',
+    'ul',
+    'var',
+    'video',
+    'wbr',
   ],
   allowedAttributes: {
     '*': ['class', 'id', 'style', 'title', 'lang', 'dir', 'aria-*', 'data-*'],
-    'a': ['href', 'target', 'rel', 'type', 'hreflang', 'download', 'referrerpolicy'],
-    'img': ['src', 'alt', 'width', 'height', 'loading', 'decoding', 'srcset', 'sizes'],
-    'video': ['src', 'poster', 'preload', 'autoplay', 'loop', 'muted', 'controls', 'playsinline'],
-    'audio': ['src', 'preload', 'autoplay', 'loop', 'muted', 'controls'],
-    'iframe': ['src', 'width', 'height', 'name', 'allow', 'allowfullscreen', 'sandbox'],
-    'input': ['type', 'name', 'value', 'placeholder', 'required', 'disabled', 'readonly', 'min', 'max', 'step', 'pattern'],
-    'button': ['type', 'name', 'value', 'disabled', 'form'],
-    'form': ['action', 'method', 'enctype', 'target', 'autocomplete'],
-    'select': ['name', 'required', 'disabled', 'multiple', 'form'],
-    'textarea': ['name', 'rows', 'cols', 'placeholder', 'required', 'disabled', 'readonly', 'form'],
-    'link': ['rel', 'href', 'type', 'media', 'sizes', 'hreflang'],
-    'meta': ['name', 'content', 'http-equiv', 'charset'],
-    'source': ['src', 'type', 'media', 'sizes'],
-    'track': ['src', 'kind', 'srclang', 'label', 'default'],
-    'object': ['data', 'type', 'width', 'height', 'name'],
-    'embed': ['src', 'type', 'width', 'height'],
-    'col': ['span'],
-    'colgroup': ['span'],
-    'td': ['colspan', 'rowspan', 'headers'],
-    'th': ['colspan', 'rowspan', 'scope', 'headers'],
-    'time': ['datetime'],
-    'data': ['value']
+    a: ['href', 'target', 'rel', 'type', 'hreflang', 'download', 'referrerpolicy'],
+    img: ['src', 'alt', 'width', 'height', 'loading', 'decoding', 'srcset', 'sizes'],
+    video: ['src', 'poster', 'preload', 'autoplay', 'loop', 'muted', 'controls', 'playsinline'],
+    audio: ['src', 'preload', 'autoplay', 'loop', 'muted', 'controls'],
+    iframe: ['src', 'width', 'height', 'name', 'allow', 'allowfullscreen', 'sandbox'],
+    input: [
+      'type',
+      'name',
+      'value',
+      'placeholder',
+      'required',
+      'disabled',
+      'readonly',
+      'min',
+      'max',
+      'step',
+      'pattern',
+    ],
+    button: ['type', 'name', 'value', 'disabled', 'form'],
+    form: ['action', 'method', 'enctype', 'target', 'autocomplete'],
+    select: ['name', 'required', 'disabled', 'multiple', 'form'],
+    textarea: ['name', 'rows', 'cols', 'placeholder', 'required', 'disabled', 'readonly', 'form'],
+    link: ['rel', 'href', 'type', 'media', 'sizes', 'hreflang'],
+    meta: ['name', 'content', 'http-equiv', 'charset'],
+    source: ['src', 'type', 'media', 'sizes'],
+    track: ['src', 'kind', 'srclang', 'label', 'default'],
+    object: ['data', 'type', 'width', 'height', 'name'],
+    embed: ['src', 'type', 'width', 'height'],
+    col: ['span'],
+    colgroup: ['span'],
+    td: ['colspan', 'rowspan', 'headers'],
+    th: ['colspan', 'rowspan', 'scope', 'headers'],
+    time: ['datetime'],
+    data: ['value'],
   },
   allowedSchemes: ['http', 'https', 'mailto', 'tel', 'data', 'sms', 'app', 'blob'],
   allowCustomElements: false,
   allowComments: false,
-  allowUnknownMarkup: false
+  allowUnknownMarkup: false,
 };
 
 const loadDOMPurify = async (): Promise<Window['DOMPurify'] | null> => {
   if (typeof window !== 'undefined' && window.DOMPurify) {
     return window.DOMPurify;
   }
-  
+
   try {
     const dompurify = await import('dompurify');
-    const purify = (dompurify as unknown as { default?: Window['DOMPurify'] }).default || (dompurify as unknown as Window['DOMPurify']);
+    const purify =
+      (dompurify as unknown as { default?: Window['DOMPurify'] }).default ||
+      (dompurify as unknown as Window['DOMPurify']);
     return purify;
   } catch (error) {
     console.error('Failed to load DOMPurify:', error);
@@ -113,10 +219,13 @@ export const XSSProvider: React.FC<{
   children: React.ReactNode;
   config?: Partial<XSSProtectionConfig>;
 }> = ({ children, config = {} }) => {
-  const currentConfig = useMemo(() => ({
-    ...DEFAULT_CONFIG,
-    ...config
-  }), [config]);
+  const currentConfig = useMemo(
+    () => ({
+      ...DEFAULT_CONFIG,
+      ...config,
+    }),
+    [config]
+  );
 
   const purifyCache = useRef<Window['DOMPurify'] | null>(null);
 
@@ -127,83 +236,90 @@ export const XSSProvider: React.FC<{
     return purifyCache.current;
   }, []);
 
-  const sanitize = useCallback(async (
-    html: string,
-    customConfig?: Partial<XSSProtectionConfig>
-  ): Promise<string> => {
-    const purify = await getPurify();
-    if (!purify) {
-      console.warn('DOMPurify not available, returning original HTML');
-      return html;
-    }
-
-    const mergedConfig = customConfig ? {
-      ...currentConfig,
-      ...customConfig,
-      allowedTags: [...currentConfig.allowedTags!, ...(customConfig.allowedTags || [])],
-      allowedAttributes: {
-        ...currentConfig.allowedAttributes,
-        ...(customConfig.allowedAttributes || {})
+  const sanitize = useCallback(
+    async (html: string, customConfig?: Partial<XSSProtectionConfig>): Promise<string> => {
+      const purify = await getPurify();
+      if (!purify) {
+        console.warn('DOMPurify not available, returning original HTML');
+        return html;
       }
-    } : currentConfig;
 
-    return purify.sanitize(html, {
-      ALLOWED_TAGS: mergedConfig.allowedTags,
-      ALLOWED_ATTR: Object.values(mergedConfig.allowedAttributes!).flat(),
-      ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp|data|app|blob):|[^a-z]|[a-z+.-]+(?:[^a-z+.-:]|$))/i,
-      WHOLE_DOCUMENT: false,
-      RETURN_DOM: false,
-      RETURN_DOM_FRAGMENT: false,
-      RETURN_DOM_IMPORT: false,
-      SANITIZE_DOM: true,
-      SAFE_FOR_TEMPLATES: false,
-      SAFE_FOR_JQUERY: true,
-      KEEP_CONTENT: true,
-      USE_PROFILES: { html: true, svg: true, svgFilters: true, mathMl: true },
-      ADD_ATTR: mergedConfig.addAttributes ? Object.values(mergedConfig.addAttributes).flat() : [],
-      ADD_TAGS: mergedConfig.addTags || [],
-      FORBID_ATTR: mergedConfig.removeAttributes || [],
-      FORBID_TAGS: mergedConfig.forbidTags || [],
-      ALLOW_DATA_ATTR: true,
-      ALLOW_UNKNOWN_PROTOCOLS: false,
-      SAFE_JQUERY: true,
-      SANITIZE_NAMED_PROPS: true,
-      HOOKS: {}
-    });
-  }, [currentConfig, getPurify]);
+      const mergedConfig = customConfig
+        ? {
+            ...currentConfig,
+            ...customConfig,
+            allowedTags: [...currentConfig.allowedTags!, ...(customConfig.allowedTags || [])],
+            allowedAttributes: {
+              ...currentConfig.allowedAttributes,
+              ...(customConfig.allowedAttributes || {}),
+            },
+          }
+        : currentConfig;
 
-  const sanitizeDOM = useCallback(async (
-    element: Element,
-    customConfig?: Partial<XSSProtectionConfig>
-  ): Promise<void> => {
-    const purify = await getPurify();
-    if (!purify) {
-      console.warn('DOMPurify not available');
-      return;
-    }
-
-    const html = element.outerHTML;
-    const sanitized = await sanitize(html, customConfig);
-    element.outerHTML = sanitized;
-  }, [getPurify, sanitize]);
-
-  const isSafe = useCallback(async (html: string): Promise<boolean> => {
-    const sanitized = await sanitize(html);
-    return sanitized === html;
-  }, [sanitize]);
-
-  const value = useMemo(() => ({
-    sanitize,
-    sanitizeDOM,
-    isSafe,
-    config: currentConfig
-  }), [sanitize, sanitizeDOM, isSafe, currentConfig]);
-
-  return (
-    <XSSContext.Provider value={value}>
-      {children}
-    </XSSContext.Provider>
+      return purify.sanitize(html, {
+        ALLOWED_TAGS: mergedConfig.allowedTags,
+        ALLOWED_ATTR: Object.values(mergedConfig.allowedAttributes!).flat(),
+        ALLOWED_URI_REGEXP:
+          /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp|data|app|blob):|[^a-z]|[a-z+.-]+(?:[^a-z+.-:]|$))/i,
+        WHOLE_DOCUMENT: false,
+        RETURN_DOM: false,
+        RETURN_DOM_FRAGMENT: false,
+        RETURN_DOM_IMPORT: false,
+        SANITIZE_DOM: true,
+        SAFE_FOR_TEMPLATES: false,
+        SAFE_FOR_JQUERY: true,
+        KEEP_CONTENT: true,
+        USE_PROFILES: { html: true, svg: true, svgFilters: true, mathMl: true },
+        ADD_ATTR: mergedConfig.addAttributes
+          ? Object.values(mergedConfig.addAttributes).flat()
+          : [],
+        ADD_TAGS: mergedConfig.addTags || [],
+        FORBID_ATTR: mergedConfig.removeAttributes || [],
+        FORBID_TAGS: mergedConfig.forbidTags || [],
+        ALLOW_DATA_ATTR: true,
+        ALLOW_UNKNOWN_PROTOCOLS: false,
+        SAFE_JQUERY: true,
+        SANITIZE_NAMED_PROPS: true,
+        HOOKS: {},
+      });
+    },
+    [currentConfig, getPurify]
   );
+
+  const sanitizeDOM = useCallback(
+    async (element: Element, customConfig?: Partial<XSSProtectionConfig>): Promise<void> => {
+      const purify = await getPurify();
+      if (!purify) {
+        console.warn('DOMPurify not available');
+        return;
+      }
+
+      const html = element.outerHTML;
+      const sanitized = await sanitize(html, customConfig);
+      element.outerHTML = sanitized;
+    },
+    [getPurify, sanitize]
+  );
+
+  const isSafe = useCallback(
+    async (html: string): Promise<boolean> => {
+      const sanitized = await sanitize(html);
+      return sanitized === html;
+    },
+    [sanitize]
+  );
+
+  const value = useMemo(
+    () => ({
+      sanitize,
+      sanitizeDOM,
+      isSafe,
+      config: currentConfig,
+    }),
+    [sanitize, sanitizeDOM, isSafe, currentConfig]
+  );
+
+  return <XSSContext.Provider value={value}>{children}</XSSContext.Provider>;
 };
 
 export const useXSS = (): XSSContextType => {
@@ -229,7 +345,7 @@ export const SafeHTML: React.FC<{
 
   return React.createElement(Component, {
     className,
-    dangerouslySetInnerHTML: { __html: sanitizedHTML }
+    dangerouslySetInnerHTML: { __html: sanitizedHTML },
   });
 };
 
@@ -243,38 +359,37 @@ export const SafeInput: React.FC<{
   const { sanitize } = useXSS();
   const [localValue, setLocalValue] = React.useState(value);
 
-  const handleChange = useCallback(async (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    let newValue = e.target.value;
+  const handleChange = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      let newValue = e.target.value;
 
-    if (maxLength && newValue.length > maxLength) {
-      newValue = newValue.substring(0, maxLength);
-    }
+      if (maxLength && newValue.length > maxLength) {
+        newValue = newValue.substring(0, maxLength);
+      }
 
-    if (allowedPattern && !allowedPattern.test(newValue)) {
-      return;
-    }
+      if (allowedPattern && !allowedPattern.test(newValue)) {
+        return;
+      }
 
-    if (sanitizeOnInput) {
-      const sanitized = await sanitize(newValue);
-      setLocalValue(sanitized);
-      onChange(sanitized);
-    } else {
-      setLocalValue(newValue);
-      onChange(newValue);
-    }
-  }, [sanitize, sanitizeOnInput, maxLength, allowedPattern, onChange]);
-
-  return (
-    <input
-      type="text"
-      value={localValue}
-      onChange={handleChange}
-      maxLength={maxLength}
-    />
+      if (sanitizeOnInput) {
+        const sanitized = await sanitize(newValue);
+        setLocalValue(sanitized);
+        onChange(sanitized);
+      } else {
+        setLocalValue(newValue);
+        onChange(newValue);
+      }
+    },
+    [sanitize, sanitizeOnInput, maxLength, allowedPattern, onChange]
   );
+
+  return <input type="text" value={localValue} onChange={handleChange} maxLength={maxLength} />;
 };
 
-export const createSafeURL = (url: string, allowedSchemes: string[] = ['http', 'https']): string | null => {
+export const createSafeURL = (
+  url: string,
+  allowedSchemes: string[] = ['http', 'https']
+): string | null => {
   try {
     const parsed = new URL(url);
     if (!allowedSchemes.includes(parsed.protocol.replace(':', ''))) {
@@ -313,12 +428,7 @@ export const unescapeHTML = (html: string): string => {
 };
 
 export const sanitizeAttributeValue = (_attribute: string, value: string): string => {
-  const dangerousPatterns = [
-    /javascript:/i,
-    /data:\s*text\/html/i,
-    /vbscript:/i,
-    /on\w+\s*=/i
-  ];
+  const dangerousPatterns = [/javascript:/i, /data:\s*text\/html/i, /vbscript:/i, /on\w+\s*=/i];
 
   for (const pattern of dangerousPatterns) {
     if (pattern.test(value)) {
@@ -335,20 +445,20 @@ export const createXSSHook = () => {
 
   return {
     enable: () => {
-      document.createElement = function(tagName: string, options?: { is?: string }) {
+      document.createElement = function (tagName: string, options?: { is?: string }) {
         const element = originalCreateElement(tagName, options);
-        
+
         if (tagName.toLowerCase() === 'script') {
           element.addEventListener('beforescriptexecute', (e: Event) => {
             e.preventDefault();
             console.warn('Blocked inline script execution');
           });
         }
-        
+
         return element;
       };
 
-      Element.prototype.setAttribute = function(this: Element, name: string, value: string) {
+      Element.prototype.setAttribute = function (this: Element, name: string, value: string) {
         const sanitized = sanitizeAttributeValue(name, value);
         originalSetAttribute.call(this, name, sanitized);
       };
@@ -356,7 +466,7 @@ export const createXSSHook = () => {
     disable: () => {
       document.createElement = originalCreateElement;
       Element.prototype.setAttribute = originalSetAttribute;
-    }
+    },
   };
 };
 
@@ -369,20 +479,18 @@ export const withXSSProtection = <P extends object>(
       <Component {...props} />
     </XSSProvider>
   );
-  
+
   WrappedComponent.displayName = `withXSSProtection(${Component.displayName || Component.name})`;
   return WrappedComponent;
 };
 
 export const createStrictConfig = (): XSSProtectionConfig => ({
   ...DEFAULT_CONFIG,
-  allowedTags: [
-    'p', 'br', 'strong', 'em', 'a', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre'
-  ],
+  allowedTags: ['p', 'br', 'strong', 'em', 'a', 'ul', 'ol', 'li', 'blockquote', 'code', 'pre'],
   allowedAttributes: {
-    'a': ['href']
+    a: ['href'],
   },
-  allowedSchemes: ['https', 'mailto']
+  allowedSchemes: ['https', 'mailto'],
 });
 
 export const createModerateConfig = (): XSSProtectionConfig => DEFAULT_CONFIG;
@@ -391,7 +499,7 @@ export const createPermissiveConfig = (): XSSProtectionConfig => ({
   ...DEFAULT_CONFIG,
   allowCustomElements: true,
   allowComments: true,
-  allowUnknownMarkup: true
+  allowUnknownMarkup: true,
 });
 
 export default {
@@ -409,5 +517,5 @@ export default {
   withXSSProtection,
   createStrictConfig,
   createModerateConfig,
-  createPermissiveConfig
+  createPermissiveConfig,
 };

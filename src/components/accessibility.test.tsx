@@ -7,7 +7,7 @@ import { Card, CardHeader, CardTitle, CardContent } from './Card';
 import { Badge } from './Badge';
 import { Avatar } from './Avatar';
 import { ThemeToggle } from './ThemeToggle';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 expect.extend(toHaveNoViolations as unknown as jest.ExpectExtendMap);
 
@@ -76,8 +76,13 @@ describe('Accessibility Tests', () => {
     });
 
     it('should not have accessibility violations for all variants', async () => {
-      const variants: Array<'default' | 'secondary' | 'destructive' | 'outline'> = ['default', 'secondary', 'destructive', 'outline'];
-      
+      const variants: Array<'default' | 'secondary' | 'destructive' | 'outline'> = [
+        'default',
+        'secondary',
+        'destructive',
+        'outline',
+      ];
+
       for (const variant of variants) {
         const { container } = renderWithTheme(<Badge variant={variant}>{variant}</Badge>);
         const results = await axe(container);

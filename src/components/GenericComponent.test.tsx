@@ -9,11 +9,11 @@
 
 import * as React from 'react';
 
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import '@testing-library/jest-dom';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 import {
   GenericComponent,
   genericComponentFactory,
@@ -21,7 +21,7 @@ import {
   withGenericComponentEffect,
   withGenericComponentMemo,
   mergeGenericComponentProps,
-  overrideGenericComponentProps
+  overrideGenericComponentProps,
 } from './GenericComponent';
 
 describe('GenericComponent', () => {
@@ -74,7 +74,7 @@ describe('GenericComponent', () => {
     const element = container.querySelector('div');
     expect(element).toHaveStyle({
       color: 'rgb(0, 0, 255)',
-      backgroundColor: 'rgb(255, 255, 0)'
+      backgroundColor: 'rgb(255, 255, 0)',
     });
   });
 
@@ -88,7 +88,7 @@ describe('GenericComponent', () => {
     expect(element).toHaveStyle({
       margin: '10px',
       padding: '20px',
-      gap: '5px'
+      gap: '5px',
     });
   });
 
@@ -114,7 +114,7 @@ describe('GenericComponent', () => {
       flex: '1',
       flexDirection: 'row',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
     });
   });
 
@@ -136,7 +136,7 @@ describe('GenericComponent', () => {
       fontWeight: 'bold',
       lineHeight: '1.5',
       letterSpacing: '1px',
-      textAlign: 'center'
+      textAlign: 'center',
     });
   });
 
@@ -193,9 +193,7 @@ describe('GenericComponent', () => {
 
   it('应该支持 onChange 事件', () => {
     const handleChange = jest.fn();
-    const { container } = render(
-      <GenericComponent as="input" onChange={handleChange} />
-    );
+    const { container } = render(<GenericComponent as="input" onChange={handleChange} />);
     const element = container.querySelector('input');
     if (element) {
       fireEvent.change(element, { target: { value: 'test' } });
@@ -239,15 +237,17 @@ describe('GenericComponent', () => {
   });
 
   it('应该支持 disabled 属性', () => {
-    render(<GenericComponent as="button" disabled>Test Content</GenericComponent>);
+    render(
+      <GenericComponent as="button" disabled>
+        Test Content
+      </GenericComponent>
+    );
     const element = screen.getByText('Test Content');
     expect(element).toHaveAttribute('disabled');
   });
 
   it('应该支持 hidden 属性', () => {
-    const { container } = render(
-      <GenericComponent hidden>Test Content</GenericComponent>
-    );
+    const { container } = render(<GenericComponent hidden>Test Content</GenericComponent>);
     const element = container.querySelector('div');
     expect(element).toHaveAttribute('hidden');
   });
@@ -267,7 +267,7 @@ describe('GenericComponent', () => {
     const element = container.querySelector('div');
     expect(element).toHaveStyle({
       color: 'rgb(255, 0, 0)',
-      fontSize: '20px'
+      fontSize: '20px',
     });
   });
 });
@@ -275,7 +275,11 @@ describe('GenericComponent', () => {
 describe('genericComponentFactory', () => {
   it('应该使用 create 方法创建组件', () => {
     const Button = genericComponentFactory.create('CustomButton', undefined);
-    render(<ThemeProvider><Button>Click Me</Button></ThemeProvider>);
+    render(
+      <ThemeProvider>
+        <Button>Click Me</Button>
+      </ThemeProvider>
+    );
     expect(screen.getByText('Click Me')).toBeInTheDocument();
   });
 
@@ -335,7 +339,7 @@ describe('mergeGenericComponentProps', () => {
     expect(merged).toEqual({
       color: 'red',
       fontSize: '20px',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
     });
   });
 });
@@ -348,7 +352,7 @@ describe('overrideGenericComponentProps', () => {
     expect(result).toEqual({
       color: 'red',
       fontSize: '20px',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
     });
   });
 
@@ -358,7 +362,7 @@ describe('overrideGenericComponentProps', () => {
     const result = overrideGenericComponentProps(base, overrides);
     expect(result).toEqual({
       color: 'red',
-      fontSize: '16px'
+      fontSize: '16px',
     });
   });
 
@@ -368,7 +372,7 @@ describe('overrideGenericComponentProps', () => {
     const result = overrideGenericComponentProps(base, overrides);
     expect(result).toEqual({
       fontSize: '20px',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
     });
   });
 });
@@ -527,11 +531,7 @@ describe('GenericComponent - rest 属性传递', () => {
 
   it('应该传递多个自定义属性', () => {
     const { container } = render(
-      <GenericComponent
-        data-custom-1="value-1"
-        data-custom-2="value-2"
-        data-custom-3="value-3"
-      >
+      <GenericComponent data-custom-1="value-1" data-custom-2="value-2" data-custom-3="value-3">
         Test Content
       </GenericComponent>
     );
@@ -542,12 +542,7 @@ describe('GenericComponent - rest 属性传递', () => {
   });
 
   it('应该传递 HTML 标准属性', () => {
-    const { container } = render(
-      <GenericComponent
-        as="input"
-        disabled
-      />
-    );
+    const { container } = render(<GenericComponent as="input" disabled />);
     const element = container.querySelector('input');
     expect(element).toHaveAttribute('disabled');
   });
@@ -572,9 +567,7 @@ describe('GenericComponent - 空值和 undefined 处理', () => {
   });
 
   it('应该处理空字符串的 className 属性', () => {
-    const { container } = render(
-      <GenericComponent className="">Test Content</GenericComponent>
-    );
+    const { container } = render(<GenericComponent className="">Test Content</GenericComponent>);
     const element = container.querySelector('div');
     expect(element).toBeInTheDocument();
   });
@@ -592,7 +585,9 @@ describe('GenericComponent - 空值和 undefined 处理', () => {
 
   it('应该处理 undefined 的间距属性', () => {
     const { container } = render(
-      <GenericComponent margin={undefined} padding={undefined}>Test Content</GenericComponent>
+      <GenericComponent margin={undefined} padding={undefined}>
+        Test Content
+      </GenericComponent>
     );
     const element = container.querySelector('div');
     expect(element).toBeInTheDocument();
@@ -604,7 +599,9 @@ describe('GenericComponent - 空值和 undefined 处理', () => {
 
   it('应该处理 undefined 的布局属性', () => {
     const { container } = render(
-      <GenericComponent width={undefined} height={undefined}>Test Content</GenericComponent>
+      <GenericComponent width={undefined} height={undefined}>
+        Test Content
+      </GenericComponent>
     );
     const element = container.querySelector('div');
     expect(element).toBeInTheDocument();
@@ -616,7 +613,9 @@ describe('GenericComponent - 空值和 undefined 处理', () => {
 
   it('应该处理 undefined 的排版属性', () => {
     const { container } = render(
-      <GenericComponent fontSize={undefined} fontWeight={undefined}>Test Content</GenericComponent>
+      <GenericComponent fontSize={undefined} fontWeight={undefined}>
+        Test Content
+      </GenericComponent>
     );
     const element = container.querySelector('div');
     expect(element).toBeInTheDocument();
@@ -769,11 +768,7 @@ describe('GenericComponent - 属性组合测试', () => {
 
   it('应该支持所有间距属性组合', () => {
     const { container } = render(
-      <GenericComponent
-        margin="10px"
-        padding="20px"
-        gap="5px"
-      >
+      <GenericComponent margin="10px" padding="20px" gap="5px">
         Test Content
       </GenericComponent>
     );
@@ -781,7 +776,7 @@ describe('GenericComponent - 属性组合测试', () => {
     expect(element).toHaveStyle({
       margin: '10px',
       padding: '20px',
-      gap: '5px'
+      gap: '5px',
     });
   });
 
@@ -807,7 +802,7 @@ describe('GenericComponent - 属性组合测试', () => {
       flex: '1',
       flexDirection: 'column',
       justifyContent: 'space-between',
-      alignItems: 'stretch'
+      alignItems: 'stretch',
     });
   });
 
@@ -829,7 +824,7 @@ describe('GenericComponent - 属性组合测试', () => {
       fontWeight: '600',
       lineHeight: '1.6',
       letterSpacing: '0.5px',
-      textAlign: 'justify'
+      textAlign: 'justify',
     });
   });
 
@@ -908,7 +903,11 @@ describe('GenericComponent - 属性组合测试', () => {
 describe('createGenericComponent - 更多测试', () => {
   it('应该支持自定义默认属性', () => {
     const CustomButton = createGenericComponent('CustomButton', undefined);
-    const { container } = render(<CustomButton className="default-class" style={{ color: 'red' }}>Click Me</CustomButton>);
+    const { container } = render(
+      <CustomButton className="default-class" style={{ color: 'red' }}>
+        Click Me
+      </CustomButton>
+    );
     const element = container.querySelector('div');
     expect(element).toHaveClass('default-class');
     expect(element).toHaveStyle({ color: 'rgb(255, 0, 0)' });
@@ -940,7 +939,7 @@ describe('createGenericComponent - 更多测试', () => {
       color: 'rgb(255, 0, 0)',
       backgroundColor: 'rgb(0, 0, 255)',
       margin: '10px',
-      padding: '20px'
+      padding: '20px',
     });
   });
 });
@@ -951,10 +950,7 @@ describe('withGenericComponentEffect - 更多测试', () => {
     const SimpleComponent = () => <div>Simple</div>;
     const EnhancedComponent = withGenericComponentEffect(SimpleComponent, 'Simple');
     render(<EnhancedComponent />);
-    expect(consoleWarnSpy).toHaveBeenCalledWith(
-      'Simple mounted with props:',
-      expect.any(Object)
-    );
+    expect(consoleWarnSpy).toHaveBeenCalledWith('Simple mounted with props:', expect.any(Object));
     consoleWarnSpy.mockRestore();
   });
 
@@ -969,7 +965,9 @@ describe('withGenericComponentEffect - 更多测试', () => {
   });
 
   it('应该支持属性传递', () => {
-    const SimpleComponent = (props: React.HTMLAttributes<HTMLDivElement>) => <div {...props}>Simple</div>;
+    const SimpleComponent = (props: React.HTMLAttributes<HTMLDivElement>) => (
+      <div {...props}>Simple</div>
+    );
     const EnhancedComponent = withGenericComponentEffect(SimpleComponent, 'Simple');
     const { container } = render(<EnhancedComponent className="test-class" data-test="test" />);
     expect(container.querySelector('.test-class')).toBeInTheDocument();
@@ -979,13 +977,17 @@ describe('withGenericComponentEffect - 更多测试', () => {
 
 describe('withGenericComponentMemo - 更多测试', () => {
   it('应该使用 React.memo 包装组件', () => {
-    const SimpleComponent = (props: React.HTMLAttributes<HTMLDivElement>) => <div {...props}>Simple</div>;
+    const SimpleComponent = (props: React.HTMLAttributes<HTMLDivElement>) => (
+      <div {...props}>Simple</div>
+    );
     const MemoizedComponent = withGenericComponentMemo(SimpleComponent, 'Simple');
     expect(MemoizedComponent.displayName).toBe('memo(Simple)');
   });
 
   it('应该支持属性传递', () => {
-    const SimpleComponent = (props: React.HTMLAttributes<HTMLDivElement>) => <div {...props}>Simple</div>;
+    const SimpleComponent = (props: React.HTMLAttributes<HTMLDivElement>) => (
+      <div {...props}>Simple</div>
+    );
     const MemoizedComponent = withGenericComponentMemo(SimpleComponent, 'Simple');
     const { container } = render(<MemoizedComponent className="test-class" data-test="test" />);
     expect(container.querySelector('.test-class')).toBeInTheDocument();
@@ -1000,7 +1002,7 @@ describe('mergeGenericComponentProps - 更多测试', () => {
     const merged = mergeGenericComponentProps(props1, props2);
     expect(merged).toEqual({
       style: { fontSize: '16px' },
-      className: 'class2'
+      className: 'class2',
     });
   });
 
@@ -1038,7 +1040,7 @@ describe('overrideGenericComponentProps - 更多测试', () => {
     expect(result).toEqual({
       color: 'blue',
       fontSize: '20px',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
     });
   });
 
@@ -1049,7 +1051,7 @@ describe('overrideGenericComponentProps - 更多测试', () => {
     expect(result).toEqual({
       color: 'blue',
       fontSize: '16px',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
     });
   });
 
@@ -1060,7 +1062,7 @@ describe('overrideGenericComponentProps - 更多测试', () => {
     expect(result).toEqual({
       color: 'red',
       fontSize: '16px',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
     });
   });
 
@@ -1070,7 +1072,7 @@ describe('overrideGenericComponentProps - 更多测试', () => {
     const result = overrideGenericComponentProps(base, overrides);
     expect(result).toEqual({
       style: { fontSize: '16px' },
-      className: 'class2'
+      className: 'class2',
     });
   });
 
@@ -1122,7 +1124,9 @@ describe('GenericComponent - 边界情况', () => {
   });
 
   it('应该处理特殊字符在文本中', () => {
-    const { container } = render(<GenericComponent>Test &lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;</GenericComponent>);
+    const { container } = render(
+      <GenericComponent>Test &lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;</GenericComponent>
+    );
     const element = container.querySelector('div');
     expect(element).toBeInTheDocument();
     expect(element?.innerHTML).toContain('&lt;script&gt;');
@@ -1204,7 +1208,9 @@ describe('GenericComponent - 事件参数', () => {
       expect(e.key).toBe('Enter');
     });
     const { container } = render(
-      <GenericComponent onKeyDown={handleKeyDown} tabIndex={0}>Test</GenericComponent>
+      <GenericComponent onKeyDown={handleKeyDown} tabIndex={0}>
+        Test
+      </GenericComponent>
     );
     const element = container.querySelector('div');
     if (element) {
@@ -1218,9 +1224,7 @@ describe('GenericComponent - 事件参数', () => {
       expect(e).toBeDefined();
       expect(e.type).toBe('change');
     });
-    const { container } = render(
-      <GenericComponent as="input" onChange={handleChange} />
-    );
+    const { container } = render(<GenericComponent as="input" onChange={handleChange} />);
     const element = container.querySelector('input');
     if (element) {
       fireEvent.change(element, { target: { value: 'test' } });

@@ -11,17 +11,19 @@ interface CardProps {
 
 export const Card = memo<CardProps>(({ children, className = '', 'data-testid': dataTestId }) => {
   const { tokens } = useTheme();
-  const radius = tokens['radius.lg'] as string || '0.5rem';
+  const radius = (tokens['radius.lg'] as string) || '0.5rem';
   const cardShadowValue = tokens['shadow.card'] as string;
-  const cardShadow = cardShadowValue ? cardShadowValue.split(' ') : ['0px', '6px', '20px', '-4px', '#d6cbd0'];
+  const cardShadow = cardShadowValue
+    ? cardShadowValue.split(' ')
+    : ['0px', '6px', '20px', '-4px', '#d6cbd0'];
   const shadowString = `${cardShadow[0]} ${cardShadow[1]} ${cardShadow[2]} ${cardShadow[3]} ${cardShadow[4] || '#d6cbd0'}`;
 
   const cardStyle: React.CSSProperties = {
-    backgroundColor: tokens['color.card'] as string || '#f8f9ef',
+    backgroundColor: (tokens['color.card'] as string) || '#f8f9ef',
     borderRadius: radius,
     boxShadow: shadowString,
     padding: '1.5rem',
-    border: `1px solid ${tokens['color.muted-foreground'] as string || '#ccc'}`,
+    border: `1px solid ${(tokens['color.muted-foreground'] as string) || '#ccc'}`,
     transition: 'all 0.2s ease',
   };
 
@@ -34,78 +36,86 @@ export const Card = memo<CardProps>(({ children, className = '', 'data-testid': 
 
 Card.displayName = 'Card';
 
-export const CardHeader = memo<{ children: React.ReactNode; className?: string }>(({ children, className }) => {
-  const { tokens } = useTheme();
-  
-  const headerStyle: React.CSSProperties = {
-    marginBottom: '1rem',
-    paddingBottom: '0.75rem',
-    borderBottom: `1px solid ${tokens['color.muted-foreground'] as string || '#ccc'}`,
-  };
+export const CardHeader = memo<{ children: React.ReactNode; className?: string }>(
+  ({ children, className }) => {
+    const { tokens } = useTheme();
 
-  return (
-    <div style={headerStyle} className={className}>
-      {children}
-    </div>
-  );
-});
+    const headerStyle: React.CSSProperties = {
+      marginBottom: '1rem',
+      paddingBottom: '0.75rem',
+      borderBottom: `1px solid ${(tokens['color.muted-foreground'] as string) || '#ccc'}`,
+    };
+
+    return (
+      <div style={headerStyle} className={className}>
+        {children}
+      </div>
+    );
+  }
+);
 
 CardHeader.displayName = 'CardHeader';
 
-export const CardTitle = memo<{ children: React.ReactNode; className?: string }>(({ children, className }) => {
-  const { tokens } = useTheme();
-  
-  const titleStyle: React.CSSProperties = {
-    fontSize: tokens['font-size.heading-2'] as string || '1.5rem',
-    fontWeight: '600',
-    margin: '0',
-    color: tokens['color.foreground'] as string || '#000',
-  };
+export const CardTitle = memo<{ children: React.ReactNode; className?: string }>(
+  ({ children, className }) => {
+    const { tokens } = useTheme();
 
-  return (
-    <h3 style={titleStyle} className={className}>
-      {children}
-    </h3>
-  );
-});
+    const titleStyle: React.CSSProperties = {
+      fontSize: (tokens['font-size.heading-2'] as string) || '1.5rem',
+      fontWeight: '600',
+      margin: '0',
+      color: (tokens['color.foreground'] as string) || '#000',
+    };
+
+    return (
+      <h3 style={titleStyle} className={className}>
+        {children}
+      </h3>
+    );
+  }
+);
 
 CardTitle.displayName = 'CardTitle';
 
-export const CardContent = memo<{ children: React.ReactNode; className?: string }>(({ children, className }) => {
-  const { tokens } = useTheme();
-  
-  const contentStyle: React.CSSProperties = {
-    fontSize: tokens['font-size.body'] as string || '1rem',
-    lineHeight: tokens['line-height.body'] as string || '1.5',
-  };
+export const CardContent = memo<{ children: React.ReactNode; className?: string }>(
+  ({ children, className }) => {
+    const { tokens } = useTheme();
 
-  return (
-    <div style={contentStyle} className={className}>
-      {children}
-    </div>
-  );
-});
+    const contentStyle: React.CSSProperties = {
+      fontSize: (tokens['font-size.body'] as string) || '1rem',
+      lineHeight: (tokens['line-height.body'] as string) || '1.5',
+    };
+
+    return (
+      <div style={contentStyle} className={className}>
+        {children}
+      </div>
+    );
+  }
+);
 
 CardContent.displayName = 'CardContent';
 
-export const CardFooter = memo<{ children: React.ReactNode; className?: string }>(({ children, className }) => {
-  const { tokens } = useTheme();
-  
-  const footerStyle: React.CSSProperties = {
-    marginTop: '1rem',
-    paddingTop: '0.75rem',
-    borderTop: `1px solid ${tokens['color.muted-foreground'] as string || '#ccc'}`,
-    display: 'flex',
-    justifyContent: 'flex-end',
-    gap: '0.5rem',
-  };
+export const CardFooter = memo<{ children: React.ReactNode; className?: string }>(
+  ({ children, className }) => {
+    const { tokens } = useTheme();
 
-  return (
-    <div style={footerStyle} className={className}>
-      {children}
-    </div>
-  );
-});
+    const footerStyle: React.CSSProperties = {
+      marginTop: '1rem',
+      paddingTop: '0.75rem',
+      borderTop: `1px solid ${(tokens['color.muted-foreground'] as string) || '#ccc'}`,
+      display: 'flex',
+      justifyContent: 'flex-end',
+      gap: '0.5rem',
+    };
+
+    return (
+      <div style={footerStyle} className={className}>
+        {children}
+      </div>
+    );
+  }
+);
 
 CardFooter.displayName = 'CardFooter';
 

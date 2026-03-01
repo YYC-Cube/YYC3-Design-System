@@ -13,10 +13,7 @@ import { Button } from './Button';
 import { Input } from './Input';
 import { Badge } from './Badge';
 import { useTheme } from '../theme/useTheme';
-import {
-  createRealtimeEditor,
-  EditorState,
-} from '../editor/realtime-editor';
+import { createRealtimeEditor, EditorState } from '../editor/realtime-editor';
 import { DesignTokens } from '../../types/tokens';
 
 interface RealtimeEditorProps {
@@ -47,28 +44,34 @@ export const RealtimeEditor: React.FC<RealtimeEditorProps> = ({
     return unsubscribe;
   }, [editor]);
 
-  const handleUpdateToken = useCallback((tokenName: string, value: string | number) => {
-    const validation = editor.validateToken(tokenName);
-    const valueValidation = editor.validateValue(value);
+  const handleUpdateToken = useCallback(
+    (tokenName: string, value: string | number) => {
+      const validation = editor.validateToken(tokenName);
+      const valueValidation = editor.validateValue(value);
 
-    if (!validation.valid) {
-      alert(validation.error);
-      return;
-    }
+      if (!validation.valid) {
+        alert(validation.error);
+        return;
+      }
 
-    if (!valueValidation.valid) {
-      alert(valueValidation.error);
-      return;
-    }
+      if (!valueValidation.valid) {
+        alert(valueValidation.error);
+        return;
+      }
 
-    editor.updateToken(tokenName, value);
-  }, [editor]);
+      editor.updateToken(tokenName, value);
+    },
+    [editor]
+  );
 
-  const handleDeleteToken = useCallback((tokenName: string) => {
-    if (confirm(`确定要删除令牌 ${tokenName} 吗？`)) {
-      editor.deleteToken(tokenName);
-    }
-  }, [editor]);
+  const handleDeleteToken = useCallback(
+    (tokenName: string) => {
+      if (confirm(`确定要删除令牌 ${tokenName} 吗？`)) {
+        editor.deleteToken(tokenName);
+      }
+    },
+    [editor]
+  );
 
   const handleAddToken = useCallback(() => {
     const validation = editor.validateToken(newTokenName);
@@ -132,12 +135,13 @@ export const RealtimeEditor: React.FC<RealtimeEditorProps> = ({
           <CardTitle>实时编辑器</CardTitle>
           <div className="flex gap-2">
             {state.isDirty && (
-              <Badge style={{ background: '#f59e0b', color: '#ffffff' }}>
-                未保存
-              </Badge>
+              <Badge style={{ background: '#f59e0b', color: '#ffffff' }}>未保存</Badge>
             )}
             {state.lastSaved && (
-              <Badge variant="outline" style={{ borderColor: themeTokens['color.border'] as string }}>
+              <Badge
+                variant="outline"
+                style={{ borderColor: themeTokens['color.border'] as string }}
+              >
                 已保存 {new Date(state.lastSaved).toLocaleTimeString()}
               </Badge>
             )}
@@ -158,7 +162,10 @@ export const RealtimeEditor: React.FC<RealtimeEditorProps> = ({
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: themeTokens['color.foreground'] as string }}>
+          <label
+            className="block text-sm font-medium mb-2"
+            style={{ color: themeTokens['color.foreground'] as string }}
+          >
             搜索
           </label>
           <Input
@@ -170,18 +177,27 @@ export const RealtimeEditor: React.FC<RealtimeEditorProps> = ({
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: themeTokens['color.foreground'] as string }}>
+          <label
+            className="block text-sm font-medium mb-2"
+            style={{ color: themeTokens['color.foreground'] as string }}
+          >
             类别
           </label>
           <div className="flex flex-wrap gap-2">
-            {categories.map(category => (
+            {categories.map((category) => (
               <Badge
                 key={category}
                 variant={selectedCategory === category ? 'default' : 'outline'}
                 style={{
                   cursor: 'pointer',
-                  background: selectedCategory === category ? themeTokens['color.primary'] as string : 'transparent',
-                  color: selectedCategory === category ? '#ffffff' : themeTokens['color.foreground'] as string,
+                  background:
+                    selectedCategory === category
+                      ? (themeTokens['color.primary'] as string)
+                      : 'transparent',
+                  color:
+                    selectedCategory === category
+                      ? '#ffffff'
+                      : (themeTokens['color.foreground'] as string),
                   borderColor: themeTokens['color.primary'] as string,
                 }}
                 onClick={() => setSelectedCategory(category)}
@@ -193,7 +209,10 @@ export const RealtimeEditor: React.FC<RealtimeEditorProps> = ({
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2" style={{ color: themeTokens['color.foreground'] as string }}>
+          <label
+            className="block text-sm font-medium mb-2"
+            style={{ color: themeTokens['color.foreground'] as string }}
+          >
             添加新令牌
           </label>
           <div className="flex gap-2">
@@ -218,7 +237,10 @@ export const RealtimeEditor: React.FC<RealtimeEditorProps> = ({
         </div>
 
         <div className="space-y-2">
-          <h3 className="text-sm font-medium" style={{ color: themeTokens['color.foreground'] as string }}>
+          <h3
+            className="text-sm font-medium"
+            style={{ color: themeTokens['color.foreground'] as string }}
+          >
             令牌 ({filteredTokens.length})
           </h3>
           <div className="space-y-2">
@@ -233,26 +255,27 @@ export const RealtimeEditor: React.FC<RealtimeEditorProps> = ({
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex-1">
-                    <div className="text-sm font-medium" style={{ color: themeTokens['color.foreground'] as string }}>
+                    <div
+                      className="text-sm font-medium"
+                      style={{ color: themeTokens['color.foreground'] as string }}
+                    >
                       {name}
                     </div>
-                    {name.includes('color') && typeof value === 'string' && value.startsWith('#') && (
-                      <div className="flex items-center gap-2 mt-1">
-                        <div
-                          className="w-4 h-4 rounded"
-                          style={{ background: value }}
-                        />
-                        <span className="text-xs" style={{ color: themeTokens['color.muted-foreground'] as string }}>
-                          {value}
-                        </span>
-                      </div>
-                    )}
+                    {name.includes('color') &&
+                      typeof value === 'string' &&
+                      value.startsWith('#') && (
+                        <div className="flex items-center gap-2 mt-1">
+                          <div className="w-4 h-4 rounded" style={{ background: value }} />
+                          <span
+                            className="text-xs"
+                            style={{ color: themeTokens['color.muted-foreground'] as string }}
+                          >
+                            {value}
+                          </span>
+                        </div>
+                      )}
                   </div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleDeleteToken(name)}
-                  >
+                  <Button variant="outline" size="sm" onClick={() => handleDeleteToken(name)}>
                     删除
                   </Button>
                 </div>
@@ -297,42 +320,54 @@ export const RealtimeEditor: React.FC<RealtimeEditorProps> = ({
 
         {state.changes.length > 0 && (
           <div>
-            <h3 className="text-sm font-medium mb-2" style={{ color: themeTokens['color.foreground'] as string }}>
+            <h3
+              className="text-sm font-medium mb-2"
+              style={{ color: themeTokens['color.foreground'] as string }}
+            >
               更改历史 ({state.changes.length})
             </h3>
             <div className="space-y-2 max-h-60 overflow-y-auto">
-              {state.changes.slice().reverse().map((change, index) => (
-                <div
-                  key={index}
-                  className="p-3 rounded"
-                  style={{
-                    background: themeTokens['color.card'] as string,
-                    border: `1px solid ${themeTokens['color.border'] as string}`,
-                  }}
-                >
-                  <div className="text-sm font-medium" style={{ color: themeTokens['color.foreground'] as string }}>
-                    {change.tokenName}
-                  </div>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span
-                      className="text-xs"
+              {state.changes
+                .slice()
+                .reverse()
+                .map((change, index) => (
+                  <div
+                    key={index}
+                    className="p-3 rounded"
+                    style={{
+                      background: themeTokens['color.card'] as string,
+                      border: `1px solid ${themeTokens['color.border'] as string}`,
+                    }}
+                  >
+                    <div
+                      className="text-sm font-medium"
+                      style={{ color: themeTokens['color.foreground'] as string }}
+                    >
+                      {change.tokenName}
+                    </div>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span
+                        className="text-xs"
+                        style={{ color: themeTokens['color.muted-foreground'] as string }}
+                      >
+                        {change.oldValue !== undefined ? String(change.oldValue) : '(空)'}
+                      </span>
+                      <span style={{ color: themeTokens['color.foreground'] as string }}>→</span>
+                      <span
+                        className="text-xs"
+                        style={{ color: themeTokens['color.muted-foreground'] as string }}
+                      >
+                        {change.newValue !== undefined ? String(change.newValue) : '(删除)'}
+                      </span>
+                    </div>
+                    <div
+                      className="text-xs mt-1"
                       style={{ color: themeTokens['color.muted-foreground'] as string }}
                     >
-                      {change.oldValue !== undefined ? String(change.oldValue) : '(空)'}
-                    </span>
-                    <span style={{ color: themeTokens['color.foreground'] as string }}>→</span>
-                    <span
-                      className="text-xs"
-                      style={{ color: themeTokens['color.muted-foreground'] as string }}
-                    >
-                      {change.newValue !== undefined ? String(change.newValue) : '(删除)'}
-                    </span>
+                      {new Date(change.timestamp).toLocaleString()}
+                    </div>
                   </div>
-                  <div className="text-xs mt-1" style={{ color: themeTokens['color.muted-foreground'] as string }}>
-                    {new Date(change.timestamp).toLocaleString()}
-                  </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         )}

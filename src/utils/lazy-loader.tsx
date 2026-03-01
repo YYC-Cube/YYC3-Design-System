@@ -22,30 +22,36 @@ export interface LazyLoadResult<T extends ComponentType<any>> {
 }
 
 const DEFAULT_FALLBACK = (
-  <div style={{
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '200px',
-    padding: '2rem',
-  }}>
-    <div style={{
-      width: '40px',
-      height: '40px',
-      border: '4px solid #f3f3f3f',
-      borderTop: '4px solid #d45a5f',
-      borderRadius: '50%',
-      animation: 'spin 1s linear infinite',
-    }} />
+  <div
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '200px',
+      padding: '2rem',
+    }}
+  >
+    <div
+      style={{
+        width: '40px',
+        height: '40px',
+        border: '4px solid #f3f3f3f',
+        borderTop: '4px solid #d45a5f',
+        borderRadius: '50%',
+        animation: 'spin 1s linear infinite',
+      }}
+    />
   </div>
 );
 
 const DEFAULT_ERROR_FALLBACK = (
-  <div style={{
-    padding: '2rem',
-    textAlign: 'center',
-    color: '#ef4444',
-  }}>
+  <div
+    style={{
+      padding: '2rem',
+      textAlign: 'center',
+      color: '#ef4444',
+    }}
+  >
     <p>加载组件失败，请刷新页面重试</p>
   </div>
 );
@@ -54,11 +60,7 @@ const createLazyComponent = <T extends ComponentType<any>>(
   importFn: () => Promise<{ default: T }>,
   options: LazyComponentOptions = {}
 ): T => {
-  const {
-    fallback = DEFAULT_FALLBACK,
-    delay = 300,
-    timeout = 5000,
-  } = options;
+  const { fallback = DEFAULT_FALLBACK, delay = 300, timeout = 5000 } = options;
 
   const LazyComponent = lazy(() => {
     return new Promise<{ default: T }>((resolve, reject) => {
@@ -67,11 +69,11 @@ const createLazyComponent = <T extends ComponentType<any>>(
       }, timeout);
 
       importFn()
-        .then(module => {
+        .then((module) => {
           clearTimeout(timer);
           setTimeout(() => resolve(module), delay);
         })
-        .catch(error => {
+        .catch((error) => {
           clearTimeout(timer);
           reject(error);
         });
@@ -85,10 +87,7 @@ export const withLazyLoading = <P extends object>(
   Component: ComponentType<P>,
   options: LazyComponentOptions = {}
 ): ComponentType<P> => {
-  const LazyComponent = createLazyComponent(
-    () => Promise.resolve({ default: Component }),
-    options
-  );
+  const LazyComponent = createLazyComponent(() => Promise.resolve({ default: Component }), options);
 
   return (props: P) => (
     <Suspense fallback={options.fallback || DEFAULT_FALLBACK}>
@@ -113,7 +112,7 @@ export const createLazyWrapper = <P extends object>(
 export const preloadComponent = <T extends ComponentType<any>>(
   importFn: () => Promise<{ default: T }>
 ): void => {
-  importFn().catch(error => {
+  importFn().catch((error) => {
     console.error('[LazyLoader] 预加载组件失败:', error);
   });
 };
@@ -127,19 +126,15 @@ export const lazyLoadImage = (
   } = {}
 ): Promise<HTMLImageElement> => {
   return new Promise((resolve, reject) => {
-    const {
-      threshold = 0.1,
-      rootMargin = '50px',
-      fallback = '',
-    } = options;
+    const { threshold = 0.1, rootMargin = '50px', fallback = '' } = options;
 
     if ('IntersectionObserver' in window) {
       const img = new Image();
       img.src = fallback || src;
 
       const observer = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
+        (entries) => {
+          entries.forEach((entry) => {
             if (entry.isIntersecting) {
               img.src = src;
               observer.unobserve(entry.target);

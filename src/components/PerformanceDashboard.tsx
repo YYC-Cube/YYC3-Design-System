@@ -33,7 +33,10 @@ export const PerformanceDashboard: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const getScore = (value: number | undefined, thresholds: { good: number; needsImprovement: number }): Score => {
+  const getScore = (
+    value: number | undefined,
+    thresholds: { good: number; needsImprovement: number }
+  ): Score => {
     if (value === undefined) {
       return { score: 0, label: '等待中', color: 'gray' };
     }
@@ -52,15 +55,21 @@ export const PerformanceDashboard: React.FC = () => {
   const clsScore = getScore(metrics.CLS, { good: 0.1, needsImprovement: 0.25 });
   const ttfbScore = getScore(metrics.TTFB, { good: 800, needsImprovement: 1800 });
 
-  const MetricCard = ({ title, value, unit, score }: { title: string; value?: number; unit: string; score: Score }) => (
+  const MetricCard = ({
+    title,
+    value,
+    unit,
+    score,
+  }: {
+    title: string;
+    value?: number;
+    unit: string;
+    score: Score;
+  }) => (
     <div className="metric-card">
       <div className="metric-title">{title}</div>
-      <div className="metric-value">
-        {value !== undefined ? `${value.toFixed(2)}${unit}` : '-'}
-      </div>
-      <div className={cn('metric-score', score.color)}>
-        {score.label}
-      </div>
+      <div className="metric-value">{value !== undefined ? `${value.toFixed(2)}${unit}` : '-'}</div>
+      <div className={cn('metric-score', score.color)}>{score.label}</div>
     </div>
   );
 
@@ -208,7 +217,7 @@ export const PerformanceDashboard: React.FC = () => {
       >
         📊
       </button>
-      
+
       {isVisible && (
         <div className="performance-dashboard-overlay">
           <Card className="performance-dashboard">
@@ -255,7 +264,7 @@ export const PerformanceDashboard: React.FC = () => {
                   score={ttfbScore}
                 />
               </div>
-              
+
               <div className="performance-tips">
                 <h4>性能优化建议</h4>
                 <ul>

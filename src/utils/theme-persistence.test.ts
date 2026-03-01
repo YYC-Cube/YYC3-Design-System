@@ -43,41 +43,53 @@ describe('theme-persistence', () => {
     });
 
     it('应该返回存储的light主题', () => {
-      localStorage.setItem('yyc3-theme', JSON.stringify({
-        mode: 'light',
-        version: '1.0.0',
-        timestamp: Date.now()
-      }));
+      localStorage.setItem(
+        'yyc3-theme',
+        JSON.stringify({
+          mode: 'light',
+          version: '1.0.0',
+          timestamp: Date.now(),
+        })
+      );
       const theme = getStoredTheme();
       expect(theme).toBe('light');
     });
 
     it('应该返回存储的dark主题', () => {
-      localStorage.setItem('yyc3-theme', JSON.stringify({
-        mode: 'dark',
-        version: '1.0.0',
-        timestamp: Date.now()
-      }));
+      localStorage.setItem(
+        'yyc3-theme',
+        JSON.stringify({
+          mode: 'dark',
+          version: '1.0.0',
+          timestamp: Date.now(),
+        })
+      );
       const theme = getStoredTheme();
       expect(theme).toBe('dark');
     });
 
     it('当模式为system时应该返回系统主题', () => {
-      localStorage.setItem('yyc3-theme', JSON.stringify({
-        mode: 'system',
-        version: '1.0.0',
-        timestamp: Date.now()
-      }));
+      localStorage.setItem(
+        'yyc3-theme',
+        JSON.stringify({
+          mode: 'system',
+          version: '1.0.0',
+          timestamp: Date.now(),
+        })
+      );
       const theme = getStoredTheme();
       expect(['light', 'dark']).toContain(theme);
     });
 
     it('当版本不匹配时应该返回light', () => {
-      localStorage.setItem('yyc3-theme', JSON.stringify({
-        mode: 'dark',
-        version: '0.9.0',
-        timestamp: Date.now()
-      }));
+      localStorage.setItem(
+        'yyc3-theme',
+        JSON.stringify({
+          mode: 'dark',
+          version: '0.9.0',
+          timestamp: Date.now(),
+        })
+      );
       const theme = getStoredTheme();
       expect(theme).toBe('light');
     });
@@ -118,7 +130,7 @@ describe('theme-persistence', () => {
       const beforeTime = Date.now();
       setStoredTheme('light');
       const afterTime = Date.now();
-      
+
       const stored = localStorage.getItem('yyc3-theme');
       const config = JSON.parse(stored!);
       expect(config.timestamp).toBeGreaterThanOrEqual(beforeTime);
@@ -128,11 +140,14 @@ describe('theme-persistence', () => {
 
   describe('clearStoredTheme', () => {
     it('应该清除存储的主题', () => {
-      localStorage.setItem('yyc3-theme', JSON.stringify({
-        mode: 'dark',
-        version: '1.0.0',
-        timestamp: Date.now()
-      }));
+      localStorage.setItem(
+        'yyc3-theme',
+        JSON.stringify({
+          mode: 'dark',
+          version: '1.0.0',
+          timestamp: Date.now(),
+        })
+      );
       clearStoredTheme();
       expect(localStorage.getItem('yyc3-theme')).toBeNull();
     });
@@ -152,11 +167,14 @@ describe('theme-persistence', () => {
 
   describe('migrateTheme', () => {
     it('应该迁移主题版本', () => {
-      localStorage.setItem('yyc3-theme', JSON.stringify({
-        mode: 'dark',
-        version: '0.9.0',
-        timestamp: Date.now()
-      }));
+      localStorage.setItem(
+        'yyc3-theme',
+        JSON.stringify({
+          mode: 'dark',
+          version: '0.9.0',
+          timestamp: Date.now(),
+        })
+      );
       migrateTheme('0.9.0');
       const stored = localStorage.getItem('yyc3-theme');
       const config = JSON.parse(stored!);
@@ -164,11 +182,14 @@ describe('theme-persistence', () => {
     });
 
     it('应该保留主题模式', () => {
-      localStorage.setItem('yyc3-theme', JSON.stringify({
-        mode: 'dark',
-        version: '0.9.0',
-        timestamp: Date.now()
-      }));
+      localStorage.setItem(
+        'yyc3-theme',
+        JSON.stringify({
+          mode: 'dark',
+          version: '0.9.0',
+          timestamp: Date.now(),
+        })
+      );
       migrateTheme('0.9.0');
       const stored = localStorage.getItem('yyc3-theme');
       const config = JSON.parse(stored!);
@@ -178,22 +199,28 @@ describe('theme-persistence', () => {
 
   describe('syncThemeWithSystem', () => {
     it('当模式为system时应该同步系统主题', () => {
-      localStorage.setItem('yyc3-theme', JSON.stringify({
-        mode: 'system',
-        version: '1.0.0',
-        timestamp: Date.now()
-      }));
+      localStorage.setItem(
+        'yyc3-theme',
+        JSON.stringify({
+          mode: 'system',
+          version: '1.0.0',
+          timestamp: Date.now(),
+        })
+      );
       syncThemeWithSystem();
       const theme = document.documentElement.getAttribute('data-theme');
       expect(['light', 'dark']).toContain(theme);
     });
 
     it('当模式不为system时不应该同步', () => {
-      localStorage.setItem('yyc3-theme', JSON.stringify({
-        mode: 'dark',
-        version: '1.0.0',
-        timestamp: Date.now()
-      }));
+      localStorage.setItem(
+        'yyc3-theme',
+        JSON.stringify({
+          mode: 'dark',
+          version: '1.0.0',
+          timestamp: Date.now(),
+        })
+      );
       syncThemeWithSystem();
       expect(document.documentElement.getAttribute('data-theme')).toBeNull();
     });
@@ -209,7 +236,7 @@ describe('theme-persistence', () => {
       const config = {
         mode: 'dark' as const,
         version: '1.0.0',
-        timestamp: Date.now()
+        timestamp: Date.now(),
       };
       localStorage.setItem('yyc3-theme', JSON.stringify(config));
       const info = getThemeInfo();
@@ -224,11 +251,14 @@ describe('theme-persistence', () => {
     });
 
     it('当有存储的主题时应该返回true', () => {
-      localStorage.setItem('yyc3-theme', JSON.stringify({
-        mode: 'dark',
-        version: '1.0.0',
-        timestamp: Date.now()
-      }));
+      localStorage.setItem(
+        'yyc3-theme',
+        JSON.stringify({
+          mode: 'dark',
+          version: '1.0.0',
+          timestamp: Date.now(),
+        })
+      );
       const persisted = isThemePersisted();
       expect(persisted).toBe(true);
     });

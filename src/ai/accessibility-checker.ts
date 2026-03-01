@@ -1,6 +1,13 @@
 export interface AccessibilityIssue {
   id: string;
-  type: 'color-contrast' | 'focus-indicator' | 'keyboard-nav' | 'aria-label' | 'alt-text' | 'heading-order' | 'form-label';
+  type:
+    | 'color-contrast'
+    | 'focus-indicator'
+    | 'keyboard-nav'
+    | 'aria-label'
+    | 'alt-text'
+    | 'heading-order'
+    | 'form-label';
   severity: 'critical' | 'serious' | 'moderate' | 'minor';
   element: string;
   message: string;
@@ -81,10 +88,10 @@ export class AccessibilityChecker {
     }
 
     const summary = {
-      critical: issues.filter(i => i.severity === 'critical').length,
-      serious: issues.filter(i => i.severity === 'serious').length,
-      moderate: issues.filter(i => i.severity === 'moderate').length,
-      minor: issues.filter(i => i.severity === 'minor').length,
+      critical: issues.filter((i) => i.severity === 'critical').length,
+      serious: issues.filter((i) => i.severity === 'serious').length,
+      moderate: issues.filter((i) => i.severity === 'moderate').length,
+      minor: issues.filter((i) => i.severity === 'minor').length,
     };
 
     const overallScore = this.calculateOverallScore(issues);
@@ -104,12 +111,15 @@ export class AccessibilityChecker {
     return report;
   }
 
-  private checkColorContrast(element: HTMLElement, targetLevel: 'A' | 'AA' | 'AAA'): AccessibilityIssue[] {
+  private checkColorContrast(
+    element: HTMLElement,
+    targetLevel: 'A' | 'AA' | 'AAA'
+  ): AccessibilityIssue[] {
     const issues: AccessibilityIssue[] = [];
     const targetRatio = targetLevel === 'AAA' ? 7 : targetLevel === 'AA' ? 4.5 : 3;
 
     const textElements = element.querySelectorAll('*');
-    textElements.forEach(el => {
+    textElements.forEach((el) => {
       const computedStyle = window.getComputedStyle(el);
       const color = computedStyle.color;
       const backgroundColor = computedStyle.backgroundColor;
@@ -144,14 +154,14 @@ export class AccessibilityChecker {
 
   private checkKeyboardNavigation(element: HTMLElement): AccessibilityIssue[] {
     const issues: AccessibilityIssue[] = [];
-    const interactiveElements = element.querySelectorAll('a, button, input, select, textarea, [tabindex]');
+    const interactiveElements = element.querySelectorAll(
+      'a, button, input, select, textarea, [tabindex]'
+    );
 
-    interactiveElements.forEach(el => {
+    interactiveElements.forEach((el) => {
       const htmlElement = el as HTMLElement;
       const computedStyle = window.getComputedStyle(htmlElement);
-      const hasFocusStyle = 
-        computedStyle.outline !== 'none' ||
-        computedStyle.boxShadow !== 'none';
+      const hasFocusStyle = computedStyle.outline !== 'none' || computedStyle.boxShadow !== 'none';
 
       if (!hasFocusStyle) {
         const issue: AccessibilityIssue = {
@@ -190,9 +200,11 @@ export class AccessibilityChecker {
 
   private checkAriaLabels(element: HTMLElement): AccessibilityIssue[] {
     const issues: AccessibilityIssue[] = [];
-    const elementsNeedingLabels = element.querySelectorAll('button:not([aria-label]):not([aria-labelledby]), input:not([aria-label]):not([aria-labelledby]), textarea:not([aria-label]):not([aria-labelledby])');
+    const elementsNeedingLabels = element.querySelectorAll(
+      'button:not([aria-label]):not([aria-labelledby]), input:not([aria-label]):not([aria-labelledby]), textarea:not([aria-label]):not([aria-labelledby])'
+    );
 
-    elementsNeedingLabels.forEach(el => {
+    elementsNeedingLabels.forEach((el) => {
       const htmlElement = el as HTMLElement;
       const hasVisibleLabel = this.hasVisibleLabel(htmlElement);
 
@@ -211,10 +223,10 @@ export class AccessibilityChecker {
     });
 
     const iconButtons = element.querySelectorAll('button svg, button i, button .icon');
-    iconButtons.forEach(el => {
+    iconButtons.forEach((el) => {
       const htmlElement = el as HTMLElement;
-      const hasAriaLabel = htmlElement.hasAttribute('aria-label') || 
-                           htmlElement.hasAttribute('aria-labelledby');
+      const hasAriaLabel =
+        htmlElement.hasAttribute('aria-label') || htmlElement.hasAttribute('aria-labelledby');
 
       if (!hasAriaLabel) {
         const issue: AccessibilityIssue = {
@@ -235,13 +247,15 @@ export class AccessibilityChecker {
 
   private checkFormLabels(element: HTMLElement): AccessibilityIssue[] {
     const issues: AccessibilityIssue[] = [];
-    const inputs = element.querySelectorAll('input[type="text"], input[type="email"], input[type="password"], input[type="number"], textarea, select');
+    const inputs = element.querySelectorAll(
+      'input[type="text"], input[type="email"], input[type="password"], input[type="number"], textarea, select'
+    );
 
-    inputs.forEach(el => {
+    inputs.forEach((el) => {
       const htmlElement = el as HTMLElement;
       const hasLabel = this.hasFormLabel(htmlElement);
-      const hasAriaLabel = htmlElement.hasAttribute('aria-label') ||
-                          htmlElement.hasAttribute('aria-labelledby');
+      const hasAriaLabel =
+        htmlElement.hasAttribute('aria-label') || htmlElement.hasAttribute('aria-labelledby');
 
       if (!hasLabel && !hasAriaLabel) {
         const issue: AccessibilityIssue = {
@@ -263,7 +277,7 @@ export class AccessibilityChecker {
   private checkHeadingOrder(element: HTMLElement): AccessibilityIssue[] {
     const issues: AccessibilityIssue[] = [];
     const headings = element.querySelectorAll('h1, h2, h3, h4, h5, h6');
-    
+
     let previousLevel = 0;
     headings.forEach((heading, index) => {
       const level = parseInt(heading.tagName.charAt(1));
@@ -356,11 +370,13 @@ export class AccessibilityChecker {
   private hexToRgb(color: string): { r: number; g: number; b: number } | null {
     if (color.startsWith('#')) {
       const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
-      return result ? {
-        r: parseInt(result[1], 16) / 255,
-        g: parseInt(result[2], 16) / 255,
-        b: parseInt(result[3], 16) / 255,
-      } : null;
+      return result
+        ? {
+            r: parseInt(result[1], 16) / 255,
+            g: parseInt(result[2], 16) / 255,
+            b: parseInt(result[3], 16) / 255,
+          }
+        : null;
     }
 
     if (color.startsWith('rgb')) {
@@ -378,7 +394,7 @@ export class AccessibilityChecker {
   }
 
   private calculateLuminance(rgb: { r: number; g: number; b: number }): number {
-    const [r, g, b] = [rgb.r, rgb.g, rgb.b].map(channel => {
+    const [r, g, b] = [rgb.r, rgb.g, rgb.b].map((channel) => {
       const c = channel <= 0.03928 ? channel / 12.92 : Math.pow((channel + 0.055) / 1.055, 2.4);
       return c;
     });
@@ -386,7 +402,11 @@ export class AccessibilityChecker {
     return 0.2126 * r + 0.7152 * g + 0.0722 * b;
   }
 
-  private optimizeContrast(foregroundColor: string, backgroundColor: string, targetRatio: number): string {
+  private optimizeContrast(
+    foregroundColor: string,
+    backgroundColor: string,
+    targetRatio: number
+  ): string {
     let optimized = foregroundColor;
     let iterations = 0;
     const maxIterations = 50;
@@ -401,13 +421,13 @@ export class AccessibilityChecker {
       const adjustment = currentRatio < targetRatio * 0.5 ? 0.1 : 0.02;
       const luminance = this.calculateLuminance(rgb);
       const newLuminance = luminance > 0.5 ? luminance - adjustment : luminance + adjustment;
-      
+
       optimized = this.rgbToHex(
         Math.max(0, Math.min(1, newLuminance * 255)),
         Math.max(0, Math.min(1, rgb.g * 255)),
         Math.max(0, Math.min(1, rgb.b * 255))
       );
-      
+
       iterations++;
     }
 
@@ -415,10 +435,12 @@ export class AccessibilityChecker {
   }
 
   private rgbToHex(r: number, g: number, b: number): string {
-    return `#${[r, g, b].map(x => {
-      const hex = Math.round(x).toString(16);
-      return hex.length === 1 ? '0' + hex : hex;
-    }).join('')}`;
+    return `#${[r, g, b]
+      .map((x) => {
+        const hex = Math.round(x).toString(16);
+        return hex.length === 1 ? '0' + hex : hex;
+      })
+      .join('')}`;
   }
 
   private calculateOverallScore(issues: AccessibilityIssue[]): number {
@@ -438,7 +460,10 @@ export class AccessibilityChecker {
     return Math.max(0, 100 + penalty);
   }
 
-  private determineWcagCompliance(score: number, targetLevel: 'A' | 'AA' | 'AAA'): 'A' | 'AA' | 'AAA' | 'fail' {
+  private determineWcagCompliance(
+    score: number,
+    targetLevel: 'A' | 'AA' | 'AAA'
+  ): 'A' | 'AA' | 'AAA' | 'fail' {
     if (score >= 95) {
       if (targetLevel === 'AAA') return 'AAA';
       if (targetLevel === 'AA') return 'AA';
@@ -449,11 +474,14 @@ export class AccessibilityChecker {
     return 'fail';
   }
 
-  private generateRecommendations(issues: AccessibilityIssue[], targetLevel: 'A' | 'AA' | 'AAA'): string[] {
+  private generateRecommendations(
+    issues: AccessibilityIssue[],
+    targetLevel: 'A' | 'AA' | 'AAA'
+  ): string[] {
     const recommendations: string[] = [];
 
-    const criticalCount = issues.filter(i => i.severity === 'critical').length;
-    const seriousCount = issues.filter(i => i.severity === 'serious').length;
+    const criticalCount = issues.filter((i) => i.severity === 'critical').length;
+    const seriousCount = issues.filter((i) => i.severity === 'serious').length;
 
     if (criticalCount > 0) {
       recommendations.push(`发现 ${criticalCount} 个严重问题，必须立即修复`);
@@ -463,18 +491,18 @@ export class AccessibilityChecker {
       recommendations.push(`${seriousCount} 个严重问题会影响用户体验`);
     }
 
-    const autoFixableIssues = issues.filter(i => i.autoFixable);
+    const autoFixableIssues = issues.filter((i) => i.autoFixable);
     if (autoFixableIssues.length > 0) {
       recommendations.push(`${autoFixableIssues.length} 个问题可以自动修复`);
     }
 
     const typeCounts = {
-      'color-contrast': issues.filter(i => i.type === 'color-contrast').length,
-      'focus-indicator': issues.filter(i => i.type === 'focus-indicator').length,
-      'keyboard-nav': issues.filter(i => i.type === 'keyboard-nav').length,
-      'aria-label': issues.filter(i => i.type === 'aria-label').length,
-      'form-label': issues.filter(i => i.type === 'form-label').length,
-      'heading-order': issues.filter(i => i.type === 'heading-order').length,
+      'color-contrast': issues.filter((i) => i.type === 'color-contrast').length,
+      'focus-indicator': issues.filter((i) => i.type === 'focus-indicator').length,
+      'keyboard-nav': issues.filter((i) => i.type === 'keyboard-nav').length,
+      'aria-label': issues.filter((i) => i.type === 'aria-label').length,
+      'form-label': issues.filter((i) => i.type === 'form-label').length,
+      'heading-order': issues.filter((i) => i.type === 'heading-order').length,
     };
 
     const topType = Object.entries(typeCounts).sort((a, b) => b[1] - a[1])[0];

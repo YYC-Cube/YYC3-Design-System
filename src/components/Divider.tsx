@@ -11,7 +11,7 @@ export const Divider: React.FC<DividerProps> = ({
 
   const dividerStyle: React.CSSProperties = {
     border: 'none',
-    borderColor: tokens['color.muted-foreground'] as string || '#ccc',
+    borderColor: (tokens['color.muted-foreground'] as string) || '#ccc',
   };
 
   if (orientation === 'horizontal') {

@@ -308,9 +308,7 @@ export const generateResponsiveImageAttributes = (
   };
 };
 
-export const createResponsiveImageElement = (
-  options: ResponsiveImageOptions
-): HTMLImageElement => {
+export const createResponsiveImageElement = (options: ResponsiveImageOptions): HTMLImageElement => {
   const { alt, width, height, className, style } = options;
   const attributes = generateResponsiveImageAttributes(options);
 
@@ -333,18 +331,11 @@ export const createResponsiveImageElement = (
   return img;
 };
 
-export const createPictureElement = (
-  options: ResponsiveImageOptions
-): HTMLPictureElement => {
+export const createPictureElement = (options: ResponsiveImageOptions): HTMLPictureElement => {
   const { src, alt, width, height, breakpoints, formats, quality, className, style } = options;
   const picture = document.createElement('picture');
 
-  const sources = generatePictureSources(
-    src,
-    breakpoints,
-    formats,
-    quality
-  );
+  const sources = generatePictureSources(src, breakpoints, formats, quality);
 
   sources.forEach(({ srcSet, type }) => {
     const source = document.createElement('source');
@@ -354,7 +345,12 @@ export const createPictureElement = (
   });
 
   const img = document.createElement('img');
-  img.src = generateResponsiveImageUrl(src, breakpoints?.[0] || defaultBreakpoints[0], formats?.[0] || 'webp', quality);
+  img.src = generateResponsiveImageUrl(
+    src,
+    breakpoints?.[0] || defaultBreakpoints[0],
+    formats?.[0] || 'webp',
+    quality
+  );
   img.alt = alt;
 
   if (width) img.width = width;

@@ -15,7 +15,12 @@ import { Card, CardContent, CardHeader, CardTitle } from './Card';
 import { Input } from './Input';
 import { Button } from './Button';
 import { Grid } from './Grid';
-import { themePresets, type ThemePreset, createCustomPreset, mergePresetTokens } from '../theme/ThemePresets';
+import {
+  themePresets,
+  type ThemePreset,
+  createCustomPreset,
+  mergePresetTokens,
+} from '../theme/ThemePresets';
 import { useTheme } from '../theme/useTheme';
 import type { DesignTokens } from '../../types/tokens';
 
@@ -110,8 +115,8 @@ export const ThemeEditor: React.FC<ThemeEditorProps> = ({
 }) => {
   const { setTokens: setTheme } = useTheme();
 
-  const initialPreset = useMemo(() =>
-    themePresets.find(p => p.id === initialPresetId) || null,
+  const initialPreset = useMemo(
+    () => themePresets.find((p) => p.id === initialPresetId) || null,
     [initialPresetId]
   );
 
@@ -129,7 +134,7 @@ export const ThemeEditor: React.FC<ThemeEditorProps> = ({
 
   const handlePresetChange = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     const presetId = e.target.value;
-    const preset = themePresets.find(p => p.id === presetId);
+    const preset = themePresets.find((p) => p.id === presetId);
     if (preset) {
       setSelectedPreset(preset);
       setCustomTokens({});
@@ -139,7 +144,7 @@ export const ThemeEditor: React.FC<ThemeEditorProps> = ({
   }, []);
 
   const handleTokenChange = useCallback((key: keyof DesignTokens, value: string) => {
-    setCustomTokens(prev => ({
+    setCustomTokens((prev) => ({
       ...prev,
       [key]: value,
     }));
@@ -159,7 +164,7 @@ export const ThemeEditor: React.FC<ThemeEditorProps> = ({
         selectedPreset
       );
       customPreset.tokens = mergePresetTokens(selectedPreset, customTokens);
-      setTheme(customPreset.tokens as DesignTokens);
+      setTheme?.(customPreset.tokens as DesignTokens);
       onSave?.(customPreset);
     }
   }, [themeName, themeDescription, selectedPreset, customTokens, setTheme, onSave]);
@@ -200,7 +205,7 @@ export const ThemeEditor: React.FC<ThemeEditorProps> = ({
         setCustomTokens({});
         setThemeName(importedPreset.name);
         setThemeDescription(importedPreset.description);
-        setTheme(importedPreset.tokens as DesignTokens);
+        setTheme?.(importedPreset.tokens as DesignTokens);
         onImport?.(importData);
         setShowImportModal(false);
         setImportData('');
@@ -211,7 +216,7 @@ export const ThemeEditor: React.FC<ThemeEditorProps> = ({
     }
   }, [importData, onImport, setTheme]);
 
-  const activeGroup = tokenGroups.find(g => g.category === activeCategory);
+  const activeGroup = tokenGroups.find((g) => g.category === activeCategory);
 
   return (
     <div className="theme-editor">
@@ -229,7 +234,7 @@ export const ThemeEditor: React.FC<ThemeEditorProps> = ({
                   value={selectedPreset?.id || ''}
                   onChange={handlePresetChange}
                 >
-                  {themePresets.map(preset => (
+                  {themePresets.map((preset) => (
                     <option key={preset.id} value={preset.id}>
                       {preset.name} - {preset.description}
                     </option>
@@ -259,7 +264,7 @@ export const ThemeEditor: React.FC<ThemeEditorProps> = ({
             <div>
               <label className="block text-sm font-medium mb-2">令牌类别</label>
               <div className="flex flex-wrap gap-2">
-                {tokenGroups.map(group => (
+                {tokenGroups.map((group) => (
                   <button
                     key={group.category}
                     className={`px-4 py-2 rounded transition-colors ${
@@ -278,11 +283,9 @@ export const ThemeEditor: React.FC<ThemeEditorProps> = ({
             {activeGroup && (
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold">{activeGroup.category}</h3>
-                {activeGroup.tokens.map(token => (
+                {activeGroup.tokens.map((token) => (
                   <div key={token.key} className="space-y-1">
-                    <label className="block text-sm font-medium">
-                      {token.label}
-                    </label>
+                    <label className="block text-sm font-medium">{token.label}</label>
                     {token.type === 'color' ? (
                       <div className="flex gap-2">
                         <input
@@ -317,11 +320,7 @@ export const ThemeEditor: React.FC<ThemeEditorProps> = ({
               <Button onClick={handleExport} variant="outline" className="flex-1">
                 导出主题
               </Button>
-              <Button
-                onClick={() => setShowImportModal(true)}
-                variant="outline"
-                className="flex-1"
-              >
+              <Button onClick={() => setShowImportModal(true)} variant="outline" className="flex-1">
                 导入主题
               </Button>
             </div>
@@ -343,10 +342,20 @@ export const ThemeEditor: React.FC<ThemeEditorProps> = ({
                   border: `1px solid ${getTokenValue(currentTokens, 'color.border')}`,
                 }}
               >
-                <h2 style={{ fontSize: getTokenValue(currentTokens, 'font-size.h1'), marginBottom: '16px' }}>
+                <h2
+                  style={{
+                    fontSize: getTokenValue(currentTokens, 'font-size.h1'),
+                    marginBottom: '16px',
+                  }}
+                >
                   {themeName || '主题预览'}
                 </h2>
-                <p style={{ fontSize: getTokenValue(currentTokens, 'font-size.body'), marginBottom: '16px' }}>
+                <p
+                  style={{
+                    fontSize: getTokenValue(currentTokens, 'font-size.body'),
+                    marginBottom: '16px',
+                  }}
+                >
                   {themeDescription || '这是主题预览区域'}
                 </p>
                 <div className="flex gap-2 flex-wrap">
@@ -415,7 +424,12 @@ export const ThemeEditor: React.FC<ThemeEditorProps> = ({
                   borderRadius: getTokenValue(currentTokens, 'radius.md'),
                 }}
               >
-                <h3 style={{ fontSize: getTokenValue(currentTokens, 'font-size.h2'), marginBottom: '12px' }}>
+                <h3
+                  style={{
+                    fontSize: getTokenValue(currentTokens, 'font-size.h2'),
+                    marginBottom: '12px',
+                  }}
+                >
                   静默区域
                 </h3>
                 <p style={{ fontSize: getTokenValue(currentTokens, 'font-size.body') }}>
@@ -456,9 +470,7 @@ export const ThemeEditor: React.FC<ThemeEditorProps> = ({
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-2">
-                  主题JSON数据
-                </label>
+                <label className="block text-sm font-medium mb-2">主题JSON数据</label>
                 <textarea
                   value={importData}
                   onChange={(e) => setImportData(e.target.value)}

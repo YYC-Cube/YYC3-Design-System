@@ -23,9 +23,7 @@ const getTokenValue = (tokens: Record<string, unknown>, key: string): string => 
   return typeof value === 'string' ? value : '#000000';
 };
 
-export const AIUsageAnalyzer: React.FC<AIUsageAnalyzerProps> = ({
-  className = '',
-}) => {
+export const AIUsageAnalyzer: React.FC<AIUsageAnalyzerProps> = ({ className = '' }) => {
   const { tokens } = useTheme();
   const [report, setReport] = useState<UsageReport | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -66,10 +64,16 @@ export const AIUsageAnalyzer: React.FC<AIUsageAnalyzerProps> = ({
                   border: `1px solid ${getTokenValue(tokens, 'color.border')}`,
                 }}
               >
-                <div className="text-2xl font-bold" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                <div
+                  className="text-2xl font-bold"
+                  style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                >
                   {report.summary.totalTokens}
                 </div>
-                <div className="text-xs mt-1" style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
+                <div
+                  className="text-xs mt-1"
+                  style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}
+                >
                   总令牌数
                 </div>
               </div>
@@ -83,7 +87,10 @@ export const AIUsageAnalyzer: React.FC<AIUsageAnalyzerProps> = ({
                 <div className="text-2xl font-bold" style={{ color: '#10b981' }}>
                   {report.summary.usedTokens}
                 </div>
-                <div className="text-xs mt-1" style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
+                <div
+                  className="text-xs mt-1"
+                  style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}
+                >
                   已使用
                 </div>
               </div>
@@ -97,7 +104,10 @@ export const AIUsageAnalyzer: React.FC<AIUsageAnalyzerProps> = ({
                 <div className="text-2xl font-bold" style={{ color: '#ef4444' }}>
                   {report.summary.unusedTokens}
                 </div>
-                <div className="text-xs mt-1" style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
+                <div
+                  className="text-xs mt-1"
+                  style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}
+                >
                   未使用
                 </div>
               </div>
@@ -111,13 +121,20 @@ export const AIUsageAnalyzer: React.FC<AIUsageAnalyzerProps> = ({
                 <div
                   className="text-2xl font-bold"
                   style={{
-                    color: report.summary.coverage >= 80 ? '#10b981' : 
-                           report.summary.coverage >= 60 ? '#f59e0b' : '#ef4444'
+                    color:
+                      report.summary.coverage >= 80
+                        ? '#10b981'
+                        : report.summary.coverage >= 60
+                          ? '#f59e0b'
+                          : '#ef4444',
                   }}
                 >
                   {report.summary.coverage}%
                 </div>
-                <div className="text-xs mt-1" style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
+                <div
+                  className="text-xs mt-1"
+                  style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}
+                >
                   使用率
                 </div>
               </div>
@@ -125,14 +142,20 @@ export const AIUsageAnalyzer: React.FC<AIUsageAnalyzerProps> = ({
 
             <div>
               <div className="flex gap-2 mb-4">
-                {categories.map(category => (
+                {categories.map((category) => (
                   <Badge
                     key={category}
                     variant={selectedCategory === category ? 'default' : 'outline'}
                     style={{
                       cursor: 'pointer',
-                      background: selectedCategory === category ? getTokenValue(tokens, 'color.primary') : 'transparent',
-                      color: selectedCategory === category ? '#ffffff' : getTokenValue(tokens, 'color.foreground'),
+                      background:
+                        selectedCategory === category
+                          ? getTokenValue(tokens, 'color.primary')
+                          : 'transparent',
+                      color:
+                        selectedCategory === category
+                          ? '#ffffff'
+                          : getTokenValue(tokens, 'color.foreground'),
                       borderColor: getTokenValue(tokens, 'color.primary'),
                     }}
                     onClick={() => setSelectedCategory(category)}
@@ -145,7 +168,10 @@ export const AIUsageAnalyzer: React.FC<AIUsageAnalyzerProps> = ({
               {report.patterns[selectedCategory] && (
                 <div className="space-y-4">
                   <div>
-                    <h4 className="text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                    <h4
+                      className="text-sm font-medium mb-2"
+                      style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                    >
                       最常用令牌
                     </h4>
                     <div className="space-y-2">
@@ -159,10 +185,16 @@ export const AIUsageAnalyzer: React.FC<AIUsageAnalyzerProps> = ({
                           }}
                         >
                           <div>
-                            <div className="text-sm font-medium" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                            <div
+                              className="text-sm font-medium"
+                              style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                            >
                               {token.tokenName}
                             </div>
-                            <div className="text-xs mt-1" style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
+                            <div
+                              className="text-xs mt-1"
+                              style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}
+                            >
                               {token.tokenValue}
                             </div>
                           </div>
@@ -181,7 +213,10 @@ export const AIUsageAnalyzer: React.FC<AIUsageAnalyzerProps> = ({
 
                   {report.patterns[selectedCategory].trends.increasing.length > 0 && (
                     <div>
-                      <h4 className="text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                      <h4
+                        className="text-sm font-medium mb-2"
+                        style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                      >
                         使用趋势上升
                       </h4>
                       <div className="flex flex-wrap gap-2">
@@ -203,7 +238,10 @@ export const AIUsageAnalyzer: React.FC<AIUsageAnalyzerProps> = ({
 
                   {report.patterns[selectedCategory].trends.decreasing.length > 0 && (
                     <div>
-                      <h4 className="text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                      <h4
+                        className="text-sm font-medium mb-2"
+                        style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                      >
                         使用趋势下降
                       </h4>
                       <div className="flex flex-wrap gap-2">
@@ -228,7 +266,10 @@ export const AIUsageAnalyzer: React.FC<AIUsageAnalyzerProps> = ({
 
             {report.insights.length > 0 && (
               <div>
-                <h3 className="text-sm font-medium mb-2" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                <h3
+                  className="text-sm font-medium mb-2"
+                  style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                >
                   关键洞察
                 </h3>
                 <ul className="space-y-2">
@@ -251,7 +292,10 @@ export const AIUsageAnalyzer: React.FC<AIUsageAnalyzerProps> = ({
 
             {report.recommendations.length > 0 && (
               <div>
-                <h3 className="text-sm font-medium mb-2" style={{ color: tokens['color.foreground'] as string }}>
+                <h3
+                  className="text-sm font-medium mb-2"
+                  style={{ color: tokens['color.foreground'] as string }}
+                >
                   优化建议
                 </h3>
                 <ul className="space-y-2">

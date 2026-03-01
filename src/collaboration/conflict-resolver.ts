@@ -13,7 +13,13 @@ import { ColorToken, ShadowToken, TypographyTokens } from '../../types/tokens';
 export interface ConflictResolution {
   conflictId: string;
   strategy: 'local' | 'remote' | 'merge' | 'custom';
-  resolvedValue?: string | number | ColorToken | ShadowToken | TypographyTokens | Record<string, string | number>;
+  resolvedValue?:
+    | string
+    | number
+    | ColorToken
+    | ShadowToken
+    | TypographyTokens
+    | Record<string, string | number>;
   timestamp: Date;
   userId: string;
   userName: string;
@@ -23,7 +29,13 @@ export interface ConflictSuggestion {
   strategy: 'local' | 'remote' | 'merge' | 'custom';
   confidence: number;
   reason: string;
-  previewValue?: string | number | ColorToken | ShadowToken | TypographyTokens | Record<string, string | number>;
+  previewValue?:
+    | string
+    | number
+    | ColorToken
+    | ShadowToken
+    | TypographyTokens
+    | Record<string, string | number>;
 }
 
 export interface ConflictPattern {
@@ -76,7 +88,7 @@ export class ConflictResolver {
       const resolutionsData = localStorage.getItem('yyc3_conflict_resolutions');
       if (resolutionsData) {
         const resolutions = JSON.parse(resolutionsData) as ConflictResolution[];
-        resolutions.forEach(resolution => {
+        resolutions.forEach((resolution) => {
           this.resolutions.set(resolution.conflictId, resolution);
         });
       }
@@ -98,18 +110,18 @@ export class ConflictResolver {
     const { localOperation, remoteOperation } = conflict;
 
     if (typeof localOperation.newValue !== typeof remoteOperation.newValue) {
-      return this.patterns.find(p => p.type === 'type')!;
+      return this.patterns.find((p) => p.type === 'type')!;
     }
 
     if (this.isReferenceConflict(conflict)) {
-      return this.patterns.find(p => p.type === 'reference')!;
+      return this.patterns.find((p) => p.type === 'reference')!;
     }
 
     if (this.isDependencyConflict(conflict)) {
-      return this.patterns.find(p => p.type === 'dependency')!;
+      return this.patterns.find((p) => p.type === 'dependency')!;
     }
 
-    return this.patterns.find(p => p.type === 'value')!;
+    return this.patterns.find((p) => p.type === 'value')!;
   }
 
   private isReferenceConflict(conflict: SyncConflict): boolean {
@@ -123,7 +135,11 @@ export class ConflictResolver {
 
   private isDependencyConflict(conflict: SyncConflict): boolean {
     const tokenName = conflict.tokenName;
-    return tokenName.includes('primary') || tokenName.includes('secondary') || tokenName.includes('accent');
+    return (
+      tokenName.includes('primary') ||
+      tokenName.includes('secondary') ||
+      tokenName.includes('accent')
+    );
   }
 
   generateSuggestions(conflict: SyncConflict): ConflictSuggestion[] {
@@ -165,10 +181,7 @@ export class ConflictResolver {
       return null;
     }
 
-    const mergedValue = this.mergeValues(
-      localValue,
-      remoteValue
-    );
+    const mergedValue = this.mergeValues(localValue, remoteValue);
 
     if (mergedValue === undefined) return null;
 
@@ -185,9 +198,30 @@ export class ConflictResolver {
   }
 
   private mergeValues(
-    local: string | number | ColorToken | ShadowToken | TypographyTokens | Record<string, string | number> | undefined,
-    remote: string | number | ColorToken | ShadowToken | TypographyTokens | Record<string, string | number> | undefined
-  ): string | number | ColorToken | ShadowToken | TypographyTokens | Record<string, string | number> | undefined {
+    local:
+      | string
+      | number
+      | ColorToken
+      | ShadowToken
+      | TypographyTokens
+      | Record<string, string | number>
+      | undefined,
+    remote:
+      | string
+      | number
+      | ColorToken
+      | ShadowToken
+      | TypographyTokens
+      | Record<string, string | number>
+      | undefined
+  ):
+    | string
+    | number
+    | ColorToken
+    | ShadowToken
+    | TypographyTokens
+    | Record<string, string | number>
+    | undefined {
     if (local === undefined) return remote;
     if (remote === undefined) return local;
     if (local === remote) return local;
@@ -219,7 +253,6 @@ export class ConflictResolver {
     return Math.round((local + remote) / 2);
   }
 
-
   private calculateLocalConfidence(conflict: SyncConflict): number {
     const { localOperation, remoteOperation } = conflict;
 
@@ -247,7 +280,13 @@ export class ConflictResolver {
     strategy: 'local' | 'remote' | 'merge' | 'custom',
     userId: string,
     userName: string,
-    customValue?: string | number | ColorToken | ShadowToken | TypographyTokens | Record<string, string | number>
+    customValue?:
+      | string
+      | number
+      | ColorToken
+      | ShadowToken
+      | TypographyTokens
+      | Record<string, string | number>
   ): ConflictResolution {
     const resolution: ConflictResolution = {
       conflictId: conflict.id,
@@ -294,7 +333,7 @@ export class ConflictResolver {
   }
 
   getResolutionsByUser(userId: string): ConflictResolution[] {
-    return this.getAllResolutions().filter(r => r.userId === userId);
+    return this.getAllResolutions().filter((r) => r.userId === userId);
   }
 
   getResolutionStats() {
@@ -302,10 +341,10 @@ export class ConflictResolver {
     return {
       total: resolutions.length,
       byStrategy: {
-        local: resolutions.filter(r => r.strategy === 'local').length,
-        remote: resolutions.filter(r => r.strategy === 'remote').length,
-        merge: resolutions.filter(r => r.strategy === 'merge').length,
-        custom: resolutions.filter(r => r.strategy === 'custom').length,
+        local: resolutions.filter((r) => r.strategy === 'local').length,
+        remote: resolutions.filter((r) => r.strategy === 'remote').length,
+        merge: resolutions.filter((r) => r.strategy === 'merge').length,
+        custom: resolutions.filter((r) => r.strategy === 'custom').length,
       },
       byUser: this.getResolutionByUserStats(),
     };
@@ -313,7 +352,7 @@ export class ConflictResolver {
 
   private getResolutionByUserStats(): Record<string, number> {
     const stats: Record<string, number> = {};
-    this.getAllResolutions().forEach(resolution => {
+    this.getAllResolutions().forEach((resolution) => {
       const key = resolution.userName;
       stats[key] = (stats[key] || 0) + 1;
     });
@@ -328,7 +367,7 @@ export class ConflictResolver {
     try {
       const resolutions = JSON.parse(resolutionsJson) as ConflictResolution[];
       this.resolutions.clear();
-      resolutions.forEach(resolution => {
+      resolutions.forEach((resolution) => {
         this.resolutions.set(resolution.conflictId, resolution);
       });
       this.saveToStorage();
@@ -352,7 +391,7 @@ export class ConflictResolver {
   }
 
   removePattern(type: ConflictPattern['type']): void {
-    this.patterns = this.patterns.filter(p => p.type !== type);
+    this.patterns = this.patterns.filter((p) => p.type !== type);
   }
 }
 

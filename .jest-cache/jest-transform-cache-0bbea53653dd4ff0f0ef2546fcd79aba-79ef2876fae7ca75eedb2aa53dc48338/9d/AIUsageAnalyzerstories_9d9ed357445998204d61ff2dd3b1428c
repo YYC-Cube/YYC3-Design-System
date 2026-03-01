@@ -1,0 +1,282 @@
+cdd529968824fcc7efef7e672db0c1af
+"use strict";
+
+/**
+ * @file AI 使用模式分析 Storybook 文档
+ * @description AI 使用模式分析的 Storybook 故事
+ * @module stories/AIUsageAnalyzer.stories
+ * @author YYC³
+ * @version 1.0.0
+ * @created 2026-02-18
+ */
+/* istanbul ignore next */
+function cov_61fabhe3k() {
+  var path = "/Users/yanyu/Downloads/yyc3-Design-System/src/components/AIUsageAnalyzer.stories.tsx";
+  var hash = "9673a8028045e208cce53e90dd98378416b9a5d8";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/yanyu/Downloads/yyc3-Design-System/src/components/AIUsageAnalyzer.stories.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 10,
+          column: 0
+        },
+        end: {
+          line: 10,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 11,
+          column: 0
+        },
+        end: {
+          line: 11,
+          column: 44
+        }
+      },
+      "2": {
+        start: {
+          line: 12,
+          column: 26
+        },
+        end: {
+          line: 12,
+          column: 54
+        }
+      },
+      "3": {
+        start: {
+          line: 13,
+          column: 13
+        },
+        end: {
+          line: 20,
+          column: 1
+        }
+      },
+      "4": {
+        start: {
+          line: 21,
+          column: 0
+        },
+        end: {
+          line: 21,
+          column: 23
+        }
+      },
+      "5": {
+        start: {
+          line: 22,
+          column: 0
+        },
+        end: {
+          line: 24,
+          column: 2
+        }
+      },
+      "6": {
+        start: {
+          line: 25,
+          column: 0
+        },
+        end: {
+          line: 33,
+          column: 2
+        }
+      },
+      "7": {
+        start: {
+          line: 28,
+          column: 30
+        },
+        end: {
+          line: 28,
+          column: 67
+        }
+      },
+      "8": {
+        start: {
+          line: 29,
+          column: 8
+        },
+        end: {
+          line: 31,
+          column: 9
+        }
+      },
+      "9": {
+        start: {
+          line: 30,
+          column: 12
+        },
+        end: {
+          line: 30,
+          column: 79
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "(anonymous_0)",
+        decl: {
+          start: {
+            line: 27,
+            column: 10
+          },
+          end: {
+            line: 27,
+            column: 11
+          }
+        },
+        loc: {
+          start: {
+            line: 27,
+            column: 39
+          },
+          end: {
+            line: 32,
+            column: 5
+          }
+        },
+        line: 27
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 29,
+            column: 8
+          },
+          end: {
+            line: 31,
+            column: 9
+          }
+        },
+        type: "if",
+        locations: [{
+          start: {
+            line: 29,
+            column: 8
+          },
+          end: {
+            line: 31,
+            column: 9
+          }
+        }, {
+          start: {
+            line: undefined,
+            column: undefined
+          },
+          end: {
+            line: undefined,
+            column: undefined
+          }
+        }],
+        line: 29
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {
+      "0": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/yanyu/Downloads/yyc3-Design-System/src/components/AIUsageAnalyzer.stories.tsx",
+      mappings: ";AAAA;;;;;;;GAOG;;;AAGH,uDAAoD;AAEpD,MAAM,IAAI,GAAiC;IACzC,KAAK,EAAE,oBAAoB;IAC3B,SAAS,EAAE,iCAAe;IAC1B,IAAI,EAAE,CAAC,UAAU,CAAC;IAClB,UAAU,EAAE;QACV,MAAM,EAAE,UAAU;KACnB;CACF,CAAC;AAEF,kBAAe,IAAI,CAAC;AAGP,QAAA,OAAO,GAAU;IAC5B,IAAI,EAAE,EAAE;CACT,CAAC;AAEW,QAAA,QAAQ,GAAU;IAC7B,IAAI,EAAE,EAAE;IACR,IAAI,EAAE,KAAK,EAAE,EAAE,aAAa,EAAE,EAAE,EAAE;QAChC,MAAM,aAAa,GAAG,aAAa,CAAC,aAAa,CAAC,QAAQ,CAAsB,CAAC;QACjF,IAAI,aAAa,EAAE,CAAC;YAClB,aAAa,CAAC,aAAa,CAAC,IAAI,KAAK,CAAC,OAAO,EAAE,EAAE,OAAO,EAAE,IAAI,EAAE,CAAC,CAAC,CAAC;QACrE,CAAC;IACH,CAAC;CACF,CAAC",
+      names: [],
+      sources: ["/Users/yanyu/Downloads/yyc3-Design-System/src/components/AIUsageAnalyzer.stories.tsx"],
+      sourcesContent: ["/**\n * @file AI \u4F7F\u7528\u6A21\u5F0F\u5206\u6790 Storybook \u6587\u6863\n * @description AI \u4F7F\u7528\u6A21\u5F0F\u5206\u6790\u7684 Storybook \u6545\u4E8B\n * @module stories/AIUsageAnalyzer.stories\n * @author YYC\xB3\n * @version 1.0.0\n * @created 2026-02-18\n */\n\nimport type { Meta, StoryObj } from '@storybook/react';\nimport { AIUsageAnalyzer } from './AIUsageAnalyzer';\n\nconst meta: Meta<typeof AIUsageAnalyzer> = {\n  title: 'AI/AIUsageAnalyzer',\n  component: AIUsageAnalyzer,\n  tags: ['autodocs'],\n  parameters: {\n    layout: 'centered',\n  },\n};\n\nexport default meta;\ntype Story = StoryObj<typeof AIUsageAnalyzer>;\n\nexport const Default: Story = {\n  args: {},\n};\n\nexport const Analyzed: Story = {\n  args: {},\n  play: async ({ canvasElement }) => {\n    const analyzeButton = canvasElement.querySelector('button') as HTMLButtonElement;\n    if (analyzeButton) {\n      analyzeButton.dispatchEvent(new Event('click', { bubbles: true }));\n    }\n  },\n};\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "9673a8028045e208cce53e90dd98378416b9a5d8"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_61fabhe3k = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_61fabhe3k();
+cov_61fabhe3k().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_61fabhe3k().s[1]++;
+exports.Analyzed = exports.Default = void 0;
+const AIUsageAnalyzer_1 =
+/* istanbul ignore next */
+(cov_61fabhe3k().s[2]++, require("./AIUsageAnalyzer"));
+const meta =
+/* istanbul ignore next */
+(cov_61fabhe3k().s[3]++, {
+  title: 'AI/AIUsageAnalyzer',
+  component: AIUsageAnalyzer_1.AIUsageAnalyzer,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered'
+  }
+});
+/* istanbul ignore next */
+cov_61fabhe3k().s[4]++;
+exports.default = meta;
+/* istanbul ignore next */
+cov_61fabhe3k().s[5]++;
+exports.Default = {
+  args: {}
+};
+/* istanbul ignore next */
+cov_61fabhe3k().s[6]++;
+exports.Analyzed = {
+  args: {},
+  play: async ({
+    canvasElement
+  }) => {
+    /* istanbul ignore next */
+    cov_61fabhe3k().f[0]++;
+    const analyzeButton =
+    /* istanbul ignore next */
+    (cov_61fabhe3k().s[7]++, canvasElement.querySelector('button'));
+    /* istanbul ignore next */
+    cov_61fabhe3k().s[8]++;
+    if (analyzeButton) {
+      /* istanbul ignore next */
+      cov_61fabhe3k().b[0][0]++;
+      cov_61fabhe3k().s[9]++;
+      analyzeButton.dispatchEvent(new Event('click', {
+        bubbles: true
+      }));
+    } else
+    /* istanbul ignore next */
+    {
+      cov_61fabhe3k().b[0][1]++;
+    }
+  }
+};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfNjFmYWJoZTNrIiwicGF0aCIsImhhc2giLCJnbG9iYWwiLCJGdW5jdGlvbiIsImdjdiIsImNvdmVyYWdlRGF0YSIsInN0YXRlbWVudE1hcCIsInN0YXJ0IiwibGluZSIsImNvbHVtbiIsImVuZCIsImZuTWFwIiwibmFtZSIsImRlY2wiLCJsb2MiLCJicmFuY2hNYXAiLCJ0eXBlIiwibG9jYXRpb25zIiwidW5kZWZpbmVkIiwicyIsImYiLCJiIiwiaW5wdXRTb3VyY2VNYXAiLCJmaWxlIiwibWFwcGluZ3MiLCJuYW1lcyIsInNvdXJjZXMiLCJzb3VyY2VzQ29udGVudCIsInZlcnNpb24iLCJfY292ZXJhZ2VTY2hlbWEiLCJjb3ZlcmFnZSIsImFjdHVhbENvdmVyYWdlIiwiQUlVc2FnZUFuYWx5emVyXzEiLCJyZXF1aXJlIiwibWV0YSIsInRpdGxlIiwiY29tcG9uZW50IiwiQUlVc2FnZUFuYWx5emVyIiwidGFncyIsInBhcmFtZXRlcnMiLCJsYXlvdXQiLCJleHBvcnRzIiwiZGVmYXVsdCIsIkRlZmF1bHQiLCJhcmdzIiwiQW5hbHl6ZWQiLCJwbGF5IiwiY2FudmFzRWxlbWVudCIsImFuYWx5emVCdXR0b24iLCJxdWVyeVNlbGVjdG9yIiwiZGlzcGF0Y2hFdmVudCIsIkV2ZW50IiwiYnViYmxlcyJdLCJzb3VyY2VzIjpbIi9Vc2Vycy95YW55dS9Eb3dubG9hZHMveXljMy1EZXNpZ24tU3lzdGVtL3NyYy9jb21wb25lbnRzL0FJVXNhZ2VBbmFseXplci5zdG9yaWVzLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEBmaWxlIEFJIOS9v+eUqOaooeW8j+WIhuaekCBTdG9yeWJvb2sg5paH5qGjXG4gKiBAZGVzY3JpcHRpb24gQUkg5L2/55So5qih5byP5YiG5p6Q55qEIFN0b3J5Ym9vayDmlYXkuotcbiAqIEBtb2R1bGUgc3Rvcmllcy9BSVVzYWdlQW5hbHl6ZXIuc3Rvcmllc1xuICogQGF1dGhvciBZWUPCs1xuICogQHZlcnNpb24gMS4wLjBcbiAqIEBjcmVhdGVkIDIwMjYtMDItMThcbiAqL1xuXG5pbXBvcnQgdHlwZSB7IE1ldGEsIFN0b3J5T2JqIH0gZnJvbSAnQHN0b3J5Ym9vay9yZWFjdCc7XG5pbXBvcnQgeyBBSVVzYWdlQW5hbHl6ZXIgfSBmcm9tICcuL0FJVXNhZ2VBbmFseXplcic7XG5cbmNvbnN0IG1ldGE6IE1ldGE8dHlwZW9mIEFJVXNhZ2VBbmFseXplcj4gPSB7XG4gIHRpdGxlOiAnQUkvQUlVc2FnZUFuYWx5emVyJyxcbiAgY29tcG9uZW50OiBBSVVzYWdlQW5hbHl6ZXIsXG4gIHRhZ3M6IFsnYXV0b2RvY3MnXSxcbiAgcGFyYW1ldGVyczoge1xuICAgIGxheW91dDogJ2NlbnRlcmVkJyxcbiAgfSxcbn07XG5cbmV4cG9ydCBkZWZhdWx0IG1ldGE7XG50eXBlIFN0b3J5ID0gU3RvcnlPYmo8dHlwZW9mIEFJVXNhZ2VBbmFseXplcj47XG5cbmV4cG9ydCBjb25zdCBEZWZhdWx0OiBTdG9yeSA9IHtcbiAgYXJnczoge30sXG59O1xuXG5leHBvcnQgY29uc3QgQW5hbHl6ZWQ6IFN0b3J5ID0ge1xuICBhcmdzOiB7fSxcbiAgcGxheTogYXN5bmMgKHsgY2FudmFzRWxlbWVudCB9KSA9PiB7XG4gICAgY29uc3QgYW5hbHl6ZUJ1dHRvbiA9IGNhbnZhc0VsZW1lbnQucXVlcnlTZWxlY3RvcignYnV0dG9uJykgYXMgSFRNTEJ1dHRvbkVsZW1lbnQ7XG4gICAgaWYgKGFuYWx5emVCdXR0b24pIHtcbiAgICAgIGFuYWx5emVCdXR0b24uZGlzcGF0Y2hFdmVudChuZXcgRXZlbnQoJ2NsaWNrJywgeyBidWJibGVzOiB0cnVlIH0pKTtcbiAgICB9XG4gIH0sXG59O1xuIl0sIm1hcHBpbmdzIjoiOztBQUFBOzs7Ozs7OztBQUFBO0FBQUEsU0FBQUEsY0FBQTtFQUFBLElBQUFDLElBQUE7RUFBQSxJQUFBQyxJQUFBO0VBQUEsSUFBQUMsTUFBQSxPQUFBQyxRQUFBO0VBQUEsSUFBQUMsR0FBQTtFQUFBLElBQUFDLFlBQUE7SUFBQUwsSUFBQTtJQUFBTSxZQUFBO01BQUE7UUFBQUMsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7SUFBQTtJQUFBRSxLQUFBO01BQUE7UUFBQUMsSUFBQTtRQUFBQyxJQUFBO1VBQUFOLEtBQUE7WUFBQUMsSUFBQTtZQUFBQyxNQUFBO1VBQUE7VUFBQUMsR0FBQTtZQUFBRixJQUFBO1lBQUFDLE1BQUE7VUFBQTtRQUFBO1FBQUFLLEdBQUE7VUFBQVAsS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUQsSUFBQTtNQUFBO0lBQUE7SUFBQU8sU0FBQTtNQUFBO1FBQUFELEdBQUE7VUFBQVAsS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQU8sSUFBQTtRQUFBQyxTQUFBO1VBQUFWLEtBQUE7WUFBQUMsSUFBQTtZQUFBQyxNQUFBO1VBQUE7VUFBQUMsR0FBQTtZQUFBRixJQUFBO1lBQUFDLE1BQUE7VUFBQTtRQUFBO1VBQUFGLEtBQUE7WUFBQUMsSUFBQSxFQUFBVSxTQUFBO1lBQUFULE1BQUEsRUFBQVM7VUFBQTtVQUFBUixHQUFBO1lBQUFGLElBQUEsRUFBQVUsU0FBQTtZQUFBVCxNQUFBLEVBQUFTO1VBQUE7UUFBQTtRQUFBVixJQUFBO01BQUE7SUFBQTtJQUFBVyxDQUFBO01BQUE7TUFBQTtNQUFBO01BQUE7TUFBQTtNQUFBO01BQUE7TUFBQTtNQUFBO01BQUE7SUFBQTtJQUFBQyxDQUFBO01BQUE7SUFBQTtJQUFBQyxDQUFBO01BQUE7SUFBQTtJQUFBQyxjQUFBO01BQUFDLElBQUE7TUFBQUMsUUFBQTtNQUFBQyxLQUFBO01BQUFDLE9BQUE7TUFBQUMsY0FBQTtNQUFBQyxPQUFBO0lBQUE7SUFBQUMsZUFBQTtJQUFBNUIsSUFBQTtFQUFBO0VBQUEsSUFBQTZCLFFBQUEsR0FBQTVCLE1BQUEsQ0FBQUUsR0FBQSxNQUFBRixNQUFBLENBQUFFLEdBQUE7RUFBQSxLQUFBMEIsUUFBQSxDQUFBOUIsSUFBQSxLQUFBOEIsUUFBQSxDQUFBOUIsSUFBQSxFQUFBQyxJQUFBLEtBQUFBLElBQUE7SUFBQTZCLFFBQUEsQ0FBQTlCLElBQUEsSUFBQUssWUFBQTtFQUFBO0VBQUEsSUFBQTBCLGNBQUEsR0FBQUQsUUFBQSxDQUFBOUIsSUFBQTtFQUFBO0lBZVM7SUFBQUQsYUFBQSxZQUFBQSxDQUFBO01BQUEsT0FBQWdDLGNBQUE7SUFBQTtFQUFBO0VBQUEsT0FBQUEsY0FBQTtBQUFBO0FBQUFoQyxhQUFBO0FBQUFBLGFBQUEsR0FBQW9CLENBQUE7Ozs7Ozs7QUFMVCxNQUFBYSxpQkFBQTtBQUFBO0FBQUEsQ0FBQWpDLGFBQUEsR0FBQW9CLENBQUEsT0FBQWMsT0FBQTtBQUVBLE1BQU1DLElBQUk7QUFBQTtBQUFBLENBQUFuQyxhQUFBLEdBQUFvQixDQUFBLE9BQWlDO0VBQ3pDZ0IsS0FBSyxFQUFFLG9CQUFvQjtFQUMzQkMsU0FBUyxFQUFFSixpQkFBQSxDQUFBSyxlQUFlO0VBQzFCQyxJQUFJLEVBQUUsQ0FBQyxVQUFVLENBQUM7RUFDbEJDLFVBQVUsRUFBRTtJQUNWQyxNQUFNLEVBQUU7O0NBRVg7QUFBQztBQUFBekMsYUFBQSxHQUFBb0IsQ0FBQTtBQUVGc0IsT0FBQSxDQUFBQyxPQUFBLEdBQWVSLElBQUk7QUFBQztBQUFBbkMsYUFBQSxHQUFBb0IsQ0FBQTtBQUdQc0IsT0FBQSxDQUFBRSxPQUFPLEdBQVU7RUFDNUJDLElBQUksRUFBRTtDQUNQO0FBQUM7QUFBQTdDLGFBQUEsR0FBQW9CLENBQUE7QUFFV3NCLE9BQUEsQ0FBQUksUUFBUSxHQUFVO0VBQzdCRCxJQUFJLEVBQUUsRUFBRTtFQUNSRSxJQUFJLEVBQUUsTUFBQUEsQ0FBTztJQUFFQztFQUFhLENBQUUsS0FBSTtJQUFBO0lBQUFoRCxhQUFBLEdBQUFxQixDQUFBO0lBQ2hDLE1BQU00QixhQUFhO0lBQUE7SUFBQSxDQUFBakQsYUFBQSxHQUFBb0IsQ0FBQSxPQUFHNEIsYUFBYSxDQUFDRSxhQUFhLENBQUMsUUFBUSxDQUFzQjtJQUFDO0lBQUFsRCxhQUFBLEdBQUFvQixDQUFBO0lBQ2pGLElBQUk2QixhQUFhLEVBQUU7TUFBQTtNQUFBakQsYUFBQSxHQUFBc0IsQ0FBQTtNQUFBdEIsYUFBQSxHQUFBb0IsQ0FBQTtNQUNqQjZCLGFBQWEsQ0FBQ0UsYUFBYSxDQUFDLElBQUlDLEtBQUssQ0FBQyxPQUFPLEVBQUU7UUFBRUMsT0FBTyxFQUFFO01BQUksQ0FBRSxDQUFDLENBQUM7SUFDcEUsQ0FBQztJQUFBO0lBQUE7TUFBQXJELGFBQUEsR0FBQXNCLENBQUE7SUFBQTtFQUNIO0NBQ0QiLCJpZ25vcmVMaXN0IjpbXX0=

@@ -18,7 +18,14 @@ export interface EnhancedColorToken extends GeneratedColorToken {
 
 export interface TokenGenerationEnhancedOptions {
   baseColor?: string;
-  harmony?: 'complementary' | 'analogous' | 'triadic' | 'tetradic' | 'monochromatic' | 'split-complementary' | 'double-complementary';
+  harmony?:
+    | 'complementary'
+    | 'analogous'
+    | 'triadic'
+    | 'tetradic'
+    | 'monochromatic'
+    | 'split-complementary'
+    | 'double-complementary';
   scale?: number;
   includeShades?: boolean;
   includeTints?: boolean;
@@ -29,11 +36,11 @@ export interface TokenGenerationEnhancedOptions {
 
 export class EnhancedAITokenGenerator {
   private harmonies: Record<string, (baseColor: string) => string[]> = {
-    'complementary': (baseColor) => this.generateComplementary(baseColor),
-    'analogous': (baseColor) => this.generateAnalogous(baseColor),
-    'triadic': (baseColor) => this.generateTriadic(baseColor),
-    'tetradic': (baseColor) => this.generateTetradic(baseColor),
-    'monochromatic': (baseColor) => this.generateMonochromatic(baseColor),
+    complementary: (baseColor) => this.generateComplementary(baseColor),
+    analogous: (baseColor) => this.generateAnalogous(baseColor),
+    triadic: (baseColor) => this.generateTriadic(baseColor),
+    tetradic: (baseColor) => this.generateTetradic(baseColor),
+    monochromatic: (baseColor) => this.generateMonochromatic(baseColor),
     'split-complementary': (baseColor) => this.generateSplitComplementary(baseColor),
     'double-complementary': (baseColor) => this.generateDoubleComplementary(baseColor),
   };
@@ -41,7 +48,9 @@ export class EnhancedAITokenGenerator {
   private spacingScales = [4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96, 128, 160, 192, 256];
   private typeScales = [12, 14, 16, 18, 20, 24, 30, 36, 48, 60, 72];
 
-  generateTokens(options: TokenGenerationEnhancedOptions = {}): GeneratedTokens & { enhancedColors: Record<string, EnhancedColorToken> } {
+  generateTokens(
+    options: TokenGenerationEnhancedOptions = {}
+  ): GeneratedTokens & { enhancedColors: Record<string, EnhancedColorToken> } {
     const {
       baseColor = '#d45a5f',
       harmony = 'monochromatic',
@@ -148,17 +157,43 @@ export class EnhancedAITokenGenerator {
   }
 
   private getAllColorSpaces(hex: string): ColorSpaceValue {
-    const hsl = culori.converter('hsl')(hex) as { h: number; s: number; l: number; mode?: 'hsl' } | null;
-    const lab = culori.converter('lab')(hex) as { l: number; a: number; b: number; mode?: 'lab' } | null;
-    const rgb = culori.converter('rgb')(hex) as { r: number; g: number; b: number; mode?: 'rgb' } | null;
-    const oklch = culori.converter('oklch')(hex) as { l: number; c: number; h: number; mode?: 'oklch' } | null;
+    const hsl = culori.converter('hsl')(hex) as {
+      h: number;
+      s: number;
+      l: number;
+      mode?: 'hsl';
+    } | null;
+    const lab = culori.converter('lab')(hex) as {
+      l: number;
+      a: number;
+      b: number;
+      mode?: 'lab';
+    } | null;
+    const rgb = culori.converter('rgb')(hex) as {
+      r: number;
+      g: number;
+      b: number;
+      mode?: 'rgb';
+    } | null;
+    const oklch = culori.converter('oklch')(hex) as {
+      l: number;
+      c: number;
+      h: number;
+      mode?: 'oklch';
+    } | null;
 
     return {
       hex,
-      hsl: hsl ? `hsl(${Math.round(hsl.h || 0)}, ${Math.round((hsl.s || 0) * 100)}%, ${Math.round((hsl.l || 0) * 100)}%)` : hex,
+      hsl: hsl
+        ? `hsl(${Math.round(hsl.h || 0)}, ${Math.round((hsl.s || 0) * 100)}%, ${Math.round((hsl.l || 0) * 100)}%)`
+        : hex,
       lab: lab ? `lab(${lab.l.toFixed(2)}, ${lab.a.toFixed(2)}, ${lab.b.toFixed(2)})` : hex,
-      rgb: rgb ? `rgb(${Math.round((rgb.r || 0) * 255)}, ${Math.round((rgb.g || 0) * 255)}, ${Math.round((rgb.b || 0) * 255)})` : hex,
-      oklch: oklch ? `oklch(${oklch.l.toFixed(4)} ${oklch.c.toFixed(4)} ${(oklch.h || 0).toFixed(4)})` : hex,
+      rgb: rgb
+        ? `rgb(${Math.round((rgb.r || 0) * 255)}, ${Math.round((rgb.g || 0) * 255)}, ${Math.round((rgb.b || 0) * 255)})`
+        : hex,
+      oklch: oklch
+        ? `oklch(${oklch.l.toFixed(4)} ${oklch.c.toFixed(4)} ${(oklch.h || 0).toFixed(4)})`
+        : hex,
     };
   }
 
@@ -178,7 +213,7 @@ export class EnhancedAITokenGenerator {
   }
 
   private calculateLuminance(rgb: { r: number; g: number; b: number }): number {
-    const [r, g, b] = [rgb.r, rgb.g, rgb.b].map(channel => {
+    const [r, g, b] = [rgb.r, rgb.g, rgb.b].map((channel) => {
       const c = channel <= 0.03928 ? channel / 12.92 : Math.pow((channel + 0.055) / 1.055, 2.4);
       return c;
     });
@@ -186,7 +221,11 @@ export class EnhancedAITokenGenerator {
     return 0.2126 * r + 0.7152 * g + 0.0722 * b;
   }
 
-  private optimizeForContrast(color: string, targetRatio: number, bgColor: string = '#ffffff'): string {
+  private optimizeForContrast(
+    color: string,
+    targetRatio: number,
+    bgColor: string = '#ffffff'
+  ): string {
     let optimized = color;
     let iterations = 0;
     const maxIterations = 100;
@@ -199,7 +238,10 @@ export class EnhancedAITokenGenerator {
       if (!hsl) break;
 
       const adjustment = currentRatio < targetRatio * 0.5 ? 0.05 : 0.01;
-      const newLightness = Math.max(0.05, Math.min(0.95, hsl.l + (hsl.l > 0.5 ? -adjustment : adjustment)));
+      const newLightness = Math.max(
+        0.05,
+        Math.min(0.95, hsl.l + (hsl.l > 0.5 ? -adjustment : adjustment))
+      );
 
       const newColor: culori.Hsl = { h: hsl.h || 0, s: hsl.s, l: newLightness, mode: 'hsl' };
       optimized = culori.formatter.hex(newColor);
@@ -255,7 +297,7 @@ export class EnhancedAITokenGenerator {
     if (!hsl) return [baseColor];
     const colors: string[] = [baseColor];
     for (let i = 1; i <= 10; i++) {
-      const lightness = 0.1 + (i * 0.08);
+      const lightness = 0.1 + i * 0.08;
       const color: culori.Hsl = { h: hsl.h || 0, s: hsl.s, l: lightness, mode: 'hsl' };
       colors.push(culori.formatter.hex(color));
     }
@@ -282,7 +324,12 @@ export class EnhancedAITokenGenerator {
     colors.push(culori.formatter.hex(complement));
     const analogous: culori.Hsl = { h: (hsl.h || 0) + 30, s: hsl.s, l: hsl.l, mode: 'hsl' };
     colors.push(culori.formatter.hex(analogous));
-    const analogousComplement: culori.Hsl = { h: (hsl.h || 0) + 210, s: hsl.s, l: hsl.l, mode: 'hsl' };
+    const analogousComplement: culori.Hsl = {
+      h: (hsl.h || 0) + 210,
+      s: hsl.s,
+      l: hsl.l,
+      mode: 'hsl',
+    };
     colors.push(culori.formatter.hex(analogousComplement));
     return colors;
   }
@@ -292,7 +339,12 @@ export class EnhancedAITokenGenerator {
     if (!hsl) return [];
     const shades: string[] = [];
     for (let i = 1; i <= 5; i++) {
-      const shade: culori.Hsl = { h: hsl.h || 0, s: hsl.s, l: Math.max(0, (hsl.l || 0.5) - i * 0.1), mode: 'hsl' };
+      const shade: culori.Hsl = {
+        h: hsl.h || 0,
+        s: hsl.s,
+        l: Math.max(0, (hsl.l || 0.5) - i * 0.1),
+        mode: 'hsl',
+      };
       shades.push(culori.formatter.hex(shade));
     }
     return shades;
@@ -303,7 +355,12 @@ export class EnhancedAITokenGenerator {
     if (!hsl) return [];
     const tints: string[] = [];
     for (let i = 1; i <= 5; i++) {
-      const tint: culori.Hsl = { h: hsl.h || 0, s: hsl.s, l: Math.min(1, (hsl.l || 0.5) + i * 0.1), mode: 'hsl' };
+      const tint: culori.Hsl = {
+        h: hsl.h || 0,
+        s: hsl.s,
+        l: Math.min(1, (hsl.l || 0.5) + i * 0.1),
+        mode: 'hsl',
+      };
       tints.push(culori.formatter.hex(tint));
     }
     return tints;
@@ -311,7 +368,7 @@ export class EnhancedAITokenGenerator {
 
   private generateSpacingTokens(scale: number): Record<string, string | number> {
     const spacingTokens: Record<string, string | number> = {};
-    const scaledValues = this.spacingScales.map(v => v * (scale / 10));
+    const scaledValues = this.spacingScales.map((v) => v * (scale / 10));
 
     scaledValues.forEach((value, index) => {
       const name = this.getSpacingName(index);
@@ -322,7 +379,24 @@ export class EnhancedAITokenGenerator {
   }
 
   private getSpacingName(index: number): string {
-    const names = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl', '10xl', '11xl', '12xl'];
+    const names = [
+      'xs',
+      'sm',
+      'md',
+      'lg',
+      'xl',
+      '2xl',
+      '3xl',
+      '4xl',
+      '5xl',
+      '6xl',
+      '7xl',
+      '8xl',
+      '9xl',
+      '10xl',
+      '11xl',
+      '12xl',
+    ];
     return names[index] || `spacing-${index}`;
   }
 
@@ -352,7 +426,9 @@ export class EnhancedAITokenGenerator {
   analyzeColorHarmony(colors: string[]): string {
     if (colors.length < 2) return 'monochromatic';
 
-    const hsls = colors.map(c => culori.converter('hsl')(c) as { h: number; s: number; l: number } | null);
+    const hsls = colors.map(
+      (c) => culori.converter('hsl')(c) as { h: number; s: number; l: number } | null
+    );
     const hueDifferences = hsls.slice(1).map((hsl, i) => {
       const prevHsl = hsls[i];
       if (!hsl || !prevHsl) return 0;
@@ -360,7 +436,10 @@ export class EnhancedAITokenGenerator {
       return Math.min(diff, 360 - diff);
     });
 
-    const avgDiff = hueDifferences.length > 0 ? hueDifferences.reduce((a, b) => a + b, 0) / hueDifferences.length : 0;
+    const avgDiff =
+      hueDifferences.length > 0
+        ? hueDifferences.reduce((a, b) => a + b, 0) / hueDifferences.length
+        : 0;
 
     if (avgDiff > 170 && avgDiff < 190) return 'complementary';
     if (avgDiff > 110 && avgDiff < 130) return 'triadic';
@@ -370,7 +449,9 @@ export class EnhancedAITokenGenerator {
     return 'monochromatic';
   }
 
-  generateRecommendations(tokens: GeneratedTokens & { enhancedColors?: Record<string, EnhancedColorToken> }): string[] {
+  generateRecommendations(
+    tokens: GeneratedTokens & { enhancedColors?: Record<string, EnhancedColorToken> }
+  ): string[] {
     const recommendations: string[] = [];
 
     const colors = tokens.colors || {};
@@ -382,7 +463,12 @@ export class EnhancedAITokenGenerator {
         if (typeof c === 'object' && c !== null) {
           const token = c as GeneratedColorToken;
           if ('hex' in token.value) return token.value.hex;
-          if ('value' in token && typeof token.value === 'object' && token.value !== null && 'hex' in token.value) {
+          if (
+            'value' in token &&
+            typeof token.value === 'object' &&
+            token.value !== null &&
+            'hex' in token.value
+          ) {
             return (token.value as { hex: string }).hex;
           }
         }
@@ -397,7 +483,9 @@ export class EnhancedAITokenGenerator {
       }
 
       const enhancedColors = tokens.enhancedColors || {};
-      const lowContrastColors = Object.entries(enhancedColors).filter(([_, color]) => !color.wcagAA);
+      const lowContrastColors = Object.entries(enhancedColors).filter(
+        ([_, color]) => !color.wcagAA
+      );
 
       if (lowContrastColors.length > 0) {
         recommendations.push(`发现 ${lowContrastColors.length} 个颜色未达到 WCAG AA 对比度标准`);
@@ -409,7 +497,7 @@ export class EnhancedAITokenGenerator {
     const spacingValues = Object.values(spacing);
 
     if (spacingValues.length > 0) {
-      const values = spacingValues.map(s => {
+      const values = spacingValues.map((s) => {
         if (typeof s === 'string') return parseInt(s);
         if (typeof s === 'number') return s;
         return 0;

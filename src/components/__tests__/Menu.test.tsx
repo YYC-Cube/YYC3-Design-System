@@ -13,7 +13,7 @@ import { render, fireEvent } from '@testing-library/react'
 import { screen } from '@testing-library/dom';
 
 import { Menu } from '../Menu'
-import { ThemeProvider } from '../../theme/ThemeProvider';;
+import { ThemeProvider } from '../../context/ThemeContext';;
 
 describe('Menu', () => {
   const mockItems = [

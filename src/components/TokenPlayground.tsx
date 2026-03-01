@@ -8,7 +8,7 @@ interface TokenPlaygroundProps {
 
 export const getTokenValue = (tokens: Record<string, unknown>, path: string): unknown => {
   const keys = path.split('.');
-  
+
   if (keys.length === 2) {
     const [category, tokenName] = keys;
     const flatKey = `${category}.${tokenName}`;
@@ -16,7 +16,7 @@ export const getTokenValue = (tokens: Record<string, unknown>, path: string): un
       return tokens[flatKey];
     }
   }
-  
+
   let value: unknown = tokens;
   for (const key of keys) {
     if (value && typeof value === 'object' && value !== null && !Array.isArray(value)) {
@@ -25,7 +25,7 @@ export const getTokenValue = (tokens: Record<string, unknown>, path: string): un
       return undefined;
     }
   }
-  
+
   return value;
 };
 
@@ -40,7 +40,11 @@ export const getTokenColor = (tokens: Record<string, unknown>, path: string): Co
   return null;
 };
 
-export const getTokenString = (tokens: Record<string, unknown>, path: string, defaultValue: string): string => {
+export const getTokenString = (
+  tokens: Record<string, unknown>,
+  path: string,
+  defaultValue: string
+): string => {
   const value = getTokenValue(tokens, path);
   return typeof value === 'string' ? value : defaultValue;
 };
@@ -58,7 +62,7 @@ export const TokenPlayground: React.FC<TokenPlaygroundProps> = ({ className = ''
       'line-height': [],
     };
 
-    Object.keys(currentTokens).forEach(key => {
+    Object.keys(currentTokens).forEach((key) => {
       const parts = key.split('.');
       if (parts.length === 2) {
         const [category, tokenName] = parts;
@@ -180,7 +184,11 @@ export const TokenPlayground: React.FC<TokenPlaygroundProps> = ({ className = ''
   };
 
   const handleTokenMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.currentTarget.style.backgroundColor = getTokenString(currentTokens, 'color.primary', '#d45a5f');
+    e.currentTarget.style.backgroundColor = getTokenString(
+      currentTokens,
+      'color.primary',
+      '#d45a5f'
+    );
     e.currentTarget.style.color = getTokenString(currentTokens, 'color.primary.foreground', '#fff');
   };
 
@@ -195,13 +203,13 @@ export const TokenPlayground: React.FC<TokenPlaygroundProps> = ({ className = ''
   return (
     <div style={containerStyle} className={className}>
       <h1 style={headerStyle}>Token Playground</h1>
-      
+
       <div style={gridStyle}>
         <div style={sidebarStyle}>
           {Object.entries(tokenCategories).map(([category, tokens]) => (
             <div key={category}>
               <h3 style={categoryTitleStyle}>{category}</h3>
-              {tokens.map(token => (
+              {tokens.map((token) => (
                 <div
                   key={token}
                   style={tokenItemStyle}
@@ -220,7 +228,7 @@ export const TokenPlayground: React.FC<TokenPlaygroundProps> = ({ className = ''
           <h2 style={previewTitleStyle}>{selectedToken}</h2>
           <div style={tokenNameStyle}>Value</div>
           <div style={tokenValueStyle}>{displayValue}</div>
-          
+
           {isColorToken && colorToken && (
             <>
               <div style={tokenNameStyle}>Color Preview</div>

@@ -1,0 +1,316 @@
+a4db02567e0c17dc14e314788db2bc38
+"use strict";
+
+/**
+ * YYC³ Design System — Chromatic Visual Regression Configuration
+ *
+ * Chromatic captures screenshots of every Storybook story and diffs them
+ * against the baseline on every PR. This ensures visual consistency.
+ *
+ * Setup:
+ *   1. Install: pnpm add -D chromatic
+ *   2. Create a Chromatic project at https://www.chromatic.com
+ *   3. Set CHROMATIC_PROJECT_TOKEN in GitHub Secrets
+ *   4. Run: npx chromatic --project-token=<token>
+ *
+ * Five-High Alignment:
+ *   - High Consistency: automated screenshot comparison
+ *   - High Accessibility: can catch contrast/layout regressions visually
+ */
+/* istanbul ignore next */
+function cov_1fkgyvn4f8() {
+  var path = "/Users/yanyu/Downloads/yyc3-Design-System/src/tests/visual/chromatic.config.ts";
+  var hash = "8d16437e66d6df6d16bf81c5dd1011159a03d02d";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/yanyu/Downloads/yyc3-Design-System/src/tests/visual/chromatic.config.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 18,
+          column: 0
+        },
+        end: {
+          line: 18,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 19,
+          column: 0
+        },
+        end: {
+          line: 19,
+          column: 60
+        }
+      },
+      "2": {
+        start: {
+          line: 20,
+          column: 0
+        },
+        end: {
+          line: 78,
+          column: 2
+        }
+      },
+      "3": {
+        start: {
+          line: 102,
+          column: 0
+        },
+        end: {
+          line: 128,
+          column: 2
+        }
+      },
+      "4": {
+        start: {
+          line: 129,
+          column: 0
+        },
+        end: {
+          line: 129,
+          column: 42
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 21,
+            column: 18
+          },
+          end: {
+            line: 21,
+            column: 79
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 21,
+            column: 18
+          },
+          end: {
+            line: 21,
+            column: 53
+          }
+        }, {
+          start: {
+            line: 21,
+            column: 57
+          },
+          end: {
+            line: 21,
+            column: 79
+          }
+        }],
+        line: 21
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    f: {},
+    b: {
+      "0": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/yanyu/Downloads/yyc3-Design-System/src/tests/visual/chromatic.config.ts",
+      mappings: ";AAAA;;;;;;;;;;;;;;;GAeG;;;AAEU,QAAA,eAAe,GAAG;IAC7B,YAAY,EAAE,OAAO,CAAC,GAAG,CAAC,uBAAuB,IAAI,sBAAsB;IAE3E,yBAAyB;IACzB,eAAe,EAAE,iBAAiB;IAClC,iBAAiB,EAAE,kBAAkB;IAErC,4BAA4B;IAC5B,KAAK,EAAE,GAAG,EAAE,sCAAsC;IAClD,aAAa,EAAE,KAAK,EAAE,8BAA8B;IACpD,mBAAmB,EAAE,IAAI,EAAE,kDAAkD;IAE7E,gCAAgC;IAChC,yDAAyD;IACzD,sFAAsF;IACtF,KAAK,EAAE;QACL,cAAc,EAAE;YACd,KAAK,EAAE,QAAQ;YACf,WAAW,EAAE,OAAO;YACpB,QAAQ,EAAE,EAAE,KAAK,EAAE,IAAI,EAAE,MAAM,EAAE,GAAG,EAAE;SACvC;QACD,aAAa,EAAE;YACb,KAAK,EAAE,QAAQ;YACf,WAAW,EAAE,MAAM;YACnB,QAAQ,EAAE,EAAE,KAAK,EAAE,IAAI,EAAE,MAAM,EAAE,GAAG,EAAE;SACvC;QACD,aAAa,EAAE;YACb,KAAK,EAAE,OAAO;YACd,WAAW,EAAE,OAAO;YACpB,QAAQ,EAAE,EAAE,KAAK,EAAE,IAAI,EAAE,MAAM,EAAE,GAAG,EAAE;SACvC;QACD,YAAY,EAAE;YACZ,KAAK,EAAE,OAAO;YACd,WAAW,EAAE,MAAM;YACnB,QAAQ,EAAE,EAAE,KAAK,EAAE,IAAI,EAAE,MAAM,EAAE,GAAG,EAAE;SACvC;QACD,gBAAgB,EAAE;YAChB,KAAK,EAAE,UAAU;YACjB,WAAW,EAAE,OAAO;YACpB,QAAQ,EAAE,EAAE,KAAK,EAAE,IAAI,EAAE,MAAM,EAAE,GAAG,EAAE;SACvC;QACD,eAAe,EAAE;YACf,KAAK,EAAE,UAAU;YACjB,WAAW,EAAE,MAAM;YACnB,QAAQ,EAAE,EAAE,KAAK,EAAE,IAAI,EAAE,MAAM,EAAE,GAAG,EAAE;SACvC;QACD,MAAM,EAAE;YACN,KAAK,EAAE,QAAQ;YACf,WAAW,EAAE,OAAO;YACpB,QAAQ,EAAE,EAAE,KAAK,EAAE,GAAG,EAAE,MAAM,EAAE,GAAG,EAAE;SACtC;KACF;IAED,sBAAsB;IACtB,iBAAiB,EAAE,KAAK,EAAE,sDAAsD;IAChF,gBAAgB,EAAE,KAAK,EAAE,yBAAyB;IAClD,WAAW,EAAE,IAAI,EAAE,qCAAqC;IACxD,SAAS,EAAE,CAAC,UAAU,CAAC,EAAE,2BAA2B;IACpD,IAAI,EAAE,eAAe,EAAE,eAAe;IAEtC,oBAAoB;IACpB,kDAAkD;IAClD,cAAc,EAAE,IAAI;CACrB,CAAC;AAEF;;;;;;;;;;;;;;;;;;;;;;GAsBG;AACU,QAAA,gBAAgB,GAAG;IAC9B,KAAK,EAAE;QACL,IAAI,EAAE,OAAO;QACb,WAAW,EAAE,mBAAmB;QAChC,YAAY,EAAE,QAAQ;QACtB,OAAO,EAAE;YACP,IAAI,EAAE,YAAY;YAClB,KAAK,EAAE;gBACL,EAAE,KAAK,EAAE,QAAQ,EAAE,KAAK,EAAE,aAAa,EAAE;gBACzC,EAAE,KAAK,EAAE,OAAO,EAAE,KAAK,EAAE,YAAY,EAAE;gBACvC,EAAE,KAAK,EAAE,UAAU,EAAE,KAAK,EAAE,UAAU,EAAE;aACzC;SACF;KACF;IACD,WAAW,EAAE;QACX,IAAI,EAAE,cAAc;QACpB,WAAW,EAAE,oBAAoB;QACjC,YAAY,EAAE,OAAO;QACrB,OAAO,EAAE;YACP,IAAI,EAAE,QAAQ;YACd,KAAK,EAAE;gBACL,EAAE,KAAK,EAAE,OAAO,EAAE,KAAK,EAAE,OAAO,EAAE;gBAClC,EAAE,KAAK,EAAE,MAAM,EAAE,KAAK,EAAE,MAAM,EAAE;aACjC;SACF;KACF;CACF,CAAC;AAEF,kBAAe,uBAAe,CAAC",
+      names: [],
+      sources: ["/Users/yanyu/Downloads/yyc3-Design-System/src/tests/visual/chromatic.config.ts"],
+      sourcesContent: ["/**\n * YYC\xB3 Design System \u2014 Chromatic Visual Regression Configuration\n *\n * Chromatic captures screenshots of every Storybook story and diffs them\n * against the baseline on every PR. This ensures visual consistency.\n *\n * Setup:\n *   1. Install: pnpm add -D chromatic\n *   2. Create a Chromatic project at https://www.chromatic.com\n *   3. Set CHROMATIC_PROJECT_TOKEN in GitHub Secrets\n *   4. Run: npx chromatic --project-token=<token>\n *\n * Five-High Alignment:\n *   - High Consistency: automated screenshot comparison\n *   - High Accessibility: can catch contrast/layout regressions visually\n */\n\nexport const chromaticConfig = {\n  projectToken: process.env.CHROMATIC_PROJECT_TOKEN || 'YOUR_CHROMATIC_TOKEN',\n\n  // \u2500\u2500\u2500 Build settings \u2500\u2500\u2500\n  buildScriptName: 'build-storybook',\n  storybookBuildDir: 'storybook-static',\n\n  // \u2500\u2500\u2500 Snapshot settings \u2500\u2500\u2500\n  delay: 300, // Wait 300ms for animations to settle\n  diffThreshold: 0.063, // Pixel diff threshold (6.3%)\n  pauseAnimationAtEnd: true, // Pause CSS animations for consistent screenshots\n\n  // \u2500\u2500\u2500 Multi-theme snapshots \u2500\u2500\u2500\n  // Each story should be captured in all 6 theme variants:\n  //   future-light, future-dark, cyber-light, cyber-dark, business-light, business-dark\n  modes: {\n    'future-light': {\n      theme: 'future',\n      colorScheme: 'light',\n      viewport: { width: 1280, height: 900 },\n    },\n    'future-dark': {\n      theme: 'future',\n      colorScheme: 'dark',\n      viewport: { width: 1280, height: 900 },\n    },\n    'cyber-light': {\n      theme: 'cyber',\n      colorScheme: 'light',\n      viewport: { width: 1280, height: 900 },\n    },\n    'cyber-dark': {\n      theme: 'cyber',\n      colorScheme: 'dark',\n      viewport: { width: 1280, height: 900 },\n    },\n    'business-light': {\n      theme: 'business',\n      colorScheme: 'light',\n      viewport: { width: 1280, height: 900 },\n    },\n    'business-dark': {\n      theme: 'business',\n      colorScheme: 'dark',\n      viewport: { width: 1280, height: 900 },\n    },\n    mobile: {\n      theme: 'future',\n      colorScheme: 'light',\n      viewport: { width: 375, height: 812 },\n    },\n  },\n\n  // \u2500\u2500\u2500 CI settings \u2500\u2500\u2500\n  exitZeroOnChanges: false, // Fail CI if visual changes detected without approval\n  exitOnceUploaded: false, // Wait for build results\n  onlyChanged: true, // Only test changed stories (faster)\n  externals: ['**/*.css'], // Re-test when CSS changes\n  skip: 'dependabot/**', // Skip bot PRs\n\n  // \u2500\u2500\u2500 Turbosnap \u2500\u2500\u2500\n  // Only re-render stories affected by code changes\n  onlyStoryFiles: true,\n};\n\n/**\n * Storybook decorator for theme wrapping.\n * Add to .storybook/preview.tsx:\n *\n * ```tsx\n * import { ThemeProvider } from '../src/app/context/ThemeContext';\n * import { LanguageProvider } from '../src/app/context/LanguageContext';\n *\n * export const decorators = [\n *   (Story, context) => {\n *     const theme = context.globals.theme || 'future';\n *     const mode = context.globals.colorScheme || 'light';\n *     return (\n *       <ThemeProvider initialStyle={theme} initialMode={mode}>\n *         <LanguageProvider>\n *           <Story />\n *         </LanguageProvider>\n *       </ThemeProvider>\n *     );\n *   },\n * ];\n * ```\n */\nexport const storybookGlobals = {\n  theme: {\n    name: 'Theme',\n    description: 'YYC\xB3 visual theme',\n    defaultValue: 'future',\n    toolbar: {\n      icon: 'paintbrush',\n      items: [\n        { value: 'future', title: 'Future-Tech' },\n        { value: 'cyber', title: 'Cyber-Punk' },\n        { value: 'business', title: 'Business' },\n      ],\n    },\n  },\n  colorScheme: {\n    name: 'Color Scheme',\n    description: 'Light or Dark mode',\n    defaultValue: 'light',\n    toolbar: {\n      icon: 'mirror',\n      items: [\n        { value: 'light', title: 'Light' },\n        { value: 'dark', title: 'Dark' },\n      ],\n    },\n  },\n};\n\nexport default chromaticConfig;\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "8d16437e66d6df6d16bf81c5dd1011159a03d02d"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1fkgyvn4f8 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_1fkgyvn4f8();
+cov_1fkgyvn4f8().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_1fkgyvn4f8().s[1]++;
+exports.storybookGlobals = exports.chromaticConfig = void 0;
+/* istanbul ignore next */
+cov_1fkgyvn4f8().s[2]++;
+exports.chromaticConfig = {
+  projectToken: 
+  /* istanbul ignore next */
+  (cov_1fkgyvn4f8().b[0][0]++, process.env.CHROMATIC_PROJECT_TOKEN) ||
+  /* istanbul ignore next */
+  (cov_1fkgyvn4f8().b[0][1]++, 'YOUR_CHROMATIC_TOKEN'),
+  // ─── Build settings ───
+  buildScriptName: 'build-storybook',
+  storybookBuildDir: 'storybook-static',
+  // ─── Snapshot settings ───
+  delay: 300,
+  // Wait 300ms for animations to settle
+  diffThreshold: 0.063,
+  // Pixel diff threshold (6.3%)
+  pauseAnimationAtEnd: true,
+  // Pause CSS animations for consistent screenshots
+  // ─── Multi-theme snapshots ───
+  // Each story should be captured in all 6 theme variants:
+  //   future-light, future-dark, cyber-light, cyber-dark, business-light, business-dark
+  modes: {
+    'future-light': {
+      theme: 'future',
+      colorScheme: 'light',
+      viewport: {
+        width: 1280,
+        height: 900
+      }
+    },
+    'future-dark': {
+      theme: 'future',
+      colorScheme: 'dark',
+      viewport: {
+        width: 1280,
+        height: 900
+      }
+    },
+    'cyber-light': {
+      theme: 'cyber',
+      colorScheme: 'light',
+      viewport: {
+        width: 1280,
+        height: 900
+      }
+    },
+    'cyber-dark': {
+      theme: 'cyber',
+      colorScheme: 'dark',
+      viewport: {
+        width: 1280,
+        height: 900
+      }
+    },
+    'business-light': {
+      theme: 'business',
+      colorScheme: 'light',
+      viewport: {
+        width: 1280,
+        height: 900
+      }
+    },
+    'business-dark': {
+      theme: 'business',
+      colorScheme: 'dark',
+      viewport: {
+        width: 1280,
+        height: 900
+      }
+    },
+    mobile: {
+      theme: 'future',
+      colorScheme: 'light',
+      viewport: {
+        width: 375,
+        height: 812
+      }
+    }
+  },
+  // ─── CI settings ───
+  exitZeroOnChanges: false,
+  // Fail CI if visual changes detected without approval
+  exitOnceUploaded: false,
+  // Wait for build results
+  onlyChanged: true,
+  // Only test changed stories (faster)
+  externals: ['**/*.css'],
+  // Re-test when CSS changes
+  skip: 'dependabot/**',
+  // Skip bot PRs
+  // ─── Turbosnap ───
+  // Only re-render stories affected by code changes
+  onlyStoryFiles: true
+};
+/**
+ * Storybook decorator for theme wrapping.
+ * Add to .storybook/preview.tsx:
+ *
+ * ```tsx
+ * import { ThemeProvider } from '../src/app/context/ThemeContext';
+ * import { LanguageProvider } from '../src/app/context/LanguageContext';
+ *
+ * export const decorators = [
+ *   (Story, context) => {
+ *     const theme = context.globals.theme || 'future';
+ *     const mode = context.globals.colorScheme || 'light';
+ *     return (
+ *       <ThemeProvider initialStyle={theme} initialMode={mode}>
+ *         <LanguageProvider>
+ *           <Story />
+ *         </LanguageProvider>
+ *       </ThemeProvider>
+ *     );
+ *   },
+ * ];
+ * ```
+ */
+/* istanbul ignore next */
+cov_1fkgyvn4f8().s[3]++;
+exports.storybookGlobals = {
+  theme: {
+    name: 'Theme',
+    description: 'YYC³ visual theme',
+    defaultValue: 'future',
+    toolbar: {
+      icon: 'paintbrush',
+      items: [{
+        value: 'future',
+        title: 'Future-Tech'
+      }, {
+        value: 'cyber',
+        title: 'Cyber-Punk'
+      }, {
+        value: 'business',
+        title: 'Business'
+      }]
+    }
+  },
+  colorScheme: {
+    name: 'Color Scheme',
+    description: 'Light or Dark mode',
+    defaultValue: 'light',
+    toolbar: {
+      icon: 'mirror',
+      items: [{
+        value: 'light',
+        title: 'Light'
+      }, {
+        value: 'dark',
+        title: 'Dark'
+      }]
+    }
+  }
+};
+/* istanbul ignore next */
+cov_1fkgyvn4f8().s[4]++;
+exports.default = exports.chromaticConfig;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMWZrZ3l2bjRmOCIsInBhdGgiLCJoYXNoIiwiZ2xvYmFsIiwiRnVuY3Rpb24iLCJnY3YiLCJjb3ZlcmFnZURhdGEiLCJzdGF0ZW1lbnRNYXAiLCJzdGFydCIsImxpbmUiLCJjb2x1bW4iLCJlbmQiLCJmbk1hcCIsImJyYW5jaE1hcCIsImxvYyIsInR5cGUiLCJsb2NhdGlvbnMiLCJzIiwiZiIsImIiLCJpbnB1dFNvdXJjZU1hcCIsImZpbGUiLCJtYXBwaW5ncyIsIm5hbWVzIiwic291cmNlcyIsInNvdXJjZXNDb250ZW50IiwidmVyc2lvbiIsIl9jb3ZlcmFnZVNjaGVtYSIsImNvdmVyYWdlIiwiYWN0dWFsQ292ZXJhZ2UiLCJleHBvcnRzIiwiY2hyb21hdGljQ29uZmlnIiwicHJvamVjdFRva2VuIiwicHJvY2VzcyIsImVudiIsIkNIUk9NQVRJQ19QUk9KRUNUX1RPS0VOIiwiYnVpbGRTY3JpcHROYW1lIiwic3Rvcnlib29rQnVpbGREaXIiLCJkZWxheSIsImRpZmZUaHJlc2hvbGQiLCJwYXVzZUFuaW1hdGlvbkF0RW5kIiwibW9kZXMiLCJ0aGVtZSIsImNvbG9yU2NoZW1lIiwidmlld3BvcnQiLCJ3aWR0aCIsImhlaWdodCIsIm1vYmlsZSIsImV4aXRaZXJvT25DaGFuZ2VzIiwiZXhpdE9uY2VVcGxvYWRlZCIsIm9ubHlDaGFuZ2VkIiwiZXh0ZXJuYWxzIiwic2tpcCIsIm9ubHlTdG9yeUZpbGVzIiwic3Rvcnlib29rR2xvYmFscyIsIm5hbWUiLCJkZXNjcmlwdGlvbiIsImRlZmF1bHRWYWx1ZSIsInRvb2xiYXIiLCJpY29uIiwiaXRlbXMiLCJ2YWx1ZSIsInRpdGxlIiwiZGVmYXVsdCJdLCJzb3VyY2VzIjpbIi9Vc2Vycy95YW55dS9Eb3dubG9hZHMveXljMy1EZXNpZ24tU3lzdGVtL3NyYy90ZXN0cy92aXN1YWwvY2hyb21hdGljLmNvbmZpZy50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIFlZQ8KzIERlc2lnbiBTeXN0ZW0g4oCUIENocm9tYXRpYyBWaXN1YWwgUmVncmVzc2lvbiBDb25maWd1cmF0aW9uXG4gKlxuICogQ2hyb21hdGljIGNhcHR1cmVzIHNjcmVlbnNob3RzIG9mIGV2ZXJ5IFN0b3J5Ym9vayBzdG9yeSBhbmQgZGlmZnMgdGhlbVxuICogYWdhaW5zdCB0aGUgYmFzZWxpbmUgb24gZXZlcnkgUFIuIFRoaXMgZW5zdXJlcyB2aXN1YWwgY29uc2lzdGVuY3kuXG4gKlxuICogU2V0dXA6XG4gKiAgIDEuIEluc3RhbGw6IHBucG0gYWRkIC1EIGNocm9tYXRpY1xuICogICAyLiBDcmVhdGUgYSBDaHJvbWF0aWMgcHJvamVjdCBhdCBodHRwczovL3d3dy5jaHJvbWF0aWMuY29tXG4gKiAgIDMuIFNldCBDSFJPTUFUSUNfUFJPSkVDVF9UT0tFTiBpbiBHaXRIdWIgU2VjcmV0c1xuICogICA0LiBSdW46IG5weCBjaHJvbWF0aWMgLS1wcm9qZWN0LXRva2VuPTx0b2tlbj5cbiAqXG4gKiBGaXZlLUhpZ2ggQWxpZ25tZW50OlxuICogICAtIEhpZ2ggQ29uc2lzdGVuY3k6IGF1dG9tYXRlZCBzY3JlZW5zaG90IGNvbXBhcmlzb25cbiAqICAgLSBIaWdoIEFjY2Vzc2liaWxpdHk6IGNhbiBjYXRjaCBjb250cmFzdC9sYXlvdXQgcmVncmVzc2lvbnMgdmlzdWFsbHlcbiAqL1xuXG5leHBvcnQgY29uc3QgY2hyb21hdGljQ29uZmlnID0ge1xuICBwcm9qZWN0VG9rZW46IHByb2Nlc3MuZW52LkNIUk9NQVRJQ19QUk9KRUNUX1RPS0VOIHx8ICdZT1VSX0NIUk9NQVRJQ19UT0tFTicsXG5cbiAgLy8g4pSA4pSA4pSAIEJ1aWxkIHNldHRpbmdzIOKUgOKUgOKUgFxuICBidWlsZFNjcmlwdE5hbWU6ICdidWlsZC1zdG9yeWJvb2snLFxuICBzdG9yeWJvb2tCdWlsZERpcjogJ3N0b3J5Ym9vay1zdGF0aWMnLFxuXG4gIC8vIOKUgOKUgOKUgCBTbmFwc2hvdCBzZXR0aW5ncyDilIDilIDilIBcbiAgZGVsYXk6IDMwMCwgLy8gV2FpdCAzMDBtcyBmb3IgYW5pbWF0aW9ucyB0byBzZXR0bGVcbiAgZGlmZlRocmVzaG9sZDogMC4wNjMsIC8vIFBpeGVsIGRpZmYgdGhyZXNob2xkICg2LjMlKVxuICBwYXVzZUFuaW1hdGlvbkF0RW5kOiB0cnVlLCAvLyBQYXVzZSBDU1MgYW5pbWF0aW9ucyBmb3IgY29uc2lzdGVudCBzY3JlZW5zaG90c1xuXG4gIC8vIOKUgOKUgOKUgCBNdWx0aS10aGVtZSBzbmFwc2hvdHMg4pSA4pSA4pSAXG4gIC8vIEVhY2ggc3Rvcnkgc2hvdWxkIGJlIGNhcHR1cmVkIGluIGFsbCA2IHRoZW1lIHZhcmlhbnRzOlxuICAvLyAgIGZ1dHVyZS1saWdodCwgZnV0dXJlLWRhcmssIGN5YmVyLWxpZ2h0LCBjeWJlci1kYXJrLCBidXNpbmVzcy1saWdodCwgYnVzaW5lc3MtZGFya1xuICBtb2Rlczoge1xuICAgICdmdXR1cmUtbGlnaHQnOiB7XG4gICAgICB0aGVtZTogJ2Z1dHVyZScsXG4gICAgICBjb2xvclNjaGVtZTogJ2xpZ2h0JyxcbiAgICAgIHZpZXdwb3J0OiB7IHdpZHRoOiAxMjgwLCBoZWlnaHQ6IDkwMCB9LFxuICAgIH0sXG4gICAgJ2Z1dHVyZS1kYXJrJzoge1xuICAgICAgdGhlbWU6ICdmdXR1cmUnLFxuICAgICAgY29sb3JTY2hlbWU6ICdkYXJrJyxcbiAgICAgIHZpZXdwb3J0OiB7IHdpZHRoOiAxMjgwLCBoZWlnaHQ6IDkwMCB9LFxuICAgIH0sXG4gICAgJ2N5YmVyLWxpZ2h0Jzoge1xuICAgICAgdGhlbWU6ICdjeWJlcicsXG4gICAgICBjb2xvclNjaGVtZTogJ2xpZ2h0JyxcbiAgICAgIHZpZXdwb3J0OiB7IHdpZHRoOiAxMjgwLCBoZWlnaHQ6IDkwMCB9LFxuICAgIH0sXG4gICAgJ2N5YmVyLWRhcmsnOiB7XG4gICAgICB0aGVtZTogJ2N5YmVyJyxcbiAgICAgIGNvbG9yU2NoZW1lOiAnZGFyaycsXG4gICAgICB2aWV3cG9ydDogeyB3aWR0aDogMTI4MCwgaGVpZ2h0OiA5MDAgfSxcbiAgICB9LFxuICAgICdidXNpbmVzcy1saWdodCc6IHtcbiAgICAgIHRoZW1lOiAnYnVzaW5lc3MnLFxuICAgICAgY29sb3JTY2hlbWU6ICdsaWdodCcsXG4gICAgICB2aWV3cG9ydDogeyB3aWR0aDogMTI4MCwgaGVpZ2h0OiA5MDAgfSxcbiAgICB9LFxuICAgICdidXNpbmVzcy1kYXJrJzoge1xuICAgICAgdGhlbWU6ICdidXNpbmVzcycsXG4gICAgICBjb2xvclNjaGVtZTogJ2RhcmsnLFxuICAgICAgdmlld3BvcnQ6IHsgd2lkdGg6IDEyODAsIGhlaWdodDogOTAwIH0sXG4gICAgfSxcbiAgICBtb2JpbGU6IHtcbiAgICAgIHRoZW1lOiAnZnV0dXJlJyxcbiAgICAgIGNvbG9yU2NoZW1lOiAnbGlnaHQnLFxuICAgICAgdmlld3BvcnQ6IHsgd2lkdGg6IDM3NSwgaGVpZ2h0OiA4MTIgfSxcbiAgICB9LFxuICB9LFxuXG4gIC8vIOKUgOKUgOKUgCBDSSBzZXR0aW5ncyDilIDilIDilIBcbiAgZXhpdFplcm9PbkNoYW5nZXM6IGZhbHNlLCAvLyBGYWlsIENJIGlmIHZpc3VhbCBjaGFuZ2VzIGRldGVjdGVkIHdpdGhvdXQgYXBwcm92YWxcbiAgZXhpdE9uY2VVcGxvYWRlZDogZmFsc2UsIC8vIFdhaXQgZm9yIGJ1aWxkIHJlc3VsdHNcbiAgb25seUNoYW5nZWQ6IHRydWUsIC8vIE9ubHkgdGVzdCBjaGFuZ2VkIHN0b3JpZXMgKGZhc3RlcilcbiAgZXh0ZXJuYWxzOiBbJyoqLyouY3NzJ10sIC8vIFJlLXRlc3Qgd2hlbiBDU1MgY2hhbmdlc1xuICBza2lwOiAnZGVwZW5kYWJvdC8qKicsIC8vIFNraXAgYm90IFBSc1xuXG4gIC8vIOKUgOKUgOKUgCBUdXJib3NuYXAg4pSA4pSA4pSAXG4gIC8vIE9ubHkgcmUtcmVuZGVyIHN0b3JpZXMgYWZmZWN0ZWQgYnkgY29kZSBjaGFuZ2VzXG4gIG9ubHlTdG9yeUZpbGVzOiB0cnVlLFxufTtcblxuLyoqXG4gKiBTdG9yeWJvb2sgZGVjb3JhdG9yIGZvciB0aGVtZSB3cmFwcGluZy5cbiAqIEFkZCB0byAuc3Rvcnlib29rL3ByZXZpZXcudHN4OlxuICpcbiAqIGBgYHRzeFxuICogaW1wb3J0IHsgVGhlbWVQcm92aWRlciB9IGZyb20gJy4uL3NyYy9hcHAvY29udGV4dC9UaGVtZUNvbnRleHQnO1xuICogaW1wb3J0IHsgTGFuZ3VhZ2VQcm92aWRlciB9IGZyb20gJy4uL3NyYy9hcHAvY29udGV4dC9MYW5ndWFnZUNvbnRleHQnO1xuICpcbiAqIGV4cG9ydCBjb25zdCBkZWNvcmF0b3JzID0gW1xuICogICAoU3RvcnksIGNvbnRleHQpID0+IHtcbiAqICAgICBjb25zdCB0aGVtZSA9IGNvbnRleHQuZ2xvYmFscy50aGVtZSB8fCAnZnV0dXJlJztcbiAqICAgICBjb25zdCBtb2RlID0gY29udGV4dC5nbG9iYWxzLmNvbG9yU2NoZW1lIHx8ICdsaWdodCc7XG4gKiAgICAgcmV0dXJuIChcbiAqICAgICAgIDxUaGVtZVByb3ZpZGVyIGluaXRpYWxTdHlsZT17dGhlbWV9IGluaXRpYWxNb2RlPXttb2RlfT5cbiAqICAgICAgICAgPExhbmd1YWdlUHJvdmlkZXI+XG4gKiAgICAgICAgICAgPFN0b3J5IC8+XG4gKiAgICAgICAgIDwvTGFuZ3VhZ2VQcm92aWRlcj5cbiAqICAgICAgIDwvVGhlbWVQcm92aWRlcj5cbiAqICAgICApO1xuICogICB9LFxuICogXTtcbiAqIGBgYFxuICovXG5leHBvcnQgY29uc3Qgc3Rvcnlib29rR2xvYmFscyA9IHtcbiAgdGhlbWU6IHtcbiAgICBuYW1lOiAnVGhlbWUnLFxuICAgIGRlc2NyaXB0aW9uOiAnWVlDwrMgdmlzdWFsIHRoZW1lJyxcbiAgICBkZWZhdWx0VmFsdWU6ICdmdXR1cmUnLFxuICAgIHRvb2xiYXI6IHtcbiAgICAgIGljb246ICdwYWludGJydXNoJyxcbiAgICAgIGl0ZW1zOiBbXG4gICAgICAgIHsgdmFsdWU6ICdmdXR1cmUnLCB0aXRsZTogJ0Z1dHVyZS1UZWNoJyB9LFxuICAgICAgICB7IHZhbHVlOiAnY3liZXInLCB0aXRsZTogJ0N5YmVyLVB1bmsnIH0sXG4gICAgICAgIHsgdmFsdWU6ICdidXNpbmVzcycsIHRpdGxlOiAnQnVzaW5lc3MnIH0sXG4gICAgICBdLFxuICAgIH0sXG4gIH0sXG4gIGNvbG9yU2NoZW1lOiB7XG4gICAgbmFtZTogJ0NvbG9yIFNjaGVtZScsXG4gICAgZGVzY3JpcHRpb246ICdMaWdodCBvciBEYXJrIG1vZGUnLFxuICAgIGRlZmF1bHRWYWx1ZTogJ2xpZ2h0JyxcbiAgICB0b29sYmFyOiB7XG4gICAgICBpY29uOiAnbWlycm9yJyxcbiAgICAgIGl0ZW1zOiBbXG4gICAgICAgIHsgdmFsdWU6ICdsaWdodCcsIHRpdGxlOiAnTGlnaHQnIH0sXG4gICAgICAgIHsgdmFsdWU6ICdkYXJrJywgdGl0bGU6ICdEYXJrJyB9LFxuICAgICAgXSxcbiAgICB9LFxuICB9LFxufTtcblxuZXhwb3J0IGRlZmF1bHQgY2hyb21hdGljQ29uZmlnO1xuIl0sIm1hcHBpbmdzIjoiOztBQUFBOzs7Ozs7Ozs7Ozs7Ozs7O0FBQUE7QUFBQSxTQUFBQSxlQUFBO0VBQUEsSUFBQUMsSUFBQTtFQUFBLElBQUFDLElBQUE7RUFBQSxJQUFBQyxNQUFBLE9BQUFDLFFBQUE7RUFBQSxJQUFBQyxHQUFBO0VBQUEsSUFBQUMsWUFBQTtJQUFBTCxJQUFBO0lBQUFNLFlBQUE7TUFBQTtRQUFBQyxLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO0lBQUE7SUFBQUUsS0FBQTtJQUFBQyxTQUFBO01BQUE7UUFBQUMsR0FBQTtVQUFBTixLQUFBO1lBQUFDLElBQUE7WUFBQUMsTUFBQTtVQUFBO1VBQUFDLEdBQUE7WUFBQUYsSUFBQTtZQUFBQyxNQUFBO1VBQUE7UUFBQTtRQUFBSyxJQUFBO1FBQUFDLFNBQUE7VUFBQVIsS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7VUFBQUYsS0FBQTtZQUFBQyxJQUFBO1lBQUFDLE1BQUE7VUFBQTtVQUFBQyxHQUFBO1lBQUFGLElBQUE7WUFBQUMsTUFBQTtVQUFBO1FBQUE7UUFBQUQsSUFBQTtNQUFBO0lBQUE7SUFBQVEsQ0FBQTtNQUFBO01BQUE7TUFBQTtNQUFBO01BQUE7SUFBQTtJQUFBQyxDQUFBO0lBQUFDLENBQUE7TUFBQTtJQUFBO0lBQUFDLGNBQUE7TUFBQUMsSUFBQTtNQUFBQyxRQUFBO01BQUFDLEtBQUE7TUFBQUMsT0FBQTtNQUFBQyxjQUFBO01BQUFDLE9BQUE7SUFBQTtJQUFBQyxlQUFBO0lBQUF6QixJQUFBO0VBQUE7RUFBQSxJQUFBMEIsUUFBQSxHQUFBekIsTUFBQSxDQUFBRSxHQUFBLE1BQUFGLE1BQUEsQ0FBQUUsR0FBQTtFQUFBLEtBQUF1QixRQUFBLENBQUEzQixJQUFBLEtBQUEyQixRQUFBLENBQUEzQixJQUFBLEVBQUFDLElBQUEsS0FBQUEsSUFBQTtJQUFBMEIsUUFBQSxDQUFBM0IsSUFBQSxJQUFBSyxZQUFBO0VBQUE7RUFBQSxJQUFBdUIsY0FBQSxHQUFBRCxRQUFBLENBQUEzQixJQUFBO0VBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQWlCYTZCLE9BQUEsQ0FBQUMsZUFBZSxHQUFHO0VBQzdCQyxZQUFZO0VBQUU7RUFBQSxDQUFBaEMsY0FBQSxHQUFBbUIsQ0FBQSxVQUFBYyxPQUFPLENBQUNDLEdBQUcsQ0FBQ0MsdUJBQXVCO0VBQUE7RUFBQSxDQUFBbkMsY0FBQSxHQUFBbUIsQ0FBQSxVQUFJLHNCQUFzQjtFQUUzRTtFQUNBaUIsZUFBZSxFQUFFLGlCQUFpQjtFQUNsQ0MsaUJBQWlCLEVBQUUsa0JBQWtCO0VBRXJDO0VBQ0FDLEtBQUssRUFBRSxHQUFHO0VBQUU7RUFDWkMsYUFBYSxFQUFFLEtBQUs7RUFBRTtFQUN0QkMsbUJBQW1CLEVBQUUsSUFBSTtFQUFFO0VBRTNCO0VBQ0E7RUFDQTtFQUNBQyxLQUFLLEVBQUU7SUFDTCxjQUFjLEVBQUU7TUFDZEMsS0FBSyxFQUFFLFFBQVE7TUFDZkMsV0FBVyxFQUFFLE9BQU87TUFDcEJDLFFBQVEsRUFBRTtRQUFFQyxLQUFLLEVBQUUsSUFBSTtRQUFFQyxNQUFNLEVBQUU7TUFBRztLQUNyQztJQUNELGFBQWEsRUFBRTtNQUNiSixLQUFLLEVBQUUsUUFBUTtNQUNmQyxXQUFXLEVBQUUsTUFBTTtNQUNuQkMsUUFBUSxFQUFFO1FBQUVDLEtBQUssRUFBRSxJQUFJO1FBQUVDLE1BQU0sRUFBRTtNQUFHO0tBQ3JDO0lBQ0QsYUFBYSxFQUFFO01BQ2JKLEtBQUssRUFBRSxPQUFPO01BQ2RDLFdBQVcsRUFBRSxPQUFPO01BQ3BCQyxRQUFRLEVBQUU7UUFBRUMsS0FBSyxFQUFFLElBQUk7UUFBRUMsTUFBTSxFQUFFO01BQUc7S0FDckM7SUFDRCxZQUFZLEVBQUU7TUFDWkosS0FBSyxFQUFFLE9BQU87TUFDZEMsV0FBVyxFQUFFLE1BQU07TUFDbkJDLFFBQVEsRUFBRTtRQUFFQyxLQUFLLEVBQUUsSUFBSTtRQUFFQyxNQUFNLEVBQUU7TUFBRztLQUNyQztJQUNELGdCQUFnQixFQUFFO01BQ2hCSixLQUFLLEVBQUUsVUFBVTtNQUNqQkMsV0FBVyxFQUFFLE9BQU87TUFDcEJDLFFBQVEsRUFBRTtRQUFFQyxLQUFLLEVBQUUsSUFBSTtRQUFFQyxNQUFNLEVBQUU7TUFBRztLQUNyQztJQUNELGVBQWUsRUFBRTtNQUNmSixLQUFLLEVBQUUsVUFBVTtNQUNqQkMsV0FBVyxFQUFFLE1BQU07TUFDbkJDLFFBQVEsRUFBRTtRQUFFQyxLQUFLLEVBQUUsSUFBSTtRQUFFQyxNQUFNLEVBQUU7TUFBRztLQUNyQztJQUNEQyxNQUFNLEVBQUU7TUFDTkwsS0FBSyxFQUFFLFFBQVE7TUFDZkMsV0FBVyxFQUFFLE9BQU87TUFDcEJDLFFBQVEsRUFBRTtRQUFFQyxLQUFLLEVBQUUsR0FBRztRQUFFQyxNQUFNLEVBQUU7TUFBRzs7R0FFdEM7RUFFRDtFQUNBRSxpQkFBaUIsRUFBRSxLQUFLO0VBQUU7RUFDMUJDLGdCQUFnQixFQUFFLEtBQUs7RUFBRTtFQUN6QkMsV0FBVyxFQUFFLElBQUk7RUFBRTtFQUNuQkMsU0FBUyxFQUFFLENBQUMsVUFBVSxDQUFDO0VBQUU7RUFDekJDLElBQUksRUFBRSxlQUFlO0VBQUU7RUFFdkI7RUFDQTtFQUNBQyxjQUFjLEVBQUU7Q0FDakI7QUFFRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQTtBQUFBckQsY0FBQSxHQUFBaUIsQ0FBQTtBQXVCYWEsT0FBQSxDQUFBd0IsZ0JBQWdCLEdBQUc7RUFDOUJaLEtBQUssRUFBRTtJQUNMYSxJQUFJLEVBQUUsT0FBTztJQUNiQyxXQUFXLEVBQUUsbUJBQW1CO0lBQ2hDQyxZQUFZLEVBQUUsUUFBUTtJQUN0QkMsT0FBTyxFQUFFO01BQ1BDLElBQUksRUFBRSxZQUFZO01BQ2xCQyxLQUFLLEVBQUUsQ0FDTDtRQUFFQyxLQUFLLEVBQUUsUUFBUTtRQUFFQyxLQUFLLEVBQUU7TUFBYSxDQUFFLEVBQ3pDO1FBQUVELEtBQUssRUFBRSxPQUFPO1FBQUVDLEtBQUssRUFBRTtNQUFZLENBQUUsRUFDdkM7UUFBRUQsS0FBSyxFQUFFLFVBQVU7UUFBRUMsS0FBSyxFQUFFO01BQVUsQ0FBRTs7R0FHN0M7RUFDRG5CLFdBQVcsRUFBRTtJQUNYWSxJQUFJLEVBQUUsY0FBYztJQUNwQkMsV0FBVyxFQUFFLG9CQUFvQjtJQUNqQ0MsWUFBWSxFQUFFLE9BQU87SUFDckJDLE9BQU8sRUFBRTtNQUNQQyxJQUFJLEVBQUUsUUFBUTtNQUNkQyxLQUFLLEVBQUUsQ0FDTDtRQUFFQyxLQUFLLEVBQUUsT0FBTztRQUFFQyxLQUFLLEVBQUU7TUFBTyxDQUFFLEVBQ2xDO1FBQUVELEtBQUssRUFBRSxNQUFNO1FBQUVDLEtBQUssRUFBRTtNQUFNLENBQUU7OztDQUl2QztBQUFDO0FBQUE5RCxjQUFBLEdBQUFpQixDQUFBO0FBRUZhLE9BQUEsQ0FBQWlDLE9BQUEsR0FBZWpDLE9BQUEsQ0FBQUMsZUFBZSIsImlnbm9yZUxpc3QiOltdfQ==

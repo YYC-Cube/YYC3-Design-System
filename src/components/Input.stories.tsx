@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Input } from './Input';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 const meta: Meta<typeof Input> = {
   title: 'Components/Input',
@@ -70,12 +70,7 @@ const ControlledComponent = () => {
   const [value, setValue] = React.useState('');
   return (
     <div>
-      <Input
-        type="text"
-        placeholder="受控输入框"
-        value={value}
-        onChange={setValue}
-      />
+      <Input type="text" placeholder="受控输入框" value={value} onChange={setValue} />
       <p style={{ marginTop: '0.5rem' }}>当前值: {value}</p>
     </div>
   );

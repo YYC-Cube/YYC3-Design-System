@@ -6,10 +6,7 @@ interface SpinnerProps {
   className?: string;
 }
 
-export const Spinner: React.FC<SpinnerProps> = ({
-  size = 'md',
-  className = '',
-}) => {
+export const Spinner: React.FC<SpinnerProps> = ({ size = 'md', className = '' }) => {
   const { tokens } = useTheme();
 
   const sizeStyles = {
@@ -21,8 +18,8 @@ export const Spinner: React.FC<SpinnerProps> = ({
   const spinnerStyle: React.CSSProperties = {
     ...sizeStyles[size],
     borderRadius: '50%',
-    border: `solid ${tokens['color.muted-foreground'] as string || '#ccc'}`,
-    borderTopColor: tokens['color.primary'] as string || '#d45a5f',
+    border: `solid ${(tokens['color.muted-foreground'] as string) || '#ccc'}`,
+    borderTopColor: (tokens['color.primary'] as string) || '#d45a5f',
     animation: 'spin 1s linear infinite',
   };
 

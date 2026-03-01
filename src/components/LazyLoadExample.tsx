@@ -10,29 +10,20 @@
 import React, { useState, useCallback } from 'react';
 import { Button } from './Button';
 import { Card, CardHeader, CardContent } from './Card';
-import { createLazyWrapper, lazyLoadImage, lazyLoadScript, createResourcePreloader } from '../utils/lazy-loader';
+import {
+  createLazyWrapper,
+  lazyLoadImage,
+  lazyLoadScript,
+  createResourcePreloader,
+} from '../utils/lazy-loader';
 
-const LazyModal = createLazyWrapper(
-  () => import('./Modal'),
-  {
-    fallback: (
-      <div style={{ padding: '2rem', textAlign: 'center' }}>
-        加载模态框组件...
-      </div>
-    ),
-  }
-);
+const LazyModal = createLazyWrapper(() => import('./Modal'), {
+  fallback: <div style={{ padding: '2rem', textAlign: 'center' }}>加载模态框组件...</div>,
+});
 
-const LazyTokenPlayground = createLazyWrapper(
-  () => import('./TokenPlayground'),
-  {
-    fallback: (
-      <div style={{ padding: '2rem', textAlign: 'center' }}>
-        加载令牌游乐场...
-      </div>
-    ),
-  }
-);
+const LazyTokenPlayground = createLazyWrapper(() => import('./TokenPlayground'), {
+  fallback: <div style={{ padding: '2rem', textAlign: 'center' }}>加载令牌游乐场...</div>,
+});
 
 export interface LazyLoadExampleProps {
   className?: string;
@@ -65,7 +56,10 @@ export const LazyLoadExample: React.FC<LazyLoadExampleProps> = ({ className = ''
   }, []);
 
   const handlePreloadResources = useCallback(() => {
-    preloader.preload('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', 'font');
+    preloader.preload(
+      'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
+      'font'
+    );
     preloader.preload('https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js', 'script');
   }, [preloader]);
 
@@ -74,85 +68,86 @@ export const LazyLoadExample: React.FC<LazyLoadExampleProps> = ({ className = ''
       <div style={{ marginBottom: '2rem' }}>
         <Card>
           <CardHeader>
-          <h2 style={{ margin: 0, fontSize: '1.5rem' }}>组件懒加载示例</h2>
-        </CardHeader>
-        <CardContent>
-          <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
-            <div>
-              <h3 style={{ marginBottom: '1rem' }}>懒加载模态框</h3>
-              <p style={{ marginBottom: '1rem', color: '#64748b' }}>
-                点击按钮动态加载 Modal 组件，减少初始包大小
-              </p>
-              <Button onClick={() => setShowModal(true)}>
-                打开模态框
-              </Button>
-              {showModal && (
-                <LazyModal
-                  isOpen={showModal}
-                  onClose={() => setShowModal(false)}
-                >
-                  <h2 style={{ margin: '0 0 1rem 0', fontSize: '1.5rem' }}>懒加载模态框</h2>
-                  <p>这是一个懒加载的模态框组件</p>
-                </LazyModal>
-              )}
-            </div>
+            <h2 style={{ margin: 0, fontSize: '1.5rem' }}>组件懒加载示例</h2>
+          </CardHeader>
+          <CardContent>
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              }}
+            >
+              <div>
+                <h3 style={{ marginBottom: '1rem' }}>懒加载模态框</h3>
+                <p style={{ marginBottom: '1rem', color: '#64748b' }}>
+                  点击按钮动态加载 Modal 组件，减少初始包大小
+                </p>
+                <Button onClick={() => setShowModal(true)}>打开模态框</Button>
+                {showModal && (
+                  <LazyModal isOpen={showModal} onClose={() => setShowModal(false)}>
+                    <h2 style={{ margin: '0 0 1rem 0', fontSize: '1.5rem' }}>懒加载模态框</h2>
+                    <p>这是一个懒加载的模态框组件</p>
+                  </LazyModal>
+                )}
+              </div>
 
-            <div>
-              <h3 style={{ marginBottom: '1rem' }}>懒加载令牌游乐场</h3>
-              <p style={{ marginBottom: '1rem', color: '#64748b' }}>
-                点击按钮动态加载 TokenPlayground 组件
-              </p>
-              <Button onClick={() => setShowPlayground(true)}>
-                打开令牌游乐场
-              </Button>
-              {showPlayground && (
-                <LazyTokenPlayground />
-              )}
+              <div>
+                <h3 style={{ marginBottom: '1rem' }}>懒加载令牌游乐场</h3>
+                <p style={{ marginBottom: '1rem', color: '#64748b' }}>
+                  点击按钮动态加载 TokenPlayground 组件
+                </p>
+                <Button onClick={() => setShowPlayground(true)}>打开令牌游乐场</Button>
+                {showPlayground && <LazyTokenPlayground />}
+              </div>
             </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
       </div>
 
       <div style={{ marginBottom: '2rem' }}>
         <Card>
           <CardHeader>
-          <h2 style={{ margin: 0, fontSize: '1.5rem' }}>资源懒加载示例</h2>
-        </CardHeader>
-        <CardContent>
-          <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))' }}>
-            <div>
-              <h3 style={{ marginBottom: '1rem' }}>懒加载图片</h3>
-              <p style={{ marginBottom: '1rem', color: '#64748b' }}>
-                点击按钮懒加载图片，使用 IntersectionObserver
-              </p>
-              <Button onClick={handleLoadImage} disabled={imageLoaded}>
-                {imageLoaded ? '图片已加载' : '加载图片'}
-              </Button>
-            </div>
+            <h2 style={{ margin: 0, fontSize: '1.5rem' }}>资源懒加载示例</h2>
+          </CardHeader>
+          <CardContent>
+            <div
+              style={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              }}
+            >
+              <div>
+                <h3 style={{ marginBottom: '1rem' }}>懒加载图片</h3>
+                <p style={{ marginBottom: '1rem', color: '#64748b' }}>
+                  点击按钮懒加载图片，使用 IntersectionObserver
+                </p>
+                <Button onClick={handleLoadImage} disabled={imageLoaded}>
+                  {imageLoaded ? '图片已加载' : '加载图片'}
+                </Button>
+              </div>
 
-            <div>
-              <h3 style={{ marginBottom: '1rem' }}>懒加载脚本</h3>
-              <p style={{ marginBottom: '1rem', color: '#64748b' }}>
-                点击按钮懒加载 Chart.js 脚本
-              </p>
-              <Button onClick={handleLoadScript} disabled={scriptLoaded}>
-                {scriptLoaded ? '脚本已加载' : '加载脚本'}
-              </Button>
-            </div>
+              <div>
+                <h3 style={{ marginBottom: '1rem' }}>懒加载脚本</h3>
+                <p style={{ marginBottom: '1rem', color: '#64748b' }}>
+                  点击按钮懒加载 Chart.js 脚本
+                </p>
+                <Button onClick={handleLoadScript} disabled={scriptLoaded}>
+                  {scriptLoaded ? '脚本已加载' : '加载脚本'}
+                </Button>
+              </div>
 
-            <div>
-              <h3 style={{ marginBottom: '1rem' }}>预加载资源</h3>
-              <p style={{ marginBottom: '1rem', color: '#64748b' }}>
-                预加载字体和脚本，提升后续加载速度
-              </p>
-              <Button onClick={handlePreloadResources}>
-                预加载资源
-              </Button>
+              <div>
+                <h3 style={{ marginBottom: '1rem' }}>预加载资源</h3>
+                <p style={{ marginBottom: '1rem', color: '#64748b' }}>
+                  预加载字体和脚本，提升后续加载速度
+                </p>
+                <Button onClick={handlePreloadResources}>预加载资源</Button>
+              </div>
             </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
       </div>
 
       <Card>

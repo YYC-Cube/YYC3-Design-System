@@ -34,8 +34,8 @@ export const Radio: React.FC<RadioProps> = ({
     width: '1.25rem',
     height: '1.25rem',
     borderRadius: '50%',
-    border: `2px solid ${tokens['color.muted-foreground'] as string || '#ccc'}`,
-    backgroundColor: checked ? tokens['color.primary'] as string || '#d45a5f' : 'transparent',
+    border: `2px solid ${(tokens['color.muted-foreground'] as string) || '#ccc'}`,
+    backgroundColor: checked ? (tokens['color.primary'] as string) || '#d45a5f' : 'transparent',
     cursor: disabled ? 'not-allowed' : 'pointer',
     opacity: disabled ? 0.5 : 1,
     display: 'flex',
@@ -49,20 +49,28 @@ export const Radio: React.FC<RadioProps> = ({
     width: '0.5rem',
     height: '0.5rem',
     borderRadius: '50%',
-    backgroundColor: tokens['color.primary-foreground'] as string || '#fff',
+    backgroundColor: (tokens['color.primary-foreground'] as string) || '#fff',
     display: checked ? 'block' : 'none',
   };
 
   const labelStyle: React.CSSProperties = {
     marginLeft: '0.5rem',
     cursor: disabled ? 'not-allowed' : 'pointer',
-    fontSize: tokens['font-size.body'] as string || '1rem',
-    fontFamily: tokens['typography.font-sans'] as string || 'system-ui',
-    color: tokens['color.foreground'] as string || '#000',
+    fontSize: (tokens['font-size.body'] as string) || '1rem',
+    fontFamily: (tokens['typography.font-sans'] as string) || 'system-ui',
+    color: (tokens['color.foreground'] as string) || '#000',
   };
 
   return (
-    <label style={{ display: 'inline-flex', alignItems: 'center', cursor: disabled ? 'not-allowed' : 'pointer' }} className={className} data-testid={dataTestId}>
+    <label
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        cursor: disabled ? 'not-allowed' : 'pointer',
+      }}
+      className={className}
+      data-testid={dataTestId}
+    >
       <div style={radioStyle}>
         <span style={dotStyle} />
       </div>

@@ -443,10 +443,31 @@ export const WithCustomConfig: Story = {
 export const AllAnimationsGrid: Story = {
   render: () => {
     const animations: AnimationPreset[] = [
-      'fadeIn', 'fadeOut', 'slideInUp', 'slideInDown', 'slideInLeft', 'slideInRight',
-      'scaleIn', 'scaleOut', 'rotateIn', 'bounceIn', 'elasticIn', 'flipInX',
-      'flipInY', 'zoomIn', 'rollIn', 'lightSpeedIn', 'pulse', 'shake', 'swing',
-      'tada', 'wobble', 'jelly', 'glitch', 'heartbeat', 'rubberBand',
+      'fadeIn',
+      'fadeOut',
+      'slideInUp',
+      'slideInDown',
+      'slideInLeft',
+      'slideInRight',
+      'scaleIn',
+      'scaleOut',
+      'rotateIn',
+      'bounceIn',
+      'elasticIn',
+      'flipInX',
+      'flipInY',
+      'zoomIn',
+      'rollIn',
+      'lightSpeedIn',
+      'pulse',
+      'shake',
+      'swing',
+      'tada',
+      'wobble',
+      'jelly',
+      'glitch',
+      'heartbeat',
+      'rubberBand',
     ];
 
     return (

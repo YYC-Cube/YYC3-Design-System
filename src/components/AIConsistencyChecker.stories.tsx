@@ -54,8 +54,8 @@ export const WithIssues: Story = {
       'spacing.1': '5px',
       'spacing.2': '11px',
       'spacing.3': '17px',
-      'fontSize': '16px',
-      'lineHeight': '1.5',
+      fontSize: '16px',
+      lineHeight: '1.5',
     },
   },
 };

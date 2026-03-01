@@ -1,0 +1,42 @@
+b7078960fb0a1197ec22af592e76a59a
+"use strict";
+/**
+ * @file 性能监控测试
+ * @description 测试性能监控相关的工具函数和组件
+ * @module __tests__/performance/monitoring.test
+ * @author YYC³
+ * @version 1.0.0
+ * @created 2026-02-22
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const index_1 = require("../index");
+describe('性能监控测试', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+        (0, index_1.destroyPerformanceMonitoring)();
+    });
+    describe('性能监控初始化', () => {
+        it('应该正确初始化性能监控', () => {
+            (0, index_1.initPerformanceMonitoring)();
+            expect((0, index_1.getPerformanceMetrics)()).toBeDefined();
+        });
+        it('应该获取性能指标', () => {
+            (0, index_1.initPerformanceMonitoring)();
+            const metrics = (0, index_1.getPerformanceMetrics)();
+            expect(typeof metrics).toBe('object');
+        });
+        it('应该正确销毁性能监控', () => {
+            (0, index_1.initPerformanceMonitoring)();
+            expect(() => {
+                (0, index_1.destroyPerformanceMonitoring)();
+            }).not.toThrow();
+        });
+    });
+    describe('性能指标收集', () => {
+        it('应该返回空对象当监控未初始化时', () => {
+            const metrics = (0, index_1.getPerformanceMetrics)();
+            expect(metrics).toEqual({});
+        });
+    });
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL3lhbnl1L0Rvd25sb2Fkcy95eWMzLURlc2lnbi1TeXN0ZW0vc3JjL3BlcmZvcm1hbmNlL19fdGVzdHNfXy9tb25pdG9yaW5nLnRlc3QudHMiLCJtYXBwaW5ncyI6IjtBQUFBOzs7Ozs7O0dBT0c7O0FBR0gsb0NBSWtCO0FBRWxCLFFBQVEsQ0FBQyxRQUFRLEVBQUUsR0FBRyxFQUFFO0lBQ3RCLFVBQVUsQ0FBQyxHQUFHLEVBQUU7UUFDZCxJQUFJLENBQUMsYUFBYSxFQUFFLENBQUM7UUFDckIsSUFBQSxvQ0FBNEIsR0FBRSxDQUFDO0lBQ2pDLENBQUMsQ0FBQyxDQUFDO0lBRUgsUUFBUSxDQUFDLFNBQVMsRUFBRSxHQUFHLEVBQUU7UUFDdkIsRUFBRSxDQUFDLGFBQWEsRUFBRSxHQUFHLEVBQUU7WUFDckIsSUFBQSxpQ0FBeUIsR0FBRSxDQUFDO1lBRTVCLE1BQU0sQ0FBQyxJQUFBLDZCQUFxQixHQUFFLENBQUMsQ0FBQyxXQUFXLEVBQUUsQ0FBQztRQUNoRCxDQUFDLENBQUMsQ0FBQztRQUVILEVBQUUsQ0FBQyxVQUFVLEVBQUUsR0FBRyxFQUFFO1lBQ2xCLElBQUEsaUNBQXlCLEdBQUUsQ0FBQztZQUU1QixNQUFNLE9BQU8sR0FBRyxJQUFBLDZCQUFxQixHQUFFLENBQUM7WUFFeEMsTUFBTSxDQUFDLE9BQU8sT0FBTyxDQUFDLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBQ3hDLENBQUMsQ0FBQyxDQUFDO1FBRUgsRUFBRSxDQUFDLFlBQVksRUFBRSxHQUFHLEVBQUU7WUFDcEIsSUFBQSxpQ0FBeUIsR0FBRSxDQUFDO1lBRTVCLE1BQU0sQ0FBQyxHQUFHLEVBQUU7Z0JBQ1YsSUFBQSxvQ0FBNEIsR0FBRSxDQUFDO1lBQ2pDLENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxPQUFPLEVBQUUsQ0FBQztRQUNuQixDQUFDLENBQUMsQ0FBQztJQUNMLENBQUMsQ0FBQyxDQUFDO0lBRUgsUUFBUSxDQUFDLFFBQVEsRUFBRSxHQUFHLEVBQUU7UUFDdEIsRUFBRSxDQUFDLGlCQUFpQixFQUFFLEdBQUcsRUFBRTtZQUN6QixNQUFNLE9BQU8sR0FBRyxJQUFBLDZCQUFxQixHQUFFLENBQUM7WUFFeEMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDLE9BQU8sQ0FBQyxFQUFFLENBQUMsQ0FBQztRQUM5QixDQUFDLENBQUMsQ0FBQztJQUNMLENBQUMsQ0FBQyxDQUFDO0FBQ0wsQ0FBQyxDQUFDLENBQUMiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL3lhbnl1L0Rvd25sb2Fkcy95eWMzLURlc2lnbi1TeXN0ZW0vc3JjL3BlcmZvcm1hbmNlL19fdGVzdHNfXy9tb25pdG9yaW5nLnRlc3QudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBAZmlsZSDmgKfog73nm5HmjqfmtYvor5VcbiAqIEBkZXNjcmlwdGlvbiDmtYvor5XmgKfog73nm5Hmjqfnm7jlhbPnmoTlt6Xlhbflh73mlbDlkoznu4Tku7ZcbiAqIEBtb2R1bGUgX190ZXN0c19fL3BlcmZvcm1hbmNlL21vbml0b3JpbmcudGVzdFxuICogQGF1dGhvciBZWUPCs1xuICogQHZlcnNpb24gMS4wLjBcbiAqIEBjcmVhdGVkIDIwMjYtMDItMjJcbiAqL1xuXG5pbXBvcnQgeyByZW5kZXJIb29rLCBhY3QgfSBmcm9tICdAdGVzdGluZy1saWJyYXJ5L3JlYWN0JztcbmltcG9ydCB7XG4gIGluaXRQZXJmb3JtYW5jZU1vbml0b3JpbmcsXG4gIGdldFBlcmZvcm1hbmNlTWV0cmljcyxcbiAgZGVzdHJveVBlcmZvcm1hbmNlTW9uaXRvcmluZyxcbn0gZnJvbSAnLi4vaW5kZXgnO1xuXG5kZXNjcmliZSgn5oCn6IO955uR5o6n5rWL6K+VJywgKCkgPT4ge1xuICBiZWZvcmVFYWNoKCgpID0+IHtcbiAgICBqZXN0LmNsZWFyQWxsTW9ja3MoKTtcbiAgICBkZXN0cm95UGVyZm9ybWFuY2VNb25pdG9yaW5nKCk7XG4gIH0pO1xuXG4gIGRlc2NyaWJlKCfmgKfog73nm5HmjqfliJ3lp4vljJYnLCAoKSA9PiB7XG4gICAgaXQoJ+W6lOivpeato+ehruWIneWni+WMluaAp+iDveebkeaOpycsICgpID0+IHtcbiAgICAgIGluaXRQZXJmb3JtYW5jZU1vbml0b3JpbmcoKTtcblxuICAgICAgZXhwZWN0KGdldFBlcmZvcm1hbmNlTWV0cmljcygpKS50b0JlRGVmaW5lZCgpO1xuICAgIH0pO1xuXG4gICAgaXQoJ+W6lOivpeiOt+WPluaAp+iDveaMh+aghycsICgpID0+IHtcbiAgICAgIGluaXRQZXJmb3JtYW5jZU1vbml0b3JpbmcoKTtcblxuICAgICAgY29uc3QgbWV0cmljcyA9IGdldFBlcmZvcm1hbmNlTWV0cmljcygpO1xuXG4gICAgICBleHBlY3QodHlwZW9mIG1ldHJpY3MpLnRvQmUoJ29iamVjdCcpO1xuICAgIH0pO1xuXG4gICAgaXQoJ+W6lOivpeato+ehrumUgOavgeaAp+iDveebkeaOpycsICgpID0+IHtcbiAgICAgIGluaXRQZXJmb3JtYW5jZU1vbml0b3JpbmcoKTtcblxuICAgICAgZXhwZWN0KCgpID0+IHtcbiAgICAgICAgZGVzdHJveVBlcmZvcm1hbmNlTW9uaXRvcmluZygpO1xuICAgICAgfSkubm90LnRvVGhyb3coKTtcbiAgICB9KTtcbiAgfSk7XG5cbiAgZGVzY3JpYmUoJ+aAp+iDveaMh+agh+aUtumbhicsICgpID0+IHtcbiAgICBpdCgn5bqU6K+l6L+U5Zue56m65a+56LGh5b2T55uR5o6n5pyq5Yid5aeL5YyW5pe2JywgKCkgPT4ge1xuICAgICAgY29uc3QgbWV0cmljcyA9IGdldFBlcmZvcm1hbmNlTWV0cmljcygpO1xuXG4gICAgICBleHBlY3QobWV0cmljcykudG9FcXVhbCh7fSk7XG4gICAgfSk7XG4gIH0pO1xufSk7XG4iXSwidmVyc2lvbiI6M30=

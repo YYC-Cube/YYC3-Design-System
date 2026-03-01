@@ -1,0 +1,146 @@
+94224a719e4e5579f880197b268d2db0
+"use strict";
+
+/* istanbul ignore next */
+function cov_1c6184nxk7() {
+  var path = "/Users/yanyu/Downloads/yyc3-Design-System/src/utils/cn.ts";
+  var hash = "5af6dca13412a0178925b415999b5fd72add9fb6";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/yanyu/Downloads/yyc3-Design-System/src/utils/cn.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 16
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 15
+        },
+        end: {
+          line: 4,
+          column: 30
+        }
+      },
+      "3": {
+        start: {
+          line: 5,
+          column: 25
+        },
+        end: {
+          line: 5,
+          column: 50
+        }
+      },
+      "4": {
+        start: {
+          line: 7,
+          column: 4
+        },
+        end: {
+          line: 7,
+          column: 67
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "cn",
+        decl: {
+          start: {
+            line: 6,
+            column: 9
+          },
+          end: {
+            line: 6,
+            column: 11
+          }
+        },
+        loc: {
+          start: {
+            line: 6,
+            column: 23
+          },
+          end: {
+            line: 8,
+            column: 1
+          }
+        },
+        line: 6
+      }
+    },
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    f: {
+      "0": 0
+    },
+    b: {},
+    inputSourceMap: {
+      file: "/Users/yanyu/Downloads/yyc3-Design-System/src/utils/cn.ts",
+      mappings: ";;AAGA,gBAEC;AALD,+BAA6C;AAC7C,mDAAyC;AAEzC,SAAgB,EAAE,CAAC,GAAG,MAAoB;IACxC,OAAO,IAAA,wBAAO,EAAC,IAAA,WAAI,EAAC,MAAM,CAAC,CAAC,CAAC;AAC/B,CAAC",
+      names: [],
+      sources: ["/Users/yanyu/Downloads/yyc3-Design-System/src/utils/cn.ts"],
+      sourcesContent: ["import { type ClassValue, clsx } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "5af6dca13412a0178925b415999b5fd72add9fb6"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_1c6184nxk7 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_1c6184nxk7();
+cov_1c6184nxk7().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_1c6184nxk7().s[1]++;
+exports.cn = cn;
+const clsx_1 =
+/* istanbul ignore next */
+(cov_1c6184nxk7().s[2]++, require("clsx"));
+const tailwind_merge_1 =
+/* istanbul ignore next */
+(cov_1c6184nxk7().s[3]++, require("tailwind-merge"));
+function cn(...inputs) {
+  /* istanbul ignore next */
+  cov_1c6184nxk7().f[0]++;
+  cov_1c6184nxk7().s[4]++;
+  return (0, tailwind_merge_1.twMerge)((0, clsx_1.clsx)(inputs));
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJleHBvcnRzIiwiY24iLCJjbHN4XzEiLCJjb3ZfMWM2MTg0bnhrNyIsInMiLCJyZXF1aXJlIiwidGFpbHdpbmRfbWVyZ2VfMSIsImlucHV0cyIsImYiLCJ0d01lcmdlIiwiY2xzeCJdLCJzb3VyY2VzIjpbIi9Vc2Vycy95YW55dS9Eb3dubG9hZHMveXljMy1EZXNpZ24tU3lzdGVtL3NyYy91dGlscy9jbi50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyB0eXBlIENsYXNzVmFsdWUsIGNsc3ggfSBmcm9tICdjbHN4JztcbmltcG9ydCB7IHR3TWVyZ2UgfSBmcm9tICd0YWlsd2luZC1tZXJnZSc7XG5cbmV4cG9ydCBmdW5jdGlvbiBjbiguLi5pbnB1dHM6IENsYXNzVmFsdWVbXSkge1xuICByZXR1cm4gdHdNZXJnZShjbHN4KGlucHV0cykpO1xufVxuIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUdBQSxPQUFBLENBQUFDLEVBQUEsR0FBQUEsRUFBQTtBQUhBLE1BQUFDLE1BQUE7QUFBQTtBQUFBLENBQUFDLGNBQUEsR0FBQUMsQ0FBQSxPQUFBQyxPQUFBO0FBQ0EsTUFBQUMsZ0JBQUE7QUFBQTtBQUFBLENBQUFILGNBQUEsR0FBQUMsQ0FBQSxPQUFBQyxPQUFBO0FBRUEsU0FBZ0JKLEVBQUVBLENBQUMsR0FBR00sTUFBb0I7RUFBQTtFQUFBSixjQUFBLEdBQUFLLENBQUE7RUFBQUwsY0FBQSxHQUFBQyxDQUFBO0VBQ3hDLE9BQU8sSUFBQUUsZ0JBQUEsQ0FBQUcsT0FBTyxFQUFDLElBQUFQLE1BQUEsQ0FBQVEsSUFBSSxFQUFDSCxNQUFNLENBQUMsQ0FBQztBQUM5QiIsImlnbm9yZUxpc3QiOltdfQ==

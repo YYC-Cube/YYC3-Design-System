@@ -13,7 +13,11 @@ import { Button } from './Button';
 import { Input } from './Input';
 import { Grid } from './Grid';
 import { performanceOptimizer } from '../ai/performance-optimizer';
-import type { PerformanceMetrics, OptimizationPlan, PerformanceIssue } from '../ai/performance-optimizer';
+import type {
+  PerformanceMetrics,
+  OptimizationPlan,
+  PerformanceIssue,
+} from '../ai/performance-optimizer';
 import { useTheme } from '../theme/useTheme';
 
 const { useState, useCallback, useMemo } = React;
@@ -140,7 +144,10 @@ export const AIPerformanceOptimizer: React.FC<AIPerformanceOptimizerProps> = ({
         <CardContent>
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-semibold mb-4" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+              <h3
+                className="text-lg font-semibold mb-4"
+                style={{ color: getTokenValue(tokens, 'color.foreground') }}
+              >
                 性能指标输入
               </h3>
               <Grid cols={2} gap={4}>
@@ -155,27 +162,39 @@ export const AIPerformanceOptimizer: React.FC<AIPerformanceOptimizerProps> = ({
                     <Input
                       type="number"
                       value={metrics[key as keyof PerformanceMetrics]?.toString() || ''}
-                      onChange={(value) => handleMetricChange(key as keyof PerformanceMetrics, value)}
+                      onChange={(value) =>
+                        handleMetricChange(key as keyof PerformanceMetrics, value)
+                      }
                       placeholder="输入数值"
                     />
                   </div>
                 ))}
               </Grid>
-              <Button
-                onClick={handleGeneratePlan}
-                className="w-full mt-4"
-              >
+              <Button onClick={handleGeneratePlan} className="w-full mt-4">
                 生成优化建议
               </Button>
             </div>
 
             {optimizationPlan && (
               <div className="space-y-6">
-                <div className="text-center p-6 rounded-lg" style={{ backgroundColor: getTokenValue(tokens, 'color.muted') }}>
-                  <div className="mb-2" style={{ fontSize: '48px', fontWeight: 'bold', color: getGradeColor(optimizationPlan.grade) }}>
+                <div
+                  className="text-center p-6 rounded-lg"
+                  style={{ backgroundColor: getTokenValue(tokens, 'color.muted') }}
+                >
+                  <div
+                    className="mb-2"
+                    style={{
+                      fontSize: '48px',
+                      fontWeight: 'bold',
+                      color: getGradeColor(optimizationPlan.grade),
+                    }}
+                  >
                     {optimizationPlan.grade}
                   </div>
-                  <div className="text-lg" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                  <div
+                    className="text-lg"
+                    style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                  >
                     综合评分: {overallScore.toFixed(0)}/100
                   </div>
                   <div className="grid grid-cols-3 gap-4 mt-4 text-sm">
@@ -199,7 +218,10 @@ export const AIPerformanceOptimizer: React.FC<AIPerformanceOptimizerProps> = ({
 
                 {optimizationPlan.quickWins.length > 0 && (
                   <div>
-                    <h3 className="text-lg font-semibold mb-4" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                    <h3
+                      className="text-lg font-semibold mb-4"
+                      style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                    >
                       快速改进 ({optimizationPlan.quickWins.length})
                     </h3>
                     <div className="space-y-3">
@@ -215,7 +237,10 @@ export const AIPerformanceOptimizer: React.FC<AIPerformanceOptimizerProps> = ({
                           <div className="flex items-start justify-between mb-2">
                             <div className="flex items-center gap-2">
                               <span className="text-xl">{getIssueIcon(issue.type)}</span>
-                              <span className="font-medium" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                              <span
+                                className="font-medium"
+                                style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                              >
                                 {issue.metric}
                               </span>
                             </div>
@@ -223,14 +248,14 @@ export const AIPerformanceOptimizer: React.FC<AIPerformanceOptimizerProps> = ({
                               {issue.currentValue.toFixed(2)} / {issue.targetValue.toFixed(2)}
                             </div>
                           </div>
-                          <p className="text-sm mb-3" style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
+                          <p
+                            className="text-sm mb-3"
+                            style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}
+                          >
                             {issue.description}
                           </p>
                           <div className="flex gap-2">
-                            <Button
-                              size="sm"
-                              onClick={() => handleSelectIssue(issue)}
-                            >
+                            <Button size="sm" onClick={() => handleSelectIssue(issue)}>
                               详情
                             </Button>
                             {issue.codeExample && (
@@ -239,15 +264,20 @@ export const AIPerformanceOptimizer: React.FC<AIPerformanceOptimizerProps> = ({
                                 variant="outline"
                                 onClick={() => toggleCodeExample(`${issue.metric}-${index}`)}
                               >
-                                {showCodeExample[`${issue.metric}-${index}`] ? '隐藏代码' : '查看代码'}
+                                {showCodeExample[`${issue.metric}-${index}`]
+                                  ? '隐藏代码'
+                                  : '查看代码'}
                               </Button>
                             )}
                           </div>
                           {showCodeExample[`${issue.metric}-${index}`] && issue.codeExample && (
-                            <pre className="mt-3 p-3 rounded text-xs overflow-x-auto" style={{
-                              backgroundColor: getTokenValue(tokens, 'color.muted'),
-                              color: getTokenValue(tokens, 'color.foreground'),
-                            }}>
+                            <pre
+                              className="mt-3 p-3 rounded text-xs overflow-x-auto"
+                              style={{
+                                backgroundColor: getTokenValue(tokens, 'color.muted'),
+                                color: getTokenValue(tokens, 'color.foreground'),
+                              }}
+                            >
                               {issue.codeExample}
                             </pre>
                           )}
@@ -259,7 +289,10 @@ export const AIPerformanceOptimizer: React.FC<AIPerformanceOptimizerProps> = ({
 
                 {optimizationPlan.longTermImprovements.length > 0 && (
                   <div>
-                    <h3 className="text-lg font-semibold mb-4" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                    <h3
+                      className="text-lg font-semibold mb-4"
+                      style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                    >
                       长期优化 ({optimizationPlan.longTermImprovements.length})
                     </h3>
                     <div className="space-y-3">
@@ -275,7 +308,10 @@ export const AIPerformanceOptimizer: React.FC<AIPerformanceOptimizerProps> = ({
                           <div className="flex items-start justify-between mb-2">
                             <div className="flex items-center gap-2">
                               <span className="text-xl">{getIssueIcon(issue.type)}</span>
-                              <span className="font-medium" style={{ color: getTokenValue(tokens, 'color.foreground') }}>
+                              <span
+                                className="font-medium"
+                                style={{ color: getTokenValue(tokens, 'color.foreground') }}
+                              >
                                 {issue.metric}
                               </span>
                             </div>
@@ -283,11 +319,22 @@ export const AIPerformanceOptimizer: React.FC<AIPerformanceOptimizerProps> = ({
                               {issue.currentValue.toFixed(2)} / {issue.targetValue.toFixed(2)}
                             </div>
                           </div>
-                          <p className="text-sm mb-2" style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
+                          <p
+                            className="text-sm mb-2"
+                            style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}
+                          >
                             {issue.description}
                           </p>
-                          <div className="text-xs" style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}>
-                            预计影响: {issue.estimatedImpact} | 难度: {issue.effort === 'low' ? '低' : issue.effort === 'medium' ? '中' : '高'}
+                          <div
+                            className="text-xs"
+                            style={{ color: getTokenValue(tokens, 'color.muted-foreground') }}
+                          >
+                            预计影响: {issue.estimatedImpact} | 难度:{' '}
+                            {issue.effort === 'low'
+                              ? '低'
+                              : issue.effort === 'medium'
+                                ? '中'
+                                : '高'}
                           </div>
                         </div>
                       ))}
@@ -311,11 +358,17 @@ export const AIPerformanceOptimizer: React.FC<AIPerformanceOptimizerProps> = ({
       </Card>
 
       {selectedIssue && (
-        <div className="fixed inset-0 flex items-center justify-center z-50" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-          <div className="max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 rounded-lg" style={{
-            backgroundColor: getTokenValue(tokens, 'color.background'),
-            color: getTokenValue(tokens, 'color.foreground'),
-          }}>
+        <div
+          className="fixed inset-0 flex items-center justify-center z-50"
+          style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
+        >
+          <div
+            className="max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 rounded-lg"
+            style={{
+              backgroundColor: getTokenValue(tokens, 'color.background'),
+              color: getTokenValue(tokens, 'color.foreground'),
+            }}
+          >
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">{selectedIssue.metric}</h2>
               <Button size="sm" variant="outline" onClick={() => setSelectedIssue(null)}>
@@ -333,7 +386,9 @@ export const AIPerformanceOptimizer: React.FC<AIPerformanceOptimizerProps> = ({
               </div>
               <div>
                 <h3 className="font-semibold mb-2">当前值 / 目标值</h3>
-                <p>{selectedIssue.currentValue.toFixed(2)} / {selectedIssue.targetValue.toFixed(2)}</p>
+                <p>
+                  {selectedIssue.currentValue.toFixed(2)} / {selectedIssue.targetValue.toFixed(2)}
+                </p>
               </div>
               <div>
                 <h3 className="font-semibold mb-2">预计影响</h3>
@@ -342,9 +397,12 @@ export const AIPerformanceOptimizer: React.FC<AIPerformanceOptimizerProps> = ({
               {selectedIssue.codeExample && (
                 <div>
                   <h3 className="font-semibold mb-2">代码示例</h3>
-                  <pre className="p-3 rounded text-xs overflow-x-auto" style={{
-                    backgroundColor: getTokenValue(tokens, 'color.muted'),
-                  }}>
+                  <pre
+                    className="p-3 rounded text-xs overflow-x-auto"
+                    style={{
+                      backgroundColor: getTokenValue(tokens, 'color.muted'),
+                    }}
+                  >
                     {selectedIssue.codeExample}
                   </pre>
                 </div>

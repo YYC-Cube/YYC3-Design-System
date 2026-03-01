@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ThemeEditor } from './ThemeEditor';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 const meta: Meta<typeof ThemeEditor> = {
   title: 'Components/ThemeEditor',
@@ -21,7 +21,19 @@ const meta: Meta<typeof ThemeEditor> = {
   argTypes: {
     initialPresetId: {
       control: { type: 'select' },
-      options: ['light', 'dark', 'forest', 'ocean', 'sunset', 'midnight', 'lavender', 'rose', 'amber', 'cyan', 'slate'],
+      options: [
+        'light',
+        'dark',
+        'forest',
+        'ocean',
+        'sunset',
+        'midnight',
+        'lavender',
+        'rose',
+        'amber',
+        'cyan',
+        'slate',
+      ],
     },
     showPreview: {
       control: 'boolean',

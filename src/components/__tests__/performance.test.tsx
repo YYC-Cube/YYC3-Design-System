@@ -21,10 +21,13 @@ interface MockItem {
 
 describe('组件性能测试', () => {
   describe('VirtualList 组件', () => {
-    const mockItems = Array.from({ length: 1000 }, (_, i): MockItem => ({
-      id: i,
-      name: `Item ${i}`,
-    }));
+    const mockItems = Array.from(
+      { length: 1000 },
+      (_, i): MockItem => ({
+        id: i,
+        name: `Item ${i}`,
+      })
+    );
 
     it('应该正确渲染虚拟列表', () => {
       const { container } = render(
@@ -251,9 +254,7 @@ describe('组件性能测试', () => {
     it('应该缓存计算结果', () => {
       const expensiveCalculation = jest.fn((value: number) => value * 2);
 
-      const { rerender } = render(
-        <div data-testid="test">{expensiveCalculation(5)}</div>
-      );
+      const { rerender } = render(<div data-testid="test">{expensiveCalculation(5)}</div>);
 
       expect(expensiveCalculation).toHaveBeenCalledTimes(1);
 
@@ -267,11 +268,11 @@ describe('组件性能测试', () => {
     it('应该缓存函数引用', () => {
       const mockCallback = jest.fn();
 
-      const { rerender } = render(
-        <button onClick={mockCallback}>Click</button>
-      );
+      const { rerender } = render(<button onClick={mockCallback}>Click</button>);
 
-      const firstCallback = rerender(<button onClick={mockCallback}>Click</button>).container.querySelector('button');
+      const firstCallback = rerender(
+        <button onClick={mockCallback}>Click</button>
+      ).container.querySelector('button');
 
       expect(firstCallback).toBe(firstCallback);
     });

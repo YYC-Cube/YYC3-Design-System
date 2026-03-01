@@ -53,7 +53,7 @@ const ItemList = memo<ItemListProps>(({ items, onItemClick }) => {
 
   return (
     <ul style={{ listStyle: 'none', padding: 0 }}>
-      {items.map(item => (
+      {items.map((item) => (
         <li
           key={item.id}
           onClick={() => onItemClick(item.id)}
@@ -84,11 +84,11 @@ export const PerformanceOptimizationExample: React.FC = () => {
   ]);
 
   const handleIncrement = useCallback(() => {
-    setCount(prev => prev + 1);
+    setCount((prev) => prev + 1);
   }, []);
 
   const handleDecrement = useCallback(() => {
-    setCount(prev => prev - 1);
+    setCount((prev) => prev - 1);
   }, []);
 
   const handleNumberChange = useCallback((value: string) => {
@@ -97,7 +97,7 @@ export const PerformanceOptimizationExample: React.FC = () => {
 
   const handleAddItem = useCallback(() => {
     const newId = items.length + 1;
-    setItems(prev => [...prev, { id: newId, name: `项目 ${newId}`, value: newId * 100 }]);
+    setItems((prev) => [...prev, { id: newId, name: `项目 ${newId}`, value: newId * 100 }]);
   }, [items.length]);
 
   const handleItemClick = useCallback((id: number) => {
@@ -106,7 +106,7 @@ export const PerformanceOptimizationExample: React.FC = () => {
 
   const filteredItems = useMemo(() => {
     console.warn('[PerformanceOptimizationExample] 过滤项目');
-    return items.filter(item => item.value > 150);
+    return items.filter((item) => item.value > 150);
   }, [items]);
 
   const sortedItems = useMemo(() => {
@@ -131,7 +131,9 @@ export const PerformanceOptimizationExample: React.FC = () => {
           </div>
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
             <Button onClick={handleIncrement}>增加</Button>
-            <Button onClick={handleDecrement} variant="outline">减少</Button>
+            <Button onClick={handleDecrement} variant="outline">
+              减少
+            </Button>
           </div>
           <p style={{ fontSize: '0.875rem', color: '#666' }}>
             使用 useCallback 避免每次渲染都创建新的函数引用
@@ -166,9 +168,8 @@ export const PerformanceOptimizationExample: React.FC = () => {
             <Button onClick={handleAddItem}>添加项目</Button>
           </div>
           <div style={{ marginBottom: '1rem' }}>
-            <strong>项目总数：</strong> {items.length} |
-            <strong> 过滤后：</strong> {filteredItems.length} |
-            <strong> 总值：</strong> {totalValue}
+            <strong>项目总数：</strong> {items.length} |<strong> 过滤后：</strong>{' '}
+            {filteredItems.length} |<strong> 总值：</strong> {totalValue}
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div>

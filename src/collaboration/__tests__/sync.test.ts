@@ -7,8 +7,6 @@
  * @created 2026-02-19
  */
 
-
-
 describe('Collaboration Sync Module', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -49,7 +47,7 @@ describe('Collaboration Sync Module', () => {
       const syncConfig = {
         endpoint: '/api/sync',
         interval: 30000,
-        retryAttempts: 3
+        retryAttempts: 3,
       };
 
       expect(syncConfig.endpoint).toBe('/api/sync');
@@ -63,8 +61,8 @@ describe('Collaboration Sync Module', () => {
         timestamp: Date.now(),
         changes: [
           { id: 1, action: 'create' },
-          { id: 2, action: 'update' }
-        ]
+          { id: 2, action: 'update' },
+        ],
       };
 
       expect(syncResult.success).toBe(true);
@@ -75,7 +73,7 @@ describe('Collaboration Sync Module', () => {
       const syncError = {
         success: false,
         error: 'Network error',
-        retryCount: 1
+        retryCount: 1,
       };
 
       expect(syncError.success).toBe(false);
@@ -91,14 +89,14 @@ describe('Collaboration Sync Module', () => {
           documentId: 'doc1',
           userId: 'user1',
           timestamp: Date.now() - 1000,
-          changes: { content: 'content1' }
+          changes: { content: 'content1' },
         },
         {
           documentId: 'doc1',
           userId: 'user2',
           timestamp: Date.now(),
-          changes: { content: 'content2' }
-        }
+          changes: { content: 'content2' },
+        },
       ];
 
       const hasConflict = changes.length > 1;
@@ -108,7 +106,7 @@ describe('Collaboration Sync Module', () => {
     it('应该标记冲突类型', () => {
       const conflictTypes = ['merge', 'override', 'ignore'];
 
-      conflictTypes.forEach(type => {
+      conflictTypes.forEach((type) => {
         expect(type).toBeDefined();
       });
     });
@@ -117,7 +115,7 @@ describe('Collaboration Sync Module', () => {
       const resolution = {
         strategy: 'last-write-wins',
         autoResolve: true,
-        notifyUsers: true
+        notifyUsers: true,
       };
 
       expect(resolution.strategy).toBe('last-write-wins');
@@ -131,7 +129,7 @@ describe('Collaboration Sync Module', () => {
       const operationQueue = [
         { type: 'create', data: { id: 1, content: 'test' } },
         { type: 'update', data: { id: 2, content: 'updated' } },
-        { type: 'delete', data: { id: 3 } }
+        { type: 'delete', data: { id: 3 } },
       ];
 
       expect(operationQueue.length).toBe(3);
@@ -144,12 +142,14 @@ describe('Collaboration Sync Module', () => {
       const prioritizedQueue = [
         { type: 'delete', data: { id: 1 }, priority: 'high' },
         { type: 'update', data: { id: 2 }, priority: 'medium' },
-        { type: 'create', data: { id: 3 }, priority: 'low' }
+        { type: 'create', data: { id: 3 }, priority: 'low' },
       ];
 
       const sortedQueue = prioritizedQueue.sort((a, b) => {
         const priorityOrder: Record<string, number> = { high: 1, medium: 2, low: 3 };
-        return (priorityOrder[a.priority as string] || 0) - (priorityOrder[b.priority as string] || 0);
+        return (
+          (priorityOrder[a.priority as string] || 0) - (priorityOrder[b.priority as string] || 0)
+        );
       });
 
       expect(sortedQueue[0].priority).toBe('high');
@@ -161,7 +161,7 @@ describe('Collaboration Sync Module', () => {
       const batchSize = 10;
       const operations = Array.from({ length: 25 }, (_, i) => ({
         type: 'update',
-        data: { id: i }
+        data: { id: i },
       }));
 
       const batches = [];
@@ -181,7 +181,7 @@ describe('Collaboration Sync Module', () => {
       const wsConfig = {
         url: 'ws://localhost:3000',
         reconnectInterval: 5000,
-        maxReconnectAttempts: 5
+        maxReconnectAttempts: 5,
       };
 
       expect(wsConfig.url).toBe('ws://localhost:3000');
@@ -193,10 +193,10 @@ describe('Collaboration Sync Module', () => {
       const events = [
         { type: 'document_updated', data: { id: 1 } },
         { type: 'user_joined', data: { userId: 'user1' } },
-        { type: 'user_left', data: { userId: 'user2' } }
+        { type: 'user_left', data: { userId: 'user2' } },
       ];
 
-      events.forEach(event => {
+      events.forEach((event) => {
         expect(event.type).toBeDefined();
         expect(event.data).toBeDefined();
       });
@@ -205,7 +205,7 @@ describe('Collaboration Sync Module', () => {
     it('应该处理连接状态', () => {
       const connectionStates = ['connecting', 'connected', 'disconnected', 'error'];
 
-      connectionStates.forEach(state => {
+      connectionStates.forEach((state) => {
         expect(state).toBeDefined();
       });
     });
@@ -215,9 +215,7 @@ describe('Collaboration Sync Module', () => {
     it('应该缓存离线操作', () => {
       const offlineCache = {
         maxSize: 100,
-        operations: [
-          { type: 'create', data: { id: 1 }, timestamp: Date.now() }
-        ]
+        operations: [{ type: 'create', data: { id: 1 }, timestamp: Date.now() }],
       };
 
       expect(offlineCache.maxSize).toBe(100);
@@ -233,7 +231,7 @@ describe('Collaboration Sync Module', () => {
       const offlineConflict = {
         localOperation: { type: 'update', data: { id: 1, content: 'local' } },
         serverData: { id: 1, content: 'server' },
-        timestamp: Date.now()
+        timestamp: Date.now(),
       };
 
       expect(offlineConflict.localOperation).toBeDefined();
@@ -245,7 +243,7 @@ describe('Collaboration Sync Module', () => {
     it('应该支持节流同步', () => {
       const throttleConfig = {
         interval: 1000,
-        maxBatchSize: 50
+        maxBatchSize: 50,
       };
 
       expect(throttleConfig.interval).toBe(1000);
@@ -256,7 +254,7 @@ describe('Collaboration Sync Module', () => {
       const compressionConfig = {
         enabled: true,
         algorithm: 'gzip',
-        threshold: 1024
+        threshold: 1024,
       };
 
       expect(compressionConfig.enabled).toBe(true);
@@ -268,7 +266,7 @@ describe('Collaboration Sync Module', () => {
       const incrementalSync = {
         enabled: true,
         lastSyncTimestamp: Date.now() - 3600000,
-        syncWindow: 3600000
+        syncWindow: 3600000,
       };
 
       expect(incrementalSync.enabled).toBe(true);
@@ -283,7 +281,7 @@ describe('Collaboration Sync Module', () => {
         type: 'network',
         message: 'Connection failed',
         code: 'NETWORK_ERROR',
-        retryable: true
+        retryable: true,
       };
 
       expect(networkError.type).toBe('network');
@@ -296,7 +294,7 @@ describe('Collaboration Sync Module', () => {
         type: 'server',
         message: 'Internal server error',
         code: 500,
-        retryable: false
+        retryable: false,
       };
 
       expect(serverError.type).toBe('server');
@@ -309,7 +307,7 @@ describe('Collaboration Sync Module', () => {
         type: 'timeout',
         message: 'Request timeout',
         code: 'TIMEOUT',
-        retryable: true
+        retryable: true,
       };
 
       expect(timeoutError.type).toBe('timeout');
@@ -322,7 +320,7 @@ describe('Collaboration Sync Module', () => {
     it('应该跟踪在线用户', () => {
       const onlineUsers = [
         { id: 'user1', name: 'User 1', lastSeen: Date.now() },
-        { id: 'user2', name: 'User 2', lastSeen: Date.now() }
+        { id: 'user2', name: 'User 2', lastSeen: Date.now() },
       ];
 
       expect(onlineUsers.length).toBe(2);
@@ -333,7 +331,7 @@ describe('Collaboration Sync Module', () => {
       const userJoin = {
         userId: 'user3',
         userName: 'User 3',
-        timestamp: Date.now()
+        timestamp: Date.now(),
       };
 
       expect(userJoin.userId).toBe('user3');
@@ -343,7 +341,7 @@ describe('Collaboration Sync Module', () => {
     it('应该处理用户离开', () => {
       const userLeave = {
         userId: 'user1',
-        timestamp: Date.now()
+        timestamp: Date.now(),
       };
 
       expect(userLeave.userId).toBe('user1');
@@ -352,10 +350,10 @@ describe('Collaboration Sync Module', () => {
     it('应该处理用户状态变化', () => {
       const statusChanges = [
         { userId: 'user1', oldStatus: 'idle', newStatus: 'active' },
-        { userId: 'user2', oldStatus: 'active', newStatus: 'busy' }
+        { userId: 'user2', oldStatus: 'active', newStatus: 'busy' },
       ];
 
-      statusChanges.forEach(change => {
+      statusChanges.forEach((change) => {
         expect(change.userId).toBeDefined();
         expect(change.oldStatus).toBeDefined();
         expect(change.newStatus).toBeDefined();

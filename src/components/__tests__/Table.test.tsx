@@ -7,11 +7,11 @@
  * @created 2026-02-23
  */
 
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { Table } from '../Table';
-import { ThemeProvider } from '../../theme/ThemeProvider';
+import { ThemeProvider } from '../../context/ThemeContext';
 
 describe('Table', () => {
   const mockData = [
@@ -27,21 +27,36 @@ describe('Table', () => {
   ];
 
   it('应该渲染表格', () => {
-    render(<ThemeProvider><Table columns={mockColumns} dataSource={mockData} /></ThemeProvider>);
+    render(
+      <ThemeProvider>
+        <Table columns={mockColumns} dataSource={mockData} />
+      </ThemeProvider>
+    );
     expect(screen.getByText('Name')).toBeInTheDocument();
     expect(screen.getByText('Age')).toBeInTheDocument();
     expect(screen.getByText('Email')).toBeInTheDocument();
   });
 
   it('应该渲染数据行', () => {
-    render(<ThemeProvider><Table columns={mockColumns} dataSource={mockData} /></ThemeProvider>);
+    render(
+      <ThemeProvider>
+        <Table columns={mockColumns} dataSource={mockData} />
+      </ThemeProvider>
+    );
     expect(screen.getByText('John Doe')).toBeInTheDocument();
     expect(screen.getByText('Jane Smith')).toBeInTheDocument();
     expect(screen.getByText('Bob Johnson')).toBeInTheDocument();
   });
 
   it('应该支持排序', () => {
-    render(<ThemeProvider><Table columns={mockColumns.map(col => ({ ...col, sortable: true }))} dataSource={mockData} /></ThemeProvider>);
+    render(
+      <ThemeProvider>
+        <Table
+          columns={mockColumns.map((col) => ({ ...col, sortable: true }))}
+          dataSource={mockData}
+        />
+      </ThemeProvider>
+    );
     const nameHeader = screen.getByText('Name');
     fireEvent.click(nameHeader);
     expect(screen.getByText('↑')).toBeInTheDocument();
@@ -103,16 +118,29 @@ describe('Table', () => {
   });
 
   it('应该支持空数据', () => {
-    render(<ThemeProvider><Table columns={mockColumns} dataSource={[]} /></ThemeProvider>);
+    render(
+      <ThemeProvider>
+        <Table columns={mockColumns} dataSource={[]} />
+      </ThemeProvider>
+    );
     const emptyText = screen.getByText(/暂无数据/);
     expect(emptyText).toBeInTheDocument();
   });
 
   it('应该支持自定义单元格渲染', () => {
     const customColumns = [
-      { key: 'name', title: 'Name', dataIndex: 'name', render: (value: unknown) => <strong>{value as string}</strong> },
+      {
+        key: 'name',
+        title: 'Name',
+        dataIndex: 'name',
+        render: (value: unknown) => <strong>{value as string}</strong>,
+      },
     ];
-    render(<ThemeProvider><Table columns={customColumns} dataSource={mockData} /></ThemeProvider>);
+    render(
+      <ThemeProvider>
+        <Table columns={customColumns} dataSource={mockData} />
+      </ThemeProvider>
+    );
     const nameCell = screen.getByText('John Doe');
     expect(nameCell.closest('strong')).toBeInTheDocument();
   });
@@ -122,7 +150,11 @@ describe('Table', () => {
       { key: 'name', title: 'Name', dataIndex: 'name', width: 200 },
       { key: 'age', title: 'Age', dataIndex: 'age', width: 100 },
     ];
-    render(<ThemeProvider><Table columns={widthColumns} dataSource={mockData} /></ThemeProvider>);
+    render(
+      <ThemeProvider>
+        <Table columns={widthColumns} dataSource={mockData} />
+      </ThemeProvider>
+    );
     const nameHeader = screen.getByText('Name');
     expect(nameHeader).toBeInTheDocument();
   });
@@ -130,11 +162,7 @@ describe('Table', () => {
   it('应该支持数据加载状态', () => {
     render(
       <ThemeProvider>
-        <Table
-          columns={mockColumns}
-          dataSource={mockData}
-          loading
-        />
+        <Table columns={mockColumns} dataSource={mockData} loading />
       </ThemeProvider>
     );
     const loadingIndicator = screen.getByRole('status');

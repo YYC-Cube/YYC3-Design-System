@@ -12,7 +12,7 @@ import * as React from 'react';
 import { render, fireEvent, act } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 import '@testing-library/jest-dom';
-import { ThemeProvider, useTheme } from '../theme/ThemeProvider';
+import { ThemeProvider, useTheme } from '../context/ThemeContext';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '../components/Card';
@@ -53,7 +53,7 @@ describe('组件集成测试', () => {
       });
 
       expect(screen.getByTestId('current-theme')).toHaveTextContent('当前主题: dark');
-      
+
       unmount();
     });
 
@@ -90,11 +90,7 @@ describe('组件集成测试', () => {
               <CardTitle>表单</CardTitle>
             </CardHeader>
             <CardContent>
-              <Input
-                value={value}
-                onChange={setValue}
-                placeholder="请输入内容"
-              />
+              <Input value={value} onChange={setValue} placeholder="请输入内容" />
             </CardContent>
             <CardFooter>
               <Button onClick={handleSubmit}>提交</Button>
@@ -121,11 +117,7 @@ describe('组件集成测试', () => {
         return (
           <Card>
             <CardContent>
-              <Input
-                value={value}
-                onChange={setValue}
-                placeholder="请输入内容"
-              />
+              <Input value={value} onChange={setValue} placeholder="请输入内容" />
             </CardContent>
             <CardFooter>
               <Button onClick={() => handleSubmit(value)}>提交</Button>
@@ -224,9 +216,7 @@ describe('组件集成测试', () => {
 
       render(
         <ThemeProvider>
-          <Grid cols={2}>
-            {cards}
-          </Grid>
+          <Grid cols={2}>{cards}</Grid>
         </ThemeProvider>
       );
 
@@ -237,15 +227,11 @@ describe('组件集成测试', () => {
     });
 
     it('应该能够在Grid中渲染多个Button', () => {
-      const buttons = Array.from({ length: 4 }, (_, i) => (
-        <Button key={i}>按钮{i}</Button>
-      ));
+      const buttons = Array.from({ length: 4 }, (_, i) => <Button key={i}>按钮{i}</Button>);
 
       render(
         <ThemeProvider>
-          <Grid cols={2}>
-            {buttons}
-          </Grid>
+          <Grid cols={2}>{buttons}</Grid>
         </ThemeProvider>
       );
 
@@ -272,16 +258,12 @@ describe('组件集成测试', () => {
     });
 
     it('应该能够在Container中渲染Grid', () => {
-      const items = Array.from({ length: 4 }, (_, i) => (
-        <div key={i}>项目{i}</div>
-      ));
+      const items = Array.from({ length: 4 }, (_, i) => <div key={i}>项目{i}</div>);
 
       render(
         <ThemeProvider>
           <Container>
-            <Grid cols={2}>
-              {items}
-            </Grid>
+            <Grid cols={2}>{items}</Grid>
           </Container>
         </ThemeProvider>
       );
@@ -306,11 +288,7 @@ describe('组件集成测试', () => {
                 <CardTitle>复杂场景</CardTitle>
               </CardHeader>
               <CardContent>
-                <Input
-                  value={value}
-                  onChange={setValue}
-                  placeholder="请输入内容"
-                />
+                <Input value={value} onChange={setValue} placeholder="请输入内容" />
                 <Grid cols={2}>
                   <Button onClick={() => setIsOpen(true)}>打开Modal</Button>
                   <Button>提交</Button>

@@ -9,13 +9,11 @@
 
 import * as React from 'react';
 
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import { Input } from './Input';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 const renderWithTheme = (component: React.ReactElement) => {
   return render(<ThemeProvider>{component}</ThemeProvider>);
@@ -33,7 +31,7 @@ describe('Input 组件', () => {
   it('应该支持不同的 type 属性', () => {
     const types = ['text', 'password', 'email', 'number'] as const;
 
-    types.forEach(type => {
+    types.forEach((type) => {
       const { container, unmount } = renderWithTheme(<Input type={type} />);
       const input = container.querySelector(`input[type="${type}"]`);
       expect(input).toBeInTheDocument();
@@ -178,8 +176,8 @@ describe('Input 组件', () => {
     const input = screen.getByRole('textbox');
     fireEvent.paste(input, {
       clipboardData: {
-        getData: () => 'pasted text'
-      }
+        getData: () => 'pasted text',
+      },
     });
 
     expect(input).toBeInTheDocument();

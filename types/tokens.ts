@@ -1,3 +1,5 @@
+import type { ReactNode, FocusEvent, KeyboardEvent, CSSProperties, ReactElement } from 'react';
+
 export interface ColorToken {
   oklch: string;
   hex: string;
@@ -50,6 +52,12 @@ export interface ThemeContextValue {
   setMode: (mode: 'light' | 'dark') => void;
 }
 
+export interface ThemeProviderProps {
+  children: ReactNode;
+  initialTheme?: string;
+  initialMode?: 'light' | 'dark';
+}
+
 export type ButtonVariant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
 export type ButtonSize = 'default' | 'sm' | 'lg' | 'icon';
 
@@ -58,7 +66,7 @@ export interface ButtonProps {
   size?: ButtonSize;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
-  children: React.ReactNode;
+  children: ReactNode;
   onClick?: () => void;
   className?: string;
   'data-testid'?: string;
@@ -73,8 +81,8 @@ export interface InputProps {
   value?: string;
   defaultValue?: string;
   onChange?: (value: string) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
   autoFocus?: boolean;
   required?: boolean;
   name?: string;
@@ -84,16 +92,16 @@ export interface InputProps {
 }
 
 export interface CardProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   'data-testid'?: string;
 }
 
 export interface BadgeProps {
   variant?: 'default' | 'secondary' | 'destructive' | 'outline';
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   onClick?: () => void;
   'data-testid'?: string;
 }
@@ -111,7 +119,7 @@ export interface CheckboxProps {
   checked?: boolean;
   disabled?: boolean;
   onChange?: (checked: boolean) => void;
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
 }
 
@@ -121,7 +129,7 @@ export interface RadioProps {
   checked?: boolean;
   disabled?: boolean;
   onChange?: (value: string) => void;
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
 }
 
@@ -145,43 +153,43 @@ export interface SpinnerProps {
 
 export interface AlertProps {
   variant?: 'default' | 'destructive' | 'warning' | 'success';
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
 export interface TabsProps {
   defaultValue?: string;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
 export interface TabListProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
 export interface TabProps {
   value: string;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
 export interface TabPanelProps {
   value: string;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
 export interface ModalProps {
   isOpen?: boolean;
   onClose?: () => void;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
 export interface TooltipProps {
-  content: React.ReactNode;
-  children: React.ReactElement;
+  content: ReactNode;
+  children: ReactElement;
   placement?: 'top' | 'bottom' | 'left' | 'right';
   className?: string;
 }

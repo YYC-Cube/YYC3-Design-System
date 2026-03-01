@@ -12,7 +12,14 @@
 import type { ElementType } from 'react';
 import * as React from 'react';
 import type { z } from 'zod';
-import type { UseFormReturn, FieldValues, Control, FieldPath, FieldPathValue, RegisterOptions } from 'react-hook-form';
+import type {
+  UseFormReturn,
+  FieldValues,
+  Control,
+  FieldPath,
+  FieldPathValue,
+  RegisterOptions,
+} from 'react-hook-form';
 
 export type Primitive = string | number | boolean | bigint | symbol | null | undefined;
 
@@ -40,13 +47,15 @@ export type CSSValue = string | number;
 
 export type SpacingValue = string | number;
 
-export type ResponsiveValue<T> = T | {
-  xs?: T;
-  sm?: T;
-  md?: T;
-  lg?: T;
-  xl?: T;
-};
+export type ResponsiveValue<T> =
+  | T
+  | {
+      xs?: T;
+      sm?: T;
+      md?: T;
+      lg?: T;
+      xl?: T;
+    };
 
 export type ThemeValue<T> = T | ((theme: Record<string, unknown>) => T);
 
@@ -154,9 +163,10 @@ export type PolymorphicComponentProps<E extends ElementType, P extends object = 
   children?: React.ReactNode;
 };
 
-export type ComponentWithRef<T extends ElementType, P extends object = object> = React.ForwardRefExoticComponent<
-  PolymorphicComponentProps<T, P>
->;
+export type ComponentWithRef<
+  T extends ElementType,
+  P extends object = object,
+> = React.ForwardRefExoticComponent<PolymorphicComponentProps<T, P>>;
 
 export type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] };
 
@@ -256,17 +266,37 @@ export type Push<T extends unknown[], U> = [...T, U];
 
 export type Flatten<T extends unknown[]> = T extends [infer F, ...infer R] ? F | Flatten<R> : never;
 
-export type Reverse<T extends unknown[]> = T extends [...infer R, infer L] ? [L, ...Reverse<R>] : [];
+export type Reverse<T extends unknown[]> = T extends [...infer R, infer L]
+  ? [L, ...Reverse<R>]
+  : [];
 
-export type Unique<T extends unknown[]> = T extends [infer F, ...infer R] ? (F extends R[number] ? never : [F, ...Unique<R>]) : T;
+export type Unique<T extends unknown[]> = T extends [infer F, ...infer R]
+  ? F extends R[number]
+    ? never
+    : [F, ...Unique<R>]
+  : T;
 
 export type Includes<T extends unknown[], U> = U extends T[number] ? true : false;
 
-export type IncludesAll<T extends unknown[], U extends unknown[]> = U extends [infer F, ...infer R] ? (F extends T[number] ? IncludesAll<T, R> : false) : true;
+export type IncludesAll<T extends unknown[], U extends unknown[]> = U extends [infer F, ...infer R]
+  ? F extends T[number]
+    ? IncludesAll<T, R>
+    : false
+  : true;
 
-export type IncludesAny<T extends unknown[], U extends unknown[]> = U extends [infer F, ...infer R] ? (F extends T[number] ? true : IncludesAny<T, R>) : false;
+export type IncludesAny<T extends unknown[], U extends unknown[]> = U extends [infer F, ...infer R]
+  ? F extends T[number]
+    ? true
+    : IncludesAny<T, R>
+  : false;
 
-export type UnionIncludes<T, U> = [T] extends [never] ? false : (T extends U ? true : U extends T ? true : false);
+export type UnionIncludes<T, U> = [T] extends [never]
+  ? false
+  : T extends U
+    ? true
+    : U extends T
+      ? true
+      : false;
 
 export type Last<T extends unknown[]> = T extends [...unknown[], infer L] ? L : never;
 
@@ -276,7 +306,11 @@ export type Rest<T extends unknown[]> = T extends [unknown, ...infer R] ? R : ne
 
 export type Init<T extends unknown[]> = T extends [unknown, ...infer R] ? R : T extends [] ? [] : T;
 
-export type At<T extends unknown[], I extends number> = T extends [...Array<unknown>, infer E] ? (I extends keyof Init<T> ? E : never) : never;
+export type At<T extends unknown[], I extends number> = T extends [...Array<unknown>, infer E]
+  ? I extends keyof Init<T>
+    ? E
+    : never
+  : never;
 
 export type AtLeastOne<T, U = { [K in keyof T]-?: T[K] }> = Partial<T> & U & Record<string, never>;
 
@@ -292,7 +326,7 @@ export type ExactlyOne<T, K extends keyof T = keyof T> = {
   [P in K]?: T[P];
 } & Record<string, never>;
 
-export type XOR<T, U> = (T | U) extends object
+export type XOR<T, U> = T | U extends object
   ? (undefined extends T ? Record<string, never> : { [K in Exclude<keyof T, keyof U>]?: T[K] }) &
       (undefined extends U ? Record<string, never> : { [K in Exclude<keyof U, keyof T>]?: U[K] })
   : T | U;
@@ -349,11 +383,21 @@ export type UnknownKey<T> = T extends unknown ? T : never;
 
 export type NeverKey<T> = T extends never ? T : never;
 
-export type IsTuple<T> = T extends readonly unknown[] ? (number extends T['length'] ? false : true) : false;
+export type IsTuple<T> = T extends readonly unknown[]
+  ? number extends T['length']
+    ? false
+    : true
+  : false;
 
 export type IsArray<T> = T extends unknown[] ? true : false;
 
-export type IsObject<T> = T extends object ? (T extends (...args: unknown[]) => unknown ? false : T extends unknown[] ? false : true) : false;
+export type IsObject<T> = T extends object
+  ? T extends (...args: unknown[]) => unknown
+    ? false
+    : T extends unknown[]
+      ? false
+      : true
+  : false;
 
 export type IsFunction<T> = T extends (...args: unknown[]) => unknown ? true : false;
 
@@ -393,9 +437,9 @@ export type IsSame<T, U> = Equals<T, U>;
 
 export type IsDifferent<T, U> = Equals<T, U> extends true ? false : true;
 
-export type IsLiteral<T> = T extends Primitive 
-  ? [T] extends [never] 
-    ? false 
+export type IsLiteral<T> = T extends Primitive
+  ? [T] extends [never]
+    ? false
     : [T] extends [string | number | boolean | bigint | symbol | null | undefined]
       ? T extends string | number | boolean | bigint | symbol | null | undefined
         ? [string | number | boolean | bigint | symbol | null | undefined] extends [T]
@@ -405,23 +449,48 @@ export type IsLiteral<T> = T extends Primitive
       : false
   : false;
 
-export type Equals<X, Y> = (<T>() => T extends X ? (Y extends X ? true : false) : false) extends <T>() => T extends Y
-  ? (Y extends X ? true : false)
-  : false
-  ? true
-  : false;
+export type Equals<X, Y> =
+  (<T>() => T extends X ? (Y extends X ? true : false) : false) extends <T>() => T extends Y
+    ? Y extends X
+      ? true
+      : false
+    : false
+    ? true
+    : false;
 
 export type IsUnion<T, U extends T = T> = (T extends U ? false : true) extends false ? false : true;
 
-export type UnionToIntersection<U> = (U extends unknown ? (k: U) => void : never) extends (k: infer I) => void
+export type UnionToIntersection<U> = (U extends unknown ? (k: U) => void : never) extends (
+  k: infer I
+) => void
   ? I & { [K in keyof I]: I[K] }
   : never;
 
-export type Widen<T> = T extends string ? string : T extends number ? number : T extends boolean ? boolean : T extends null ? null : T extends undefined ? undefined : T;
+export type Widen<T> = T extends string
+  ? string
+  : T extends number
+    ? number
+    : T extends boolean
+      ? boolean
+      : T extends null
+        ? null
+        : T extends undefined
+          ? undefined
+          : T;
 
-export type Narrow<T> = T extends string ? string : T extends number ? number : T extends boolean ? boolean : T extends null ? null : T extends undefined ? undefined : T;
+export type Narrow<T> = T extends string
+  ? string
+  : T extends number
+    ? number
+    : T extends boolean
+      ? boolean
+      : T extends null
+        ? null
+        : T extends undefined
+          ? undefined
+          : T;
 
-export type ExtractLiteral<T> = T extends Primitive 
+export type ExtractLiteral<T> = T extends Primitive
   ? [T] extends [string | number | boolean | bigint | symbol | null | undefined]
     ? [string | number | boolean | bigint | symbol | null | undefined] extends [T]
       ? never
@@ -429,7 +498,7 @@ export type ExtractLiteral<T> = T extends Primitive
     : never
   : never;
 
-export type ExtractUnion<T> = T extends Primitive 
+export type ExtractUnion<T> = T extends Primitive
   ? [T] extends [string | number | boolean | bigint | symbol | null | undefined]
     ? [string | number | boolean | bigint | symbol | null | undefined] extends [T]
       ? T
@@ -437,7 +506,13 @@ export type ExtractUnion<T> = T extends Primitive
     : never
   : never;
 
-export type ExtractObject<T> = T extends object ? (T extends (...args: unknown[]) => unknown ? never : T extends unknown[] ? never : T) : never;
+export type ExtractObject<T> = T extends object
+  ? T extends (...args: unknown[]) => unknown
+    ? never
+    : T extends unknown[]
+      ? never
+      : T
+  : never;
 
 export type ExtractArray<T> = T extends unknown[] ? T : never;
 
@@ -445,47 +520,155 @@ export type ExtractFunction<T> = T extends (...args: unknown[]) => unknown ? T :
 
 export type ExtractPrimitive<T> = T extends Primitive ? T : never;
 
-export type ExtractNonPrimitive<T> = T extends object ? (T extends (...args: unknown[]) => unknown ? never : T extends unknown[] ? never : T) : never;
+export type ExtractNonPrimitive<T> = T extends object
+  ? T extends (...args: unknown[]) => unknown
+    ? never
+    : T extends unknown[]
+      ? never
+      : T
+  : never;
 
-export type ExtractBuiltin<T> = T extends Primitive | ((...args: unknown[]) => unknown) | Date | Error | RegExp ? T : never;
+export type ExtractBuiltin<T> = T extends
+  | Primitive
+  | ((...args: unknown[]) => unknown)
+  | Date
+  | Error
+  | RegExp
+  ? T
+  : never;
 
-export type ExtractNonBuiltin<T> = Primitive | ((...args: unknown[]) => unknown) | Date | Error | RegExp extends T ? never : T;
+export type ExtractNonBuiltin<T> =
+  | Primitive
+  | ((...args: unknown[]) => unknown)
+  | Date
+  | Error
+  | RegExp extends T
+  ? never
+  : T;
 
-export type ExtractTuple<T> = T extends readonly unknown[] ? (number extends T['length'] ? never : T) : never;
+export type ExtractTuple<T> = T extends readonly unknown[]
+  ? number extends T['length']
+    ? never
+    : T
+  : never;
 
-export type ExtractNonTuple<T> = T extends readonly unknown[] ? (number extends T['length'] ? T : never) : never;
+export type ExtractNonTuple<T> = T extends readonly unknown[]
+  ? number extends T['length']
+    ? T
+    : never
+  : never;
 
-export type ExtractArrayNonTuple<T> = T extends unknown[] ? (number extends T['length'] ? T : never) : never;
+export type ExtractArrayNonTuple<T> = T extends unknown[]
+  ? number extends T['length']
+    ? T
+    : never
+  : never;
 
-export type ExtractObjectNonArrayNonTuple<T> = T extends object ? (T extends (...args: unknown[]) => unknown ? never : T extends unknown[] ? never : T) : never;
+export type ExtractObjectNonArrayNonTuple<T> = T extends object
+  ? T extends (...args: unknown[]) => unknown
+    ? never
+    : T extends unknown[]
+      ? never
+      : T
+  : never;
 
 export type ExtractFunctionNonObject<T> = T extends (...args: unknown[]) => unknown ? T : never;
 
 export type ExtractPrimitiveNonObject<T> = T extends Primitive ? T : never;
 
-export type ExtractNonPrimitiveNonObjectNonFunction<T> = T extends object ? (T extends (...args: unknown[]) => unknown ? never : T) : never;
+export type ExtractNonPrimitiveNonObjectNonFunction<T> = T extends object
+  ? T extends (...args: unknown[]) => unknown
+    ? never
+    : T
+  : never;
 
-export type ExtractBuiltinNonPrimitiveNonObjectNonFunction<T> = T extends Primitive | ((...args: unknown[]) => unknown) | Date | Error | RegExp ? (T extends Primitive ? T : never) : never;
+export type ExtractBuiltinNonPrimitiveNonObjectNonFunction<T> = T extends
+  | Primitive
+  | ((...args: unknown[]) => unknown)
+  | Date
+  | Error
+  | RegExp
+  ? T extends Primitive
+    ? T
+    : never
+  : never;
 
-export type ExtractNonBuiltinNonPrimitiveNonObjectNonFunction<T> = Primitive | ((...args: unknown[]) => unknown) | Date | Error | RegExp extends T ? never : (T extends object ? (T extends (...args: unknown[]) => unknown ? never : T) : never);
+export type ExtractNonBuiltinNonPrimitiveNonObjectNonFunction<T> =
+  | Primitive
+  | ((...args: unknown[]) => unknown)
+  | Date
+  | Error
+  | RegExp extends T
+  ? never
+  : T extends object
+    ? T extends (...args: unknown[]) => unknown
+      ? never
+      : T
+    : never;
 
-export type ExtractTupleNonArrayNonObjectNonFunction<T> = T extends readonly unknown[] ? (number extends T['length'] ? T : never) : never;
+export type ExtractTupleNonArrayNonObjectNonFunction<T> = T extends readonly unknown[]
+  ? number extends T['length']
+    ? T
+    : never
+  : never;
 
-export type ExtractNonTupleNonArrayNonObjectNonFunction<T> = T extends readonly unknown[] ? (number extends T['length'] ? T : never) : never;
+export type ExtractNonTupleNonArrayNonObjectNonFunction<T> = T extends readonly unknown[]
+  ? number extends T['length']
+    ? T
+    : never
+  : never;
 
-export type ExtractArrayNonTupleNonObjectNonFunction<T> = T extends unknown[] ? (number extends T['length'] ? T : never) : never;
+export type ExtractArrayNonTupleNonObjectNonFunction<T> = T extends unknown[]
+  ? number extends T['length']
+    ? T
+    : never
+  : never;
 
-export type ExtractObjectNonArrayNonTupleNonFunction<T> = T extends object ? (T extends (...args: unknown[]) => unknown ? never : T extends unknown[] ? never : T) : never;
+export type ExtractObjectNonArrayNonTupleNonFunction<T> = T extends object
+  ? T extends (...args: unknown[]) => unknown
+    ? never
+    : T extends unknown[]
+      ? never
+      : T
+  : never;
 
-export type ExtractFunctionNonObjectNonArrayNonTuple<T> = T extends (...args: unknown[]) => unknown ? T : never;
+export type ExtractFunctionNonObjectNonArrayNonTuple<T> = T extends (...args: unknown[]) => unknown
+  ? T
+  : never;
 
-export type ExtractPrimitiveNonObjectNonArrayNonTupleNonFunction<T> = T extends Primitive ? T : never;
+export type ExtractPrimitiveNonObjectNonArrayNonTupleNonFunction<T> = T extends Primitive
+  ? T
+  : never;
 
-export type ExtractNonPrimitiveNonObjectNonArrayNonTupleNonFunction<T> = T extends object ? (T extends (...args: unknown[]) => unknown ? never : T) : never;
+export type ExtractNonPrimitiveNonObjectNonArrayNonTupleNonFunction<T> = T extends object
+  ? T extends (...args: unknown[]) => unknown
+    ? never
+    : T
+  : never;
 
-export type ExtractBuiltinNonPrimitiveNonObjectNonArrayNonTupleNonFunction<T> = Primitive | ((...args: unknown[]) => unknown) | Date | Error | RegExp extends T ? (T extends Primitive ? T : never) : never;
+export type ExtractBuiltinNonPrimitiveNonObjectNonArrayNonTupleNonFunction<T> =
+  | Primitive
+  | ((...args: unknown[]) => unknown)
+  | Date
+  | Error
+  | RegExp extends T
+  ? T extends Primitive
+    ? T
+    : never
+  : never;
 
-export type ExtractNonBuiltinNonPrimitiveNonObjectNonArrayNonTupleNonFunction<T> = Primitive | ((...args: unknown[]) => unknown) | Date | Error | RegExp extends T ? never : (T extends object ? (T extends (...args: unknown[]) => unknown ? never : T) : never);
+export type ExtractNonBuiltinNonPrimitiveNonObjectNonArrayNonTupleNonFunction<T> =
+  | Primitive
+  | ((...args: unknown[]) => unknown)
+  | Date
+  | Error
+  | RegExp extends T
+  ? never
+  : T extends object
+    ? T extends (...args: unknown[]) => unknown
+      ? never
+      : T
+    : never;
 
 export type IsUnionLiteral<T, U> = [T] extends [U] ? false : [U] extends [T] ? false : true;
 
@@ -497,7 +680,9 @@ export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
 export type RequiredBy<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
 
-export type AsyncReturnType<T extends (...args: unknown[]) => unknown> = T extends (...args: unknown[]) => Promise<infer U>
+export type AsyncReturnType<T extends (...args: unknown[]) => unknown> = T extends (
+  ...args: unknown[]
+) => Promise<infer U>
   ? U
   : T extends (...args: unknown[]) => infer U
     ? U
@@ -814,7 +999,16 @@ export type ErrorLoggerState = {
 export type DocumentMapping = {
   sourcePath: string;
   targetPath: string;
-  type: 'component' | 'theme' | 'token' | 'store' | 'hook' | 'utility' | 'type' | 'config' | 'documentation';
+  type:
+    | 'component'
+    | 'theme'
+    | 'token'
+    | 'store'
+    | 'hook'
+    | 'utility'
+    | 'type'
+    | 'config'
+    | 'documentation';
   priority: 'high' | 'medium' | 'low';
   autoSync?: boolean;
   lastSynced?: number;
@@ -1011,7 +1205,10 @@ export type PluginManagerState = {
   getToken: (tokenId: string) => TokenRegistration | undefined;
 };
 
-export type FormProps<T extends z.ZodType> = Omit<React.FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> & {
+export type FormProps<T extends z.ZodType> = Omit<
+  React.FormHTMLAttributes<HTMLFormElement>,
+  'onSubmit'
+> & {
   schema: T;
   defaultValues?: z.infer<T>;
   onSubmit: (data: z.infer<T>) => void | Promise<void>;
@@ -1020,7 +1217,10 @@ export type FormProps<T extends z.ZodType> = Omit<React.FormHTMLAttributes<HTMLF
   'data-testid'?: string;
 };
 
-export type FormFieldProps<TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>> = Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> & {
+export type FormFieldProps<
+  TFieldValues extends FieldValues,
+  TName extends FieldPath<TFieldValues>,
+> = Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> & {
   name: TName;
   label?: string;
   error?: string;
@@ -1171,18 +1371,27 @@ export type ColorTokenStyle = {
   foreground?: ColorValue;
 };
 
-export type DynamicStyleValue<T extends Record<string, unknown>, K extends keyof T> = K extends keyof T 
-  ? T[K] extends string 
-    ? string 
-    : T[K] extends number 
-      ? number 
-      : T[K] extends boolean 
-        ? boolean 
+export type DynamicStyleValue<
+  T extends Record<string, unknown>,
+  K extends keyof T,
+> = K extends keyof T
+  ? T[K] extends string
+    ? string
+    : T[K] extends number
+      ? number
+      : T[K] extends boolean
+        ? boolean
         : unknown
   : never;
 
 export type SafeStyleAssignment<T extends Record<string, unknown>, K extends keyof T> = {
-  [P in K]: T[P] extends string ? string : T[P] extends number ? number : T[P] extends boolean ? boolean : never;
+  [P in K]: T[P] extends string
+    ? string
+    : T[P] extends number
+      ? number
+      : T[P] extends boolean
+        ? boolean
+        : never;
 };
 
 export type StrictRecord<K extends PropertyKey, T> = Record<K, T> & {
@@ -1243,73 +1452,86 @@ export type ArrayToReadonly<T> = Readonly<T>;
 
 export type ReadonlyToArray<T> = T extends readonly unknown[] ? [...T] : never;
 
-export type Join<T extends readonly string[], D extends string = ''> = T extends readonly [infer F, ...infer R] 
+export type Join<T extends readonly string[], D extends string = ''> = T extends readonly [
+  infer F,
+  ...infer R,
+]
   ? `${F}${D}${Join<R, D>}`
   : '';
 
-export type Split<S extends string, D extends string> = S extends `${infer T}${D}${infer R}` ? [T, ...Split<R, D>] : [S];
+export type Split<S extends string, D extends string> = S extends `${infer T}${D}${infer R}`
+  ? [T, ...Split<R, D>]
+  : [S];
 
-export type CamelCase<S extends string> = S extends `${infer T}_${infer U}` 
+export type CamelCase<S extends string> = S extends `${infer T}_${infer U}`
   ? `${T}${Capitalize<CamelCase<U>>}`
   : S;
 
-export type KebabCase<S extends string> = S extends `${infer T}${infer U}` 
-  ? U extends Uppercase<U> 
+export type KebabCase<S extends string> = S extends `${infer T}${infer U}`
+  ? U extends Uppercase<U>
     ? `${T}-${Lowercase<U>}`
     : `${T}-${KebabCase<U>}`
   : S;
 
 export type PascalCase<S extends string> = Capitalize<CamelCase<S>>;
 
-export type SnakeCase<S extends string> = S extends `${infer T}_${infer U}` 
+export type SnakeCase<S extends string> = S extends `${infer T}_${infer U}`
   ? `${T}_${SnakeCase<U>}`
   : S;
 
-export type Lowercase<S extends string> = S extends `${infer T}${infer U}` 
+export type Lowercase<S extends string> = S extends `${infer T}${infer U}`
   ? `${Lowercase<T>}${Lowercase<U>}`
   : S;
 
-export type Uppercase<S extends string> = S extends `${infer T}${infer U}` 
+export type Uppercase<S extends string> = S extends `${infer T}${infer U}`
   ? `${Uppercase<T>}${Uppercase<U>}`
   : S;
 
-export type Capitalize<S extends string> = S extends `${infer T}${infer U}` 
+export type Capitalize<S extends string> = S extends `${infer T}${infer U}`
   ? `${Uppercase<T>}${Lowercase<U>}`
   : S;
 
-export type Uncapitalize<S extends string> = S extends `${infer T}${infer U}` 
+export type Uncapitalize<S extends string> = S extends `${infer T}${infer U}`
   ? `${Lowercase<T>}${U}`
   : S;
 
-export type Trim<S extends string> = S extends `${' '}${infer T}${' '}` 
+export type Trim<S extends string> = S extends `${' '}${infer T}${' '}`
   ? Trim<T>
-  : S extends `${'\t'}${infer T}${'\t'}` 
+  : S extends `${'\t'}${infer T}${'\t'}`
     ? Trim<T>
-    : S extends `${'\n'}${infer T}${'\n'}` 
+    : S extends `${'\n'}${infer T}${'\n'}`
       ? Trim<T>
-      : S extends `${'\r'}${infer T}${'\r'}` 
+      : S extends `${'\r'}${infer T}${'\r'}`
         ? Trim<T>
         : S;
 
-export type Replace<S extends string, From extends string, To extends string> = From extends '' 
-  ? S 
-  : S extends `${infer Before}${From}${infer After}` 
+export type Replace<S extends string, From extends string, To extends string> = From extends ''
+  ? S
+  : S extends `${infer Before}${From}${infer After}`
     ? `${Before}${To}${Replace<After, From, To>}`
     : S;
 
-export type ReplaceAll<S extends string, From extends string, To extends string> = From extends '' 
-  ? S 
-  : S extends `${infer Before}${From}${infer After}` 
+export type ReplaceAll<S extends string, From extends string, To extends string> = From extends ''
+  ? S
+  : S extends `${infer Before}${From}${infer After}`
     ? `${Before}${To}${ReplaceAll<After, From, To>}`
     : S;
 
-export type Includes<S extends string, Sub extends string> = S extends `${string}${Sub}${string}` ? true : false;
+export type Includes<S extends string, Sub extends string> = S extends `${string}${Sub}${string}`
+  ? true
+  : false;
 
-export type StartsWith<S extends string, Prefix extends string> = S extends `${Prefix}${string}` ? true : false;
+export type StartsWith<S extends string, Prefix extends string> = S extends `${Prefix}${string}`
+  ? true
+  : false;
 
-export type EndsWith<S extends string, Suffix extends string> = S extends `${string}${Suffix}` ? true : false;
+export type EndsWith<S extends string, Suffix extends string> = S extends `${string}${Suffix}`
+  ? true
+  : false;
 
-export type StringLength<S extends string, L extends number = S['length']> = S['length'] extends L ? true : false;
+export type StringLength<S extends string, L extends number = S['length']> = S['length'] extends L
+  ? true
+  : false;
 
 export type StringAt<S extends string, I extends number> = string;
 
@@ -1339,7 +1561,11 @@ export type NumberToString<N extends number> = string;
 
 export type StringToNumber<S extends string> = number;
 
-export type StringToBoolean<S extends string> = S extends 'true' ? true : S extends 'false' ? false : never;
+export type StringToBoolean<S extends string> = S extends 'true'
+  ? true
+  : S extends 'false'
+    ? false
+    : never;
 
 export type BooleanToString<B extends boolean> = B extends true ? 'true' : 'false';
 
@@ -1375,10 +1601,10 @@ export type Max<A extends number, B extends number> = A extends B ? A : B;
 
 export type Min<A extends number, B extends number> = A extends B ? B : A;
 
-export type Clamp<N extends number, Min extends number, Max extends number> = N extends Min 
-  ? N extends Max 
-    ? N 
-    : Max 
+export type Clamp<N extends number, Min extends number, Max extends number> = N extends Min
+  ? N extends Max
+    ? N
+    : Max
   : Min;
 
 export type Abs<N extends number> = number;
@@ -1401,11 +1627,16 @@ export type ArrayShift<T extends unknown[]> = T extends [infer _, ...infer R] ? 
 
 export type ArrayUnshift<T extends unknown[], U> = [U, ...T];
 
-export type ArraySplice<T extends unknown[], Start extends number, DeleteCount extends number, Insert extends unknown[]> = T extends [...infer Before, ...infer After] 
-  ? DeleteCount extends 0 
+export type ArraySplice<
+  T extends unknown[],
+  Start extends number,
+  DeleteCount extends number,
+  Insert extends unknown[],
+> = T extends [...infer Before, ...infer After]
+  ? DeleteCount extends 0
     ? [...Before, ...Insert, ...After]
-    : DeleteCount extends 1 
-      ? Before extends [infer _, ...infer Rest] 
+    : DeleteCount extends 1
+      ? Before extends [infer _, ...infer Rest]
         ? [...Rest, ...Insert, ...After]
         : never
       : never
@@ -1417,7 +1648,9 @@ export type ArrayReverse<T> = T extends [...infer R, infer L] ? [L, ...Reverse<R
 
 export type ArrayFlat<T extends unknown[]> = T extends [infer F, ...infer R] ? F | ArrayFlat<R> : F;
 
-export type ArrayFlatMap<T extends unknown[]> = T extends [infer F, ...infer R] ? [F, ...ArrayFlatMap<R>] : [F];
+export type ArrayFlatMap<T extends unknown[]> = T extends [infer F, ...infer R]
+  ? [F, ...ArrayFlatMap<R>]
+  : [F];
 
 export type ArrayJoin<T extends string[], D extends string = ','> = string;
 
@@ -1455,13 +1688,11 @@ export type ArrayOf<T, N extends number> = ArrayFrom<T, N>;
 
 export type ArrayCopyWithin<T, Target extends number, Start extends number, End extends number> = T;
 
-export type ArrayEntries<T extends unknown[]> = T extends readonly unknown[] 
+export type ArrayEntries<T extends unknown[]> = T extends readonly unknown[]
   ? { [K in keyof T]: [K, T[K]] }
   : never;
 
-export type ArrayKeys<T extends unknown[]> = T extends readonly unknown[] 
-  ? keyof T 
-  : never;
+export type ArrayKeys<T extends unknown[]> = T extends readonly unknown[] ? keyof T : never;
 
 export type ArrayValues<T extends unknown[]> = T[number];
 
@@ -1469,7 +1700,7 @@ export type ObjectKeys<T extends object> = keyof T;
 
 export type ObjectValues<T extends object> = T[keyof T];
 
-export type ObjectEntries<T extends object> = T extends object 
+export type ObjectEntries<T extends object> = T extends object
   ? { [K in keyof T]: [K, T[K]] }
   : never;
 
@@ -1489,7 +1720,7 @@ export type ObjectKeys<T extends object> = keyof T;
 
 export type ObjectValues<T extends object> = T[keyof T];
 
-export type ObjectEntries<T extends object> = T extends object 
+export type ObjectEntries<T extends object> = T extends object
   ? { [K in keyof T]: [K, T[K]] }
   : never;
 
@@ -1497,9 +1728,11 @@ export type PromiseAll<T extends readonly unknown[]> = {
   [K in keyof T]: T[K] extends Promise<infer U> ? U : never;
 }[keyof T];
 
-export type PromiseRace<T extends readonly unknown[]> = T[number] extends Promise<infer U> ? U : never;
+export type PromiseRace<T extends readonly unknown[]> =
+  T[number] extends Promise<infer U> ? U : never;
 
-export type PromiseAny<T extends readonly unknown[]> = T[number] extends Promise<infer U> ? U : never;
+export type PromiseAny<T extends readonly unknown[]> =
+  T[number] extends Promise<infer U> ? U : never;
 
 export type PromiseAllSettled<T extends readonly unknown[]> = {
   [K in keyof T]: T[K] extends Promise<infer U> ? PromiseSettledResult<U> : never;
@@ -1517,55 +1750,97 @@ export type PromiseRejectedResult = {
   reason: unknown;
 };
 
-export type FunctionParameters<T extends (...args: unknown[]) => unknown> = T extends (...args: infer P) => unknown ? P : never;
+export type FunctionParameters<T extends (...args: unknown[]) => unknown> = T extends (
+  ...args: infer P
+) => unknown
+  ? P
+  : never;
 
-export type FunctionReturnType<T extends (...args: unknown[]) => unknown> = T extends (...args: unknown[]) => infer R ? R : never;
+export type FunctionReturnType<T extends (...args: unknown[]) => unknown> = T extends (
+  ...args: unknown[]
+) => infer R
+  ? R
+  : never;
 
-export type FunctionThisParameter<T> = T extends (this: infer U, ...args: unknown[]) => unknown ? U : unknown;
+export type FunctionThisParameter<T> = T extends (this: infer U, ...args: unknown[]) => unknown
+  ? U
+  : unknown;
 
-export type InstanceType<T extends new (...args: unknown[]) => unknown> = T extends new (...args: infer P) => infer R ? R : never;
+export type InstanceType<T extends new (...args: unknown[]) => unknown> = T extends new (
+  ...args: infer P
+) => infer R
+  ? R
+  : never;
 
-export type ConstructorParameters<T extends new (...args: unknown[]) => unknown> = T extends new (...args: infer P) => unknown ? P : never;
+export type ConstructorParameters<T extends new (...args: unknown[]) => unknown> = T extends new (
+  ...args: infer P
+) => unknown
+  ? P
+  : never;
 
-export type ThisParameterType<T> = T extends (this: infer U, ...args: unknown[]) => unknown ? U : unknown;
+export type ThisParameterType<T> = T extends (this: infer U, ...args: unknown[]) => unknown
+  ? U
+  : unknown;
 
-export type OmitThisParameter<T> = T extends (this: unknown, ...args: infer P) => unknown ? (...args: P) => unknown : never;
+export type OmitThisParameter<T> = T extends (this: unknown, ...args: infer P) => unknown
+  ? (...args: P) => unknown
+  : never;
 
-export type ExtractThisParameter<T> = T extends (this: infer U, ...args: unknown[]) => unknown ? U : unknown;
+export type ExtractThisParameter<T> = T extends (this: infer U, ...args: unknown[]) => unknown
+  ? U
+  : unknown;
 
 export type NoInfer<T> = [T] extends [never] ? T : T;
 
-export type IsLiteralType<T> = T extends string 
-  ? string extends T 
-    ? false 
-    : true 
-  : T extends number 
-    ? number extends T 
-      ? false 
-      : true 
-    : T extends boolean 
-      ? boolean extends T 
-        ? false 
-        : true 
-      : T extends bigint 
-        ? bigint extends T 
-          ? false 
-          : true 
-        : T extends symbol 
-          ? symbol extends T 
-            ? false 
-            : true 
+export type IsLiteralType<T> = T extends string
+  ? string extends T
+    ? false
+    : true
+  : T extends number
+    ? number extends T
+      ? false
+      : true
+    : T extends boolean
+      ? boolean extends T
+        ? false
+        : true
+      : T extends bigint
+        ? bigint extends T
+          ? false
+          : true
+        : T extends symbol
+          ? symbol extends T
+            ? false
+            : true
           : false;
 
 export type IsUnionType<T> = [T] extends [never] ? false : true;
 
-export type IsIntersectionType<T> = [T] extends [never] ? false : T extends object ? (T extends (...args: unknown[]) => unknown ? false : T extends unknown[] ? false : true) : false;
+export type IsIntersectionType<T> = [T] extends [never]
+  ? false
+  : T extends object
+    ? T extends (...args: unknown[]) => unknown
+      ? false
+      : T extends unknown[]
+        ? false
+        : true
+    : false;
 
 export type IsArrayType<T> = T extends readonly unknown[] ? true : false;
 
-export type IsTupleType<T> = T extends readonly unknown[] ? (number extends T['length'] ? false : true) : false;
+export type IsTupleType<T> = T extends readonly unknown[]
+  ? number extends T['length']
+    ? false
+    : true
+  : false;
 
-export type IsObjectType<T> = T extends object ? (T extends (...args: unknown[]) => unknown ? false : T extends unknown[] ? false : true) : false;
+export type IsObjectType<T> = T extends object
+  ? T extends (...args: unknown[]) => unknown
+    ? false
+    : T extends unknown[]
+      ? false
+      : true
+  : false;
 
 export type IsFunctionType<T> = T extends (...args: unknown[]) => unknown ? true : false;
 
@@ -1573,7 +1848,11 @@ export type IsPromiseType<T> = T extends Promise<unknown> ? true : false;
 
 export type IsAsyncFunction<T> = T extends (...args: unknown[]) => Promise<unknown> ? true : false;
 
-export type IsSyncFunction<T> = T extends (...args: unknown[]) => unknown ? (T extends (...args: unknown[]) => Promise<unknown> ? false : true) : false;
+export type IsSyncFunction<T> = T extends (...args: unknown[]) => unknown
+  ? T extends (...args: unknown[]) => Promise<unknown>
+    ? false
+    : true
+  : false;
 
 export type ExtractReturnType<T> = T extends (...args: unknown[]) => infer R ? R : never;
 
@@ -1587,18 +1866,20 @@ export type UnwrapArray<T> = T extends (infer U)[] ? U : T;
 
 export type UnwrapReadonlyArray<T> = T extends readonly (infer U)[] ? U : T;
 
-export type FlattenObjectKeys<T> = T extends object 
+export type FlattenObjectKeys<T> = T extends object
   ? { [K in keyof T]: T[K] extends object ? FlattenObjectKeys<T[K]> : T[K] }
   : never;
 
-export type FlattenObjectValues<T> = T extends object 
+export type FlattenObjectValues<T> = T extends object
   ? { [K in keyof T]: T[K] extends object ? FlattenObjectValues<T[K]> : T[K] }
   : never;
 
 export type FlattenObject<T> = FlattenObjectKeys<T> | FlattenObjectValues<T>;
 
 export type DeepOmit<T, K extends keyof T> = {
-  [P in Exclude<keyof T, K>]: T[P] extends object ? DeepOmit<T[P], K extends keyof T[P] ? K : never> : T[P];
+  [P in Exclude<keyof T, K>]: T[P] extends object
+    ? DeepOmit<T[P], K extends keyof T[P] ? K : never>
+    : T[P];
 };
 
 export type DeepPick<T, K extends keyof T> = {
@@ -1717,4 +1998,8 @@ export type AssertMutable<T> = T extends Readonly<T> ? false : true;
 
 export type AssertArray<T> = T extends unknown[] ? true : false;
 
-export type AssertObject<T> = T extends object ? (T extends (...args: unknown[]) => unknown ? false : true) : false;
+export type AssertObject<T> = T extends object
+  ? T extends (...args: unknown[]) => unknown
+    ? false
+    : true
+  : false;

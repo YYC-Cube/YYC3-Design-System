@@ -7,9 +7,15 @@
  * @created 2026-02-18
  */
 
-
 import { renderHook, act } from '@testing-library/react';
-import { useDebounce, useThrottle, usePrevious, useIsMounted, useLazyRef, useUpdateEffect } from './performance';
+import {
+  useDebounce,
+  useThrottle,
+  usePrevious,
+  useIsMounted,
+  useLazyRef,
+  useUpdateEffect,
+} from './performance';
 
 describe('性能工具函数', () => {
   beforeEach(() => {

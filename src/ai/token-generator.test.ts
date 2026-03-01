@@ -7,7 +7,6 @@
  * @created 2026-02-18
  */
 
-
 import { AITokenGenerator } from '@/ai/token-generator';
 
 describe('AITokenGenerator', () => {
@@ -181,7 +180,9 @@ describe('AITokenGenerator', () => {
 
       const recommendations = generator.generateRecommendations(tokens);
 
-      expect(recommendations.some(r => r.includes('complementary') || r.includes('analogous'))).toBe(true);
+      expect(
+        recommendations.some((r) => r.includes('complementary') || r.includes('analogous'))
+      ).toBe(true);
     });
 
     it('应该推荐间距比例', () => {
@@ -194,7 +195,7 @@ describe('AITokenGenerator', () => {
 
       const recommendations = generator.generateRecommendations(tokens);
 
-      expect(recommendations.some(r => r.includes('间距比例'))).toBe(true);
+      expect(recommendations.some((r) => r.includes('间距比例'))).toBe(true);
     });
   });
 });

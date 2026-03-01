@@ -7,8 +7,6 @@
  * @created 2026-02-19
  */
 
-
-
 describe('Multi-User Collaboration Module', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -24,7 +22,7 @@ describe('Multi-User Collaboration Module', () => {
         userId: 'user1',
         userName: 'User 1',
         sessionId: 'session-123',
-        joinedAt: Date.now()
+        joinedAt: Date.now(),
       };
 
       expect(userSession.userId).toBe('user1');
@@ -37,11 +35,11 @@ describe('Multi-User Collaboration Module', () => {
       const activeSessions = [
         { userId: 'user1', lastActivity: Date.now() },
         { userId: 'user2', lastActivity: Date.now() },
-        { userId: 'user3', lastActivity: Date.now() }
+        { userId: 'user3', lastActivity: Date.now() },
       ];
 
       expect(activeSessions.length).toBe(3);
-      activeSessions.forEach(session => {
+      activeSessions.forEach((session) => {
         expect(session.userId).toBeDefined();
         expect(session.lastActivity).toBeDefined();
       });
@@ -51,10 +49,10 @@ describe('Multi-User Collaboration Module', () => {
       const session = {
         userId: 'user1',
         lastActivity: Date.now() - 1800000,
-        timeout: 900000
+        timeout: 900000,
       };
 
-      const isExpired = (Date.now() - session.lastActivity) > session.timeout;
+      const isExpired = Date.now() - session.lastActivity > session.timeout;
       expect(isExpired).toBe(true);
     });
   });
@@ -64,11 +62,11 @@ describe('Multi-User Collaboration Module', () => {
       const editors = [
         { userId: 'user1', documentId: 'doc1', cursor: { line: 1, column: 10 } },
         { userId: 'user2', documentId: 'doc1', cursor: { line: 5, column: 20 } },
-        { userId: 'user3', documentId: 'doc1', cursor: { line: 10, column: 5 } }
+        { userId: 'user3', documentId: 'doc1', cursor: { line: 10, column: 5 } },
       ];
 
       expect(editors.length).toBe(3);
-      editors.forEach(editor => {
+      editors.forEach((editor) => {
         expect(editor.documentId).toBe('doc1');
         expect(editor.cursor).toBeDefined();
       });
@@ -78,7 +76,7 @@ describe('Multi-User Collaboration Module', () => {
       const cursor = {
         userId: 'user1',
         position: { line: 10, column: 15 },
-        selection: { start: { line: 10, column: 15 }, end: { line: 10, column: 20 } }
+        selection: { start: { line: 10, column: 15 }, end: { line: 10, column: 20 } },
       };
 
       expect(cursor.userId).toBe('user1');
@@ -91,7 +89,7 @@ describe('Multi-User Collaboration Module', () => {
     it('应该处理编辑冲突', () => {
       const edits = [
         { userId: 'user1', operation: 'insert', position: 10, content: 'test' },
-        { userId: 'user2', operation: 'insert', position: 10, content: 'other' }
+        { userId: 'user2', operation: 'insert', position: 10, content: 'other' },
       ];
 
       const hasConflict = edits.length > 1 && edits[0].position === edits[1].position;
@@ -104,10 +102,10 @@ describe('Multi-User Collaboration Module', () => {
       const operations = [
         { type: 'insert', userId: 'user1', data: 'abc' },
         { type: 'delete', userId: 'user2', data: 'def' },
-        { type: 'replace', userId: 'user3', data: 'ghi' }
+        { type: 'replace', userId: 'user3', data: 'ghi' },
       ];
 
-      operations.forEach(op => {
+      operations.forEach((op) => {
         expect(op.type).toBeDefined();
         expect(op.userId).toBeDefined();
         expect(op.data).toBeDefined();
@@ -118,11 +116,11 @@ describe('Multi-User Collaboration Module', () => {
       const operationHistory = [
         { id: 1, operation: 'insert', timestamp: Date.now() },
         { id: 2, operation: 'delete', timestamp: Date.now() },
-        { id: 3, operation: 'replace', timestamp: Date.now() }
+        { id: 3, operation: 'replace', timestamp: Date.now() },
       ];
 
       expect(operationHistory.length).toBe(3);
-      operationHistory.forEach(op => {
+      operationHistory.forEach((op) => {
         expect(op.id).toBeDefined();
         expect(op.operation).toBeDefined();
         expect(op.timestamp).toBeDefined();
@@ -132,7 +130,7 @@ describe('Multi-User Collaboration Module', () => {
     it('应该支持操作撤销', () => {
       const undoStack = [
         { operation: 'insert', content: 'abc', position: 0 },
-        { operation: 'delete', content: 'def', position: 3 }
+        { operation: 'delete', content: 'def', position: 3 },
       ];
 
       const lastOperation = undoStack.pop();
@@ -143,7 +141,7 @@ describe('Multi-User Collaboration Module', () => {
     it('应该支持操作重做', () => {
       const redoStack = [
         { operation: 'insert', content: 'abc', position: 0 },
-        { operation: 'delete', content: 'def', position: 3 }
+        { operation: 'delete', content: 'def', position: 3 },
       ];
 
       const nextOperation = redoStack.pop();
@@ -159,7 +157,7 @@ describe('Multi-User Collaboration Module', () => {
         documentId: 'doc1',
         level: 'read',
         canEdit: false,
-        canDelete: false
+        canDelete: false,
       };
 
       expect(permission.level).toBe('read');
@@ -173,7 +171,7 @@ describe('Multi-User Collaboration Module', () => {
         documentId: 'doc1',
         level: 'write',
         canEdit: true,
-        canDelete: false
+        canDelete: false,
       };
 
       expect(permission.level).toBe('write');
@@ -187,7 +185,7 @@ describe('Multi-User Collaboration Module', () => {
         documentId: 'doc1',
         level: 'admin',
         canEdit: true,
-        canDelete: true
+        canDelete: true,
       };
 
       expect(permission.level).toBe('admin');
@@ -201,10 +199,10 @@ describe('Multi-User Collaboration Module', () => {
       const documentStates = [
         { documentId: 'doc1', status: 'draft', lastModified: Date.now() },
         { documentId: 'doc2', status: 'published', lastModified: Date.now() },
-        { documentId: 'doc3', status: 'archived', lastModified: Date.now() }
+        { documentId: 'doc3', status: 'archived', lastModified: Date.now() },
       ];
 
-      documentStates.forEach(state => {
+      documentStates.forEach((state) => {
         expect(state.documentId).toBeDefined();
         expect(state.status).toBeDefined();
         expect(state.lastModified).toBeDefined();
@@ -215,10 +213,10 @@ describe('Multi-User Collaboration Module', () => {
       const transitions = [
         { from: 'draft', to: 'published', allowed: true },
         { from: 'published', to: 'archived', allowed: true },
-        { from: 'draft', to: 'archived', allowed: true }
+        { from: 'draft', to: 'archived', allowed: true },
       ];
 
-      transitions.forEach(transition => {
+      transitions.forEach((transition) => {
         expect(transition.from).toBeDefined();
         expect(transition.to).toBeDefined();
         expect(transition.allowed).toBeDefined();
@@ -232,7 +230,7 @@ describe('Multi-User Collaboration Module', () => {
         type: 'user_joined',
         userId: 'user1',
         userName: 'User 1',
-        timestamp: Date.now()
+        timestamp: Date.now(),
       };
 
       expect(notification.type).toBe('user_joined');
@@ -245,7 +243,7 @@ describe('Multi-User Collaboration Module', () => {
         type: 'user_left',
         userId: 'user2',
         userName: 'User 2',
-        timestamp: Date.now()
+        timestamp: Date.now(),
       };
 
       expect(notification.type).toBe('user_left');
@@ -257,7 +255,7 @@ describe('Multi-User Collaboration Module', () => {
         type: 'document_updated',
         documentId: 'doc1',
         userId: 'user1',
-        changes: ['content', 'metadata']
+        changes: ['content', 'metadata'],
       };
 
       expect(notification.type).toBe('document_updated');
@@ -271,7 +269,7 @@ describe('Multi-User Collaboration Module', () => {
       const conflictResolution = {
         options: ['accept_mine', 'accept_theirs', 'merge', 'manual'],
         autoResolve: false,
-        notifyUsers: true
+        notifyUsers: true,
       };
 
       expect(conflictResolution.options).toContain('accept_mine');
@@ -284,7 +282,7 @@ describe('Multi-User Collaboration Module', () => {
       const autoMerge = {
         strategy: 'last-write-wins',
         algorithm: 'diff3',
-        confidence: 0.8
+        confidence: 0.8,
       };
 
       expect(autoMerge.strategy).toBe('last-write-wins');
@@ -298,17 +296,17 @@ describe('Multi-User Collaboration Module', () => {
           id: 1,
           timestamp: Date.now(),
           users: ['user1', 'user2'],
-          resolution: 'merge'
+          resolution: 'merge',
         },
         {
           id: 2,
           timestamp: Date.now(),
           users: ['user2', 'user3'],
-          resolution: 'accept_mine'
-        }
+          resolution: 'accept_mine',
+        },
       ];
 
-      conflictHistory.forEach(conflict => {
+      conflictHistory.forEach((conflict) => {
         expect(conflict.id).toBeDefined();
         expect(conflict.timestamp).toBeDefined();
         expect(conflict.users).toBeDefined();
@@ -322,7 +320,7 @@ describe('Multi-User Collaboration Module', () => {
       const operations = Array.from({ length: 100 }, (_, i) => ({
         type: 'insert',
         userId: `user${i % 3}`,
-        data: `data${i}`
+        data: `data${i}`,
       }));
 
       const batchSize = 10;
@@ -339,7 +337,7 @@ describe('Multi-User Collaboration Module', () => {
     it('应该压缩操作数据', () => {
       const operations = [
         { type: 'insert', data: 'abc' },
-        { type: 'delete', data: 'def' }
+        { type: 'delete', data: 'def' },
       ];
 
       const compressed = JSON.stringify(operations);

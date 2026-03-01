@@ -10,7 +10,19 @@
  * @license MIT
  */
 
-import { PluginManifest, PluginContext, PluginAPI, PluginLogger, PluginHooks, PluginState, ComponentRegistration, ThemeRegistration, TokenRegistration, PluginEvent, PluginConfig } from '../types/plugin';
+import {
+  PluginManifest,
+  PluginContext,
+  PluginAPI,
+  PluginLogger,
+  PluginHooks,
+  PluginState,
+  ComponentRegistration,
+  ThemeRegistration,
+  TokenRegistration,
+  PluginEvent,
+  PluginConfig,
+} from '../types/plugin';
 
 export class PluginManager {
   private plugins: Map<string, PluginManifest> = new Map();
@@ -32,11 +44,15 @@ export class PluginManager {
     }
 
     if (yyc3?.minVersion && this.isVersionIncompatible(yyc3.minVersion)) {
-      throw new Error(`Plugin ${id} requires YYC³ Design System version ${yyc3.minVersion} or higher`);
+      throw new Error(
+        `Plugin ${id} requires YYC³ Design System version ${yyc3.minVersion} or higher`
+      );
     }
 
     if (yyc3?.maxVersion && this.isVersionIncompatible('0.0.0', yyc3.maxVersion)) {
-      throw new Error(`Plugin ${id} is not compatible with YYC³ Design System version ${yyc3.maxVersion}`);
+      throw new Error(
+        `Plugin ${id} is not compatible with YYC³ Design System version ${yyc3.maxVersion}`
+      );
     }
 
     this.plugins.set(id, manifest);
@@ -152,7 +168,7 @@ export class PluginManager {
 
   getActivatedPlugins(): PluginManifest[] {
     return Array.from(this.plugins.values()).filter(
-      plugin => this.pluginStates.get(plugin.id)?.activated
+      (plugin) => this.pluginStates.get(plugin.id)?.activated
     );
   }
 
@@ -231,7 +247,7 @@ export class PluginManager {
   emitEvent(event: PluginEvent): void {
     const listeners = this.eventListeners.get(event.type);
     if (listeners) {
-      listeners.forEach(callback => callback(event));
+      listeners.forEach((callback) => callback(event));
     }
   }
 

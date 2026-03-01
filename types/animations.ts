@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 export interface AnimationTokens {
   duration: {
     fast: string;
@@ -36,7 +38,7 @@ export interface AnimationConfig {
 }
 
 export interface AnimatedProps {
-  children: React.ReactNode;
+  children: ReactNode;
   animation?: 'fadeIn' | 'fadeOut' | 'slideInUp' | 'slideInDown' | 'slideInLeft' | 'slideInRight' | 'scaleIn' | 'scaleOut' | 'rotateIn' | 'bounceIn';
   config?: AnimationConfig;
   className?: string;

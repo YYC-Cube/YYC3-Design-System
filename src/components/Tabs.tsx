@@ -40,7 +40,9 @@ export const Tabs: React.FC<TabsProps> = ({
 
   return (
     <TabsContext.Provider value={{ activeTab, setActiveTab }}>
-      <div className={className} data-testid={dataTestId}>{children}</div>
+      <div className={className} data-testid={dataTestId}>
+        {children}
+      </div>
     </TabsContext.Provider>
   );
 };
@@ -51,11 +53,15 @@ export const TabList: React.FC<TabListProps> = ({ children, className = '' }) =>
   const listStyle: React.CSSProperties = {
     display: 'flex',
     gap: '0.5rem',
-    borderBottom: `1px solid ${tokens['color.muted-foreground'] as string || '#ccc'}`,
+    borderBottom: `1px solid ${(tokens['color.muted-foreground'] as string) || '#ccc'}`,
     marginBottom: '1rem',
   };
 
-  return <div style={listStyle} className={className} role="tablist">{children}</div>;
+  return (
+    <div style={listStyle} className={className} role="tablist">
+      {children}
+    </div>
+  );
 };
 
 export const Tab: React.FC<TabProps> = ({ value, children, className = '' }) => {
@@ -71,19 +77,17 @@ export const Tab: React.FC<TabProps> = ({ value, children, className = '' }) => 
 
   const tabStyle: React.CSSProperties = {
     padding: '0.5rem 1rem',
-    borderRadius: `${tokens['radius.md'] as string || '0.25rem'} ${tokens['radius.md'] as string || '0.25rem'} 0 0`,
+    borderRadius: `${(tokens['radius.md'] as string) || '0.25rem'} ${(tokens['radius.md'] as string) || '0.25rem'} 0 0`,
     cursor: 'pointer',
     border: 'none',
-    backgroundColor: isActive 
-      ? (tokens['color.primary'] as string || '#d45a5f')
-      : 'transparent',
-    color: isActive 
-      ? (tokens['color.primary-foreground'] as string || '#fff')
-      : (tokens['color.foreground'] as string || '#000'),
+    backgroundColor: isActive ? (tokens['color.primary'] as string) || '#d45a5f' : 'transparent',
+    color: isActive
+      ? (tokens['color.primary-foreground'] as string) || '#fff'
+      : (tokens['color.foreground'] as string) || '#000',
     fontWeight: isActive ? '600' : '400',
     transition: 'all 0.2s ease',
-    fontFamily: tokens['typography.font-sans'] as string || 'system-ui',
-    fontSize: tokens['font-size.body'] as string || '1rem',
+    fontFamily: (tokens['typography.font-sans'] as string) || 'system-ui',
+    fontSize: (tokens['font-size.body'] as string) || '1rem',
   };
 
   return (

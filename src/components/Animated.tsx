@@ -1,10 +1,32 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { fadeIn, fadeOut, slideInUp, slideInDown, slideInLeft, slideInRight, scaleIn, scaleOut, rotateIn, bounceIn, createTransition } from '../utils/animations';
+import {
+  fadeIn,
+  fadeOut,
+  slideInUp,
+  slideInDown,
+  slideInLeft,
+  slideInRight,
+  scaleIn,
+  scaleOut,
+  rotateIn,
+  bounceIn,
+  createTransition,
+} from '../utils/animations';
 import type { AnimationConfig } from '../../types/animations';
 
 interface AnimatedProps {
   children: React.ReactNode;
-  animation?: 'fadeIn' | 'fadeOut' | 'slideInUp' | 'slideInDown' | 'slideInLeft' | 'slideInRight' | 'scaleIn' | 'scaleOut' | 'rotateIn' | 'bounceIn';
+  animation?:
+    | 'fadeIn'
+    | 'fadeOut'
+    | 'slideInUp'
+    | 'slideInDown'
+    | 'slideInLeft'
+    | 'slideInRight'
+    | 'scaleIn'
+    | 'scaleOut'
+    | 'rotateIn'
+    | 'bounceIn';
   config?: AnimationConfig;
   className?: string;
   trigger?: 'mount' | 'hover' | 'click';
@@ -57,17 +79,20 @@ export const Animated: React.FC<AnimatedProps> = ({
 
   const handleClick = useCallback(() => {
     if (trigger === 'click') {
-      setIsAnimated(prev => !prev);
+      setIsAnimated((prev) => !prev);
     }
   }, [trigger]);
 
-  const shouldAnimate = trigger === 'mount' ? true : (trigger === 'hover' ? isHovered : isAnimated);
+  const shouldAnimate = trigger === 'mount' ? true : trigger === 'hover' ? isHovered : isAnimated;
 
-  const containerStyle = useMemo(() => ({
-    ...transitionStyle,
-    cursor: trigger === 'click' ? 'pointer' : 'default',
-    ...(shouldAnimate ? animationStyle : {}),
-  }), [transitionStyle, trigger, shouldAnimate, animationStyle]);
+  const containerStyle = useMemo(
+    () => ({
+      ...transitionStyle,
+      cursor: trigger === 'click' ? 'pointer' : 'default',
+      ...(shouldAnimate ? animationStyle : {}),
+    }),
+    [transitionStyle, trigger, shouldAnimate, animationStyle]
+  );
 
   return (
     <div

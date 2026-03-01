@@ -24,7 +24,7 @@ import {
   createTokenTheme,
   useToken,
   createTokenCache,
-  createTokenObserver
+  createTokenObserver,
 } from './token-utils';
 
 const mockTokens = {
@@ -32,27 +32,27 @@ const mockTokens = {
     primary: '#d45a5f',
     secondary: '#3d4a5c',
     background: '#ffffff',
-    foreground: '#000000'
+    foreground: '#000000',
   },
   spacing: {
     xs: '4px',
     sm: '8px',
     md: '16px',
     lg: '24px',
-    xl: '32px'
+    xl: '32px',
   },
   radius: {
     sm: '4px',
     md: '8px',
-    lg: '12px'
+    lg: '12px',
   },
   font: {
     size: {
       sm: '14px',
       base: '16px',
-      lg: '18px'
-    }
-  }
+      lg: '18px',
+    },
+  },
 };
 
 describe('token-utils', () => {
@@ -301,7 +301,7 @@ describe('token-utils', () => {
       const theme = createTokenTheme(mockTokens);
       const overrides = [
         { color: { primary: '#ff0000' } } as Partial<typeof mockTokens>,
-        { spacing: { xs: '8px' } } as Partial<typeof mockTokens>
+        { spacing: { xs: '8px' } } as Partial<typeof mockTokens>,
       ];
       const newTheme = theme.mergeThemes(...overrides);
       expect(newTheme.color.primary).toBe('#ff0000');

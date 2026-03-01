@@ -3,7 +3,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { screen as screenDom } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { DatePicker } from '../DatePicker';
-import { ThemeProvider } from '../../theme/ThemeProvider';
+import { ThemeProvider } from '../../context/ThemeContext';
 
 describe('DatePicker', () => {
   let mockOnChange: jest.Mock;

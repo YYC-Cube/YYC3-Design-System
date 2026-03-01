@@ -1,0 +1,241 @@
+f194eb8ed1719b44a66ee72fa7d83d20
+"use strict";
+
+/**
+ * YYC³ Design System — Lighthouse CI Configuration
+ *
+ * Performance budgets aligned with Five-High goals:
+ *   - FCP <= 1.5s (High Performance)
+ *   - LCP <= 2.5s
+ *   - CLS <= 0.1
+ *   - Total JS <= 200KB
+ *   - Accessibility score >= 90
+ *
+ * Install: pnpm add -D @lhci/cli
+ * Run:     npx lhci autorun
+ */
+/* istanbul ignore next */
+function cov_2lqxuhkhpa() {
+  var path = "/Users/yanyu/Downloads/yyc3-Design-System/src/tests/performance/lighthouse.config.ts";
+  var hash = "463fab189673e76eb2c1dd7d9f0af8e93733f9bb";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/yanyu/Downloads/yyc3-Design-System/src/tests/performance/lighthouse.config.ts",
+    statementMap: {
+      "0": {
+        start: {
+          line: 15,
+          column: 0
+        },
+        end: {
+          line: 15,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 16,
+          column: 0
+        },
+        end: {
+          line: 16,
+          column: 62
+        }
+      },
+      "2": {
+        start: {
+          line: 17,
+          column: 0
+        },
+        end: {
+          line: 64,
+          column: 2
+        }
+      },
+      "3": {
+        start: {
+          line: 68,
+          column: 0
+        },
+        end: {
+          line: 88,
+          column: 2
+        }
+      },
+      "4": {
+        start: {
+          line: 89,
+          column: 0
+        },
+        end: {
+          line: 89,
+          column: 43
+        }
+      }
+    },
+    fnMap: {},
+    branchMap: {},
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    f: {},
+    b: {},
+    inputSourceMap: {
+      file: "/Users/yanyu/Downloads/yyc3-Design-System/src/tests/performance/lighthouse.config.ts",
+      mappings: ";AAAA;;;;;;;;;;;;GAYG;;;AAEU,QAAA,gBAAgB,GAAG;IAC9B,EAAE,EAAE;QACF,OAAO,EAAE;YACP,aAAa,EAAE,QAAQ;YACvB,YAAY,EAAE,CAAC;YACf,QAAQ,EAAE;gBACR,MAAM,EAAE,SAAS;gBACjB,UAAU,EAAE;oBACV,qBAAqB,EAAE,CAAC;iBACzB;aACF;YACD,GAAG,EAAE;gBACH,wBAAwB;gBACxB,kCAAkC;gBAClC,kCAAkC;gBAClC,8BAA8B;gBAC9B,qCAAqC;gBACrC,6BAA6B;aAC9B;SACF;QACD,MAAM,EAAE;YACN,UAAU,EAAE;gBACV,gCAAgC;gBAChC,wBAAwB,EAAE,CAAC,OAAO,EAAE,EAAE,QAAQ,EAAE,IAAI,EAAE,CAAC;gBACvD,wBAAwB,EAAE,CAAC,OAAO,EAAE,EAAE,eAAe,EAAE,IAAI,EAAE,CAAC;gBAC9D,0BAA0B,EAAE,CAAC,OAAO,EAAE,EAAE,eAAe,EAAE,IAAI,EAAE,CAAC;gBAChE,yBAAyB,EAAE,CAAC,OAAO,EAAE,EAAE,eAAe,EAAE,GAAG,EAAE,CAAC;gBAC9D,qBAAqB,EAAE,CAAC,MAAM,EAAE,EAAE,eAAe,EAAE,GAAG,EAAE,CAAC;gBACzD,aAAa,EAAE,CAAC,MAAM,EAAE,EAAE,eAAe,EAAE,IAAI,EAAE,CAAC;gBAElD,oCAAoC;gBACpC,0BAA0B,EAAE,CAAC,OAAO,EAAE,EAAE,QAAQ,EAAE,GAAG,EAAE,CAAC;gBACxD,gBAAgB,EAAE,OAAO;gBACzB,gBAAgB,EAAE,OAAO;gBACzB,eAAe,EAAE,OAAO;gBACxB,eAAe,EAAE,OAAO;gBAExB,yBAAyB;gBACzB,2BAA2B,EAAE,CAAC,MAAM,EAAE,EAAE,QAAQ,EAAE,IAAI,EAAE,CAAC;gBAEzD,qCAAqC;gBACrC,8BAA8B,EAAE,CAAC,OAAO,EAAE,EAAE,eAAe,EAAE,MAAM,EAAE,CAAC,EAAE,QAAQ;gBAChF,kCAAkC,EAAE,CAAC,MAAM,EAAE,EAAE,eAAe,EAAE,KAAK,EAAE,CAAC,EAAE,OAAO;gBACjF,6BAA6B,EAAE,CAAC,OAAO,EAAE,EAAE,eAAe,EAAE,MAAM,EAAE,CAAC,EAAE,QAAQ;aAChF;SACF;QACD,MAAM,EAAE;YACN,MAAM,EAAE,0BAA0B;SACnC;KACF;CACF,CAAC;AAEF;;GAEG;AACU,QAAA,iBAAiB,GAAG;IAC/B,aAAa,EAAE;QACb,EAAE,YAAY,EAAE,QAAQ,EAAE,MAAM,EAAE,GAAG,EAAE,EAAE,KAAK;QAC9C,EAAE,YAAY,EAAE,YAAY,EAAE,MAAM,EAAE,EAAE,EAAE;QAC1C,EAAE,YAAY,EAAE,OAAO,EAAE,MAAM,EAAE,GAAG,EAAE;QACtC,EAAE,YAAY,EAAE,OAAO,EAAE,MAAM,EAAE,GAAG,EAAE;QACtC,EAAE,YAAY,EAAE,MAAM,EAAE,MAAM,EAAE,GAAG,EAAE;KACtC;IACD,cAAc,EAAE;QACd,EAAE,YAAY,EAAE,QAAQ,EAAE,MAAM,EAAE,EAAE,EAAE;QACtC,EAAE,YAAY,EAAE,YAAY,EAAE,MAAM,EAAE,CAAC,EAAE;QACzC,EAAE,YAAY,EAAE,aAAa,EAAE,MAAM,EAAE,CAAC,EAAE;KAC3C;IACD,OAAO,EAAE;QACP,EAAE,MAAM,EAAE,wBAAwB,EAAE,MAAM,EAAE,IAAI,EAAE;QAClD,EAAE,MAAM,EAAE,0BAA0B,EAAE,MAAM,EAAE,IAAI,EAAE;QACpD,EAAE,MAAM,EAAE,yBAAyB,EAAE,MAAM,EAAE,GAAG,EAAE;QAClD,EAAE,MAAM,EAAE,qBAAqB,EAAE,MAAM,EAAE,GAAG,EAAE;QAC9C,EAAE,MAAM,EAAE,aAAa,EAAE,MAAM,EAAE,IAAI,EAAE;KACxC;CACF,CAAC;AAEF,kBAAe,wBAAgB,CAAC",
+      names: [],
+      sources: ["/Users/yanyu/Downloads/yyc3-Design-System/src/tests/performance/lighthouse.config.ts"],
+      sourcesContent: ["/**\n * YYC\xB3 Design System \u2014 Lighthouse CI Configuration\n *\n * Performance budgets aligned with Five-High goals:\n *   - FCP <= 1.5s (High Performance)\n *   - LCP <= 2.5s\n *   - CLS <= 0.1\n *   - Total JS <= 200KB\n *   - Accessibility score >= 90\n *\n * Install: pnpm add -D @lhci/cli\n * Run:     npx lhci autorun\n */\n\nexport const lighthouseConfig = {\n  ci: {\n    collect: {\n      staticDistDir: './dist',\n      numberOfRuns: 3,\n      settings: {\n        preset: 'desktop',\n        throttling: {\n          cpuSlowdownMultiplier: 1,\n        },\n      },\n      url: [\n        'http://localhost:5173/',\n        'http://localhost:5173/components',\n        'http://localhost:5173/playground',\n        'http://localhost:5173/tokens',\n        'http://localhost:5173/token-manager',\n        'http://localhost:5173/build',\n      ],\n    },\n    assert: {\n      assertions: {\n        // \u2500\u2500\u2500 Performance (\u4E94\u9AD8: \u9AD8\u6027\u80FD) \u2500\u2500\u2500\n        'categories:performance': ['error', { minScore: 0.85 }],\n        'first-contentful-paint': ['error', { maxNumericValue: 1500 }],\n        'largest-contentful-paint': ['error', { maxNumericValue: 2500 }],\n        'cumulative-layout-shift': ['error', { maxNumericValue: 0.1 }],\n        'total-blocking-time': ['warn', { maxNumericValue: 300 }],\n        'speed-index': ['warn', { maxNumericValue: 3000 }],\n\n        // \u2500\u2500\u2500 Accessibility (\u4E94\u9AD8: \u9AD8\u53EF\u8BBF\u95EE\u6027) \u2500\u2500\u2500\n        'categories:accessibility': ['error', { minScore: 0.9 }],\n        'color-contrast': 'error',\n        'document-title': 'error',\n        'html-has-lang': 'error',\n        'meta-viewport': 'error',\n\n        // \u2500\u2500\u2500 Best Practices \u2500\u2500\u2500\n        'categories:best-practices': ['warn', { minScore: 0.85 }],\n\n        // \u2500\u2500\u2500 Resource budgets (\u4E94\u9AD8: \u9AD8\u6027\u80FD) \u2500\u2500\u2500\n        'resource-summary:script:size': ['error', { maxNumericValue: 204800 }], // 200KB\n        'resource-summary:stylesheet:size': ['warn', { maxNumericValue: 51200 }], // 50KB\n        'resource-summary:total:size': ['error', { maxNumericValue: 512000 }], // 500KB\n      },\n    },\n    upload: {\n      target: 'temporary-public-storage',\n    },\n  },\n};\n\n/**\n * Performance budget file (can be used with Webpack/Vite plugins)\n */\nexport const performanceBudget = {\n  resourceSizes: [\n    { resourceType: 'script', budget: 200 }, // KB\n    { resourceType: 'stylesheet', budget: 50 },\n    { resourceType: 'total', budget: 500 },\n    { resourceType: 'image', budget: 200 },\n    { resourceType: 'font', budget: 100 },\n  ],\n  resourceCounts: [\n    { resourceType: 'script', budget: 10 },\n    { resourceType: 'stylesheet', budget: 5 },\n    { resourceType: 'third-party', budget: 5 },\n  ],\n  timings: [\n    { metric: 'first-contentful-paint', budget: 1500 },\n    { metric: 'largest-contentful-paint', budget: 2500 },\n    { metric: 'cumulative-layout-shift', budget: 0.1 },\n    { metric: 'total-blocking-time', budget: 300 },\n    { metric: 'interactive', budget: 3000 },\n  ],\n};\n\nexport default lighthouseConfig;\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "463fab189673e76eb2c1dd7d9f0af8e93733f9bb"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_2lqxuhkhpa = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_2lqxuhkhpa();
+cov_2lqxuhkhpa().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_2lqxuhkhpa().s[1]++;
+exports.performanceBudget = exports.lighthouseConfig = void 0;
+/* istanbul ignore next */
+cov_2lqxuhkhpa().s[2]++;
+exports.lighthouseConfig = {
+  ci: {
+    collect: {
+      staticDistDir: './dist',
+      numberOfRuns: 3,
+      settings: {
+        preset: 'desktop',
+        throttling: {
+          cpuSlowdownMultiplier: 1
+        }
+      },
+      url: ['http://localhost:5173/', 'http://localhost:5173/components', 'http://localhost:5173/playground', 'http://localhost:5173/tokens', 'http://localhost:5173/token-manager', 'http://localhost:5173/build']
+    },
+    assert: {
+      assertions: {
+        // ─── Performance (五高: 高性能) ───
+        'categories:performance': ['error', {
+          minScore: 0.85
+        }],
+        'first-contentful-paint': ['error', {
+          maxNumericValue: 1500
+        }],
+        'largest-contentful-paint': ['error', {
+          maxNumericValue: 2500
+        }],
+        'cumulative-layout-shift': ['error', {
+          maxNumericValue: 0.1
+        }],
+        'total-blocking-time': ['warn', {
+          maxNumericValue: 300
+        }],
+        'speed-index': ['warn', {
+          maxNumericValue: 3000
+        }],
+        // ─── Accessibility (五高: 高可访问性) ───
+        'categories:accessibility': ['error', {
+          minScore: 0.9
+        }],
+        'color-contrast': 'error',
+        'document-title': 'error',
+        'html-has-lang': 'error',
+        'meta-viewport': 'error',
+        // ─── Best Practices ───
+        'categories:best-practices': ['warn', {
+          minScore: 0.85
+        }],
+        // ─── Resource budgets (五高: 高性能) ───
+        'resource-summary:script:size': ['error', {
+          maxNumericValue: 204800
+        }],
+        // 200KB
+        'resource-summary:stylesheet:size': ['warn', {
+          maxNumericValue: 51200
+        }],
+        // 50KB
+        'resource-summary:total:size': ['error', {
+          maxNumericValue: 512000
+        }] // 500KB
+      }
+    },
+    upload: {
+      target: 'temporary-public-storage'
+    }
+  }
+};
+/**
+ * Performance budget file (can be used with Webpack/Vite plugins)
+ */
+/* istanbul ignore next */
+cov_2lqxuhkhpa().s[3]++;
+exports.performanceBudget = {
+  resourceSizes: [{
+    resourceType: 'script',
+    budget: 200
+  },
+  // KB
+  {
+    resourceType: 'stylesheet',
+    budget: 50
+  }, {
+    resourceType: 'total',
+    budget: 500
+  }, {
+    resourceType: 'image',
+    budget: 200
+  }, {
+    resourceType: 'font',
+    budget: 100
+  }],
+  resourceCounts: [{
+    resourceType: 'script',
+    budget: 10
+  }, {
+    resourceType: 'stylesheet',
+    budget: 5
+  }, {
+    resourceType: 'third-party',
+    budget: 5
+  }],
+  timings: [{
+    metric: 'first-contentful-paint',
+    budget: 1500
+  }, {
+    metric: 'largest-contentful-paint',
+    budget: 2500
+  }, {
+    metric: 'cumulative-layout-shift',
+    budget: 0.1
+  }, {
+    metric: 'total-blocking-time',
+    budget: 300
+  }, {
+    metric: 'interactive',
+    budget: 3000
+  }]
+};
+/* istanbul ignore next */
+cov_2lqxuhkhpa().s[4]++;
+exports.default = exports.lighthouseConfig;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMmxxeHVoa2hwYSIsInBhdGgiLCJoYXNoIiwiZ2xvYmFsIiwiRnVuY3Rpb24iLCJnY3YiLCJjb3ZlcmFnZURhdGEiLCJzdGF0ZW1lbnRNYXAiLCJzdGFydCIsImxpbmUiLCJjb2x1bW4iLCJlbmQiLCJmbk1hcCIsImJyYW5jaE1hcCIsInMiLCJmIiwiYiIsImlucHV0U291cmNlTWFwIiwiZmlsZSIsIm1hcHBpbmdzIiwibmFtZXMiLCJzb3VyY2VzIiwic291cmNlc0NvbnRlbnQiLCJ2ZXJzaW9uIiwiX2NvdmVyYWdlU2NoZW1hIiwiY292ZXJhZ2UiLCJhY3R1YWxDb3ZlcmFnZSIsImV4cG9ydHMiLCJsaWdodGhvdXNlQ29uZmlnIiwiY2kiLCJjb2xsZWN0Iiwic3RhdGljRGlzdERpciIsIm51bWJlck9mUnVucyIsInNldHRpbmdzIiwicHJlc2V0IiwidGhyb3R0bGluZyIsImNwdVNsb3dkb3duTXVsdGlwbGllciIsInVybCIsImFzc2VydCIsImFzc2VydGlvbnMiLCJtaW5TY29yZSIsIm1heE51bWVyaWNWYWx1ZSIsInVwbG9hZCIsInRhcmdldCIsInBlcmZvcm1hbmNlQnVkZ2V0IiwicmVzb3VyY2VTaXplcyIsInJlc291cmNlVHlwZSIsImJ1ZGdldCIsInJlc291cmNlQ291bnRzIiwidGltaW5ncyIsIm1ldHJpYyIsImRlZmF1bHQiXSwic291cmNlcyI6WyIvVXNlcnMveWFueXUvRG93bmxvYWRzL3l5YzMtRGVzaWduLVN5c3RlbS9zcmMvdGVzdHMvcGVyZm9ybWFuY2UvbGlnaHRob3VzZS5jb25maWcudHMiXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBZWUPCsyBEZXNpZ24gU3lzdGVtIOKAlCBMaWdodGhvdXNlIENJIENvbmZpZ3VyYXRpb25cbiAqXG4gKiBQZXJmb3JtYW5jZSBidWRnZXRzIGFsaWduZWQgd2l0aCBGaXZlLUhpZ2ggZ29hbHM6XG4gKiAgIC0gRkNQIDw9IDEuNXMgKEhpZ2ggUGVyZm9ybWFuY2UpXG4gKiAgIC0gTENQIDw9IDIuNXNcbiAqICAgLSBDTFMgPD0gMC4xXG4gKiAgIC0gVG90YWwgSlMgPD0gMjAwS0JcbiAqICAgLSBBY2Nlc3NpYmlsaXR5IHNjb3JlID49IDkwXG4gKlxuICogSW5zdGFsbDogcG5wbSBhZGQgLUQgQGxoY2kvY2xpXG4gKiBSdW46ICAgICBucHggbGhjaSBhdXRvcnVuXG4gKi9cblxuZXhwb3J0IGNvbnN0IGxpZ2h0aG91c2VDb25maWcgPSB7XG4gIGNpOiB7XG4gICAgY29sbGVjdDoge1xuICAgICAgc3RhdGljRGlzdERpcjogJy4vZGlzdCcsXG4gICAgICBudW1iZXJPZlJ1bnM6IDMsXG4gICAgICBzZXR0aW5nczoge1xuICAgICAgICBwcmVzZXQ6ICdkZXNrdG9wJyxcbiAgICAgICAgdGhyb3R0bGluZzoge1xuICAgICAgICAgIGNwdVNsb3dkb3duTXVsdGlwbGllcjogMSxcbiAgICAgICAgfSxcbiAgICAgIH0sXG4gICAgICB1cmw6IFtcbiAgICAgICAgJ2h0dHA6Ly9sb2NhbGhvc3Q6NTE3My8nLFxuICAgICAgICAnaHR0cDovL2xvY2FsaG9zdDo1MTczL2NvbXBvbmVudHMnLFxuICAgICAgICAnaHR0cDovL2xvY2FsaG9zdDo1MTczL3BsYXlncm91bmQnLFxuICAgICAgICAnaHR0cDovL2xvY2FsaG9zdDo1MTczL3Rva2VucycsXG4gICAgICAgICdodHRwOi8vbG9jYWxob3N0OjUxNzMvdG9rZW4tbWFuYWdlcicsXG4gICAgICAgICdodHRwOi8vbG9jYWxob3N0OjUxNzMvYnVpbGQnLFxuICAgICAgXSxcbiAgICB9LFxuICAgIGFzc2VydDoge1xuICAgICAgYXNzZXJ0aW9uczoge1xuICAgICAgICAvLyDilIDilIDilIAgUGVyZm9ybWFuY2UgKOS6lOmrmDog6auY5oCn6IO9KSDilIDilIDilIBcbiAgICAgICAgJ2NhdGVnb3JpZXM6cGVyZm9ybWFuY2UnOiBbJ2Vycm9yJywgeyBtaW5TY29yZTogMC44NSB9XSxcbiAgICAgICAgJ2ZpcnN0LWNvbnRlbnRmdWwtcGFpbnQnOiBbJ2Vycm9yJywgeyBtYXhOdW1lcmljVmFsdWU6IDE1MDAgfV0sXG4gICAgICAgICdsYXJnZXN0LWNvbnRlbnRmdWwtcGFpbnQnOiBbJ2Vycm9yJywgeyBtYXhOdW1lcmljVmFsdWU6IDI1MDAgfV0sXG4gICAgICAgICdjdW11bGF0aXZlLWxheW91dC1zaGlmdCc6IFsnZXJyb3InLCB7IG1heE51bWVyaWNWYWx1ZTogMC4xIH1dLFxuICAgICAgICAndG90YWwtYmxvY2tpbmctdGltZSc6IFsnd2FybicsIHsgbWF4TnVtZXJpY1ZhbHVlOiAzMDAgfV0sXG4gICAgICAgICdzcGVlZC1pbmRleCc6IFsnd2FybicsIHsgbWF4TnVtZXJpY1ZhbHVlOiAzMDAwIH1dLFxuXG4gICAgICAgIC8vIOKUgOKUgOKUgCBBY2Nlc3NpYmlsaXR5ICjkupTpq5g6IOmrmOWPr+iuv+mXruaApykg4pSA4pSA4pSAXG4gICAgICAgICdjYXRlZ29yaWVzOmFjY2Vzc2liaWxpdHknOiBbJ2Vycm9yJywgeyBtaW5TY29yZTogMC45IH1dLFxuICAgICAgICAnY29sb3ItY29udHJhc3QnOiAnZXJyb3InLFxuICAgICAgICAnZG9jdW1lbnQtdGl0bGUnOiAnZXJyb3InLFxuICAgICAgICAnaHRtbC1oYXMtbGFuZyc6ICdlcnJvcicsXG4gICAgICAgICdtZXRhLXZpZXdwb3J0JzogJ2Vycm9yJyxcblxuICAgICAgICAvLyDilIDilIDilIAgQmVzdCBQcmFjdGljZXMg4pSA4pSA4pSAXG4gICAgICAgICdjYXRlZ29yaWVzOmJlc3QtcHJhY3RpY2VzJzogWyd3YXJuJywgeyBtaW5TY29yZTogMC44NSB9XSxcblxuICAgICAgICAvLyDilIDilIDilIAgUmVzb3VyY2UgYnVkZ2V0cyAo5LqU6auYOiDpq5jmgKfog70pIOKUgOKUgOKUgFxuICAgICAgICAncmVzb3VyY2Utc3VtbWFyeTpzY3JpcHQ6c2l6ZSc6IFsnZXJyb3InLCB7IG1heE51bWVyaWNWYWx1ZTogMjA0ODAwIH1dLCAvLyAyMDBLQlxuICAgICAgICAncmVzb3VyY2Utc3VtbWFyeTpzdHlsZXNoZWV0OnNpemUnOiBbJ3dhcm4nLCB7IG1heE51bWVyaWNWYWx1ZTogNTEyMDAgfV0sIC8vIDUwS0JcbiAgICAgICAgJ3Jlc291cmNlLXN1bW1hcnk6dG90YWw6c2l6ZSc6IFsnZXJyb3InLCB7IG1heE51bWVyaWNWYWx1ZTogNTEyMDAwIH1dLCAvLyA1MDBLQlxuICAgICAgfSxcbiAgICB9LFxuICAgIHVwbG9hZDoge1xuICAgICAgdGFyZ2V0OiAndGVtcG9yYXJ5LXB1YmxpYy1zdG9yYWdlJyxcbiAgICB9LFxuICB9LFxufTtcblxuLyoqXG4gKiBQZXJmb3JtYW5jZSBidWRnZXQgZmlsZSAoY2FuIGJlIHVzZWQgd2l0aCBXZWJwYWNrL1ZpdGUgcGx1Z2lucylcbiAqL1xuZXhwb3J0IGNvbnN0IHBlcmZvcm1hbmNlQnVkZ2V0ID0ge1xuICByZXNvdXJjZVNpemVzOiBbXG4gICAgeyByZXNvdXJjZVR5cGU6ICdzY3JpcHQnLCBidWRnZXQ6IDIwMCB9LCAvLyBLQlxuICAgIHsgcmVzb3VyY2VUeXBlOiAnc3R5bGVzaGVldCcsIGJ1ZGdldDogNTAgfSxcbiAgICB7IHJlc291cmNlVHlwZTogJ3RvdGFsJywgYnVkZ2V0OiA1MDAgfSxcbiAgICB7IHJlc291cmNlVHlwZTogJ2ltYWdlJywgYnVkZ2V0OiAyMDAgfSxcbiAgICB7IHJlc291cmNlVHlwZTogJ2ZvbnQnLCBidWRnZXQ6IDEwMCB9LFxuICBdLFxuICByZXNvdXJjZUNvdW50czogW1xuICAgIHsgcmVzb3VyY2VUeXBlOiAnc2NyaXB0JywgYnVkZ2V0OiAxMCB9LFxuICAgIHsgcmVzb3VyY2VUeXBlOiAnc3R5bGVzaGVldCcsIGJ1ZGdldDogNSB9LFxuICAgIHsgcmVzb3VyY2VUeXBlOiAndGhpcmQtcGFydHknLCBidWRnZXQ6IDUgfSxcbiAgXSxcbiAgdGltaW5nczogW1xuICAgIHsgbWV0cmljOiAnZmlyc3QtY29udGVudGZ1bC1wYWludCcsIGJ1ZGdldDogMTUwMCB9LFxuICAgIHsgbWV0cmljOiAnbGFyZ2VzdC1jb250ZW50ZnVsLXBhaW50JywgYnVkZ2V0OiAyNTAwIH0sXG4gICAgeyBtZXRyaWM6ICdjdW11bGF0aXZlLWxheW91dC1zaGlmdCcsIGJ1ZGdldDogMC4xIH0sXG4gICAgeyBtZXRyaWM6ICd0b3RhbC1ibG9ja2luZy10aW1lJywgYnVkZ2V0OiAzMDAgfSxcbiAgICB7IG1ldHJpYzogJ2ludGVyYWN0aXZlJywgYnVkZ2V0OiAzMDAwIH0sXG4gIF0sXG59O1xuXG5leHBvcnQgZGVmYXVsdCBsaWdodGhvdXNlQ29uZmlnO1xuIl0sIm1hcHBpbmdzIjoiOztBQUFBOzs7Ozs7Ozs7Ozs7O0FBQUE7QUFBQSxTQUFBQSxlQUFBO0VBQUEsSUFBQUMsSUFBQTtFQUFBLElBQUFDLElBQUE7RUFBQSxJQUFBQyxNQUFBLE9BQUFDLFFBQUE7RUFBQSxJQUFBQyxHQUFBO0VBQUEsSUFBQUMsWUFBQTtJQUFBTCxJQUFBO0lBQUFNLFlBQUE7TUFBQTtRQUFBQyxLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO01BQUE7UUFBQUYsS0FBQTtVQUFBQyxJQUFBO1VBQUFDLE1BQUE7UUFBQTtRQUFBQyxHQUFBO1VBQUFGLElBQUE7VUFBQUMsTUFBQTtRQUFBO01BQUE7TUFBQTtRQUFBRixLQUFBO1VBQUFDLElBQUE7VUFBQUMsTUFBQTtRQUFBO1FBQUFDLEdBQUE7VUFBQUYsSUFBQTtVQUFBQyxNQUFBO1FBQUE7TUFBQTtNQUFBO1FBQUFGLEtBQUE7VUFBQUMsSUFBQTtVQUFBQyxNQUFBO1FBQUE7UUFBQUMsR0FBQTtVQUFBRixJQUFBO1VBQUFDLE1BQUE7UUFBQTtNQUFBO0lBQUE7SUFBQUUsS0FBQTtJQUFBQyxTQUFBO0lBQUFDLENBQUE7TUFBQTtNQUFBO01BQUE7TUFBQTtNQUFBO0lBQUE7SUFBQUMsQ0FBQTtJ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

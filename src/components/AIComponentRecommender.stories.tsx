@@ -9,7 +9,7 @@
 
 import * as React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 import { AIComponentRecommender } from './AIComponentRecommender';
 
 const meta: Meta<typeof AIComponentRecommender> = {
@@ -44,14 +44,26 @@ const WithTheme = ({ children }: { children: React.ReactNode }) => {
 };
 
 export const Default: Story = {
-  decorators: [(Story) => <WithTheme><Story /></WithTheme>],
+  decorators: [
+    (Story) => (
+      <WithTheme>
+        <Story />
+      </WithTheme>
+    ),
+  ],
   args: {
     onSelectComponent: (component: string) => console.log('Selected component:', component),
   },
 };
 
 export const Interactive: Story = {
-  decorators: [(Story) => <WithTheme><Story /></WithTheme>],
+  decorators: [
+    (Story) => (
+      <WithTheme>
+        <Story />
+      </WithTheme>
+    ),
+  ],
   args: {
     onSelectComponent: (component: string) => console.log('Selected component:', component),
   },
@@ -65,7 +77,13 @@ export const Interactive: Story = {
 };
 
 export const Simple: Story = {
-  decorators: [(Story) => <WithTheme><Story /></WithTheme>],
+  decorators: [
+    (Story) => (
+      <WithTheme>
+        <Story />
+      </WithTheme>
+    ),
+  ],
   args: {
     onSelectComponent: (component: string) => console.log('Selected component:', component),
   },

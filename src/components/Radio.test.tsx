@@ -8,14 +8,11 @@
  */
 
 import * as React from 'react';
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
-
 import { Radio } from './Radio';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 describe('Radio 组件', () => {
   const renderWithTheme = (component: React.ReactElement) => {
@@ -24,7 +21,7 @@ describe('Radio 组件', () => {
 
   it('应该正确渲染未选中的 Radio', () => {
     renderWithTheme(<Radio value="option1" name="test" />);
-    
+
     const radio = screen.getByRole('radio');
     expect(radio).toBeInTheDocument();
     expect(radio).not.toBeChecked();
@@ -32,7 +29,7 @@ describe('Radio 组件', () => {
 
   it('应该正确渲染选中的 Radio', () => {
     renderWithTheme(<Radio value="option1" name="test" checked />);
-    
+
     const radio = screen.getByRole('radio');
     expect(radio).toBeChecked();
   });
@@ -40,17 +37,17 @@ describe('Radio 组件', () => {
   it('应该在点击时调用 onChange', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Radio value="option1" name="test" onChange={handleChange} />);
-    
+
     const radio = screen.getByRole('radio');
     fireEvent.click(radio);
-    
+
     expect(handleChange).toHaveBeenCalledWith('option1');
   });
 
   it('应该在禁用状态下不响应点击', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Radio value="option1" name="test" disabled onChange={handleChange} />);
-    
+
     const radio = screen.getByRole('radio');
     expect(radio).toBeDisabled();
   });
@@ -61,13 +58,13 @@ describe('Radio 组件', () => {
         Option Label
       </Radio>
     );
-    
+
     expect(screen.getByText('Option Label')).toBeInTheDocument();
   });
 
   it('应该在没有子元素时不渲染 label', () => {
     const { container } = renderWithTheme(<Radio value="option1" name="test" />);
-    
+
     const radio = screen.getByRole('radio');
     const label = container.querySelector('label > span:last-child');
     expect(label).not.toBeInTheDocument();
@@ -78,35 +75,35 @@ describe('Radio 组件', () => {
     const { container } = renderWithTheme(
       <Radio value="option1" name="test" className="custom-class" />
     );
-    
+
     const label = container.querySelector('.custom-class');
     expect(label).toBeInTheDocument();
   });
 
   it('应该正确设置 name 属性', () => {
     renderWithTheme(<Radio value="option1" name="test-name" />);
-    
+
     const radio = screen.getByRole('radio');
     expect(radio).toHaveAttribute('name', 'test-name');
   });
 
   it('应该正确设置 value 属性', () => {
     renderWithTheme(<Radio value="test-value" name="test" />);
-    
+
     const radio = screen.getByRole('radio');
     expect(radio).toHaveAttribute('value', 'test-value');
   });
 
   it('应该在禁用时设置正确的属性', () => {
     renderWithTheme(<Radio value="option1" name="test" disabled />);
-    
+
     const radio = screen.getByRole('radio');
     expect(radio).toBeDisabled();
   });
 
   it('应该在选中时显示内部圆点', () => {
     renderWithTheme(<Radio value="option1" name="test" checked />);
-    
+
     const radio = screen.getByRole('radio');
     const container = radio.parentElement;
     const radioContainer = container?.querySelector('div');
@@ -117,7 +114,7 @@ describe('Radio 组件', () => {
 
   it('应该在未选中时隐藏内部圆点', () => {
     renderWithTheme(<Radio value="option1" name="test" checked={false} />);
-    
+
     const radio = screen.getByRole('radio');
     const container = radio.parentElement;
     const radioContainer = container?.querySelector('div');
@@ -128,7 +125,7 @@ describe('Radio 组件', () => {
 
   it('应该在禁用时应用正确的样式', () => {
     renderWithTheme(<Radio value="option1" name="test" disabled />);
-    
+
     const radio = screen.getByRole('radio');
     const container = radio.parentElement;
     const radioContainer = container?.querySelector('div');
@@ -140,7 +137,7 @@ describe('Radio 组件', () => {
 
   it('应该在未禁用时应用正确的样式', () => {
     renderWithTheme(<Radio value="option1" name="test" />);
-    
+
     const radio = screen.getByRole('radio');
     const container = radio.parentElement;
     const radioContainer = container?.querySelector('div');
@@ -157,32 +154,38 @@ describe('Radio 组件', () => {
         Option Label
       </Radio>
     );
-    
+
     const label = screen.getByText('Option Label');
     fireEvent.click(label);
-    
+
     expect(handleChange).toHaveBeenCalledWith('option1');
   });
 
   it('应该在没有 value 时不调用 onChange', () => {
     const handleChange = jest.fn();
     renderWithTheme(<Radio name="test" onChange={handleChange} />);
-    
+
     const radio = screen.getByRole('radio');
     fireEvent.click(radio);
-    
+
     expect(handleChange).not.toHaveBeenCalled();
   });
 
   it('应该正确处理多个 Radio 组件', () => {
     renderWithTheme(
       <div>
-        <Radio value="option1" name="test" checked>Option 1</Radio>
-        <Radio value="option2" name="test">Option 2</Radio>
-        <Radio value="option3" name="test">Option 3</Radio>
+        <Radio value="option1" name="test" checked>
+          Option 1
+        </Radio>
+        <Radio value="option2" name="test">
+          Option 2
+        </Radio>
+        <Radio value="option3" name="test">
+          Option 3
+        </Radio>
       </div>
     );
-    
+
     expect(screen.getByText('Option 1')).toBeInTheDocument();
     expect(screen.getByText('Option 2')).toBeInTheDocument();
     expect(screen.getByText('Option 3')).toBeInTheDocument();
@@ -194,7 +197,7 @@ describe('Radio 组件', () => {
         Disabled Option
       </Radio>
     );
-    
+
     const label = screen.getByText('Disabled Option');
     expect(label).toHaveStyle({
       cursor: 'not-allowed',
@@ -207,7 +210,7 @@ describe('Radio 组件', () => {
         Enabled Option
       </Radio>
     );
-    
+
     const label = screen.getByText('Enabled Option');
     expect(label).toHaveStyle({
       cursor: 'pointer',
@@ -216,7 +219,7 @@ describe('Radio 组件', () => {
 
   it('应该应用正确的边框样式', () => {
     renderWithTheme(<Radio value="option1" name="test" />);
-    
+
     const radio = screen.getByRole('radio');
     const container = radio.parentElement;
     const radioContainer = container?.querySelector('div');
@@ -228,7 +231,7 @@ describe('Radio 组件', () => {
 
   it('应该在选中时应用正确的背景色', () => {
     renderWithTheme(<Radio value="option1" name="test" checked />);
-    
+
     const radio = screen.getByRole('radio');
     const container = radio.parentElement;
     const radioContainer = container?.querySelector('div');
@@ -239,7 +242,7 @@ describe('Radio 组件', () => {
 
   it('应该在未选中时应用透明背景', () => {
     renderWithTheme(<Radio value="option1" name="test" checked={false} />);
-    
+
     const radio = screen.getByRole('radio');
     const container = radio.parentElement;
     const radioContainer = container?.querySelector('div');

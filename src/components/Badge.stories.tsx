@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Badge } from './Badge';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 const meta: Meta<typeof Badge> = {
   title: 'Components/Badge',
@@ -66,12 +66,10 @@ export const WithText: Story = {
   render: () => (
     <div>
       <p>
-        这是一段包含徽章的文本 <Badge variant="default">新功能</Badge>，
-        可以用来突出显示重要信息。
+        这是一段包含徽章的文本 <Badge variant="default">新功能</Badge>， 可以用来突出显示重要信息。
       </p>
       <p style={{ marginTop: '1rem' }}>
-        另一个示例 <Badge variant="secondary">提示</Badge>，
-        徽章可以灵活地嵌入到文本中。
+        另一个示例 <Badge variant="secondary">提示</Badge>， 徽章可以灵活地嵌入到文本中。
       </p>
     </div>
   ),

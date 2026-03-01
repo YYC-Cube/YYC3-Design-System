@@ -1,0 +1,818 @@
+b122bf9d38aa8ebcd20f547adcc94464
+"use strict";
+
+/* istanbul ignore next */
+function cov_kgf92mw17() {
+  var path = "/Users/yanyu/Downloads/yyc3-Design-System/src/components/StorybookSettingsPanel.tsx";
+  var hash = "96483e84fec0fc2336779f726a1327184a92ea77";
+  var global = new Function("return this")();
+  var gcv = "__coverage__";
+  var coverageData = {
+    path: "/Users/yanyu/Downloads/yyc3-Design-System/src/components/StorybookSettingsPanel.tsx",
+    statementMap: {
+      "0": {
+        start: {
+          line: 2,
+          column: 0
+        },
+        end: {
+          line: 2,
+          column: 62
+        }
+      },
+      "1": {
+        start: {
+          line: 3,
+          column: 0
+        },
+        end: {
+          line: 3,
+          column: 56
+        }
+      },
+      "2": {
+        start: {
+          line: 4,
+          column: 22
+        },
+        end: {
+          line: 4,
+          column: 50
+        }
+      },
+      "3": {
+        start: {
+          line: 18,
+          column: 16
+        },
+        end: {
+          line: 18,
+          column: 32
+        }
+      },
+      "4": {
+        start: {
+          line: 19,
+          column: 26
+        },
+        end: {
+          line: 19,
+          column: 63
+        }
+      },
+      "5": {
+        start: {
+          line: 20,
+          column: 17
+        },
+        end: {
+          line: 20,
+          column: 39
+        }
+      },
+      "6": {
+        start: {
+          line: 21,
+          column: 16
+        },
+        end: {
+          line: 21,
+          column: 37
+        }
+      },
+      "7": {
+        start: {
+          line: 22,
+          column: 17
+        },
+        end: {
+          line: 22,
+          column: 39
+        }
+      },
+      "8": {
+        start: {
+          line: 23,
+          column: 17
+        },
+        end: {
+          line: 23,
+          column: 39
+        }
+      },
+      "9": {
+        start: {
+          line: 24,
+          column: 16
+        },
+        end: {
+          line: 24,
+          column: 37
+        }
+      },
+      "10": {
+        start: {
+          line: 25,
+          column: 17
+        },
+        end: {
+          line: 25,
+          column: 39
+        }
+      },
+      "11": {
+        start: {
+          line: 26,
+          column: 17
+        },
+        end: {
+          line: 26,
+          column: 39
+        }
+      },
+      "12": {
+        start: {
+          line: 27,
+          column: 20
+        },
+        end: {
+          line: 27,
+          column: 45
+        }
+      },
+      "13": {
+        start: {
+          line: 28,
+          column: 23
+        },
+        end: {
+          line: 28,
+          column: 46
+        }
+      },
+      "14": {
+        start: {
+          line: 30,
+          column: 18
+        },
+        end: {
+          line: 30,
+          column: 54
+        }
+      },
+      "15": {
+        start: {
+          line: 31,
+          column: 46
+        },
+        end: {
+          line: 31,
+          column: 74
+        }
+      },
+      "16": {
+        start: {
+          line: 32,
+          column: 48
+        },
+        end: {
+          line: 32,
+          column: 77
+        }
+      },
+      "17": {
+        start: {
+          line: 33,
+          column: 46
+        },
+        end: {
+          line: 33,
+          column: 73
+        }
+      },
+      "18": {
+        start: {
+          line: 34,
+          column: 38
+        },
+        end: {
+          line: 34,
+          column: 66
+        }
+      },
+      "19": {
+        start: {
+          line: 35,
+          column: 46
+        },
+        end: {
+          line: 35,
+          column: 73
+        }
+      },
+      "20": {
+        start: {
+          line: 36,
+          column: 27
+        },
+        end: {
+          line: 43,
+          column: 5
+        }
+      },
+      "21": {
+        start: {
+          line: 37,
+          column: 8
+        },
+        end: {
+          line: 37,
+          column: 27
+        }
+      },
+      "22": {
+        start: {
+          line: 38,
+          column: 8
+        },
+        end: {
+          line: 38,
+          column: 31
+        }
+      },
+      "23": {
+        start: {
+          line: 39,
+          column: 8
+        },
+        end: {
+          line: 42,
+          column: 17
+        }
+      },
+      "24": {
+        start: {
+          line: 40,
+          column: 12
+        },
+        end: {
+          line: 40,
+          column: 32
+        }
+      },
+      "25": {
+        start: {
+          line: 41,
+          column: 12
+        },
+        end: {
+          line: 41,
+          column: 72
+        }
+      },
+      "26": {
+        start: {
+          line: 44,
+          column: 4
+        },
+        end: {
+          line: 47,
+          column: 582
+        }
+      }
+    },
+    fnMap: {
+      "0": {
+        name: "StorybookSettingsPanel",
+        decl: {
+          start: {
+            line: 29,
+            column: 9
+          },
+          end: {
+            line: 29,
+            column: 31
+          }
+        },
+        loc: {
+          start: {
+            line: 29,
+            column: 56
+          },
+          end: {
+            line: 48,
+            column: 1
+          }
+        },
+        line: 29
+      },
+      "1": {
+        name: "(anonymous_1)",
+        decl: {
+          start: {
+            line: 36,
+            column: 27
+          },
+          end: {
+            line: 36,
+            column: 28
+          }
+        },
+        loc: {
+          start: {
+            line: 36,
+            column: 33
+          },
+          end: {
+            line: 43,
+            column: 5
+          }
+        },
+        line: 36
+      },
+      "2": {
+        name: "(anonymous_2)",
+        decl: {
+          start: {
+            line: 39,
+            column: 19
+          },
+          end: {
+            line: 39,
+            column: 20
+          }
+        },
+        loc: {
+          start: {
+            line: 39,
+            column: 25
+          },
+          end: {
+            line: 42,
+            column: 9
+          }
+        },
+        line: 39
+      }
+    },
+    branchMap: {
+      "0": {
+        loc: {
+          start: {
+            line: 41,
+            column: 29
+          },
+          end: {
+            line: 41,
+            column: 70
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 41,
+            column: 51
+          },
+          end: {
+            line: 41,
+            column: 59
+          }
+        }, {
+          start: {
+            line: 41,
+            column: 62
+          },
+          end: {
+            line: 41,
+            column: 70
+          }
+        }],
+        line: 41
+      },
+      "1": {
+        loc: {
+          start: {
+            line: 44,
+            column: 3015
+          },
+          end: {
+            line: 44,
+            column: 3373
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 44,
+            column: 3028
+          },
+          end: {
+            line: 44,
+            column: 3201
+          }
+        }, {
+          start: {
+            line: 44,
+            column: 3206
+          },
+          end: {
+            line: 44,
+            column: 3372
+          }
+        }],
+        line: 44
+      },
+      "2": {
+        loc: {
+          start: {
+            line: 44,
+            column: 3378
+          },
+          end: {
+            line: 47,
+            column: 162
+          }
+        },
+        type: "binary-expr",
+        locations: [{
+          start: {
+            line: 44,
+            column: 3378
+          },
+          end: {
+            line: 44,
+            column: 3391
+          }
+        }, {
+          start: {
+            line: 44,
+            column: 3396
+          },
+          end: {
+            line: 47,
+            column: 161
+          }
+        }],
+        line: 44
+      },
+      "3": {
+        loc: {
+          start: {
+            line: 44,
+            column: 3615
+          },
+          end: {
+            line: 47,
+            column: 157
+          }
+        },
+        type: "cond-expr",
+        locations: [{
+          start: {
+            line: 44,
+            column: 3645
+          },
+          end: {
+            line: 44,
+            column: 3897
+          }
+        }, {
+          start: {
+            line: 44,
+            column: 3902
+          },
+          end: {
+            line: 47,
+            column: 156
+          }
+        }],
+        line: 44
+      }
+    },
+    s: {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0,
+      "20": 0,
+      "21": 0,
+      "22": 0,
+      "23": 0,
+      "24": 0,
+      "25": 0,
+      "26": 0
+    },
+    f: {
+      "0": 0,
+      "1": 0,
+      "2": 0
+    },
+    b: {
+      "0": [0, 0],
+      "1": [0, 0],
+      "2": [0, 0],
+      "3": [0, 0]
+    },
+    inputSourceMap: {
+      file: "/Users/yanyu/Downloads/yyc3-Design-System/src/components/StorybookSettingsPanel.tsx",
+      mappings: "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",
+      names: [],
+      sources: ["/Users/yanyu/Downloads/yyc3-Design-System/src/components/StorybookSettingsPanel.tsx"],
+      sourcesContent: ["/**\n * YYC\xB3 Design System \u2014 Storybook Settings Panel\n *\n * Token Reference:\n *   primary:       var(--primary)           \u2014 Switch active color\n *   success:       var(--success)           \u2014 Passed badge background\n *   destructive:   var(--destructive)       \u2014 Failed badge background\n *   muted:         var(--muted)             \u2014 Help block background\n *   card:          var(--card)              \u2014 Dialog background\n *   shadow:        var(--shadow-card)       \u2014 Switch selected shadow\n *   animation:     var(--duration-fast) var(--easing-default)\n *   a11y:          outline: 2px solid var(--ring) on focus\n */\nimport { useState } from 'react';\nimport { useLanguage } from '../context/LanguageContext';\nimport { Button } from './ui/button';\nimport { Badge } from './ui/badge';\nimport { Switch } from './ui/switch';\nimport { Slider } from './ui/slider';\nimport { Label } from './ui/label';\nimport { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';\nimport { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';\nimport { Separator } from './ui/separator';\nimport { Play, X, Loader2, CheckCircle2, XCircle, Info, Settings } from 'lucide-react';\n\ninterface StorybookSettingsPanelProps {\n  open: boolean;\n  onOpenChange: (open: boolean) => void;\n}\n\nexport function StorybookSettingsPanel({ open, onOpenChange }: StorybookSettingsPanelProps) {\n  const { t } = useLanguage();\n  const [isolationMode, setIsolationMode] = useState(false);\n  const [snapshotLayout, setSnapshotLayout] = useState('grid');\n  const [renderQuality, setRenderQuality] = useState([75]);\n  const [isRunning, setIsRunning] = useState(false);\n  const [lastRunStatus, setLastRunStatus] = useState<'passed' | 'failed' | null>(null);\n\n  const handleRunTests = () => {\n    setIsRunning(true);\n    setLastRunStatus(null);\n    setTimeout(() => {\n      setIsRunning(false);\n      setLastRunStatus(Math.random() > 0.3 ? 'passed' : 'failed');\n    }, 2500);\n  };\n\n  return (\n    <Dialog open={open} onOpenChange={onOpenChange}>\n      <DialogContent className=\"sm:max-w-md\">\n        <DialogHeader>\n          <div className=\"flex items-center gap-2\">\n            <Settings className=\"size-5 text-primary\" />\n            <DialogTitle>{t('storybook.title')}</DialogTitle>\n          </div>\n          <DialogDescription>{t('storybook.subtitle')}</DialogDescription>\n        </DialogHeader>\n\n        <div className=\"space-y-5 py-2\">\n          {/* Isolation Mode Switch \u2014 Token: color-primary (active) */}\n          <div className=\"flex items-center justify-between\">\n            <div className=\"space-y-0.5\">\n              <Label htmlFor=\"isolation-mode\" className=\"text-sm\">\n                {t('storybook.isolationMode')}\n              </Label>\n              <p className=\"text-xs text-muted-foreground\">{t('storybook.isolationModeDesc')}</p>\n            </div>\n            <Switch\n              id=\"isolation-mode\"\n              checked={isolationMode}\n              onCheckedChange={setIsolationMode}\n              aria-label={t('storybook.toggleIsolation')}\n            />\n          </div>\n\n          <Separator />\n\n          {/* Snapshot Layout Dropdown */}\n          <div className=\"space-y-2\">\n            <Label>{t('storybook.snapshotLayout')}</Label>\n            <Select value={snapshotLayout} onValueChange={setSnapshotLayout}>\n              <SelectTrigger aria-label={t('storybook.selectLayout')}>\n                <SelectValue />\n              </SelectTrigger>\n              <SelectContent>\n                <SelectItem value=\"grid\">{t('storybook.grid')}</SelectItem>\n                <SelectItem value=\"list\">{t('storybook.list')}</SelectItem>\n                <SelectItem value=\"carousel\">{t('storybook.carousel')}</SelectItem>\n              </SelectContent>\n            </Select>\n          </div>\n\n          {/* Render Quality Slider \u2014 Token: color-primary (track) */}\n          <div className=\"space-y-2\">\n            <div className=\"flex items-center justify-between\">\n              <Label>{t('storybook.renderQuality')}</Label>\n              <span className=\"text-xs text-muted-foreground font-mono\">{renderQuality[0]}%</span>\n            </div>\n            <Slider\n              value={renderQuality}\n              onValueChange={setRenderQuality}\n              min={0}\n              max={100}\n              step={5}\n              aria-label={t('storybook.renderQuality')}\n            />\n            <p className=\"text-[10px] text-muted-foreground\">{t('storybook.renderQualityDesc')}</p>\n          </div>\n\n          <Separator />\n\n          {/* Run Tests Button */}\n          <div className=\"space-y-3\">\n            <Button onClick={handleRunTests} disabled={isRunning} className=\"w-full\">\n              {isRunning ? (\n                <>\n                  <Loader2 className=\"size-4 animate-spin\" />\n                  {t('storybook.running')}\n                </>\n              ) : (\n                <>\n                  <Play className=\"size-4\" />\n                  {t('storybook.runIsolatedTests')}\n                </>\n              )}\n            </Button>\n\n            {/* Status Badge \u2014 Token: color-success / color-destructive */}\n            {lastRunStatus && (\n              <div className=\"flex items-center justify-center gap-2\">\n                <span className=\"text-xs text-muted-foreground\">{t('storybook.lastRun')}:</span>\n                {lastRunStatus === 'passed' ? (\n                  <Badge\n                    className=\"gap-1\"\n                    style={{ background: 'var(--success)', color: 'var(--success-foreground)' }}\n                  >\n                    <CheckCircle2 className=\"size-3\" />\n                    {t('storybook.passed')}\n                  </Badge>\n                ) : (\n                  <Badge\n                    className=\"gap-1\"\n                    style={{\n                      background: 'var(--destructive)',\n                      color: 'var(--destructive-foreground)',\n                    }}\n                  >\n                    <XCircle className=\"size-3\" />\n                    {t('storybook.failed')}\n                  </Badge>\n                )}\n              </div>\n            )}\n          </div>\n\n          {/* Help text \u2014 Token: bg = var(--muted) */}\n          <div\n            className=\"rounded-lg p-3 flex items-start gap-2\"\n            style={{ background: 'var(--muted)' }}\n          >\n            <Info className=\"size-4 text-muted-foreground shrink-0 mt-0.5\" />\n            <p className=\"text-[10px] text-muted-foreground\" style={{ lineHeight: 1.5 }}>\n              {t('storybook.isolationDescription')}\n            </p>\n          </div>\n        </div>\n      </DialogContent>\n    </Dialog>\n  );\n}\n"],
+      version: 3
+    },
+    _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    hash: "96483e84fec0fc2336779f726a1327184a92ea77"
+  };
+  var coverage = global[gcv] || (global[gcv] = {});
+  if (!coverage[path] || coverage[path].hash !== hash) {
+    coverage[path] = coverageData;
+  }
+  var actualCoverage = coverage[path];
+  {
+    // @ts-ignore
+    cov_kgf92mw17 = function () {
+      return actualCoverage;
+    };
+  }
+  return actualCoverage;
+}
+cov_kgf92mw17();
+cov_kgf92mw17().s[0]++;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+/* istanbul ignore next */
+cov_kgf92mw17().s[1]++;
+exports.StorybookSettingsPanel = StorybookSettingsPanel;
+const jsx_runtime_1 =
+/* istanbul ignore next */
+(cov_kgf92mw17().s[2]++, require("react/jsx-runtime"));
+/**
+ * YYC³ Design System — Storybook Settings Panel
+ *
+ * Token Reference:
+ *   primary:       var(--primary)           — Switch active color
+ *   success:       var(--success)           — Passed badge background
+ *   destructive:   var(--destructive)       — Failed badge background
+ *   muted:         var(--muted)             — Help block background
+ *   card:          var(--card)              — Dialog background
+ *   shadow:        var(--shadow-card)       — Switch selected shadow
+ *   animation:     var(--duration-fast) var(--easing-default)
+ *   a11y:          outline: 2px solid var(--ring) on focus
+ */
+const react_1 =
+/* istanbul ignore next */
+(cov_kgf92mw17().s[3]++, require("react"));
+const LanguageContext_1 =
+/* istanbul ignore next */
+(cov_kgf92mw17().s[4]++, require("../context/LanguageContext"));
+const button_1 =
+/* istanbul ignore next */
+(cov_kgf92mw17().s[5]++, require("./ui/button"));
+const badge_1 =
+/* istanbul ignore next */
+(cov_kgf92mw17().s[6]++, require("./ui/badge"));
+const switch_1 =
+/* istanbul ignore next */
+(cov_kgf92mw17().s[7]++, require("./ui/switch"));
+const slider_1 =
+/* istanbul ignore next */
+(cov_kgf92mw17().s[8]++, require("./ui/slider"));
+const label_1 =
+/* istanbul ignore next */
+(cov_kgf92mw17().s[9]++, require("./ui/label"));
+const select_1 =
+/* istanbul ignore next */
+(cov_kgf92mw17().s[10]++, require("./ui/select"));
+const dialog_1 =
+/* istanbul ignore next */
+(cov_kgf92mw17().s[11]++, require("./ui/dialog"));
+const separator_1 =
+/* istanbul ignore next */
+(cov_kgf92mw17().s[12]++, require("./ui/separator"));
+const lucide_react_1 =
+/* istanbul ignore next */
+(cov_kgf92mw17().s[13]++, require("lucide-react"));
+function StorybookSettingsPanel({
+  open,
+  onOpenChange
+}) {
+  /* istanbul ignore next */
+  cov_kgf92mw17().f[0]++;
+  const {
+    t
+  } =
+  /* istanbul ignore next */
+  (cov_kgf92mw17().s[14]++, (0, LanguageContext_1.useLanguage)());
+  const [isolationMode, setIsolationMode] =
+  /* istanbul ignore next */
+  (cov_kgf92mw17().s[15]++, (0, react_1.useState)(false));
+  const [snapshotLayout, setSnapshotLayout] =
+  /* istanbul ignore next */
+  (cov_kgf92mw17().s[16]++, (0, react_1.useState)('grid'));
+  const [renderQuality, setRenderQuality] =
+  /* istanbul ignore next */
+  (cov_kgf92mw17().s[17]++, (0, react_1.useState)([75]));
+  const [isRunning, setIsRunning] =
+  /* istanbul ignore next */
+  (cov_kgf92mw17().s[18]++, (0, react_1.useState)(false));
+  const [lastRunStatus, setLastRunStatus] =
+  /* istanbul ignore next */
+  (cov_kgf92mw17().s[19]++, (0, react_1.useState)(null));
+  /* istanbul ignore next */
+  cov_kgf92mw17().s[20]++;
+  const handleRunTests = () => {
+    /* istanbul ignore next */
+    cov_kgf92mw17().f[1]++;
+    cov_kgf92mw17().s[21]++;
+    setIsRunning(true);
+    /* istanbul ignore next */
+    cov_kgf92mw17().s[22]++;
+    setLastRunStatus(null);
+    /* istanbul ignore next */
+    cov_kgf92mw17().s[23]++;
+    setTimeout(() => {
+      /* istanbul ignore next */
+      cov_kgf92mw17().f[2]++;
+      cov_kgf92mw17().s[24]++;
+      setIsRunning(false);
+      /* istanbul ignore next */
+      cov_kgf92mw17().s[25]++;
+      setLastRunStatus(Math.random() > 0.3 ?
+      /* istanbul ignore next */
+      (cov_kgf92mw17().b[0][0]++, 'passed') :
+      /* istanbul ignore next */
+      (cov_kgf92mw17().b[0][1]++, 'failed'));
+    }, 2500);
+  };
+  /* istanbul ignore next */
+  cov_kgf92mw17().s[26]++;
+  return (0, jsx_runtime_1.jsx)(dialog_1.Dialog, {
+    open: open,
+    onOpenChange: onOpenChange,
+    children: (0, jsx_runtime_1.jsxs)(dialog_1.DialogContent, {
+      className: "sm:max-w-md",
+      children: [(0, jsx_runtime_1.jsxs)(dialog_1.DialogHeader, {
+        children: [(0, jsx_runtime_1.jsxs)("div", {
+          className: "flex items-center gap-2",
+          children: [(0, jsx_runtime_1.jsx)(lucide_react_1.Settings, {
+            className: "size-5 text-primary"
+          }), (0, jsx_runtime_1.jsx)(dialog_1.DialogTitle, {
+            children: t('storybook.title')
+          })]
+        }), (0, jsx_runtime_1.jsx)(dialog_1.DialogDescription, {
+          children: t('storybook.subtitle')
+        })]
+      }), (0, jsx_runtime_1.jsxs)("div", {
+        className: "space-y-5 py-2",
+        children: [(0, jsx_runtime_1.jsxs)("div", {
+          className: "flex items-center justify-between",
+          children: [(0, jsx_runtime_1.jsxs)("div", {
+            className: "space-y-0.5",
+            children: [(0, jsx_runtime_1.jsx)(label_1.Label, {
+              htmlFor: "isolation-mode",
+              className: "text-sm",
+              children: t('storybook.isolationMode')
+            }), (0, jsx_runtime_1.jsx)("p", {
+              className: "text-xs text-muted-foreground",
+              children: t('storybook.isolationModeDesc')
+            })]
+          }), (0, jsx_runtime_1.jsx)(switch_1.Switch, {
+            id: "isolation-mode",
+            checked: isolationMode,
+            onCheckedChange: setIsolationMode,
+            "aria-label": t('storybook.toggleIsolation')
+          })]
+        }), (0, jsx_runtime_1.jsx)(separator_1.Separator, {}), (0, jsx_runtime_1.jsxs)("div", {
+          className: "space-y-2",
+          children: [(0, jsx_runtime_1.jsx)(label_1.Label, {
+            children: t('storybook.snapshotLayout')
+          }), (0, jsx_runtime_1.jsxs)(select_1.Select, {
+            value: snapshotLayout,
+            onValueChange: setSnapshotLayout,
+            children: [(0, jsx_runtime_1.jsx)(select_1.SelectTrigger, {
+              "aria-label": t('storybook.selectLayout'),
+              children: (0, jsx_runtime_1.jsx)(select_1.SelectValue, {})
+            }), (0, jsx_runtime_1.jsxs)(select_1.SelectContent, {
+              children: [(0, jsx_runtime_1.jsx)(select_1.SelectItem, {
+                value: "grid",
+                children: t('storybook.grid')
+              }), (0, jsx_runtime_1.jsx)(select_1.SelectItem, {
+                value: "list",
+                children: t('storybook.list')
+              }), (0, jsx_runtime_1.jsx)(select_1.SelectItem, {
+                value: "carousel",
+                children: t('storybook.carousel')
+              })]
+            })]
+          })]
+        }), (0, jsx_runtime_1.jsxs)("div", {
+          className: "space-y-2",
+          children: [(0, jsx_runtime_1.jsxs)("div", {
+            className: "flex items-center justify-between",
+            children: [(0, jsx_runtime_1.jsx)(label_1.Label, {
+              children: t('storybook.renderQuality')
+            }), (0, jsx_runtime_1.jsxs)("span", {
+              className: "text-xs text-muted-foreground font-mono",
+              children: [renderQuality[0], "%"]
+            })]
+          }), (0, jsx_runtime_1.jsx)(slider_1.Slider, {
+            value: renderQuality,
+            onValueChange: setRenderQuality,
+            min: 0,
+            max: 100,
+            step: 5,
+            "aria-label": t('storybook.renderQuality')
+          }), (0, jsx_runtime_1.jsx)("p", {
+            className: "text-[10px] text-muted-foreground",
+            children: t('storybook.renderQualityDesc')
+          })]
+        }), (0, jsx_runtime_1.jsx)(separator_1.Separator, {}), (0, jsx_runtime_1.jsxs)("div", {
+          className: "space-y-3",
+          children: [(0, jsx_runtime_1.jsx)(button_1.Button, {
+            onClick: handleRunTests,
+            disabled: isRunning,
+            className: "w-full",
+            children: isRunning ?
+            /* istanbul ignore next */
+            (cov_kgf92mw17().b[1][0]++, (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, {
+              children: [(0, jsx_runtime_1.jsx)(lucide_react_1.Loader2, {
+                className: "size-4 animate-spin"
+              }), t('storybook.running')]
+            })) :
+            /* istanbul ignore next */
+            (cov_kgf92mw17().b[1][1]++, (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, {
+              children: [(0, jsx_runtime_1.jsx)(lucide_react_1.Play, {
+                className: "size-4"
+              }), t('storybook.runIsolatedTests')]
+            }))
+          }), 
+          /* istanbul ignore next */
+          (cov_kgf92mw17().b[2][0]++, lastRunStatus) &&
+          /* istanbul ignore next */
+          (cov_kgf92mw17().b[2][1]++, (0, jsx_runtime_1.jsxs)("div", {
+            className: "flex items-center justify-center gap-2",
+            children: [(0, jsx_runtime_1.jsxs)("span", {
+              className: "text-xs text-muted-foreground",
+              children: [t('storybook.lastRun'), ":"]
+            }), lastRunStatus === 'passed' ?
+            /* istanbul ignore next */
+            (cov_kgf92mw17().b[3][0]++, (0, jsx_runtime_1.jsxs)(badge_1.Badge, {
+              className: "gap-1",
+              style: {
+                background: 'var(--success)',
+                color: 'var(--success-foreground)'
+              },
+              children: [(0, jsx_runtime_1.jsx)(lucide_react_1.CheckCircle2, {
+                className: "size-3"
+              }), t('storybook.passed')]
+            })) :
+            /* istanbul ignore next */
+            (cov_kgf92mw17().b[3][1]++, (0, jsx_runtime_1.jsxs)(badge_1.Badge, {
+              className: "gap-1",
+              style: {
+                background: 'var(--destructive)',
+                color: 'var(--destructive-foreground)'
+              },
+              children: [(0, jsx_runtime_1.jsx)(lucide_react_1.XCircle, {
+                className: "size-3"
+              }), t('storybook.failed')]
+            }))]
+          }))]
+        }), (0, jsx_runtime_1.jsxs)("div", {
+          className: "rounded-lg p-3 flex items-start gap-2",
+          style: {
+            background: 'var(--muted)'
+          },
+          children: [(0, jsx_runtime_1.jsx)(lucide_react_1.Info, {
+            className: "size-4 text-muted-foreground shrink-0 mt-0.5"
+          }), (0, jsx_runtime_1.jsx)("p", {
+            className: "text-[10px] text-muted-foreground",
+            style: {
+              lineHeight: 1.5
+            },
+            children: t('storybook.isolationDescription')
+          })]
+        })]
+      })]
+    })
+  });
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJleHBvcnRzIiwiU3Rvcnlib29rU2V0dGluZ3NQYW5lbCIsInJlYWN0XzEiLCJjb3Zfa2dmOTJtdzE3IiwicyIsInJlcXVpcmUiLCJMYW5ndWFnZUNvbnRleHRfMSIsImJ1dHRvbl8xIiwiYmFkZ2VfMSIsInN3aXRjaF8xIiwic2xpZGVyXzEiLCJsYWJlbF8xIiwic2VsZWN0XzEiLCJkaWFsb2dfMSIsInNlcGFyYXRvcl8xIiwibHVjaWRlX3JlYWN0XzEiLCJvcGVuIiwib25PcGVuQ2hhbmdlIiwiZiIsInQiLCJ1c2VMYW5ndWFnZSIsImlzb2xhdGlvbk1vZGUiLCJzZXRJc29sYXRpb25Nb2RlIiwidXNlU3RhdGUiLCJzbmFwc2hvdExheW91dCIsInNldFNuYXBzaG90TGF5b3V0IiwicmVuZGVyUXVhbGl0eSIsInNldFJlbmRlclF1YWxpdHkiLCJpc1J1bm5pbmciLCJzZXRJc1J1bm5pbmciLCJsYXN0UnVuU3RhdHVzIiwic2V0TGFzdFJ1blN0YXR1cyIsImhhbmRsZVJ1blRlc3RzIiwic2V0VGltZW91dCIsIk1hdGgiLCJyYW5kb20iLCJiIiwianN4X3J1bnRpbWVfMSIsImpzeCIsIkRpYWxvZyIsImNoaWxkcmVuIiwianN4cyIsIkRpYWxvZ0NvbnRlbnQiLCJjbGFzc05hbWUiLCJEaWFsb2dIZWFkZXIiLCJTZXR0aW5ncyIsIkRpYWxvZ1RpdGxlIiwiRGlhbG9nRGVzY3JpcHRpb24iLCJMYWJlbCIsImh0bWxGb3IiLCJTd2l0Y2giLCJpZCIsImNoZWNrZWQiLCJvbkNoZWNrZWRDaGFuZ2UiLCJTZXBhcmF0b3IiLCJTZWxlY3QiLCJ2YWx1ZSIsIm9uVmFsdWVDaGFuZ2UiLCJTZWxlY3RUcmlnZ2VyIiwiU2VsZWN0VmFsdWUiLCJTZWxlY3RDb250ZW50IiwiU2VsZWN0SXRlbSIsIlNsaWRlciIsIm1pbiIsIm1heCIsInN0ZXAiLCJCdXR0b24iLCJvbkNsaWNrIiwiZGlzYWJsZWQiLCJGcmFnbWVudCIsIkxvYWRlcjIiLCJQbGF5IiwiQmFkZ2UiLCJzdHlsZSIsImJhY2tncm91bmQiLCJjb2xvciIsIkNoZWNrQ2lyY2xlMiIsIlhDaXJjbGUiLCJJbmZvIiwibGluZUhlaWdodCJdLCJzb3VyY2VzIjpbIi9Vc2Vycy95YW55dS9Eb3dubG9hZHMveXljMy1EZXNpZ24tU3lzdGVtL3NyYy9jb21wb25lbnRzL1N0b3J5Ym9va1NldHRpbmdzUGFuZWwudHN4Il0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogWVlDwrMgRGVzaWduIFN5c3RlbSDigJQgU3Rvcnlib29rIFNldHRpbmdzIFBhbmVsXG4gKlxuICogVG9rZW4gUmVmZXJlbmNlOlxuICogICBwcmltYXJ5OiAgICAgICB2YXIoLS1wcmltYXJ5KSAgICAgICAgICAg4oCUIFN3aXRjaCBhY3RpdmUgY29sb3JcbiAqICAgc3VjY2VzczogICAgICAgdmFyKC0tc3VjY2VzcykgICAgICAgICAgIOKAlCBQYXNzZWQgYmFkZ2UgYmFja2dyb3VuZFxuICogICBkZXN0cnVjdGl2ZTogICB2YXIoLS1kZXN0cnVjdGl2ZSkgICAgICAg4oCUIEZhaWxlZCBiYWRnZSBiYWNrZ3JvdW5kXG4gKiAgIG11dGVkOiAgICAgICAgIHZhcigtLW11dGVkKSAgICAgICAgICAgICDigJQgSGVscCBibG9jayBiYWNrZ3JvdW5kXG4gKiAgIGNhcmQ6ICAgICAgICAgIHZhcigtLWNhcmQpICAgICAgICAgICAgICDigJQgRGlhbG9nIGJhY2tncm91bmRcbiAqICAgc2hhZG93OiAgICAgICAgdmFyKC0tc2hhZG93LWNhcmQpICAgICAgIOKAlCBTd2l0Y2ggc2VsZWN0ZWQgc2hhZG93XG4gKiAgIGFuaW1hdGlvbjogICAgIHZhcigtLWR1cmF0aW9uLWZhc3QpIHZhcigtLWVhc2luZy1kZWZhdWx0KVxuICogICBhMTF5OiAgICAgICAgICBvdXRsaW5lOiAycHggc29saWQgdmFyKC0tcmluZykgb24gZm9jdXNcbiAqL1xuaW1wb3J0IHsgdXNlU3RhdGUgfSBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyB1c2VMYW5ndWFnZSB9IGZyb20gJy4uL2NvbnRleHQvTGFuZ3VhZ2VDb250ZXh0JztcbmltcG9ydCB7IEJ1dHRvbiB9IGZyb20gJy4vdWkvYnV0dG9uJztcbmltcG9ydCB7IEJhZGdlIH0gZnJvbSAnLi91aS9iYWRnZSc7XG5pbXBvcnQgeyBTd2l0Y2ggfSBmcm9tICcuL3VpL3N3aXRjaCc7XG5pbXBvcnQgeyBTbGlkZXIgfSBmcm9tICcuL3VpL3NsaWRlcic7XG5pbXBvcnQgeyBMYWJlbCB9IGZyb20gJy4vdWkvbGFiZWwnO1xuaW1wb3J0IHsgU2VsZWN0LCBTZWxlY3RDb250ZW50LCBTZWxlY3RJdGVtLCBTZWxlY3RUcmlnZ2VyLCBTZWxlY3RWYWx1ZSB9IGZyb20gJy4vdWkvc2VsZWN0JztcbmltcG9ydCB7IERpYWxvZywgRGlhbG9nQ29udGVudCwgRGlhbG9nSGVhZGVyLCBEaWFsb2dUaXRsZSwgRGlhbG9nRGVzY3JpcHRpb24gfSBmcm9tICcuL3VpL2RpYWxvZyc7XG5pbXBvcnQgeyBTZXBhcmF0b3IgfSBmcm9tICcuL3VpL3NlcGFyYXRvcic7XG5pbXBvcnQgeyBQbGF5LCBYLCBMb2FkZXIyLCBDaGVja0NpcmNsZTIsIFhDaXJjbGUsIEluZm8sIFNldHRpbmdzIH0gZnJvbSAnbHVjaWRlLXJlYWN0JztcblxuaW50ZXJmYWNlIFN0b3J5Ym9va1NldHRpbmdzUGFuZWxQcm9wcyB7XG4gIG9wZW46IGJvb2xlYW47XG4gIG9uT3BlbkNoYW5nZTogKG9wZW46IGJvb2xlYW4pID0+IHZvaWQ7XG59XG5cbmV4cG9ydCBmdW5jdGlvbiBTdG9yeWJvb2tTZXR0aW5nc1BhbmVsKHsgb3Blbiwgb25PcGVuQ2hhbmdlIH06IFN0b3J5Ym9va1NldHRpbmdzUGFuZWxQcm9wcykge1xuICBjb25zdCB7IHQgfSA9IHVzZUxhbmd1YWdlKCk7XG4gIGNvbnN0IFtpc29sYXRpb25Nb2RlLCBzZXRJc29sYXRpb25Nb2RlXSA9IHVzZVN0YXRlKGZhbHNlKTtcbiAgY29uc3QgW3NuYXBzaG90TGF5b3V0LCBzZXRTbmFwc2hvdExheW91dF0gPSB1c2VTdGF0ZSgnZ3JpZCcpO1xuICBjb25zdCBbcmVuZGVyUXVhbGl0eSwgc2V0UmVuZGVyUXVhbGl0eV0gPSB1c2VTdGF0ZShbNzVdKTtcbiAgY29uc3QgW2lzUnVubmluZywgc2V0SXNSdW5uaW5nXSA9IHVzZVN0YXRlKGZhbHNlKTtcbiAgY29uc3QgW2xhc3RSdW5TdGF0dXMsIHNldExhc3RSdW5TdGF0dXNdID0gdXNlU3RhdGU8J3Bhc3NlZCcgfCAnZmFpbGVkJyB8IG51bGw+KG51bGwpO1xuXG4gIGNvbnN0IGhhbmRsZVJ1blRlc3RzID0gKCkgPT4ge1xuICAgIHNldElzUnVubmluZyh0cnVlKTtcbiAgICBzZXRMYXN0UnVuU3RhdHVzKG51bGwpO1xuICAgIHNldFRpbWVvdXQoKCkgPT4ge1xuICAgICAgc2V0SXNSdW5uaW5nKGZhbHNlKTtcbiAgICAgIHNldExhc3RSdW5TdGF0dXMoTWF0aC5yYW5kb20oKSA+IDAuMyA/ICdwYXNzZWQnIDogJ2ZhaWxlZCcpO1xuICAgIH0sIDI1MDApO1xuICB9O1xuXG4gIHJldHVybiAoXG4gICAgPERpYWxvZyBvcGVuPXtvcGVufSBvbk9wZW5DaGFuZ2U9e29uT3BlbkNoYW5nZX0+XG4gICAgICA8RGlhbG9nQ29udGVudCBjbGFzc05hbWU9XCJzbTptYXgtdy1tZFwiPlxuICAgICAgICA8RGlhbG9nSGVhZGVyPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTJcIj5cbiAgICAgICAgICAgIDxTZXR0aW5ncyBjbGFzc05hbWU9XCJzaXplLTUgdGV4dC1wcmltYXJ5XCIgLz5cbiAgICAgICAgICAgIDxEaWFsb2dUaXRsZT57dCgnc3Rvcnlib29rLnRpdGxlJyl9PC9EaWFsb2dUaXRsZT5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8RGlhbG9nRGVzY3JpcHRpb24+e3QoJ3N0b3J5Ym9vay5zdWJ0aXRsZScpfTwvRGlhbG9nRGVzY3JpcHRpb24+XG4gICAgICAgIDwvRGlhbG9nSGVhZGVyPlxuXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS01IHB5LTJcIj5cbiAgICAgICAgICB7LyogSXNvbGF0aW9uIE1vZGUgU3dpdGNoIOKAlCBUb2tlbjogY29sb3ItcHJpbWFyeSAoYWN0aXZlKSAqL31cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktYmV0d2VlblwiPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzcGFjZS15LTAuNVwiPlxuICAgICAgICAgICAgICA8TGFiZWwgaHRtbEZvcj1cImlzb2xhdGlvbi1tb2RlXCIgY2xhc3NOYW1lPVwidGV4dC1zbVwiPlxuICAgICAgICAgICAgICAgIHt0KCdzdG9yeWJvb2suaXNvbGF0aW9uTW9kZScpfVxuICAgICAgICAgICAgICA8L0xhYmVsPlxuICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXhzIHRleHQtbXV0ZWQtZm9yZWdyb3VuZFwiPnt0KCdzdG9yeWJvb2suaXNvbGF0aW9uTW9kZURlc2MnKX08L3A+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDxTd2l0Y2hcbiAgICAgICAgICAgICAgaWQ9XCJpc29sYXRpb24tbW9kZVwiXG4gICAgICAgICAgICAgIGNoZWNrZWQ9e2lzb2xhdGlvbk1vZGV9XG4gICAgICAgICAgICAgIG9uQ2hlY2tlZENoYW5nZT17c2V0SXNvbGF0aW9uTW9kZX1cbiAgICAgICAgICAgICAgYXJpYS1sYWJlbD17dCgnc3Rvcnlib29rLnRvZ2dsZUlzb2xhdGlvbicpfVxuICAgICAgICAgICAgLz5cbiAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgIDxTZXBhcmF0b3IgLz5cblxuICAgICAgICAgIHsvKiBTbmFwc2hvdCBMYXlvdXQgRHJvcGRvd24gKi99XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzcGFjZS15LTJcIj5cbiAgICAgICAgICAgIDxMYWJlbD57dCgnc3Rvcnlib29rLnNuYXBzaG90TGF5b3V0Jyl9PC9MYWJlbD5cbiAgICAgICAgICAgIDxTZWxlY3QgdmFsdWU9e3NuYXBzaG90TGF5b3V0fSBvblZhbHVlQ2hhbmdlPXtzZXRTbmFwc2hvdExheW91dH0+XG4gICAgICAgICAgICAgIDxTZWxlY3RUcmlnZ2VyIGFyaWEtbGFiZWw9e3QoJ3N0b3J5Ym9vay5zZWxlY3RMYXlvdXQnKX0+XG4gICAgICAgICAgICAgICAgPFNlbGVjdFZhbHVlIC8+XG4gICAgICAgICAgICAgIDwvU2VsZWN0VHJpZ2dlcj5cbiAgICAgICAgICAgICAgPFNlbGVjdENvbnRlbnQ+XG4gICAgICAgICAgICAgICAgPFNlbGVjdEl0ZW0gdmFsdWU9XCJncmlkXCI+e3QoJ3N0b3J5Ym9vay5ncmlkJyl9PC9TZWxlY3RJdGVtPlxuICAgICAgICAgICAgICAgIDxTZWxlY3RJdGVtIHZhbHVlPVwibGlzdFwiPnt0KCdzdG9yeWJvb2subGlzdCcpfTwvU2VsZWN0SXRlbT5cbiAgICAgICAgICAgICAgICA8U2VsZWN0SXRlbSB2YWx1ZT1cImNhcm91c2VsXCI+e3QoJ3N0b3J5Ym9vay5jYXJvdXNlbCcpfTwvU2VsZWN0SXRlbT5cbiAgICAgICAgICAgICAgPC9TZWxlY3RDb250ZW50PlxuICAgICAgICAgICAgPC9TZWxlY3Q+XG4gICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICB7LyogUmVuZGVyIFF1YWxpdHkgU2xpZGVyIOKAlCBUb2tlbjogY29sb3ItcHJpbWFyeSAodHJhY2spICovfVxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS0yXCI+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktYmV0d2VlblwiPlxuICAgICAgICAgICAgICA8TGFiZWw+e3QoJ3N0b3J5Ym9vay5yZW5kZXJRdWFsaXR5Jyl9PC9MYWJlbD5cbiAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC14cyB0ZXh0LW11dGVkLWZvcmVncm91bmQgZm9udC1tb25vXCI+e3JlbmRlclF1YWxpdHlbMF19JTwvc3Bhbj5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgPFNsaWRlclxuICAgICAgICAgICAgICB2YWx1ZT17cmVuZGVyUXVhbGl0eX1cbiAgICAgICAgICAgICAgb25WYWx1ZUNoYW5nZT17c2V0UmVuZGVyUXVhbGl0eX1cbiAgICAgICAgICAgICAgbWluPXswfVxuICAgICAgICAgICAgICBtYXg9ezEwMH1cbiAgICAgICAgICAgICAgc3RlcD17NX1cbiAgICAgICAgICAgICAgYXJpYS1sYWJlbD17dCgnc3Rvcnlib29rLnJlbmRlclF1YWxpdHknKX1cbiAgICAgICAgICAgIC8+XG4gICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LVsxMHB4XSB0ZXh0LW11dGVkLWZvcmVncm91bmRcIj57dCgnc3Rvcnlib29rLnJlbmRlclF1YWxpdHlEZXNjJyl9PC9wPlxuICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgPFNlcGFyYXRvciAvPlxuXG4gICAgICAgICAgey8qIFJ1biBUZXN0cyBCdXR0b24gKi99XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzcGFjZS15LTNcIj5cbiAgICAgICAgICAgIDxCdXR0b24gb25DbGljaz17aGFuZGxlUnVuVGVzdHN9IGRpc2FibGVkPXtpc1J1bm5pbmd9IGNsYXNzTmFtZT1cInctZnVsbFwiPlxuICAgICAgICAgICAgICB7aXNSdW5uaW5nID8gKFxuICAgICAgICAgICAgICAgIDw+XG4gICAgICAgICAgICAgICAgICA8TG9hZGVyMiBjbGFzc05hbWU9XCJzaXplLTQgYW5pbWF0ZS1zcGluXCIgLz5cbiAgICAgICAgICAgICAgICAgIHt0KCdzdG9yeWJvb2sucnVubmluZycpfVxuICAgICAgICAgICAgICAgIDwvPlxuICAgICAgICAgICAgICApIDogKFxuICAgICAgICAgICAgICAgIDw+XG4gICAgICAgICAgICAgICAgICA8UGxheSBjbGFzc05hbWU9XCJzaXplLTRcIiAvPlxuICAgICAgICAgICAgICAgICAge3QoJ3N0b3J5Ym9vay5ydW5Jc29sYXRlZFRlc3RzJyl9XG4gICAgICAgICAgICAgICAgPC8+XG4gICAgICAgICAgICAgICl9XG4gICAgICAgICAgICA8L0J1dHRvbj5cblxuICAgICAgICAgICAgey8qIFN0YXR1cyBCYWRnZSDigJQgVG9rZW46IGNvbG9yLXN1Y2Nlc3MgLyBjb2xvci1kZXN0cnVjdGl2ZSAqL31cbiAgICAgICAgICAgIHtsYXN0UnVuU3RhdHVzICYmIChcbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBnYXAtMlwiPlxuICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInRleHQteHMgdGV4dC1tdXRlZC1mb3JlZ3JvdW5kXCI+e3QoJ3N0b3J5Ym9vay5sYXN0UnVuJyl9Ojwvc3Bhbj5cbiAgICAgICAgICAgICAgICB7bGFzdFJ1blN0YXR1cyA9PT0gJ3Bhc3NlZCcgPyAoXG4gICAgICAgICAgICAgICAgICA8QmFkZ2VcbiAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiZ2FwLTFcIlxuICAgICAgICAgICAgICAgICAgICBzdHlsZT17eyBiYWNrZ3JvdW5kOiAndmFyKC0tc3VjY2VzcyknLCBjb2xvcjogJ3ZhcigtLXN1Y2Nlc3MtZm9yZWdyb3VuZCknIH19XG4gICAgICAgICAgICAgICAgICA+XG4gICAgICAgICAgICAgICAgICAgIDxDaGVja0NpcmNsZTIgY2xhc3NOYW1lPVwic2l6ZS0zXCIgLz5cbiAgICAgICAgICAgICAgICAgICAge3QoJ3N0b3J5Ym9vay5wYXNzZWQnKX1cbiAgICAgICAgICAgICAgICAgIDwvQmFkZ2U+XG4gICAgICAgICAgICAgICAgKSA6IChcbiAgICAgICAgICAgICAgICAgIDxCYWRnZVxuICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJnYXAtMVwiXG4gICAgICAgICAgICAgICAgICAgIHN0eWxlPXt7XG4gICAgICAgICAgICAgICAgICAgICAgYmFja2dyb3VuZDogJ3ZhcigtLWRlc3RydWN0aXZlKScsXG4gICAgICAgICAgICAgICAgICAgICAgY29sb3I6ICd2YXIoLS1kZXN0cnVjdGl2ZS1mb3JlZ3JvdW5kKScsXG4gICAgICAgICAgICAgICAgICAgIH19XG4gICAgICAgICAgICAgICAgICA+XG4gICAgICAgICAgICAgICAgICAgIDxYQ2lyY2xlIGNsYXNzTmFtZT1cInNpemUtM1wiIC8+XG4gICAgICAgICAgICAgICAgICAgIHt0KCdzdG9yeWJvb2suZmFpbGVkJyl9XG4gICAgICAgICAgICAgICAgICA8L0JhZGdlPlxuICAgICAgICAgICAgICAgICl9XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgKX1cbiAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgIHsvKiBIZWxwIHRleHQg4oCUIFRva2VuOiBiZyA9IHZhcigtLW11dGVkKSAqL31cbiAgICAgICAgICA8ZGl2XG4gICAgICAgICAgICBjbGFzc05hbWU9XCJyb3VuZGVkLWxnIHAtMyBmbGV4IGl0ZW1zLXN0YXJ0IGdhcC0yXCJcbiAgICAgICAgICAgIHN0eWxlPXt7IGJhY2tncm91bmQ6ICd2YXIoLS1tdXRlZCknIH19XG4gICAgICAgICAgPlxuICAgICAgICAgICAgPEluZm8gY2xhc3NOYW1lPVwic2l6ZS00IHRleHQtbXV0ZWQtZm9yZWdyb3VuZCBzaHJpbmstMCBtdC0wLjVcIiAvPlxuICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1bMTBweF0gdGV4dC1tdXRlZC1mb3JlZ3JvdW5kXCIgc3R5bGU9e3sgbGluZUhlaWdodDogMS41IH19PlxuICAgICAgICAgICAgICB7dCgnc3Rvcnlib29rLmlzb2xhdGlvbkRlc2NyaXB0aW9uJyl9XG4gICAgICAgICAgICA8L3A+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9EaWFsb2dDb250ZW50PlxuICAgIDwvRGlhbG9nPlxuICApO1xufVxuIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUE4QkFBLE9BQUEsQ0FBQUMsc0JBQUEsR0FBQUEsc0JBQUE7Ozs7QUE5QkE7Ozs7Ozs7Ozs7Ozs7QUFhQSxNQUFBQyxPQUFBO0FBQUE7QUFBQSxDQUFBQyxhQUFBLEdBQUFDLENBQUEsT0FBQUMsT0FBQTtBQUNBLE1BQUFDLGlCQUFBO0FBQUE7QUFBQSxDQUFBSCxhQUFBLEdBQUFDLENBQUEsT0FBQUMsT0FBQTtBQUNBLE1BQUFFLFFBQUE7QUFBQTtBQUFBLENBQUFKLGFBQUEsR0FBQUMsQ0FBQSxPQUFBQyxPQUFBO0FBQ0EsTUFBQUcsT0FBQTtBQUFBO0FBQUEsQ0FBQUwsYUFBQSxHQUFBQyxDQUFBLE9BQUFDLE9BQUE7QUFDQSxNQUFBSSxRQUFBO0FBQUE7QUFBQSxDQUFBTixhQUFBLEdBQUFDLENBQUEsT0FBQUMsT0FBQTtBQUNBLE1BQUFLLFFBQUE7QUFBQTtBQUFB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QixDQUFDO1lBQUEsRUFBUyxFQUMvRVcsYUFBYSxLQUFLLFFBQVE7WUFBQTtZQUFBLENBQUEzQixhQUFBLEdBQUFpQyxDQUFBLFVBQ3pCLElBQUFDLGFBQUEsQ0FBQUksSUFBQSxFQUFDakMsT0FBQSxDQUFBZ0UsS0FBSztjQUNKN0IsU0FBUyxFQUFDLE9BQU87Y0FDakI4QixLQUFLLEVBQUU7Z0JBQUVDLFVBQVUsRUFBRSxnQkFBZ0I7Z0JBQUVDLEtBQUssRUFBRTtjQUEyQixDQUFFO2NBQUFuQyxRQUFBLEdBRTNFLElBQUFILGFBQUEsQ0FBQUMsR0FBQSxFQUFDdkIsY0FBQSxDQUFBNkQsWUFBWTtnQkFBQ2pDLFNBQVMsRUFBQztjQUFRLEVBQUcsRUFDbEN4QixDQUFDLENBQUMsa0JBQWtCLENBQUM7WUFBQSxFQUNoQjtZQUFBO1lBQUEsQ0FBQWhCLGFBQUEsR0FBQWlDLENBQUEsVUFFUixJQUFBQyxhQUFBLENBQUFJLElBQUEsRUFBQ2pDLE9BQUEsQ0FBQWdFLEtBQUs7Y0FDSjdCLFNBQVMsRUFBQyxPQUFPO2NBQ2pCOEIsS0FBSyxFQUFFO2dCQUNMQyxVQUFVLEVBQUUsb0JBQW9CO2dCQUNoQ0MsS0FBSyxFQUFFO2VBQ1I7Y0FBQW5DLFFBQUEsR0FFRCxJQUFBSCxhQUFBLENBQUFDLEdBQUEsRUFBQ3ZCLGNBQUEsQ0FBQThELE9BQU87Z0JBQUNsQyxTQUFTLEVBQUM7Y0FBUSxFQUFHLEVBQzdCeEIsQ0FBQyxDQUFDLGtCQUFrQixDQUFDO1lBQUEsRUFDaEIsQ0FDVDtVQUFBLEVBQ0csQ0FDUDtRQUFBLEVBQ0csRUFHTixJQUFBa0IsYUFBQSxDQUFBSSxJQUFBO1VBQ0VFLFNBQVMsRUFBQyx1Q0FBdUM7VUFDakQ4QixLQUFLLEVBQUU7WUFBRUMsVUFBVSxFQUFFO1VBQWMsQ0FBRTtVQUFBbEMsUUFBQSxHQUVyQyxJQUFBSCxhQUFBLENBQUFDLEdBQUEsRUFBQ3ZCLGNBQUEsQ0FBQStELElBQUk7WUFBQ25DLFNBQVMsRUFBQztVQUE4QyxFQUFHLEVBQ2pFLElBQUFOLGFBQUEsQ0FBQUMsR0FBQTtZQUFHSyxTQUFTLEVBQUMsbUNBQW1DO1lBQUM4QixLQUFLLEVBQUU7Y0FBRU0sVUFBVSxFQUFFO1lBQUcsQ0FBRTtZQUFBdkMsUUFBQSxFQUN4RXJCLENBQUMsQ0FBQyxnQ0FBZ0M7VUFBQyxFQUNsQztRQUFBLEVBQ0E7TUFBQSxFQUNGO0lBQUE7RUFDUSxFQUNUO0FBRWIiLCJpZ25vcmVMaXN0IjpbXX0=

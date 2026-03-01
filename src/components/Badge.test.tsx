@@ -7,14 +7,12 @@
  * @created 2026-02-18
  */
 
-;
-
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import * as React from 'react';
 import { Badge } from './Badge';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { ThemeProvider } from '../context/ThemeContext';
 
 const renderWithTheme = (component: React.ReactElement) => {
   return render(<ThemeProvider initial="light">{component}</ThemeProvider>);
@@ -30,7 +28,7 @@ describe('Badge 组件', () => {
   it('应该支持不同的变体', () => {
     const variants = ['default', 'secondary', 'destructive', 'outline'] as const;
 
-    variants.forEach(variant => {
+    variants.forEach((variant) => {
       const { unmount } = renderWithTheme(<Badge variant={variant}>{variant}</Badge>);
       expect(screen.getByText(variant)).toBeInTheDocument();
       unmount();
@@ -122,13 +120,21 @@ describe('Badge 组件', () => {
   });
 
   it('应该正确处理 React 元素 children', () => {
-    renderWithTheme(<Badge><span>Custom</span></Badge>);
+    renderWithTheme(
+      <Badge>
+        <span>Custom</span>
+      </Badge>
+    );
 
     expect(screen.getByText('Custom')).toBeInTheDocument();
   });
 
   it('应该正确处理多个 children', () => {
-    renderWithTheme(<Badge>Test <span>Badge</span></Badge>);
+    renderWithTheme(
+      <Badge>
+        Test <span>Badge</span>
+      </Badge>
+    );
 
     expect(screen.getByText('Test')).toBeInTheDocument();
     expect(screen.getByText('Badge')).toBeInTheDocument();
@@ -227,7 +233,7 @@ describe('Badge 组件', () => {
   it('应该为所有 variant 应用正确的 border 样式', () => {
     const variants = ['default', 'secondary', 'destructive', 'outline'] as const;
 
-    variants.forEach(name => {
+    variants.forEach((name) => {
       const { unmount } = renderWithTheme(<Badge variant={name}>{name}</Badge>);
       const badge = screen.getByText(name);
       expect(badge).toBeInTheDocument();
@@ -238,7 +244,7 @@ describe('Badge 组件', () => {
   it('应该为所有 variant 应用正确的 backgroundColor', () => {
     const variants = ['default', 'secondary', 'destructive', 'outline'] as const;
 
-    variants.forEach(name => {
+    variants.forEach((name) => {
       const { unmount } = renderWithTheme(<Badge variant={name}>{name}</Badge>);
       const badge = screen.getByText(name);
       expect(badge).toBeInTheDocument();
@@ -249,7 +255,7 @@ describe('Badge 组件', () => {
   it('应该为所有 variant 应用正确的 color', () => {
     const variants = ['default', 'secondary', 'destructive', 'outline'] as const;
 
-    variants.forEach(name => {
+    variants.forEach((name) => {
       const { unmount } = renderWithTheme(<Badge variant={name}>{name}</Badge>);
       const badge = screen.getByText(name);
       expect(badge).toBeInTheDocument();

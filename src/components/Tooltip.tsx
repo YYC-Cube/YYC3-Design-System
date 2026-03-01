@@ -45,11 +45,11 @@ export const Tooltip: React.FC<TooltipProps> = ({
   const getPlacementStyles = () => {
     const baseStyle: React.CSSProperties = {
       position: 'absolute',
-      backgroundColor: tokens['color.foreground'] as string || '#000',
-      color: tokens['color.background'] as string || '#fbfbfc',
+      backgroundColor: (tokens['color.foreground'] as string) || '#000',
+      color: (tokens['color.background'] as string) || '#fbfbfc',
       padding: '0.5rem 0.75rem',
-      borderRadius: tokens['radius.sm'] as string || '0.125rem',
-      fontSize: tokens['font-size.caption'] as string || '0.875rem',
+      borderRadius: (tokens['radius.sm'] as string) || '0.125rem',
+      fontSize: (tokens['font-size.caption'] as string) || '0.875rem',
       whiteSpace: 'nowrap',
       zIndex: 1000,
       opacity: isVisible ? 1 : 0,
@@ -59,13 +59,37 @@ export const Tooltip: React.FC<TooltipProps> = ({
 
     switch (placement) {
       case 'top':
-        return { ...baseStyle, bottom: '100%', left: '50%', transform: 'translateX(-50%)', marginBottom: '0.25rem' };
+        return {
+          ...baseStyle,
+          bottom: '100%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          marginBottom: '0.25rem',
+        };
       case 'bottom':
-        return { ...baseStyle, top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '0.25rem' };
+        return {
+          ...baseStyle,
+          top: '100%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          marginTop: '0.25rem',
+        };
       case 'left':
-        return { ...baseStyle, right: '100%', top: '50%', transform: 'translateY(-50%)', marginRight: '0.25rem' };
+        return {
+          ...baseStyle,
+          right: '100%',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          marginRight: '0.25rem',
+        };
       case 'right':
-        return { ...baseStyle, left: '100%', top: '50%', transform: 'translateY(-50%)', marginLeft: '0.25rem' };
+        return {
+          ...baseStyle,
+          left: '100%',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          marginLeft: '0.25rem',
+        };
       default:
         return baseStyle;
     }
