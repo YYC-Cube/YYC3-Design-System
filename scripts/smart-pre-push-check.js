@@ -275,7 +275,18 @@ class SmartPrePushChecker {
       this.addResult('security', '依赖漏洞扫描', true);
     } catch (error) {
       const errorMessage = error.message || '';
-      if (errorMessage.includes('AUDIT_ENDPOINT_NOT_EXISTS') || errorMessage.includes("doesn't exist")) {
+      const errorOutput = error.stdout ? error.stdout.toString() : '';
+      const errorStderr = error.stderr ? error.stderr.toString() : '';
+      const fullError = errorMessage + errorOutput + errorStderr;
+
+      if (
+        errorMessage.includes('AUDIT_ENDPOINT_NOT_EXISTS') ||
+        errorMessage.includes('ERR_PNPM_AUDIT_ENDPOINT_NOT_EXISTS') ||
+        errorOutput.includes('ERR_PNPM_AUDIT_ENDPOINT_NOT_EXISTS') ||
+        errorStderr.includes('ERR_PNPM_AUDIT_ENDPOINT_NOT_EXISTS') ||
+        fullError.includes("doesn't exist") ||
+        fullError.includes('AUDIT_ENDPOINT_NOT_EXISTS')
+      ) {
         log(`${SYMBOLS.info} 当前镜像不支持安全审计，跳过检查`, 'dim');
         log(`${SYMBOLS.info} 如需安全审计，请切换到官方 npm 源`, 'dim');
         this.addResult('security', '依赖漏洞扫描', true, '镜像不支持审计', 'info');
