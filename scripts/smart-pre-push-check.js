@@ -98,7 +98,7 @@ class SmartPrePushChecker {
 
   async checkEnvironment() {
     header('1️⃣ 环境检查');
-    
+
     log(`${SYMBOLS.processing} 检查 Node.js 版本...`, 'dim');
     const nodeVersion = process.version;
     log(`${SYMBOLS.check} Node.js 版本: ${nodeVersion}`, 'green');
@@ -125,7 +125,7 @@ class SmartPrePushChecker {
 
   async checkGitStatus() {
     header('2️⃣ Git 状态检查');
-    
+
     try {
       const branch = execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf-8' }).trim();
       log(`${SYMBOLS.info} 当前分支: ${branch}`, 'cyan');
@@ -150,7 +150,7 @@ class SmartPrePushChecker {
 
   async checkCodeQuality() {
     header('3️⃣ 代码质量检查');
-    
+
     subHeader('TypeScript 类型检查');
     try {
       execSync('pnpm typecheck', { stdio: 'pipe' });
@@ -239,7 +239,7 @@ class SmartPrePushChecker {
       execSync('pnpm build', { stdio: 'pipe' });
       const buildTime = (Date.now() - buildStart) / 1000;
       log(`${SYMBOLS.check} 构建时间: ${buildTime.toFixed(2)}s`, 'green');
-      
+
       if (buildTime > 120) {
         log(`${SYMBOLS.warning} 构建时间较长，建议优化`, 'yellow');
         this.addResult('performance', '构建性能', true, `构建时间: ${buildTime.toFixed(2)}s`, 'warning');
@@ -274,15 +274,22 @@ class SmartPrePushChecker {
       log(`${SYMBOLS.success} 无已知安全漏洞`, 'green');
       this.addResult('security', '依赖漏洞扫描', true);
     } catch (error) {
-      log(`${SYMBOLS.warning} 发现安全漏洞，建议修复`, 'yellow');
-      this.addResult('security', '依赖漏洞扫描', false, '存在漏洞', 'warning');
+      const errorMessage = error.message || '';
+      if (errorMessage.includes('AUDIT_ENDPOINT_NOT_EXISTS') || errorMessage.includes("doesn't exist")) {
+        log(`${SYMBOLS.info} 当前镜像不支持安全审计，跳过检查`, 'dim');
+        log(`${SYMBOLS.info} 如需安全审计，请切换到官方 npm 源`, 'dim');
+        this.addResult('security', '依赖漏洞扫描', true, '镜像不支持审计', 'info');
+      } else {
+        log(`${SYMBOLS.warning} 发现安全漏洞，建议修复`, 'yellow');
+        this.addResult('security', '依赖漏洞扫描', false, '存在漏洞', 'warning');
+      }
     }
 
     subHeader('敏感信息检查');
     try {
       const gitOutput = execSync('git diff --cached --name-only', { encoding: 'utf-8' });
       const files = gitOutput.trim().split('\n').filter(f => f);
-      
+
       const sensitivePatterns = [
         /password\s*=\s*['"][\w]+['"]/i,
         /api[_-]?key\s*=\s*['"][\w-]+['"]/i,
@@ -322,7 +329,7 @@ class SmartPrePushChecker {
       if (existsSync(readmePath)) {
         const readme = readFileSync(readmePath, 'utf-8');
         const requiredSections = ['# 概述', '## 功能特性', '## 快速开始', '## 技术栈'];
-        
+
         for (const section of requiredSections) {
           if (readme.includes(section)) {
             log(`${SYMBOLS.check} 包含 "${section}"`, 'green');
@@ -357,7 +364,7 @@ class SmartPrePushChecker {
     try {
       const packageJson = JSON.parse(readFileSync(join(__dirname, '..', 'package.json'), 'utf-8'));
       const projectName = packageJson.name;
-      
+
       if (projectName.startsWith('yyc3-')) {
         log(`${SYMBOLS.success} 项目命名符合 YYC³ 规范: ${projectName}`, 'green');
         this.addResult('yyc3', '项目命名规范', true);
@@ -373,7 +380,7 @@ class SmartPrePushChecker {
     try {
       const viteConfig = readFileSync(join(__dirname, '..', 'vite.config.ts'), 'utf-8');
       const portMatch = viteConfig.match(/port:\s*(\d+)/);
-      
+
       if (portMatch) {
         const port = parseInt(portMatch[1]);
         if (port >= 3200 && port <= 3500) {
@@ -394,7 +401,7 @@ class SmartPrePushChecker {
     try {
       const gitOutput = execSync('git diff --cached --name-only', { encoding: 'utf-8' });
       const files = gitOutput.trim().split('\n').filter(f => f && (f.endsWith('.ts') || f.endsWith('.tsx')));
-      
+
       let filesWithHeader = 0;
       for (const file of files) {
         const filePath = join(__dirname, '..', file);
@@ -409,7 +416,7 @@ class SmartPrePushChecker {
       if (files.length > 0) {
         const percentage = (filesWithHeader / files.length) * 100;
         log(`${SYMBOLS.info} 文件头注释覆盖率: ${percentage.toFixed(0)}%`, 'cyan');
-        
+
         if (percentage >= 80) {
           this.addResult('yyc3', '文件头注释检查', true, `覆盖率: ${percentage.toFixed(0)}%`);
         } else {
@@ -423,7 +430,7 @@ class SmartPrePushChecker {
 
   addResult(category, name, passed, message = '', type = 'normal') {
     const result = { category, name, passed, message, type };
-    if (passed) {
+    if (passed || type === 'info') {
       this.results.passed.push(result);
     } else if (type === 'warning') {
       this.results.warnings.push(result);
@@ -434,9 +441,9 @@ class SmartPrePushChecker {
 
   generateReport() {
     const duration = ((Date.now() - this.startTime) / 1000).toFixed(2);
-    
+
     header('📊 检测报告');
-    
+
     subHeader('📈 统计信息');
     log(`${SYMBOLS.success} 通过: ${this.results.passed.length}`, 'green');
     log(`${SYMBOLS.warning} 警告: ${this.results.warnings.length}`, 'yellow');
@@ -464,7 +471,7 @@ class SmartPrePushChecker {
     }
 
     header('🎯 最终结果');
-    
+
     if (this.results.failed.length === 0) {
       log(`\n${SYMBOLS.success} 所有检测通过！可以安全推送到远程仓库。`, 'green');
       log('\n' + '╔══════════════════════════════════════════════════════════╗', 'cyan');
