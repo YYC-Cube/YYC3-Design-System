@@ -21,7 +21,11 @@ interface ThemeToggleProps {
   'data-testid'?: string;
 }
 
-export function ThemeToggle({ className, style, 'data-testid': dataTestId }: ThemeToggleProps = {}) {
+export function ThemeToggle({
+  className,
+  style,
+  'data-testid': dataTestId,
+}: ThemeToggleProps = {}) {
   const { style: themeStyle, mode, setStyle, setMode, toggleMode } = useTheme();
   const { t } = useLanguage();
 
@@ -32,7 +36,11 @@ export function ThemeToggle({ className, style, 'data-testid': dataTestId }: The
   };
 
   return (
-    <div className={`flex items-center gap-2 ${className || ''}`} style={style} data-testid={dataTestId}>
+    <div
+      className={`flex items-center gap-2 ${className || ''}`}
+      style={style}
+      data-testid={dataTestId}
+    >
       {/* Style selector */}
       <div className="flex items-center rounded-lg border border-border bg-card p-0.5 gap-0.5">
         {(Object.keys(styleConfig) as ThemeStyle[]).map((s) => (

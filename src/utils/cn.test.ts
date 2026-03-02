@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-binary-expression */
 import { cn } from '../cn';
 
 describe('cn 工具函数', () => {
@@ -82,21 +83,15 @@ describe('cn 工具函数', () => {
     });
 
     it('应该处理多个对象参数', () => {
-      expect(
-        cn({ class1: true, class2: false }, { class3: true })
-      ).toBe('class1 class3');
+      expect(cn({ class1: true, class2: false }, { class3: true })).toBe('class1 class3');
     });
 
     it('应该处理混合参数类型', () => {
-      expect(
-        cn('base', { class1: true, class2: false }, 'class3')
-      ).toBe('base class1 class3');
+      expect(cn('base', { class1: true, class2: false }, 'class3')).toBe('base class1 class3');
     });
 
     it('应该处理对象中的字符串值', () => {
-      expect(
-        cn({ class1: 'value1', class2: false })
-      ).toBe('class1');
+      expect(cn({ class1: 'value1', class2: false })).toBe('class1');
     });
   });
 
@@ -114,9 +109,7 @@ describe('cn 工具函数', () => {
     });
 
     it('应该处理对象数组', () => {
-      expect(
-        cn([{ class1: true }, { class2: false }, { class3: true }])
-      ).toBe('class1 class3');
+      expect(cn([{ class1: true }, { class2: false }, { class3: true }])).toBe('class1 class3');
     });
 
     it('应该处理混合数组', () => {
@@ -238,24 +231,18 @@ describe('cn 工具函数', () => {
       expect(
         cn('base', {
           active: isActive,
-          inactive: !isActive
+          inactive: !isActive,
         })
       ).toBe('base active');
     });
 
     it('应该与 clsx 库兼容（如果使用）', () => {
-      expect(
-        cn('base', false && 'hidden', true && 'visible')
-      ).toBe('base visible');
+      expect(cn('base', false && 'hidden', true && 'visible')).toBe('base visible');
     });
 
     it('应该与 tailwind-merge 库兼容（如果使用）', () => {
-      expect(
-        cn('px-4 py-2 bg-white', 'px-2 bg-blue-500')
-      ).toContain('px-2');
-      expect(
-        cn('px-4 py-2 bg-white', 'px-2 bg-blue-500')
-      ).toContain('bg-blue-500');
+      expect(cn('px-4 py-2 bg-white', 'px-2 bg-blue-500')).toContain('px-2');
+      expect(cn('px-4 py-2 bg-white', 'px-2 bg-blue-500')).toContain('bg-blue-500');
     });
   });
 
@@ -263,18 +250,14 @@ describe('cn 工具函数', () => {
     it('应该处理按钮类名', () => {
       const variants = {
         primary: 'bg-blue-500 text-white',
-        secondary: 'bg-gray-200 text-black'
+        secondary: 'bg-gray-200 text-black',
       };
       const sizes = {
         sm: 'px-2 py-1 text-sm',
-        md: 'px-4 py-2 text-base'
+        md: 'px-4 py-2 text-base',
       };
 
-      const buttonClass = cn(
-        'font-medium rounded',
-        variants.primary,
-        sizes.md
-      );
+      const buttonClass = cn('font-medium rounded', variants.primary, sizes.md);
 
       expect(buttonClass).toContain('bg-blue-500');
       expect(buttonClass).toContain('text-white');
@@ -299,12 +282,7 @@ describe('cn 工具函数', () => {
     });
 
     it('应该处理响应式类名', () => {
-      const responsiveClass = cn(
-        'text-base',
-        'sm:text-lg',
-        'md:text-xl',
-        'lg:text-2xl'
-      );
+      const responsiveClass = cn('text-base', 'sm:text-lg', 'md:text-xl', 'lg:text-2xl');
 
       expect(responsiveClass).toContain('sm:text-lg');
       expect(responsiveClass).toContain('md:text-xl');

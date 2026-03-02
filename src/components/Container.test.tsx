@@ -16,17 +16,13 @@ describe('Container 组件', () => {
     });
 
     it('应该支持自定义 className', () => {
-      renderWithTheme(
-        <Container className="custom-container">内容</Container>
-      );
+      renderWithTheme(<Container className="custom-container">内容</Container>);
       const container = screen.getByText('内容').closest('.container');
       expect(container).toHaveClass('custom-container');
     });
 
     it('应该支持自定义样式', () => {
-      renderWithTheme(
-        <Container style={{ maxWidth: '800px' }}>内容</Container>
-      );
+      renderWithTheme(<Container style={{ maxWidth: '800px' }}>内容</Container>);
       const container = screen.getByText('内容').closest('.container');
       expect(container).toHaveStyle({ maxWidth: '800px' });
     });
@@ -123,9 +119,7 @@ describe('Container 组件', () => {
 
   describe('Props 传递', () => {
     it('应该传递 data-testid 属性', () => {
-      renderWithTheme(
-        <Container data-testid="test-container">内容</Container>
-      );
+      renderWithTheme(<Container data-testid="test-container">内容</Container>);
       expect(screen.getByTestId('test-container')).toBeInTheDocument();
     });
 
@@ -135,9 +129,7 @@ describe('Container 组件', () => {
     });
 
     it('应该传递 aria-label 属性', () => {
-      renderWithTheme(
-        <Container aria-label="主容器">内容</Container>
-      );
+      renderWithTheme(<Container aria-label="主容器">内容</Container>);
       expect(screen.getByLabelText('主容器')).toBeInTheDocument();
     });
   });

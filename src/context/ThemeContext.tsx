@@ -60,7 +60,7 @@ function getSystemPreference(): 'light' | 'dark' {
 
 export function ThemeProvider({
   children,
-  initial = 'dark'
+  initial = 'dark',
 }: {
   children: React.ReactNode;
   initial?: 'light' | 'dark';
@@ -72,7 +72,7 @@ export function ThemeProvider({
 
   const [mode, setModeState] = useState<ThemeMode>(() => {
     const saved = localStorage.getItem('yyc3-theme-mode');
-    if (saved) return (saved as ThemeMode);
+    if (saved) return saved as ThemeMode;
     // Use initial prop if provided, otherwise default to 'dark'
     return initial === 'light' ? 'light' : 'dark';
   });

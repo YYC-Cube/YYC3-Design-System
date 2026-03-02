@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Input } from '../ui/input';
@@ -78,12 +78,7 @@ describe('Input 组件', () => {
     it('应该支持受控值', () => {
       const TestComponent = () => {
         const [value, setValue] = React.useState('初始值');
-        return (
-          <Input
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-          />
-        );
+        return <Input value={value} onChange={(e) => setValue(e.target.value)} />;
       };
 
       renderWithTheme(<TestComponent />);
@@ -104,12 +99,7 @@ describe('Input 组件', () => {
     it('应该正确更新受控值', async () => {
       const TestComponent = () => {
         const [value, setValue] = React.useState('');
-        return (
-          <Input
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-          />
-        );
+        return <Input value={value} onChange={(e) => setValue(e.target.value)} />;
       };
 
       renderWithTheme(<TestComponent />);

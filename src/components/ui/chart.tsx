@@ -8,11 +8,10 @@ import { cn } from './utils';
 // Security: Validate CSS color values to prevent injection attacks
 const isValidCSSColor = (value: string): boolean => {
   // Allow hex, rgb, rgba, hsl, hsla, and CSS variables
-  const colorRegex = /^(#([0-9A-Fa-f]{3}){1,2}|(rgb|hsl)a?\(\s*(-?\d+%?\s*,\s*){2,3}-?\d+%?\s*\)|var\(--[a-zA-Z0-9-]+\))$/;
+  const colorRegex =
+    /^(#([0-9A-Fa-f]{3}){1,2}|(rgb|hsl)a?\(\s*(-?\d+%?\s*,\s*){2,3}-?\d+%?\s*\)|var\(--[a-zA-Z0-9-]+\))$/;
   return colorRegex.test(value.trim());
 };
-
-
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: '', dark: '.dark' } as const;
