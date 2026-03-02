@@ -308,7 +308,9 @@ export class MultiUserManager {
       this.saveToStorage();
     } catch (error) {
       console.error('Failed to import users:', error);
-      throw new Error('Invalid users data');
+      const newError = new Error('Invalid users data');
+      (newError as any).cause = error;
+      throw newError;
     }
   }
 

@@ -10,6 +10,7 @@
  *   animation:  var(--duration-fast) var(--easing-default)
  *   a11y:       outline: 2px solid var(--ring) on focus
  */
+import * as React from 'react';
 import { Sun, Moon, Monitor, Sparkles, Zap, Briefcase } from 'lucide-react';
 import { useTheme, type ThemeStyle } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';

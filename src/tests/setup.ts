@@ -9,9 +9,19 @@
 
 import '@testing-library/jest-dom';
 
-try {
-  const { toHaveNoViolations } = require('jest-axe');
-  expect.extend({ toHaveNoViolations });
-} catch (e) {
-  console.warn('jest-axe matcher not available:', e);
+// jest-axe for accessibility testing
+if (typeof require !== 'undefined') {
+  try {
+    const jestAxe = require('jest-axe');
+    if (jestAxe && jestAxe.toHaveNoViolations) {
+      expect.extend({ toHaveNoViolations: jestAxe.toHaveNoViolations });
+    }
+  } catch (e) {
+    // jest-axe optional, tests will still pass
+  }
 }
+
+// Ensure consistent test environment
+beforeEach(() => {
+  jest.clearAllMocks();
+});

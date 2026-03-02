@@ -152,6 +152,9 @@ export class ImagePreloader {
 
       onLoad?.(result.image!);
       return result;
+    } catch (error) {
+      onError?.(error as Error);
+      throw error;
     } finally {
       this.currentLoads--;
       this.processQueue();
@@ -303,7 +306,6 @@ export class ImagePreloader {
     images: Array<{ src: string; options?: PreloadImageOptions }>,
     onProgress: (loaded: number, total: number) => void
   ): Promise<PreloadImageResult[]> {
-    const results: PreloadImageResult[] = [];
     let loaded = 0;
 
     const promises = images.map(({ src, options }) =>

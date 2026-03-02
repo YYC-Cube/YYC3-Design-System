@@ -196,8 +196,8 @@ const createSubset = (
 
 const createBrowserSubset = (
   font: ArrayBuffer,
-  chars: string,
-  options: FontSubsetOptions
+  _chars: string,
+  _options: FontSubsetOptions
 ): ArrayBuffer => {
   const fontData = new Uint8Array(font);
   const subset = new Uint8Array(font.byteLength);
@@ -263,7 +263,7 @@ export const createFontFaceWithSubset = (
   fontFamily: string,
   fontSrc: string,
   subsetChars: string,
-  options: FontSubsetOptions = {}
+  _options: FontSubsetOptions = {}
 ): string => {
   const unicodeRanges = generateUnicodeRanges(subsetChars);
   const ranges = unicodeRanges.join(', ');
@@ -323,7 +323,7 @@ export const getFontSubsetSize = (
 export const estimateSubsetReduction = (
   originalSize: number,
   subsetChars: string,
-  totalChars: number = 65536
+  _totalChars: number = 65536
 ): number => {
   const subsetSize = getFontSubsetSize(originalSize, subsetChars);
   return ((originalSize - subsetSize) / originalSize) * 100;

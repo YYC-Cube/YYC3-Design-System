@@ -100,9 +100,9 @@ jobs:
       - name: Coverage Threshold Check
         run: |
           COVERAGE=$(cat coverage/coverage-summary.json | jq '.total.lines.pct')
-          echo "Line coverage: \${COVERAGE}%"
-          if (( $(echo "\$COVERAGE < 80" | bc -l) )); then
-            echo "::error::Coverage \${COVERAGE}% is below 80% threshold"
+          echo "Line coverage: ${COVERAGE}%"
+          if (( $(echo "${COVERAGE} < 80" | bc -l) )); then
+            echo "::error::Coverage ${COVERAGE}% is below 80% threshold"
             exit 1
           fi
 
@@ -135,14 +135,14 @@ jobs:
           JS_SIZE=$(du -sk dist/assets/*.js 2>/dev/null | awk '{sum+=$1} END {print sum+0}')
           CSS_SIZE=$(du -sk dist/assets/*.css 2>/dev/null | awk '{sum+=$1} END {print sum+0}')
           TOTAL_SIZE=$((JS_SIZE + CSS_SIZE))
-          echo "JS: \${JS_SIZE}KB | CSS: \${CSS_SIZE}KB | Total: \${TOTAL_SIZE}KB"
+          echo "JS: ${JS_SIZE}KB | CSS: ${CSS_SIZE}KB | Total: ${TOTAL_SIZE}KB"
 
-          if [ "\$JS_SIZE" -gt 200 ]; then
-            echo "::error::JS bundle \${JS_SIZE}KB exceeds 200KB budget"
+          if [ "${JS_SIZE}" -gt 200 ]; then
+            echo "::error::JS bundle ${JS_SIZE}KB exceeds 200KB budget"
             exit 1
           fi
-          if [ "\$TOTAL_SIZE" -gt 500 ]; then
-            echo "::error::Total bundle \${TOTAL_SIZE}KB exceeds 500KB budget"
+          if [ "${TOTAL_SIZE}" -gt 500 ]; then
+            echo "::error::Total bundle ${TOTAL_SIZE}KB exceeds 500KB budget"
             exit 1
           fi
           echo "✅ Bundle size within budget"

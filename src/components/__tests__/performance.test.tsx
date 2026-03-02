@@ -7,7 +7,7 @@
  * @created 2026-02-22
  */
 
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { VirtualList } from '../VirtualList';
 import { VirtualGrid } from '../VirtualGrid';
 import { AnimationOptimizationExample } from '../AnimationOptimizationExample';
@@ -19,16 +19,16 @@ interface MockItem {
   name: string;
 }
 
+const mockItems = Array.from(
+  { length: 1000 },
+  (_, i): MockItem => ({
+    id: i,
+    name: `Item ${i}`,
+  })
+);
+
 describe('组件性能测试', () => {
   describe('VirtualList 组件', () => {
-    const mockItems = Array.from(
-      { length: 1000 },
-      (_, i): MockItem => ({
-        id: i,
-        name: `Item ${i}`,
-      })
-    );
-
     it('应该正确渲染虚拟列表', () => {
       const { container } = render(
         <VirtualList

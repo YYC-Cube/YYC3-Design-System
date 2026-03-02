@@ -373,7 +373,9 @@ export class ConflictResolver {
       this.saveToStorage();
     } catch (error) {
       console.error('Failed to import conflict resolutions:', error);
-      throw new Error('Invalid conflict resolutions data');
+      const newError = new Error('Invalid conflict resolutions data');
+      (newError as any).cause = error;
+      throw newError;
     }
   }
 

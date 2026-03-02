@@ -13,6 +13,8 @@ import { Card, CardContent, CardHeader, CardTitle } from './Card';
 import { Button } from './Button';
 import { Grid } from './Grid';
 
+const _Button = Button;
+
 const meta: Meta<typeof AnimatedEnhanced> = {
   title: 'Components/AnimatedEnhanced',
   component: AnimatedEnhanced,

@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { useState, useMemo, useCallback } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';

@@ -8,6 +8,7 @@
  */
 
 import * as React from 'react';
+import { act } from 'react-dom/test-utils';
 
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import { screen } from '@testing-library/dom';

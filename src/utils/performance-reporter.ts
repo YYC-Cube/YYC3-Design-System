@@ -81,8 +81,6 @@ class PerformanceReporter {
   }
 
   private async sendToEndpoint(reports: PerformanceReport[]): Promise<ReportResult> {
-    const startTime = Date.now();
-
     for (let attempt = 0; attempt < (this.config.maxRetries || 3); attempt++) {
       try {
         const controller = new AbortController();
@@ -110,7 +108,7 @@ class PerformanceReporter {
 
         const data = await response.json();
 
-        console.log('[PerformanceReporter] Reports sent successfully:', data);
+        console.info('[PerformanceReporter] Reports sent successfully:', data);
 
         return {
           success: true,

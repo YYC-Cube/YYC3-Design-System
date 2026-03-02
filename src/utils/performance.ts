@@ -25,10 +25,10 @@ export type PerformanceOptions = {
   onThresholdExceeded?: (metrics: PerformanceMetrics) => void;
 };
 
-const performanceCache = new Map<string, any>();
+const performanceCache = new Map<string, unknown>();
 const MAX_CACHE_SIZE = 100;
 
-export const memoize = <T extends (...args: any[]) => any>(
+export const memoize = <T extends (...args: unknown[]) => unknown>(
   fn: T,
   keyGenerator?: (...args: Parameters<T>) => string
 ): T => {
@@ -53,7 +53,7 @@ export const memoize = <T extends (...args: any[]) => any>(
   }) as T;
 };
 
-export const debounce = <T extends (...args: any[]) => any>(
+export const debounce = <T extends (...args: unknown[]) => unknown>(
   fn: T,
   delay: number
 ): ((...args: Parameters<T>) => void) => {
@@ -65,16 +65,16 @@ export const debounce = <T extends (...args: any[]) => any>(
   };
 };
 
-export const throttle = <T extends (...args: any[]) => any>(
+export const throttle = <T extends (...args: unknown[]) => unknown>(
   fn: T,
   limit: number
 ): ((...args: Parameters<T>) => void) => {
   let inThrottle: boolean;
-  let lastResult: ReturnType<T>;
+  let lastResult: ReturnType<T> | undefined;
 
   return (...args: Parameters<T>) => {
     if (!inThrottle) {
-      lastResult = fn(...args);
+      lastResult = fn(...args) as ReturnType<T>;
       inThrottle = true;
       setTimeout(() => (inThrottle = false), limit);
     }
@@ -82,7 +82,7 @@ export const throttle = <T extends (...args: any[]) => any>(
   };
 };
 
-export const useDebounce = <T extends (...args: any[]) => any>(fn: T, delay: number): T => {
+export const useDebounce = <T extends (...args: unknown[]) => unknown>(fn: T, delay: number): T => {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   return useCallback(
@@ -96,9 +96,9 @@ export const useDebounce = <T extends (...args: any[]) => any>(fn: T, delay: num
   ) as T;
 };
 
-export const useThrottle = <T extends (...args: any[]) => any>(fn: T, limit: number): T => {
+export const useThrottle = <T extends (...args: unknown[]) => unknown>(fn: T, limit: number): T => {
   const inThrottleRef = useRef(false);
-  const lastResultRef = useRef<ReturnType<T> | undefined>(undefined);
+  const lastResultRef = useRef<unknown>(undefined);
 
   return useCallback(
     (...args: Parameters<T>) => {
@@ -110,13 +110,13 @@ export const useThrottle = <T extends (...args: any[]) => any>(fn: T, limit: num
           inThrottleRef.current = false;
         }, limit);
       }
-      return lastResultRef.current;
+      return lastResultRef.current as ReturnType<T>;
     },
     [fn, limit]
   ) as T;
 };
 
-export const useIdleCallback = <T extends (...args: any[]) => any>(
+export const useIdleCallback = <T extends (...args: unknown[]) => unknown>(
   fn: T,
   timeout: number = 2000
 ): T => {
@@ -269,7 +269,7 @@ export const batchDOMUpdates = <T>(updates: Array<() => T>): T[] => {
 };
 
 export const useVirtualScroll = (
-  items: any[],
+  items: unknown[],
   itemHeight: number,
   containerHeight: number,
   overscan: number = 5
@@ -305,7 +305,8 @@ export const useLazyLoad = <T>(
   useEffect(() => {
     loader()
       .then((module) => {
-        setComponent(() => (module as any).default || module);
+        const mod = module as { default?: React.ComponentType<T> };
+        setComponent(mod.default || (mod as React.ComponentType<T>));
         setLoading(false);
       })
       .catch((error) => {

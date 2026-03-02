@@ -10,5 +10,5 @@
 import '@testing-library/jest-dom';
 
 declare module '@testing-library/react' {
-  export interface Queries extends jest.DomLibQueries {}
+  export type Queries = jest.DomLibQueries;
 }

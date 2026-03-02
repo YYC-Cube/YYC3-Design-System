@@ -10,6 +10,7 @@
  * @license MIT
  */
 
+import * as React from 'react';
 import { memo, useState, useCallback, ReactNode } from 'react';
 import { useTheme } from '../context/ThemeContext';
 

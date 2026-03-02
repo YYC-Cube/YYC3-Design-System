@@ -121,7 +121,12 @@ export class FontDisplayOptimizer {
   }
 
   waitForFontLoad(fontFamily: string, options?: FontDisplayOptions): Promise<FontLoadingState> {
-    const { timeout = 3000, fallbackFont = 'sans-serif', onLoad, onError } = options || {};
+    const {
+      timeout = 3000,
+      fallbackFont: _fallbackFont = 'sans-serif',
+      onLoad,
+      onError,
+    } = options || {};
 
     return new Promise((resolve) => {
       const startTime = performance.now();
@@ -181,8 +186,6 @@ export class FontDisplayOptimizer {
     options?: FontDisplayOptions
   ): () => void {
     const { showLoadingIndicator = true, hideOnLoad = true, onLoad, onError } = options || {};
-
-    const originalStyle = element.style.fontFamily;
 
     if (showLoadingIndicator) {
       element.style.fontFamily = `${fontFamily}, ${this.configs.get(fontFamily)?.fallback || 'sans-serif'}`;

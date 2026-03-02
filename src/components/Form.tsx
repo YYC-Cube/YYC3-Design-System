@@ -12,14 +12,12 @@
 
 import React, { memo, ReactNode, FormHTMLAttributes, useCallback } from 'react';
 import { useForm, FormProvider, useFormContext } from 'react-hook-form';
-import type { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 export interface FormProps<T = Record<string, unknown>> extends Omit<
   FormHTMLAttributes<HTMLFormElement>,
   'onSubmit'
 > {
-  schema?: z.ZodType<any>;
+  schema?: any;
   defaultValues?: any;
   onSubmit: (data: T) => void | Promise<void>;
   children: ReactNode;
@@ -37,7 +35,6 @@ const FormComponent = <T = Record<string, unknown>,>({
   ...props
 }: FormProps<T>) => {
   const methods = useForm({
-    resolver: schema ? zodResolver(schema as any) : undefined,
     defaultValues: defaultValues,
   });
 

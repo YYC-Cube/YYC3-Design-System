@@ -1517,9 +1517,10 @@ export type ReplaceAll<S extends string, From extends string, To extends string>
     ? `${Before}${To}${ReplaceAll<After, From, To>}`
     : S;
 
-export type Includes<S extends string, Sub extends string> = S extends `${string}${Sub}${string}`
-  ? true
-  : false;
+export type IncludesString<
+  S extends string,
+  Sub extends string,
+> = S extends `${string}${Sub}${string}` ? true : false;
 
 export type StartsWith<S extends string, Prefix extends string> = S extends `${Prefix}${string}`
   ? true
@@ -1646,11 +1647,13 @@ export type ArraySort<T> = T extends number[] ? number[] : T extends string[] ? 
 
 export type ArrayReverse<T> = T extends [...infer R, infer L] ? [L, ...Reverse<R>] : [];
 
-export type ArrayFlat<T extends unknown[]> = T extends [infer F, ...infer R] ? F | ArrayFlat<R> : F;
+export type ArrayFlat<T extends unknown[]> = T extends [infer F, ...infer R]
+  ? F | ArrayFlat<R>
+  : never;
 
 export type ArrayFlatMap<T extends unknown[]> = T extends [infer F, ...infer R]
   ? [F, ...ArrayFlatMap<R>]
-  : [F];
+  : [];
 
 export type ArrayJoin<T extends string[], D extends string = ','> = string;
 
@@ -1715,14 +1718,6 @@ export type ObjectMerge<T, U> = Omit<T, keyof U> & U;
 export type ObjectOmit<T, K extends keyof T> = Omit<T, K>;
 
 export type ObjectPick<T, K extends keyof T> = Pick<T, K>;
-
-export type ObjectKeys<T extends object> = keyof T;
-
-export type ObjectValues<T extends object> = T[keyof T];
-
-export type ObjectEntries<T extends object> = T extends object
-  ? { [K in keyof T]: [K, T[K]] }
-  : never;
 
 export type PromiseAll<T extends readonly unknown[]> = {
   [K in keyof T]: T[K] extends Promise<infer U> ? U : never;
@@ -1912,7 +1907,7 @@ export type PartialKeys<T> = {
   [P in keyof T]-?: T[P];
 };
 
-export type RequiredKeys<T> = {
+export type RequiredKeys2<T> = {
   [P in keyof T]-?: T[P];
 };
 
@@ -1925,7 +1920,7 @@ export type MutableKeys<T> = {
 };
 
 export type GetRequired<T> = {
-  [P in RequiredKeys<T>]-?: T[P];
+  [P in RequiredKeys2<T>]-?: T[P];
 };
 
 export type GetOptional<T> = {

@@ -7,7 +7,8 @@
  * @created 2026-02-22
  */
 
-import { renderHook, act } from '@testing-library/react';
+/* eslint-disable */
+import { renderHook } from '@testing-library/react';
 import {
   initPerformanceMonitoring,
   getPerformanceMetrics,

@@ -639,7 +639,7 @@
     "promptSection2Item2Detail": "Tailwindcss plugin + unified code formatting",
     "promptSection2Item3": "Husky + lint-staged (lintstagedrc.json)",
     "promptSection2Item3Detail": "Pre-commit hooks: auto typecheck + lint + format + locale validation",
-    "promptSection2Item4": "CI workflow script (ci-workflow.ts)",
+    "promptSection2Item4": "CI workflow script (ci-workflow.js)",
     "promptSection2Item4Detail": "Script defined, .github/workflows/ 3 YAML files in place, pending local pnpm qa",
     "promptSection3": "4.3 Test Suite (Jest)",
     "promptSection3Item1": "Jest configuration (jest.config.ts)",

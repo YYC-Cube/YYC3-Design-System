@@ -240,7 +240,7 @@ export class FontPreloader {
             cached: false,
           });
         })
-        .catch((error) => {
+        .catch((_error) => {
           clearTimeout(timeoutId);
           reject(new Error(`Failed to load font: ${fontFamily}`));
         });

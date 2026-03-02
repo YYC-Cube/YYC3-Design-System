@@ -10,6 +10,7 @@
  * @license MIT
  */
 
+import * as React from 'react';
 import { memo, useState, useRef, useEffect, useCallback, ReactNode, ReactElement } from 'react';
 import { useTheme } from '../context/ThemeContext';
 
@@ -99,16 +100,18 @@ export const Dropdown = memo<DropdownProps>(
         const currentIndex = enabledOptions.findIndex((opt) => opt.key === activeKey);
 
         switch (e.key) {
-          case 'ArrowDown':
+          case 'ArrowDown': {
             e.preventDefault();
             const nextIndex = currentIndex < enabledOptions.length - 1 ? currentIndex + 1 : 0;
             setActiveKey(enabledOptions[nextIndex].key);
             break;
-          case 'ArrowUp':
+          }
+          case 'ArrowUp': {
             e.preventDefault();
             const prevIndex = currentIndex > 0 ? currentIndex - 1 : enabledOptions.length - 1;
             setActiveKey(enabledOptions[prevIndex].key);
             break;
+          }
           case 'Enter':
           case ' ':
             e.preventDefault();
@@ -152,7 +155,8 @@ export const Dropdown = memo<DropdownProps>(
       } else {
         setActiveKey(null);
       }
-    }, [visible, options]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visible]);
 
     const getPlacementStyles = (): React.CSSProperties => {
       const baseStyles: React.CSSProperties = {

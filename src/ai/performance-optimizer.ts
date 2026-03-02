@@ -68,16 +68,16 @@ const generateIssue = (
   const threshold = performanceThresholds[metric];
   if (!threshold) return null;
 
-  let type: PerformanceIssue['type'] = 'info';
-  let impact: PerformanceIssue['impact'] = 'low';
-  let category: PerformanceIssue['category'] = 'loading';
-  let description = '指标表现正常';
-  let recommendation = '继续保持当前策略';
-  let codeExample = '';
-  let estimatedImpact = '无改进需求';
-  let effort: PerformanceIssue['effort'] = 'low';
-
   const needsImprovement = value > threshold.good;
+
+  let type: PerformanceIssue['type'];
+  let impact: PerformanceIssue['impact'];
+  let category: PerformanceIssue['category'];
+  let description: string;
+  let recommendation: string;
+  let codeExample: string = '';
+  let estimatedImpact: string;
+  let effort: PerformanceIssue['effort'];
 
   switch (metric) {
     case 'FCP':
@@ -380,7 +380,7 @@ const batchData = await Promise.all([
     impact,
     description,
     recommendation,
-    codeExample,
+    codeExample: codeExample || '',
     estimatedImpact,
     effort,
     relatedMetrics: [],

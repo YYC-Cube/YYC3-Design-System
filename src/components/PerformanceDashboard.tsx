@@ -15,6 +15,21 @@ interface Score {
   color: string;
 }
 
+interface MetricCardProps {
+  title: string;
+  value?: number;
+  unit: string;
+  score: Score;
+}
+
+const MetricCard: React.FC<MetricCardProps> = ({ title, value, unit, score }) => (
+  <div className="metric-card">
+    <div className="metric-title">{title}</div>
+    <div className="metric-value">{value !== undefined ? `${value.toFixed(2)}${unit}` : '-'}</div>
+    <div className={cn('metric-score', score.color)}>{score.label}</div>
+  </div>
+);
+
 export const PerformanceDashboard: React.FC = () => {
   const [metrics, setMetrics] = useState<PerformanceMetrics>({});
   const [isVisible, setIsVisible] = useState(false);
@@ -54,24 +69,6 @@ export const PerformanceDashboard: React.FC = () => {
   const fidScore = getScore(metrics.FID, { good: 100, needsImprovement: 300 });
   const clsScore = getScore(metrics.CLS, { good: 0.1, needsImprovement: 0.25 });
   const ttfbScore = getScore(metrics.TTFB, { good: 800, needsImprovement: 1800 });
-
-  const MetricCard = ({
-    title,
-    value,
-    unit,
-    score,
-  }: {
-    title: string;
-    value?: number;
-    unit: string;
-    score: Score;
-  }) => (
-    <div className="metric-card">
-      <div className="metric-title">{title}</div>
-      <div className="metric-value">{value !== undefined ? `${value.toFixed(2)}${unit}` : '-'}</div>
-      <div className={cn('metric-score', score.color)}>{score.label}</div>
-    </div>
-  );
 
   return (
     <>

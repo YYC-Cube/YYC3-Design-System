@@ -476,7 +476,7 @@ export class AccessibilityChecker {
 
   private generateRecommendations(
     issues: AccessibilityIssue[],
-    targetLevel: 'A' | 'AA' | 'AAA'
+    _targetLevel: 'A' | 'AA' | 'AAA'
   ): string[] {
     const recommendations: string[] = [];
 

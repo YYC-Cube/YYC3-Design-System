@@ -19,6 +19,8 @@
 
 # YYC³ Design System
 
+![YYC³ Design System Banner](public/Design-System-001.png)
+
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)](https://github.com/YYC-Cube/YYC3-Design-System/actions/workflows/test-and-build.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![NPM Version](https://img.shields.io/badge/npm-v2.0.0-orange.svg?style=flat-square)](https://www.npmjs.com/package/@yyc3/design-system)

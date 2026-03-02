@@ -357,7 +357,9 @@ export class ChangeSyncManager {
       this.saveToStorage();
     } catch (error) {
       console.error('Failed to import sync state:', error);
-      throw new Error('Invalid sync state data');
+      const newError = new Error('Invalid sync state data');
+      (newError as any).cause = error;
+      throw newError;
     }
   }
 

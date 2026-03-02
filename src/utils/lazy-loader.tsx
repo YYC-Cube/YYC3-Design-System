@@ -44,23 +44,11 @@ const DEFAULT_FALLBACK = (
   </div>
 );
 
-const DEFAULT_ERROR_FALLBACK = (
-  <div
-    style={{
-      padding: '2rem',
-      textAlign: 'center',
-      color: '#ef4444',
-    }}
-  >
-    <p>加载组件失败，请刷新页面重试</p>
-  </div>
-);
-
 const createLazyComponent = <T extends ComponentType<any>>(
   importFn: () => Promise<{ default: T }>,
   options: LazyComponentOptions = {}
 ): T => {
-  const { fallback = DEFAULT_FALLBACK, delay = 300, timeout = 5000 } = options;
+  const { delay = 300, timeout = 5000 } = options;
 
   const LazyComponent = lazy(() => {
     return new Promise<{ default: T }>((resolve, reject) => {
@@ -89,11 +77,13 @@ export const withLazyLoading = <P extends object>(
 ): ComponentType<P> => {
   const LazyComponent = createLazyComponent(() => Promise.resolve({ default: Component }), options);
 
-  return (props: P) => (
-    <Suspense fallback={options.fallback || DEFAULT_FALLBACK}>
+  const WrappedComponent = (props: P) => (
+    <Suspense fallback={DEFAULT_FALLBACK}>
       <LazyComponent {...props} />
     </Suspense>
   );
+  WrappedComponent.displayName = `WithLazyLoading(${Component.displayName || Component.name || 'Component'})`;
+  return WrappedComponent;
 };
 
 export const createLazyWrapper = <P extends object>(
@@ -102,11 +92,13 @@ export const createLazyWrapper = <P extends object>(
 ): ComponentType<P> => {
   const LazyComponent = createLazyComponent(importFn, options);
 
-  return (props: P) => (
-    <Suspense fallback={options.fallback || DEFAULT_FALLBACK}>
+  const WrappedComponent = (props: P) => (
+    <Suspense fallback={DEFAULT_FALLBACK}>
       <LazyComponent {...props} />
     </Suspense>
   );
+  WrappedComponent.displayName = 'LazyWrapper';
+  return WrappedComponent;
 };
 
 export const preloadComponent = <T extends ComponentType<any>>(

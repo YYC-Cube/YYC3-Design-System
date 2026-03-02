@@ -7,6 +7,7 @@
  * @created 2026-02-27
  */
 
+import * as React from 'react';
 import { useTheme, type ThemeStyle } from '../theme/ThemeContext';
 
 const IconSun = () => (

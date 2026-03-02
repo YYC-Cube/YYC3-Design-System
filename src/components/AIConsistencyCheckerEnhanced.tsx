@@ -12,7 +12,7 @@ import {
 } from '../ai/consistency-checker-enhanced';
 import { DesignTokens } from '../../types/tokens';
 
-type TokenValue = string | number | Record<string, string | number>;
+type _TokenValue = string | number | Record<string, string | number>;
 
 const getTokenValue = (tokens: Record<string, unknown>, key: string): string => {
   const value = tokens[key];
@@ -50,7 +50,7 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
       autoFix,
       targetContrast,
       checkAccessibility: true,
-      checkNaming: true,
+      _checkNaming: true,
     };
 
     setTimeout(() => {
@@ -89,7 +89,7 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
       autoFix: true,
       targetContrast,
       checkAccessibility: true,
-      checkNaming: true,
+      _checkNaming: true,
     };
 
     const newReport = enhancedConsistencyChecker.check(tokensToCheck, options);
@@ -144,14 +144,14 @@ export const AIConsistencyCheckerEnhanced: React.FC<AIConsistencyCheckerEnhanced
 
   useEffect(() => {
     if (realtimeCheck) {
-      handleCheck();
       const interval = window.setInterval(handleCheck, 30000);
       setCheckInterval(interval);
+      handleCheck();
       return () => {
         if (interval) clearInterval(interval);
       };
     }
-  }, [realtimeCheck, tokensToCheck, handleCheck]);
+  }, [realtimeCheck, tokensToCheck]);
 
   useEffect(() => {
     return () => {

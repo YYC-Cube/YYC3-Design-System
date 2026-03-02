@@ -7,7 +7,7 @@
  * @created 2026-02-19
  */
 
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 
 import '@testing-library/jest-dom';
 import {

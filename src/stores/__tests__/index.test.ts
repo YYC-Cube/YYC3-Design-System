@@ -8,7 +8,7 @@
  */
 
 import { renderHook, act, render } from '@testing-library/react';
-import { screen, fireEvent, waitFor } from '@testing-library/dom';
+import { screen, waitFor } from '@testing-library/dom';
 import { useAppStore } from '@/stores/useAppStore';
 import { useThemeStore } from '@/stores/useThemeStore';
 import { useComponentStore } from '@/stores/useComponentStore';

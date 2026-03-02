@@ -9,7 +9,7 @@
 
 import * as React from 'react';
 import { XSSProvider, useXSS } from '../XSSProtection';
-import { render, cleanup, fireEvent, waitFor, act } from '@testing-library/react';
+import { render, cleanup, waitFor, act } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 describe('XSS Protection Module', () => {

@@ -7,6 +7,17 @@
  * @created 2026-02-22
  */
 
+export type IntersectionObserverCallback = (
+  entries: IntersectionObserverEntry[],
+  observer: IntersectionObserver
+) => void;
+
+export interface IntersectionObserverInit {
+  root?: Element | null;
+  rootMargin?: string;
+  threshold?: number | number[];
+}
+
 export interface LazyImageOptions {
   rootMargin?: string;
   threshold?: number | number[];
@@ -115,7 +126,6 @@ export const loadImage = (
     onError,
   } = options || {};
 
-  const originalSrc = element.src;
   element.src = placeholder;
 
   const img = new Image();

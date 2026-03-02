@@ -15,6 +15,8 @@ import { FormError } from './FormError';
 import { Input } from './Input';
 import { Button } from './Button';
 
+const _FormError = FormError;
+
 const meta: Meta<typeof Form> = {
   title: 'Components/Form',
   component: Form,

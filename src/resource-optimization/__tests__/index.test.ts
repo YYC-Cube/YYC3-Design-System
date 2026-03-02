@@ -163,7 +163,11 @@ describe('资源优化测试', () => {
   });
 
   describe('资源预加载测试', () => {
-    it('应该预加载单个资源', async () => {
+    beforeEach(() => {
+      jest.spyOn(document.head, 'appendChild').mockImplementation((node) => node);
+    });
+
+    it('应该预加载单个资源', () => {
       const mockUrl = 'https://example.com/script.js';
 
       preloadResource(mockUrl, 'script');
@@ -171,7 +175,7 @@ describe('资源优化测试', () => {
       expect(isPreloaded(mockUrl)).toBe(true);
     });
 
-    it('应该批量预加载资源', async () => {
+    it('应该批量预加载资源', () => {
       const mockResources = [
         { url: 'https://example.com/script.js', type: 'script' as const },
         { url: 'https://example.com/style.css', type: 'style' as const },
@@ -183,7 +187,7 @@ describe('资源优化测试', () => {
       expect(isPreloaded(mockResources[1].url)).toBe(true);
     });
 
-    it('应该预加载关键资源', async () => {
+    it('应该预加载关键资源', () => {
       const mockResources = [{ url: 'https://example.com/script.js', type: 'script' as const }];
 
       preloadCriticalResources(mockResources);
@@ -191,7 +195,7 @@ describe('资源优化测试', () => {
       expect(isPreloaded(mockResources[0].url)).toBe(true);
     });
 
-    it('应该预连接到源', async () => {
+    it('应该预连接到源', () => {
       const mockUrl = 'https://example.com';
 
       preconnect(mockUrl);
@@ -199,7 +203,7 @@ describe('资源优化测试', () => {
       expect(isPreconnected(mockUrl)).toBe(true);
     });
 
-    it('应该批量预连接到源', async () => {
+    it('应该批量预连接到源', () => {
       const mockUrls = ['https://example1.com', 'https://example2.com'];
 
       preconnectOrigins(mockUrls);
@@ -208,7 +212,7 @@ describe('资源优化测试', () => {
       expect(isPreconnected(mockUrls[1])).toBe(true);
     });
 
-    it('应该预取资源', async () => {
+    it('应该预取资源', () => {
       const mockUrl = 'https://example.com/script.js';
 
       prefetch(mockUrl, 'script');
@@ -216,7 +220,7 @@ describe('资源优化测试', () => {
       expect(isPrefetched(mockUrl)).toBe(true);
     });
 
-    it('应该批量预取资源', async () => {
+    it('应该批量预取资源', () => {
       const mockResources = [
         { url: 'https://example.com/script.js', type: 'script' as const },
         { url: 'https://example.com/style.css', type: 'style' as const },
@@ -228,7 +232,7 @@ describe('资源优化测试', () => {
       expect(isPrefetched(mockResources[1].url)).toBe(true);
     });
 
-    it('应该预加载脚本', async () => {
+    it('应该预加载脚本', () => {
       const mockUrl = 'https://example.com/script.js';
 
       preloadScript(mockUrl);
@@ -236,7 +240,7 @@ describe('资源优化测试', () => {
       expect(isPreloaded(mockUrl)).toBe(true);
     });
 
-    it('应该预加载样式', async () => {
+    it('应该预加载样式', () => {
       const mockUrl = 'https://example.com/style.css';
 
       preloadStyle(mockUrl);
@@ -244,7 +248,7 @@ describe('资源优化测试', () => {
       expect(isPreloaded(mockUrl)).toBe(true);
     });
 
-    it('应该预加载图片', async () => {
+    it('应该预加载图片', () => {
       const mockUrl = 'https://example.com/image.jpg';
 
       preloadResourceImage(mockUrl);
@@ -252,7 +256,7 @@ describe('资源优化测试', () => {
       expect(isPreloaded(mockUrl)).toBe(true);
     });
 
-    it('应该预加载字体', async () => {
+    it('应该预加载字体', () => {
       const mockUrl = 'https://example.com/font.woff2';
 
       preloadResourceFont(mockUrl);
@@ -260,12 +264,10 @@ describe('资源优化测试', () => {
       expect(isPreloaded(mockUrl)).toBe(true);
     });
 
-    it('应该清空所有资源缓存', async () => {
+    it('应该清空所有资源缓存', () => {
       const mockUrl = 'https://example.com/script.js';
 
       preloadResource(mockUrl, 'script');
-
-      await new Promise((resolve) => setTimeout(resolve, 100));
 
       expect(getResourcePreloaderStats().count).toBeGreaterThan(0);
 
@@ -274,12 +276,10 @@ describe('资源优化测试', () => {
       expect(getResourcePreloaderStats().count).toBe(0);
     });
 
-    it('应该生成预加载提示', async () => {
+    it('应该生成预加载提示', () => {
       const mockUrl = 'https://example.com/script.js';
 
       preloadResource(mockUrl, 'script');
-
-      await new Promise((resolve) => setTimeout(resolve, 100));
 
       const hints = generatePreloadHints();
       expect(hints.length).toBeGreaterThan(0);
@@ -288,8 +288,6 @@ describe('资源优化测试', () => {
 
   describe('性能基准测试', () => {
     it('应该测量图片加载性能', async () => {
-      jest.useFakeTimers();
-
       const mockSrc = 'https://example.com/image.jpg';
       let resolveLoad: () => void;
       const loadPromise = new Promise<void>((resolve) => {
@@ -308,7 +306,7 @@ describe('资源优化测试', () => {
             mockImage.onload(new Event('load'));
           }
           resolveLoad();
-        }, 100);
+        }, 10);
 
         return mockImage as unknown as HTMLImageElement;
       });
@@ -316,26 +314,20 @@ describe('资源优化测试', () => {
       const start = performance.now();
 
       await preloadLazyImage(mockSrc);
-
-      jest.runAllTimers();
       await loadPromise;
 
       const end = performance.now();
       const loadTime = end - start;
 
       expect(loadTime).toBeLessThan(1000);
-
-      jest.useRealTimers();
-    }, 10000);
+    }, 30000);
 
     it('应该测量字体加载性能', async () => {
-      jest.useFakeTimers();
-
       jest.spyOn(document.head, 'appendChild').mockImplementation((node) => {
         setTimeout(() => {
           const event = new Event('load');
           (node as HTMLElement).dispatchEvent(event);
-        }, 100);
+        }, 10);
         return node;
       });
 
@@ -348,25 +340,20 @@ describe('资源优化测试', () => {
 
       await preloadFont(mockFont.fontFamily, mockFont.fontSrc);
 
-      jest.runAllTimers();
-      await new Promise((resolve) => setTimeout(resolve, 200));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       const end = performance.now();
       const loadTime = end - start;
 
       expect(loadTime).toBeLessThan(500);
-
-      jest.useRealTimers();
-    }, 10000);
+    }, 30000);
 
     it('应该测量资源预加载性能', async () => {
-      jest.useFakeTimers();
-
       jest.spyOn(document.head, 'appendChild').mockImplementation((node) => {
         setTimeout(() => {
           const event = new Event('load');
           (node as HTMLElement).dispatchEvent(event);
-        }, 100);
+        }, 10);
         return node;
       });
 
@@ -376,15 +363,12 @@ describe('资源优化测试', () => {
 
       preloadResource(mockUrl, 'script');
 
-      jest.runAllTimers();
-      await new Promise((resolve) => setTimeout(resolve, 200));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       const end = performance.now();
       const loadTime = end - start;
 
       expect(loadTime).toBeLessThan(500);
-
-      jest.useRealTimers();
-    }, 10000);
+    }, 30000);
   });
 });

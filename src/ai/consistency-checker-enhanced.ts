@@ -27,7 +27,7 @@ export interface ConsistencyCheckOptions {
   autoFix?: boolean;
   targetContrast?: 'AA' | 'AAA';
   checkAccessibility?: boolean;
-  checkNaming?: boolean;
+  _checkNaming?: boolean;
 }
 
 export class EnhancedConsistencyChecker {
@@ -42,7 +42,7 @@ export class EnhancedConsistencyChecker {
       autoFix = false,
       targetContrast = 'AA',
       checkAccessibility = true,
-      checkNaming = true,
+      _checkNaming = true,
     } = options;
 
     const issues: ConsistencyIssue[] = [];
@@ -422,7 +422,7 @@ export class EnhancedConsistencyChecker {
 
     const errorCount = issues.filter((i) => i.severity === 'error').length;
     const warningCount = issues.filter((i) => i.severity === 'warning').length;
-    const infoCount = issues.filter((i) => i.severity === 'info').length;
+    const _infoCount = issues.filter((i) => i.severity === 'info').length;
 
     if (errorCount > 0) {
       recommendations.push(`发现 ${errorCount} 个严重问题，建议优先修复`);

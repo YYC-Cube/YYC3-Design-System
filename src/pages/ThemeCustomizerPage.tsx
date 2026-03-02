@@ -21,6 +21,7 @@
  *   animation:     var(--duration-fast) var(--easing-out)
  *   a11y:          outline: 2px solid var(--color-ring) on focus
  */
+import * as React from 'react';
 import { useState, useCallback, useRef, useEffect, useMemo } from 'react';
 import {
   Upload,

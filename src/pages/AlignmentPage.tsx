@@ -619,7 +619,7 @@ export function AlignmentPage() {
           label: t('alignment.promptSection2Item4'),
           status: 'partial',
           detail: t('alignment.promptSection2Item4Detail'),
-          token: 'src/qa/ci-workflow.ts',
+          token: 'src/qa/ci-workflow.js',
         },
       ],
     },

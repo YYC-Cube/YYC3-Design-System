@@ -30,19 +30,6 @@ export const animationEasings: Record<AnimationEasing, string> = {
   back: 'cubic-bezier(0.36, 0, 0.66, -0.56)',
 };
 
-const animationKeyframes: Record<AnimationKeyframe, string> = {
-  'fade-in': 'fadeIn 0.3s ease-in-out',
-  'fade-out': 'fadeOut 0.3s ease-in-out',
-  'slide-in-up': 'slideInUp 0.3s ease-out',
-  'slide-in-down': 'slideInDown 0.3s ease-out',
-  'slide-in-left': 'slideInLeft 0.3s ease-out',
-  'slide-in-right': 'slideInRight 0.3s ease-out',
-  'scale-in': 'scaleIn 0.3s ease-out',
-  'scale-out': 'scaleOut 0.3s ease-in',
-  'rotate-in': 'rotateIn 0.5s ease-out',
-  'bounce-in': 'bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-};
-
 export const getAnimationString = (
   keyframe: AnimationKeyframe,
   config?: AnimationConfig
@@ -139,7 +126,8 @@ export const useAnimationFrame = (callback: () => void, deps: React.DependencyLi
         cancelAnimationFrame(requestRef.current);
       }
     };
-  }, deps);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [callback, ...deps]);
 };
 
 export const useThrottledAnimationFrame = (callback: () => void, delay: number = 16) => {

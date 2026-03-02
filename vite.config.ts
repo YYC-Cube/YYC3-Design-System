@@ -9,32 +9,45 @@
  */
 
 import { defineConfig } from 'vite';
+import type { Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
-import { visualizer } from 'rollup-plugin-visualizer';
+
 import viteCompression from 'vite-plugin-compression';
+
+const visualizerPlugin = (() => {
+  try {
+    return require('rollup-plugin-visualizer');
+  } catch {
+    return null;
+  }
+})();
 
 export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
-    visualizer({
-      filename: './dist/stats.html',
-      open: false,
-      gzipSize: true,
-      brotliSize: true,
-    }) as any,
+    ...(visualizerPlugin
+      ? [
+          visualizerPlugin({
+            filename: './dist/stats.html',
+            open: false,
+            gzipSize: true,
+            brotliSize: true,
+          }) as Plugin,
+        ]
+      : []),
     viteCompression({
       algorithm: 'gzip',
       ext: '.gz',
       threshold: 10240,
       deleteOriginFile: false,
-    }) as any,
+    }) as Plugin,
     viteCompression({
       algorithm: 'brotliCompress',
       ext: '.br',
       threshold: 10240,
       deleteOriginFile: false,
-    }) as any,
+    }) as Plugin,
   ],
   resolve: {
     alias: {

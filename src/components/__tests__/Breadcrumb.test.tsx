@@ -7,7 +7,7 @@
  * @created 2026-02-23
  */
 
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import { Breadcrumb } from '../Breadcrumb';

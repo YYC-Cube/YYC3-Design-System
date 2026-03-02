@@ -86,11 +86,11 @@ export const AIAccessibilityChecker: React.FC<AIAccessibilityCheckerProps> = ({
   const handleAutoFixAll = useCallback(() => {
     if (!report) return;
 
-    let fixedCount = 0;
+    let _fixedCount = 0;
     report.issues.forEach((issue) => {
       if (issue.autoFixable && issue.fixAction) {
         issue.fixAction();
-        fixedCount++;
+        _fixedCount++;
       }
     });
 

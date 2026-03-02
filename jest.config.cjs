@@ -26,6 +26,7 @@ module.exports = {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
   setupFilesAfterEnv: ["<rootDir>/src/tests/setup.ts"],
+  setupFiles: ["<rootDir>/jest.setup.js"],
   collectCoverageFrom: [
     "src/**/*.{ts,tsx}",
     "!src/**/*.d.ts",

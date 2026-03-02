@@ -16,6 +16,7 @@
  *   animation:    var(--duration-fast) var(--easing-out)
  *   a11y:         focus-visible:outline-ring/50, aria-label on all interactive elements
  */
+import * as React from 'react';
 import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';

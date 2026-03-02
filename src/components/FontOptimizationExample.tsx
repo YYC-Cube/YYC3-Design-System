@@ -10,6 +10,8 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { Card, CardHeader, CardContent } from './Card';
 import { Button } from './Button';
+
+const _useRef = useRef;
 import {
   preloadFont,
   preloadFontBatch,

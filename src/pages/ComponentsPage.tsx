@@ -10,6 +10,7 @@
  *   animation:    var(--duration-fast) var(--easing-default)
  *   a11y:         outline: 2px solid var(--ring) on focus
  */
+import * as React from 'react';
 import { useState, useCallback } from 'react';
 import { toast } from 'sonner';
 import { Button } from '../components/ui/button';

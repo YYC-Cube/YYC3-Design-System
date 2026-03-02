@@ -12,6 +12,7 @@
  *   animation:    var(--duration-fast), var(--duration-normal), var(--easing-default), var(--easing-out)
  *   a11y:         outline: 2px solid var(--ring) on focus, aria-label on all interactive elements
  */
+import * as React from 'react';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';

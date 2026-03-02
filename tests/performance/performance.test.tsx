@@ -223,7 +223,7 @@ describe('YYC³ Design System Performance Tests', () => {
     it('should handle Button click within 50ms', () => {
       const handleClick = jest.fn();
 
-      const { container } = renderWithTheme(
+      renderWithTheme(
         <Button variant="default" onClick={handleClick} data-testid="button">
           Test Button
         </Button>
@@ -275,7 +275,7 @@ describe('YYC³ Design System Performance Tests', () => {
         );
       };
 
-      const { container } = renderWithTheme(<TestComponent />);
+      renderWithTheme(<TestComponent />);
 
       const toggleButton = screen.getByTestId('toggle');
       const startTime = performance.now();

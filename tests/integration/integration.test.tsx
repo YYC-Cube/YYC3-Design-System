@@ -101,7 +101,6 @@ describe('YYC³ Design System Integration Tests', () => {
       const handleSubmit = jest.fn((e) => {
         e.preventDefault();
       });
-      const user = userEvent.setup();
 
       renderWithTheme(
         <Card className="p-4">
@@ -564,7 +563,7 @@ describe('YYC³ Design System Integration Tests', () => {
     it('should handle loading and error states', async () => {
       const DataLoader = () => {
         const [loading, setLoading] = React.useState(true);
-        const [error, setError] = React.useState<string | null>(null);
+        const [error] = React.useState<string | null>(null);
         const [data, setData] = React.useState<string | null>(null);
 
         React.useEffect(() => {

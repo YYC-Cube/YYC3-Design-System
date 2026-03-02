@@ -7,7 +7,7 @@
  * @created 2026-02-18
  */
 
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import * as React from 'react';
