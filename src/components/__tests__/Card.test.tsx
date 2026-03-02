@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 
 import '@testing-library/jest-dom';
-import { Card } from '../Card';
+import Card from '../Card';
 import { ThemeProvider } from '../../context/ThemeContext';
 
 describe('Card 组件', () => {

@@ -8,6 +8,7 @@
  */
 
 import React, { ElementType, forwardRef } from 'react';
+import { logger } from '../utils/logger';
 import type {
   MergeProps,
   ColorProps,
@@ -226,9 +227,9 @@ export const withGenericComponentEffect = function <P extends React.HTMLAttribut
 ) {
   const EnhancedComponent = forwardRef<HTMLElement, P>((props, ref) => {
     React.useEffect(() => {
-      console.warn(`${displayName} mounted with props:`, props);
+      logger.warn(`${displayName} mounted with props:`, props);
       return () => {
-        console.warn(`${displayName} unmounted`);
+        logger.warn(`${displayName} unmounted`);
       };
     }, [props]);
 

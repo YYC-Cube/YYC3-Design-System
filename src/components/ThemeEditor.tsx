@@ -23,6 +23,7 @@ import {
 } from '../theme/ThemePresets';
 import { useTheme } from '../theme/useTheme';
 import type { DesignTokens } from '../../types/tokens';
+import { logger } from '../utils/logger';
 
 const { useState, useCallback, useMemo } = React;
 
@@ -211,7 +212,7 @@ export const ThemeEditor: React.FC<ThemeEditorProps> = ({
         setImportData('');
       }
     } catch (error) {
-      console.error('导入主题失败:', error);
+      logger.error('导入主题失败:', error);
       alert('导入主题失败，请检查JSON格式');
     }
   }, [importData, onImport, setTheme]);

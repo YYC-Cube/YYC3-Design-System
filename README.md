@@ -1,13 +1,4 @@
----
-@file: README.md
-@description: YYC³ Design System 主文档 - 开源设计系统完整指南
-@author: YanYuCloudCube Team
-@version: 2.0.0
-@created: 2026-01-30
-@updated: 2026-03-01
-@status: production-ready
-@tags: design-system, opensource, yyccube, ui-components, theme-system
----
+# YYC³ Design System
 
 > ***YanYuCloudCube***
 > *言启象限 | 语枢未来*
@@ -18,25 +9,6 @@
 <div align="center">
 
 # YYC³ Design System
-
-![YYC³ Design System Banner](public/Design-System-001.png)
-
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)](https://github.com/YYC-Cube/YYC3-Design-System/actions/workflows/test-and-build.yml)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
-[![NPM Version](https://img.shields.io/badge/npm-v2.0.0-orange.svg?style=flat-square)](https://www.npmjs.com/package/@yyc3/design-system)
-[![Node Version](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen.svg?style=flat-square)](https://nodejs.org/)
-[![OKLCH Support](https://img.shields.io/badge/OKLCH-ready-ff69b4.svg?style=flat-square)](https://github.com/w3c/csswg-drafts/issues/7844)
-[![Storybook](https://img.shields.io/badge/storybook-ready-FF4785.svg?style=flat-square)](https://storybook.js.org/)
-[![PWA](https://img.shields.io/badge/PWA-enabled-5A0FC8.svg?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
-[![i18n](https://img.shields.io/badge/i18n-bilingual-blue.svg?style=flat-square)](https://www.i18next.com/)
-[![Test Coverage](https://img.shields.io/badge/coverage-85%25-brightgreen.svg?style=flat-square)](https://github.com/YYC-Cube/YYC3-Design-System/actions/workflows/test-and-build.yml)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Open Source](https://img.shields.io/badge/Open%20Source-Yes-success.svg?style=flat-square)](https://opensource.org/)
-[![Community](https://img.shields.io/badge/Community-Active-brightgreen.svg?style=flat-square)](https://github.com/YYC-Cube/YYC3-Design-System)
-[![Documentation](https://img.shields.io/badge/docs-complete-4D5F9C.svg?style=flat-square)](https://yyc3-design-system.netlify.app/)
-[![DeepScan](https://img.shields.io/badge/DeepScan-passed-00d9ff.svg?style=flat-square)](https://github.com/YYC-Cube/YYC3-Design-System)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-fe7a37.svg?style=flat-square)](https://conventionalcommits.org)
-[![YYC³ Standard](https://img.shields.io/badge/YYC³%20Standard-A+-gold.svg?style=flat-square)](https://github.com/YYC-Cube/YYC3-Standards)
 
 </div>
 

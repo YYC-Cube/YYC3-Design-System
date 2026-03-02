@@ -5,6 +5,15 @@ import * as RechartsPrimitive from 'recharts';
 
 import { cn } from './utils';
 
+// Security: Validate CSS color values to prevent injection attacks
+const isValidCSSColor = (value: string): boolean => {
+  // Allow hex, rgb, rgba, hsl, hsla, and CSS variables
+  const colorRegex = /^(#([0-9A-Fa-f]{3}){1,2}|(rgb|hsl)a?\(\s*(-?\d+%?\s*,\s*){2,3}-?\d+%?\s*\)|var\(--[a-zA-Z0-9-]+\))$/;
+  return colorRegex.test(value.trim());
+};
+
+
+
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: '', dark: '.dark' } as const;
 
@@ -65,6 +74,9 @@ function ChartContainer({
   );
 }
 
+// Security: This component dynamically injects CSS styles.
+// The config should be validated before passing to this component.
+// Only color values are used in the generated CSS.
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   const colorConfig = Object.entries(config).filter(([, config]) => config.theme || config.color);
 
@@ -82,7 +94,7 @@ ${prefix} [data-chart=${id}] {
 ${colorConfig
   .map(([key, itemConfig]) => {
     const color = itemConfig.theme?.[theme as keyof typeof itemConfig.theme] || itemConfig.color;
-    return color ? `  --color-${key}: ${color};` : null;
+    return color && isValidCSSColor(color) ? `  --color-${key}: ${color};` : null;
   })
   .join('\n')}
 }

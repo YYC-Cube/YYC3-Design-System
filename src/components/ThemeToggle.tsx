@@ -15,8 +15,14 @@ import { Sun, Moon, Monitor, Sparkles, Zap, Briefcase } from 'lucide-react';
 import { useTheme, type ThemeStyle } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 
-export function ThemeToggle() {
-  const { style, mode, setStyle, setMode, toggleMode } = useTheme();
+interface ThemeToggleProps {
+  className?: string;
+  style?: React.CSSProperties;
+  'data-testid'?: string;
+}
+
+export function ThemeToggle({ className, style, 'data-testid': dataTestId }: ThemeToggleProps = {}) {
+  const { style: themeStyle, mode, setStyle, setMode, toggleMode } = useTheme();
   const { t } = useLanguage();
 
   const styleConfig: Record<ThemeStyle, { label: string; icon: React.ReactNode }> = {
@@ -26,7 +32,7 @@ export function ThemeToggle() {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className={`flex items-center gap-2 ${className || ''}`} style={style} data-testid={dataTestId}>
       {/* Style selector */}
       <div className="flex items-center rounded-lg border border-border bg-card p-0.5 gap-0.5">
         {(Object.keys(styleConfig) as ThemeStyle[]).map((s) => (
@@ -34,12 +40,12 @@ export function ThemeToggle() {
             key={s}
             onClick={() => setStyle(s)}
             className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md transition-all ${
-              style === s
+              themeStyle === s
                 ? 'bg-primary text-primary-foreground shadow-sm'
                 : 'text-muted-foreground hover:text-foreground hover:bg-muted'
             }`}
             aria-label={`${t('theme.switchTo').replace('{theme}', styleConfig[s].label)}`}
-            aria-pressed={style === s}
+            aria-pressed={themeStyle === s}
             title={styleConfig[s].label}
           >
             {styleConfig[s].icon}

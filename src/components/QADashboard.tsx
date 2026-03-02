@@ -8,6 +8,7 @@
  */
 
 import React, { useState, useMemo, useCallback } from 'react';
+import { logger } from '../utils/logger';
 import { Button } from './Button';
 import { Progress } from './Progress';
 
@@ -228,14 +229,14 @@ export function QADashboard() {
       const report = runLocaleValidation();
       setLocaleReport(report);
       setIsValidating(false);
-      console.log(report.isValid ? 'Locale validation passed' : 'Locale validation failed');
+      logger.info(report.isValid ? 'Locale validation passed' : 'Locale validation failed');
     }, 400);
   }, []);
 
   const handleRunTokenValidation = useCallback(() => {
     const report = runTokenValidation();
     setTokenReport(report);
-    console.log(report.isValid ? 'Token validation passed' : 'Token validation failed');
+    logger.info(report.isValid ? 'Token validation passed' : 'Token validation failed');
   }, []);
 
   const coverageData = useMemo(

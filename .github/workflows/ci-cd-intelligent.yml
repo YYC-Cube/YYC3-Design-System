@@ -1,0 +1,805 @@
+name: "YYC³ Design System - Intelligent CI/CD (High Availability)"
+
+# 触发条件：更智能的触发策略
+on:
+  push:
+    branches: [main, develop]
+    tags:
+      - 'v*.*.*'
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+  # 定时任务：每天凌晨2点运行依赖更新检查
+  schedule:
+    - cron: '0 2 * * *'
+  # 手动触发
+  workflow_dispatch:
+    inputs:
+      skip_tests:
+        description: '跳过测试（仅用于紧急修复）'
+        required: false
+        default: false
+        type: boolean
+      run_performance:
+        description: '运行性能测试'
+        required: false
+        default: true
+        type: boolean
+
+# 环境变量
+env:
+  NODE_VERSION: '20'
+  PNPM_VERSION: '9'
+  CI: true
+  # 强制颜色输出，方便调试
+  FORCE_COLOR: '1'
+  # 超时时间
+  TIMEOUT_MINUTES: 30
+
+# 智能并发控制
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# 全局默认值
+defaults:
+  run:
+    shell: bash
+
+# 全局超时设置
+timeout-minutes: 60
+
+jobs:
+  # ========== 智能 Pre-Check ==========
+  pre-check:
+    name: "🔍 Intelligent Pre-Check"
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+      is_major_change: ${{ steps.check.outputs.is_major_change }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔍 智能变更分析
+        id: check
+        run: |
+          # 获取变更文件列表
+          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
+
+          echo "变更文件："
+          echo "$CHANGED_FILES"
+
+          # 判断是否应该运行完整的 CI
+          SHOULD_RUN="true"
+          IS_MAJOR_CHANGE="false"
+
+          # 只改了文档，可以简化 CI
+          if echo "$CHANGED_FILES" | grep -qE "^README|^docs/|^\.github/"; then
+            if ! echo "$CHANGED_FILES" | grep -vE "^README|^docs/|^\.github/"; then
+              SHOULD_RUN="simplified"
+              echo "仅文档变更，使用简化 CI"
+            fi
+          fi
+
+          # 检测重大变更（影响核心模块）
+          if echo "$CHANGED_FILES" | grep -qE "^(src/components|src/theme|src/context|src/i18n)/"; then
+            IS_MAJOR_CHANGE="true"
+            echo "检测到核心模块变更"
+          fi
+
+          echo "should_run=$SHOULD_RUN" >> $GITHUB_OUTPUT
+          echo "is_major_change=$IS_MAJOR_CHANGE" >> $GITHUB_OUTPUT
+
+      - name: 📊 变更统计
+        run: |
+          echo "## 📊 变更分析" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **变更类型**: ${{ steps.check.outputs.should_run }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **是否重大变更**: ${{ steps.check.outputs.is_major_change }}" >> $GITHUB_STEP_SUMMARY
+
+  # ========== 依赖安全扫描 ==========
+  security-scan:
+    name: "🔒 Security Scan"
+    runs-on: ubuntu-latest
+    needs: pre-check
+    if: needs.pre-check.outputs.should_run != 'simplified'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔍 Run npm audit
+        run: |
+          npm audit --production --audit-level=moderate || true
+
+      - name: 🔍 Run Snyk (Vulnerability Scanner)
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high --org=${{ secrets.SNYK_ORG_ID }}
+
+      - name: 🔍 CodeQL Analysis
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript, typescript
+        continue-on-error: true
+
+      - name: 🔍 Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        continue-on-error: true
+
+  # ========== 依赖更新检查 ==========
+  dependency-update:
+    name: "📦 Dependency Update Check"
+    runs-on: ubuntu-latest
+    needs: pre-check
+    if: github.event_name == 'schedule' && needs.pre-check.outputs.should_run != 'simplified'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🔍 Check for outdated dependencies
+        run: |
+          pnpm outdated --json > outdated.json || true
+
+          if [ -s outdated.json ]; then
+            echo "发现过时的依赖"
+            cat outdated.json
+
+            # 创建 Issue
+            gh issue create \
+              --title "📦 过时的依赖检测 - $(date +%Y-%m-%d)" \
+              --label "dependencies" \
+              --body "$(cat outdated.json)" || true
+          else
+            echo "所有依赖都是最新的"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ========== 智能代码质量检查 ==========
+  quality:
+    name: "✨ Code Quality"
+    runs-on: ubuntu-latest
+    needs: pre-check
+    # 并行运行策略
+    strategy:
+      matrix:
+        # 多个 Runner 并行运行不同的检查
+        check: [typescript, eslint, prettier, locales]
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      # 智能分层缓存
+      - name: 🗄️ Layer 1: Cache pnpm modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+        id: pnpm-cache
+
+      - name: 🗄️ Layer 2: Cache Node modules
+        if: steps.pnpm-cache.outputs.cache-hit != 'true'
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+        id: node-cache
+
+      - name: Install dependencies
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: pnpm install --frozen-lockfile
+
+      # 条件执行：根据矩阵运行不同的检查
+      - name: 📝 TypeScript Check
+        if: matrix.check == 'typescript'
+        run: |
+          echo "Running TypeScript Check..."
+          pnpm exec tsc --noEmit --pretty || {
+            echo "❌ TypeScript 检查失败"
+            exit 1
+          }
+
+      - name: 🔍 ESLint Check
+        if: matrix.check == 'eslint'
+        run: |
+          echo "Running ESLint..."
+          pnpm lint --format=compact --max-warnings=0 || {
+            echo "❌ ESLint 检查失败"
+            exit 1
+          }
+
+      - name: 💅 Prettier Check
+        if: matrix.check == 'prettier'
+        run: |
+          echo "Running Prettier..."
+          pnpm format:check || {
+            echo "❌ Prettier 检查失败"
+            pnpm format:write
+            echo "已自动修复格式问题，请提交修复"
+            exit 1
+          }
+
+      - name: 🌍 Locale Validation
+        if: matrix.check == 'locales'
+        run: |
+          echo "Running Locale Validation..."
+          pnpm validate:locales || {
+            echo "❌ Locale 验证失败"
+            exit 1
+          }
+
+  # ========== 智能测试矩阵 ==========
+  test:
+    name: "🧪 Tests (Node ${{ matrix.node }})"
+    runs-on: ubuntu-latest
+    needs: quality
+    # 矩阵策略：测试多个 Node 版本
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [18, 20, 22]
+        # 分片测试：并行运行测试分片
+        shard: [1, 2, 3, 4]
+    # 超时设置
+    timeout-minutes: ${{ fromJSON('30') }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'pnpm'
+
+      # 智能缓存策略
+      - name: 🗄️ Cache pnpm modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ matrix.node }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-${{ matrix.node }}-
+            ${{ runner.os }}-pnpm-
+
+      - name: 🗄️ Cache Jest cache
+        uses: actions/cache@v4
+        with:
+          path: .jest-cache
+          key: ${{ runner.os }}-jest-${{ matrix.node }}-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/*.test.ts*') }}
+          restore-keys: |
+            ${{ runner.os }}-jest-${{ matrix.node }}-
+            ${{ runner.os }}-jest-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 运行测试分片
+      - name: 🧪 Run Tests (Shard ${{ matrix.shard }}/4)
+        run: |
+          pnpm test -- \
+            --coverage \
+            --ci \
+            --watchAll=false \
+            --shard=${{ matrix.shard }} \
+            --shardCount=4
+        timeout-minutes: 20
+
+      # 失败重试机制
+      - name: 🔄 Retry failed tests
+        if: failure() && steps.test.outcome == 'failure'
+        run: |
+          echo "检测到测试失败，尝试重试..."
+          pnpm test -- --coverage --ci --watchAll=false --onlyFailures
+        timeout-minutes: 15
+
+      # 上传覆盖率
+      - name: 📊 Upload Coverage to Codecov
+        uses: codecov/codecov-action@v4
+        if: matrix.node == 20 && matrix.shard == 1
+        with:
+          files: ./coverage/coverage-final.json
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
+
+      # 覆盖率检查（仅主节点和第一个分片）
+      - name: 📊 Coverage Check
+        if: matrix.node == 20 && matrix.shard == 1
+        run: |
+          if [ -f coverage/coverage-summary.json ]; then
+            COVERAGE=$(cat coverage/coverage-summary.json | jq '.total.lines.pct')
+            echo "Line coverage: ${COVERAGE}%"
+
+            # 根据变更类型调整覆盖率阈值
+            THRESHOLD=80
+            if [ "${{ needs.pre-check.outputs.should_run }}" == "simplified" ]; then
+              THRESHOLD=0
+            fi
+
+            if (( $(echo "$COVERAGE < $THRESHOLD" | bc -l) )); then
+              echo "::error::Coverage ${COVERAGE}% below threshold ${THRESHOLD}%"
+              exit 1
+            fi
+          else
+            echo "⚠️ 覆盖率报告未生成"
+          fi
+
+      # 上传测试结果
+      - name: 📤 Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-node${{ matrix.node }}-shard${{ matrix.shard }}
+          path: |
+            coverage/
+            test-results/
+          retention-days: 30
+
+  # ========== 智能构建 ==========
+  build:
+    name: "🏗️ Build"
+    runs-on: ubuntu-latest
+    needs: quality
+    # 并行构建不同配置
+    strategy:
+      matrix:
+        mode: [production, development]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      # 分层缓存
+      - name: 🗄️ Cache pnpm modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      - name: 🗄️ Cache build artifacts
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules/.cache
+            dist-${{ matrix.mode }}
+          key: ${{ runner.os }}-build-${{ matrix.mode }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ matrix.mode }}-
+            ${{ runner.os }}-build-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🏗️ Build (${{ matrix.mode }})
+        run: |
+          if [ "${{ matrix.mode }}" == "production" ]; then
+            pnpm build
+          else
+            pnpm build:dev
+          fi
+        timeout-minutes: 15
+
+      # Bundle Size Check（仅生产构建）
+      - name: 📏 Bundle Size Check
+        if: matrix.mode == 'production'
+        run: |
+          echo "## 📏 Bundle Size Analysis" >> $GITHUB_STEP_SUMMARY
+
+          # JS Bundle Size
+          JS_SIZE=$(du -sk dist/assets/*.js 2>/dev/null | awk '{sum+=$1} END {print sum+0}')
+          echo "- **JS Bundle**: ${JS_SIZE}KB" >> $GITHUB_STEP_SUMMARY
+
+          if [ "$JS_SIZE" -gt 200 ]; then
+            echo "::warning::JS bundle ${JS_SIZE}KB exceeds 200KB threshold"
+          fi
+
+          # CSS Bundle Size
+          CSS_SIZE=$(du -sk dist/assets/*.css 2>/dev/null | awk '{sum+=$1} END {print sum+0}')
+          echo "- **CSS Bundle**: ${CSS_SIZE}KB" >> $GITHUB_STEP_SUMMARY
+
+          if [ "$CSS_SIZE" -gt 50 ]; then
+            echo "::warning::CSS bundle ${CSS_SIZE}KB exceeds 50KB threshold"
+          fi
+
+      # 上传构建产物
+      - name: 📤 Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ matrix.mode }}
+          path: dist-${{ matrix.mode }}/
+          retention-days: 7
+
+  # ========== E2E 测试 ==========
+  e2e:
+    name: "🎭 E2E Tests"
+    runs-on: ubuntu-latest
+    needs: build
+    # 矩阵策略：测试多个浏览器
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🎭 Install Playwright Browsers
+        run: npx playwright install --with-deps ${{ matrix.browser }}
+
+      - name: 📥 Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-production
+          path: dist/
+
+      - name: 🎭 Run E2E Tests (${{ matrix.browser }})
+        run: pnpm test:e2e --project=${{ matrix.browser }}
+        timeout-minutes: 20
+        env:
+          CI: true
+
+      # 失败时上传截图和视频
+      - name: 📤 Upload E2E artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-artifacts-${{ matrix.browser }}
+          path: |
+            playwright-report/
+            test-results/
+            screenshots/
+          retention-days: 30
+
+  # ========== 性能测试 ==========
+  performance:
+    name: "⚡ Performance Tests"
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event.inputs.run_performance != 'false'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 📥 Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-production
+          path: dist/
+
+      - name: 🚀 Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: |
+            https://yyc3-design-system.vercel.app/
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+      - name: 📊 Performance Summary
+        run: |
+          echo "## ⚡ Performance Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Lighthouse CI 已完成，请查看详细的性能报告。" >> $GITHUB_STEP_SUMMARY
+
+  # ========== 视觉回归测试 ==========
+  visual:
+    name: "👁️ Visual Regression"
+    runs-on: ubuntu-latest
+    needs: quality
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 📚 Build Storybook
+        run: pnpm build-storybook
+
+      - name: 👁️ Chromatic Visual Tests
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          buildScriptName: build-storybook
+          workingDir: ./
+          autoAcceptChanges: 'base'
+          exitZeroOnChanges: false
+          exitOnceUploaded: true
+
+  # ========== 智能通知 ==========
+  notify:
+    name: "📢 Intelligent Notifications"
+    runs-on: ubuntu-latest
+    needs: [test, build, e2e, performance, visual]
+    if: always()
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: 📊 Generate Summary
+        run: |
+          echo "## 📊 CI/CD Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Workflow**: ${{ github.workflow }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Trigger**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Actor**: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: 📢 Send Slack Notification
+        if: always()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          text: |
+            ${{ github.workflow }} ${{ job.status }}
+            Repository: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.sha }}
+            Author: ${{ github.actor }}
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+        continue-on-error: true
+
+      - name: 📢 Send Discord Notification
+        if: always()
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          description: |
+            ${{ github.workflow }} ${{ job.status }}
+            Repository: ${{ github.repository }}
+            Branch: ${{ github.ref_name }}
+            Commit: ${{ github.sha }}
+            Author: ${{ github.actor }}
+        continue-on-error: true
+
+  # ========== 智能部署 ==========
+  deploy-preview:
+    name: "🚀 Deploy Preview"
+    runs-on: ubuntu-latest
+    needs: [test, build]
+    if: github.event_name == 'pull_request'
+    environment:
+      name: preview-${{ github.event.number }}
+      url: https://deploy-preview-${{ github.event.number }}--yyc3-design-system.vercel.app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: 📥 Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-production
+          path: dist/
+
+      - name: 🚀 Deploy to Vercel Preview
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./
+          vercel-args: '--prod'
+
+      - name: 📝 Add Preview URL to PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const previewUrl = 'https://deploy-preview-${{ github.event.number }}--yyc3-design-system.vercel.app/';
+
+            const comment = `
+            ## 🚀 Preview Deployment
+
+            ✅ Preview environment is ready!
+
+            **Preview URL**: ${previewUrl}
+
+            ---
+
+            Deployment Info:
+            - Commit: ${{ github.sha }}
+            - PR: #${{ github.event.number }}
+            - Branch: ${{ github.head_ref }}
+            `;
+
+            // 查找现有的 PR 评论
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const botComment = comments.data.find(c =>
+              c.user.type === 'Bot' && c.body.includes('Preview Deployment')
+            );
+
+            if (botComment) {
+              // 更新现有评论
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: comment
+              });
+            } else {
+              // 创建新评论
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: comment
+              });
+            }
+
+  deploy-production:
+    name: "🚀 Deploy to Production"
+    runs-on: ubuntu-latest
+    needs: [test, build, e2e, performance]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && !contains(github.event.head_commit.message, '[skip ci]')
+    environment:
+      name: production
+      url: https://yyc3-design-system.vercel.app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: 📥 Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-production
+          path: dist/
+
+      - name: 🚀 Deploy to Vercel Production
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./
+          vercel-args: '--prod'
+
+      - name: 🏷️ Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 📢 Production Deployment Notification
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = '${{ job.status }}';
+            const emoji = status === 'success' ? '✅' : '❌';
+
+            const comment = `
+            ## 🚀 Production Deployment
+
+            **Status**: ${emoji} ${status.toUpperCase()}
+
+            **Environment**: Vercel (Production)
+
+            **URL**: https://yyc3-design-system.vercel.app
+
+            **Commit**: ${{ github.sha }}
+
+            **Branch**: ${{ github.ref_name }}
+
+            **Version**: ${{ github.ref_name }}
+
+            ---
+
+            Deployment completed! Visit https://yyc3-design-system.vercel.app to see the latest version.
+            `;
+
+            github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+              body: comment
+            });

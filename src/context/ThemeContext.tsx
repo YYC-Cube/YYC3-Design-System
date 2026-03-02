@@ -58,7 +58,13 @@ function getSystemPreference(): 'light' | 'dark' {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
+export function ThemeProvider({
+  children,
+  initial = 'dark'
+}: {
+  children: React.ReactNode;
+  initial?: 'light' | 'dark';
+}) {
   const [style, setStyleState] = useState<ThemeStyle>(() => {
     const saved = localStorage.getItem('yyc3-theme-style');
     return (saved as ThemeStyle) || 'future';
@@ -66,7 +72,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const [mode, setModeState] = useState<ThemeMode>(() => {
     const saved = localStorage.getItem('yyc3-theme-mode');
-    return (saved as ThemeMode) || 'dark';
+    if (saved) return (saved as ThemeMode);
+    // Use initial prop if provided, otherwise default to 'dark'
+    return initial === 'light' ? 'light' : 'dark';
   });
 
   const [systemPref, setSystemPref] = useState<'light' | 'dark'>(getSystemPreference);
