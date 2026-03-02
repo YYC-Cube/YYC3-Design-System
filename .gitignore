@@ -33,3 +33,7 @@ reports/
 
 # OS
 Thumbs.db
+
+# Playwright test results
+playwright-report/
+test-results/
