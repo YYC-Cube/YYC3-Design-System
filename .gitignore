@@ -7,3 +7,28 @@ reports/
 .env
 .env.local
 .env.*.local
+
+# Cache directories
+.jest-cache/
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.vite/
+.turbo/
+
+# Test coverage
+*.lcov
+
+# Build artifacts
+*.tsbuildinfo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
