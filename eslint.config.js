@@ -19,6 +19,8 @@ export default [
       '.chromatic/**',
       '__mocks__/**',
       'config/**',
+      'tests/**/*.js',
+      'tests/**/*.mjs',
     ],
   },
   {
@@ -75,6 +77,54 @@ export default [
     files: ['**/*.test.{ts,tsx}', '**/__tests__/**/*.{ts,tsx}'],
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+  {
+    files: ['**/*.js', '**/*.jsx', '**/*.mjs', '**/*.cjs'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      sourceType: 'module',
+      globals: {
+        ...globals.browser,
+        ...globals.es6,
+        ...globals.node,
+        ...globals.jest,
+        require: 'readonly',
+        module: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        process: 'readonly',
+        Buffer: 'readonly',
+        global: 'readonly',
+        describe: 'readonly',
+        test: 'readonly',
+        it: 'readonly',
+        beforeAll: 'readonly',
+        beforeEach: 'readonly',
+        afterAll: 'readonly',
+        afterEach: 'readonly',
+        expect: 'readonly',
+        jest: 'readonly',
+      },
+    },
+    plugins: {
+      react,
+      'react-hooks': reactHooks,
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      ...prettier.rules,
+      'no-undef': 'off',
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
     },
   },
 ];
