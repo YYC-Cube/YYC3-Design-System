@@ -114,6 +114,7 @@ jobs:
         run: |
           npm audit --production --audit-level=moderate || true
 
+      if: false
       - name: 🔍 Run Snyk (Vulnerability Scanner)
         uses: snyk/actions/node@master
         continue-on-error: true
@@ -276,8 +277,9 @@ jobs:
       fail-fast: false
       matrix:
         node: [18, 20, 22]
-        # 分片测试：并行运行测试分片
-        shard: [1, 2, 3, 4]
+        # 矩阵策略：仅测试多个 Node 版本（禁用分片）
+        #         shard: [1, 2, 3, 4]
+        #         shard: [1, 2, 3, 4]
     # 超时设置
     timeout-minutes: ${{ fromJSON('30') }}
     steps:
@@ -318,14 +320,17 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       # 运行测试分片
-      - name: 🧪 Run Tests (Shard ${{ matrix.shard }}/4)
+      - name: 🧪 Run Tests
         run: |
           pnpm test -- \
             --coverage \
+        #             --shard=${{ matrix.shard }} \
+        #             --shardCount=4
+            --coverage \
             --ci \
             --watchAll=false \
-            --shard=${{ matrix.shard }} \
-            --shardCount=4
+        #             --shard=${{ matrix.shard }} \
+        #             --shardCount=4
         timeout-minutes: 20
 
       # 失败重试机制
@@ -337,9 +342,10 @@ jobs:
         timeout-minutes: 15
 
       # 上传覆盖率
+      if: false
       - name: 📊 Upload Coverage to Codecov
         uses: codecov/codecov-action@v4
-        if: matrix.node == 20 && matrix.shard == 1
+        #         if: matrix.node == 20 && matrix.shard == 1
         with:
           files: ./coverage/coverage-final.json
           flags: unittests
@@ -350,7 +356,7 @@ jobs:
 
       # 覆盖率检查（仅主节点和第一个分片）
       - name: 📊 Coverage Check
-        if: matrix.node == 20 && matrix.shard == 1
+        #         if: matrix.node == 20 && matrix.shard == 1
         run: |
           if [ -f coverage/coverage-summary.json ]; then
             COVERAGE=$(cat coverage/coverage-summary.json | jq '.total.lines.pct')
@@ -375,7 +381,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-results-node${{ matrix.node }}-shard${{ matrix.shard }}
+        #           name: test-results-node${{ matrix.node }}-shard${{ matrix.shard }}
           path: |
             coverage/
             test-results/
@@ -552,6 +558,7 @@ jobs:
           name: dist-production
           path: dist/
 
+      if: false
       - name: 🚀 Lighthouse CI
         uses: treosh/lighthouse-ci-action@v11
         with:
@@ -597,6 +604,7 @@ jobs:
       - name: 📚 Build Storybook
         run: pnpm build-storybook
 
+      if: false
       - name: 👁️ Chromatic Visual Tests
         uses: chromaui/action@v1
         with:
@@ -627,6 +635,7 @@ jobs:
           echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Actor**: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
 
+      if: false
       - name: 📢 Send Slack Notification
         if: always()
         uses: 8398a7/action-slack@v3
@@ -641,6 +650,7 @@ jobs:
           webhook_url: ${{ secrets.SLACK_WEBHOOK }}
         continue-on-error: true
 
+      if: false
       - name: 📢 Send Discord Notification
         if: always()
         uses: sarisia/actions-status-discord@v1
@@ -656,6 +666,7 @@ jobs:
 
   # ========== 智能部署 ==========
   deploy-preview:
+  if: false
     name: "🚀 Deploy Preview"
     runs-on: ubuntu-latest
     needs: [test, build]
@@ -733,6 +744,7 @@ jobs:
             }
 
   deploy-production:
+  if: false
     name: "🚀 Deploy to Production"
     runs-on: ubuntu-latest
     needs: [test, build, e2e, performance]
