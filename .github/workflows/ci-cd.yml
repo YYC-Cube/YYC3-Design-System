@@ -28,6 +28,8 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
+      - name: Pre-commit Check
+        run: pnpm precommit
       - name: TypeScript Check
         run: pnpm exec tsc --noEmit
       - name: ESLint
