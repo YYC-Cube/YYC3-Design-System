@@ -1,0 +1,33 @@
+{
+  "title": "YYC³ Design System - Enterprise-grade Open Source Design System",
+  "description": "Five-High/Five-Standard/Five-Implementation framework with 3 switchable themes",
+  "image": "https://github.com/YYC-Cube/YYC3-Design-System/raw/main/public/github-social-image.svg",
+  "url": "https://github.com/YYC-Cube/YYC3-Design-System",
+  "type": "website",
+  "author": {
+    "name": "YYC³ Team",
+    "url": "https://github.com/YYC-Cube"
+  },
+  "keywords": [
+    "design-system",
+    "react",
+    "typescript",
+    "component-library",
+    "ui-kit",
+    "ui-components",
+    "theme-system",
+    "oklch",
+    "tokens",
+    "accessibility",
+    "wcag",
+    "pwa",
+    "i18n",
+    "bilingual",
+    "enterprise",
+    "five-high",
+    "five-standard",
+    "five-implementation",
+    "yyc3",
+    "yanyucloudcube"
+  ]
+}

@@ -7,46 +7,15 @@
 # YYC³ Design System
 
 <!-- Badges -->
-<!-- License Badge -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-
-<!-- CI/CD Badges -->
 [![Build Status](https://github.com/YYC-Cube/YYC3-Design-System/actions/workflows/ci-cd-intelligent.yml/badge.svg)](https://github.com/YYC-Cube/YYC3-Design-System/actions)
 [![codecov](https://codecov.io/gh/YYC-Cube/YYC3-Design-System/branch/main/graph/badge.svg)](https://codecov.io/gh/YYC-Cube/YYC3-Design-System)
-[![CI/CD](https://img.shields.io/badge/CI%2FCD-Intelligent-blue)](https://github.com/YYC-Cube/YYC3-Design-System/actions)
-
-<!-- Package Badges -->
 [![npm version](https://badge.fury.io/js/yyc3-design-system.svg)](https://www.npmjs.com/package/yyc3-design-system)
 [![npm downloads](https://img.shields.io/npm/dm/yyc3-design-system)](https://www.npmjs.com/package/yyc3-design-system)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/yyc3-design-system)](https://bundlephobia.com/result?p=yyc3-design-system)
-[![Minified Size](https://badgen.net/bundlephobia/minzip/yyc3-design-system)](https://bundlephobia.com/result?p=yyc3-design-system)
-
-<!-- GitHub Badges -->
 [![GitHub stars](https://img.shields.io/github/stars/YYC-Cube/YYC3-Design-System?style=social)](https://github.com/YYC-Cube/YYC3-Design-System/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/YYC-Cube/YYC3-Design-System?style=social)](https://github.com/YYC-Cube/YYC3-Design-System/network/members)
-[![GitHub issues](https://img.shields.io/github/issues/YYC-Cube/YYC3-Design-System)](https://github.com/YYC-Cube/YYC3-Design-System/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/YYC-Cube/YYC3-Design-System)](https://github.com/YYC-Cube/YYC3-Design-System/pulls)
-[![GitHub contributors](https://img.shields.io/github/contributors/YYC-Cube/YYC3-Design-System?style=social)](https://github.com/YYC-Cube/YYC3-Design-System/graphs/contributors)
-[![GitHub last commit](https://img.shields.io/github/last-commit/YYC-Cube/YYC3-Design-System)](https://github.com/YYC-Cube/YYC3-Design-System/commits/main)
-
-<!-- Social Badges -->
 [![Twitter Follow](https://img.shields.io/twitter/follow/YYC_Cube?style=social)](https://twitter.com/YYC_Cube)
-[![Discord](https://img.shields.io/discord/1234567890)](https://discord.gg/yyc3)
-
-<!-- Code Quality Badges -->
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier)
-[![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=flat&logo=ESLint&logoColor=white)](https://eslint.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=flat&logo=TypeScript&logoColor=white)](https://www.typescriptlang.org/)
-
-<!-- Tech Stack Badges -->
-[![React](https://img.shields.io/badge/React-18.0-61DAFB?style=flat&logo=React&logoColor=white)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-5.0-646CFF?style=flat&logo=Vite&logoColor=white)](https://vitejs.dev/)
-[![pnpm](https://img.shields.io/badge/pnpm-8.0-F69220?style=flat&logo=pnpm&logoColor=white)](https://pnpm.io/)
-
-<!-- Status Badges -->
-[![Maintenance](https://img.shields.io/badge/Maintenance-Active-green.svg)](https://github.com/YYC-Cube/YYC3-Design-System)
-[![PR Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
-[![Open Source](https://img.shields.io/badge/Open%20Source-%E2%9A%9C-lightgrey.svg)](https://github.com/YYC-Cube/YYC3-Design-System)
 
 ---
 
