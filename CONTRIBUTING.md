@@ -1,13 +1,4 @@
----
-@file: CONTRIBUTING.md
-@description: YYC³ Design System 贡献指南
-@author: YanYuCloudCube Team
-@version: 2.0.0
-@created: 2026-03-01
-@updated: 2026-03-01
-@status: active
-@tags: contributing, guidelines, community
----
+# YYC³ Design System 贡献指南
 
 > ***YanYuCloudCube***
 > *言启象限 | 语枢未来*
@@ -16,8 +7,6 @@
 > ***All things converge in cloud pivot; Deep stacks ignite a new era of intelligence***
 
 ---
-
-# YYC³ Design System 贡献指南
 
 感谢您对 YYC³ Design System 的关注！我们欢迎所有形式的贡献。
 
