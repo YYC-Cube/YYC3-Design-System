@@ -2,7 +2,7 @@
 <div align="center">
 
 <!-- GitHub Social Image -->
-<img src="public/github-social-image.svg" alt="YYC³ Design System Social Image" width="1200">
+<img src="public/Design-System-001.png" alt="YYC³ Design System Social Image" width="1200">
 
 # YYC³ Design System
 
