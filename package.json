@@ -20,7 +20,7 @@
     "test:integration": "jest --testPathPattern=integration",
     "test:a11y": "jest --testPathPattern=a11y",
     "test:oklch": "node scripts/test-oklch-to-hex.js",
-    "test:e2e": "playwright install --with-deps "test:e2e": "playwright test""test:e2e": "playwright test" playwright test",
+    "test:e2e": "playwright install --with-deps && playwright test",
     "test:e2e:headed": "playwright test --headed",
     "test:perf": "tsx scripts/perf-test.ts",
     "typecheck": "tsc --noEmit",
