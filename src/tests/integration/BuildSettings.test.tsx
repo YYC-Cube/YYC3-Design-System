@@ -6,7 +6,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../context/ThemeContext';
 import { LanguageProvider } from '../../context/LanguageContext';
-import { BuildSettingsPage } from '../../../app/pages/BuildSettingsPage';
+import { BuildSettingsPage } from '../../pages/BuildSettingsPage';
 import { MemoryRouter } from 'react-router';
 
 function renderBuildSettings() {

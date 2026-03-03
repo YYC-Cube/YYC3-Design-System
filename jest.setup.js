@@ -181,3 +181,34 @@ if (typeof global.getComputedStyle === 'undefined') {
     };
   };
 }
+
+// Polyfill TextEncoder and TextDecoder for Jest
+if (typeof TextEncoder === 'undefined') {
+  global.TextEncoder = class TextEncoder {
+    encode(input) {
+      const str = String(input);
+      const length = str.length;
+      const result = new Uint8Array(length);
+      for (let i = 0; i < length; i++) {
+        result[i] = str.charCodeAt(i);
+      }
+      return result;
+    }
+  };
+}
+
+if (typeof TextDecoder === 'undefined') {
+  global.TextDecoder = class TextDecoder {
+    decode(input) {
+      if (typeof input === 'string') {
+        return input;
+      }
+      const bytes = new Uint8Array(input);
+      let result = '';
+      for (let i = 0; i < bytes.length; i++) {
+        result += String.fromCharCode(bytes[i]);
+      }
+      return result;
+    }
+  };
+}

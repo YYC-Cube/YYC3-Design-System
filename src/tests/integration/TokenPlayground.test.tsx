@@ -8,7 +8,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../context/ThemeContext';
 import { LanguageProvider } from '../../context/LanguageContext';
-import { PlaygroundPage } from '../../../app/pages/PlaygroundPage';
+import { PlaygroundPage } from '../../pages/PlaygroundPage';
 import { MemoryRouter } from 'react-router';
 
 function renderPlayground() {

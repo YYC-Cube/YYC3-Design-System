@@ -8,7 +8,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../context/ThemeContext';
 import { LanguageProvider } from '../../context/LanguageContext';
-import { TokenManagerPage } from '../../../app/pages/TokenManagerPage';
+import { TokenManagerPage } from '../../pages/TokenManagerPage';
 import { MemoryRouter } from 'react-router';
 
 function renderTokenManager() {

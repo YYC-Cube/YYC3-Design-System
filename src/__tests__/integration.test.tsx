@@ -33,26 +33,26 @@ describe('组件集成测试', () => {
         return (
           <div>
             <Button>按钮</Button>
-            <button onClick={() => setMode('dark')}>切换主题</button>
+            <button onClick={() => setMode('light')}>切换主题</button>
             <span data-testid="current-theme">当前主题: {mode}</span>
           </div>
         );
       };
 
       const { unmount } = render(
-        <ThemeProvider>
+        <ThemeProvider initial="dark">
           <TestComponent />
         </ThemeProvider>
       );
 
-      expect(screen.getByTestId('current-theme')).toHaveTextContent('当前主题: light');
+      expect(screen.getByTestId('current-theme')).toHaveTextContent('当前主题: dark');
       expect(screen.getByRole('button', { name: '按钮' })).toBeInTheDocument();
 
       act(() => {
         screen.getByText('切换主题').click();
       });
 
-      expect(screen.getByTestId('current-theme')).toHaveTextContent('当前主题: dark');
+      expect(screen.getByTestId('current-theme')).toHaveTextContent('当前主题: light');
 
       unmount();
     });
