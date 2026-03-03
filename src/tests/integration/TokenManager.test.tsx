@@ -6,8 +6,8 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ThemeProvider } from '../../../app/context/ThemeContext';
-import { LanguageProvider } from '../../../app/context/LanguageContext';
+import { ThemeProvider } from '../../context/ThemeContext';
+import { LanguageProvider } from '../../context/LanguageContext';
 import { TokenManagerPage } from '../../../app/pages/TokenManagerPage';
 import { MemoryRouter } from 'react-router';
 

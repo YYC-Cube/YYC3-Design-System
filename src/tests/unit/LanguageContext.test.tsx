@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import { LanguageProvider, useLanguage } from '../../../app/context/LanguageContext';
+import { LanguageProvider, useLanguage } from '../../context/LanguageContext';
 
 function TestConsumer() {
   const { lang, toggleLang, t } = useLanguage();

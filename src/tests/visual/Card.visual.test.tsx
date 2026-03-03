@@ -15,8 +15,8 @@
  */
 import React from 'react';
 import { render } from '@testing-library/react';
-import { ThemeProvider } from '../../../app/context/ThemeContext';
-import { LanguageProvider } from '../../../app/context/LanguageContext';
+import { ThemeProvider } from '../../context/ThemeContext';
+import { LanguageProvider } from '../../context/LanguageContext';
 import {
   Card,
   CardHeader,

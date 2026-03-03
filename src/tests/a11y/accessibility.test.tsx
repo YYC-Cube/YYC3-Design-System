@@ -12,8 +12,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
-import { ThemeProvider } from '../../../app/context/ThemeContext';
-import { LanguageProvider } from '../../../app/context/LanguageContext';
+import { ThemeProvider } from '../../context/ThemeContext';
+import { LanguageProvider } from '../../context/LanguageContext';
 import { Button } from '../../../components/ui/button';
 import { Input } from '../../../components/ui/input';
 import { Badge } from '../../../components/ui/badge';

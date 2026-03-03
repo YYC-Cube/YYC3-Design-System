@@ -1,7 +1,7 @@
 /**
  * YYC³ Design System — Locale Validation Unit Tests
  */
-import { validateLocales, formatReport, assertLocalesValid } from '../../locale-validation';
+import { validateLocales, formatReport, assertLocalesValid } from '../../utils/locale-validation';
 
 describe('Locale Validation', () => {
   it('generates a valid report', () => {

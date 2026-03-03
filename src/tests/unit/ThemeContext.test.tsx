@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import { ThemeProvider, useTheme } from '../../../app/context/ThemeContext';
+import { ThemeProvider, useTheme } from '../../context/ThemeContext';
 
 function TestConsumer() {
   const { style, mode, resolvedMode, setStyle, setMode, toggleMode, cycleStyle } = useTheme();
@@ -40,7 +40,7 @@ describe('ThemeContext', () => {
   it('provides default theme values', () => {
     renderWithTheme();
     expect(screen.getByTestId('style')).toHaveTextContent('future');
-    expect(screen.getByTestId('mode')).toHaveTextContent('system');
+    expect(screen.getByTestId('mode')).toHaveTextContent('dark');
   });
 
   it('sets visual theme style', () => {
