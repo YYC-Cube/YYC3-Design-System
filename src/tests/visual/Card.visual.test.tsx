@@ -24,9 +24,9 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from '../../../app/components/ui/card';
-import { Button } from '../../../app/components/ui/button';
-import { Badge } from '../../../app/components/ui/badge';
+} from '../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Badge } from '../../../components/ui/badge';
 
 /**
  * Wrapper that renders a component in a specific theme + mode context.

@@ -6,7 +6,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../../app/context/ThemeContext';
 import { LanguageProvider } from '../../../app/context/LanguageContext';
-import { StorybookSettingsPanel } from '../../../app/components/StorybookSettingsPanel';
+import { StorybookSettingsPanel } from '../../../components/StorybookSettingsPanel';
 
 function renderPanel() {
   const onOpenChange = jest.fn();

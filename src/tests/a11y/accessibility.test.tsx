@@ -14,14 +14,14 @@ import { render } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { ThemeProvider } from '../../../app/context/ThemeContext';
 import { LanguageProvider } from '../../../app/context/LanguageContext';
-import { Button } from '../../../app/components/ui/button';
-import { Input } from '../../../app/components/ui/input';
-import { Badge } from '../../../app/components/ui/badge';
-import { Alert, AlertTitle, AlertDescription } from '../../../app/components/ui/alert';
-import { Progress } from '../../../app/components/ui/progress';
-import { Switch } from '../../../app/components/ui/switch';
-import { Checkbox } from '../../../app/components/ui/checkbox';
-import { Label } from '../../../app/components/ui/label';
+import { Button } from '../../../components/ui/button';
+import { Input } from '../../../components/ui/input';
+import { Badge } from '../../../components/ui/badge';
+import { Alert, AlertTitle, AlertDescription } from '../../../components/ui/alert';
+import { Progress } from '../../../components/ui/progress';
+import { Switch } from '../../../components/ui/switch';
+import { Checkbox } from '../../../components/ui/checkbox';
+import { Label } from '../../../components/ui/label';
 
 expect.extend(toHaveNoViolations);
 
