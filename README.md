@@ -1,10 +1,10 @@
 <!-- Project Logo and Social Image -->
 <div align="center">
 
-<!-- GitHub Social Image -->
-<img src="public/Design-System-001.png" alt="YYC³ Design System Social Image" width="1200">
-
 # YYC³ Design System
+
+<!-- Project Logo -->
+<img src="public/Design-System-001.png" alt="YYC³ Design System Logo" width="800" />
 
 <!-- Badges -->
 <!-- License Badge -->
@@ -63,6 +63,9 @@
 **[🧩 Storybook](https://yyc3-design-system.vercel.app/storybook)**
 ·
 **[🎨 Design Tokens](https://yyc3-design-system.vercel.app/tokens)**
+
+**Language**:
+[English](README.md) | [简体中文](README.zh-CN.md)
 
 </div>
 
