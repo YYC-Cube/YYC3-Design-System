@@ -1,0 +1,1 @@
+function n(n,t,{checkForDefaultPrevented:e=!0}={}){return function(r){if(null==n||n(r),!1===e||!r.defaultPrevented)return null==t?void 0:t(r)}}function t(n,[t,e]){return Math.min(e,Math.max(t,n))}export{t as a,n as c};

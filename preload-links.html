@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YYC³ Design System - 预加载资源</title>
+  
+  <!-- 预连接到关键域名 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- 预加载关键 CSS -->
+  <link rel="preload" href="/assets/index.css" as="style">
+  
+  <!-- 预加载关键字体 -->
+  <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-bold.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- 预加载关键 JS -->
+  <link rel="preload" href="/entry/index-[hash].js" as="script">
+  <link rel="preload" href="/chunks/vendor-react-[hash].js" as="script">
+  
+  <!-- DNS 预解析 -->
+  <link rel="dns-prefetch" href="https://api.yyc3.com">
+  <link rel="dns-prefetch" href="https://cdn.yyc3.com">
+</head>
+<body>
+  <p>资源预加载页面</p>
+</body>
+</html>
