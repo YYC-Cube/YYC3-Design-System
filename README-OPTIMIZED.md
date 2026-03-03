@@ -1,10 +1,14 @@
 <!-- Project Logo and Social Image -->
 <div align="center">
 
-<!-- GitHub Social Image -->
-<img src="public/github-social-image.svg" alt="YYC³ Design System Social Image" width="1200">
-
 # YYC³ Design System
+
+<!-- Project Logo -->
+<img src="public/Design-System-001.png" alt="YYC³ Design System Logo" width="800" />
+
+<!-- GitHub Social Image -->
+
+***Words Initiate Quadrants, Language Serves as Core for Future***
 
 <!-- Badges -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)

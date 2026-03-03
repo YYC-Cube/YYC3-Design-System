@@ -1,9 +1,12 @@
 <div align="center">
 
-<!-- Project Logo -->
-<img src="https://yyc3-design-system.vercel.app/logo.svg" alt="YYC³ Design System Logo" width="200" height="200">
-
 # YYC³ Design System
+
+<!-- Project Logo -->
+<img src="public/Design-System-001.png" alt="YYC³ Design System Logo" width="800" />
+
+<!-- GitHub Social Image -->
+***Words Initiate Quadrants, Language Serves as Core for Future***
 
 <!-- Badges -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
